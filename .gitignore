@@ -1,11 +1,40 @@
-CMakeLists.txt.user
+# C++ (CMake)
+build/
+cmake-build-debug/
+cmake-build-release/
+CMakeFiles/
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
 Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-_deps
+*.out
+*.o
+*.exe
+*.dll
+*.pdb
+
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.moc
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# MacOS
+.DS_Store
+
+# Logs
+*.log
+
+# Backup files
+*~
+*.bak
+*.tmp
+
+# IDE specific
+/.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Environment files
+.env
