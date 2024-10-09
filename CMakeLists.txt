@@ -34,8 +34,7 @@ src/main.cpp
 src/gui/MainWindow.cpp
 src/utils/SystemUtils.cpp
 src/utils/FileUtils.cpp
-src/utils/EmailUtils.cpp
-src/utils/KeyUtils.cpp
+        src/utils/KeyUtils.cpp
 src/logic/encryptor.cpp
 src/logic/decryptor.cpp
 src/utils/CryptoAes128.cpp
@@ -48,8 +47,7 @@ set(HEADERS
 src/gui/MainWindow.h
 src/utils/SystemUtils.h
 src/utils/FileUtils.h
-src/utils/EmailUtils.h
-src/utils/KeyUtils.h
+        src/utils/KeyUtils.h
 src/logic/encryptor.h
 src/logic/decryptor.h
 src/utils/CryptoAes128.h
