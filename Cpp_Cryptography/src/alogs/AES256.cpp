@@ -1,18 +1,25 @@
-#include "CryptoAes256.h"
-#include "FileUtils.h"
-#include "KeyUtils.h"
-#include "EmailUtils.h"
+//
+// Created by prang on 09.10.2024.
+//
+
+#include "../CryptoNamespace.h"
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <iostream>
+#include <fstream>
 
-void printError(const std::string &msg) {
+using easyOpenSSL::AES256;
+
+void AES256::printError(const std::string &msg) {
   std::cerr << msg << " Error: " << ERR_reason_error_string(ERR_get_error()) << std::endl;
 }
 
-bool CryptoAes256::encryptFileAES256(const fs::path &inputFile, const fs::path &encryptedFile, const KeyIvAES& keyIv) {
-  const auto &KEY = keyIv.key;
-  const auto &IV = keyIv.iv;
+bool AES256::encryptFile(
+    const fs::path &originalFile,
+    const fs::path &encryptedFile,
+    const std::vector<unsigned char> &KEY,
+    const std::vector<unsigned char> &IV
+) {
 
   // Initialize encryption context
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
@@ -29,10 +36,10 @@ bool CryptoAes256::encryptFileAES256(const fs::path &inputFile, const fs::path &
   }
 
   // Open input and output files
-  std::ifstream infile(inputFile, std::ios::binary);
+  std::ifstream infile(originalFile, std::ios::binary);
   std::ofstream outfile(encryptedFile, std::ios::binary);
   if (!infile.is_open()) {
-    std::cerr << "Failed to open input file: " << inputFile.string() << std::endl;
+    std::cerr << "Failed to open input file: " << originalFile.string() << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
@@ -81,9 +88,12 @@ bool CryptoAes256::encryptFileAES256(const fs::path &inputFile, const fs::path &
   return true;
 }
 
-bool CryptoAes256::decryptFileAES256(const fs::path &encryptedFilePath, const fs::path &decryptedFilePath, const KeyIvAES& keyIv) {
-  const auto &KEY = keyIv.key;
-  const auto &IV = keyIv.iv;
+bool AES256::decryptFile(
+    const fs::path &encryptedFile,
+    const fs::path &decryptedFile,
+    const std::vector<unsigned char> &KEY,
+    const std::vector<unsigned char> &IV
+) {
 
   // Überprüfen Sie die Schlüssellänge
   if (KEY.size() != 32 || IV.size() != 16) {
@@ -104,15 +114,15 @@ bool CryptoAes256::decryptFileAES256(const fs::path &encryptedFilePath, const fs
     return false;
   }
 
-  std::ifstream infile(encryptedFilePath, std::ios::binary);
-  std::ofstream outfile(decryptedFilePath, std::ios::binary);
+  std::ifstream infile(encryptedFile, std::ios::binary);
+  std::ofstream outfile(decryptedFile, std::ios::binary);
   if (!infile.is_open()) {
-    std::cerr << "Failed to open input file: " << encryptedFilePath << std::endl;
+    std::cerr << "Failed to open input file: " << encryptedFile << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
   if (!outfile.is_open()) {
-    std::cerr << "Failed to open output file: " << decryptedFilePath << std::endl;
+    std::cerr << "Failed to open output file: " << decryptedFile << std::endl;
     infile.close();
     EVP_CIPHER_CTX_free(ctx);
     return false;
@@ -159,74 +169,4 @@ bool CryptoAes256::decryptFileAES256(const fs::path &encryptedFilePath, const fs
 
   EVP_CIPHER_CTX_free(ctx);
   return true;
-}
-
-bool CryptoAes256::testKeyOnEncryptedFileAES256(const fs::path& encryptedFilePath, const KeyIvAES& keyIv) {
-  // Create temporary file path for decrypted file
-  fs::path decryptedFilePath = encryptedFilePath.parent_path() / "sstest89Test89ss.txt";
-
-  // Decrypt the file
-  if (!decryptFileAES256(encryptedFilePath, decryptedFilePath, keyIv)) {
-    std::cerr << "Test decryption failed." << std::endl;
-    fs::remove(decryptedFilePath);
-    return false; // Decryption failed
-  }
-
-  // Check the header of the decrypted file
-  std::ifstream decryptedFile(decryptedFilePath);
-  if (!decryptedFile.is_open()) {
-    std::cerr << "Failed to open decrypted file for verification." << std::endl;
-    fs::remove(decryptedFilePath); // Clean up temporary file
-    return false; // File cannot be opened
-  }
-
-  std::string firstLine;
-  std::getline(decryptedFile, firstLine); // Read the first line
-  decryptedFile.close();
-
-  // Compare the header
-  if (firstLine == FILE_HEADER) {
-    // Clean up the temporary decrypted file
-    fs::remove(decryptedFilePath);
-    return true; // Key appears to be correct
-  } else {
-    std::cerr << "Decrypted file header does not match expected header." << std::endl;
-    // Clean up the temporary decrypted file
-    fs::remove(decryptedFilePath);
-    return false; // Key is incorrect
-  }
-}
-
-void CryptoAes256::encryptSaveFile() {
-  EmailUtils emailUtils;
-  KeyUtils keyUtils;
-  KeyIvAES keyIvAes;
-
-  keyIvAes = keyUtils.generateKeyIv(32);
-
-  if (encryptFileAES256(KEY_IV_SAVE_FILE, ENCRYPTED_KEY_IV_SAVE_FILE, keyIvAes)) {
-    std::cout << "Save File encryption Succeeded" << std::endl;
-    if (SEND_EMAIL) {
-      std::string key = keyUtils.bytesToInts(keyIvAes.key);
-      std::string iv = keyUtils.bytesToInts(keyIvAes.iv);
-
-      std::string messageBody = "Key: " + key + " | Iv: " + iv;
-      emailUtils.sendEmailWithRust(messageBody);
-    }
-
-    if (fs::exists(KEY_IV_SAVE_FILE)) {
-      fs::remove(KEY_IV_SAVE_FILE);
-    }
-
-  } else {
-    std::cerr << "Save File encryption failed" << std::endl;
-  }
-}
-
-void CryptoAes256::decryptSaveFile(const KeyIvAES& keyIv) {
-  if (decryptFileAES256(ENCRYPTED_KEY_IV_SAVE_FILE, KEY_IV_SAVE_FILE, keyIv)) {
-    if (fs::exists(ENCRYPTED_KEY_IV_SAVE_FILE)) {
-      fs::remove(ENCRYPTED_KEY_IV_SAVE_FILE);
-    }
-  }
 }

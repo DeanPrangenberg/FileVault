@@ -14,18 +14,10 @@ namespace fs = std::filesystem;
 
 class FileUtils {
 public:
-  std::vector<fs::path> listFiles(const std::vector<fs::path> &directoryList, bool encryptionMode);
-
-  std::vector<CryptoData> loadCryptoData();
-
-  void saveCryptoData(const CryptoData &data);
-
+  static std::vector<fs::path> scanPathForFiles(const std::vector<fs::path> &directoryList, const bool encryptionMode);
 private:
   static bool isValidPath(const fs::path& p);
-
   static bool isSystemCritical(const fs::path &file_path);
-
-  static bool hasValidExtension(const fs::path &filepath, bool encryptionMode);
 };
 
 

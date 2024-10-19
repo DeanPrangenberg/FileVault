@@ -8,11 +8,19 @@
 #include <string>
 #include <vector>
 #include <filesystem>
-#include "../src/utils/SystemUtils.h"
 
 namespace fs = std::filesystem;
 
 // global used structs
+struct FileData {
+  std::vector<unsigned char> FileID;
+  std::string AlgorithmenType;
+  fs::path EncryptedFilePath;
+  fs::path DecryptedFilePath;
+  std::vector<unsigned char> Key;
+  std::vector<unsigned char> Iv;
+};
+
 struct KeyIvAES {
   std::vector<unsigned char> key;
   std::vector<unsigned char> iv;

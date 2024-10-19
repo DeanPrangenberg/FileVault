@@ -5,8 +5,8 @@
 #include <vector>
 #include <iostream>
 #include "decryptor.h"
-#include "../utils/FileUtils.h"
-#include "../utils/CryptoAes128.h"
+#include "../FileScanner/FileUtils.h"
+#include "../Cryptography/AES128.h"
 
 
 void Decrypt::printPathList(std::vector<fs::path> &file_list) {
@@ -19,7 +19,7 @@ void Decrypt::printPathList(std::vector<fs::path> &file_list) {
 
 void Decrypt::startDecryptionProcess() {
   FileUtils fileUtils;
-  CryptoAes128 cryptoAes128;
+  AES128 cryptoAes128;
 
   std::vector<CryptoData> cryptoDataVector = fileUtils.loadCryptoData();
 

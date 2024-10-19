@@ -1,25 +1,25 @@
 //
-// Created by prang on 25.09.2024.
+// Created by prang on 09.10.2024.
 //
 
-#include "CryptoAes128.h"
-#include "FileUtils.h"
-#include "KeyUtils.h"
+#include "../CryptoNamespace.h"
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <iostream>
+#include <fstream>
 
-bool CryptoAes128::encryptFileAES128(const fs::path &input_file, const fs::path &output_file) {
-  FileUtils fileUtils;
-  KeyUtils keyUtils;
+using easyOpenSSL::AES128;
 
-  // Generiere die Verschlüsselungsdaten
-  CryptoData encryptionData;
-  encryptionData.encryptedPath = output_file;
-  encryptionData.keyIvAES = keyUtils.generateKeyIv(16); // 128-bit KEY/IV
+void AES128::printError(const std::string &msg) {
+  std::cerr << msg << " Error: " << ERR_reason_error_string(ERR_get_error()) << std::endl;
+}
 
-  const auto &KEY = encryptionData.keyIvAES.key;
-  const auto &IV = encryptionData.keyIvAES.iv;
+bool AES128::encryptFile(
+    const fs::path &originalFile,
+    const fs::path &encryptedFile,
+    const std::vector<unsigned char> &KEY,
+    const std::vector<unsigned char> &IV
+) {
 
   // Initialisiere den Verschlüsselungskontext
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
@@ -30,21 +30,21 @@ bool CryptoAes128::encryptFileAES128(const fs::path &input_file, const fs::path 
 
   // Setze den AES-128-CBC Algorithmus mit Schlüssel und IV
   if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, KEY.data(), IV.data())) {
-    std::cerr << "EVP_EncryptInit_ex failed: " << ERR_error_string(ERR_get_error(), nullptr) << std::endl;
+    printError("EVP_EncryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
 
   // Öffne die Eingabedatei und die Ausgabedatei
-  std::ifstream infile(input_file, std::ios::binary);
-  std::ofstream outfile(output_file, std::ios::binary);
+  std::ifstream infile(originalFile, std::ios::binary);
+  std::ofstream outfile(encryptedFile, std::ios::binary);
   if (!infile.is_open()) {
-    std::cerr << "Failed to open input file: " << input_file.string() << std::endl;
+    std::cerr << "Failed to open input file: " << originalFile.string() << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
   if (!outfile.is_open()) {
-    std::cerr << "Failed to open output file: " << output_file.string() << std::endl;
+    std::cerr << "Failed to open output file: " << encryptedFile.string() << std::endl;
     infile.close();
     EVP_CIPHER_CTX_free(ctx);
     return false;
@@ -58,7 +58,7 @@ bool CryptoAes128::encryptFileAES128(const fs::path &input_file, const fs::path 
   // Datei blockweise verschlüsseln
   while (infile.read(reinterpret_cast<char *>(buffer), buffer_size) || infile.gcount() > 0) {
     if (1 != EVP_EncryptUpdate(ctx, ciphertext, &len, buffer, infile.gcount())) {
-      std::cerr << "EVP_EncryptUpdate failed: " << ERR_error_string(ERR_get_error(), nullptr) << std::endl;
+      printError("EVP_EncryptUpdate failed");
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
@@ -72,7 +72,7 @@ bool CryptoAes128::encryptFileAES128(const fs::path &input_file, const fs::path 
 
   // Finalisiere die Verschlüsselung und füge Padding hinzu
   if (1 != EVP_EncryptFinal_ex(ctx, ciphertext, &len)) {
-    std::cerr << "EVP_EncryptFinal_ex failed: " << ERR_error_string(ERR_get_error(), nullptr) << std::endl;
+    printError("EVP_EncryptFinal_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
@@ -86,16 +86,15 @@ bool CryptoAes128::encryptFileAES128(const fs::path &input_file, const fs::path 
   // Freigeben des Kontextes
   EVP_CIPHER_CTX_free(ctx);
 
-  // Speichern der Verschlüsselungsdaten (z.B. Schlüssel und IV)
-  fileUtils.saveCryptoData(encryptionData);
-
   return true;
 }
 
-bool CryptoAes128::decryptFileAES128(const CryptoData &cryptoData, const fs::path &decryptedFilePath) {
-  const auto &encryptedFilePath = cryptoData.encryptedPath;
-  const auto &KEY = cryptoData.keyIvAES.key;
-  const auto &IV = cryptoData.keyIvAES.iv;
+bool AES128::decryptFile(
+    const fs::path &encryptedFile,
+    const fs::path &decryptedFile,
+    const std::vector<unsigned char> &KEY,
+    const std::vector<unsigned char> &IV
+) {
 
   // Initialisiere den Entschlüsselungskontext
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
@@ -106,21 +105,21 @@ bool CryptoAes128::decryptFileAES128(const CryptoData &cryptoData, const fs::pat
 
   // Setze den AES-128-CBC Algorithmus mit Schlüssel und IV
   if (1 != EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, KEY.data(), IV.data())) {
-    std::cerr << "EVP_DecryptInit_ex failed: " << ERR_error_string(ERR_get_error(), nullptr) << std::endl;
+    printError("EVP_DecryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
 
   // Öffne die verschlüsselte Datei und die Ausgabedatei für die Entschlüsselung
-  std::ifstream infile(encryptedFilePath, std::ios::binary);
-  std::ofstream outfile(decryptedFilePath, std::ios::binary);
+  std::ifstream infile(encryptedFile, std::ios::binary);
+  std::ofstream outfile(decryptedFile, std::ios::binary);
   if (!infile.is_open()) {
-    std::cerr << "Failed to open encrypted input file: " << encryptedFilePath.string() << std::endl;
+    std::cerr << "Failed to open encrypted input file: " << encryptedFile.string() << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
   if (!outfile.is_open()) {
-    std::cerr << "Failed to open output file: " << decryptedFilePath.string() << std::endl;
+    std::cerr << "Failed to open output file: " << decryptedFile.string() << std::endl;
     infile.close();
     EVP_CIPHER_CTX_free(ctx);
     return false;
@@ -134,7 +133,7 @@ bool CryptoAes128::decryptFileAES128(const CryptoData &cryptoData, const fs::pat
   // Datei blockweise entschlüsseln
   while (infile.read(reinterpret_cast<char *>(buffer), buffer_size) || infile.gcount() > 0) {
     if (1 != EVP_DecryptUpdate(ctx, plaintext, &len, buffer, infile.gcount())) {
-      std::cerr << "EVP_DecryptUpdate failed: " << ERR_error_string(ERR_get_error(), nullptr) << std::endl;
+      printError("EVP_DecryptUpdate failed");
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
@@ -148,7 +147,7 @@ bool CryptoAes128::decryptFileAES128(const CryptoData &cryptoData, const fs::pat
 
   // Finalisiere die Entschlüsselung und überprüfe das Padding
   if (1 != EVP_DecryptFinal_ex(ctx, plaintext, &len)) {
-    std::cerr << "EVP_DecryptFinal_ex failed: " << ERR_error_string(ERR_get_error(), nullptr) << std::endl;
+    printError("EVP_DecryptFinal_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
