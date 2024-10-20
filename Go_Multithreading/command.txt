@@ -1,1 +1,0 @@
-build command: go build -o cryptoLib.dll -buildmode=c-shared .

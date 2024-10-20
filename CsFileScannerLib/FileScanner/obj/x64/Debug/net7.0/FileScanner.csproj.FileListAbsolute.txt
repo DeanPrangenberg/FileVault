@@ -1,0 +1,13 @@
+D:\MyRepo\FileVault\cmake-build-release\bin\FileScanner.deps.json
+D:\MyRepo\FileVault\cmake-build-release\bin\FileScanner.dll
+D:\MyRepo\FileVault\cmake-build-release\bin\FileScanner.pdb
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.AssemblyInfoInputs.cache
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.AssemblyInfo.cs
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.csproj.CoreCompileInputs.cache
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.sourcelink.json
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.dll
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\refint\FileScanner.dll
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.pdb
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\ref\FileScanner.dll
+D:\MyRepo\FileVault\CsFileScannerLib\FileScanner\obj\x64\Debug\net7.0\FileScanner.csproj.AssemblyReference.cache

@@ -3,9 +3,6 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
-  <component name="DBNavigator.Project.ExecutionManager">
-    <retain-sticky-names value="false" />
-  </component>
   <component name="DBNavigator.Project.Settings">
     <connections />
     <browser-settings>
@@ -129,6 +126,7 @@
       <qualified-text-editor text-length-threshold="300">
         <content-types>
           <content-type name="Text" enabled="true" />
+          <content-type name="Properties" enabled="true" />
           <content-type name="XML" enabled="true" />
           <content-type name="DTD" enabled="true" />
           <content-type name="HTML" enabled="true" />
@@ -140,6 +138,8 @@
           <content-type name="JSON" enabled="true" />
           <content-type name="JSON5" enabled="true" />
           <content-type name="YAML" enabled="true" />
+          <content-type name="C#" enabled="true" />
+          <content-type name="C++" enabled="true" />
         </content-types>
       </qualified-text-editor>
       <record-navigation>
