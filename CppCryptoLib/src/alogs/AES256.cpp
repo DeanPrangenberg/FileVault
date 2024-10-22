@@ -10,8 +10,8 @@
 
 using easyOpenSSL::AES256;
 
-void AES256::printError(const std::string &msg) {
-  std::cerr << msg << " Error: " << ERR_reason_error_string(ERR_get_error()) << std::endl;
+void AES256::printError(const std::wstring &msg) {
+  std::wcerr << msg << L" Error: " << ERR_reason_error_string(ERR_get_error()) << std::endl;
 }
 
 bool AES256::encryptFile(
@@ -24,13 +24,13 @@ bool AES256::encryptFile(
   // Initialize encryption context
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
   if (!ctx) {
-    printError("Failed to create EVP_CIPHER_CTX");
+    printError(L"Failed to create EVP_CIPHER_CTX");
     return false;
   }
 
   // Set AES-256-CBC algorithm with key and IV
   if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, KEY.data(), IV.data())) {
-    printError("EVP_EncryptInit_ex failed");
+    printError(L"EVP_EncryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
@@ -39,12 +39,12 @@ bool AES256::encryptFile(
   std::ifstream infile(originalFile, std::ios::binary);
   std::ofstream outfile(encryptedFile, std::ios::binary);
   if (!infile.is_open()) {
-    std::cerr << "Failed to open input file: " << originalFile.string() << std::endl;
+    std::wcerr << L"Failed to open input file: " << originalFile.wstring() << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
   if (!outfile.is_open()) {
-    std::cerr << "Failed to open output file: " << encryptedFile.string() << std::endl;
+    std::wcerr << "Failed to open output file: " << encryptedFile.wstring() << std::endl;
     infile.close();
     EVP_CIPHER_CTX_free(ctx);
     return false;
@@ -58,13 +58,13 @@ bool AES256::encryptFile(
   // Encrypt the file block by block
   while (infile.read(reinterpret_cast<char *>(buffer), buffer_size) || infile.gcount() > 0) {
     if (1 != EVP_EncryptUpdate(ctx, ciphertext, &len, buffer, infile.gcount())) {
-      printError("EVP_EncryptUpdate failed");
+      printError(L"EVP_EncryptUpdate failed");
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
     outfile.write(reinterpret_cast<char *>(ciphertext), len);
     if (outfile.fail()) {
-      std::cerr << "Failed to write ciphertext to output file." << std::endl;
+      std::wcerr << "Failed to write ciphertext to output file." << std::endl;
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
@@ -72,13 +72,13 @@ bool AES256::encryptFile(
 
   // Finalize the encryption and add padding
   if (1 != EVP_EncryptFinal_ex(ctx, ciphertext, &len)) {
-    printError("EVP_EncryptFinal_ex failed");
+    printError(L"EVP_EncryptFinal_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
   outfile.write(reinterpret_cast<char *>(ciphertext), len);
   if (outfile.fail()) {
-    std::cerr << "Failed to write final ciphertext block to output file." << std::endl;
+    std::wcerr << "Failed to write final ciphertext block to output file." << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
@@ -97,19 +97,19 @@ bool AES256::decryptFile(
 
   // Überprüfen Sie die Schlüssellänge
   if (KEY.size() != 32 || IV.size() != 16) {
-    std::cerr << "Invalid key or IV size!" << std::endl;
+    std::wcerr << "Invalid key or IV size!" << std::endl;
     return false;
   }
 
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
   if (!ctx) {
-    printError("Failed to create EVP_CIPHER_CTX");
+    printError(L"Failed to create EVP_CIPHER_CTX");
     return false;
   }
 
   // Initialisieren Sie den Dekryptierungs-Kontext mit AES-256
   if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, KEY.data(), IV.data()) != 1) {
-    printError("EVP_DecryptInit_ex failed");
+    printError(L"EVP_DecryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
@@ -117,12 +117,12 @@ bool AES256::decryptFile(
   std::ifstream infile(encryptedFile, std::ios::binary);
   std::ofstream outfile(decryptedFile, std::ios::binary);
   if (!infile.is_open()) {
-    std::cerr << "Failed to open input file: " << encryptedFile << std::endl;
+    std::wcerr << "Failed to open input file: " << encryptedFile << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
   if (!outfile.is_open()) {
-    std::cerr << "Failed to open output file: " << decryptedFile << std::endl;
+    std::wcerr << "Failed to open output file: " << decryptedFile << std::endl;
     infile.close();
     EVP_CIPHER_CTX_free(ctx);
     return false;
@@ -138,14 +138,14 @@ bool AES256::decryptFile(
 
     // Entschlüsseln Sie den aktuellen Block
     if (EVP_DecryptUpdate(ctx, plaintext, &len, buffer, infile.gcount()) != 1) {
-      printError("EVP_DecryptUpdate failed");
+      printError(L"EVP_DecryptUpdate failed");
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
 
     // Schreiben Sie die entschlüsselten Daten in die Ausgabedatei
     if (outfile.write(reinterpret_cast<char *>(plaintext), len).fail()) {
-      std::cerr << "Failed to write plaintext to output file." << std::endl;
+      std::wcerr << "Failed to write plaintext to output file." << std::endl;
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
@@ -154,14 +154,14 @@ bool AES256::decryptFile(
   // Finalisieren Sie die Entschlüsselung
   int finalLen = 0;
   if (EVP_DecryptFinal_ex(ctx, plaintext, &finalLen) != 1) {
-    printError("EVP_DecryptFinal_ex failed");
+    printError(L"EVP_DecryptFinal_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
 
   // Schreiben Sie den letzten Block in die Ausgabedatei
   if (outfile.write(reinterpret_cast<char *>(plaintext), finalLen).fail()) {
-    std::cerr << "Failed to write final plaintext to output file." << std::endl;
+    std::wcerr << "Failed to write final plaintext to output file." << std::endl;
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }

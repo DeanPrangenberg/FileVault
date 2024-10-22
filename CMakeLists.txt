@@ -34,13 +34,11 @@ else()
     message(FATAL_ERROR "Directory CppSaveFileLib does not exist.")
 endif()
 
-
-# Add custom target for the C# project
-add_custom_target(CsFileScanner ALL
-        COMMAND dotnet build ${CMAKE_SOURCE_DIR}/CsFileScannerLib/FileScanner/FileScanner.csproj -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/CsFileScannerLib
-        COMMENT "Building C# Lib"
-)
+if(EXISTS "${CMAKE_SOURCE_DIR}/CppDirectoryScanner")
+    add_subdirectory(CppDirectoryScanner)  # Main application logic
+else()
+    message(FATAL_ERROR "Directory CppDirectoryScanner does not exist.")
+endif()
 
 add_custom_target(GoMultiThreadCryptoLib ALL
         COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoMultiThreadCryptoLib.dll -buildmode=c-shared .
@@ -54,7 +52,7 @@ add_dependencies(GoMultiThreadCryptoLib CppCryptoLib)  # Go DLL depends on C++ C
 add_dependencies(CppFileVaultMain CppCryptoLib)  # Main app depends on cryptography
 add_dependencies(CppFileVaultMain CppSaveFileLib)  # Main app depends on file handling
 add_dependencies(CppFileVaultMain GoMultiThreadCryptoLib)  # Main app depends on Go DLL
-add_dependencies(CppFileVaultMain CsFileScanner)  # Main app depends on C# project
+add_dependencies(CppFileVaultMain CppDirectoryScannerLib)  # Main app depends on C# project
 
 # Compilation options for warnings
 if (MSVC)

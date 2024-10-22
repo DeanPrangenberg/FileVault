@@ -23,32 +23,18 @@ add_library(CppCryptoLib SHARED
         src/CryptoNamespace.h
         src/alogs/SHA256.cpp
         src/alogs/SHA256.cpp
-)
 
-# Create the static library
-add_library(CppCryptoLibStatic STATIC
-        src/alogs/AES128.cpp
-        src/alogs/AES256.cpp
-        src/alogs/KeyGen.cpp
-        src/CryptoNamespace.cpp
-        src/CryptoNamespace.h
-        src/alogs/SHA256.cpp
-        src/alogs/SHA256.cpp
 )
 
 # Link OpenSSL libraries
 target_link_libraries(CppCryptoLib PRIVATE OpenSSL::SSL OpenSSL::Crypto)
-target_link_libraries(CppCryptoLibStatic PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 
 # Compile options
 if (MSVC)
     target_compile_options(CppCryptoLib PRIVATE /W4)
-    target_compile_options(CppCryptoLibStatic PRIVATE /W4)
 else ()
     target_compile_options(CppCryptoLib PRIVATE -Wall -Wextra)
-    target_compile_options(CppCryptoLibStatic PRIVATE -Wall -Wextra)
 endif ()
 
 # Define the export macro for DLL
 target_compile_definitions(CppCryptoLib PRIVATE CppCryptoLib_EXPORTS CRYPTOLIBRARY_EXPORTS)
-target_compile_definitions(CppCryptoLibStatic PRIVATE CppCryptoLib_EXPORTS CRYPTOLIBRARY_EXPORTS)

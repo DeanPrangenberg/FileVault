@@ -9,6 +9,8 @@
 
 using globalDefinitions::FileData;
 
+const bool printDebug = false;
+
 extern "C" {
 __declspec(dllexport) void writeFileDataToJson(const FileData *fileDataList, size_t fileDataSize, const wchar_t *filePath);
 __declspec(dllexport) bool findAndCompleteStruct(FileData& partialStruct, const std::wstring& filePath);

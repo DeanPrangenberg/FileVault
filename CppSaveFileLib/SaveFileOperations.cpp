@@ -19,7 +19,7 @@ std::string toBinaryString(const unsigned char *data, int length) {
 
 std::string wstringToUtf8(const wchar_t *wstr) {
   if (!wstr || wcslen(wstr) == 0) {
-    std::cout << "Empty wchar_t*" << std::endl;
+    if (printDebug) std::cout << "Empty wchar_t*" << std::endl;
     return std::string();
   }
   int size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr, (int) wcslen(wstr), NULL, 0, NULL, NULL);
@@ -52,7 +52,7 @@ json serializeFileDataToJson(const FileData &fileData) {
 }
 
 void createFileIfNotExists(const wchar_t *filePath) {
-  std::wcout << "Checking file path: " << filePath << std::endl;
+  if (printDebug) std::wcout << "Checking file path: " << filePath << std::endl;
   std::ifstream infile(filePath);
   if (!infile.good()) {
     std::ofstream outfile(filePath);
@@ -61,16 +61,16 @@ void createFileIfNotExists(const wchar_t *filePath) {
 }
 
 void writeFileDataToJson(const FileData *fileDataList, size_t fileDataSize, const wchar_t *filePath) {
-  std::cout << "Checking file" << std::endl;
+  if (printDebug) std::cout << "Checking file" << std::endl;
   createFileIfNotExists(filePath);
-  std::cout << "Checking done" << std::endl;
+  if (printDebug) std::cout << "Checking done" << std::endl;
 
   json j;
-  std::cout << "Building Json Data" << std::endl;
+  if (printDebug) std::cout << "Building Json Data" << std::endl;
   for (int i = 0; i < fileDataSize; ++i) {
     const auto &fileData = fileDataList[i];
     json serializedData = serializeFileDataToJson(fileData);
-    std::cout << serializedData.dump(4) << std::endl;
+    if (printDebug) std::cout << serializedData.dump(4) << std::endl;
     j.push_back(serializeFileDataToJson(fileData));
   }
 

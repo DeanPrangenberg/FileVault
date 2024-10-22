@@ -24,7 +24,7 @@ namespace easyOpenSSL {
                             const std::vector<unsigned char> &KEY, const std::vector<unsigned char> &IV);
 
   private:
-    static void printError(const std::string &msg);
+    static void printError(const std::wstring &msg);
   };
 
   // AES-256 encryption class
@@ -37,7 +37,7 @@ namespace easyOpenSSL {
                             const std::vector<unsigned char> &KEY, const std::vector<unsigned char> &IV);
 
   private:
-    static void printError(const std::string &msg);
+    static void printError(const std::wstring &msg);
   };
 
   class CRYPTOLIB_API SHA256 {

@@ -1,7 +1,7 @@
 package main
 
 /*
-#cgo LDFLAGS: -LD:/MyRepo/FileVault/cmake-build-release/lib -lCppCryptoLib
+#cgo LDFLAGS: -LD:/MyRepo/FileVault/cmake-build-release/bin -lCppCryptoLib
 #include <stdlib.h>
 #include <wchar.h>
 #include <stdbool.h>
@@ -79,9 +79,9 @@ func EncryptFiles(fileInfos []C.struct_FileData) {
    }
 
    if result == C.bool(false) {
-    fmt.Printf("Failed to encrypt file: %s\n", wcharToString(file.EncryptedFilePath))
+    fmt.Printf("Failed to encrypt file: %s\n", wcharToString(file.OriginalFilePath))
    } else {
-    fmt.Printf("Successfully encrypted file: %s\n", wcharToString(file.EncryptedFilePath))
+    fmt.Printf("Successfully encrypted file: %s\n", wcharToString(file.OriginalFilePath))
    }
   }(file)
  }
@@ -120,9 +120,9 @@ func DecryptFiles(fileInfos []C.struct_FileData) {
    }
 
    if result == C.bool(false) {
-    fmt.Printf("Failed to decrypt file: %s\n", wcharToString(file.DecryptedFilePath))
+    fmt.Printf("Failed to decrypt file: %s\n", wcharToString(file.EncryptedFilePath))
    } else {
-    fmt.Printf("Successfully decrypted file: %s\n", wcharToString(file.DecryptedFilePath))
+    fmt.Printf("Successfully decrypted file: %s\n", wcharToString(file.EncryptedFilePath))
    }
   }(file)
  }
