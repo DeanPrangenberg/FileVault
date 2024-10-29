@@ -16,14 +16,16 @@ find_package(OpenSSL REQUIRED)
 
 # Create the shared library
 add_library(CppCryptoLib SHARED
-        src/alogs/AES128.cpp
-        src/alogs/AES256.cpp
-        src/alogs/KeyGen.cpp
-        src/CryptoNamespace.cpp
-        src/CryptoNamespace.h
-        src/alogs/SHA256.cpp
-        src/alogs/SHA256.cpp
-
+		src/alogs/AES128.cpp
+		src/alogs/AES256.cpp
+		src/alogs/KeyGen.cpp
+		src/CryptoNamespace.cpp
+		src/CryptoNamespace.h
+		src/alogs/SHA512.cpp
+		../CppFileVaultMain/src/GlobalDefinitions.h
+		../CppFileVaultMain/src/GlobalDefinitions.cpp
+		src/HelperUtils.cpp
+		src/HelperUtils.cpp
 )
 
 # Link OpenSSL libraries
@@ -31,9 +33,9 @@ target_link_libraries(CppCryptoLib PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 
 # Compile options
 if (MSVC)
-    target_compile_options(CppCryptoLib PRIVATE /W4)
+	target_compile_options(CppCryptoLib PRIVATE /W4)
 else ()
-    target_compile_options(CppCryptoLib PRIVATE -Wall -Wextra)
+	target_compile_options(CppCryptoLib PRIVATE -Wall -Wextra)
 endif ()
 
 # Define the export macro for DLL

@@ -19,23 +19,15 @@ struct FileData {
   int ivLength;
 };
 
-extern bool EncryptFileAes128(const wchar_t *originalFilePath, const wchar_t *encryptedFilePath,
-                                     unsigned char *key, size_t keySize, unsigned char *iv, size_t ivSize);
-
-extern bool DecryptFileAes128(const wchar_t *encryptedFilePath, const wchar_t *decryptedFilePath,
-                                     unsigned char *key, size_t keySize, unsigned char *iv, size_t ivSize);
-
-extern bool EncryptFileAes256(const wchar_t *originalFilePath, const wchar_t *encryptedFilePath,
-                                     unsigned char *key, size_t keySize, unsigned char *iv, size_t ivSize);
-
-extern bool DecryptFileAes256(const wchar_t *encryptedFilePath, const wchar_t *decryptedFilePath,
-                                     unsigned char *key, size_t keySize, unsigned char *iv, size_t ivSize);
+extern bool EncryptFileWrapper(const struct FileData *fileData);
+extern bool DecryptFileWrapper(const struct FileData *fileData);
 */
 import "C"
 import (
  "fmt"
  "sync"
  "unsafe"
+ "runtime"
 )
 
 // Convert wchar_t* to Go string
@@ -48,104 +40,95 @@ func wcharToString(wstr *C.wchar_t) string {
  return result
 }
 
-// EncryptFiles encrypts files based on FileData
-func EncryptFiles(fileInfos []C.struct_FileData) {
- var wg sync.WaitGroup
-
- for _, file := range fileInfos {
-  wg.Add(1)
-  go func(file C.struct_FileData) {
-   defer wg.Done()
-
-   var result C.bool
-   if file.keyLength == 16 { // AES-128
-    result = C.EncryptFileAes128(
-     file.OriginalFilePath,
-     file.EncryptedFilePath,
-     file.Key,
-     C.size_t(file.keyLength),
-     file.Iv,
-     C.size_t(file.ivLength),
-    )
-   } else if file.keyLength == 32 { // AES-256
-    result = C.EncryptFileAes256(
-     file.OriginalFilePath,
-     file.EncryptedFilePath,
-     file.Key,
-     C.size_t(file.keyLength),
-     file.Iv,
-     C.size_t(file.ivLength),
-    )
-   }
-
-   if result == C.bool(false) {
-    fmt.Printf("Failed to encrypt file: %s\n", wcharToString(file.OriginalFilePath))
-   } else {
-    fmt.Printf("Successfully encrypted file: %s\n", wcharToString(file.OriginalFilePath))
-   }
-  }(file)
- }
-
- wg.Wait()
+// Convert []bool to []byte
+func boolsToBytes(bools []bool) []byte {
+    bytes := make([]byte, len(bools))
+    for i, b := range bools {
+        if b {
+            bytes[i] = 1
+        } else {
+            bytes[i] = 0
+        }
+    }
+    return bytes
 }
 
-// DecryptFiles decrypts files based on FileData
-func DecryptFiles(fileInfos []C.struct_FileData) {
- var wg sync.WaitGroup
+// EncryptFiles encrypts files based on FileData and returns a slice of booleans indicating success or failure
+func EncryptFiles(fileInfos []C.struct_FileData) []bool {
+    var wg sync.WaitGroup
+    results := make([]bool, len(fileInfos))
 
- for _, file := range fileInfos {
-  wg.Add(1)
-  go func(file C.struct_FileData) {
-   defer wg.Done()
+    for i, file := range fileInfos {
+        wg.Add(1)
+        go func(i int, file C.struct_FileData) {
+            defer wg.Done()
+            runtime.LockOSThread()
+            defer runtime.UnlockOSThread()
 
-   var result C.bool
-   if file.keyLength == 16 { // AES-128
-    result = C.DecryptFileAes128(
-     file.EncryptedFilePath,
-     file.DecryptedFilePath,
-     file.Key,
-     C.size_t(file.keyLength),
-     file.Iv,
-     C.size_t(file.ivLength),
-    )
-   } else if file.keyLength == 32 { // AES-256
-    result = C.DecryptFileAes256(
-     file.EncryptedFilePath,
-     file.DecryptedFilePath,
-     file.Key,
-     C.size_t(file.keyLength),
-     file.Iv,
-     C.size_t(file.ivLength),
-    )
-   }
+            result := C.EncryptFileWrapper(&file)
 
-   if result == C.bool(false) {
-    fmt.Printf("Failed to decrypt file: %s\n", wcharToString(file.EncryptedFilePath))
-   } else {
-    fmt.Printf("Successfully decrypted file: %s\n", wcharToString(file.EncryptedFilePath))
-   }
-  }(file)
- }
+            if result == C.bool(false) {
+                fmt.Printf("Go: Failed to encrypt file: %s\n", wcharToString(file.OriginalFilePath))
+                results[i] = false
+            } else {
+                fmt.Printf("Go: Successfully encrypted file: %s\n", wcharToString(file.OriginalFilePath))
+                results[i] = true
+            }
+        }(i, file)
+    }
 
- wg.Wait()
+    wg.Wait()
+    return results
+}
+
+// DecryptFiles decrypts files based on FileData and returns a slice of booleans indicating success or failure
+func DecryptFiles(fileInfos []C.struct_FileData) []bool {
+    var wg sync.WaitGroup
+    results := make([]bool, len(fileInfos))
+
+    for i, file := range fileInfos {
+        wg.Add(1)
+        go func(i int, file C.struct_FileData) {
+            defer wg.Done()
+            runtime.LockOSThread()
+            defer runtime.UnlockOSThread()
+
+            result := C.DecryptFileWrapper(&file)
+
+            if result == C.bool(false) {
+                fmt.Printf("Go: Failed to decrypt file: %s\n", wcharToString(file.EncryptedFilePath))
+                results[i] = false
+            } else {
+                fmt.Printf("Go: Successfully decrypted file: %s\n", wcharToString(file.EncryptedFilePath))
+                results[i] = true
+            }
+        }(i, file)
+    }
+
+    wg.Wait()
+    return results
 }
 
 //export EncryptFilesWrapper
-func EncryptFilesWrapper(filesPtr *C.struct_FileData, numFiles C.int) {
- fileInfos := make([]C.struct_FileData, numFiles)
- for i := 0; i < int(numFiles); i++ {
-  fileInfos[i] = *(*C.struct_FileData)(unsafe.Pointer(uintptr(unsafe.Pointer(filesPtr)) + uintptr(i)*unsafe.Sizeof(C.struct_FileData{})))
- }
- EncryptFiles(fileInfos)
+func EncryptFilesWrapper(filesPtr *C.struct_FileData, numFiles C.int) *C.bool {
+    fileInfos := make([]C.struct_FileData, numFiles)
+    for i := 0; i < int(numFiles); i++ {
+        fileInfos[i] = *(*C.struct_FileData)(unsafe.Pointer(uintptr(unsafe.Pointer(filesPtr)) + uintptr(i)*unsafe.Sizeof(C.struct_FileData{})))
+    }
+    results := EncryptFiles(fileInfos)
+    resultBytes := boolsToBytes(results)
+    return (*C.bool)(C.CBytes(resultBytes))
 }
 
 //export DecryptFilesWrapper
-func DecryptFilesWrapper(filesPtr *C.struct_FileData, numFiles C.int) {
- fileInfos := make([]C.struct_FileData, numFiles)
- for i := 0; i < int(numFiles); i++ {
-  fileInfos[i] = *(*C.struct_FileData)(unsafe.Pointer(uintptr(unsafe.Pointer(filesPtr)) + uintptr(i)*unsafe.Sizeof(C.struct_FileData{})))
- }
- DecryptFiles(fileInfos)
+func DecryptFilesWrapper(filesPtr *C.struct_FileData, numFiles C.int) *C.bool {
+    fileInfos := make([]C.struct_FileData, numFiles)
+    for i := 0; i < int(numFiles); i++ {
+        fileInfos[i] = *(*C.struct_FileData)(unsafe.Pointer(uintptr(unsafe.Pointer(filesPtr)) + uintptr(i)*unsafe.Sizeof(C.struct_FileData{})))
+    }
+    results := DecryptFiles(fileInfos)
+    resultBytes := boolsToBytes(results)
+    return (*C.bool)(C.CBytes(resultBytes))
 }
 
 func main() {}

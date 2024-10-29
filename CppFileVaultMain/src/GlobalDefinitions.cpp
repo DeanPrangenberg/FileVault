@@ -4,4 +4,5 @@
 namespace globalDefinitions {
   const std::wstring encFileSuffix = L".encFV";
   const wchar_t* jsonFileName = L"SaveData.json";
+  const std::string markIdentifier = "<FileVault-FileID>";
 }

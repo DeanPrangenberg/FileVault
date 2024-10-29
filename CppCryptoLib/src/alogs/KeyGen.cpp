@@ -7,8 +7,6 @@
 #include <stdexcept>
 #include "../CryptoNamespace.h"
 
-using easyOpenSSL::KeyGen;
-
 void KeyGen::generateKeyIv(const size_t &keySize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV) {
   // Create the key and IV with specified sizes
   std::vector<unsigned char> key(keySize);

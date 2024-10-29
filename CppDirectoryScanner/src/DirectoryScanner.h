@@ -16,9 +16,9 @@
 
 namespace fs = std::filesystem;
 
-class DirectoryScanner {
+class FILESCANNER_API DirectoryScanner {
 public:
-  std::vector<fs::path> listFiles(const fs::path &directory, const bool &encryptionMode);
+  std::vector<fs::path> listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles);
 
   const wchar_t **convertVectorToWCharArray(const std::vector<fs::path> &paths);
 
@@ -33,7 +33,7 @@ private:
 };
 
 extern "C" {
-FILESCANNER_API const wchar_t **ScanForFilesInDirectory(const wchar_t *originalFilePath, const bool *encryptionMode);
+FILESCANNER_API const wchar_t **ScanForFilesInDirectory(const wchar_t *originalFilePath, const bool searchOnlyForDecryptedFiles);
 }
 
 #endif //FILEVAULTROOT_DIRECTORYSCANNER_H

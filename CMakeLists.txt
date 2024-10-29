@@ -16,29 +16,12 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # Add subprojects
-if(EXISTS "${CMAKE_SOURCE_DIR}/CppCryptoLib")
+
     add_subdirectory(CppCryptoLib)  # Your cryptography module
-else()
-    message(FATAL_ERROR "Directory CppCryptoLib does not exist.")
-endif()
-
-if(EXISTS "${CMAKE_SOURCE_DIR}/CppFileVaultMain")
     add_subdirectory(CppFileVaultMain)  # Main application logic
-else()
-    message(FATAL_ERROR "Directory CppFileVaultMain does not exist.")
-endif()
-
-if(EXISTS "${CMAKE_SOURCE_DIR}/CppSaveFileLib")
     add_subdirectory(CppSaveFileLib)  # File handling logic
-else()
-    message(FATAL_ERROR "Directory CppSaveFileLib does not exist.")
-endif()
-
-if(EXISTS "${CMAKE_SOURCE_DIR}/CppDirectoryScanner")
+    add_subdirectory(CppFileMarkLib)  # File marking logic
     add_subdirectory(CppDirectoryScanner)  # Main application logic
-else()
-    message(FATAL_ERROR "Directory CppDirectoryScanner does not exist.")
-endif()
 
 add_custom_target(GoMultiThreadCryptoLib ALL
         COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoMultiThreadCryptoLib.dll -buildmode=c-shared .
@@ -53,6 +36,7 @@ add_dependencies(CppFileVaultMain CppCryptoLib)  # Main app depends on cryptogra
 add_dependencies(CppFileVaultMain CppSaveFileLib)  # Main app depends on file handling
 add_dependencies(CppFileVaultMain GoMultiThreadCryptoLib)  # Main app depends on Go DLL
 add_dependencies(CppFileVaultMain CppDirectoryScannerLib)  # Main app depends on C# project
+add_dependencies(CppFileVaultMain CppFileMarkLib)  # Main app depends on C# project
 
 # Compilation options for warnings
 if (MSVC)

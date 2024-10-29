@@ -8,6 +8,7 @@ namespace globalDefinitions {
   // variables
   extern const std::wstring encFileSuffix;
   extern const wchar_t* jsonFileName;
+  extern const std::string markIdentifier;
 
   // structs
   struct FileData {
