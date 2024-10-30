@@ -13,15 +13,15 @@ namespace globalDefinitions {
   // structs
   struct FileData {
     unsigned char* FileID;
-    int fileIDLength;
+    size_t fileIDLength;
     const wchar_t* AlgorithmenType;
     const wchar_t* OriginalFilePath;
     const wchar_t* EncryptedFilePath;
     const wchar_t* DecryptedFilePath;
     unsigned char* Key;
-    int keyLength;
+    size_t keyLength;
     unsigned char* Iv;
-    int ivLength;
+    size_t ivLength;
   };
 
   // enums

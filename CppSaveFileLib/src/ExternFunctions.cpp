@@ -7,33 +7,43 @@
 #include <fstream>
 
 extern "C" {
-void WriteFileDataToJson(const FileData *fileDataList, size_t fileDataSize, const wchar_t *filePath) {
-  if (printDebug) std::cout << "Checking file" << std::endl;
-  SaveFileLib::createFileIfNotExists(filePath);
-  if (printDebug) std::cout << "Checking done" << std::endl;
+[[maybe_unused]] void WriteFileDataToJson(const FileData *fileDataList, size_t fileDataSize, const wchar_t *saveFilePath) {
+  SaveFileLib::createFileIfNotExists(saveFilePath);
 
+  // Read existing data from the file
+  std::vector<FileData> existingFileDataList;
+  std::ifstream infile(saveFilePath);
+  if (infile.peek() != std::ifstream::traits_type::eof()) {
+    existingFileDataList = SaveFileLib().readFileDataFromJson(saveFilePath);
+  }
+  infile.close();
+
+  // Append new data to the existing data
+  for (size_t i = 0; i < fileDataSize; ++i) {
+    existingFileDataList.push_back(fileDataList[i]);
+  }
+
+  // Serialize the combined data to JSON
   json j;
-  if (printDebug) std::cout << "Building Json Data" << std::endl;
-  for (int i = 0; i < fileDataSize; ++i) {
-    const auto &fileData = fileDataList[i];
+  for (const auto &fileData : existingFileDataList) {
     SaveFileLib lib;
     json serializedData = lib.serializeFileDataToJson(fileData);
-    if (printDebug) std::cout << serializedData.dump(4) << std::endl;
     j.push_back(serializedData);
   }
 
-  std::ofstream file(filePath);
+  // Write the combined data back to the file
+  std::ofstream file(saveFilePath);
   if (file.is_open()) {
     file << j.dump(4);
     file.close();
   } else {
-    std::wcerr << L"Failed to open file for writing: " << filePath << std::endl;
+    std::wcerr << L"Failed to open file for writing: " << saveFilePath << std::endl;
   }
 }
 
-bool FindAndCompleteStruct(FileData *partialStruct, const wchar_t *filePath) {
+[[maybe_unused]] bool FindAndCompleteStruct(FileData *partialStruct, const wchar_t *saveFilePath) {
   SaveFileLib lib;
-  auto fileDataList = lib.readFileDataFromJson(filePath);
+  auto fileDataList = lib.readFileDataFromJson(saveFilePath);
   auto match = lib.findMatchingFileData(partialStruct, fileDataList);
   if (match) {
     *partialStruct = *match;
@@ -42,15 +52,15 @@ bool FindAndCompleteStruct(FileData *partialStruct, const wchar_t *filePath) {
   return false;
 }
 
-bool DeleteStructFromJson(const FileData *targetStruct, const wchar_t *filePath) {
+[[maybe_unused]] bool DeleteStructFromJson(const FileData *targetStruct, const wchar_t *saveFilePath) {
   SaveFileLib lib;
-  auto fileDataList = lib.readFileDataFromJson(filePath);
+  auto fileDataList = lib.readFileDataFromJson(saveFilePath);
   auto it = std::remove_if(fileDataList.begin(), fileDataList.end(), [&](const FileData& data) {
     return lib.compareFileData(targetStruct, data);
   });
   if (it != fileDataList.end()) {
     fileDataList.erase(it, fileDataList.end());
-    WriteFileDataToJson(fileDataList.data(), fileDataList.size(), filePath);
+    WriteFileDataToJson(fileDataList.data(), fileDataList.size(), saveFilePath);
     return true;
   }
   return false;

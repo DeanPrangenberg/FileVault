@@ -14,9 +14,9 @@ struct FileData {
   const wchar_t *EncryptedFilePath;
   const wchar_t *DecryptedFilePath;
   unsigned char *Key;
-  int keyLength;
+  size_t keyLength;
   unsigned char *Iv;
-  int ivLength;
+  size_t ivLength;
 };
 
 extern bool EncryptFileWrapper(const struct FileData *fileData);

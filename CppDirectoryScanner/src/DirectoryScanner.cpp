@@ -12,7 +12,7 @@
 
 namespace fs = std::filesystem;
 
-std::vector<fs::path> DirectoryScanner::listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles) {
+std::vector<fs::path> DirectoryScanner::listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles) const {
   std::vector<fs::path> fileList;
   if (!fs::exists(directory) || !fs::is_directory(directory)) {
     std::wcerr << "Error: Invalid directory: " << directory << std::endl;
@@ -47,9 +47,8 @@ std::vector<fs::path> DirectoryScanner::listFiles(const fs::path &directory, con
         } else if (fs::is_regular_file(entry)
                    && !isSystemCritical(entry.path())
                    && fs::file_size(entry.path()) > 0) {
-          if (!searchOnlyForDecryptedFiles
-              && !hasEncFileExtension(entry.path())
-              || hasEncFileExtension(entry.path())) {
+          if ((!searchOnlyForDecryptedFiles && !hasEncFileExtension(entry.path())) ||
+              (searchOnlyForDecryptedFiles && hasEncFileExtension(entry.path()))) {
             if (printDebug) std::wcout << L"Found file: " << entry.path() << std::endl;
             fileList.push_back(entry.path());
           }
@@ -112,7 +111,7 @@ bool DirectoryScanner::hasEncFileExtension(const fs::path &filepath) {
 }
 
 const wchar_t **DirectoryScanner::convertVectorToWCharArray(const std::vector<std::filesystem::path> &paths) {
-  const wchar_t **result = new const wchar_t *[paths.size() + 1]; // +1 for null terminator
+  auto **result = new const wchar_t *[paths.size() + 1]; // +1 for null terminator
   for (size_t i = 0; i < paths.size(); ++i) {
     result[i] = _wcsdup(paths[i].c_str()); // Duplicate the string to ensure it is properly managed
   }
@@ -121,9 +120,9 @@ const wchar_t **DirectoryScanner::convertVectorToWCharArray(const std::vector<st
 }
 
 extern "C" {
-FILESCANNER_API const wchar_t **ScanForFilesInDirectory(const wchar_t *originalFilePath, const bool searchOnlyForDecryptedFiles) {
+[[maybe_unused]] FILESCANNER_API const wchar_t **ScanForFilesInDirectory(const wchar_t *originalFilePath, const bool searchOnlyForDecryptedFiles) {
     fs::path directory(originalFilePath);
     DirectoryScanner directoryScanner;
-    return directoryScanner.convertVectorToWCharArray(directoryScanner.listFiles(directory, searchOnlyForDecryptedFiles));
+    return DirectoryScanner::convertVectorToWCharArray(directoryScanner.listFiles(directory, searchOnlyForDecryptedFiles));
   }
 }

@@ -65,7 +65,7 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
   }
 }
 
-FILEMARKLIB_API void markFile(const struct FileData *fileData) {
+[[maybe_unused]] FILEMARKLIB_API void markFile(const struct FileData *fileData) {
   // Convert FileID to string
   std::string fileIDStr(reinterpret_cast<const char *>(fileData->FileID), fileData->fileIDLength);
   std::string fileMark = globalDefinitions::markIdentifier + fileIDStr + globalDefinitions::markIdentifier + "\n";
@@ -100,7 +100,7 @@ FILEMARKLIB_API void markFile(const struct FileData *fileData) {
   outputFile.close();
 }
 
-FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData) {
+[[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData) {
   // Open the original file
   std::ifstream inputFile(fileData->EncryptedFilePath, std::ios::binary);
   if (!inputFile) {

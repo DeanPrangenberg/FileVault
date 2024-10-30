@@ -30,6 +30,10 @@ add_executable(CppFileVaultMain
 		src/GlobalDefinitions.cpp
 		src/System/SystemUtils.h
 		src/System/SystemUtils.cpp
+		src/HelperUtils/HelperUtils.cpp
+		src/HelperUtils/HelperUtils.h
+		src/HelperUtils/HelperUtils.h
+		src/HelperUtils/HelperUtils.cpp
 		# Add other source files here
 )
 

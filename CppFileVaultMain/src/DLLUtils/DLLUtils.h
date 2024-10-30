@@ -17,8 +17,8 @@ public:
   void EncryptFiles(struct FileData *fileData, int count, std::vector<bool> &results);
   void DecryptFiles(struct FileData *fileData, int count, std::vector<bool> &results);
   void WriteFileDataToJson(const std::vector<FileData> &fileDataList);
-  bool FindAndCompleteStruct(FileData *partialStruct, const wchar_t *filePath);
-  bool DeleteStructFromJson(const FileData *targetStruct, const wchar_t *filePath);
+  bool FindAndCompleteStruct(FileData *partialStruct, const wchar_t *saveFilePath);
+  bool DeleteStructFromJson(const FileData *targetStruct, const wchar_t *saveFilePath);
   std::vector<fs::path> ScanDirectory(const fs::path& directory, const bool searchOnlyForDecryptedFiles);
   bool ExtractFileIDFromFile(const wchar_t * filePath, unsigned char FileID[64]);
 

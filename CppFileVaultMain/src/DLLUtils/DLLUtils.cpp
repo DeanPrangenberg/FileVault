@@ -115,7 +115,7 @@ void DLLUtils::WriteFileDataToJson(const std::vector<FileData>& fileDataList) {
   unloadDll(hSaveFileOperationsDll);
 }
 
-bool DLLUtils::FindAndCompleteStruct(FileData *partialStruct, const wchar_t *filePath) {
+bool DLLUtils::FindAndCompleteStruct(FileData *partialStruct, const wchar_t *saveFilePath) {
   HMODULE hSaveFileOperationsDll = loadDll(L"CppSaveFileLib.dll");
   if (!hSaveFileOperationsDll) {
     return false;
@@ -128,12 +128,12 @@ bool DLLUtils::FindAndCompleteStruct(FileData *partialStruct, const wchar_t *fil
     return false;
   }
 
-  bool result = findAndCompleteStructFunc(partialStruct, filePath);
+  bool result = findAndCompleteStructFunc(partialStruct, saveFilePath);
   unloadDll(hSaveFileOperationsDll);
   return result;
 }
 
-bool DLLUtils::DeleteStructFromJson(const FileData *targetStruct, const wchar_t *filePath) {
+bool DLLUtils::DeleteStructFromJson(const FileData *targetStruct, const wchar_t *saveFilePath) {
   HMODULE hSaveFileOperationsDll = loadDll(L"CppSaveFileLib.dll");
   if (!hSaveFileOperationsDll) {
     return false;
@@ -146,13 +146,27 @@ bool DLLUtils::DeleteStructFromJson(const FileData *targetStruct, const wchar_t 
     return false;
   }
 
-  bool result = deleteStructFromJsonFunc(targetStruct, filePath);
+  bool result = deleteStructFromJsonFunc(targetStruct, saveFilePath);
   unloadDll(hSaveFileOperationsDll);
   return result;
 }
 
-void DLLUtils::ExtractFileIDFromFile() {
+bool DLLUtils::ExtractFileIDFromFile(const wchar_t * filePath, unsigned char FileID[64]) {
+  HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
+  if (!hFileMarkDll) {
+    return false;
+  }
 
+  auto extractFileIDFromFileFunc = (ExtractFileIDFromFileFunc) GetProcAddress(hFileMarkDll, "extractFileIDFromFile");
+  if (!extractFileIDFromFileFunc) {
+    logError("Failed to get function address for extractFileIDFromFile");
+    unloadDll(hFileMarkDll);
+    return false;
+  }
+
+  bool result = extractFileIDFromFileFunc(filePath, FileID);
+  unloadDll(hFileMarkDll);
+  return result;
 }
 
 std::vector<fs::path> DLLUtils::ScanDirectory(const fs::path& directory, const bool searchOnlyForDecryptedFiles) {

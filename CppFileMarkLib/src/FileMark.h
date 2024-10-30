@@ -16,9 +16,9 @@ using globalDefinitions::FileData;
 #endif
 
 extern "C" {
-FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t * filePath, unsigned char FileID[64]);
-FILEMARKLIB_API void markFile(const struct FileData *fileData);
-FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData);
+[[maybe_unused]] FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t * filePath, unsigned char FileID[64]);
+[[maybe_unused]] FILEMARKLIB_API void markFile(const struct FileData *fileData);
+[[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData);
 }
 
 #endif //FILEVAULTROOT_FILEMARK_H

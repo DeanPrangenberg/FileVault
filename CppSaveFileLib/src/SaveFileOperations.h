@@ -34,9 +34,11 @@ public:
 const bool printDebug = false;
 
 extern "C" {
-SAVEFILELIB_API void WriteFileDataToJson(const FileData *fileDataList, size_t fileDataSize, const wchar_t *filePath);
-SAVEFILELIB_API bool FindAndCompleteStruct(FileData *partialStruct, const wchar_t *filePath);
-SAVEFILELIB_API bool DeleteStructFromJson(const FileData *targetStruct, const wchar_t *filePath);
+[[maybe_unused]] SAVEFILELIB_API void WriteFileDataToJson(const FileData *fileDataList,
+                                                          size_t fileDataSize,
+                                                          const wchar_t *saveFilePath);
+[[maybe_unused]] SAVEFILELIB_API bool FindAndCompleteStruct(FileData *partialStruct, const wchar_t *saveFilePath);
+[[maybe_unused]] SAVEFILELIB_API bool DeleteStructFromJson(const FileData *targetStruct, const wchar_t *saveFilePath);
 }
 
 #endif //ROOTPROJECT_SAVEFILEOPERATIONS_H

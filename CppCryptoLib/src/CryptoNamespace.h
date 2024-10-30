@@ -57,13 +57,13 @@ private:
 
 // Wrapper functions for C compatibility
 extern "C" {
-CRYPTOLIB_API bool EncryptFileWrapper(const struct FileData *fileData);
+[[maybe_unused]] CRYPTOLIB_API bool EncryptFileWrapper(const struct FileData *fileData);
 
-CRYPTOLIB_API bool DecryptFileWrapper(const struct FileData *fileData);
+[[maybe_unused]] CRYPTOLIB_API bool DecryptFileWrapper(const struct FileData *fileData);
 
-CRYPTOLIB_API void GenerateKeyIv(size_t keySize, unsigned char *key, unsigned char *iv);
+[[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, unsigned char *key, unsigned char *iv);
 
-CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID);
+[[maybe_unused]] CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID);
 
 }
 

@@ -1,5 +1,6 @@
 #include "StructUtils/StructUtils.h"
 #include "DLLUtils/DLLUtils.h"
+#include "HelperUtils/HelperUtils.h"
 #include <filesystem>
 #include <iostream>
 #include <thread>
@@ -11,7 +12,7 @@ int main() {
   auto dllUtils = DLLUtils();
 
   std::cout << "--Starting file scan--" << std::endl;
-  auto pathList = dllUtils.ScanDirectory("S:\\", false);
+  auto pathList = dllUtils.ScanDirectory("S:\\clips\\cut", false);
   std::cout << "Scan completed found " << pathList.size() << " files!" << std::endl;
 
   std::vector<FileData> fileDataVec;
@@ -44,6 +45,13 @@ int main() {
 
       std::cout << "--Saving File Data--" << std::endl;
       dllUtils.WriteFileDataToJson(fileDataVec);
+
+      int stop;
+      std::cin >> stop;
+
+      auto helperUtils = HelperUtils();
+      std::vector<fs::path> paths = {"S:\\clips\\cut\\test1"};
+      helperUtils.repairLostEncFileStructs(paths);
 
       // Clear the current fileDataVec and rescan the directory
       fileDataVec.clear();
@@ -80,7 +88,6 @@ int main() {
           std::wcout << L"Deleted struct for file: " << fileData.OriginalFilePath << std::endl;
         }
       }
-
     }
   }
 
