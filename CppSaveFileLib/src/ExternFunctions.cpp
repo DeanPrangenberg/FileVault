@@ -11,31 +11,29 @@ extern "C" {
   SaveFileLib::createFileIfNotExists(saveFilePath);
 
   // Read existing data from the file
-  std::vector<FileData> existingFileDataList;
-  std::ifstream infile(saveFilePath);
-  if (infile.peek() != std::ifstream::traits_type::eof()) {
-    existingFileDataList = SaveFileLib().readFileDataFromJson(saveFilePath);
+  json existingData = json::array(); // Initialize as an empty array
+  std::ifstream inputFile(saveFilePath);
+  if (inputFile.is_open()) {
+    try {
+      inputFile >> existingData;
+    } catch (const std::exception &e) {
+      // If the file is empty or contains invalid JSON, existingData remains an empty array
+    }
+    inputFile.close();
   }
-  infile.close();
 
-  // Append new data to the existing data
+  // Serialize the new data to JSON and append it to the existing data
   for (size_t i = 0; i < fileDataSize; ++i) {
-    existingFileDataList.push_back(fileDataList[i]);
-  }
-
-  // Serialize the combined data to JSON
-  json j;
-  for (const auto &fileData : existingFileDataList) {
     SaveFileLib lib;
-    json serializedData = lib.serializeFileDataToJson(fileData);
-    j.push_back(serializedData);
+    json serializedData = lib.serializeFileDataToJson(fileDataList[i]);
+    existingData.push_back(serializedData);
   }
 
   // Write the combined data back to the file
-  std::ofstream file(saveFilePath);
-  if (file.is_open()) {
-    file << j.dump(4);
-    file.close();
+  std::ofstream outputFile(saveFilePath);
+  if (outputFile.is_open()) {
+    outputFile << existingData.dump(4);
+    outputFile.close();
   } else {
     std::wcerr << L"Failed to open file for writing: " << saveFilePath << std::endl;
   }
@@ -60,7 +58,24 @@ extern "C" {
   });
   if (it != fileDataList.end()) {
     fileDataList.erase(it, fileDataList.end());
-    WriteFileDataToJson(fileDataList.data(), fileDataList.size(), saveFilePath);
+    try {
+      // Overwrite the JSON file with the updated list
+      std::ofstream outputFile(saveFilePath);
+      if (outputFile.is_open()) {
+        json updatedData = json::array();
+        for (const auto& fileData : fileDataList) {
+          updatedData.push_back(lib.serializeFileDataToJson(fileData));
+        }
+        outputFile << updatedData.dump(4);
+        outputFile.close();
+      } else {
+        std::wcerr << L"Failed to open file for writing: " << saveFilePath << std::endl;
+        return false;
+      }
+    } catch (const std::exception &e) {
+      std::wcerr << L"Failed to write to JSON file: " << e.what() << std::endl;
+      return false;
+    }
     return true;
   }
   return false;

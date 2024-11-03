@@ -49,10 +49,12 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
   std::vector<FileIDData> lostFiles;
   for (const auto &filePath: totalFiles) {
     std::array<unsigned char, 64> FileID;
-    if (dllUtils.ExtractFileIDFromFile(ConvertWStringToWChar(filePath.wstring()), FileID.data())) {
+    auto wch = ConvertWStringToWChar(filePath.wstring());
+    if (dllUtils.ExtractFileIDFromFile(wch, FileID.data())) {
       std::cout << "FileID found for file: " << filePath << std::endl;
       lostFiles.push_back({FileID, filePath});
     }
+    delete[] wch; // Free allocated memory
   }
   std::cout << "Found " << lostFiles.size() << " files with FileID" << std::endl;
 
@@ -78,7 +80,10 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
   for (auto &fileData : fileDataList) {
     for (const auto &lostFile : lostFiles) {
       if (std::vector<unsigned char>(fileData.FileID, fileData.FileID + fileData.fileIDLength) == std::vector<unsigned char>(lostFile.FileID.begin(), lostFile.FileID.end())) {
-        fileData.EncryptedFilePath = ConvertWStringToWChar(lostFile.newEncryptedFilePath);
+        auto wch = ConvertWStringToWChar(lostFile.newEncryptedFilePath.wstring());
+        fileData.EncryptedFilePath = new wchar_t[wcslen(wch) + 1];
+        std::wmemcpy(const_cast<wchar_t *>(fileData.EncryptedFilePath), wch, wcslen(wch) + 1);
+        delete[] wch; // Free allocated memory
         break;
       }
     }
@@ -98,6 +103,7 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
   std::cout << "Freeing allocated memory" << std::endl;
   for (auto &fileData : fileDataList) {
     delete[] fileData.FileID;
+    delete[] fileData.EncryptedFilePath;
   }
   std::cout << "Memory freed, repairLostEncFileStructs done!" << std::endl;
 }
