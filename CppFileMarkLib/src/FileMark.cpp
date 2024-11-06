@@ -3,11 +3,11 @@
 //
 
 #include "FileMark.h"
-#include <locale>
 #include <codecvt>
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <cstring>
 
 extern "C" {
 FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, unsigned char FileID[64]) {
@@ -57,7 +57,13 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
 
   // Compare the fileIDs and return if they are equal
   if (fileIDStart == fileIDEnd) {
-    std::memcpy(FileID, fileIDStart.c_str(), fileIDStart.length() + 1);
+    if (fileIDStart.length() != 64) {
+      std::cout << "File ID has the wrong size" << std::endl;
+      return false;
+    }
+    std::memcpy(FileID, fileIDStart.c_str(), fileIDStart.length());
+    std::memset(FileID + fileIDStart.length(), 0, 64 - fileIDStart.length()); // Zero out the rest of the array
+    std::cout << "Extracted File ID: " << fileIDStart << std::endl; // Log the extracted File ID
     return true;
   } else {
     std::cout << "File IDs do not match" << std::endl;
@@ -101,7 +107,7 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
 }
 
 [[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData) {
-  // Open the original file
+  // Open the Encrypted file
   std::ifstream inputFile(fileData->EncryptedFilePath, std::ios::binary);
   if (!inputFile) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
@@ -118,21 +124,17 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
 
   // Extract the fileID using extractFileID
   unsigned char extractedFileIDArr[64];
-  if (extractFileIDFromFile(fileData->EncryptedFilePath, extractedFileIDArr)) {
+  if (!extractFileIDFromFile(fileData->EncryptedFilePath, extractedFileIDArr)) {
     std::cout << "Failed to extract file ID" << std::endl;
     return false;
   }
-
-  // Turn fileID in to a pointer
-  auto *extractedFileID = new unsigned char[fileData->fileIDLength];
 
   // Convert FileID to string
   std::string fileIDStr(reinterpret_cast<const char *>(fileData->FileID), fileData->fileIDLength);
 
   // Verify if the extracted fileID matches the fileID in the struct
-  if (std::memcmp(fileData->FileID, extractedFileID, fileData->fileIDLength) != 0) {
+  if (std::memcmp(fileData->FileID, extractedFileIDArr, fileData->fileIDLength) != 0) {
     std::cout << "File ID does not match" << std::endl;
-    delete[] extractedFileID; // Free the allocated memory
     return false;
   }
 
@@ -145,7 +147,6 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
     fileContents.erase(startPos, markWithID.length());
   } else {
     std::cout << "Failed to find the first mark identifier" << std::endl;
-    delete[] extractedFileID; // Free the allocated memory
     return false;
   }
 
@@ -155,7 +156,6 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
     fileContents.erase(endPos, markWithID.length());
   } else {
     std::cout << "Failed to find the last mark identifier" << std::endl;
-    delete[] extractedFileID; // Free the allocated memory
     return false;
   }
 
@@ -165,14 +165,11 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
     std::string filePathStr = converter.to_bytes(fileData->EncryptedFilePath);
     std::cout << "Failed to open original file for writing: " + filePathStr << std::endl;
-    delete[] extractedFileID; // Free the allocated memory
     return false;
   }
   outputFile << fileContents;
   outputFile.close();
 
-  // Free the allocated memory
-  delete[] extractedFileID;
   return true;
 }
 }

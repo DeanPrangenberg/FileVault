@@ -45,16 +45,19 @@ int main() {
 
       std::cout << "--Saving File Data--" << std::endl;
       dllUtils.WriteFileDataToJson(fileDataVec);
+      std::cout << "Type something: ";
 
       int stop;
       std::cin >> stop;
 
+      std::cout << "--Repairing Lost Encrypted File Structs--" << std::endl;
       auto helperUtils = HelperUtils();
-      std::vector<fs::path> paths = {"S:\\clips\\cut\\test1"};
+      std::vector<fs::path> paths = {"S:\\clips\\cut"};
       helperUtils.repairLostEncFileStructs(paths);
 
       // Clear the current fileDataVec and rescan the directory
       fileDataVec.clear();
+      std::cout << "--Rescanning Directory for encrypted files--" << std::endl;
       pathList = dllUtils.ScanDirectory("S:\\clips\\cut", true);
 
       // Reload the FileData structs from the JSON file
