@@ -2,14 +2,14 @@
 #include <optional>
 #include <vector>
 #include <cstring>
+#include <iostream>
 
 bool SaveFileLib::compareFileData(const FileData *a, const FileData &b) {
+  std::cout << "FileData to find id: " << "" << std::endl;
   if (a->FileID && b.FileID && memcmp(a->FileID, b.FileID, a->fileIDLength) == 0) {
     return true;
   }
-  if (a->EncryptedFilePath && b.EncryptedFilePath && wcscmp(a->EncryptedFilePath, b.EncryptedFilePath) == 0) {
-    return true;
-  }
+  std::cout << "FileID comparison failed" << std::endl;
   return false;
 }
 

@@ -59,6 +59,7 @@ int main() {
       fileDataVec.clear();
       std::cout << "--Rescanning Directory for encrypted files--" << std::endl;
       pathList = dllUtils.ScanDirectory("S:\\clips\\cut", true);
+      std::cout << "Scan completed found " << pathList.size() << " files!" << std::endl;
 
       // Reload the FileData structs from the JSON file
       std::cout << "--Reloading File Data--" << std::endl;
@@ -67,10 +68,20 @@ int main() {
         std::wstring filePathStr = filePath.wstring();
         partialStruct->EncryptedFilePath = StructUtils::ConvertWStringToWChar(filePathStr);
         if (dllUtils.FindAndCompleteStruct(partialStruct, globalDefinitions::jsonFileName)) {
-          FileData fileData = *partialStruct;
+          if (partialStruct->OriginalFilePath != nullptr
+              && partialStruct->EncryptedFilePath != nullptr
+              && partialStruct->FileID != nullptr) {
+            FileData fileData = *partialStruct;
+            delete partialStruct;
+            fileDataVec.push_back(fileData);
+            std::wcout << L"Found and completed struct for file: " << filePathStr << std::endl;
+          } else {
+            delete partialStruct;
+            std::wcout << L"Null pointers in struct for: " << filePathStr << std::endl;
+          }
+        } else {
           delete partialStruct;
-          fileDataVec.push_back(fileData);
-          std::wcout << L"Found and completed struct for file: " << fileData.OriginalFilePath << std::endl;
+          std::wcout << L"Failed to find struct for file: " << filePathStr << std::endl;
         }
       }
 
