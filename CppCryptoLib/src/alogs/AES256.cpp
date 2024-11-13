@@ -15,6 +15,9 @@ bool AES256::encryptFile(const FileData *fileData) {
   fs::path originalFile(fileData->OriginalFilePath);
   fs::path encryptedFile(fileData->EncryptedFilePath);
 
+  // Create directories if they do not exist
+  fs::create_directories(encryptedFile.parent_path());
+
   // Initialize encryption context
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
   if (!ctx) {
@@ -32,6 +35,7 @@ bool AES256::encryptFile(const FileData *fileData) {
   // Open input and output files
   std::ifstream infile(originalFile, std::ios::binary);
   std::ofstream outfile(encryptedFile, std::ios::binary);
+
   if (!infile.is_open()) {
     std::wcerr << L"AES256: Failed to open input file: " << originalFile.wstring() << std::endl;
     EVP_CIPHER_CTX_free(ctx);
@@ -77,7 +81,7 @@ bool AES256::encryptFile(const FileData *fileData) {
     return false;
   }
 
- // Close the file streams
+  // Close the file streams
   infile.close();
   outfile.close();
 
@@ -102,6 +106,9 @@ bool AES256::decryptFile(const FileData *fileData) {
 
   fs::path encryptedFile(fileData->EncryptedFilePath);
   fs::path decryptedFile(fileData->DecryptedFilePath);
+
+  // Create directories if they do not exist
+  fs::create_directories(decryptedFile.parent_path());
 
   // Initialize decryption context
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
@@ -173,7 +180,7 @@ bool AES256::decryptFile(const FileData *fileData) {
     return false;
   }
 
- // Close the file streams
+  // Close the file streams
   infile.close();
   outfile.close();
 

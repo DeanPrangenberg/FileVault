@@ -44,12 +44,9 @@ extern "C" {
   auto fileDataList = lib.readFileDataFromJson(saveFilePath);
   auto match = lib.findMatchingFileData(partialStruct, fileDataList);
   if (match) {
-    std::cout << "Found matching struct in JSON file" << std::endl;
     *partialStruct = *match;
     return true;
   }
-
-  std::cout << L"Failed to find matching struct in JSON file" << std::endl;
   return false;
 }
 

@@ -15,6 +15,9 @@ bool AES128::encryptFile(const FileData *fileData) {
   fs::path originalFile(fileData->OriginalFilePath);
   fs::path encryptedFile(fileData->EncryptedFilePath);
 
+  // Create directories if they do not exist
+  fs::create_directories(encryptedFile.parent_path());
+
   // Initialize encryption context
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
   if (!ctx) {
@@ -87,7 +90,6 @@ bool AES128::encryptFile(const FileData *fileData) {
   HelperUtils::deleteFile(originalFile);
   HelperUtils::MarkFile(fileData);
 
-
   return true;
 }
 
@@ -102,6 +104,9 @@ bool AES128::decryptFile(const FileData *fileData) {
 
   fs::path encryptedFile(fileData->EncryptedFilePath);
   fs::path decryptedFile(fileData->DecryptedFilePath);
+
+  // Create directories if they do not exist
+  fs::create_directories(decryptedFile.parent_path());
 
   // Initialize decryption context
   EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
