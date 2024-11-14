@@ -63,7 +63,7 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
     }
     std::memcpy(FileID, fileIDStart.c_str(), fileIDStart.length());
     std::memset(FileID + fileIDStart.length(), 0, 64 - fileIDStart.length()); // Zero out the rest of the array
-    std::cout << "Extracted File ID: " << fileIDStart << std::endl; // Log the extracted File ID
+    if (debugPrint) std::cout << "Extracted File ID: " << fileIDStart << std::endl; // Log the extracted File ID
     return true;
   } else {
     std::cout << "File IDs do not match" << std::endl;

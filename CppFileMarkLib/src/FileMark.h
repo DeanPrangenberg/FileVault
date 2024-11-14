@@ -15,6 +15,8 @@ using globalDefinitions::FileData;
 #define FILEMARKLIB_API __declspec(dllimport)
 #endif
 
+const bool debugPrint = false;
+
 extern "C" {
 [[maybe_unused]] FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t * filePath, unsigned char FileID[64]);
 [[maybe_unused]] FILEMARKLIB_API void markFile(const struct FileData *fileData);

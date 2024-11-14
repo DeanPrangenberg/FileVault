@@ -10,8 +10,22 @@ namespace fs = std::filesystem;
 
 #define pathToCrypt "S:\\clips\\cut"
 
+void deleteFile(const fs::path &filePath) {
+  try {
+    if (fs::remove(filePath)) {
+      std::cout << "File deleted successfully." << std::endl;
+    } else {
+      std::cout << "File not found." << std::endl;
+    }
+  } catch (const fs::filesystem_error &e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+  }
+}
+
 int main() {
   auto dllUtils = DLLUtils();
+
+  deleteFile(fs::path(globalDefinitions::jsonFileName));
 
   std::cout << "--Starting file scan--" << std::endl;
   auto pathList = dllUtils.ScanDirectory(pathToCrypt, false);
@@ -65,26 +79,28 @@ int main() {
       pathList = dllUtils.ScanDirectory(pathToCrypt, true);
       std::cout << "++Scan completed found " << pathList.size() << " files!++" << std::endl;
 
-      for (const auto &filePath: pathList) {
-        std::wcout << filePath.wstring() << std::endl;
-      }
 
       // Reload the FileData structs from the JSON file
       std::cout << "--Reloading File Data--" << std::endl;
       for (const auto &filePath: pathList) {
-        auto *partialStruct = new FileData();
-        partialStruct->FileID = new unsigned char[64];
-        partialStruct->EncryptedFilePath = StructUtils::ConvertWStringToWChar(filePath.wstring());
+        FileData partialStruct;
+        partialStruct.FileID = new unsigned char[64];
+        partialStruct.EncryptedFilePath = StructUtils::ConvertWStringToWChar(filePath.wstring());
 
-        std::cout << "++Extracting File ID from: " << filePath << "++" << std::endl;
+        if (dllUtils.ExtractFileIDFromFile(partialStruct.EncryptedFilePath, partialStruct.FileID)) {
+          std::cout << "++Extracted File ID from: " << filePath << "++" << std::endl;
+        } else {
+          std::cout << "++Could not extract File ID from: " << filePath << "++" << std::endl;
+          delete[] partialStruct.EncryptedFilePath;
+          delete[] partialStruct.FileID;
+          continue;
+        }
 
-        dllUtils.ExtractFileIDFromFile(partialStruct->EncryptedFilePath, partialStruct->FileID);
-
-        if (dllUtils.FindAndCompleteStruct(partialStruct, globalDefinitions::jsonFileName)) {
-          fileDataVec.push_back(*partialStruct);
+        if (dllUtils.FindAndCompleteStruct(&partialStruct, globalDefinitions::jsonFileName)) {
+          fileDataVec.push_back(partialStruct);
           std::wcout << L"++Found and completed struct for file: " << filePath << "++" << std::endl;
         } else {
-          if (partialStruct->EncryptedFilePath) {
+          if (partialStruct.EncryptedFilePath) {
             std::wcout << L"++Could not find struct for: " << filePath << " in json file++" << std::endl;
           } else {
             std::wcout << L"++Could not find struct for the file in json file++" << std::endl;
@@ -93,9 +109,7 @@ int main() {
       }
       std::cout << "++Completed " << fileDataVec.size() << " Structs from Save File++" << std::endl;
 
-      for (const auto &fileData: fileDataVec) {
-        std::wcout << fileData.EncryptedFilePath << std::endl;
-      }
+      std::cin >> stop;
 
       std::cout << "--Decrypting Files--" << std::endl;
       std::vector<bool> decryptResults(fileDataVec.size(), false);

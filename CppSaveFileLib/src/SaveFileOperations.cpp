@@ -7,9 +7,10 @@ bool SaveFileLib::compareFileData(const FileData *a, const FileData &b) {
   if (a->FileID && b.FileID && memcmp(a->FileID, b.FileID, a->fileIDLength) == 0) {
     return true;
   }
-  if (a->EncryptedFilePath && b.EncryptedFilePath && wcscmp(a->EncryptedFilePath, b.EncryptedFilePath) == 0) {
+
+  /*if (a->EncryptedFilePath && b.EncryptedFilePath && wcscmp(a->EncryptedFilePath, b.EncryptedFilePath) == 0) {
     return true;
-  }
+  }*/
   return false;
 }
 

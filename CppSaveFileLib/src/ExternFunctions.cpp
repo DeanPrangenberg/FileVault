@@ -56,7 +56,7 @@ extern "C" {
   auto it = std::remove_if(fileDataList.begin(), fileDataList.end(), [&](const FileData& data) {
     return lib.compareFileData(targetStruct, data);
   });
-  if (it != fileDataList.end()) {
+  if (it != fileDataList.end() && it != fileDataList.begin()) {
     fileDataList.erase(it, fileDataList.end());
     try {
       // Overwrite the JSON file with the updated list
