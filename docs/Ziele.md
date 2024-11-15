@@ -1,0 +1,31 @@
+Gui Programm was es erlaubt Files zu verschlüsseln und end schlüsseln
+Unterziele:
+
+    -Directory nach files scannen
+        - Files sollen nicht systemkritisch sein
+        - Files sollen entweder alle anderen extentions enthalten oder nur eine bestimmte
+        - Soll eine Liste von allen gefunden path zurückgeben
+    
+    - Save File
+        - Soll Struct von c/c++ in ein json file speichern können
+        - es dient als zentraler speciher für alle verschlüsselt files
+        - man soll struct mit verschiedennen input suchen können
+
+    - File Marking
+        - verschlüsselte files sollen mit einem Hash von den selben verschlüsselt werden
+        - Der Marker soll auch extrahiert und entfernt werden können
+
+    - Verschlüsselnung / Entschlüsselung
+        - Man soll alle File zuverlässig mit entweder AES-128 oder AES-256 verschlüsseln und wieder entschlüsseln können
+
+    - MultiThread
+        - Diese Dll sorgt dafür das für jedes file das verschlüsselt werden soll ein neuer thread angelegt wird
+
+    - Gui
+        - soll durch ein passwort geschützt sein was gleichzeit der key für das save file ist was sonnst verschlüsselt ist
+        - Statistiken anzeigen (z.B ob sich die entschlüsselten files an der richtigen stelle befinden)
+        - Soll es erlauben ganze directorys, mehrere Files oder ein einzelen file zu ver/entschlüsseln
+        - Einstellung
+            - aussehen der gui
+            - standart algorithmus
+            - ob files nach der ver/entschlüsselung gelöscht werden sollen oder nicht
