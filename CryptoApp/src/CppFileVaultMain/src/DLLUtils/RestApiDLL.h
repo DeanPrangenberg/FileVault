@@ -13,11 +13,11 @@ public:
   std::vector<FileData> GetAllFileIDsAndEncryptedPaths();
 
 private:
-  typedef void (*InsertEntryFunc)(const FileData *, bool result);
-  typedef void (*DeleteEntryFunc)(const FileData *, bool result);
-  typedef FileData *(*SearchEntryFunc)(const FileData *);
-  typedef void (*ReplaceEntryFunc)(const FileData *, bool result);
-  typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileData **, bool result);
+  typedef void (*InsertEntryFunc)(const FileData *, bool*);
+  typedef void (*DeleteEntryFunc)(const FileData *, bool*);
+  typedef void (*SearchEntryFunc)(const FileData *, bool*);
+  typedef void (*ReplaceEntryFunc)(const FileData *, bool*);
+  typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileData **, bool*);
 };
 
 #endif //FILEVAULTROOT_RESTAPIDLL_H

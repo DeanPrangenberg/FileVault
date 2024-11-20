@@ -77,7 +77,8 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
       fileDataList.push_back(fileData);
     } else {
       delete[] fileData.FileID;
-      std::cout << "##  Could not find struct for file: " << FileIDDataStruct.newEncryptedFilePath << "  ##" << std::endl;
+      std::cout << "##  Could not find struct for file: " << FileIDDataStruct.newEncryptedFilePath << "  ##"
+                << std::endl;
     }
   }
   std::cout << "##  Found " << fileDataList.size() << " FileData structs in the db  ##" << std::endl;
@@ -90,44 +91,30 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
       if (std::vector<unsigned char>(fileData.FileID, fileData.FileID + fileData.fileIDLength) ==
           std::vector<unsigned char>(lostFile.FileID.begin(), lostFile.FileID.end())) {
 
-        // Delete old FileData struct from database
-        if (restApiDll.DeleteEntry(fileData)) {
-          std::wcout << L"##  Deleted struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
-        } else {
-          std::wcout << L"##  Could not delete struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
-          break;
-        }
-
         const auto wch = ConvertWStringToWChar(lostFile.newEncryptedFilePath.wstring());
         delete[] fileData.EncryptedFilePath; // Free old memory
         fileData.EncryptedFilePath = wch;
 
-        // Output the new path in the struct and the wch variable
-        std::wcout << L"##  New EncryptedFilePath: " << fileData.EncryptedFilePath << "  ##" << std::endl;
+        // Replace the old FileData struct in the database with the updated one
+        if (restApiDll.ReplaceEntry(fileData)) {
+          std::wcout << L"##  Replaced struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
+          updated = true;
+        } else {
+          std::wcout << L"##  Could not replace struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
+        }
 
-        updated = true;
         break;
       }
     }
     if (!updated) {
       std::cout << "## Could not find a matching FileID for struct update ##" << std::endl;
-      for (auto it = fileDataList.begin(); it != fileDataList.end(); ) {
+      for (auto it = fileDataList.begin(); it != fileDataList.end();) {
         if (*it == fileData) {
           it = fileDataList.erase(it);
         } else {
           ++it;
         }
       }
-    }
-  }
-
-  // Add new FileData structs to database
-  std::cout << "## Adding new FileData structs to database  ##" << std::endl;
-  for (const auto &fileData: fileDataList) {
-    if (restApiDll.InsertEntry(fileData)) {
-      std::wcout << L"##  Added struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
-    } else {
-      std::wcout << L"##  Could not add struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
     }
   }
 

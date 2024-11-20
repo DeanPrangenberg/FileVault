@@ -54,7 +54,11 @@ void testRun() {
 
       std::cout << "--Saving File Data--" << std::endl;
       for (const auto &fileData: fileDataVec) {
-        restApiDll.InsertEntry(fileData);
+        if (restApiDll.InsertEntry(fileData)) {
+          std::wcout << L"++Saved struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
+        } else {
+          std::wcout << L"++Failed to save struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
+        }
       }
 
       std::cout << "--Repairing Lost Encrypted File Structs--" << std::endl;
@@ -96,6 +100,15 @@ void testRun() {
         }
       }
       std::cout << "++Completed " << fileDataVec.size() << " Structs from Save File++" << std::endl;
+
+      for (const auto fileData:fileDataVec) {
+        std::wcout << L"++FileData Struct: " << fileData.EncryptedFilePath << "++" << std::endl;
+        std::cout << "++FileID: ";
+        for (int i = 0; i < fileData.fileIDLength; i++) {
+          std::cout << fileData.FileID[i];
+        }
+        std::cout << std::endl;
+      }
 
       std::cout << "--Decrypting Files--" << std::endl;
       std::vector<bool> decryptResults(fileDataVec.size(), false);

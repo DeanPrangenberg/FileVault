@@ -1,20 +1,20 @@
 public class FileData {
-    public byte[] FileID;
+    public String FileID;
     public int fileIDLength;
     public String AlgorithmenType;
     public String OriginalFilePath;
     public String EncryptedFilePath;
     public String DecryptedFilePath;
-    public byte[] Key;
+    public String Key;
     public int keyLength;
-    public byte[] Iv;
+    public String Iv;
     public int ivLength;
 
-    public byte[] getFileID() {
+    public String getFileID() {
         return FileID;
     }
 
-    public void setFileID(byte[] fileID) {
+    public void setFileID(String fileID) {
         FileID = fileID;
     }
 
@@ -58,11 +58,11 @@ public class FileData {
         DecryptedFilePath = decryptedFilePath;
     }
 
-    public byte[] getKey() {
+    public String getKey() {
         return Key;
     }
 
-    public void setKey(byte[] key) {
+    public void setKey(String key) {
         Key = key;
     }
 
@@ -74,11 +74,11 @@ public class FileData {
         this.keyLength = keyLength;
     }
 
-    public byte[] getIv() {
+    public String getIv() {
         return Iv;
     }
 
-    public void setIv(byte[] iv) {
+    public void setIv(String iv) {
         Iv = iv;
     }
 

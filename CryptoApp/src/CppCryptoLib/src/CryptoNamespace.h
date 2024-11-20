@@ -33,6 +33,7 @@ public:
 class CRYPTOLIB_API SHA512 {
 public:
   static std::array<unsigned char, EVP_MAX_MD_SIZE> hashFile(const wchar_t *filePath);
+  static std::array<unsigned char, EVP_MAX_MD_SIZE> hashString(const std::wstring &input);
 };
 
 // Key generation class for generating keys and initialization vectors (IV)

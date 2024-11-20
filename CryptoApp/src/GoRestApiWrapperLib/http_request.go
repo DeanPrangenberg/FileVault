@@ -55,17 +55,21 @@ func getAllFileIDsAndEncryptedPaths() **C.FileData {
 
 	cData := make([]C.FileData, len(goData))
 	for i, data := range goData {
+		fileID, fileIDLength, _ := ConvertBinaryStringToFileID(data.FileID)
+		key, keyLength, _ := ConvertBinaryStringToFileID(data.Key)
+		iv, ivLength, _ := ConvertBinaryStringToFileID(data.Iv)
+
 		cData[i] = C.FileData{
-			FileID:            (*C.uchar)(C.CBytes(data.FileID)),
-			fileIDLength:      C.size_t(data.FileIDLength),
+			FileID:            fileID,
+			fileIDLength:      fileIDLength,
 			AlgorithmenType:   stringToWcharT(data.AlgorithmenType),
 			OriginalFilePath:  stringToWcharT(data.OriginalFilePath),
 			EncryptedFilePath: stringToWcharT(data.EncryptedFilePath),
 			DecryptedFilePath: stringToWcharT(data.DecryptedFilePath),
-			Key:               (*C.uchar)(C.CBytes(data.Key)),
-			keyLength:         C.size_t(data.KeyLength),
-			Iv:                (*C.uchar)(C.CBytes(data.Iv)),
-			ivLength:          C.size_t(data.IvLength),
+			Key:               key,
+			keyLength:         keyLength,
+			Iv:                iv,
+			ivLength:          ivLength,
 		}
 	}
 

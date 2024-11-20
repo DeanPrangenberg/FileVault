@@ -13,7 +13,7 @@ bool RestApiDLL::InsertEntry(const FileData &data) {
   }
 
   bool result = false;
-  func(&data, result);
+  func(&data, &result);
   unloadDll(hDll);
   return result;
 }
@@ -30,7 +30,7 @@ bool RestApiDLL::DeleteEntry(const FileData &data) {
   }
 
   bool result = false;
-  func(&data, result);
+  func(&data, &result);
   unloadDll(hDll);
   return result;
 }
@@ -48,14 +48,13 @@ bool RestApiDLL::SearchEntry(FileData &data) {
     return false;
   }
 
-  FileData* result = func(&data);
+  bool result = false;
+  func(&data, &result);
   if (!result) {
     logError("Failed to get FileData struct from the database");
     unloadDll(hDll);
     return false;
   }
-
-  data = *result;
 
   unloadDll(hDll);
   return true;
@@ -73,7 +72,7 @@ bool RestApiDLL::ReplaceEntry(const FileData &data) {
   }
 
   bool result = false;
-  func(&data, result);
+  func(&data, &result);
   unloadDll(hDll);
   return result;
 }
@@ -91,7 +90,7 @@ std::vector<FileData> RestApiDLL::GetAllFileIDsAndEncryptedPaths() {
 
   bool result = false;
   FileData** pFileDataList;
-  func(pFileDataList, result);
+  func(pFileDataList, &result);
   unloadDll(hDll);
 
   if (!result) {
