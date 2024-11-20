@@ -9,7 +9,7 @@ FileVault is a versatile and secure file encryption tool that allows users to en
 - **Password-based Key Derivation**: The encryption key is derived from a user-provided password, enhancing the security of your encrypted data.
 - **User-Friendly GUI**: The graphical user interface (GUI) makes encryption and decryption accessible to users without technical knowledge.
 - **File and Directory Scanning**: Users can scan entire directories to search for specific file types or manually select files for encryption or decryption.
-- **Key, IV, and Metadata Storage in JSON**: For each encrypted file, a 512-bit unique file-specific ID, key, and IV are stored in a JSON file to manage encryption and decryption.
+- **Key, IV, and Metadata Storage in JSON**: For each encrypted file, a 512-bit unique file-specific ID, key, and IV are stored in a database to manage encryption and decryption.
 - **Automated Decryption**: The software can scan the system for all previously encrypted files and decrypt them in bulk or individually.
 
 ## How It Works
@@ -57,7 +57,7 @@ cmake --build build
 1. Launch the application.
 2. Select whether to use AES-128 or AES-256 for encryption.
 3. Choose the files or directories you wish to encrypt.
-4. Enter a password and click "Encrypt". The files will be encrypted and the keys and metadata will be stored in a JSON file.
+4. Enter a password and click "Encrypt". The files will be encrypted and the keys and metadata will be stored in a database.
 5. To decrypt files, select the encrypted files or scan the system for all encrypted files, choose the correct AES method, enter the password, and click "Decrypt".
 
 ## License
