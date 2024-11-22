@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <bitset>
 
 namespace globalDefinitions {
   // variables

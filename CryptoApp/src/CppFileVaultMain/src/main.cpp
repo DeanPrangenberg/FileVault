@@ -101,7 +101,7 @@ void testRun() {
       }
       std::cout << "++Completed " << fileDataVec.size() << " Structs from Save File++" << std::endl;
 
-      for (const auto fileData:fileDataVec) {
+      for (const auto fileData: fileDataVec) {
         std::wcout << L"++FileData Struct: " << fileData.EncryptedFilePath << "++" << std::endl;
         std::cout << "++FileID: ";
         for (int i = 0; i < fileData.fileIDLength; i++) {
