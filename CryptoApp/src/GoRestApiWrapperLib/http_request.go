@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-func makeRequest(url string, data *C.FileData) *C.bool {
+func makeRequest(url string, data *C.FileDataDB) *C.bool {
 	goData := convertToGoFileData(data)
 	jsonData, err := json.Marshal(goData)
 	if err != nil {
@@ -39,7 +39,7 @@ func makeRequest(url string, data *C.FileData) *C.bool {
 	return &falseVal
 }
 
-func getAllFileIDsAndEncryptedPaths() **C.FileData {
+func getAllFileIDsAndEncryptedPaths() **C.FileDataDB {
 	resp, err := http.Get("http://localhost:8000/api/getAllFileIDsAndEncryptedPaths")
 	if err != nil {
 		return nil
@@ -53,25 +53,18 @@ func getAllFileIDsAndEncryptedPaths() **C.FileData {
 		return nil
 	}
 
-	cData := make([]C.FileData, len(goData))
+	cData := make([]C.FileDataDB, len(goData))
 	for i, data := range goData {
-		fileID, fileIDLength, _ := ConvertBinaryStringToFileID(data.FileID)
-		key, keyLength, _ := ConvertBinaryStringToFileID(data.Key)
-		iv, ivLength, _ := ConvertBinaryStringToFileID(data.Iv)
-
-		cData[i] = C.FileData{
-			FileID:            fileID,
-			fileIDLength:      fileIDLength,
+		cData[i] = C.FileDataDB{
+			FileID:            stringToWcharT(data.FileID),
 			AlgorithmenType:   stringToWcharT(data.AlgorithmenType),
 			OriginalFilePath:  stringToWcharT(data.OriginalFilePath),
 			EncryptedFilePath: stringToWcharT(data.EncryptedFilePath),
 			DecryptedFilePath: stringToWcharT(data.DecryptedFilePath),
-			Key:               key,
-			keyLength:         keyLength,
-			Iv:                iv,
-			ivLength:          ivLength,
+			Key:               stringToWcharT(data.Key),
+			Iv:                stringToWcharT(data.Iv),
 		}
 	}
 
-	return (**C.FileData)(unsafe.Pointer(&cData[0]))
+	return (**C.FileDataDB)(unsafe.Pointer(&cData[0]))
 }

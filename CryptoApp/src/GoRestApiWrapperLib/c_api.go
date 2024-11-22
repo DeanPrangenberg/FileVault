@@ -15,13 +15,9 @@ import (
 )
 
 //export DeleteEntry
-func DeleteEntry(data *C.FileData, result *C.bool) {
-	fileID, err := ConvertFileIDToBinaryString(data.FileID, data.fileIDLength)
-	if err != nil {
-		falseVal := C.bool(false)
-		*result = falseVal
-		return
-	}
+func DeleteEntry(data *C.FileDataDB, result *C.bool) {
+	fileID := wcharToString(data.FileID)
+
 	jsonData, err := json.Marshal(map[string]string{"FileID": fileID})
 	if err != nil {
 		falseVal := C.bool(false)
@@ -49,7 +45,7 @@ func DeleteEntry(data *C.FileData, result *C.bool) {
 }
 
 //export SearchEntry
-func SearchEntry(data *C.FileData, result *C.bool) {
+func SearchEntry(data *C.FileDataDB, result *C.bool) {
 	if data == nil {
 		returnBool := C.bool(false)
 		runtime.KeepAlive(returnBool)
@@ -57,13 +53,8 @@ func SearchEntry(data *C.FileData, result *C.bool) {
 		return
 	}
 
-	fileID, err := ConvertFileIDToBinaryString(data.FileID, data.fileIDLength)
-	if err != nil {
-		returnBool := C.bool(false)
-		runtime.KeepAlive(returnBool)
-		*result = returnBool
-		return
-	}
+	fileID := wcharToString(data.FileID)
+
 	jsonData, err := json.Marshal(map[string]string{"FileID": fileID})
 	if err != nil {
 		returnBool := C.bool(false)
@@ -114,16 +105,16 @@ func SearchEntry(data *C.FileData, result *C.bool) {
 }
 
 //export GetAllFileIDsAndEncryptedPaths
-func GetAllFileIDsAndEncryptedPaths(fileDataList **C.FileData) {
+func GetAllFileIDsAndEncryptedPaths(fileDataList **C.FileDataDB) {
 	fileDataList = getAllFileIDsAndEncryptedPaths()
 }
 
 //export ReplaceEntry
-func ReplaceEntry(data *C.FileData, result *C.bool) {
+func ReplaceEntry(data *C.FileDataDB, result *C.bool) {
 	result = makeRequest("http://localhost:8000/api/replace", data)
 }
 
 //export InsertEntry
-func InsertEntry(data *C.FileData, result *C.bool) {
+func InsertEntry(data *C.FileDataDB, result *C.bool) {
 	result = makeRequest("http://localhost:8000/api/insert", data)
 }

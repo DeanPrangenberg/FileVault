@@ -13,7 +13,6 @@ set(CMAKE_TOOLCHAIN_FILE "C:/Users/prang/.vcpkg-clion/vcpkg/scripts/buildsystems
 set(VCPKG_TARGET_TRIPLET "x64-windows-static")  # Ensure all libraries are static
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
-find_package(cpprestsdk REQUIRED)
 
 include_directories(
     src/System
@@ -59,11 +58,6 @@ target_link_libraries(CppFileVaultMain PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
-    cpprest_2_10
-    ws2_32
-    bcrypt
-    crypt32
-    winhttp
 )
 
 if (MSVC)
