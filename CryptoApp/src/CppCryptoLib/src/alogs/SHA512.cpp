@@ -1,8 +1,4 @@
-#include <openssl/evp.h>
-#include <fstream>
-#include <stdexcept>
-#include <array>
-#include "../CryptoNamespace.h"
+#include "SHA512.h"
 
 std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashFile(const wchar_t *filePath) {
     std::ifstream fileStream(filePath, std::ios::binary);

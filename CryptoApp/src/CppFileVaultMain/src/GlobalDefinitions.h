@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <bitset>
+#include <iostream>
 
 namespace globalDefinitions {
   // variables
@@ -29,6 +30,26 @@ namespace globalDefinitions {
              wcscmp(EncryptedFilePath, other.EncryptedFilePath) == 0;
     }
   };
+
+  inline void debugFileData(const FileData& data) {
+    std::cout << "ID: ::::: ";
+    for (int i = 0; i < data.fileIDLength; i++) {
+      std::cout << data.FileID[i];
+    }
+    std::cout << " :::::" << std::endl;
+
+    std::cout << "KEY: ::::: ";
+    for (int i = 0; i < data.keyLength; i++) {
+      std::cout << data.Key[i];
+    }
+    std::cout << " :::::" << std::endl;
+
+    std::cout << "IV: ::::: ";
+    for (int i = 0; i < data.ivLength; i++) {
+      std::cout << data.Iv[i];
+    }
+    std::cout << " :::::" << std::endl;
+  }
 
   // enums
   enum AlgorithmType {

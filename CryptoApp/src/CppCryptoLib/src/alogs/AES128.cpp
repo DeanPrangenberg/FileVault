@@ -2,11 +2,7 @@
 // Created by prang on 09.10.2024.
 //
 
-#include "../CryptoNamespace.h"
-#include <openssl/err.h>
-#include <openssl/evp.h>
-#include <iostream>
-#include <fstream>
+#include "AES128.h"
 
 bool AES128::encryptFile(const FileData *fileData) {
   std::vector<unsigned char> keyVec(fileData->Key, fileData->Key + fileData->keyLength);

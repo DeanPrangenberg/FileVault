@@ -1,7 +1,11 @@
 #include <array>
 #include <iostream>
 #include <random>
-#include "CryptoNamespace.h"
+#include "CryptoAPI.h"
+#include "../alogs/AES128.h"
+#include "../alogs/AES256.h"
+#include "../alogs/KeyGen.h"
+#include "../alogs/SHA512.h"
 
 // Wrapper functions for C compatibility
 extern "C" {

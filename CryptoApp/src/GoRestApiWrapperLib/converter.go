@@ -2,7 +2,7 @@ package main
 
 /*
 #include <stdlib.h>
-#include "filedata.h"
+#include "filedataDB.h"
 */
 import "C"
 import (
@@ -36,14 +36,40 @@ func stringToWcharT(s string) *C.wchar_t {
 }
 
 func convertToGoFileData(data *C.FileDataDB) GoFileData {
+	var fileID, algorithmenType, originalFilePath, encryptedFilePath, decryptedFilePath, key, iv string
+
+	if data != nil {
+		if data.FileID != nil {
+			fileID = wcharToString(data.FileID)
+		}
+		if data.AlgorithmenType != nil {
+			algorithmenType = wcharToString(data.AlgorithmenType)
+		}
+		if data.OriginalFilePath != nil {
+			originalFilePath = wcharToString(data.OriginalFilePath)
+		}
+		if data.EncryptedFilePath != nil {
+			encryptedFilePath = wcharToString(data.EncryptedFilePath)
+		}
+		if data.DecryptedFilePath != nil {
+			decryptedFilePath = wcharToString(data.DecryptedFilePath)
+		}
+		if data.Key != nil {
+			key = wcharToString(data.Key)
+		}
+		if data.Iv != nil {
+			iv = wcharToString(data.Iv)
+		}
+	}
+
 	return GoFileData{
-		FileID:            wcharToString(data.FileID),
-		AlgorithmenType:   wcharToString(data.AlgorithmenType),
-		OriginalFilePath:  wcharToString(data.OriginalFilePath),
-		EncryptedFilePath: wcharToString(data.EncryptedFilePath),
-		DecryptedFilePath: wcharToString(data.DecryptedFilePath),
-		Key:               wcharToString(data.Key),
-		Iv:                wcharToString(data.Iv),
+		FileID:            fileID,
+		AlgorithmenType:   algorithmenType,
+		OriginalFilePath:  originalFilePath,
+		EncryptedFilePath: encryptedFilePath,
+		DecryptedFilePath: decryptedFilePath,
+		Key:               key,
+		Iv:                iv,
 	}
 }
 
@@ -57,4 +83,8 @@ func convertToCFileData(data GoFileData) *C.FileDataDB {
 		Key:               stringToWcharT(data.AlgorithmenType),
 		Iv:                stringToWcharT(data.AlgorithmenType),
 	}
+}
+
+func convertCBoolToGoBool(cBoolPtr *C.bool) bool {
+	return bool(*cBoolPtr)
 }

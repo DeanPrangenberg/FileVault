@@ -1,6 +1,6 @@
 package main
 
-// #include "filedata.h"
+// #include "filedataDB.h"
 import "C"
 import (
 	"bytes"
@@ -30,11 +30,14 @@ func makeRequest(url string, data *C.FileDataDB) *C.bool {
 
 	body, _ := ioutil.ReadAll(resp.Body)
 
+	fmt.Println("GO-REST-makeRequest-Response: ", string(body))
 	if string(body) == "true" {
+		fmt.Println("GO-REST-makeRequest-Response: return true")
 		trueVal := C.bool(true)
 		return &trueVal
 	}
 
+	fmt.Println("GO-REST-makeRequest-Response: return false")
 	falseVal := C.bool(false)
 	return &falseVal
 }

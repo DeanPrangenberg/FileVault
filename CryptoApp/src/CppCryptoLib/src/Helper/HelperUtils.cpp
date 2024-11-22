@@ -2,10 +2,7 @@
 // Created by prang on 23.10.2024.
 //
 
-#include <iostream>
-#include <openssl/err.h>
-#include "CryptoNamespace.h"
-
+#include "HelperUtils.h"
 
 void HelperUtils::printError(const std::wstring &msg) {
   std::wcerr << msg << L" Error: " << ERR_reason_error_string(ERR_get_error()) << std::endl;

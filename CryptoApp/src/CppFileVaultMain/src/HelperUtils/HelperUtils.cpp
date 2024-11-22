@@ -42,15 +42,15 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
   std::vector<fs::path> totalFiles;
 
   // Scanning for all files in all directories
-  std::cout << "##  Scanning for all files  ##" << std::endl;
+  std::cout << "repairLostEncFileStructs: Scanning for all files" << std::endl;
   for (auto &directory: directorys) {
     auto foundFiles = fileScannerDll.ScanDirectory(directory, true);
     totalFiles.insert(totalFiles.end(), foundFiles.begin(), foundFiles.end());
   }
-  std::cout << "##  Found " << totalFiles.size() << " encrypted files  ##" << std::endl;
+  std::cout << "repairLostEncFileStructs: Found " << totalFiles.size() << " encrypted files" << std::endl;
 
   // Checking files for fileID
-  std::cout << "##  Checking files for FileID  ##" << std::endl;
+  std::cout << "repairLostEncFileStructs: Checking files for FileID" << std::endl;
   std::vector<FileIDData> lostFiles;
   for (const auto &filePath: totalFiles) {
     std::array<unsigned char, 64> FileID;
@@ -61,10 +61,10 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
     }
     delete[] wch; // Free allocated memory
   }
-  std::cout << "##  Found " << lostFiles.size() << " lost files with FileID  ##" << std::endl;
+  std::cout << "repairLostEncFileStructs: Found " << lostFiles.size() << " lost files with FileID" << std::endl;
 
   // Find filedata structs in database
-  std::cout << "##  Finding FileData structs in database  ##" << std::endl;
+  std::cout << "repairLostEncFileStructs: Finding FileData structs in database" << std::endl;
   std::vector<FileData> fileDataList;
   for (const auto &FileIDDataStruct: lostFiles) {
     FileData fileData;
@@ -73,18 +73,18 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
     fileData.fileIDLength = FileIDDataStruct.FileID.size();
 
     if (restApiDll.SearchEntry(fileData)) {
-      std::cout << "##  Found struct for file: " << FileIDDataStruct.newEncryptedFilePath << "  ##" << std::endl;
+      std::cout << "repairLostEncFileStructs: Found struct for file: " << FileIDDataStruct.newEncryptedFilePath << "" << std::endl;
       fileDataList.push_back(fileData);
     } else {
       delete[] fileData.FileID;
-      std::cout << "##  Could not find struct for file: " << FileIDDataStruct.newEncryptedFilePath << "  ##"
+      std::cout << "repairLostEncFileStructs: Could not find struct for file: " << FileIDDataStruct.newEncryptedFilePath << ""
                 << std::endl;
     }
   }
-  std::cout << "##  Found " << fileDataList.size() << " FileData structs in the db  ##" << std::endl;
+  std::cout << "repairLostEncFileStructs: Found " << fileDataList.size() << " FileData structs in the db" << std::endl;
 
   // Update the EncryptedFilePath in the FileData structs
-  std::cout << "##  Updating EncryptedFilePath in the FileData structs  ##" << std::endl;
+  std::cout << "repairLostEncFileStructs: Updating EncryptedFilePath in the FileData structs" << std::endl;
   for (auto &fileData: fileDataList) {
     bool updated = false;
     for (const auto &lostFile: lostFiles) {
@@ -97,17 +97,17 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
 
         // Replace the old FileData struct in the database with the updated one
         if (restApiDll.ReplaceEntry(fileData)) {
-          std::wcout << L"##  Replaced struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
+          std::wcout << L"repairLostEncFileStructs: Replaced struct for file: " << fileData.EncryptedFilePath << "" << std::endl;
           updated = true;
         } else {
-          std::wcout << L"##  Could not replace struct for file: " << fileData.EncryptedFilePath << "  ##" << std::endl;
+          std::wcout << L"repairLostEncFileStructs: Could not replace struct for file: " << fileData.EncryptedFilePath << "" << std::endl;
         }
 
         break;
       }
     }
     if (!updated) {
-      std::cout << "## Could not find a matching FileID for struct update ##" << std::endl;
+      std::cout << "repairLostEncFileStructs: Could not find a matching FileID for struct update ##" << std::endl;
       for (auto it = fileDataList.begin(); it != fileDataList.end();) {
         if (*it == fileData) {
           it = fileDataList.erase(it);

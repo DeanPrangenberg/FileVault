@@ -39,8 +39,6 @@ FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType,
 
   int fileIDLength = 64; // SHA512 hash length
   unsigned char fileID[64];
-
-
   cryptoDll.GenerateFileID(originalFilePath.wstring().c_str(), fileID);
 
   // Converting data for struct

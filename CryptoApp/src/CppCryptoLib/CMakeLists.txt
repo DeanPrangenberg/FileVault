@@ -19,13 +19,18 @@ add_library(CppCryptoLib SHARED
 		src/alogs/AES128.cpp
 		src/alogs/AES256.cpp
 		src/alogs/KeyGen.cpp
-		src/CryptoNamespace.cpp
-		src/CryptoNamespace.h
+		src/api/CryptoAPI.cpp
+		src/api/CryptoAPI.h
 		src/alogs/SHA512.cpp
 		../CppFileVaultMain/src/GlobalDefinitions.h
 		../CppFileVaultMain/src/GlobalDefinitions.cpp
-		src/HelperUtils.cpp
-		src/HelperUtils.cpp
+		src/Helper/HelperUtils.cpp
+		src/Helper/HelperUtils.cpp
+		src/alogs/AES128.h
+		src/alogs/AES256.h
+		src/alogs/SHA512.h
+		src/Helper/HelperUtils.h
+		src/alogs/KeyGen.h
 )
 
 # Link OpenSSL libraries

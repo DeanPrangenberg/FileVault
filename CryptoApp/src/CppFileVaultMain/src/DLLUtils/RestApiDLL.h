@@ -23,21 +23,18 @@ private:
     const wchar_t *Iv;
   };
 
+  typedef void (*InsertEntryFunc)(const FileDataDB *, bool*);
+  typedef void (*DeleteEntryFunc)(const FileDataDB *, bool*);
+  typedef void (*SearchEntryFunc)(const FileDataDB *, bool*);
+  typedef void (*ReplaceEntryFunc)(const FileDataDB *, bool*);
+  typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileDataDB **, bool*);
+
   FileDataDB convertFileDataToDBStruct(const FileData &data);
   FileData convertDBStructToFileData(const FileDataDB &data);
+  FileDataDB convertFileDataForSearch(const FileData &data);
 
   wchar_t* convertToWChar(const unsigned char* input, size_t size);
   unsigned char* convertToUnsignedChar(const wchar_t* input, size_t size);
-
-  typedef void (*InsertEntryFunc)(const FileData *, bool*);
-  typedef void (*DeleteEntryFunc)(const FileData *, bool*);
-  typedef void (*SearchEntryFunc)(const FileData *, bool*);
-  typedef void (*ReplaceEntryFunc)(const FileData *, bool*);
-  typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileData **, bool*);
-
-  wchar_t *binaryWCharToWChar(const wchar_t *input, size_t size);
-
-  wchar_t *wcharToBinaryWChar(const wchar_t *input, size_t size);
 };
 
 #endif //FILEVAULTROOT_RESTAPIDLL_H

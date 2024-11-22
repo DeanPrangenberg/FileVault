@@ -1,37 +1,57 @@
 #include "RestApiDLL.h"
 #include <windows.h>
 
-
 bool RestApiDLL::InsertEntry(const FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
-  if (!hDll) return false;
+  if (!hDll) {
+    logError("RestApiDLL-Insert: Failed to load DLL");
+    return false;
+  }
 
-  auto func = (InsertEntryFunc)GetProcAddress(hDll, "InsertEntry");
+  auto func = (InsertEntryFunc) GetProcAddress(hDll, "InsertEntry");
   if (!func) {
-    logError("Failed to get function address for InsertEntry");
+    logError("RestApiDLL-Insert: Failed to get function address for InsertEntry");
     unloadDll(hDll);
     return false;
   }
 
   bool result = false;
-  func(&data, &result);
+  auto dbStruct = convertFileDataToDBStruct(data);
+  func(&dbStruct, &result);
+  if (result) {
+    logInfo("RestApiDLL-Insert: Successfully inserted FileData struct into the database");
+  } else {
+    logError("RestApiDLL-Insert: Failed to insert FileData struct into the database");
+  }
+
   unloadDll(hDll);
   return result;
 }
 
 bool RestApiDLL::DeleteEntry(const FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
-  if (!hDll) return false;
+  if (!hDll) {
+    logError("RestApiDLL-Delete: Failed to load DLL");
+    return false;
+  }
 
-  auto func = (DeleteEntryFunc)GetProcAddress(hDll, "DeleteEntry");
+  auto func = (DeleteEntryFunc) GetProcAddress(hDll, "DeleteEntry");
   if (!func) {
-    logError("Failed to get function address for DeleteEntry");
+    logError("RestApiDLL-Delete: Failed to get function address for DeleteEntry");
     unloadDll(hDll);
     return false;
   }
 
   bool result = false;
-  func(&data, &result);
+  auto dbStruct = convertFileDataToDBStruct(data);
+  func(&dbStruct, &result);
+
+  if (result) {
+    logInfo("RestApiDLL-Delete: Successfully deleted FileData struct into the database");
+  } else {
+    logError("RestApiDLL-Delete: Failed to delete FileData struct into the database");
+  }
+
   unloadDll(hDll);
   return result;
 }
@@ -39,23 +59,27 @@ bool RestApiDLL::DeleteEntry(const FileData &data) {
 bool RestApiDLL::SearchEntry(FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
+    logError("RestApiDLL-Search: Failed to load DLL");
     return false;
   }
 
-  auto func = (SearchEntryFunc)GetProcAddress(hDll, "SearchEntry");
+  auto func = (SearchEntryFunc) GetProcAddress(hDll, "SearchEntry");
   if (!func) {
-    logError("Failed to get function address for SearchEntry");
+    logError("RestApiDLL-Search: Failed to get function address for SearchEntry");
     unloadDll(hDll);
     return false;
   }
 
   bool result = false;
-  func(&data, &result);
+  auto dbStruct = convertFileDataForSearch(data);
+  func(&dbStruct, &result);
   if (!result) {
-    logError("Failed to get FileData struct from the database");
+    logError("RestApiDLL-Search: Failed to get FileData struct from the database");
     unloadDll(hDll);
     return false;
   }
+
+  data = convertDBStructToFileData(dbStruct);
 
   unloadDll(hDll);
   return true;
@@ -63,146 +87,141 @@ bool RestApiDLL::SearchEntry(FileData &data) {
 
 bool RestApiDLL::ReplaceEntry(const FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
-  if (!hDll) return false;
+  if (!hDll) {
+    logError("RestApiDLL-Replace: Failed to load DLL");
+    return false;
+  }
 
-  auto func = (ReplaceEntryFunc)GetProcAddress(hDll, "ReplaceEntry");
+  auto func = (ReplaceEntryFunc) GetProcAddress(hDll, "ReplaceEntry");
   if (!func) {
-    logError("Failed to get function address for ReplaceEntry");
+    logError("RestApiDLL-Replace: Failed to get function address for ReplaceEntry");
     unloadDll(hDll);
     return false;
   }
 
   bool result = false;
-  func(&data, &result);
+  auto dbStruct = convertFileDataToDBStruct(data);
+  func(&dbStruct, &result);
+
+  if (result) {
+    logInfo("RestApiDLL-Replace: Successfully replaced FileData struct into the database");
+  } else {
+    logError("RestApiDLL-Replace: Failed to replace FileData struct into the database");
+  }
+
   unloadDll(hDll);
   return result;
 }
 
 std::vector<FileData> RestApiDLL::GetAllFileIDsAndEncryptedPaths() {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
-  if (!hDll) return {};
+  if (!hDll) {
+    logError("RestApiDLL-GetAll: Failed to load DLL");
+    return {};
+  }
 
-  auto func = (GetAllFileIDsAndEncryptedPathsFunc)GetProcAddress(hDll, "GetAllFileIDsAndEncryptedPaths");
+  auto func = (GetAllFileIDsAndEncryptedPathsFunc) GetProcAddress(hDll, "GetAllFileIDsAndEncryptedPaths");
   if (!func) {
-    logError("Failed to get function address for GetAllFileIDsAndEncryptedPaths");
+    logError("RestApiDLL-GetAll: Failed to get function address for GetAllFileIDsAndEncryptedPaths");
     unloadDll(hDll);
     return {};
   }
 
   bool result = false;
-  FileData** pFileDataList;
+  FileDataDB **pFileDataList = nullptr;
+  logInfo("RestApiDLL-GetAll: Getting all FileData structs from the database");
   func(pFileDataList, &result);
   unloadDll(hDll);
 
   if (!result) {
-    logError("Failed to get all FileData structs from the database");
+    logError("RestApiDLL-GetAll: Failed to get all FileData structs from the database");
     return {};
   }
 
   std::vector<FileData> FileDataList;
-
+  logInfo("RestApiDLL-GetAll: Converting FileDataDB structs to FileData structs");
   for (int i = 0; pFileDataList[i] != nullptr; i++) {
-    pFileDataList[i]->FileID = new unsigned char[64];
-    std::copy(pFileDataList[i]->FileID, pFileDataList[i]->FileID + pFileDataList[i]->fileIDLength, FileDataList[i].FileID);
-
+    FileData fileData = convertDBStructToFileData(*pFileDataList[i]);
+    FileDataList.push_back(fileData);
   }
 
+  logInfo("RestApiDLL-GetAll: Completed converting FileDataDB structs to FileData structs");
   return FileDataList;
 }
 
 wchar_t* RestApiDLL::convertToWChar(const unsigned char* input, size_t size) {
   if (input == nullptr || size == 0) {
+    std::cerr << "convertToWChar: Input is null or size is zero" << std::endl;
     return nullptr;
   }
 
-  std::vector<wchar_t> buffer(size + 1, 0); // +1 for null terminator
+  wchar_t* result = new wchar_t[size + 1]; // +1 for null terminator
   for (size_t i = 0; i < size; ++i) {
-    buffer[i] = static_cast<wchar_t>(input[i]);
+    result[i] = static_cast<wchar_t>(input[i]);
   }
-
-  wchar_t* result = new wchar_t[buffer.size()];
-  std::copy(buffer.begin(), buffer.end(), result);
+  result[size] = L'\0'; // null terminator
   return result;
 }
 
 unsigned char* RestApiDLL::convertToUnsignedChar(const wchar_t* input, size_t size) {
   if (input == nullptr || size == 0) {
+    std::cerr << "convertToUnsignedChar: Input is null or size is zero" << std::endl;
     return nullptr;
   }
 
-  std::vector<unsigned char> buffer(size + 1, 0); // +1 for null terminator
+  unsigned char* result = new unsigned char[size + 1]; // +1 for null terminator
   for (size_t i = 0; i < size; ++i) {
-    buffer[i] = static_cast<unsigned char>(input[i]);
+    result[i] = static_cast<unsigned char>(input[i]);
   }
-
-  unsigned char* result = new unsigned char[buffer.size()];
-  std::copy(buffer.begin(), buffer.end(), result);
-  return result;
-}
-
-wchar_t* RestApiDLL::wcharToBinaryWChar(const wchar_t* input, size_t size) {
-  if (input == nullptr || size == 0) {
-    return nullptr;
-  }
-
-  std::wstring binaryString;
-  for (size_t i = 0; i < size; ++i) {
-    std::bitset<sizeof(wchar_t) * 8> bits(input[i]);
-    binaryString += std::wstring(bits.to_string().begin(), bits.to_string().end());
-  }
-
-  wchar_t* result = new wchar_t[binaryString.size() + 1];
-  std::copy(binaryString.begin(), binaryString.end(), result);
-  result[binaryString.size()] = L'\0'; // null terminator
-  return result;
-}
-
-wchar_t* RestApiDLL::binaryWCharToWChar(const wchar_t* input, size_t size) {
-  if (input == nullptr || size == 0 || size % (sizeof(wchar_t) * 8) != 0) {
-    return nullptr;
-  }
-
-  size_t numChars = size / (sizeof(wchar_t) * 8);
-  wchar_t* result = new wchar_t[numChars + 1]; // +1 for null terminator
-
-  for (size_t i = 0; i < numChars; ++i) {
-    std::bitset<sizeof(wchar_t) * 8> bits;
-    for (size_t j = 0; j < sizeof(wchar_t) * 8; ++j) {
-      bits[j] = (input[i * sizeof(wchar_t) * 8 + j] == L'1');
-    }
-    result[i] = static_cast<wchar_t>(bits.to_ulong());
-  }
-
-  result[numChars] = L'\0'; // null terminator
+  result[size] = '\0'; // null terminator
   return result;
 }
 
 RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &data) {
   RestApiDLL::FileDataDB dbStruct;
-  dbStruct.FileID = wcharToBinaryWChar(convertToWChar(data.FileID, data.fileIDLength), data.fileIDLength);
-  dbStruct.EncryptedFilePath = data.EncryptedFilePath;
-  dbStruct.OriginalFilePath = data.OriginalFilePath;
+
+  dbStruct.FileID = convertToWChar(data.FileID, data.fileIDLength);
   dbStruct.AlgorithmenType = data.AlgorithmenType;
+  dbStruct.OriginalFilePath = data.OriginalFilePath;
+  dbStruct.EncryptedFilePath = data.EncryptedFilePath;
   dbStruct.DecryptedFilePath = data.DecryptedFilePath;
-  dbStruct.Key = wcharToBinaryWChar(convertToWChar(data.Key, data.keyLength), data.keyLength);
-  dbStruct.Iv = wcharToBinaryWChar(convertToWChar(data.Iv, data.ivLength), data.ivLength);
+  dbStruct.Key = convertToWChar(data.Key, data.keyLength);
+  dbStruct.Iv = convertToWChar(data.Iv, data.ivLength);
+
+  if (dbStruct.FileID == nullptr
+      || dbStruct.AlgorithmenType == nullptr
+      || dbStruct.EncryptedFilePath == nullptr
+      || dbStruct.OriginalFilePath == nullptr
+      || dbStruct.DecryptedFilePath == nullptr
+      || dbStruct.Key == nullptr
+      || dbStruct.Iv == nullptr) {
+    logError("Failed to convert FileData struct to FileDataDB struct");
+  }
+
+  return dbStruct;
+}
+
+RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data) {
+  RestApiDLL::FileDataDB dbStruct;
+  dbStruct.FileID = convertToWChar(data.FileID, data.fileIDLength);
+  dbStruct.EncryptedFilePath = data.EncryptedFilePath;
+
+  if (dbStruct.FileID == nullptr || dbStruct.EncryptedFilePath == nullptr) {
+    logError("Failed to convert FileData struct to FileDataDB struct");
+  }
 
   return dbStruct;
 }
 
 FileData RestApiDLL::convertDBStructToFileData(const FileDataDB &data) {
-  auto normalFileIDwChar = binaryWCharToWChar(data.FileID, std::wcslen(data.FileID));
-  auto normalKEYChar = binaryWCharToWChar(data.Key, std::wcslen(data.Key));
-  auto normalIVwChar = binaryWCharToWChar(data.Iv, std::wcslen(data.Iv));
-
   FileData fileData;
-  fileData.FileID = convertToUnsignedChar(normalFileIDwChar,std::wcslen(normalFileIDwChar));
+  fileData.FileID = convertToUnsignedChar(data.FileID, std::wcslen(data.FileID));
   fileData.EncryptedFilePath = data.EncryptedFilePath;
   fileData.OriginalFilePath = data.OriginalFilePath;
   fileData.AlgorithmenType = data.AlgorithmenType;
   fileData.DecryptedFilePath = data.DecryptedFilePath;
-  fileData.Key = convertToUnsignedChar(normalKEYChar,std::wcslen(normalKEYChar));
-  fileData.Iv = convertToUnsignedChar(normalIVwChar,std::wcslen(normalIVwChar));
+  fileData.Key = convertToUnsignedChar(data.Key, std::wcslen(data.Key));
+  fileData.Iv = convertToUnsignedChar(data.Iv, std::wcslen(data.Iv));
 
   return fileData;
 }

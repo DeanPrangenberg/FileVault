@@ -2,10 +2,7 @@
 // Created by prang on 14.10.2024.
 //
 
-#include <vector>
-#include <openssl/rand.h>
-#include <stdexcept>
-#include "../CryptoNamespace.h"
+#include "KeyGen.h"
 
 void KeyGen::generateKeyIv(const size_t &keySize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV) {
   // Create the key and IV with specified sizes
