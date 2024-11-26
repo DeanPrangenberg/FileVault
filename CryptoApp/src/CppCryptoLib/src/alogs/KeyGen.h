@@ -14,6 +14,7 @@
 class KeyGen {
 public:
   static void generateKeyIv(const size_t &keySize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV);
+  static std::string toHexString(const std::vector<unsigned char> &data);
 };
 
 #endif //FILEVAULTROOT_KEYGEN_H

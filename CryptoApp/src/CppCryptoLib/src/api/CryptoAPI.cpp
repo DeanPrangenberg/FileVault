@@ -28,10 +28,20 @@ extern "C" {
 }
 
 [[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, unsigned char *key, unsigned char *iv) {
-  std::vector<unsigned char> keyVec(key, key + keySize);
-  std::vector<unsigned char> ivVec(iv, iv + 16); // 128-bit
+  if (key == nullptr || iv == nullptr) {
+    std::cerr << "Error: key or iv pointer is null." << std::endl;
+    return;
+  }
+
+  std::vector<unsigned char> keyVec(keySize);
+  std::vector<unsigned char> ivVec(16); // 128-bit IV
+
   KeyGen::generateKeyIv(keySize, keyVec, ivVec);
+
+  std::copy(keyVec.begin(), keyVec.end(), key);
+  std::copy(ivVec.begin(), ivVec.end(), iv);
 }
+
 
 [[maybe_unused]] CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
   auto hash = SHA512::hashFile(filePath);

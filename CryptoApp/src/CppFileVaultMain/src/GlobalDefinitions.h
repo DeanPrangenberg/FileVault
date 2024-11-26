@@ -5,6 +5,9 @@
 #include <vector>
 #include <bitset>
 #include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <stdexcept>
 
 namespace globalDefinitions {
   // variables
@@ -13,42 +16,85 @@ namespace globalDefinitions {
 
   // structs
   struct FileData {
-    unsigned char* FileID;
-    size_t fileIDLength;
-    const wchar_t* AlgorithmenType;
-    const wchar_t* OriginalFilePath;
-    const wchar_t* EncryptedFilePath;
-    const wchar_t* DecryptedFilePath;
-    unsigned char* Key;
-    size_t keyLength;
-    unsigned char* Iv;
-    size_t ivLength;
+    unsigned char *FileID = nullptr;
+    size_t fileIDLength = 0;
+    unsigned char *EncryptionID = nullptr;
+    size_t EncryptionIDLength = 0;
+    unsigned char *LastUpdateID = nullptr;
+    size_t LastUpdateIDLength = 0;
+    wchar_t *AlgorithmenType = nullptr;
+    wchar_t *OriginalFilePath = nullptr;
+    wchar_t *EncryptedFilePath = nullptr;
+    wchar_t *DecryptedFilePath = nullptr;
+    unsigned char *Key = nullptr;
+    size_t keyLength = 0;
+    unsigned char *Iv = nullptr;
+    size_t ivLength = 0;
 
-    bool operator==(const FileData& other) const {
-      return fileIDLength == other.fileIDLength &&
-             std::equal(FileID, FileID + fileIDLength, other.FileID) &&
-             wcscmp(EncryptedFilePath, other.EncryptedFilePath) == 0;
+    bool operator==(const FileData &other) const {
+      return
+          fileIDLength == other.fileIDLength
+          && EncryptionIDLength == other.EncryptionIDLength
+          && LastUpdateIDLength == other.LastUpdateIDLength
+          && keyLength == other.keyLength
+          && ivLength == other.ivLength
+          && std::equal(FileID, FileID + fileIDLength, other.FileID)
+          && std::equal(EncryptionID, EncryptionID + EncryptionIDLength, other.EncryptionID)
+          && std::equal(LastUpdateID, LastUpdateID + LastUpdateIDLength, other.LastUpdateID)
+          && wcscmp(AlgorithmenType, other.AlgorithmenType) == 0
+          && wcscmp(OriginalFilePath, other.OriginalFilePath) == 0
+          && wcscmp(EncryptedFilePath, other.EncryptedFilePath) == 0
+          && wcscmp(DecryptedFilePath, other.DecryptedFilePath) == 0;
     }
   };
 
-  inline void debugFileData(const FileData& data) {
-    std::cout << "ID: ::::: ";
-    for (int i = 0; i < data.fileIDLength; i++) {
-      std::cout << data.FileID[i];
+  inline std::string toHexString(const unsigned char *pUChar, size_t length) {
+    if (pUChar == nullptr) {
+      throw std::invalid_argument("Null pointer passed to toHexString");
     }
-    std::cout << " :::::" << std::endl;
 
-    std::cout << "KEY: ::::: ";
-    for (int i = 0; i < data.keyLength; i++) {
-      std::cout << data.Key[i];
+    std::ostringstream oss;
+    for (size_t i = 0; i < length; ++i) {
+      oss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(pUChar[i]);
     }
-    std::cout << " :::::" << std::endl;
+    return oss.str();
+  }
 
-    std::cout << "IV: ::::: ";
-    for (int i = 0; i < data.ivLength; i++) {
-      std::cout << data.Iv[i];
+  inline void debugFileData(const FileData &data) {
+    std::cout << "-------------------------------------------------------------" << std::endl;
+    std::cout << "FileData Debug: " << std::endl;
+
+    try {
+      std::cout << "FileID: "
+                << (data.FileID != nullptr ? toHexString(data.FileID, data.fileIDLength) : "null") << std::endl;
+    } catch (const std::exception &e) {
+      std::cerr << "Error converting FileID to hex string: " << e.what() << std::endl;
     }
-    std::cout << " :::::" << std::endl;
+
+    std::wcout << L"OriginalFilePath: "
+               << (data.OriginalFilePath != nullptr ? data.OriginalFilePath : L"null") << std::endl;
+    std::wcout << L"AlgorithmenType: "
+               << (data.AlgorithmenType != nullptr ? data.AlgorithmenType : L"null") << std::endl;
+    std::wcout << L"EncryptedFilePath: "
+               << (data.EncryptedFilePath != nullptr ? data.EncryptedFilePath : L"null") << std::endl;
+    std::wcout << L"DecryptedFilePath: "
+               << (data.DecryptedFilePath != nullptr ? data.DecryptedFilePath : L"null") << std::endl;
+
+    try {
+      std::cout << "Key: "
+                << (data.Key != nullptr ? toHexString(data.Key, data.keyLength) : "null") << std::endl;
+    } catch (const std::exception &e) {
+      std::cerr << "Error converting Key to hex string: " << e.what() << std::endl;
+    }
+
+    try {
+      std::cout << "Iv: "
+                << (data.Iv != nullptr ? toHexString(data.Iv, data.ivLength) : "null") << std::endl;
+    } catch (const std::exception &e) {
+      std::cerr << "Error converting Iv to hex string: " << e.what() << std::endl;
+    }
+
+    std::cout << "-------------------------------------------------------------" << std::endl;
   }
 
   // enums

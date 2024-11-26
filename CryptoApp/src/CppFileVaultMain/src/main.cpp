@@ -55,13 +55,14 @@ void testRun() {
       std::cout << "--Saving File Data--" << std::endl;
       for (const auto &fileData: fileDataVec) {
         if (restApiDll.InsertEntry(fileData)) {
+          globalDefinitions::debugFileData(fileData);
           std::wcout << L"++Saved struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
         } else {
           std::wcout << L"++Failed to save struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
         }
       }
 
-      std::cin.get();
+      /*std::cin.get();*/
 
       std::cout << "--Repairing Lost Encrypted File Structs--" << std::endl;
       auto helperUtils = HelperUtils();
@@ -105,6 +106,7 @@ void testRun() {
 
       for (const auto fileData: fileDataVec) {
         std::wcout << L"++FileData Struct: " << fileData.EncryptedFilePath << "++" << std::endl;
+        globalDefinitions::debugFileData(fileData);
       }
 
       std::cout << "--Decrypting Files--" << std::endl;

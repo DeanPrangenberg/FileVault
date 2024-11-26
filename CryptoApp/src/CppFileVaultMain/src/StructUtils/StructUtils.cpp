@@ -20,21 +20,20 @@ wchar_t *StructUtils::ConvertWStringToWChar(const std::wstring &input) {
   return output;
 }
 
-
 FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType, const fs::path &originalFilePath) {
   CryptoDLL cryptoDll;
-  unsigned char iv[16];
-  unsigned char *key = nullptr;
+  unsigned char IV[16];
+  unsigned char *KEY = nullptr;
   int keyLength = 0;
 
   if (algorithmenType == AlgorithmType::AES128) {
-    key = new unsigned char[16];
+    KEY = new unsigned char[16];
     keyLength = 16;
-    cryptoDll.GenerateKeyIv(keyLength, key, iv);
+    cryptoDll.GenerateKeyIv(keyLength, KEY, IV);
   } else if (algorithmenType == AlgorithmType::AES256) {
-    key = new unsigned char[32];
+    KEY = new unsigned char[32];
     keyLength = 32;
-    cryptoDll.GenerateKeyIv(keyLength, key, iv);
+    cryptoDll.GenerateKeyIv(keyLength, KEY, IV);
   }
 
   int fileIDLength = 64; // SHA512 hash length
@@ -48,22 +47,20 @@ FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType,
   // Allocate memory for struct
   FileData fileData;
   fileData.FileID = new unsigned char[fileIDLength];
+  std::memcpy(fileData.FileID, fileID, fileIDLength);
   fileData.fileIDLength = fileIDLength;
   fileData.AlgorithmenType = ConvertWStringToWChar(algorithmenTypeStr);
   fileData.OriginalFilePath = ConvertWStringToWChar(originalFilePath.wstring());
   fileData.EncryptedFilePath = ConvertWStringToWChar(encryptedFilePath);
   fileData.DecryptedFilePath = ConvertWStringToWChar(originalFilePath.wstring());
   fileData.Key = new unsigned char[keyLength];
+  std::memcpy(fileData.Key, KEY, keyLength);
   fileData.keyLength = keyLength;
   fileData.Iv = new unsigned char[16];
+  std::memcpy(fileData.Iv, IV, 16);
   fileData.ivLength = 16;
 
-  // Copy data to struct
-  std::memcpy(fileData.FileID, fileID, fileIDLength);
-  std::memcpy(fileData.Key, key, keyLength);
-  std::memcpy(fileData.Iv, iv, 16);
-
-  delete[] key;
+  globalDefinitions::debugFileData(fileData);
 
   return fileData;
 }

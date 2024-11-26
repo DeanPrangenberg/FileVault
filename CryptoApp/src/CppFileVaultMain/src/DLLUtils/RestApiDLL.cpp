@@ -8,6 +8,8 @@ bool RestApiDLL::InsertEntry(const FileData &data) {
     return false;
   }
 
+  globalDefinitions::debugFileData(data);
+
   auto func = (InsertEntryFunc) GetProcAddress(hDll, "InsertEntry");
   if (!func) {
     logError("RestApiDLL-Insert: Failed to get function address for InsertEntry");
@@ -70,8 +72,11 @@ bool RestApiDLL::SearchEntry(FileData &data) {
     return false;
   }
 
+  globalDefinitions::debugFileData(data);
+
   bool result = false;
   auto dbStruct = convertFileDataForSearch(data);
+
   func(&dbStruct, &result);
   if (!result) {
     logError("RestApiDLL-Search: Failed to get FileData struct from the database");
@@ -79,7 +84,12 @@ bool RestApiDLL::SearchEntry(FileData &data) {
     return false;
   }
 
+  std::cout << "RestApiDLL-Search: Successfully got FileData struct from the database" << std::endl;
+  debugFileDataDB(dbStruct);
+  std::cout << "RestApiDLL-Search: Converting FileDataDB struct to FileData struct" << std::endl;
   data = convertDBStructToFileData(dbStruct);
+
+  globalDefinitions::debugFileData(data);
 
   unloadDll(hDll);
   return true;
@@ -149,13 +159,13 @@ std::vector<FileData> RestApiDLL::GetAllFileIDsAndEncryptedPaths() {
   return FileDataList;
 }
 
-wchar_t* RestApiDLL::convertToWChar(const unsigned char* input, size_t size) {
+wchar_t *RestApiDLL::convertToWChar(const unsigned char *input, size_t size) {
   if (input == nullptr || size == 0) {
     std::cerr << "convertToWChar: Input is null or size is zero" << std::endl;
     return nullptr;
   }
 
-  wchar_t* result = new wchar_t[size + 1]; // +1 for null terminator
+  wchar_t *result = new wchar_t[size + 1]; // +1 for null terminator
   for (size_t i = 0; i < size; ++i) {
     result[i] = static_cast<wchar_t>(input[i]);
   }
@@ -163,13 +173,13 @@ wchar_t* RestApiDLL::convertToWChar(const unsigned char* input, size_t size) {
   return result;
 }
 
-unsigned char* RestApiDLL::convertToUnsignedChar(const wchar_t* input, size_t size) {
+unsigned char *RestApiDLL::convertToUnsignedChar(const wchar_t *input, size_t size) {
   if (input == nullptr || size == 0) {
     std::cerr << "convertToUnsignedChar: Input is null or size is zero" << std::endl;
     return nullptr;
   }
 
-  unsigned char* result = new unsigned char[size + 1]; // +1 for null terminator
+  unsigned char *result = new unsigned char[size + 1]; // +1 for null terminator
   for (size_t i = 0; i < size; ++i) {
     result[i] = static_cast<unsigned char>(input[i]);
   }
@@ -196,20 +206,28 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &dat
       || dbStruct.Key == nullptr
       || dbStruct.Iv == nullptr) {
     logError("Failed to convert FileData struct to FileDataDB struct");
+  } else {
+    //debugFileDataDB(dbStruct);
   }
 
   return dbStruct;
 }
 
 RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data) {
-  RestApiDLL::FileDataDB dbStruct;
-  dbStruct.FileID = convertToWChar(data.FileID, data.fileIDLength);
-  dbStruct.EncryptedFilePath = data.EncryptedFilePath;
+  RestApiDLL::FileDataDB dbStruct{};
 
-  if (dbStruct.FileID == nullptr || dbStruct.EncryptedFilePath == nullptr) {
+  dbStruct.FileID = convertToWChar(data.FileID, data.fileIDLength);
+  dbStruct.AlgorithmenType = nullptr;
+  dbStruct.OriginalFilePath = nullptr;
+  dbStruct.EncryptedFilePath = nullptr;
+  dbStruct.DecryptedFilePath = nullptr;
+  dbStruct.Key = nullptr;
+  dbStruct.Iv = nullptr;
+
+  if (dbStruct.FileID == nullptr) {
     logError("Failed to convert FileData struct to FileDataDB struct");
   }
-
+  debugFileDataDB(dbStruct);
   return dbStruct;
 }
 
@@ -224,4 +242,81 @@ FileData RestApiDLL::convertDBStructToFileData(const FileDataDB &data) {
   fileData.Iv = convertToUnsignedChar(data.Iv, std::wcslen(data.Iv));
 
   return fileData;
+}
+
+void RestApiDLL::debugFileDataDB(const FileDataDB &data) {
+  std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+  std::wcout << L"FileDataDB: " << std::endl;
+
+  if (data.FileID != nullptr) {
+    try {
+      std::wcout << L"FileID: " << data.FileID << std::endl;
+    } catch (const std::exception &e) {
+      std::wcerr << L"Error accessing FileID: " << e.what() << std::endl;
+    }
+  } else {
+    std::wcout << L"FileID: null" << std::endl;
+  }
+
+  if (data.AlgorithmenType != nullptr) {
+    try {
+      std::wcout << L"AlgorithmenType: " << data.AlgorithmenType << std::endl;
+    } catch (const std::exception &e) {
+      std::wcerr << L"Error accessing AlgorithmenType: " << e.what() << std::endl;
+    }
+  } else {
+    std::wcout << L"AlgorithmenType: null" << std::endl;
+  }
+
+  if (data.OriginalFilePath != nullptr) {
+    try {
+      std::wcout << L"OriginalFilePath: " << data.OriginalFilePath << std::endl;
+    } catch (const std::exception &e) {
+      std::wcerr << L"Error accessing OriginalFilePath: " << e.what() << std::endl;
+    }
+  } else {
+    std::wcout << L"OriginalFilePath: null" << std::endl;
+  }
+
+  if (data.EncryptedFilePath != nullptr) {
+    try {
+      std::wcout << L"EncryptedFilePath: " << data.EncryptedFilePath << std::endl;
+    } catch (const std::exception &e) {
+      std::wcerr << L"Error accessing EncryptedFilePath: " << e.what() << std::endl;
+    }
+  } else {
+    std::wcout << L"EncryptedFilePath: null" << std::endl;
+  }
+
+  if (data.DecryptedFilePath != nullptr) {
+    try {
+      std::wcout << L"DecryptedFilePath: " << data.DecryptedFilePath << std::endl;
+    } catch (const std::exception &e) {
+      std::wcerr << L"Error accessing DecryptedFilePath: " << e.what() << std::endl;
+    }
+  } else {
+    std::wcout << L"DecryptedFilePath: null" << std::endl;
+  }
+
+  if (data.Key != nullptr) {
+    try {
+      std::wcout << L"Key: " << data.Key << std::endl;
+    } catch (const std::exception &e) {
+      std::wcerr << L"Error accessing Key: " << e.what() << std::endl;
+    }
+  } else {
+    std::wcout << L"Key: null" << std::endl;
+  }
+
+  if (data.Iv != nullptr) {
+    try {
+      std::wcout << L"Iv: " << data.Iv << std::endl;
+    } catch (const std::exception &e) {
+      std::wcerr << L"Error accessing Iv: " << e.what() << std::endl;
+    }
+  } else {
+    std::wcout << L"Iv: null" << std::endl;
+  }
+
+  std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 }

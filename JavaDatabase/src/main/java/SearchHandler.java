@@ -35,7 +35,7 @@ public class SearchHandler implements HttpHandler {
       t.sendResponseHeaders(200, response.getBytes().length);
       System.out.println("Found entry with FileID: " + fileID);
     } else {
-      response = "{\"message\": \"File not found\"}";
+      response = "false";
       t.sendResponseHeaders(404, response.getBytes().length);
       System.out.println("Entry not found for FileID: " + fileID);
     }

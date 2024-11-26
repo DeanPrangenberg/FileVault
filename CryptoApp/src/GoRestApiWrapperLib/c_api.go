@@ -76,6 +76,14 @@ func SearchEntry(data *C.FileDataDB, result *C.bool) {
   defer resp.Body.Close()
 
   body, _ := ioutil.ReadAll(resp.Body)
+  if string(body) == "false" {
+    returnBool := C.bool(false)
+    runtime.KeepAlive(returnBool)
+    *result = returnBool
+    fmt.Println("Entry not found for FileID:", fileID)
+    return
+  }
+
   var resultOutput GoFileData
   err = json.Unmarshal(body, &resultOutput)
   if err != nil {
