@@ -75,13 +75,13 @@ func convertToGoFileData(data *C.FileDataDB) GoFileData {
 
 func convertToCFileData(data GoFileData) *C.FileDataDB {
 	return &C.FileDataDB{
-		FileID:            stringToWcharT(data.AlgorithmenType),
+		FileID:            stringToWcharT(data.FileID),
 		AlgorithmenType:   stringToWcharT(data.AlgorithmenType),
 		OriginalFilePath:  stringToWcharT(data.OriginalFilePath),
 		EncryptedFilePath: stringToWcharT(data.EncryptedFilePath),
 		DecryptedFilePath: stringToWcharT(data.DecryptedFilePath),
-		Key:               stringToWcharT(data.AlgorithmenType),
-		Iv:                stringToWcharT(data.AlgorithmenType),
+		Key:               stringToWcharT(data.Key),
+		Iv:                stringToWcharT(data.Iv),
 	}
 }
 

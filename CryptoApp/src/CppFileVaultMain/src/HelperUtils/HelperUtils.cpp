@@ -104,7 +104,7 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
       std::cout << "repairLostEncFileStructs: LostFileID: " << globalDefinitions::toHexString(lostFile.FileID.data(), lostFile.FileID.size()) << std::endl;
       std::cout << "repairLostEncFileStructs: FileID: " << globalDefinitions::toHexString(fileData.FileID, fileData.fileIDLength) << std::endl;
 
-      if (std::equal(fileData.FileID, fileData.FileID + fileData.fileIDLength, lostFile.FileID.begin())) {
+      if (std::memcmp(lostFile.FileID.data(), fileData.FileID, 64)) {
         const auto wch = ConvertWStringToWChar(lostFile.newEncryptedFilePath.wstring());
         if (wch == nullptr) {
           std::cerr << "Failed to convert file path to wchar_t*" << std::endl;

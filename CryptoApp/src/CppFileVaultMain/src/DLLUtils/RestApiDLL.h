@@ -17,13 +17,13 @@ public:
 
 private:
   struct FileDataDB {
-    wchar_t *FileID;
-    wchar_t *AlgorithmenType;
-    wchar_t *OriginalFilePath;
-    wchar_t *EncryptedFilePath;
-    wchar_t *DecryptedFilePath;
-    wchar_t *Key;
-    wchar_t *Iv;
+    wchar_t *FileID = nullptr;
+    wchar_t *AlgorithmenType = nullptr;
+    wchar_t *OriginalFilePath = nullptr;
+    wchar_t *EncryptedFilePath = nullptr;
+    wchar_t *DecryptedFilePath = nullptr;
+    wchar_t *Key = nullptr;
+    wchar_t *Iv = nullptr;
   };
 
   typedef void (*InsertEntryFunc)(const FileDataDB *, bool *);

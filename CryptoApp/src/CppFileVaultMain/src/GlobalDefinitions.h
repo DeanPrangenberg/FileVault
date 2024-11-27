@@ -48,6 +48,33 @@ namespace globalDefinitions {
     }
   };
 
+  inline void cleanupFileData(FileData &data) {
+    delete[] data.FileID;
+    delete[] data.EncryptionID;
+    delete[] data.LastUpdateID;
+    delete[] data.AlgorithmenType;
+    delete[] data.OriginalFilePath;
+    delete[] data.EncryptedFilePath;
+    delete[] data.DecryptedFilePath;
+    delete[] data.Key;
+    delete[] data.Iv;
+
+    data.FileID = nullptr;
+    data.fileIDLength = 0;
+    data.EncryptionID = nullptr;
+    data.EncryptionIDLength = 0;
+    data.LastUpdateID = nullptr;
+    data.LastUpdateIDLength = 0;
+    data.AlgorithmenType = nullptr;
+    data.OriginalFilePath = nullptr;
+    data.EncryptedFilePath = nullptr;
+    data.DecryptedFilePath = nullptr;
+    data.Key = nullptr;
+    data.keyLength = 0;
+    data.Iv = nullptr;
+    data.ivLength = 0;
+  }
+
   inline std::string toHexString(const unsigned char *pUChar, size_t length) {
     if (pUChar == nullptr) {
       throw std::invalid_argument("Null pointer passed to toHexString");

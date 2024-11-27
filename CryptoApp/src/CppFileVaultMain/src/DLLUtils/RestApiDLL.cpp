@@ -87,6 +87,9 @@ bool RestApiDLL::SearchEntry(FileData &data) {
   std::cout << "RestApiDLL-Search: Successfully got FileData struct from the database" << std::endl;
   debugFileDataDB(dbStruct);
   std::cout << "RestApiDLL-Search: Converting FileDataDB struct to FileData struct" << std::endl;
+
+  globalDefinitions::cleanupFileData(data);
+
   data = convertDBStructToFileData(dbStruct);
 
   globalDefinitions::debugFileData(data);
@@ -165,25 +168,37 @@ wchar_t *RestApiDLL::convertToWChar(const unsigned char *input, size_t size) {
     return nullptr;
   }
 
-  wchar_t *result = new wchar_t[size + 1]; // +1 for null terminator
-  for (size_t i = 0; i < size; ++i) {
-    result[i] = static_cast<wchar_t>(input[i]);
-  }
-  result[size] = L'\0'; // null terminator
+  // Allocate memory for the wchar_t array
+  auto result = new wchar_t[size + 1]; // +1 for null terminator
+
+  // Use memcpy to copy the data
+  std::memcpy(result, input, size * sizeof(unsigned char));
+
+  // Add the null terminator
+  result[size] = L'\0';
+
   return result;
 }
 
-unsigned char *RestApiDLL::convertToUnsignedChar(const wchar_t *input, size_t size) {
+unsigned char* RestApiDLL::convertToUnsignedChar(const wchar_t* input, size_t size) {
   if (input == nullptr || size == 0) {
-    std::cerr << "convertToUnsignedChar: Input is null or size is zero" << std::endl;
+    std::cerr << "convertToUnsignedChar: Input ist null oder Größe ist null" << std::endl;
     return nullptr;
   }
 
-  unsigned char *result = new unsigned char[size + 1]; // +1 for null terminator
-  for (size_t i = 0; i < size; ++i) {
-    result[i] = static_cast<unsigned char>(input[i]);
+  // Berechne die Größe in Bytes
+  size_t byteSize = size * sizeof(wchar_t);
+
+  // Allokiere Speicher für das Ergebnis
+  unsigned char* result = new (std::nothrow) unsigned char[byteSize];
+  if (result == nullptr) {
+    std::cerr << "convertToUnsignedChar: Speicherallokation fehlgeschlagen" << std::endl;
+    return nullptr;
   }
-  result[size] = '\0'; // null terminator
+
+  // Kopiere die rohen Binärdaten
+  std::memcpy(result, input, byteSize);
+
   return result;
 }
 
@@ -207,7 +222,7 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &dat
       || dbStruct.Iv == nullptr) {
     logError("Failed to convert FileData struct to FileDataDB struct");
   } else {
-    //debugFileDataDB(dbStruct);
+    debugFileDataDB(dbStruct);
   }
 
   return dbStruct;
@@ -234,12 +249,15 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data
 FileData RestApiDLL::convertDBStructToFileData(const FileDataDB &data) {
   FileData fileData;
   fileData.FileID = convertToUnsignedChar(data.FileID, std::wcslen(data.FileID));
+  fileData.fileIDLength = std::wcslen(data.FileID);
   fileData.EncryptedFilePath = data.EncryptedFilePath;
   fileData.OriginalFilePath = data.OriginalFilePath;
   fileData.AlgorithmenType = data.AlgorithmenType;
   fileData.DecryptedFilePath = data.DecryptedFilePath;
   fileData.Key = convertToUnsignedChar(data.Key, std::wcslen(data.Key));
+  fileData.keyLength = std::wcslen(data.Key);
   fileData.Iv = convertToUnsignedChar(data.Iv, std::wcslen(data.Iv));
+  fileData.ivLength = std::wcslen(data.Iv);
 
   return fileData;
 }
