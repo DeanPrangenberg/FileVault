@@ -21,6 +21,8 @@ public:
   std::wstring ConvertStringToWString(const std::string &str);
   std::string ConvertWStringToString(const std::wstring &wstr);
   std::string ConvertVectorToString(const std::vector<unsigned char> &vec);
+private:
+  bool printDebug = false;
 };
 
 

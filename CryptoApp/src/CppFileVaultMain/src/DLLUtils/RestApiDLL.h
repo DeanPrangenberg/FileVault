@@ -16,6 +16,8 @@ public:
   std::vector<FileData> GetAllFileIDsAndEncryptedPaths();
 
 private:
+  bool printDebug = false;
+  bool printConverterDebug = false;
   struct FileDataDB {
     wchar_t *FileID = nullptr;
     wchar_t *AlgorithmenType = nullptr;

@@ -8,7 +8,7 @@ bool RestApiDLL::InsertEntry(const FileData &data) {
     return false;
   }
 
-  globalDefinitions::debugFileData(data);
+  if (printConverterDebug) globalDefinitions::debugFileData(data);
 
   auto func = (InsertEntryFunc) GetProcAddress(hDll, "InsertEntry");
   if (!func) {
@@ -72,7 +72,7 @@ bool RestApiDLL::SearchEntry(FileData &data) {
     return false;
   }
 
-  globalDefinitions::debugFileData(data);
+  if (printConverterDebug) globalDefinitions::debugFileData(data);
 
   bool result = false;
   auto dbStruct = convertFileDataForSearch(data);
@@ -84,15 +84,15 @@ bool RestApiDLL::SearchEntry(FileData &data) {
     return false;
   }
 
-  std::cout << "RestApiDLL-Search: Successfully got FileData struct from the database" << std::endl;
-  debugFileDataDB(dbStruct);
-  std::cout << "RestApiDLL-Search: Converting FileDataDB struct to FileData struct" << std::endl;
+  if (printDebug) std::cout << "RestApiDLL-Search: Successfully got FileData struct from the database" << std::endl;
+  if (printConverterDebug) debugFileDataDB(dbStruct);
+  if (printDebug) std::cout << "RestApiDLL-Search: Converting FileDataDB struct to FileData struct" << std::endl;
 
   globalDefinitions::cleanupFileData(data);
 
   data = convertDBStructToFileData(dbStruct);
 
-  globalDefinitions::debugFileData(data);
+  if (printConverterDebug) globalDefinitions::debugFileData(data);
 
   unloadDll(hDll);
   return true;
@@ -227,8 +227,6 @@ unsigned char* RestApiDLL::convertFromHexWChar(const wchar_t* input, const size_
   }
 
   size_t outputSize = size / 2;
-  std::cout << outputSize << std::endl;
-  std::cout << size << std::endl;
   unsigned char* result = new unsigned char[outputSize];
 
   for (size_t i = 0; i < outputSize; ++i) {
@@ -259,7 +257,7 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &dat
       || dbStruct.Iv == nullptr) {
     logError("Failed to convert FileData struct to FileDataDB struct");
   } else {
-    debugFileDataDB(dbStruct);
+    if (printConverterDebug) debugFileDataDB(dbStruct);
   }
 
   return dbStruct;
@@ -279,7 +277,7 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data
   if (dbStruct.FileID == nullptr) {
     logError("Failed to convert FileData struct to FileDataDB struct");
   }
-  debugFileDataDB(dbStruct);
+  if (printConverterDebug) debugFileDataDB(dbStruct);
   return dbStruct;
 }
 
