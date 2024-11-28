@@ -62,12 +62,14 @@ void testRun() {
         }
       }
 
-      /*std::cin.get();*/
+      std::cin.get();
 
       std::cout << "--Repairing Lost Encrypted File Structs--" << std::endl;
       auto helperUtils = HelperUtils();
       std::vector<fs::path> paths = {pathToCrypt};
       helperUtils.repairLostEncFileStructs(paths);
+
+      std::cout << "--Back in main after repair--" << std::endl;
 
       // Clear the current fileDataVec and rescan the directory
       fileDataVec.clear();
@@ -80,10 +82,11 @@ void testRun() {
       for (const auto &filePath: pathList) {
         FileData partialStruct;
         partialStruct.FileID = new unsigned char[64];
+        partialStruct.fileIDLength = 64;
         partialStruct.EncryptedFilePath = StructUtils::ConvertWStringToWChar(filePath.wstring());
 
         if (fileMarkDll.ExtractFileIDFromFile(partialStruct.EncryptedFilePath, partialStruct.FileID)) {
-          std::cout << "++Extracted File ID from: " << filePath << "++" << std::endl;
+          std::cout << "++Extracted FileID: "<< globalDefinitions::toHexString(partialStruct.FileID, partialStruct.fileIDLength) <<" from: " << filePath << "++" << std::endl;
         } else {
           std::cout << "++Could not extract File ID from: " << filePath << "++" << std::endl;
           delete[] partialStruct.EncryptedFilePath;

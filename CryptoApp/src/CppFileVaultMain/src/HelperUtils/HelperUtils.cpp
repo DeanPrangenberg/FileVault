@@ -70,7 +70,8 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
   std::vector<FileData> fileDataList;
   for (const auto &FileIDDataStruct: lostFiles) {
     FileData fileData{};
-    fileData.FileID = const_cast<unsigned char *>(FileIDDataStruct.FileID.data());
+    fileData.FileID = new unsigned char[FileIDDataStruct.FileID.size()];
+    std::copy(FileIDDataStruct.FileID.begin(), FileIDDataStruct.FileID.end(), fileData.FileID);
     fileData.fileIDLength = FileIDDataStruct.FileID.size();
 
     if (fileData.FileID == nullptr) {
@@ -104,16 +105,25 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
       std::cout << "repairLostEncFileStructs: LostFileID: " << globalDefinitions::toHexString(lostFile.FileID.data(), lostFile.FileID.size()) << std::endl;
       std::cout << "repairLostEncFileStructs: FileID: " << globalDefinitions::toHexString(fileData.FileID, fileData.fileIDLength) << std::endl;
 
-      if (std::memcmp(lostFile.FileID.data(), fileData.FileID, 64)) {
-        const auto wch = ConvertWStringToWChar(lostFile.newEncryptedFilePath.wstring());
-        if (wch == nullptr) {
-          std::cerr << "Failed to convert file path to wchar_t*" << std::endl;
-          continue;
+      bool equal = true;
+      for (size_t i = 0; i < lostFile.FileID.size(); i++) {
+        if (lostFile.FileID[i] != fileData.FileID[i]) {
+          equal = false;
+          std::cout << "repairLostEncFileStructs: FileIDs do not match" << std::endl;
+          break;
         }
+      }
 
-        delete[] fileData.EncryptedFilePath; // Free old memory
-        fileData.EncryptedFilePath = wch;
+      if (equal) {
+        std::cout << "repairLostEncFileStructs: FileIDs match" << std::endl;
 
+        std::cout << "repairLostEncFileStructs: Allocating memory for new EncryptedFilePath" << std::endl;
+        fileData.EncryptedFilePath = new wchar_t[lostFile.newEncryptedFilePath.wstring().size() + 1];
+
+        std::cout << "repairLostEncFileStructs: Copying new EncryptedFilePath" << std::endl;
+        fileData.EncryptedFilePath = const_cast<wchar_t*>(lostFile.newEncryptedFilePath.wstring().c_str());
+
+        std::cout << "repairLostEncFileStructs: Updated EncryptedFilePath" << std::endl;
         // Replace the old FileData struct in the database with the updated one
         if (restApiDll.ReplaceEntry(fileData)) {
           std::wcout << L"repairLostEncFileStructs: Replaced struct for file: " << fileData.EncryptedFilePath << std::endl;
@@ -138,12 +148,6 @@ void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
   }
 
   std::cout << "repairLostEncFileStructs: Updated " << fileDataList.size() << " FileData structs in the db" << std::endl;
-  // Free allocated memory
-  for (auto &fileData: fileDataList) {
-    delete[] fileData.FileID;
-    delete[] fileData.EncryptedFilePath;
-  }
-  std::cout << "repairLostEncFileStructs: Finished" << std::endl;
 }
 
 void HelperUtils::repairAllLostStruct() {

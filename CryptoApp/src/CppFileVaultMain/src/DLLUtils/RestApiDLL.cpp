@@ -202,16 +202,53 @@ unsigned char* RestApiDLL::convertToUnsignedChar(const wchar_t* input, size_t si
   return result;
 }
 
+wchar_t *RestApiDLL::convertToHexWChar(const unsigned char *input, size_t size) {
+  if (input == nullptr || size == 0) {
+    std::cerr << "convertToHexWChar: Input is null or size is zero" << std::endl;
+    return nullptr;
+  }
+
+  std::wstringstream wss;
+  for (size_t i = 0; i < size; ++i) {
+    wss << std::setw(2) << std::setfill(L'0') << std::hex << static_cast<int>(input[i]);
+  }
+
+  std::wstring hexStr = wss.str();
+  wchar_t *result = new wchar_t[hexStr.size() + 1];
+  std::wmemcpy(result, hexStr.c_str(), hexStr.size() + 1);
+
+  return result;
+}
+
+unsigned char* RestApiDLL::convertFromHexWChar(const wchar_t* input, const size_t size) {
+  if (input == nullptr || size == 0 || size % 4 != 0) {
+    std::wcerr << L"Invalid input" << std::endl;
+    return nullptr;
+  }
+
+  size_t outputSize = size / 2;
+  std::cout << outputSize << std::endl;
+  std::cout << size << std::endl;
+  unsigned char* result = new unsigned char[outputSize];
+
+  for (size_t i = 0; i < outputSize; ++i) {
+    wchar_t hexPair[3] = {input[2*i], input[2*i+1], L'\0'};
+    result[i] = (unsigned char)std::wcstoul(hexPair, nullptr, 16);
+  }
+
+  return result;
+}
+
 RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &data) {
   RestApiDLL::FileDataDB dbStruct;
 
-  dbStruct.FileID = convertToWChar(data.FileID, data.fileIDLength);
+  dbStruct.FileID = convertToHexWChar(data.FileID, data.fileIDLength);
   dbStruct.AlgorithmenType = data.AlgorithmenType;
   dbStruct.OriginalFilePath = data.OriginalFilePath;
   dbStruct.EncryptedFilePath = data.EncryptedFilePath;
   dbStruct.DecryptedFilePath = data.DecryptedFilePath;
-  dbStruct.Key = convertToWChar(data.Key, data.keyLength);
-  dbStruct.Iv = convertToWChar(data.Iv, data.ivLength);
+  dbStruct.Key = convertToHexWChar(data.Key, data.keyLength);
+  dbStruct.Iv = convertToHexWChar(data.Iv, data.ivLength);
 
   if (dbStruct.FileID == nullptr
       || dbStruct.AlgorithmenType == nullptr
@@ -231,7 +268,7 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &dat
 RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data) {
   RestApiDLL::FileDataDB dbStruct{};
 
-  dbStruct.FileID = convertToWChar(data.FileID, data.fileIDLength);
+  dbStruct.FileID = convertToHexWChar(data.FileID, data.fileIDLength);
   dbStruct.AlgorithmenType = nullptr;
   dbStruct.OriginalFilePath = nullptr;
   dbStruct.EncryptedFilePath = nullptr;
@@ -248,16 +285,16 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data
 
 FileData RestApiDLL::convertDBStructToFileData(const FileDataDB &data) {
   FileData fileData;
-  fileData.FileID = convertToUnsignedChar(data.FileID, std::wcslen(data.FileID));
-  fileData.fileIDLength = std::wcslen(data.FileID);
+  fileData.FileID = convertFromHexWChar(data.FileID, std::wcslen(data.FileID));
+  fileData.fileIDLength = std::wcslen(data.FileID) / 2;
   fileData.EncryptedFilePath = data.EncryptedFilePath;
   fileData.OriginalFilePath = data.OriginalFilePath;
   fileData.AlgorithmenType = data.AlgorithmenType;
   fileData.DecryptedFilePath = data.DecryptedFilePath;
-  fileData.Key = convertToUnsignedChar(data.Key, std::wcslen(data.Key));
-  fileData.keyLength = std::wcslen(data.Key);
-  fileData.Iv = convertToUnsignedChar(data.Iv, std::wcslen(data.Iv));
-  fileData.ivLength = std::wcslen(data.Iv);
+  fileData.Key = convertFromHexWChar(data.Key, std::wcslen(data.Key));
+  fileData.keyLength = std::wcslen(data.Key) / 2;
+  fileData.Iv = convertFromHexWChar(data.Iv, std::wcslen(data.Iv));
+  fileData.ivLength = std::wcslen(data.Iv) / 2;
 
   return fileData;
 }

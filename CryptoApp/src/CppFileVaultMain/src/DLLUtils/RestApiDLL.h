@@ -38,6 +38,8 @@ private:
 
   wchar_t *convertToWChar(const unsigned char *input, size_t size);
   unsigned char *convertToUnsignedChar(const wchar_t *input, size_t size);
+  wchar_t *convertToHexWChar(const unsigned char *input, size_t size);
+  unsigned char *convertFromHexWChar(const wchar_t *input, size_t size);
 
   void debugFileDataDB(const FileDataDB &data);
 };
