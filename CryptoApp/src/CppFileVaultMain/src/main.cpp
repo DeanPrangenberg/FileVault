@@ -12,6 +12,11 @@ namespace fs = std::filesystem;
 
 #define pathToCrypt "S:\\clips\\cut"
 
+void startDBContainer() {
+  std::string command = "docker start 2d73a4997f4068f1f0c2009d284225bbc1f265d78805043db61a63054e7cddd2";
+  system(command.c_str());
+}
+
 void testRun() {
   FileScannerDLL fileScannerDll;
   MultiCryptoDLL multiCryptoDll;
@@ -136,6 +141,7 @@ void testRun() {
 }
 
 int main() {
+  startDBContainer();
   testRun();
   return 0;
 }
