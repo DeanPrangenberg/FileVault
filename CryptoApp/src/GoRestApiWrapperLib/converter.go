@@ -84,7 +84,3 @@ func convertToCFileData(data GoFileData) *C.FileDataDB {
 		Iv:                stringToWcharT(data.Iv),
 	}
 }
-
-func convertCBoolToGoBool(cBoolPtr *C.bool) bool {
-	return bool(*cBoolPtr)
-}

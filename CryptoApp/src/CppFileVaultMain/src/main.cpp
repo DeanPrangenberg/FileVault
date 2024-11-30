@@ -10,10 +10,18 @@
 
 namespace fs = std::filesystem;
 
+bool printDebug = true;
+bool printConverterDebug = true;
+
 #define pathToCrypt "S:\\clips\\cut"
 
 void startDBContainer() {
   std::string command = "docker start 2d73a4997f4068f1f0c2009d284225bbc1f265d78805043db61a63054e7cddd2";
+  system(command.c_str());
+}
+
+void stopDBContainer() {
+  std::string command = "docker stop 2d73a4997f4068f1f0c2009d284225bbc1f265d78805043db61a63054e7cddd2";
   system(command.c_str());
 }
 
@@ -23,13 +31,13 @@ void testRun() {
   RestApiDLL restApiDll;
   FileMarkDLL fileMarkDll;
 
-  std::cout << "--Starting file scan--" << std::endl;
+  if (printDebug) std::cout << "--Starting file scan--" << std::endl;
   auto pathList = fileScannerDll.ScanDirectory(pathToCrypt, false);
-  std::cout << "++Scan completed found " << pathList.size() << " files!++" << std::endl;
+  if (printDebug) std::cout << "++Scan completed found " << pathList.size() << " files!++" << std::endl;
 
   std::vector<FileData> fileDataVec;
   if (!pathList.empty()) {
-    std::cout << "--Building Structs--" << std::endl;
+    if (printDebug) std::cout << "--Building Structs--" << std::endl;
     for (const auto &filePath: pathList) {
       auto filePathstr = filePath.wstring();
 
@@ -43,7 +51,7 @@ void testRun() {
     }
 
     if (!fileDataVec.empty()) {
-      std::cout << "--Encrypting Files--" << std::endl;
+      if (printDebug) std::cout << "--Encrypting Files--" << std::endl;
       std::vector<bool> encryptResults(fileDataVec.size(), false);
       multiCryptoDll.EncryptFiles(fileDataVec.data(), static_cast<int>(fileDataVec.size()), encryptResults);
 
@@ -55,12 +63,12 @@ void testRun() {
         }
       }
 
-      std::cout << "++" << fileDataVec.size() << " Files Encrypted++" << std::endl;
+      if (printDebug) std::cout << "++" << fileDataVec.size() << " Files Encrypted++" << std::endl;
 
-      std::cout << "--Saving File Data--" << std::endl;
+      if (printDebug) std::cout << "--Saving File Data--" << std::endl;
       for (const auto &fileData: fileDataVec) {
         if (restApiDll.InsertEntry(fileData)) {
-          globalDefinitions::debugFileData(fileData);
+          if (printConverterDebug) globalDefinitions::debugFileData(fileData);
           std::wcout << L"++Saved struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
         } else {
           std::wcout << L"++Failed to save struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
@@ -69,21 +77,21 @@ void testRun() {
 
       std::cin.get();
 
-      std::cout << "--Repairing Lost Encrypted File Structs--" << std::endl;
+      if (printDebug) std::cout << "--Repairing Lost Encrypted File Structs--" << std::endl;
       auto helperUtils = HelperUtils();
       std::vector<fs::path> paths = {pathToCrypt};
       helperUtils.repairLostEncFileStructs(paths);
 
-      std::cout << "--Back in main after repair--" << std::endl;
+      if (printDebug) std::cout << "--Back in main after repair--" << std::endl;
 
       // Clear the current fileDataVec and rescan the directory
       fileDataVec.clear();
-      std::cout << "--Rescanning Directory for encrypted files--" << std::endl;
+      if (printDebug) std::cout << "--Rescanning Directory for encrypted files--" << std::endl;
       pathList = fileScannerDll.ScanDirectory(pathToCrypt, true);
-      std::cout << "++Scan completed found " << pathList.size() << " files!++" << std::endl;
+      if (printDebug) std::cout << "++Scan completed found " << pathList.size() << " files!++" << std::endl;
 
       // Reload the FileData structs from the database
-      std::cout << "--Reloading File Data--" << std::endl;
+      if (printDebug) std::cout << "--Reloading File Data--" << std::endl;
       for (const auto &filePath: pathList) {
         FileData partialStruct;
         partialStruct.FileID = new unsigned char[64];
@@ -91,9 +99,9 @@ void testRun() {
         partialStruct.EncryptedFilePath = StructUtils::ConvertWStringToWChar(filePath.wstring());
 
         if (fileMarkDll.ExtractFileIDFromFile(partialStruct.EncryptedFilePath, partialStruct.FileID)) {
-          std::cout << "++Extracted FileID: "<< globalDefinitions::toHexString(partialStruct.FileID, partialStruct.fileIDLength) <<" from: " << filePath << "++" << std::endl;
+          if (printDebug) std::cout << "++Extracted FileID: "<< globalDefinitions::toHexString(partialStruct.FileID, partialStruct.fileIDLength) <<" from: " << filePath << "++" << std::endl;
         } else {
-          std::cout << "++Could not extract File ID from: " << filePath << "++" << std::endl;
+          if (printDebug) std::cout << "++Could not extract File ID from: " << filePath << "++" << std::endl;
           delete[] partialStruct.EncryptedFilePath;
           delete[] partialStruct.FileID;
           continue;
@@ -110,14 +118,14 @@ void testRun() {
           }
         }
       }
-      std::cout << "++Completed " << fileDataVec.size() << " Structs from Save File++" << std::endl;
+      if (printDebug) std::cout << "++Completed " << fileDataVec.size() << " Structs from Save File++" << std::endl;
 
       for (const auto fileData: fileDataVec) {
         std::wcout << L"++FileData Struct: " << fileData.EncryptedFilePath << "++" << std::endl;
-        globalDefinitions::debugFileData(fileData);
+        if (printConverterDebug) globalDefinitions::debugFileData(fileData);
       }
 
-      std::cout << "--Decrypting Files--" << std::endl;
+      if (printDebug) std::cout << "--Decrypting Files--" << std::endl;
       std::vector<bool> decryptResults(fileDataVec.size(), false);
       multiCryptoDll.DecryptFiles(fileDataVec.data(), static_cast<int>(fileDataVec.size()), decryptResults);
 
@@ -128,9 +136,9 @@ void testRun() {
           i--; // Adjust index after erasing
         }
       }
-      std::cout << "++" << fileDataVec.size() << " Files Decrypted++" << std::endl;
+      if (printDebug) std::cout << "++" << fileDataVec.size() << " Files Decrypted++" << std::endl;
 
-      std::cout << "--Deleting Structs--" << std::endl;
+      if (printDebug) std::cout << "--Deleting Structs--" << std::endl;
       for (const auto &fileData: fileDataVec) {
         if (restApiDll.DeleteEntry(fileData)) {
           std::wcout << L"++Deleted struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
@@ -143,5 +151,6 @@ void testRun() {
 int main() {
   startDBContainer();
   testRun();
+  stopDBContainer();
   return 0;
 }

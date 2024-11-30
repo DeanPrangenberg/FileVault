@@ -17,8 +17,6 @@
 namespace fs = std::filesystem;
 using globalDefinitions::FileData;
 
-
-
 // Wrapper functions for C compatibility
 extern "C" {
 [[maybe_unused]] CRYPTOLIB_API bool EncryptFileWrapper(const struct FileData *fileData);
