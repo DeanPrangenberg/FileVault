@@ -9,10 +9,6 @@ package main
 struct FileData {
   unsigned char *FileID;
     size_t fileIDLength;
-    unsigned char *EncryptionID;
-    size_t EncryptionIDLength;
-    unsigned char *LastUpdateID;
-    size_t LastUpdateIDLength;
     const wchar_t *AlgorithmenType;
     const wchar_t *OriginalFilePath;
     const wchar_t *EncryptedFilePath;
@@ -36,6 +32,9 @@ import (
 
 // Convert wchar_t* to Go string
 func wcharToString(wstr *C.wchar_t) string {
+  if wstr == nil {
+    return ""
+  }
   var result string
   for *wstr != 0 {
     result += string(*wstr)

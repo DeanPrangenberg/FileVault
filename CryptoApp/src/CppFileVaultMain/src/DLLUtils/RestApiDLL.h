@@ -17,7 +17,7 @@ public:
 
 private:
   bool printDebug = false;
-  bool printConverterDebug = false;
+  bool printConverterDebug = true;
   struct FileDataDB {
     wchar_t *FileID = nullptr;
     wchar_t *AlgorithmenType = nullptr;

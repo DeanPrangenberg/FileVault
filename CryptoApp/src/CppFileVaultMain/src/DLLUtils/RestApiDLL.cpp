@@ -46,12 +46,18 @@ bool RestApiDLL::DeleteEntry(const FileData &data) {
 
   bool result = false;
   auto dbStruct = convertFileDataToDBStruct(data);
-  func(&dbStruct, &result);
+
+  try {
+    func(&dbStruct, &result);
+  } catch (const std::exception& e) {
+    logError(std::string("RestApiDLL-Delete: Exception caught: ") + e.what());
+    result = false;
+  }
 
   if (result) {
-    logInfo("RestApiDLL-Delete: Successfully deleted FileData struct into the database");
+    logInfo("RestApiDLL-Delete: Successfully deleted FileData struct from the database");
   } else {
-    logError("RestApiDLL-Delete: Failed to delete FileData struct into the database");
+    logError("RestApiDLL-Delete: Failed to delete FileData struct from the database");
   }
 
   unloadDll(hDll);

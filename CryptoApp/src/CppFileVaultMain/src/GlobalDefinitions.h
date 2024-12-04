@@ -18,10 +18,10 @@ namespace globalDefinitions {
   struct FileData {
     unsigned char *FileID = nullptr;
     size_t fileIDLength = 0;
-    unsigned char *EncryptionID = nullptr;
+    /*unsigned char *EncryptionID = nullptr;
     size_t EncryptionIDLength = 0;
     unsigned char *LastUpdateID = nullptr;
-    size_t LastUpdateIDLength = 0;
+    size_t LastUpdateIDLength = 0;*/
     wchar_t *AlgorithmenType = nullptr;
     wchar_t *OriginalFilePath = nullptr;
     wchar_t *EncryptedFilePath = nullptr;
@@ -34,13 +34,13 @@ namespace globalDefinitions {
     bool operator==(const FileData &other) const {
       return
           fileIDLength == other.fileIDLength
-          && EncryptionIDLength == other.EncryptionIDLength
-          && LastUpdateIDLength == other.LastUpdateIDLength
+          /*&& EncryptionIDLength == other.EncryptionIDLength
+          && LastUpdateIDLength == other.LastUpdateIDLength*/
           && keyLength == other.keyLength
           && ivLength == other.ivLength
           && std::equal(FileID, FileID + fileIDLength, other.FileID)
-          && std::equal(EncryptionID, EncryptionID + EncryptionIDLength, other.EncryptionID)
-          && std::equal(LastUpdateID, LastUpdateID + LastUpdateIDLength, other.LastUpdateID)
+          /*&& std::equal(EncryptionID, EncryptionID + EncryptionIDLength, other.EncryptionID)
+          && std::equal(LastUpdateID, LastUpdateID + LastUpdateIDLength, other.LastUpdateID)*/
           && wcscmp(AlgorithmenType, other.AlgorithmenType) == 0
           && wcscmp(OriginalFilePath, other.OriginalFilePath) == 0
           && wcscmp(EncryptedFilePath, other.EncryptedFilePath) == 0
@@ -49,31 +49,21 @@ namespace globalDefinitions {
   };
 
   inline void cleanupFileData(FileData &data) {
-    delete[] data.FileID;
-    delete[] data.EncryptionID;
-    delete[] data.LastUpdateID;
-    delete[] data.AlgorithmenType;
-    delete[] data.OriginalFilePath;
-    delete[] data.EncryptedFilePath;
-    delete[] data.DecryptedFilePath;
-    delete[] data.Key;
-    delete[] data.Iv;
+    try {
+      delete[] data.FileID;
+      delete[] data.AlgorithmenType;
+      delete[] data.OriginalFilePath;
+      delete[] data.EncryptedFilePath;
+      delete[] data.DecryptedFilePath;
+      delete[] data.Key;
+      delete[] data.Iv;
+    } catch (const std::exception &e) {
+      std::cerr << "Error in cleanupFileData: " << e.what() << std::endl;
+    }
 
-    data.FileID = nullptr;
-    data.fileIDLength = 0;
-    data.EncryptionID = nullptr;
-    data.EncryptionIDLength = 0;
-    data.LastUpdateID = nullptr;
-    data.LastUpdateIDLength = 0;
-    data.AlgorithmenType = nullptr;
-    data.OriginalFilePath = nullptr;
-    data.EncryptedFilePath = nullptr;
-    data.DecryptedFilePath = nullptr;
-    data.Key = nullptr;
-    data.keyLength = 0;
-    data.Iv = nullptr;
-    data.ivLength = 0;
+    data = FileData();
   }
+
 
   inline std::string toHexString(const unsigned char *pUChar, size_t length) {
     if (pUChar == nullptr) {
@@ -88,8 +78,9 @@ namespace globalDefinitions {
   }
 
   inline void debugFileData(const FileData &data) {
+    std::wcout.flush();
     std::cout << "-------------------------------------------------------------" << std::endl;
-    std::cout << "FileData Debug: " << std::endl;
+    std::cout << "FileData Debug from debugFileData fn: " << std::endl;
 
     try {
       std::cout << "FileID: "
@@ -98,14 +89,41 @@ namespace globalDefinitions {
       std::cerr << "Error converting FileID to hex string: " << e.what() << std::endl;
     }
 
-    std::wcout << L"OriginalFilePath: "
-               << (data.OriginalFilePath != nullptr ? data.OriginalFilePath : L"null") << std::endl;
-    std::wcout << L"AlgorithmenType: "
-               << (data.AlgorithmenType != nullptr ? data.AlgorithmenType : L"null") << std::endl;
-    std::wcout << L"EncryptedFilePath: "
-               << (data.EncryptedFilePath != nullptr ? data.EncryptedFilePath : L"null") << std::endl;
-    std::wcout << L"DecryptedFilePath: "
-               << (data.DecryptedFilePath != nullptr ? data.DecryptedFilePath : L"null") << std::endl;
+    std::cout << "EncryptedFilePath: ";
+    if (data.EncryptedFilePath && *data.EncryptedFilePath != L'\0') {
+      std::cout << "not null: ";
+      std::wcout << data.EncryptedFilePath;
+    } else {
+      std::wcout << L"null";
+    }
+    std::wcout << std::endl;
+
+    std::cout << "OriginalFilePath: ";
+    if (data.OriginalFilePath && *data.OriginalFilePath != L'\0') {
+      std::cout << "not null: ";
+      std::wcout  << data.OriginalFilePath;
+    } else {
+      std::wcout << L"null";
+    }
+    std::wcout << std::endl;
+
+    std::cout << "DecryptedFilePath: ";
+    if (data.DecryptedFilePath && *data.DecryptedFilePath != L'\0') {
+      std::cout << "not null: ";
+      std::wcout  << data.DecryptedFilePath;
+    } else {
+      std::wcout << L"null";
+    }
+    std::wcout << std::endl;
+
+    std::cout << L"AlgorithmenType: ";
+    if (data.AlgorithmenType && *data.AlgorithmenType != L'\0') {
+      std::cout << "not null: ";
+      std::wcout << data.AlgorithmenType;
+    } else {
+      std::wcout << L"null";
+    }
+    std::wcout << std::endl;
 
     try {
       std::cout << "Key: "
