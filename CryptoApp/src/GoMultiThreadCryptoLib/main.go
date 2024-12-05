@@ -1,7 +1,7 @@
 package main
 
 /*
-#cgo LDFLAGS: -LC:/GitHub/FileVault/CryptoApp/src/cmake-build-release/bin -lCppCryptoLib
+#cgo LDFLAGS: -LD:/MyRepo/FileVault/CryptoApp/src/cmake-build-release/bin -lCppCryptoLib
 #include <stdlib.h>
 #include <wchar.h>
 #include <stdbool.h>

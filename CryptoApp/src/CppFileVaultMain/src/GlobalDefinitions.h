@@ -49,21 +49,35 @@ namespace globalDefinitions {
   };
 
   inline void cleanupFileData(FileData &data) {
-    try {
-      delete[] data.FileID;
-      delete[] data.AlgorithmenType;
-      delete[] data.OriginalFilePath;
-      delete[] data.EncryptedFilePath;
-      delete[] data.DecryptedFilePath;
-      delete[] data.Key;
-      delete[] data.Iv;
-    } catch (const std::exception &e) {
-      std::cerr << "Error in cleanupFileData: " << e.what() << std::endl;
-    }
+    // Hilfsfunktion zum sicheren Löschen von unsigned char Arrays
+    auto safeDeleteUCharArray = [](unsigned char *&ptr, size_t &length) {
+      if (ptr != nullptr) {
+        delete[] ptr;
+        ptr = nullptr;
+        length = 0;
+      }
+    };
 
+    // Hilfsfunktion zum sicheren Löschen von wchar_t Arrays
+    auto safeDeleteWChar = [](wchar_t *&ptr) {
+      if (ptr != nullptr) {
+        delete[] ptr;
+        ptr = nullptr;
+      }
+    };
+
+    // Sicheres Löschen aller dynamisch allokierten Felder
+    safeDeleteUCharArray(data.FileID, data.fileIDLength);
+    safeDeleteWChar(data.AlgorithmenType);
+    safeDeleteWChar(data.OriginalFilePath);
+    safeDeleteWChar(data.EncryptedFilePath);
+    safeDeleteWChar(data.DecryptedFilePath);
+    safeDeleteUCharArray(data.Key, data.keyLength);
+    safeDeleteUCharArray(data.Iv, data.ivLength);
+
+    // Zurücksetzen der Struktur auf Standardwerte
     data = FileData();
   }
-
 
   inline std::string toHexString(const unsigned char *pUChar, size_t length) {
     if (pUChar == nullptr) {
@@ -101,7 +115,7 @@ namespace globalDefinitions {
     std::cout << "OriginalFilePath: ";
     if (data.OriginalFilePath && *data.OriginalFilePath != L'\0') {
       std::cout << "not null: ";
-      std::wcout  << data.OriginalFilePath;
+      std::wcout << data.OriginalFilePath;
     } else {
       std::wcout << L"null";
     }
@@ -110,7 +124,7 @@ namespace globalDefinitions {
     std::cout << "DecryptedFilePath: ";
     if (data.DecryptedFilePath && *data.DecryptedFilePath != L'\0') {
       std::cout << "not null: ";
-      std::wcout  << data.DecryptedFilePath;
+      std::wcout << data.DecryptedFilePath;
     } else {
       std::wcout << L"null";
     }

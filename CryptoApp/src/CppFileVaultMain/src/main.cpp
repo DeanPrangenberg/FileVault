@@ -13,15 +13,15 @@ namespace fs = std::filesystem;
 bool printDebug = true;
 bool printConverterDebug = true;
 
-#define pathToCrypt "C:\\hallo"
+#define pathToCrypt "S:\\clips\\cut"
 
 void startDBContainer() {
-  std::string command = "docker start 4b3b761b6489ccb3f3f6a643bc10b1edc1459902a85977fbf99c0e64db571197";
+  std::string command = "docker start 2d73a4997f4068f1f0c2009d284225bbc1f265d78805043db61a63054e7cddd2";
   system(command.c_str());
 }
 
 void stopDBContainer() {
-  std::string command = "docker stop 4b3b761b6489ccb3f3f6a643bc10b1edc1459902a85977fbf99c0e64db571197";
+  std::string command = "docker stop 2d73a4997f4068f1f0c2009d284225bbc1f265d78805043db61a63054e7cddd2";
   system(command.c_str());
 }
 
@@ -135,7 +135,9 @@ void decryptAndDeleteFiles(MultiCryptoDLL &multiCryptoDll, RestApiDLL &restApiDl
     } else {
       std::wcout << L"++Failed to delete struct for file: " << fileData.OriginalFilePath << "++" << std::endl;
     }
+    std::wcout << L"Try deleting file: " << fileData.DecryptedFilePath << std::endl;
     globalDefinitions::cleanupFileData(fileData);
+    std::wcout << L"Deleted file: " << fileData.DecryptedFilePath << std::endl;
   }
 }
 
@@ -154,7 +156,10 @@ void testRun() {
 
 int main() {
   startDBContainer();
+  system(".\\RustFileCopy.exe");
+  Sleep(5000);
   testRun();
+  Sleep(1000);
   stopDBContainer();
   return 0;
 }
