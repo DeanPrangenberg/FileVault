@@ -13,15 +13,15 @@ namespace fs = std::filesystem;
 bool printDebug = true;
 bool printConverterDebug = true;
 
-#define pathToCrypt "S:\\clips\\cut"
+#define pathToCrypt "C:\\hallo"
 
 void startDBContainer() {
-  std::string command = "docker start 2d73a4997f4068f1f0c2009d284225bbc1f265d78805043db61a63054e7cddd2";
+  std::string command = "docker start 4b3b761b6489ccb3f3f6a643bc10b1edc1459902a85977fbf99c0e64db571197";
   system(command.c_str());
 }
 
 void stopDBContainer() {
-  std::string command = "docker stop 2d73a4997f4068f1f0c2009d284225bbc1f265d78805043db61a63054e7cddd2";
+  std::string command = "docker stop 4b3b761b6489ccb3f3f6a643bc10b1edc1459902a85977fbf99c0e64db571197";
   system(command.c_str());
 }
 
