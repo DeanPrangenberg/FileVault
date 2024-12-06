@@ -2,6 +2,7 @@
 #define FILEVAULTROOT_RESTAPIDLL_H
 
 #include "MasterDLLClass.h"
+#include "../../../shared/FileData.h"
 #include <vector>
 #include <iostream>
 #include <stdexcept>
@@ -16,16 +17,19 @@ public:
   std::vector<FileData> GetAllFileIDsAndEncryptedPaths();
 
 private:
-  bool printDebug = false;
+  bool printDebug = true;
   bool printConverterDebug = true;
   struct FileDataDB {
     wchar_t *FileID = nullptr;
+    size_t FileIDLength = 0;
     wchar_t *AlgorithmenType = nullptr;
     wchar_t *OriginalFilePath = nullptr;
     wchar_t *EncryptedFilePath = nullptr;
     wchar_t *DecryptedFilePath = nullptr;
     wchar_t *Key = nullptr;
+    size_t KeyLength = 0;
     wchar_t *Iv = nullptr;
+    size_t IvLength = 0;
   };
 
   typedef void (*InsertEntryFunc)(const FileDataDB *, bool *);
@@ -38,10 +42,8 @@ private:
   FileData convertDBStructToFileData(const FileDataDB &data);
   FileDataDB convertFileDataForSearch(const FileData &data);
 
-  wchar_t *convertToWChar(const unsigned char *input, size_t size);
-  unsigned char *convertToUnsignedChar(const wchar_t *input, size_t size);
   wchar_t *convertToHexWChar(const unsigned char *input, size_t size);
-  unsigned char *convertFromHexWChar(const wchar_t *input, size_t size);
+  unsigned char *convertFromHexWChar(const wchar_t *input, size_t &size);
 
   void debugFileDataDB(const FileDataDB &data);
 };

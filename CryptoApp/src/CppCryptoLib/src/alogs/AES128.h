@@ -13,7 +13,7 @@
 #include "../../../CppFileVaultMain/src/GlobalDefinitions.h"
 #include "../Helper/HelperUtils.h"
 
-using globalDefinitions::FileData;
+
 namespace fs = std::filesystem;
 
 class AES128 {

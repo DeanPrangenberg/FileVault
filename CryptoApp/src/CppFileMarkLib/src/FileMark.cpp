@@ -73,14 +73,14 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
 
 [[maybe_unused]] FILEMARKLIB_API void markFile(const struct FileData *fileData) {
   // Convert FileID to string
-  std::string fileIDStr(reinterpret_cast<const char *>(fileData->FileID), fileData->fileIDLength);
+  std::string fileIDStr(reinterpret_cast<const char *>(fileData->getFileId()), fileData->getFileIdLength());
   std::string fileMark = globalDefinitions::markIdentifier + fileIDStr + globalDefinitions::markIdentifier + "\n";
 
   // Open the original file
-  std::ifstream inputFile(fileData->EncryptedFilePath, std::ios::binary);
+  std::ifstream inputFile(fileData->getEncryptedFilePath(), std::ios::binary);
   if (!inputFile) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    std::string filePathStr = converter.to_bytes(fileData->EncryptedFilePath);
+    std::string filePathStr = converter.to_bytes(fileData->getEncryptedFilePath());
     std::cout << "Failed to open original file for reading: " + filePathStr << std::endl;
     return;
   }
@@ -95,10 +95,10 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
   std::string markedContents = fileMark + fileContents + fileMark;
 
   // Save the modified contents back to the file
-  std::ofstream outputFile(fileData->EncryptedFilePath, std::ios::binary);
+  std::ofstream outputFile(fileData->getEncryptedFilePath(), std::ios::binary);
   if (!outputFile) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    std::string filePathStr = converter.to_bytes(fileData->EncryptedFilePath);
+    std::string filePathStr = converter.to_bytes(fileData->getEncryptedFilePath());
     std::cout << "Failed to open original file for writing: " + filePathStr << std::endl;
     return;
   }
@@ -108,10 +108,10 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
 
 [[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData) {
   // Open the Encrypted file
-  std::ifstream inputFile(fileData->EncryptedFilePath, std::ios::binary);
+  std::ifstream inputFile(fileData->getEncryptedFilePath(), std::ios::binary);
   if (!inputFile) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    std::string filePathStr = converter.to_bytes(fileData->EncryptedFilePath);
+    std::string filePathStr = converter.to_bytes(fileData->getEncryptedFilePath());
     std::cout << "Failed to open file for reading: " + filePathStr << std::endl;
     return false;
   }
@@ -124,16 +124,16 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
 
   // Extract the fileID using extractFileID
   unsigned char extractedFileIDArr[64];
-  if (!extractFileIDFromFile(fileData->EncryptedFilePath, extractedFileIDArr)) {
+  if (!extractFileIDFromFile(fileData->getEncryptedFilePath(), extractedFileIDArr)) {
     std::cout << "Failed to extract file ID" << std::endl;
     return false;
   }
 
   // Convert FileID to string
-  std::string fileIDStr(reinterpret_cast<const char *>(fileData->FileID), fileData->fileIDLength);
+  std::string fileIDStr(reinterpret_cast<const char *>(fileData->getFileId()), fileData->getFileIdLength());
 
   // Verify if the extracted fileID matches the fileID in the struct
-  if (std::memcmp(fileData->FileID, extractedFileIDArr, fileData->fileIDLength) != 0) {
+  if (std::memcmp(fileData->getFileId(), extractedFileIDArr, fileData->getFileIdLength()) != 0) {
     std::cout << "File ID does not match" << std::endl;
     return false;
   }
@@ -160,10 +160,10 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
   }
 
   // Save the modified contents back to the file
-  std::ofstream outputFile(fileData->EncryptedFilePath, std::ios::binary);
+  std::ofstream outputFile(fileData->getEncryptedFilePath(), std::ios::binary);
   if (!outputFile) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    std::string filePathStr = converter.to_bytes(fileData->EncryptedFilePath);
+    std::string filePathStr = converter.to_bytes(fileData->getEncryptedFilePath());
     std::cout << "Failed to open original file for writing: " + filePathStr << std::endl;
     return false;
   }

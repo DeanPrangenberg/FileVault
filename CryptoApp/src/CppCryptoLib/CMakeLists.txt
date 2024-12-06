@@ -31,6 +31,8 @@ add_library(CppCryptoLib SHARED
 		src/alogs/SHA512.h
 		src/Helper/HelperUtils.h
 		src/alogs/KeyGen.h
+		../shared/FileData.cpp
+		../shared/FileData.h
 )
 
 # Link OpenSSL libraries

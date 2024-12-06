@@ -28,12 +28,12 @@ add_custom_target(RustFileCopy ALL
     COMMENT "Building Rust FileCopy"
 )
 
-add_custom_target(GoMultiThreadCryptoLib ALL
+#[[add_custom_target(GoMultiThreadCryptoLib ALL
     COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoMultiThreadCryptoLib.dll -buildmode=c-shared .
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/GoMultiThreadCryptoLib
     DEPENDS CppCryptoLib
     COMMENT "Building GO Lib"
-)
+)]]
 
 add_custom_target(GoRestApiWrapperLib ALL
     COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoRestApiWrapperLib.dll -buildmode=c-shared .
@@ -43,16 +43,16 @@ add_custom_target(GoRestApiWrapperLib ALL
 
 # Specify dependencies between projects
 add_dependencies(CppFileVaultMain RustFileCopy)  # Main app depends on Rust project
-add_dependencies(GoMultiThreadCryptoLib CppCryptoLib)  # Go DLL depends on C++ Cryptography
+#[[add_dependencies(GoMultiThreadCryptoLib CppCryptoLib)  # Go DLL depends on C++ Cryptography]]
 add_dependencies(CppFileVaultMain CppCryptoLib)  # Main app depends on cryptography
-add_dependencies(CppFileVaultMain GoMultiThreadCryptoLib)  # Main app depends on Go DLL
+#[[add_dependencies(CppFileVaultMain GoMultiThreadCryptoLib)  # Main app depends on Go DLL]]
 add_dependencies(CppFileVaultMain GoRestApiWrapperLib)  # Main app depends on Go DLL
 add_dependencies(CppFileVaultMain CppDirectoryScannerLib)  # Main app depends on C# project
 add_dependencies(CppFileVaultMain CppFileMarkLib)  # Main app depends on C# project
 
 # Compilation options for warnings
 if (MSVC)
- add_compile_options(/W4)  # MSVC-specific warnings
+ add_compile_options(/W4 /GS)  # MSVC-specific warnings
 else ()
  add_compile_options(-Wall -Wextra)  # GCC/Clang warnings
 endif ()

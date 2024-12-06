@@ -20,7 +20,7 @@ void HelperUtils::deleteFile(const fs::path &filePath) {
   }
 }
 
-void HelperUtils::MarkFile(const struct FileData *fileData) {
+void HelperUtils::MarkFile(const class FileData *fileData) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
   if (!hFileMarkDll) {
     return;
@@ -37,7 +37,7 @@ void HelperUtils::MarkFile(const struct FileData *fileData) {
   unloadDll(hFileMarkDll);
 }
 
-bool HelperUtils::UnmarkFile(const struct FileData *fileData) {
+bool HelperUtils::UnmarkFile(const class FileData *fileData) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
   if (!hFileMarkDll) {
     return false;

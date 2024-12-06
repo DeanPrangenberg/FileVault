@@ -10,7 +10,6 @@
 #include <iostream>
 #include "../GlobalDefinitions.h"
 
-using globalDefinitions::FileData;
 namespace fs = std::filesystem;
 
 class MasterDLLClass {

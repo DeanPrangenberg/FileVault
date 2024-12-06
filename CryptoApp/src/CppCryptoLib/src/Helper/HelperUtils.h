@@ -19,11 +19,11 @@ class HelperUtils {
 public:
   static void printError(const std::wstring &msg);
   static void deleteFile(const fs::path &filePath);
-  static void MarkFile(const struct FileData *fileData);
-  static bool UnmarkFile(const struct FileData *fileData);
+  static void MarkFile(const class FileData *fileData);
+  static bool UnmarkFile(const class FileData *fileData);
 private:
-  typedef void (*MarkFileFunc)(const struct FileData *);
-  typedef bool (*UnmarkFileFunc)(const struct FileData *);
+  typedef void (*MarkFileFunc)(const class FileData *);
+  typedef bool (*UnmarkFileFunc)(const class FileData *);
   static HMODULE loadDll(const wchar_t *dllName);
   static void unloadDll(HMODULE hDll);
   static void logError(const std::string &message);

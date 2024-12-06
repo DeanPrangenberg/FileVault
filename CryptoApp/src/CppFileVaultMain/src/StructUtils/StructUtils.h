@@ -3,15 +3,15 @@
 
 #include <filesystem>
 #include "../GlobalDefinitions.h"
+#include "../../../shared/FileData.h"
 
 using globalDefinitions::AlgorithmType;
-using globalDefinitions::FileData;
 
 namespace fs = std::filesystem;
 
 class StructUtils {
 public:
-    static globalDefinitions::FileData createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath);
+    static FileData createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath);
 
   static wchar_t *ConvertWStringToWChar(const std::wstring &input);
 

@@ -16,6 +16,8 @@ add_library(CppDirectoryScannerLib SHARED
         src/DirectoryScanner.cpp
         src/DirectoryScanner.h
 		../CppFileVaultMain/src/GlobalDefinitions.cpp
+    ../shared/FileData.cpp
+    ../shared/FileData.h
 )
 
 # Compile options

@@ -1,33 +1,40 @@
-#include <array>
-#include <iostream>
-#include <random>
 #include "CryptoAPI.h"
-#include "../alogs/AES128.h"
-#include "../alogs/AES256.h"
-#include "../alogs/KeyGen.h"
-#include "../alogs/SHA512.h"
 
-// Wrapper functions for C compatibility
+
 extern "C" {
-[[maybe_unused]] CRYPTOLIB_API bool EncryptFileWrapper(const struct FileData *fileData) {
-  if (fileData->keyLength == 16) { // AES-128
-    return AES128::encryptFile(fileData);
-  } else if (fileData->keyLength == 32) { // AES-256
-    return AES256::encryptFile(fileData);
+[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(const FileData *fileData, const int numFiles) {
+  std::vector<bool> results;
+  for (int i = 0; i < numFiles; i++) {
+    const FileData &file = fileData[i];
+    if (file.getKeyLength() == 16) { // AES-128
+      results.push_back(AES128::encryptFile(&file));
+    } else if (file.getKeyLength() == 32) { // AES-256
+      results.push_back(AES256::encryptFile(&file));
+    }
   }
-  return false;
+  bool *resultArray = new bool[results.size()];
+  std::copy(results.begin(), results.end(), resultArray);
+  return resultArray;
 }
 
-[[maybe_unused]] CRYPTOLIB_API bool DecryptFileWrapper(const struct FileData *fileData) {
-  if (fileData->keyLength == 16) { // AES-128
-    return AES128::decryptFile(fileData);
-  } else if (fileData->keyLength == 32) { // AES-256
-    return AES256::decryptFile(fileData);
+[[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, const int numFiles) {
+  std::vector<bool> results;
+  for (int i = 0; i < numFiles; i++) {
+    const FileData &file = fileData[i];
+    if (file.getKeyLength() == 16) { // AES-128
+      results.push_back(AES128::decryptFile(&file));
+    } else if (file.getKeyLength() == 32) { // AES-256
+      results.push_back(AES256::decryptFile(&file));
+    }
   }
-  return false;
+  bool *resultArray = new bool[results.size()];
+  std::copy(results.begin(), results.end(), resultArray);
+  return resultArray;
 }
 
 [[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, unsigned char *key, unsigned char *iv) {
+  KeyGen keyGen;
+
   if (key == nullptr || iv == nullptr) {
     std::cerr << "Error: key or iv pointer is null." << std::endl;
     return;
@@ -36,7 +43,8 @@ extern "C" {
   std::vector<unsigned char> keyVec(keySize);
   std::vector<unsigned char> ivVec(16); // 128-bit IV
 
-  KeyGen::generateKeyIv(keySize, keyVec, ivVec);
+
+  keyGen.generateKeyIv(keySize, keyVec, ivVec);
 
   std::copy(keyVec.begin(), keyVec.end(), key);
   std::copy(ivVec.begin(), ivVec.end(), iv);

@@ -10,16 +10,22 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <thread>
+#include <vector>
+#include <algorithm>
 #include "../../../CppFileVaultMain/src/GlobalDefinitions.h"
 #include "../Helper/HelperUtils.h"
+#undef min
+#undef max
 
-using globalDefinitions::FileData;
 namespace fs = std::filesystem;
 
 class AES256 {
     public:
     static bool encryptFile(const FileData *fileData);
     static bool decryptFile(const FileData *fileData);
+private:
+  bool printDebug = false;
 };
 
 #endif //FILEVAULTROOT_AES256_H

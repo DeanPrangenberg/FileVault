@@ -14,9 +14,11 @@ void KeyGen::generateKeyIv(const size_t &keySize, std::vector<unsigned char> &KE
   KEY = key;
   IV = iv;
 
-  std::cout << "Key and IV generated successfully" << std::endl;
-  std::cout << "Key: " << toHexString(KEY) << std::endl;
-  std::cout << "IV: " << toHexString(IV) << std::endl;
+  if (printDebug) {
+    std::cout << "Key and IV generated successfully" << std::endl;
+    std::cout << "Key: " << toHexString(KEY) << std::endl;
+    std::cout << "IV: " << toHexString(IV) << std::endl;
+  }
 }
 
 std::string KeyGen::toHexString(const std::vector<unsigned char> &data) {

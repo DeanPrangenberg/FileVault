@@ -7,12 +7,15 @@ public class Database {
 
     public static class FileData {
         public String FileID; // Changed to String to store binary string
+        public int FileIDLength; // Added to store integer value of FileID
         public String AlgorithmenType;
         public String OriginalFilePath;
         public String EncryptedFilePath;
         public String DecryptedFilePath;
         public String Key; // Changed to String to store binary string
+        public int KeyLength; // Added to store integer value of Key
         public String Iv; // Changed to String to store binary string
+        public int IvLength; // Added to store integer value of Iv
     }
 
     public void connect() {
@@ -38,12 +41,15 @@ public class Database {
     private void initializeTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS file_data (" +
                 "FileID TEXT PRIMARY KEY, " +
+                "FileIDLength INTEGER, " +
                 "AlgorithmenType TEXT, " +
                 "OriginalFilePath TEXT, " +
                 "EncryptedFilePath TEXT, " +
                 "DecryptedFilePath TEXT, " +
                 "Key TEXT, " +
-                "Iv TEXT)";
+                "KeyLength INTEGER, " +
+                "Iv TEXT, "+
+                "IvLength INTEGER)";
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         }
@@ -60,15 +66,18 @@ public class Database {
     }
 
     public void insertEntry(FileData data) {
-        String sql = "INSERT OR REPLACE INTO file_data (FileID, AlgorithmenType, OriginalFilePath, EncryptedFilePath, DecryptedFilePath, Key, Iv) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT OR REPLACE INTO file_data (FileID, FileIDLength, AlgorithmenType, OriginalFilePath, EncryptedFilePath, DecryptedFilePath, Key, KeyLength, Iv, IvLength) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, data.FileID);
-            pstmt.setString(2, data.AlgorithmenType);
-            pstmt.setString(3, data.OriginalFilePath);
-            pstmt.setString(4, data.EncryptedFilePath);
-            pstmt.setString(5, data.DecryptedFilePath);
-            pstmt.setString(6, data.Key);
-            pstmt.setString(7, data.Iv);
+            pstmt.setInt(2, data.FileIDLength);
+            pstmt.setString(3, data.AlgorithmenType);
+            pstmt.setString(4, data.OriginalFilePath);
+            pstmt.setString(5, data.EncryptedFilePath);
+            pstmt.setString(6, data.DecryptedFilePath);
+            pstmt.setString(7, data.Key);
+            pstmt.setInt(8, data.KeyLength);
+            pstmt.setString(9, data.Iv);
+            pstmt.setInt(10, data.IvLength);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,12 +107,15 @@ public class Database {
                 if (rs.next()) {
                     FileData data = new FileData();
                     data.FileID = rs.getString("FileID");
+                    data.FileIDLength = rs.getInt("FileIDLength");
                     data.AlgorithmenType = rs.getString("AlgorithmenType");
                     data.OriginalFilePath = rs.getString("OriginalFilePath");
                     data.EncryptedFilePath = rs.getString("EncryptedFilePath");
                     data.DecryptedFilePath = rs.getString("DecryptedFilePath");
                     data.Key = rs.getString("Key");
+                    data.KeyLength = rs.getInt("KeyLength");
                     data.Iv = rs.getString("Iv");
+                    data.IvLength = rs.getInt("IvLength");
                     return data;
                 }
             }
@@ -115,12 +127,13 @@ public class Database {
 
     public List<FileData> getAllFileIDsAndEncryptedPaths() {
         List<FileData> fileList = new ArrayList<>();
-        String sql = "SELECT FileID, EncryptedFilePath FROM file_data";
+        String sql = "SELECT FileID, FileIDLength, EncryptedFilePath FROM file_data";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 FileData data = new FileData();
                 data.FileID = rs.getString("FileID");
+                data.FileIDLength = rs.getInt("FileIDLength");
                 data.EncryptedFilePath = rs.getString("EncryptedFilePath");
                 fileList.add(data);
             }

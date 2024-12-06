@@ -6,8 +6,7 @@
 #define FILEVAULTROOT_FILEMARK_H
 
 #include "../../CppFileVaultMain/src/GlobalDefinitions.h"
-
-using globalDefinitions::FileData;
+#include "../../shared/FileData.h"
 
 #ifdef FILEMARKLIB_EXPORTS
 #define FILEMARKLIB_API __declspec(dllexport)
@@ -19,8 +18,8 @@ const bool debugPrint = false;
 
 extern "C" {
 [[maybe_unused]] FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t * filePath, unsigned char FileID[64]);
-[[maybe_unused]] FILEMARKLIB_API void markFile(const struct FileData *fileData);
-[[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData);
+[[maybe_unused]] FILEMARKLIB_API void markFile(const FileData *fileData);
+[[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const FileData *fileData);
 }
 
 #endif //FILEVAULTROOT_FILEMARKDLL_H

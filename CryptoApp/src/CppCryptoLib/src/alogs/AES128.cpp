@@ -5,11 +5,11 @@
 #include "AES128.h"
 
 bool AES128::encryptFile(const FileData *fileData) {
-  std::vector<unsigned char> keyVec(fileData->Key, fileData->Key + fileData->keyLength);
-  std::vector<unsigned char> ivVec(fileData->Iv, fileData->Iv + fileData->ivLength);
+  std::vector<unsigned char> keyVec(fileData->getKey(), fileData->getKey() + fileData->getKeyLength());
+  std::vector<unsigned char> ivVec(fileData->getIv(), fileData->getIv() + fileData->getIvLength());
 
-  fs::path originalFile(fileData->OriginalFilePath);
-  fs::path encryptedFile(fileData->EncryptedFilePath);
+  fs::path originalFile(fileData->getOriginalFilePath());
+  fs::path encryptedFile(fileData->getEncryptedFilePath());
 
   // Create directories if they do not exist
   fs::create_directories(encryptedFile.parent_path());
@@ -95,11 +95,11 @@ bool AES128::decryptFile(const FileData *fileData) {
     return false;
   }
 
-  std::vector<unsigned char> keyVec(fileData->Key, fileData->Key + fileData->keyLength);
-  std::vector<unsigned char> ivVec(fileData->Iv, fileData->Iv + fileData->ivLength);
+  std::vector<unsigned char> keyVec(fileData->getKey(), fileData->getKey() + fileData->getKeyLength());
+  std::vector<unsigned char> ivVec(fileData->getIv(), fileData->getIv() + fileData->getIvLength());
 
-  fs::path encryptedFile(fileData->EncryptedFilePath);
-  fs::path decryptedFile(fileData->DecryptedFilePath);
+  fs::path encryptedFile(fileData->getEncryptedFilePath());
+  fs::path decryptedFile(fileData->getDecryptedFilePath());
 
   // Create directories if they do not exist
   fs::create_directories(decryptedFile.parent_path());

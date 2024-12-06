@@ -36,7 +36,6 @@ FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType,
     cryptoDll.GenerateKeyIv(keyLength, KEY, IV);
   }
 
-  int fileIDLength = 64; // SHA512 hash length
   unsigned char fileID[64];
   cryptoDll.GenerateFileID(originalFilePath.wstring().c_str(), fileID);
 
@@ -46,21 +45,21 @@ FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType,
 
   // Allocate memory for struct
   FileData fileData;
-  fileData.FileID = new unsigned char[fileIDLength];
-  std::memcpy(fileData.FileID, fileID, fileIDLength);
-  fileData.fileIDLength = fileIDLength;
-  fileData.AlgorithmenType = ConvertWStringToWChar(algorithmenTypeStr);
-  fileData.OriginalFilePath = ConvertWStringToWChar(originalFilePath.wstring());
-  fileData.EncryptedFilePath = ConvertWStringToWChar(encryptedFilePath);
-  fileData.DecryptedFilePath = ConvertWStringToWChar(originalFilePath.wstring());
-  fileData.Key = new unsigned char[keyLength];
-  std::memcpy(fileData.Key, KEY, keyLength);
-  fileData.keyLength = keyLength;
-  fileData.Iv = new unsigned char[16];
-  std::memcpy(fileData.Iv, IV, 16);
-  fileData.ivLength = 16;
+  fileData.setFileId(new unsigned char[64]);
+  std::memcpy(fileData.getFileId(), fileID, 64);
+  fileData.setFileIdLength(64);
+  fileData.setAlgorithmenType(ConvertWStringToWChar(algorithmenTypeStr));
+  fileData.setOriginalFilePath(ConvertWStringToWChar(originalFilePath.wstring()));
+  fileData.setEncryptedFilePath(ConvertWStringToWChar(encryptedFilePath));
+  fileData.setDecryptedFilePath(ConvertWStringToWChar(originalFilePath.wstring()));
+  fileData.setKey(new unsigned char[64]);
+  std::memcpy(fileData.getKey(), KEY, keyLength);
+  fileData.setKeyLength(keyLength);
+  fileData.setIv(new unsigned char[16]);
+  std::memcpy(fileData.getIv(), IV, 16);
+  fileData.setIvLength(16);
 
-  globalDefinitions::debugFileData(fileData);
+  fileData.debugFileData();
 
   return fileData;
 }

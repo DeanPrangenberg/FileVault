@@ -17,6 +17,8 @@ add_library(CppFileMarkLib SHARED
 		src/FileMark.h
 		../CppFileVaultMain/src/GlobalDefinitions.h
 		../CppFileVaultMain/src/GlobalDefinitions.cpp
+		../shared/FileData.cpp
+		../shared/FileData.h
 )
 
 # Compile options

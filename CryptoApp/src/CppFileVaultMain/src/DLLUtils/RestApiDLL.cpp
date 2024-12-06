@@ -1,4 +1,5 @@
 #include "RestApiDLL.h"
+#include "../../../shared/FileData.h"
 #include <windows.h>
 
 bool RestApiDLL::InsertEntry(const FileData &data) {
@@ -7,8 +8,6 @@ bool RestApiDLL::InsertEntry(const FileData &data) {
     logError("RestApiDLL-Insert: Failed to load DLL");
     return false;
   }
-
-  if (printConverterDebug) globalDefinitions::debugFileData(data);
 
   auto func = (InsertEntryFunc) GetProcAddress(hDll, "InsertEntry");
   if (!func) {
@@ -49,7 +48,7 @@ bool RestApiDLL::DeleteEntry(const FileData &data) {
 
   try {
     func(&dbStruct, &result);
-  } catch (const std::exception& e) {
+  } catch (const std::exception &e) {
     logError(std::string("RestApiDLL-Delete: Exception caught: ") + e.what());
     result = false;
   }
@@ -65,6 +64,7 @@ bool RestApiDLL::DeleteEntry(const FileData &data) {
 }
 
 bool RestApiDLL::SearchEntry(FileData &data) {
+  if (printDebug) std::cout << "RestApiDLL-Search: Searching for FileData struct in the database" << std::endl;
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
     logError("RestApiDLL-Search: Failed to load DLL");
@@ -78,10 +78,9 @@ bool RestApiDLL::SearchEntry(FileData &data) {
     return false;
   }
 
-  if (printConverterDebug) globalDefinitions::debugFileData(data);
-
   bool result = false;
   auto dbStruct = convertFileDataForSearch(data);
+  if (printDebug) std::cout << "RestApiDLL-Search: Translated FileData struct for search" << std::endl;
 
   func(&dbStruct, &result);
   if (!result) {
@@ -94,11 +93,11 @@ bool RestApiDLL::SearchEntry(FileData &data) {
   if (printConverterDebug) debugFileDataDB(dbStruct);
   if (printDebug) std::cout << "RestApiDLL-Search: Converting FileDataDB struct to FileData struct" << std::endl;
 
-  globalDefinitions::cleanupFileData(data);
+  data.cleanupFileData();
 
   data = convertDBStructToFileData(dbStruct);
 
-  if (printConverterDebug) globalDefinitions::debugFileData(data);
+  if (printConverterDebug) data.debugFileData();
 
   unloadDll(hDll);
   return true;
@@ -168,111 +167,81 @@ std::vector<FileData> RestApiDLL::GetAllFileIDsAndEncryptedPaths() {
   return FileDataList;
 }
 
-wchar_t *RestApiDLL::convertToWChar(const unsigned char *input, size_t size) {
-  if (input == nullptr || size == 0) {
-    std::cerr << "convertToWChar: Input is null or size is zero" << std::endl;
-    return nullptr;
-  }
 
-  // Allocate memory for the wchar_t array
-  auto result = new wchar_t[size + 1]; // +1 for null terminator
-
-  // Use memcpy to copy the data
-  std::memcpy(result, input, size * sizeof(unsigned char));
-
-  // Add the null terminator
-  result[size] = L'\0';
-
-  return result;
-}
-
-unsigned char* RestApiDLL::convertToUnsignedChar(const wchar_t* input, size_t size) {
-  if (input == nullptr || size == 0) {
-    std::cerr << "convertToUnsignedChar: Input ist null oder Größe ist null" << std::endl;
-    return nullptr;
-  }
-
-  // Berechne die Größe in Bytes
-  size_t byteSize = size * sizeof(wchar_t);
-
-  // Allokiere Speicher für das Ergebnis
-  unsigned char* result = new (std::nothrow) unsigned char[byteSize];
-  if (result == nullptr) {
-    std::cerr << "convertToUnsignedChar: Speicherallokation fehlgeschlagen" << std::endl;
-    return nullptr;
-  }
-
-  // Kopiere die rohen Binärdaten
-  std::memcpy(result, input, byteSize);
-
-  return result;
-}
-
-wchar_t *RestApiDLL::convertToHexWChar(const unsigned char *input, size_t size) {
+wchar_t* RestApiDLL::convertToHexWChar(const unsigned char* input, size_t size) {
   if (input == nullptr || size == 0) {
     std::cerr << "convertToHexWChar: Input is null or size is zero" << std::endl;
     return nullptr;
   }
 
+  // Stream für die Hex-Darstellung
   std::wstringstream wss;
   for (size_t i = 0; i < size; ++i) {
     wss << std::setw(2) << std::setfill(L'0') << std::hex << static_cast<int>(input[i]);
   }
 
+  // Hex-Darstellung als wstring speichern
   std::wstring hexStr = wss.str();
-  wchar_t *result = new wchar_t[hexStr.size() + 1];
-  std::wmemcpy(result, hexStr.c_str(), hexStr.size() + 1);
+
+  // Speicher für wchar_t* (inklusive Null-Terminierung)
+  wchar_t* result = new wchar_t[hexStr.size() + 1];
+  std::wmemcpy(result, hexStr.c_str(), hexStr.size() + 1);  // Null-Terminierung beachten
 
   return result;
 }
 
-unsigned char* RestApiDLL::convertFromHexWChar(const wchar_t* input, const size_t size) {
-  if (input == nullptr || size == 0 || size % 4 != 0) {
-    std::wcerr << L"Invalid input" << std::endl;
+
+
+unsigned char* RestApiDLL::convertFromHexWChar(const wchar_t* input, size_t& size) {
+  if (input == nullptr) {
+    std::cerr << "convertFromHexWChar: Input is null" << std::endl;
+    size = 0;
     return nullptr;
   }
 
-  size_t outputSize = size / 2;
-  unsigned char* result = new unsigned char[outputSize];
+  size_t len = std::wcslen(input);
+  if (len % 2 != 0) {
+    std::cerr << "convertFromHexWChar: Invalid hex string length" << std::endl;
+    size = 0;
+    return nullptr;
+  }
 
-  for (size_t i = 0; i < outputSize; ++i) {
-    wchar_t hexPair[3] = {input[2*i], input[2*i+1], L'\0'};
-    result[i] = (unsigned char)std::wcstoul(hexPair, nullptr, 16);
+  size = len / 2;  // Jede zwei Hex-Ziffern entsprechen einem Byte
+  unsigned char* result = new unsigned char[size];
+
+  for (size_t i = 0; i < size; ++i) {
+    unsigned int byte;
+    std::swscanf(input + 2 * i, L"%2x", &byte);
+    result[i] = static_cast<unsigned char>(byte);
   }
 
   return result;
 }
 
-RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &data) {
-  RestApiDLL::FileDataDB dbStruct;
 
-  dbStruct.FileID = convertToHexWChar(data.FileID, data.fileIDLength);
-  dbStruct.AlgorithmenType = data.AlgorithmenType;
-  dbStruct.OriginalFilePath = data.OriginalFilePath;
-  dbStruct.EncryptedFilePath = data.EncryptedFilePath;
-  dbStruct.DecryptedFilePath = data.DecryptedFilePath;
-  dbStruct.Key = convertToHexWChar(data.Key, data.keyLength);
-  dbStruct.Iv = convertToHexWChar(data.Iv, data.ivLength);
+RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData& data) {
+  RestApiDLL::FileDataDB dbStruct{};
 
-  if (dbStruct.FileID == nullptr
-      || dbStruct.AlgorithmenType == nullptr
-      || dbStruct.EncryptedFilePath == nullptr
-      || dbStruct.OriginalFilePath == nullptr
-      || dbStruct.DecryptedFilePath == nullptr
-      || dbStruct.Key == nullptr
-      || dbStruct.Iv == nullptr) {
-    logError("Failed to convert FileData struct to FileDataDB struct");
-  } else {
-    if (printConverterDebug) debugFileDataDB(dbStruct);
-  }
+  dbStruct.FileID = convertToHexWChar(data.getFileId(), data.getFileIdLength());
+  dbStruct.FileIDLength = data.getFileIdLength();
+  dbStruct.AlgorithmenType = data.getAlgorithmenType();
+  dbStruct.OriginalFilePath = data.getOriginalFilePath();
+  dbStruct.EncryptedFilePath = data.getEncryptedFilePath();
+  dbStruct.DecryptedFilePath = data.getDecryptedFilePath();
+  dbStruct.Key = convertToHexWChar(data.getKey(), data.getKeyLength());
+  dbStruct.KeyLength = data.getKeyLength();
+  dbStruct.Iv = convertToHexWChar(data.getIv(), data.getIvLength());
+  dbStruct.IvLength = data.getIvLength();
 
   return dbStruct;
 }
 
-RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data) {
+
+RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData& data) {
   RestApiDLL::FileDataDB dbStruct{};
 
-  dbStruct.FileID = convertToHexWChar(data.FileID, data.fileIDLength);
+  // Konvertiere nur FileID
+  dbStruct.FileID = convertToHexWChar(data.getFileId(), data.getFileIdLength());
   dbStruct.AlgorithmenType = nullptr;
   dbStruct.OriginalFilePath = nullptr;
   dbStruct.EncryptedFilePath = nullptr;
@@ -280,102 +249,115 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data
   dbStruct.Key = nullptr;
   dbStruct.Iv = nullptr;
 
-  if (dbStruct.FileID == nullptr) {
-    logError("Failed to convert FileData struct to FileDataDB struct");
-  }
-  if (printConverterDebug) debugFileDataDB(dbStruct);
   return dbStruct;
 }
 
-FileData RestApiDLL::convertDBStructToFileData(const FileDataDB &data) {
-  FileData fileData;
-  fileData.FileID = convertFromHexWChar(data.FileID, std::wcslen(data.FileID));
-  fileData.fileIDLength = std::wcslen(data.FileID) / 2;
-  fileData.EncryptedFilePath = data.EncryptedFilePath;
-  fileData.OriginalFilePath = data.OriginalFilePath;
-  fileData.AlgorithmenType = data.AlgorithmenType;
-  fileData.DecryptedFilePath = data.DecryptedFilePath;
-  fileData.Key = convertFromHexWChar(data.Key, std::wcslen(data.Key));
-  fileData.keyLength = std::wcslen(data.Key) / 2;
-  fileData.Iv = convertFromHexWChar(data.Iv, std::wcslen(data.Iv));
-  fileData.ivLength = std::wcslen(data.Iv) / 2;
+FileData RestApiDLL::convertDBStructToFileData(const FileDataDB& data) {
+  FileData fileData{};
+
+  // Konvertiere FileID und setze die Länge
+  size_t fileIdLength;
+  fileData.setFileId(convertFromHexWChar(data.FileID, fileIdLength));
+  fileData.setFileIdLength(fileIdLength);
+
+  // Konvertiere Key und setze die Länge
+  size_t keyLength;
+  fileData.setKey(convertFromHexWChar(data.Key, keyLength));
+  fileData.setKeyLength(keyLength);
+
+  // Konvertiere IV und setze die Länge
+  size_t ivLength;
+  fileData.setIv(convertFromHexWChar(data.Iv, ivLength));
+  fileData.setIvLength(ivLength);
+
+  // Setze die Dateipfade und den Algorithmus
+  fileData.setEncryptedFilePath(data.EncryptedFilePath);
+  fileData.setOriginalFilePath(data.OriginalFilePath);
+  fileData.setAlgorithmenType(data.AlgorithmenType);
+  fileData.setDecryptedFilePath(data.DecryptedFilePath);
 
   return fileData;
 }
 
 void RestApiDLL::debugFileDataDB(const FileDataDB &data) {
   std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-  std::wcout << L"FileDataDB: " << std::endl;
+  std::wcout << L"+ FileDataDB: " << std::endl;
 
   if (data.FileID != nullptr) {
     try {
-      std::wcout << L"FileID: " << data.FileID << std::endl;
+      std::wcout << L"+ FileID: " << data.FileID << std::endl;
     } catch (const std::exception &e) {
-      std::wcerr << L"Error accessing FileID: " << e.what() << std::endl;
+      std::wcerr << L"+ Error accessing FileID: " << e.what() << std::endl;
     }
   } else {
-    std::wcout << L"FileID: null" << std::endl;
+    std::wcout << L"+ FileID: null" << std::endl;
   }
+
+  std::cout <<  "+ FileIDLength: " << data.FileIDLength << std::endl;
 
   if (data.AlgorithmenType != nullptr) {
     try {
-      std::wcout << L"AlgorithmenType: " << data.AlgorithmenType << std::endl;
+      std::wcout << L"+ AlgorithmenType: " << data.AlgorithmenType << std::endl;
     } catch (const std::exception &e) {
-      std::wcerr << L"Error accessing AlgorithmenType: " << e.what() << std::endl;
+      std::wcerr << L"+ Error accessing AlgorithmenType: " << e.what() << std::endl;
     }
   } else {
-    std::wcout << L"AlgorithmenType: null" << std::endl;
+    std::wcout << L"+ AlgorithmenType: null" << std::endl;
   }
 
   if (data.OriginalFilePath != nullptr) {
     try {
-      std::wcout << L"OriginalFilePath: " << data.OriginalFilePath << std::endl;
+      std::wcout << L"+ OriginalFilePath: " << data.OriginalFilePath << std::endl;
     } catch (const std::exception &e) {
-      std::wcerr << L"Error accessing OriginalFilePath: " << e.what() << std::endl;
+      std::wcerr << L"+ Error accessing OriginalFilePath: " << e.what() << std::endl;
     }
   } else {
-    std::wcout << L"OriginalFilePath: null" << std::endl;
+    std::wcout << L"+ OriginalFilePath: null" << std::endl;
   }
 
   if (data.EncryptedFilePath != nullptr) {
     try {
-      std::wcout << L"EncryptedFilePath: " << data.EncryptedFilePath << std::endl;
+      std::wcout << L"+ EncryptedFilePath: " << data.EncryptedFilePath << std::endl;
     } catch (const std::exception &e) {
-      std::wcerr << L"Error accessing EncryptedFilePath: " << e.what() << std::endl;
+      std::wcerr << L"+ Error accessing EncryptedFilePath: " << e.what() << std::endl;
     }
   } else {
-    std::wcout << L"EncryptedFilePath: null" << std::endl;
+    std::wcout << L"+ EncryptedFilePath: null" << std::endl;
   }
 
   if (data.DecryptedFilePath != nullptr) {
     try {
-      std::wcout << L"DecryptedFilePath: " << data.DecryptedFilePath << std::endl;
+      std::wcout << L"+ DecryptedFilePath: " << data.DecryptedFilePath << std::endl;
     } catch (const std::exception &e) {
-      std::wcerr << L"Error accessing DecryptedFilePath: " << e.what() << std::endl;
+      std::wcerr << L"+ Error accessing DecryptedFilePath: " << e.what() << std::endl;
     }
   } else {
-    std::wcout << L"DecryptedFilePath: null" << std::endl;
+    std::wcout << L"+ DecryptedFilePath: null" << std::endl;
   }
 
   if (data.Key != nullptr) {
     try {
-      std::wcout << L"Key: " << data.Key << std::endl;
+      std::wcout << L"+ Key: " << data.Key << std::endl;
     } catch (const std::exception &e) {
-      std::wcerr << L"Error accessing Key: " << e.what() << std::endl;
+      std::wcerr << L"+ Error accessing Key: " << e.what() << std::endl;
     }
   } else {
-    std::wcout << L"Key: null" << std::endl;
+    std::wcout << L"+ Key: null" << std::endl;
   }
+
+  std::cout << "+ KeyLength: " << data.KeyLength << std::endl;
 
   if (data.Iv != nullptr) {
     try {
-      std::wcout << L"Iv: " << data.Iv << std::endl;
+      std::wcout << L"+ Iv: " << data.Iv << std::endl;
     } catch (const std::exception &e) {
-      std::wcerr << L"Error accessing Iv: " << e.what() << std::endl;
+      std::wcerr << L"+ Error accessing Iv: " << e.what() << std::endl;
     }
   } else {
-    std::wcout << L"Iv: null" << std::endl;
+    std::wcout << L"+ Iv: null" << std::endl;
   }
+
+  std::cout << "+ IvLength: " << data.IvLength << std::endl;
 
   std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 }

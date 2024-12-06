@@ -19,9 +19,10 @@ include_directories(
     src/logic
     src/gui
     src/DLLUtils
-    ${Boost_INCLUDE_DIRS}
-    ${OPENSSL_INCLUDE_DIR}
 )
+
+# Enable debugging information
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
 add_executable(CppFileVaultMain
     src/main.cpp
@@ -40,10 +41,10 @@ add_executable(CppFileVaultMain
     src/DLLUtils/CryptoDLL.h
     src/DLLUtils/FileMarkDLL.cpp
     src/DLLUtils/FileMarkDLL.h
-    src/DLLUtils/MultiCryptoDLL.cpp
-    src/DLLUtils/MultiCryptoDLL.h
     src/DLLUtils/FileScannerDLL.cpp
     src/DLLUtils/FileScannerDLL.h
+    ../shared/FileData.cpp
+    ../shared/FileData.h
     # Add other source files here
 )
 
@@ -61,7 +62,7 @@ target_link_libraries(CppFileVaultMain PRIVATE
 )
 
 if (MSVC)
- target_compile_options(CppFileVaultMain PRIVATE /W4)
+ target_compile_options(CppFileVaultMain PRIVATE /W4 /GS)
 else ()
  target_compile_options(CppFileVaultMain PRIVATE -Wall -Wextra)
 endif ()

@@ -4,9 +4,15 @@
 #include <string>
 #include <vector>
 #include <filesystem>
-
 #include <windows.h>
-#include "../../../CppFileVaultMain/src/GlobalDefinitions.h"
+#include <array>
+#include <iostream>
+#include <random>
+#include "../../../shared/FileData.h"
+#include "../alogs/AES128.h"
+#include "../alogs/AES256.h"
+#include "../alogs/KeyGen.h"
+#include "../alogs/SHA512.h"
 
 #ifdef CRYPTOLIBRARY_EXPORTS
 #define CRYPTOLIB_API __declspec(dllexport)
@@ -15,13 +21,12 @@
 #endif
 
 namespace fs = std::filesystem;
-using globalDefinitions::FileData;
 
 // Wrapper functions for C compatibility
 extern "C" {
-[[maybe_unused]] CRYPTOLIB_API bool EncryptFileWrapper(const struct FileData *fileData);
+[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(const FileData *fileData, const int numFiles);
 
-[[maybe_unused]] CRYPTOLIB_API bool DecryptFileWrapper(const struct FileData *fileData);
+[[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, const int numFiles);
 
 [[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, unsigned char *key, unsigned char *iv);
 
