@@ -57,6 +57,16 @@ bool HelperUtils::UnmarkFile(const class FileData *fileData) {
   return result;
 }
 
+std::vector<unsigned char> HelperUtils::getCurrentTime() {
+  auto now = std::chrono::system_clock::now();
+  auto duration = now.time_since_epoch();
+  auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+
+  std::string ms_string = std::to_string(milliseconds);
+
+  return std::vector<unsigned char>(ms_string.begin(), ms_string.end());
+}
+
 void HelperUtils::logError(const std::string &message) {
   std::cerr << message << std::endl;
 }

@@ -69,14 +69,6 @@ void FileData::cleanupFileData() {
   std::cout << "$ Global-cleanupFileData: Cleaning up FileData" << std::endl;
   std::cout << "$ Global-cleanupFileData: Cleaning up FileID" << std::endl;
   safeDeleteUCharArray(this->FileID, this->fileIDLength);
-  std::cout << "$ Global-cleanupFileData: Cleaning up AlgorithmenType" << std::endl;
-  safeDeleteWChar(this->AlgorithmenType);
-  std::cout << "$ Global-cleanupFileData: Cleaning up OriginalFilePath" << std::endl;
-  safeDeleteWChar(this->OriginalFilePath);
-  std::cout << "$ Global-cleanupFileData: Cleaning up EncryptedFilePath" << std::endl;
-  safeDeleteWChar(this->EncryptedFilePath);
-  std::cout << "$ Global-cleanupFileData: Cleaning up DecryptedFilePath" << std::endl;
-  safeDeleteWChar(this->DecryptedFilePath);
   std::cout << "$ Global-cleanupFileData: Cleaning up Key" << std::endl;
   safeDeleteUCharArray(this->Key, this->keyLength);
   std::cout << "$ Global-cleanupFileData: Cleaning up Iv" << std::endl;

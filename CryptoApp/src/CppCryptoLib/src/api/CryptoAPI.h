@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <array>
 #include <iostream>
-#include <random>
+#include <chrono>
 #include "../../../shared/FileData.h"
 #include "../alogs/AES128.h"
 #include "../alogs/AES256.h"

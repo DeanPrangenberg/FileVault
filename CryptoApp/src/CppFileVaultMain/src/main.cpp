@@ -15,7 +15,7 @@ bool printDebug = true;
 bool printConverterDebug = true;
 
 #define pathToCrypt "S:\\clips\\cut"
-#define dockerHash "99081b4ebcbdde16ab0ce20bf701d7461622894d07dac3b0c938b744f865e13c"
+#define dockerHash "ff9803838f89fa8d51cb7100c2e8406af16a3c3ee0d6402f91b7774c35b8cdea"
 
 void startDBContainer() {
   std::string command = "docker start " + std::string(dockerHash);
@@ -112,7 +112,8 @@ void repairAndReloadFiles(FileScannerDLL &fileScannerDll, FileMarkDLL &fileMarkD
     if (fileMarkDll.ExtractFileIDFromFile(partialStruct.getEncryptedFilePath(), partialStruct.getFileId())) {
       if (printDebug)
         std::cout << "++Extracted FileID: "
-                  << globalDefinitions::toHexString(partialStruct.getFileId(), partialStruct.getFileIdLength()) << " from: "
+                  << globalDefinitions::toHexString(partialStruct.getFileId(), partialStruct.getFileIdLength())
+                  << " from: "
                   << filePath << "++" << std::endl;
     } else {
       std::wcout << L"++Failed to extract File ID from: " << filePath << "++" << std::endl;
@@ -146,17 +147,14 @@ void decryptAndDeleteFiles(CryptoDLL &cryptoDll, RestApiDLL &restApiDll, std::ve
   for (auto &fileData: fileDataVec) {
     if (restApiDll.DeleteEntry(fileData)) {
       std::wcout << L"++Deleted struct for file: " << fileData.getOriginalFilePath() << "++" << std::endl;
+      std::wcout << L"Try deleting file: " << fileData.getDecryptedFilePath() << std::endl;
+      fileData.cleanupFileData();
     } else {
       std::wcout << L"++Failed to delete struct for file: " << fileData.getOriginalFilePath() << "++" << std::endl;
     }
-
-    try {
-      std::wcout << L"Try deleting file: " << fileData.getDecryptedFilePath() << std::endl;
-      fileData.cleanupFileData();
-    } catch (const std::exception &e) {
-      std::wcerr << L"Failed to clean fileData: " << L" -> " << e.what() << std::endl;
-    }
   }
+  std::cout << "###############################################################################################"
+            << std::endl;
 }
 
 std::vector<int> testRun() {
@@ -177,30 +175,32 @@ std::vector<int> testRun() {
 
   result.push_back(encryptedFile.size());
   result.push_back(decryptedFile.size());
+
+  return result;
 }
 
 int main() {
-  int testRuns = 10;
+  int testRuns = 2;
   int testedFileCount = 0;
   int failedFileCount = 0;
 
+  startDBContainer();
   for (int i = 0; i < testRuns; ++i) {
-    startDBContainer();
     system(".\\RustFileCopy.exe");
     auto result = testRun();
-    testedFileCount += result[0] + result[1];
+    testedFileCount += (result[0] + result[1]);
     failedFileCount += result[1];
-    stopDBContainer();
+    std::cout << "Test run: " << i + 1 << " completed" << std::endl;
+    std::cout << "Tested files this run: " << result[0] + result[1] << std::endl;
+    std::cout << "Failed files this run: " << result[1] << std::endl;
   }
-  std::cout << "###############################################################################################" << std::endl;
-  std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-  std::cout << "###############################################################################################" << std::endl;
-  std::cout << std::endl;
-  std::cout << "Tested " << testedFileCount << " files with " << failedFileCount << " failed files" << std::endl;
-  std::cout << std::endl;
-  std::cout << "###############################################################################################" << std::endl;
-  std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-  std::cout << "###############################################################################################" << std::endl;
 
+  std::cout.flush();
+  std::cout << "Test on: " << static_cast<int>(testRuns) << " runs" << std::endl;
+  std::cout << "Total files: " << testedFileCount << std::endl;
+  std::cout << "Failed files: " << failedFileCount << std::endl;
+  std::cout << "Success rate: " << (static_cast<double>(testedFileCount - failedFileCount) / testedFileCount) * 100 << "%" << std::endl;
+
+  stopDBContainer();
   return 0;
 }

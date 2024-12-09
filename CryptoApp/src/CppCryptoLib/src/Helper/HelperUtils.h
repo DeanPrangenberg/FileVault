@@ -21,6 +21,7 @@ public:
   static void deleteFile(const fs::path &filePath);
   static void MarkFile(const class FileData *fileData);
   static bool UnmarkFile(const class FileData *fileData);
+  static std::vector<unsigned char> getCurrentTime();
 private:
   typedef void (*MarkFileFunc)(const class FileData *);
   typedef bool (*UnmarkFileFunc)(const class FileData *);

@@ -83,6 +83,9 @@ bool RestApiDLL::SearchEntry(FileData &data) {
   if (printDebug) std::cout << "RestApiDLL-Search: Translated FileData struct for search" << std::endl;
 
   func(&dbStruct, &result);
+
+  std::cout.flush();
+
   if (!result) {
     logError("RestApiDLL-Search: Failed to get FileData struct from the database");
     unloadDll(hDll);
@@ -93,7 +96,7 @@ bool RestApiDLL::SearchEntry(FileData &data) {
   if (printConverterDebug) debugFileDataDB(dbStruct);
   if (printDebug) std::cout << "RestApiDLL-Search: Converting FileDataDB struct to FileData struct" << std::endl;
 
-  data.cleanupFileData();
+  std::cout << "SearchRestAPI: FileIDLength -> " << dbStruct.FileIDLength << "; KeyLength -> " << dbStruct.KeyLength << "; IvLength -> " << dbStruct.IvLength << std::endl;
 
   data = convertDBStructToFileData(dbStruct);
 
@@ -242,12 +245,15 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData& data
 
   // Konvertiere nur FileID
   dbStruct.FileID = convertToHexWChar(data.getFileId(), data.getFileIdLength());
+  dbStruct.FileIDLength = 0;
   dbStruct.AlgorithmenType = nullptr;
   dbStruct.OriginalFilePath = nullptr;
   dbStruct.EncryptedFilePath = nullptr;
   dbStruct.DecryptedFilePath = nullptr;
   dbStruct.Key = nullptr;
+  dbStruct.KeyLength = 0;
   dbStruct.Iv = nullptr;
+  dbStruct.IvLength = 0;
 
   return dbStruct;
 }
@@ -256,19 +262,29 @@ FileData RestApiDLL::convertDBStructToFileData(const FileDataDB& data) {
   FileData fileData{};
 
   // Konvertiere FileID und setze die Länge
-  size_t fileIdLength;
-  fileData.setFileId(convertFromHexWChar(data.FileID, fileIdLength));
-  fileData.setFileIdLength(fileIdLength);
+  size_t fileIdLength = 0;
+  auto fileId = convertFromHexWChar(data.FileID, fileIdLength);
+  fileData.setFileId(fileId);
+  fileData.setFileIdLength(data.FileIDLength);
+
+  std::cout << "fileIdLength -> " << fileData.getFileIdLength() << std::endl;
+  std::cout << "FileId Len " << data.FileIDLength << " -> " << fileIdLength << " -> " << fileData.getFileIdLength() << std::endl;
 
   // Konvertiere Key und setze die Länge
-  size_t keyLength;
-  fileData.setKey(convertFromHexWChar(data.Key, keyLength));
-  fileData.setKeyLength(keyLength);
+  size_t keyLength = 0;
+  auto key = convertFromHexWChar(data.Key, keyLength);
+  fileData.setKey(key);
+  fileData.setKeyLength(data.KeyLength);
+
+  std::cout << "Key Len " << data.KeyLength << " -> " << keyLength << " -> " << fileData.getKeyLength() << std::endl;
 
   // Konvertiere IV und setze die Länge
-  size_t ivLength;
-  fileData.setIv(convertFromHexWChar(data.Iv, ivLength));
-  fileData.setIvLength(ivLength);
+  size_t ivLength = 0;
+  auto iv = convertFromHexWChar(data.Iv, ivLength);
+  fileData.setIv(iv);
+  fileData.setIvLength(data.IvLength);
+
+  std::cout << "Iv Len " << data.IvLength << " -> " << ivLength << " -> " << fileData.getIvLength() << std::endl;
 
   // Setze die Dateipfade und den Algorithmus
   fileData.setEncryptedFilePath(data.EncryptedFilePath);
@@ -281,6 +297,7 @@ FileData RestApiDLL::convertDBStructToFileData(const FileDataDB& data) {
 
 void RestApiDLL::debugFileDataDB(const FileDataDB &data) {
   std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+  std::cout << "SearchRestAPI: FileIDLength -> " << data.FileIDLength << "; KeyLength -> " << data.KeyLength << "; IvLength -> " << data.IvLength << std::endl;
   std::wcout << L"+ FileDataDB: " << std::endl;
 
   if (data.FileID != nullptr) {
