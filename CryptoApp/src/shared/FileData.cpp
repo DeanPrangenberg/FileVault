@@ -69,6 +69,10 @@ void FileData::cleanupFileData() {
   std::cout << "$ Global-cleanupFileData: Cleaning up FileData" << std::endl;
   std::cout << "$ Global-cleanupFileData: Cleaning up FileID" << std::endl;
   safeDeleteUCharArray(this->FileID, this->fileIDLength);
+  std::cout << "$ Global-cleanupFileData: Cleaning up EncryptionID" << std::endl;
+  safeDeleteUCharArray(this->EncryptionID, this->EncryptionIDLength);
+  std::cout << "$ Global-cleanupFileData: Cleaning up LastUpdateID" << std::endl;
+  safeDeleteUCharArray(this->LastUpdateID, this->LastUpdateIDLength);
   std::cout << "$ Global-cleanupFileData: Cleaning up Key" << std::endl;
   safeDeleteUCharArray(this->Key, this->keyLength);
   std::cout << "$ Global-cleanupFileData: Cleaning up Iv" << std::endl;
@@ -111,11 +115,15 @@ void FileData::debugFileData() {
   std::cout << "Global-debugFileData: Converting FileData to hex strings" << std::endl;
 
   std::string fileIDstr;
+  std::string encryptionIDstr;
+  std::string lastUpdateIDstr;
   std::string keyStr;
   std::string ivStr;
 
   try {
     fileIDstr = toHexString(this->FileID, this->fileIDLength);
+    encryptionIDstr = toHexString(this->EncryptionID, this->EncryptionIDLength);
+    lastUpdateIDstr = toHexString(this->LastUpdateID, this->LastUpdateIDLength);
     keyStr = toHexString(this->Key, this->keyLength);
     ivStr = toHexString(this->Iv, this->ivLength);
   } catch (const std::invalid_argument &e) {
@@ -123,48 +131,28 @@ void FileData::debugFileData() {
   }
 
   std::wstring fileIDwstr(fileIDstr.begin(), fileIDstr.end());
+  std::wstring encryptionIDwstr(encryptionIDstr.begin(), encryptionIDstr.end());
+  std::wstring lastUpdateIDwstr(lastUpdateIDstr.begin(), lastUpdateIDstr.end());
   std::wstring keyWstr(keyStr.begin(), keyStr.end());
   std::wstring ivWstr(ivStr.begin(), ivStr.end());
 
-  std::wcout << L"-------------------------------------------------------------\n";
-  std::wcout << L"- FileData Debug:\n";
-
-  try {
-    std::wcout << L"- FileID: " << (this->FileID != nullptr ? fileIDwstr : L"null") << "\n";
-  } catch (const std::exception &e) {
-    std::wcerr << "- Error converting FileID to hex string: " << e.what() << "\n";
-  }
-
-  std::cout << "- FileIDLength: " << this->fileIDLength << std::endl;
-
-  std::wcout << L"- EncryptedFilePath: "
-             << (this->EncryptedFilePath && *this->EncryptedFilePath != L'\0' ? this->EncryptedFilePath : L"null")
-             << "\n";
-  std::wcout << L"- OriginalFilePath: "
-             << (this->OriginalFilePath && *this->OriginalFilePath != L'\0' ? this->OriginalFilePath : L"null") << "\n";
-  std::wcout << L"- DecryptedFilePath: "
-             << (this->DecryptedFilePath && *this->DecryptedFilePath != L'\0' ? this->DecryptedFilePath : L"null")
-             << "\n";
-  std::wcout << L"- AlgorithmenType: "
-             << (this->AlgorithmenType && *this->AlgorithmenType != L'\0' ? this->AlgorithmenType : L"null") << "\n";
-
-  try {
-    std::wcout << L"- Key: " << (this->Key != nullptr ? keyWstr : L"null") << "\n";
-  } catch (const std::exception &e) {
-    std::wcerr << "- Error converting Key to hex string: " << e.what() << "\n";
-  }
-
-  std::cout << "- KeyLength: " << this->keyLength << std::endl;
-
-  try {
-    std::wcout << L"- Iv: " << (this->Iv != nullptr ? ivWstr : L"null") << "\n";
-  } catch (const std::exception &e) {
-    std::wcerr << "- Error converting Iv to hex string: " << e.what() << "\n";
-  }
-
-  std::cout << "- IvLength: " << this->ivLength << std::endl;
-
-  std::wcout << L"-------------------------------------------------------------\n";
+  std::wcout << L"-------------------------------------------------------------"<< std::endl;
+  std::wcout << L"- FileData Debug:" << std::endl;
+  std::wcout << L"- FileID: " << (this->FileID ? fileIDwstr : L"null") << std::endl;
+  std::wcout << L"- FileIDLength: " << this->fileIDLength << std::endl;
+  std::wcout << L"- EncryptionID: " << (this->EncryptionID ? encryptionIDwstr : L"null") << std::endl;
+  std::wcout << L"- EncryptionIDLength: " << this->EncryptionIDLength << std::endl;
+  std::wcout << L"- LastUpdateID: " << (this->LastUpdateID ? lastUpdateIDwstr : L"null") << std::endl;
+  std::wcout << L"- LastUpdateIDLength: " << this->LastUpdateIDLength << std::endl;
+  std::wcout << L"- EncryptedFilePath: " << (this->EncryptedFilePath && *this->EncryptedFilePath ? this->EncryptedFilePath : L"null") << std::endl;
+  std::wcout << L"- OriginalFilePath: " << (this->OriginalFilePath && *this->OriginalFilePath ? this->OriginalFilePath : L"null") << std::endl;
+  std::wcout << L"- DecryptedFilePath: " << (this->DecryptedFilePath && *this->DecryptedFilePath ? this->DecryptedFilePath : L"null") << std::endl;
+  std::wcout << L"- AlgorithmenType: " << (this->AlgorithmenType && *this->AlgorithmenType ? this->AlgorithmenType : L"null") << std::endl;
+  std::wcout << L"- Key: " << (this->Key ? keyWstr : L"null") << std::endl;
+  std::wcout << L"- KeyLength: " << this->keyLength << std::endl;
+  std::wcout << L"- Iv: " << (this->Iv ? ivWstr : L"null") << std::endl;
+  std::wcout << L"- IvLength: " << this->ivLength << std::endl;
+  std::wcout << L"------------------------------------------------------------" << std::endl;
 }
 
 unsigned char *FileData::getFileId() const {

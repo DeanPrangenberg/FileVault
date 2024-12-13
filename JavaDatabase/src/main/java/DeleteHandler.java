@@ -20,20 +20,21 @@ public class DeleteHandler implements HttpHandler {
     InputStream is = t.getRequestBody();
     byte[] inputBytes = is.readAllBytes();
     String input = new String(inputBytes, StandardCharsets.UTF_8);
-    System.out.println("Received input: " + input + " for delete");
+    System.out.println("Received input for delete: " + input);
 
     ObjectMapper mapper = new ObjectMapper();
     JsonNode jsonNode = mapper.readTree(input);
     String fileID = jsonNode.get("FileID").asText();
+    String encryptionID = jsonNode.get("EncryptionID").asText();
 
     try {
-      db.deleteEntry(fileID);
+      db.deleteEntry(fileID, encryptionID);
       String response = "true";
       t.sendResponseHeaders(200, response.length());
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
       os.close();
-      System.out.println("Deleted entry with FileID: " + fileID);
+      System.out.println("Deleted entry with FileID: " + fileID + " and EncryptionID: " + encryptionID);
     } catch (Exception e) {
       e.printStackTrace();
       String response = "false";
@@ -41,7 +42,7 @@ public class DeleteHandler implements HttpHandler {
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
       os.close();
-      System.out.println("Failed to delete entry with FileID: " + fileID);
+      System.out.println("Failed to delete entry with FileID: " + fileID + " and EncryptionID: " + encryptionID);
     }
   }
 }

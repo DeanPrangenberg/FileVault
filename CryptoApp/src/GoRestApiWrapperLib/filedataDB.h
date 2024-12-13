@@ -7,6 +7,11 @@
 typedef struct {
     const wchar_t *FileID;
     size_t FileIDLength;
+    const wchar_t *EncryptionID;
+    size_t EncryptionIDLength;
+    const wchar_t *LastUpdateID;
+    size_t LastUpdateIDLength;
+
     const wchar_t *AlgorithmenType;
     const wchar_t *OriginalFilePath;
     const wchar_t *EncryptedFilePath;

@@ -26,35 +26,48 @@ FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType,
   unsigned char *KEY = nullptr;
   int keyLength = 0;
 
-  if (algorithmenType == AlgorithmType::AES128) {
-    KEY = new unsigned char[16];
-    keyLength = 16;
-    cryptoDll.GenerateKeyIv(keyLength, KEY, IV);
-  } else if (algorithmenType == AlgorithmType::AES256) {
-    KEY = new unsigned char[32];
-    keyLength = 32;
-    cryptoDll.GenerateKeyIv(keyLength, KEY, IV);
+  switch (algorithmenType) {
+    case AlgorithmType::AES128:
+      keyLength = 16;
+      KEY = new unsigned char[keyLength];
+      break;
+    case AlgorithmType::AES256:
+      keyLength = 32;
+      KEY = new unsigned char[keyLength];
+      break;
+    default:
+      throw std::invalid_argument("Unsupported algorithm type");
   }
+
+  cryptoDll.GenerateKeyIv(keyLength, KEY, IV);
 
   unsigned char fileID[64];
   cryptoDll.GenerateFileID(originalFilePath.wstring().c_str(), fileID);
 
-  // Converting data for struct
+  unsigned char lastUpdateID[64];
+  cryptoDll.getCurrentTimeHash(lastUpdateID);
+
   std::wstring encryptedFilePath = originalFilePath.wstring() + globalDefinitions::encFileSuffix;
   std::wstring algorithmenTypeStr = AlgorithmTypeToString(algorithmenType);
 
-  // Allocate memory for struct
   FileData fileData;
   fileData.setFileId(new unsigned char[64]);
   std::memcpy(fileData.getFileId(), fileID, 64);
   fileData.setFileIdLength(64);
+
+  fileData.setLastUpdateId(new unsigned char[64]);
+  std::memcpy(fileData.getLastUpdateId(), lastUpdateID, 64);
+  fileData.setLastUpdateIdLength(64);
+
   fileData.setAlgorithmenType(ConvertWStringToWChar(algorithmenTypeStr));
   fileData.setOriginalFilePath(ConvertWStringToWChar(originalFilePath.wstring()));
   fileData.setEncryptedFilePath(ConvertWStringToWChar(encryptedFilePath));
   fileData.setDecryptedFilePath(ConvertWStringToWChar(originalFilePath.wstring()));
-  fileData.setKey(new unsigned char[64]);
+
+  fileData.setKey(new unsigned char[keyLength]);
   std::memcpy(fileData.getKey(), KEY, keyLength);
   fileData.setKeyLength(keyLength);
+
   fileData.setIv(new unsigned char[16]);
   std::memcpy(fileData.getIv(), IV, 16);
   fileData.setIvLength(16);

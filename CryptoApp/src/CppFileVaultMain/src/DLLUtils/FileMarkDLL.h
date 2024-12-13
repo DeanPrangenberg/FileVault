@@ -9,10 +9,10 @@
 
 class FileMarkDLL : MasterDLLClass {
 public:
-  bool ExtractFileIDFromFile(const wchar_t * filePath, unsigned char FileID[64]);
+  bool extractIDsFromFile(const wchar_t * filePath, unsigned char FileID[64], unsigned char EncryptionID[64]);
 
 private:
-  typedef bool (*ExtractFileIDFromFileFunc)(const wchar_t *, unsigned char[64]);
+  typedef bool (*ExtractIDsFromFileFunc)(const wchar_t *, unsigned char[64], unsigned char[64]);
 };
 
 

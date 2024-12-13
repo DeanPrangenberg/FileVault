@@ -20,11 +20,11 @@ public class ReplaceHandler implements HttpHandler {
       InputStream is = exchange.getRequestBody();
       byte[] inputBytes = is.readAllBytes();
       String input = new String(inputBytes, StandardCharsets.UTF_8);
-      System.out.println("Received input: " + input + " for replace");
+      System.out.println("Received input for replace: " + input);
 
-      // Parse input to create Database.FileData object (assuming JSON input)
+      // Parse input to create Database.GoFileData object (assuming JSON input)
       ObjectMapper mapper = new ObjectMapper();
-      Database.FileData data = mapper.readValue(input, Database.FileData.class);
+      Database.GoFileData data = mapper.readValue(input, Database.GoFileData.class);
 
       try {
         // Replace the entry in the database
@@ -34,7 +34,7 @@ public class ReplaceHandler implements HttpHandler {
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
-        System.out.println("Replaced entry with FileID: " + data.FileID);
+        System.out.println("Replaced entry with FileID: " + data.FileID + " and EncryptionID: " + data.EncryptionID);
       } catch (Exception e) {
         e.printStackTrace();
         String response = "false";
@@ -42,7 +42,7 @@ public class ReplaceHandler implements HttpHandler {
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
-        System.out.println("Failed to replace entry with FileID: " + data.FileID);
+        System.out.println("Failed to replace entry with FileID: " + data.FileID + " and EncryptionID: " + data.EncryptionID);
       }
     } else {
       exchange.sendResponseHeaders(405, -1); // Method Not Allowed

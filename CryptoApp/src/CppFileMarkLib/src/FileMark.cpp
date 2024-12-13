@@ -1,7 +1,3 @@
-//
-// Created by prang on 23.10.2024.
-//
-
 #include "FileMark.h"
 #include <codecvt>
 #include <fstream>
@@ -10,7 +6,7 @@
 #include <cstring>
 
 extern "C" {
-FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, unsigned char FileID[64]) {
+FILEMARKLIB_API bool extractIDsFromFile(const wchar_t *encryptedFilePath, unsigned char FileID[64], unsigned char EncryptionID[64]) {
   // Open the original file
   std::ifstream inputFile(encryptedFilePath, std::ios::binary);
   if (!inputFile) {
@@ -26,55 +22,79 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
   std::string fileContents = buffer.str();
   inputFile.close();
 
-  // Find the positions of the markIdentifier twice from the beginning
+  // Find the positions of the markIdentifier
   std::string markIdentifier = globalDefinitions::markIdentifier;
   size_t firstStartPos = fileContents.find(markIdentifier);
-  if (firstStartPos == std::string::npos) {
-    std::cout << "First start markIdentifier not found" << std::endl;
-    return false;
-  }
   size_t secondStartPos = fileContents.find(markIdentifier, firstStartPos + markIdentifier.length());
-  if (secondStartPos == std::string::npos) {
-    std::cout << "Second start markIdentifier not found" << std::endl;
+  size_t thirdStartPos = fileContents.find(markIdentifier, secondStartPos + markIdentifier.length());
+
+  size_t firstEndPos = fileContents.rfind(markIdentifier);
+  size_t secondEndPos = fileContents.rfind(markIdentifier, firstEndPos - markIdentifier.length());
+  size_t thirdEndPos = fileContents.rfind(markIdentifier, secondEndPos - markIdentifier.length());
+
+  if (firstStartPos == std::string::npos || secondStartPos == std::string::npos || thirdStartPos == std::string::npos ||
+      firstEndPos == std::string::npos || secondEndPos == std::string::npos || thirdEndPos == std::string::npos) {
+    std::cout << "Required markIdentifier not found" << std::endl;
     return false;
   }
+
+  // Extract IDs
   std::string fileIDStart = fileContents.substr(firstStartPos + markIdentifier.length(),
                                                 secondStartPos - firstStartPos - markIdentifier.length());
+  std::string encryptionIDStart = fileContents.substr(secondStartPos + markIdentifier.length(),
+                                                      thirdStartPos - secondStartPos - markIdentifier.length());
 
-  // Find the positions of the markIdentifier twice from the end
-  size_t firstEndPos = fileContents.rfind(markIdentifier);
-  if (firstEndPos == std::string::npos) {
-    std::cout << "First end markIdentifier not found" << std::endl;
-    return false;
-  }
-  size_t secondEndPos = fileContents.rfind(markIdentifier, firstEndPos - markIdentifier.length());
-  if (secondEndPos == std::string::npos) {
-    std::cout << "Second end markIdentifier not found" << std::endl;
-    return false;
-  }
-  std::string fileIDEnd = fileContents.substr(secondEndPos + markIdentifier.length(),
+  std::string encryptionIDEnd = fileContents.substr(secondEndPos + markIdentifier.length(),
                                               firstEndPos - secondEndPos - markIdentifier.length());
+  std::string fileIDEnd = fileContents.substr(thirdEndPos + markIdentifier.length(),
+                                                    secondEndPos - thirdEndPos - markIdentifier.length());
 
-  // Compare the fileIDs and return if they are equal
-  if (fileIDStart == fileIDEnd) {
-    if (fileIDStart.length() != 64) {
-      std::cout << "File ID has the wrong size" << std::endl;
+  // Convert IDs to hex format
+  auto toHexString = [](const std::string &str) {
+    std::ostringstream oss;
+    oss << std::hex << std::setw(2) << std::setfill('0');
+    for (unsigned char c : str) {
+      oss << static_cast<int>(c);
+    }
+    return oss.str();
+  };
+
+  // Compare the IDs
+  if (debugPrint) {
+    std::cout << "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" << std::endl;
+    std::cout << "& File ID Start: " << toHexString(fileIDStart) << std::endl;
+    std::cout << "& File ID End: " << toHexString(fileIDEnd) << std::endl;
+    std::cout << "& Encryption ID Start: " << toHexString(encryptionIDStart) << std::endl;
+    std::cout << "& Encryption ID End: " << toHexString(encryptionIDEnd) << std::endl;
+    std::cout << "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" << std::endl;
+  }
+
+  if (fileIDStart == fileIDEnd && encryptionIDStart == encryptionIDEnd) {
+    if (fileIDStart.length() != 64 || encryptionIDStart.length() != 64) {
+      std::cout << "File ID or Encryption ID has the wrong size" << std::endl;
       return false;
     }
     std::memcpy(FileID, fileIDStart.c_str(), fileIDStart.length());
     std::memset(FileID + fileIDStart.length(), 0, 64 - fileIDStart.length()); // Zero out the rest of the array
-    if (debugPrint) std::cout << "Extracted File ID: " << fileIDStart << std::endl; // Log the extracted File ID
+    std::memcpy(EncryptionID, encryptionIDStart.c_str(), encryptionIDStart.length());
+    std::memset(EncryptionID + encryptionIDStart.length(), 0, 64 - encryptionIDStart.length()); // Zero out the rest of the array
+
+    if (debugPrint) {
+      std::cout << "Extracted File ID: " << toHexString(fileIDStart) << std::endl;
+      std::cout << "Extracted Encryption ID: " << toHexString(encryptionIDStart) << std::endl;
+    }
     return true;
   } else {
-    std::cout << "File IDs do not match" << std::endl;
+    std::cout << "File IDs or Encryption IDs do not match" << std::endl;
     return false;
   }
 }
 
-[[maybe_unused]] FILEMARKLIB_API void markFile(const struct FileData *fileData) {
-  // Convert FileID to string
+[[maybe_unused]] FILEMARKLIB_API void markFile(const FileData *fileData) {
+  // Convert FileID and EncryptionID to string
   std::string fileIDStr(reinterpret_cast<const char *>(fileData->getFileId()), fileData->getFileIdLength());
-  std::string fileMark = globalDefinitions::markIdentifier + fileIDStr + globalDefinitions::markIdentifier + "\n";
+  std::string encryptionIDStr(reinterpret_cast<const char *>(fileData->getEncryptionId()), fileData->getEncryptionIdLength());
+  std::string fileMark = globalDefinitions::markIdentifier + fileIDStr + globalDefinitions::markIdentifier + encryptionIDStr + globalDefinitions::markIdentifier + "\n";
 
   // Open the original file
   std::ifstream inputFile(fileData->getEncryptedFilePath(), std::ios::binary);
@@ -106,7 +126,7 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
   outputFile.close();
 }
 
-[[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const struct FileData *fileData) {
+[[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const FileData *fileData) {
   // Open the Encrypted file
   std::ifstream inputFile(fileData->getEncryptedFilePath(), std::ios::binary);
   if (!inputFile) {
@@ -122,15 +142,17 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
   std::string fileContents = buffer.str();
   inputFile.close();
 
-  // Extract the fileID using extractFileID
+  // Extract the fileID and EncryptionID using extractIDsFromFile
   unsigned char extractedFileIDArr[64];
-  if (!extractFileIDFromFile(fileData->getEncryptedFilePath(), extractedFileIDArr)) {
-    std::cout << "Failed to extract file ID" << std::endl;
+  unsigned char extractedEncryptionIDArr[64];
+  if (!extractIDsFromFile(fileData->getEncryptedFilePath(), extractedFileIDArr, extractedEncryptionIDArr)) {
+    std::cout << "Failed to extract file ID and Encryption ID" << std::endl;
     return false;
   }
 
-  // Convert FileID to string
+  // Convert FileID and EncryptionID to string
   std::string fileIDStr(reinterpret_cast<const char *>(fileData->getFileId()), fileData->getFileIdLength());
+  std::string encryptionIDStr(reinterpret_cast<const char *>(fileData->getEncryptionId()), fileData->getEncryptionIdLength());
 
   // Verify if the extracted fileID matches the fileID in the struct
   if (std::memcmp(fileData->getFileId(), extractedFileIDArr, fileData->getFileIdLength()) != 0) {
@@ -139,7 +161,7 @@ FILEMARKLIB_API bool extractFileIDFromFile(const wchar_t *encryptedFilePath, uns
   }
 
   // Remove the marks from the file contents
-  std::string markWithID = globalDefinitions::markIdentifier + fileIDStr + globalDefinitions::markIdentifier + "\n";
+  std::string markWithID = globalDefinitions::markIdentifier + fileIDStr + globalDefinitions::markIdentifier + encryptionIDStr + globalDefinitions::markIdentifier + "\n";
 
   // Remove the first occurrence
   size_t startPos = fileContents.find(markWithID);

@@ -3,5 +3,5 @@
 
 namespace globalDefinitions {
   const std::wstring encFileSuffix = L".encFV";
-  const std::string markIdentifier = "<FileVault-FileID>";
+  const std::string markIdentifier = "<FileVault>";
 }

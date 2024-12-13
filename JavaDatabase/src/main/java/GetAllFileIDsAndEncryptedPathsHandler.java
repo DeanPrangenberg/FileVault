@@ -16,7 +16,7 @@ public class GetAllFileIDsAndEncryptedPathsHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("GET".equals(exchange.getRequestMethod())) {
-            List<Database.FileData> fileList = db.getAllFileIDsAndEncryptedPaths();
+            List<Database.GoFileData> fileList = db.getAllFileIDsAndEncryptedPaths();
             ObjectMapper mapper = new ObjectMapper();
             String response = mapper.writeValueAsString(fileList);
 

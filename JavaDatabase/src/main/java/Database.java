@@ -5,17 +5,21 @@ import java.util.List;
 public class Database {
     private Connection conn;
 
-    public static class FileData {
-        public String FileID; // Changed to String to store binary string
-        public int FileIDLength; // Added to store integer value of FileID
+    public static class GoFileData {
+        public String FileID;
+        public int FileIDLength;
+        public String EncryptionID;
+        public int EncryptionIDLength;
+        public String LastUpdateID;
+        public int LastUpdateIDLength;
         public String AlgorithmenType;
         public String OriginalFilePath;
         public String EncryptedFilePath;
         public String DecryptedFilePath;
-        public String Key; // Changed to String to store binary string
-        public int KeyLength; // Added to store integer value of Key
-        public String Iv; // Changed to String to store binary string
-        public int IvLength; // Added to store integer value of Iv
+        public String Key;
+        public int KeyLength;
+        public String Iv;
+        public int IvLength;
     }
 
     public void connect() {
@@ -40,16 +44,21 @@ public class Database {
 
     private void initializeTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS file_data (" +
-                "FileID TEXT PRIMARY KEY, " +
-                "FileIDLength INTEGER, " +
-                "AlgorithmenType TEXT, " +
-                "OriginalFilePath TEXT, " +
-                "EncryptedFilePath TEXT, " +
-                "DecryptedFilePath TEXT, " +
-                "Key TEXT, " +
-                "KeyLength INTEGER, " +
-                "Iv TEXT, "+
-                "IvLength INTEGER)";
+            "FileID TEXT, " +
+            "FileIDLength INTEGER, " +
+            "EncryptionID TEXT, " +
+            "EncryptionIDLength INTEGER, " +
+            "LastUpdateID TEXT, " +
+            "LastUpdateIDLength INTEGER, " +
+            "AlgorithmenType TEXT, " +
+            "OriginalFilePath TEXT, " +
+            "EncryptedFilePath TEXT, " +
+            "DecryptedFilePath TEXT, " +
+            "Key TEXT, " +
+            "KeyLength INTEGER, " +
+            "Iv TEXT, "+
+            "IvLength INTEGER, " +
+            "PRIMARY KEY (FileID, EncryptionID))";
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         }
@@ -65,49 +74,77 @@ public class Database {
         }
     }
 
-    public void insertEntry(FileData data) {
-        String sql = "INSERT OR REPLACE INTO file_data (FileID, FileIDLength, AlgorithmenType, OriginalFilePath, EncryptedFilePath, DecryptedFilePath, Key, KeyLength, Iv, IvLength) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void insertEntry(GoFileData data) {
+        String sql = "INSERT OR REPLACE INTO file_data (" +
+            "FileID, " +
+            "FileIDLength, " +
+            "EncryptionID, " +
+            "EncryptionIDLength, " +
+            "LastUpdateID, " +
+            "LastUpdateIDLength, " +
+            "AlgorithmenType, " +
+            "OriginalFilePath, " +
+            "EncryptedFilePath, " +
+            "DecryptedFilePath, " +
+            "Key, " +
+            "KeyLength, " +
+            "Iv, " +
+            "IvLength) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, data.FileID);
             pstmt.setInt(2, data.FileIDLength);
-            pstmt.setString(3, data.AlgorithmenType);
-            pstmt.setString(4, data.OriginalFilePath);
-            pstmt.setString(5, data.EncryptedFilePath);
-            pstmt.setString(6, data.DecryptedFilePath);
-            pstmt.setString(7, data.Key);
-            pstmt.setInt(8, data.KeyLength);
-            pstmt.setString(9, data.Iv);
-            pstmt.setInt(10, data.IvLength);
+            pstmt.setString(3, data.EncryptionID);
+            pstmt.setInt(4, data.EncryptionIDLength);
+            pstmt.setString(5, data.LastUpdateID);
+            pstmt.setInt(6, data.LastUpdateIDLength);
+            pstmt.setString(7, data.AlgorithmenType);
+            pstmt.setString(8, data.OriginalFilePath);
+            pstmt.setString(9, data.EncryptedFilePath);
+            pstmt.setString(10, data.DecryptedFilePath);
+            pstmt.setString(11, data.Key);
+            pstmt.setInt(12, data.KeyLength);
+            pstmt.setString(13, data.Iv);
+            pstmt.setInt(14, data.IvLength);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void replaceEntry(FileData data) {
-        deleteEntry(data.FileID);
-        insertEntry(data);
+    public void replaceEntry(GoFileData data) {
+        GoFileData searchData = searchEntry(data.FileID, data.EncryptionID);
+        if (searchData.LastUpdateID != data.LastUpdateID) {
+            deleteEntry(data.FileID, data.EncryptionID);
+            insertEntry(data);
+        }
     }
 
-    public void deleteEntry(String fileID) {
-        String sql = "DELETE FROM file_data WHERE FileID = ?";
+    public void deleteEntry(String fileID, String encryptionID) {
+        String sql = "DELETE FROM file_data WHERE FileID = ? AND EncryptionID = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, fileID);
+            pstmt.setString(2, encryptionID);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public FileData searchEntry(String fileID) {
-        String sql = "SELECT * FROM file_data WHERE FileID = ?";
+    public GoFileData searchEntry(String fileID, String encryptionID) {
+        String sql = "SELECT * FROM file_data WHERE FileID = ? AND EncryptionID = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, fileID);
+            pstmt.setString(2, encryptionID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    FileData data = new FileData();
+                    GoFileData data = new GoFileData();
                     data.FileID = rs.getString("FileID");
                     data.FileIDLength = rs.getInt("FileIDLength");
+                    data.EncryptionID = rs.getString("EncryptionID");
+                    data.EncryptionIDLength = rs.getInt("EncryptionIDLength");
+                    data.LastUpdateID = rs.getString("LastUpdateID");
+                    data.LastUpdateIDLength = rs.getInt("LastUpdateIDLength");
                     data.AlgorithmenType = rs.getString("AlgorithmenType");
                     data.OriginalFilePath = rs.getString("OriginalFilePath");
                     data.EncryptedFilePath = rs.getString("EncryptedFilePath");
@@ -125,13 +162,13 @@ public class Database {
         return null;
     }
 
-    public List<FileData> getAllFileIDsAndEncryptedPaths() {
-        List<FileData> fileList = new ArrayList<>();
-        String sql = "SELECT FileID, FileIDLength, EncryptedFilePath FROM file_data";
+    public List<GoFileData> getAllFileIDsAndEncryptedPaths() {
+        List<GoFileData> fileList = new ArrayList<>();
+        String sql = "SELECT FileID, FileIDLength, EncryptionID, EncryptionIDLength, EncryptedFilePath FROM file_data";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                FileData data = new FileData();
+                GoFileData data = new GoFileData();
                 data.FileID = rs.getString("FileID");
                 data.FileIDLength = rs.getInt("FileIDLength");
                 data.EncryptedFilePath = rs.getString("EncryptedFilePath");

@@ -24,7 +24,7 @@ namespace fs = std::filesystem;
 
 // Wrapper functions for C compatibility
 extern "C" {
-[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(const FileData *fileData, const int numFiles);
+[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(FileData *fileData, const int numFiles);
 
 [[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, const int numFiles);
 
@@ -32,6 +32,7 @@ extern "C" {
 
 [[maybe_unused]] CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID);
 
+[[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash);
 }
 
 #endif //CRYPTOLIB_H

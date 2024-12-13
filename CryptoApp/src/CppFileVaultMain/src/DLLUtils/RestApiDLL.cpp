@@ -221,12 +221,25 @@ unsigned char* RestApiDLL::convertFromHexWChar(const wchar_t* input, size_t& siz
   return result;
 }
 
+RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData& data) {
+  RestApiDLL::FileDataDB dbStruct{};
 
-RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData& data) {
+  // Konvertiere nur FileID
+  dbStruct.FileID = convertToHexWChar(data.getFileId(), data.getFileIdLength());
+  dbStruct.EncryptedID = convertToHexWChar(data.getEncryptionId(), data.getEncryptionIdLength());
+
+  return dbStruct;
+}
+
+RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &data) {
   RestApiDLL::FileDataDB dbStruct{};
 
   dbStruct.FileID = convertToHexWChar(data.getFileId(), data.getFileIdLength());
   dbStruct.FileIDLength = data.getFileIdLength();
+  dbStruct.EncryptedID = convertToHexWChar(data.getEncryptionId(), data.getEncryptionIdLength());
+  dbStruct.EncryptedIDLength = data.getEncryptionIdLength();
+  dbStruct.LastUpdateID = convertToHexWChar(data.getLastUpdateId(), data.getLastUpdateIdLength());
+  dbStruct.LastUpdateIDLength = data.getLastUpdateIdLength();
   dbStruct.AlgorithmenType = data.getAlgorithmenType();
   dbStruct.OriginalFilePath = data.getOriginalFilePath();
   dbStruct.EncryptedFilePath = data.getEncryptedFilePath();
@@ -239,54 +252,34 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData& dat
   return dbStruct;
 }
 
-
-RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData& data) {
-  RestApiDLL::FileDataDB dbStruct{};
-
-  // Konvertiere nur FileID
-  dbStruct.FileID = convertToHexWChar(data.getFileId(), data.getFileIdLength());
-  dbStruct.FileIDLength = 0;
-  dbStruct.AlgorithmenType = nullptr;
-  dbStruct.OriginalFilePath = nullptr;
-  dbStruct.EncryptedFilePath = nullptr;
-  dbStruct.DecryptedFilePath = nullptr;
-  dbStruct.Key = nullptr;
-  dbStruct.KeyLength = 0;
-  dbStruct.Iv = nullptr;
-  dbStruct.IvLength = 0;
-
-  return dbStruct;
-}
-
-FileData RestApiDLL::convertDBStructToFileData(const FileDataDB& data) {
+FileData RestApiDLL::convertDBStructToFileData(const FileDataDB &data) {
   FileData fileData{};
 
-  // Konvertiere FileID und setze die Länge
   size_t fileIdLength = 0;
   auto fileId = convertFromHexWChar(data.FileID, fileIdLength);
   fileData.setFileId(fileId);
   fileData.setFileIdLength(data.FileIDLength);
 
-  std::cout << "fileIdLength -> " << fileData.getFileIdLength() << std::endl;
-  std::cout << "FileId Len " << data.FileIDLength << " -> " << fileIdLength << " -> " << fileData.getFileIdLength() << std::endl;
+  size_t encryptedIdLength = 0;
+  auto encryptedId = convertFromHexWChar(data.EncryptedID, encryptedIdLength);
+  fileData.setEncryptionId(encryptedId);
+  fileData.setEncryptionIdLength(data.EncryptedIDLength);
 
-  // Konvertiere Key und setze die Länge
+  size_t lastUpdateIdLength = 0;
+  auto lastUpdateId = convertFromHexWChar(data.LastUpdateID, lastUpdateIdLength);
+  fileData.setLastUpdateId(lastUpdateId);
+  fileData.setLastUpdateIdLength(data.LastUpdateIDLength);
+
   size_t keyLength = 0;
   auto key = convertFromHexWChar(data.Key, keyLength);
   fileData.setKey(key);
   fileData.setKeyLength(data.KeyLength);
 
-  std::cout << "Key Len " << data.KeyLength << " -> " << keyLength << " -> " << fileData.getKeyLength() << std::endl;
-
-  // Konvertiere IV und setze die Länge
   size_t ivLength = 0;
   auto iv = convertFromHexWChar(data.Iv, ivLength);
   fileData.setIv(iv);
   fileData.setIvLength(data.IvLength);
 
-  std::cout << "Iv Len " << data.IvLength << " -> " << ivLength << " -> " << fileData.getIvLength() << std::endl;
-
-  // Setze die Dateipfade und den Algorithmus
   fileData.setEncryptedFilePath(data.EncryptedFilePath);
   fileData.setOriginalFilePath(data.OriginalFilePath);
   fileData.setAlgorithmenType(data.AlgorithmenType);

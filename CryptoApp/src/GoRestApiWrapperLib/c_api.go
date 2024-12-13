@@ -18,8 +18,9 @@ import (
 //export DeleteEntry
 func DeleteEntry(data *C.FileDataDB, result *C.bool) {
   fileID := wcharToString(data.FileID)
+  encryptionID := wcharToString(data.EncryptionID)
 
-  jsonData, err := json.Marshal(map[string]string{"FileID": fileID})
+  jsonData, err := json.Marshal(map[string]string{"FileID": fileID, "EncryptionID": encryptionID})
   if err != nil {
     falseVal := C.bool(false)
     *result = falseVal
@@ -55,8 +56,9 @@ func SearchEntry(data *C.FileDataDB, result *C.bool) {
   }
 
   fileID := wcharToString(data.FileID)
+  encryptionID := wcharToString(data.EncryptionID)
 
-  jsonData, err := json.Marshal(map[string]string{"FileID": fileID})
+  jsonData, err := json.Marshal(map[string]string{"FileID": fileID, "EncryptionID": encryptionID})
   if err != nil {
     returnBool := C.bool(false)
     runtime.KeepAlive(returnBool)

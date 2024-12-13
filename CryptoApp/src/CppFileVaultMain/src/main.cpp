@@ -8,6 +8,8 @@
 #include "../DLLUtils/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
 #include "../../shared/FileData.h"
+#include "gui/FileVaultGui.h"
+#include <QApplication>
 
 namespace fs = std::filesystem;
 
@@ -15,7 +17,7 @@ bool printDebug = true;
 bool printConverterDebug = true;
 
 #define pathToCrypt "S:\\clips\\cut"
-#define dockerHash "ff9803838f89fa8d51cb7100c2e8406af16a3c3ee0d6402f91b7774c35b8cdea"
+#define dockerHash "a5d0aa35ab0c107e7a04e4618a9fe80c1c6ddb4eeef2e03fd2114fcb7e8be62a"
 
 void startDBContainer() {
   std::string command = "docker start " + std::string(dockerHash);
@@ -107,14 +109,22 @@ void repairAndReloadFiles(FileScannerDLL &fileScannerDll, FileMarkDLL &fileMarkD
     FileData partialStruct{};
     partialStruct.setFileId(new unsigned char[64]);
     partialStruct.setFileIdLength(64);
+    partialStruct.setEncryptionId(new unsigned char[64]);
+    partialStruct.setEncryptionIdLength(64);
     partialStruct.setEncryptedFilePath(StructUtils::ConvertWStringToWChar(filePath.wstring()));
 
-    if (fileMarkDll.ExtractFileIDFromFile(partialStruct.getEncryptedFilePath(), partialStruct.getFileId())) {
+    if (fileMarkDll.extractIDsFromFile(partialStruct.getEncryptedFilePath(), partialStruct.getFileId(),
+                                       partialStruct.getEncryptionId())) {
       if (printDebug)
         std::cout << "++Extracted FileID: "
                   << globalDefinitions::toHexString(partialStruct.getFileId(), partialStruct.getFileIdLength())
                   << " from: "
                   << filePath << "++" << std::endl;
+      std::cout << "++Extracted EncryptionID: "
+                << globalDefinitions::toHexString(partialStruct.getEncryptionId(),
+                                                  partialStruct.getEncryptionIdLength())
+                << " from: "
+                << filePath << "++" << std::endl;
     } else {
       std::wcout << L"++Failed to extract File ID from: " << filePath << "++" << std::endl;
       partialStruct.cleanupFileData();
@@ -157,50 +167,57 @@ void decryptAndDeleteFiles(CryptoDLL &cryptoDll, RestApiDLL &restApiDll, std::ve
             << std::endl;
 }
 
-std::vector<int> testRun() {
+void testRun(int testRuns) {
+  startDBContainer();
   FileScannerDLL fileScannerDll;
   CryptoDLL cryptoDll;
   RestApiDLL restApiDll;
   FileMarkDLL fileMarkDll;
   std::vector<FileData> fileDataVec;
 
-  scanAndBuildStructs(fileScannerDll, fileDataVec);
-  encryptAndSaveFiles(cryptoDll, restApiDll, fileDataVec);
-  repairAndReloadFiles(fileScannerDll, fileMarkDll, restApiDll, fileDataVec);
-  decryptAndDeleteFiles(cryptoDll, restApiDll, fileDataVec);
-
-  std::vector<int> result;
-  auto encryptedFile = fileScannerDll.ScanDirectory(pathToCrypt, false);
-  auto decryptedFile = fileScannerDll.ScanDirectory(pathToCrypt, true);
-
-  result.push_back(encryptedFile.size());
-  result.push_back(decryptedFile.size());
-
-  return result;
-}
-
-int main() {
-  int testRuns = 2;
   int testedFileCount = 0;
+  int succeededFileCount = 0;
   int failedFileCount = 0;
 
-  startDBContainer();
   for (int i = 0; i < testRuns; ++i) {
     system(".\\RustFileCopy.exe");
-    auto result = testRun();
-    testedFileCount += (result[0] + result[1]);
-    failedFileCount += result[1];
-    std::cout << "Test run: " << i + 1 << " completed" << std::endl;
-    std::cout << "Tested files this run: " << result[0] + result[1] << std::endl;
-    std::cout << "Failed files this run: " << result[1] << std::endl;
+    scanAndBuildStructs(fileScannerDll, fileDataVec);
+    encryptAndSaveFiles(cryptoDll, restApiDll, fileDataVec);
+    repairAndReloadFiles(fileScannerDll, fileMarkDll, restApiDll, fileDataVec);
+    decryptAndDeleteFiles(cryptoDll, restApiDll, fileDataVec);
+
+    auto encryptedFile = fileScannerDll.ScanDirectory(pathToCrypt, false);
+    auto decryptedFile = fileScannerDll.ScanDirectory(pathToCrypt, true);
+
+    testedFileCount += (encryptedFile.size() + decryptedFile.size());
+    succeededFileCount += encryptedFile.size();
+    failedFileCount += decryptedFile.size();
   }
 
   std::cout.flush();
-  std::cout << "Test on: " << static_cast<int>(testRuns) << " runs" << std::endl;
+  std::cout << "Test on: " << testRuns << " runs" << std::endl;
   std::cout << "Total files: " << testedFileCount << std::endl;
+  std::cout << "Succeeded files: " << succeededFileCount - failedFileCount << std::endl;
   std::cout << "Failed files: " << failedFileCount << std::endl;
-  std::cout << "Success rate: " << (static_cast<double>(testedFileCount - failedFileCount) / testedFileCount) * 100 << "%" << std::endl;
-
+  std::cout << "Success rate: " << (static_cast<double>(testedFileCount - failedFileCount) / testedFileCount) * 100
+            << "%" << std::endl;
   stopDBContainer();
-  return 0;
+
+  std::vector<int> result;
+  result.push_back(testedFileCount);
+  result.push_back(succeededFileCount);
+  result.push_back(failedFileCount);
+}
+
+int main(int argc, char *argv[]) {
+  /*int testRuns = 20;
+  testRun(testRuns);*/
+
+  QApplication app(argc, argv);
+
+  FileVaultGui fileVaultGui;
+  fileVaultGui.setWindowIcon(QIcon(":/icons/Icon.png"));
+  fileVaultGui.show();
+
+  return app.exec();
 }

@@ -28,13 +28,6 @@ add_custom_target(RustFileCopy ALL
     COMMENT "Building Rust FileCopy"
 )
 
-#[[add_custom_target(GoMultiThreadCryptoLib ALL
-    COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoMultiThreadCryptoLib.dll -buildmode=c-shared .
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/GoMultiThreadCryptoLib
-    DEPENDS CppCryptoLib
-    COMMENT "Building GO Lib"
-)]]
-
 add_custom_target(GoRestApiWrapperLib ALL
     COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoRestApiWrapperLib.dll -buildmode=c-shared .
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/GoRestApiWrapperLib

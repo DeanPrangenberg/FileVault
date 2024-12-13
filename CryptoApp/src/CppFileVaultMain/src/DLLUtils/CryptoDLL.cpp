@@ -4,7 +4,7 @@
 
 #include "CryptoDLL.h"
 
-void CryptoDLL::EncryptFiles(struct FileData *fileData, int count, std::vector<bool> &results) {
+void CryptoDLL::EncryptFiles(FileData *fileData, int count, std::vector<bool> &results) {
   HMODULE hMultiThreadCryptoLib = loadDll(L"CppCryptoLib.dll");
   if (!hMultiThreadCryptoLib) {
     return;
@@ -26,7 +26,7 @@ void CryptoDLL::EncryptFiles(struct FileData *fileData, int count, std::vector<b
   unloadDll(hMultiThreadCryptoLib);
 }
 
-void CryptoDLL::DecryptFiles(struct FileData *fileData, int count, std::vector<bool> &results) {
+void CryptoDLL::DecryptFiles(FileData *fileData, int count, std::vector<bool> &results) {
   HMODULE hMultiThreadCryptoLib = loadDll(L"CppCryptoLib.dll");
   if (!hMultiThreadCryptoLib) {
     return;
@@ -84,5 +84,28 @@ void CryptoDLL::GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
   }
 
   generateFileIDFunc(filePath, fileID);
+  unloadDll(hCryptographyDll);
+}
+
+void CryptoDLL::getCurrentTimeHash(unsigned char *timeHash) {
+  if (!timeHash) {
+    logError("Invalid timeHash buffer");
+    return;
+  }
+
+  HMODULE hCryptographyDll = loadDll(L"CppCryptoLib.dll");
+  if (!hCryptographyDll) {
+    return;
+  }
+
+  auto getCurrentTimeHash = (getCurrentTimeHashFunc) GetProcAddress(hCryptographyDll, "getCurrentTimeHash");
+  if (!getCurrentTimeHash) {
+    logError("Failed to get function address for GenerateFileID");
+    unloadDll(hCryptographyDll);
+    return;
+  }
+
+  getCurrentTimeHash(timeHash);
+
   unloadDll(hCryptographyDll);
 }

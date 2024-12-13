@@ -7,7 +7,7 @@ void KeyGen::generateKeyIv(const size_t &keySize, std::vector<unsigned char> &KE
   const int ivSize = 16; // 128-bit IV
   std::vector<unsigned char> iv(ivSize);
 
-  if (!RAND_bytes(key.data(), key.size()) || !RAND_bytes(iv.data(), iv.size())) {
+  if (!RAND_bytes(key.data(), static_cast<int>(key.size())) || !RAND_bytes(iv.data(), static_cast<int>(iv.size()))) {
     throw std::runtime_error("Failed to generate key or IV");
   }
 

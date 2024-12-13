@@ -1,10 +1,15 @@
 #include "CryptoAPI.h"
 
 extern "C" {
-[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(const FileData *fileData, const int numFiles) {
+[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(FileData *fileData, const int numFiles) {
   std::vector<bool> results;
   for (int i = 0; i < numFiles; i++) {
-    const FileData &file = fileData[i];
+    FileData &file = fileData[i];
+    auto timeHash = new unsigned char[64];
+    getCurrentTimeHash(timeHash);
+
+    file.setEncryptionId(timeHash);
+    file.setEncryptionIdLength(64);
     if (file.getKeyLength() == 16) { // AES-128
       results.push_back(AES128::encryptFile(&file));
     } else if (file.getKeyLength() == 32) { // AES-256
@@ -49,7 +54,6 @@ extern "C" {
   std::copy(ivVec.begin(), ivVec.end(), iv);
 }
 
-
 [[maybe_unused]] CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
   auto hash = SHA512::hashFile(filePath);
   auto hashStr = SHA512::hashString(std::wstring(filePath));
@@ -62,5 +66,13 @@ extern "C" {
   std::array<unsigned char, EVP_MAX_MD_SIZE> hashID = SHA512::hashArray(combinedHash);
 
   std::copy(hashID.begin(), hashID.begin() + 64, fileID);
+}
+
+[[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash) {
+
+  auto time = HelperUtils::getCurrentTime();
+  auto hashedTime = SHA512::hashArray(time);
+
+  std::copy(hashedTime.begin(), hashedTime.begin() + 64, timeHash);
 }
 }

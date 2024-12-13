@@ -22,6 +22,10 @@ private:
   struct FileDataDB {
     wchar_t *FileID = nullptr;
     size_t FileIDLength = 0;
+    wchar_t *EncryptedID = nullptr;
+    size_t EncryptedIDLength = 0;
+    wchar_t *LastUpdateID = nullptr;
+    size_t LastUpdateIDLength = 0;
     wchar_t *AlgorithmenType = nullptr;
     wchar_t *OriginalFilePath = nullptr;
     wchar_t *EncryptedFilePath = nullptr;

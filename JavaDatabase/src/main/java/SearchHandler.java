@@ -21,23 +21,24 @@ public class SearchHandler implements HttpHandler {
     InputStream is = t.getRequestBody();
     byte[] inputBytes = is.readAllBytes();
     String input = new String(inputBytes, StandardCharsets.UTF_8);
-    System.out.println("Received input: " + input + " for search");
+    System.out.println("Received input for search: " + input);
 
     ObjectMapper mapper = new ObjectMapper();
     JsonNode jsonNode = mapper.readTree(input);
     String fileID = jsonNode.get("FileID").asText();
+    String encryptionID = jsonNode.get("EncryptionID").asText();
 
-    Database.FileData data = db.searchEntry(fileID);
+    Database.GoFileData data = db.searchEntry(fileID, encryptionID);
 
     String response;
     if (data != null) {
       response = objectMapper.writeValueAsString(data);
       t.sendResponseHeaders(200, response.getBytes().length);
-      System.out.println("Found entry with FileID: " + fileID);
+      System.out.println("Found entry with FileID: " + fileID + " and EncryptionID: " + encryptionID);
     } else {
       response = "false";
       t.sendResponseHeaders(404, response.getBytes().length);
-      System.out.println("Entry not found for FileID: " + fileID);
+      System.out.println("Entry not found for FileID: " + fileID + " and EncryptionID: " + encryptionID);
     }
 
     OutputStream os = t.getResponseBody();

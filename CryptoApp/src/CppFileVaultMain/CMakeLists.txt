@@ -24,6 +24,23 @@ include_directories(
 # Enable debugging information
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
+# Add this section before the add_executable command
+qt_add_resources(CppFileVaultMain_resources res/resources.qrc)
+
+# Custom command to always compile the .qrc file
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp
+    COMMAND ${CMAKE_COMMAND} -E echo "Compiling resources.qrc"
+    COMMAND ${Qt6_DIR}/../../../bin/rcc -name resources -o ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp ${CMAKE_CURRENT_SOURCE_DIR}/res/resources.qrc
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/res/resources.qrc
+    COMMENT "Always compiling resources.qrc"
+)
+
+# Custom target to ensure the custom command is run
+add_custom_target(compile_resources ALL
+    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp
+)
+
 add_executable(CppFileVaultMain
     src/main.cpp
     src/StructUtils/StructUtils.cpp
@@ -45,8 +62,41 @@ add_executable(CppFileVaultMain
     src/DLLUtils/FileScannerDLL.h
     ../shared/FileData.cpp
     ../shared/FileData.h
-    # Add other source files here
+
+    src/gui/FileVaultGui.cpp
+    src/gui/FileVaultGui.h
+    ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp
+    res/app_icon.rc
+    src/gui/styleClass/StyleSetter.h
+    src/gui/styleClass/StyleSetter.cpp
+    src/gui/widgetClasses/Screens/DecryptionScreenWidget.cpp
+    src/gui/widgetClasses/Screens/DecryptionScreenWidget.h
+    src/gui/widgetClasses/Screens/EncryptionScreenWidget.cpp
+    src/gui/widgetClasses/Screens/EncryptionScreenWidget.h
+    src/gui/widgetClasses/Screens/SettingsScreenWidget.cpp
+    src/gui/widgetClasses/Screens/SettingsScreenWidget.h
+    src/gui/widgetClasses/Screens/StatisticsScreenWidget.cpp
+    src/gui/widgetClasses/Screens/StatisticsScreenWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/MasterSettingsWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/MasterSettingsWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/FileDeletionWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/FileDeletionWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/StandardAlgorithmWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/StandardAlgorithmWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/LogsLocationWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/LogsLocationWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/NewPasswordWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/NewPasswordWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/LanguageSelectionWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/LanguageSelectionWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/DatabaseManagementWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/DatabaseManagementWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.h
 )
+
+# Ensure the custom target is built before the main executable
+add_dependencies(CppFileVaultMain compile_resources)
 
 set_target_properties(CppFileVaultMain PROPERTIES
     AUTOMOC ON
@@ -62,7 +112,24 @@ target_link_libraries(CppFileVaultMain PRIVATE
 )
 
 if (MSVC)
- target_compile_options(CppFileVaultMain PRIVATE /W4 /GS)
+  target_compile_options(CppFileVaultMain PRIVATE /W4 /GS)
 else ()
- target_compile_options(CppFileVaultMain PRIVATE -Wall -Wextra)
+  target_compile_options(CppFileVaultMain PRIVATE -Wall -Wextra)
 endif ()
+
+# Copy Qt DLLs to the output directory
+add_custom_command(TARGET CppFileVaultMain POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    $<TARGET_FILE:Qt6::Core>
+    $<TARGET_FILE:Qt6::Gui>
+    $<TARGET_FILE:Qt6::Widgets>
+    $<TARGET_FILE_DIR:CppFileVaultMain>
+)
+
+# Copy Qt platform plugin to the output directory
+add_custom_command(TARGET CppFileVaultMain POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:CppFileVaultMain>/platforms
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${Qt6_DIR}/../../../plugins/platforms/qwindows.dll
+    $<TARGET_FILE_DIR:CppFileVaultMain>/platforms
+)

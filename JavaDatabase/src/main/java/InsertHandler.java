@@ -19,10 +19,10 @@ public class InsertHandler implements HttpHandler {
     InputStream is = t.getRequestBody();
     byte[] inputBytes = is.readAllBytes();
     String input = new String(inputBytes, StandardCharsets.UTF_8);
-    System.out.println("Received input: " + input + " for insert");
+    System.out.println("Received input for insert: " + input);
 
-    // Parse input to create Database.FileData object (assuming JSON input)
-    Database.FileData data = parseFileData(input);
+    // Parse input to create Database.GoFileData object (assuming JSON input)
+    Database.GoFileData data = parseFileData(input);
 
     try {
       db.insertEntry(data);
@@ -31,7 +31,7 @@ public class InsertHandler implements HttpHandler {
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
       os.close();
-      System.out.println("Inserted entry with FileID: " + data.FileID);
+      System.out.println("Inserted entry with FileID: " + data.FileID + " and EncryptionID: " + data.EncryptionID);
     } catch (Exception e) {
       e.printStackTrace();
       String response = "false";
@@ -39,14 +39,14 @@ public class InsertHandler implements HttpHandler {
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
       os.close();
-      System.out.println("Failed to insert entry with FileID: " + data.FileID);
+      System.out.println("Failed to insert entry with FileID: " + data.FileID + " and EncryptionID: " + data.EncryptionID);
     }
   }
 
-  private Database.FileData parseFileData(String input) {
+  private Database.GoFileData parseFileData(String input) {
     ObjectMapper mapper = new ObjectMapper();
     try {
-      return mapper.readValue(input, Database.FileData.class);
+      return mapper.readValue(input, Database.GoFileData.class);
     } catch (IOException e) {
       e.printStackTrace();
       return null;
