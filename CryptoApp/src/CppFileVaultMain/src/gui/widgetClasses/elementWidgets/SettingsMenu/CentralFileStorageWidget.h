@@ -13,17 +13,14 @@ Q_OBJECT
 
 public:
   explicit CentralFileStorageWidget(QWidget *parent = nullptr);
-  ~CentralFileStorageWidget() override;
 
-  QCheckBox *enableCentralStorage;
-  QCheckBox *useEncryption;
-  QPushButton *selectStoragePathButton;
-  QLabel *storagePathLabel;
+  std::shared_ptr<QCheckBox> forEncryptedFiles;
+  std::shared_ptr<QCheckBox> forDecryptedFiles;
+  std::shared_ptr<QPushButton> selectStoragePathButton;
+  std::shared_ptr<QLabel> storagePathLabel;
 
 private:
-  QVBoxLayout *CentralFileStorageWidgetLayout;
-  QLabel *title;
-
+  std::unique_ptr<QLabel> title;
 };
 
 #endif // CENTRALFILESTORAGEWIDGET_H

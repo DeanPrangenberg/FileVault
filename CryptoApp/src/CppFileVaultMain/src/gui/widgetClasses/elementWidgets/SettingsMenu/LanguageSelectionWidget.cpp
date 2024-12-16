@@ -1,17 +1,14 @@
 #include "LanguageSelectionWidget.h"
 
 LanguageSelectionWidget::LanguageSelectionWidget(QWidget *parent) : MasterSettingsWidget(parent) {
-  LanguageSelectionWidgetLayout = new QVBoxLayout(this);
-  title = new QLabel("Language Selection", this);
-  languageComboBox = new QComboBox(this);
+  title = std::make_unique<QLabel>("Language Selection", this);
+  languageComboBox = std::make_shared<QComboBox>(this);
   languageComboBox->addItems({"English", "German"});
 
-  LanguageSelectionWidgetLayout->addWidget(title);
-  LanguageSelectionWidgetLayout->addWidget(languageComboBox);
+  comboBoxes.push_back(languageComboBox);
 
-  setLayout(LanguageSelectionWidgetLayout);
-}
+  centralLayout->addWidget(title.get());
+  centralLayout->addWidget(languageComboBox.get());
 
-LanguageSelectionWidget::~LanguageSelectionWidget() {
-  delete LanguageSelectionWidgetLayout;
+  applyStyle();
 }

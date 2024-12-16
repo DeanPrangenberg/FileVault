@@ -1,17 +1,43 @@
-// StyleSetter.h
 #ifndef STYLESETTER_H
 #define STYLESETTER_H
 
-#include <QWidget>
 #include <QPushButton>
-#include <QDebug>
-#include "widgetClasses/elementWidgets/SettingsMenu/MasterSettingsWidget.h"
+#include <QLineEdit>
+#include <QLabel>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QStackedWidget>
 
 class StyleSetter {
 public:
-  void setButtonStyle(QPushButton *button);
-  void setWidgetStyle(QWidget *widget);
-  void setWidgetBackgroundStyle(QWidget *widget);
+  template <typename T>
+  void setPasswordToggleButtonStyle(T button);
+
+  template<typename T>
+  void setCheckBoxStyle(T checkBox);
+
+  template<typename T>
+  void setComboBoxStyle(T comboBox);
+
+  template <typename T>
+  void setPasswordFieldStyle(T field);
+
+  template <typename T>
+  void setLabelBackgroundStyle(T label);
+
+  template <typename T>
+  void setWidgetStyle(T widget);
+
+  template <typename T>
+  void setButtonStyle(T button);
+
+  template<typename T>
+  void setLineEditStyle(T lineEdit);
+
+  template <typename T>
+  void setWidgetBackgroundStyle(T widget);
 };
+
+#include "StyleSetter.tpp"
 
 #endif // STYLESETTER_H

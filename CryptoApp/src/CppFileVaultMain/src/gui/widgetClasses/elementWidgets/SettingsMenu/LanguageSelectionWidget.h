@@ -12,13 +12,11 @@ Q_OBJECT
 
 public:
   explicit LanguageSelectionWidget(QWidget *parent = nullptr);
-  ~LanguageSelectionWidget() override;
 
-  QComboBox *languageComboBox;
+  std::shared_ptr<QComboBox> languageComboBox;
 
 private:
-  QVBoxLayout *LanguageSelectionWidgetLayout;
-  QLabel *title;
+  std::unique_ptr<QLabel> title;
 };
 
 #endif // LANGUAGESELECTIONWIDGET_H

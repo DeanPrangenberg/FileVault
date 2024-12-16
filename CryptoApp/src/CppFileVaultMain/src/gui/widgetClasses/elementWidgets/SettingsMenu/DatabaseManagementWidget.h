@@ -12,13 +12,11 @@ Q_OBJECT
 
 public:
   explicit DatabaseManagementWidget(QWidget *parent = nullptr);
-  ~DatabaseManagementWidget() override;
 
-  QComboBox *databaseExportComboBox;
+  std::shared_ptr<QComboBox>databaseExportComboBox;
 
 private:
-  QVBoxLayout *DatabaseManagementWidgetLayout;
-  QLabel *title;
+  std::unique_ptr<QLabel> title;
 };
 
 #endif // DATABASEMANAGEMENTWIDGET_H

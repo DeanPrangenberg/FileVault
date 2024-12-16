@@ -1,18 +1,17 @@
 #include "LogsLocationWidget.h"
 
 LogsLocationWidget::LogsLocationWidget(QWidget *parent) : MasterSettingsWidget(parent) {
-  LogsLocationWidgetLayout = new QVBoxLayout(this);
-  title = new QLabel("Logs Location", this);
-  selectLogsLocationButton = new QPushButton("Select Logs Location", this);
-  logsLocationLabel = new QLabel("Current Path: ", this);
+  title = std::make_unique<QLabel>("Logs Location", this);
+  selectLogsLocationButton = std::make_shared<QPushButton>("Select Logs Location", this);
+  logsLocationLabel = std::make_unique<QLabel>("Current Path: ", this);
 
-  LogsLocationWidgetLayout->addWidget(title);
-  LogsLocationWidgetLayout->addWidget(selectLogsLocationButton);
-  LogsLocationWidgetLayout->addWidget(logsLocationLabel);
+  selectLogsLocationButton->setFixedHeight(30);
 
-  setLayout(LogsLocationWidgetLayout);
-}
+  buttons.push_back(selectLogsLocationButton);
 
-LogsLocationWidget::~LogsLocationWidget() {
-  delete LogsLocationWidgetLayout;
+  centralLayout->addWidget(title.get());
+  centralLayout->addWidget(selectLogsLocationButton.get());
+  centralLayout->addWidget(logsLocationLabel.get());
+
+  applyStyle();
 }

@@ -12,14 +12,12 @@ Q_OBJECT
 
 public:
   explicit LogsLocationWidget(QWidget *parent = nullptr);
-  ~LogsLocationWidget() override;
 
-  QLabel *logsLocationLabel;
-  QPushButton *selectLogsLocationButton;
+  std::unique_ptr<QLabel> logsLocationLabel;
+  std::shared_ptr<QPushButton> selectLogsLocationButton;
 
 private:
-  QVBoxLayout *LogsLocationWidgetLayout;
-  QLabel *title;
+  std::unique_ptr<QLabel> title;
 };
 
 #endif // LOGSLOCATIONWIDGET_H

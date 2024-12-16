@@ -1,22 +1,24 @@
 #include "CentralFileStorageWidget.h"
 
 CentralFileStorageWidget::CentralFileStorageWidget(QWidget *parent) : MasterSettingsWidget(parent) {
-  CentralFileStorageWidgetLayout = new QVBoxLayout(this);
-  title = new QLabel("Central Storage", this);
-  enableCentralStorage = new QCheckBox("Enable Central Storage", this);
-  useEncryption = new QCheckBox("Use Encryption", this);
-  selectStoragePathButton = new QPushButton("Select Storage Path", this);
-  storagePathLabel = new QLabel("Current Path: ", this);
+  title = std::make_unique<QLabel>("Central Storage", this);
+  forEncryptedFiles = std::make_shared<QCheckBox>("For Encrypted Files", this);
+  forDecryptedFiles = std::make_shared<QCheckBox>("For Decrypted Files", this);
+  selectStoragePathButton = std::make_shared<QPushButton>("Select Storage Path", this);
+  storagePathLabel = std::make_unique<QLabel>("Current Path: ", this);
 
-  CentralFileStorageWidgetLayout->addWidget(title);
-  CentralFileStorageWidgetLayout->addWidget(enableCentralStorage);
-  CentralFileStorageWidgetLayout->addWidget(useEncryption);
-  CentralFileStorageWidgetLayout->addWidget(selectStoragePathButton);
-  CentralFileStorageWidgetLayout->addWidget(storagePathLabel);
+  auto checkBoxLayout = std::make_unique<QHBoxLayout>();
+  checkBoxLayout->addWidget(forEncryptedFiles.get());
+  checkBoxLayout->addWidget(forDecryptedFiles.get());
 
-  setLayout(CentralFileStorageWidgetLayout);
-}
+  centralLayout->addWidget(title.get());
+  centralLayout->addLayout(checkBoxLayout.release());
+  centralLayout->addWidget(selectStoragePathButton.get());
+  centralLayout->addWidget(storagePathLabel.get());
 
-CentralFileStorageWidget::~CentralFileStorageWidget() {
-  delete CentralFileStorageWidgetLayout;
+  checkBoxes.push_back(forEncryptedFiles);
+  checkBoxes.push_back(forDecryptedFiles);
+  buttons.push_back(selectStoragePathButton);
+
+  applyStyle();
 }

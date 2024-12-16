@@ -13,12 +13,11 @@ Q_OBJECT
 public:
   explicit FileDeletionWidget(QWidget *parent = nullptr);
 
-  QCheckBox *deleteAfterEncryption;
-  QCheckBox *deleteAfterDecryption;
+  std::shared_ptr<QCheckBox> deleteAfterEncryption;
+  std::shared_ptr<QCheckBox> deleteAfterDecryption;
 
 private:
-  QVBoxLayout *layout;
-  QLabel *title;
+  std::unique_ptr<QLabel> title;
 };
 
 #endif // FILEDELETIONWIDGET_H

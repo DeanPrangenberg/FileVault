@@ -7,21 +7,20 @@
 #include <QPushButton>
 #include <QLabel>
 #include "MasterSettingsWidget.h"
+#include "../smallElements/PasswordLineEdit.h"
 
 class NewPasswordWidget : public MasterSettingsWidget {
 Q_OBJECT
 
 public:
   explicit NewPasswordWidget(QWidget *parent = nullptr);
-  ~NewPasswordWidget() override;
 
-  QLineEdit *oldPasswordInput;
-  QLineEdit *newPasswordInput;
-  QPushButton *setPasswordButton;
+  std::unique_ptr<PasswordWidget> oldPasswordInput;
+  std::unique_ptr<PasswordWidget> newPasswordInput;
+  std::shared_ptr<QPushButton> setPasswordButton;
 
 private:
-  QVBoxLayout *NewPasswordWidgetLayout;
-  QLabel *title;
+  std::unique_ptr<QLabel> title;
 };
 
 #endif // NEWPASSWORDWIDGET_H

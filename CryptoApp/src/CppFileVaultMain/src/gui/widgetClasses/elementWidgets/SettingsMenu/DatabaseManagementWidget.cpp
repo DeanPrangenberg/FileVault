@@ -1,17 +1,14 @@
 #include "DatabaseManagementWidget.h"
 
 DatabaseManagementWidget::DatabaseManagementWidget(QWidget *parent) : MasterSettingsWidget(parent) {
-  DatabaseManagementWidgetLayout = new QVBoxLayout(this);
-  title = new QLabel("Database Export", this);
-  databaseExportComboBox = new QComboBox(this);
+  title = std::make_unique<QLabel>("Database Export", this);
+  databaseExportComboBox = std::make_shared<QComboBox>(this);
   databaseExportComboBox->addItems({"Encrypted", "Unencrypted"});
 
-  DatabaseManagementWidgetLayout->addWidget(title);
-  DatabaseManagementWidgetLayout->addWidget(databaseExportComboBox);
+  comboBoxes.push_back(databaseExportComboBox);
 
-  setLayout(DatabaseManagementWidgetLayout);
-}
+  centralLayout->addWidget(title.get());
+  centralLayout->addWidget(databaseExportComboBox.get());
 
-DatabaseManagementWidget::~DatabaseManagementWidget() {
-  delete DatabaseManagementWidgetLayout;
+  applyStyle();
 }

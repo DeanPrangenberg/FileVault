@@ -12,12 +12,10 @@ Q_OBJECT
 
 public:
   explicit StandardAlgorithmWidget(QWidget *parent = nullptr);
+  std::shared_ptr<QComboBox> algorithmComboBox;
 
-  QComboBox *algorithmComboBox;
-  ~StandardAlgorithmWidget() override;
 private:
-  QVBoxLayout *StandardAlgorithmWidgetLayout;
-  QLabel *title;
+  std::unique_ptr<QLabel> title;
 };
 
 #endif // STANDARDALGORITHMWIDGET_H

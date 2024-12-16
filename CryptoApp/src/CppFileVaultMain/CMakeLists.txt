@@ -68,7 +68,7 @@ add_executable(CppFileVaultMain
     ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp
     res/app_icon.rc
     src/gui/styleClass/StyleSetter.h
-    src/gui/styleClass/StyleSetter.cpp
+    src/gui/styleClass/StyleSetter.tpp
     src/gui/widgetClasses/Screens/DecryptionScreenWidget.cpp
     src/gui/widgetClasses/Screens/DecryptionScreenWidget.h
     src/gui/widgetClasses/Screens/EncryptionScreenWidget.cpp
@@ -93,6 +93,8 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/elementWidgets/SettingsMenu/DatabaseManagementWidget.h
     src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.cpp
     src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.h
+    "src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h"
+    src/gui/styleClass/StyleSetter.cpp
 )
 
 # Ensure the custom target is built before the main executable

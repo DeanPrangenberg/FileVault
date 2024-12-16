@@ -1,22 +1,19 @@
 #include "NewPasswordWidget.h"
 
 NewPasswordWidget::NewPasswordWidget(QWidget *parent) : MasterSettingsWidget(parent) {
-  NewPasswordWidgetLayout = new QVBoxLayout(this);
-  title = new QLabel("Set New Password", this);
-  oldPasswordInput = new QLineEdit(this);
-  oldPasswordInput->setPlaceholderText("Old Password");
-  newPasswordInput = new QLineEdit(this);
-  newPasswordInput->setPlaceholderText("New Password");
-  setPasswordButton = new QPushButton("Set Password", this);
+  title = std::make_unique<QLabel>("Set New Password", this);
+  oldPasswordInput = std::make_unique<PasswordWidget>(this);
+  oldPasswordInput->passwordField->setPlaceholderText("Old Password...");
+  newPasswordInput = std::make_unique<PasswordWidget>(this);
+  newPasswordInput->passwordField->setPlaceholderText("New Password...");
+  setPasswordButton = std::make_shared<QPushButton>("Set Password", this);
 
-  NewPasswordWidgetLayout->addWidget(title);
-  NewPasswordWidgetLayout->addWidget(oldPasswordInput);
-  NewPasswordWidgetLayout->addWidget(newPasswordInput);
-  NewPasswordWidgetLayout->addWidget(setPasswordButton);
+  buttons.push_back(setPasswordButton);
 
-  setLayout(NewPasswordWidgetLayout);
-}
+  centralLayout->addWidget(title.get());
+  centralLayout->addWidget(oldPasswordInput.get());
+  centralLayout->addWidget(newPasswordInput.get());
+  centralLayout->addWidget(setPasswordButton.get());
 
-NewPasswordWidget::~NewPasswordWidget() {
-  delete NewPasswordWidgetLayout;
+  applyStyle();
 }

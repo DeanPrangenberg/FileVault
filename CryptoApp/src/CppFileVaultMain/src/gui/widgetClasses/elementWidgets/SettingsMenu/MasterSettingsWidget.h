@@ -2,6 +2,14 @@
 #define MASTERSETTINGSWIDGET_H
 
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QVector>
+#include <QPushButton>
+#include <QComboBox>
+#include <QCheckBox>
+#include <QLineEdit>
+#include <memory>
 #include "../../../styleClass/StyleSetter.h"
 
 class MasterSettingsWidget : public QWidget {
@@ -9,13 +17,19 @@ Q_OBJECT
 
 public:
   explicit MasterSettingsWidget(QWidget *parent = nullptr);
-  virtual ~MasterSettingsWidget() {}
+  ~MasterSettingsWidget() override;
 
 protected:
-  void showEvent(QShowEvent *event) override;
+  std::shared_ptr<QLabel> backgroundLabel;
+  std::unique_ptr<QVBoxLayout> centralLayout;
+  QVector<std::shared_ptr<QPushButton>> buttons;
+  QVector<std::shared_ptr<QComboBox>> comboBoxes;
+  QVector<std::shared_ptr<QCheckBox>> checkBoxes;
+  QVector<std::shared_ptr<QLineEdit>> lineEdits;
+  QVector<std::shared_ptr<QLineEdit>> passwordFields;
+  QVector<std::shared_ptr<QPushButton>> passwordToggleButtons;
 
-private:
-  void applyStyle(QWidget *widget);
+  void applyStyle();
 };
 
 #endif // MASTERSETTINGSWIDGET_H

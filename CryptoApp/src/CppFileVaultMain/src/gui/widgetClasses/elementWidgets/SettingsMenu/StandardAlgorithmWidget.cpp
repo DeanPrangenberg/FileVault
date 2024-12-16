@@ -1,17 +1,14 @@
 #include "StandardAlgorithmWidget.h"
 
 StandardAlgorithmWidget::StandardAlgorithmWidget(QWidget *parent) : MasterSettingsWidget(parent) {
-  StandardAlgorithmWidgetLayout = new QVBoxLayout(this);
-  title = new QLabel("Standard Algorithm", this);
-  algorithmComboBox = new QComboBox(this);
+  title = std::make_unique<QLabel>("Standard Algorithm", this);
+  algorithmComboBox = std::make_shared<QComboBox>(this);
   algorithmComboBox->addItems({"AES-128", "AES-256"});
 
-  StandardAlgorithmWidgetLayout->addWidget(title);
-  StandardAlgorithmWidgetLayout->addWidget(algorithmComboBox);
+  comboBoxes.push_back(algorithmComboBox);
 
-  setLayout(StandardAlgorithmWidgetLayout);
-}
+  centralLayout->addWidget(title.get());
+  centralLayout->addWidget(algorithmComboBox.get());
 
-StandardAlgorithmWidget::~StandardAlgorithmWidget() {
-  delete StandardAlgorithmWidgetLayout;
+  applyStyle();
 }

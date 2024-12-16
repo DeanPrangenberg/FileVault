@@ -1,56 +1,64 @@
 #include "SettingsScreenWidget.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QFile>
+#include <QFileDialog>
 
 SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
-  SettingsScreenWidgetLayout = new QGridLayout(this);
+  SettingsScreenWidgetLayout = std::make_unique<QGridLayout>(this);
+  SettingsScreenWidgetLayout->setAlignment(Qt::AlignTop);
+  SettingsScreenWidgetLayout->setContentsMargins(0, 0, 0, 0);
 
   // Title
-  auto *title = new QLabel("Settings", this);
+  title = std::make_unique<QLabel>("Settings", this);
   title->setAlignment(Qt::AlignCenter);
-  SettingsScreenWidgetLayout->addWidget(title, 0, 0, 1, 2);
-
-  StyleSetter styleSetter;
-
-  // File Deletion Section
-  fileDeletionWidget = new FileDeletionWidget();
-  SettingsScreenWidgetLayout->addWidget(fileDeletionWidget, 1, 0);
-
-  // Standard Algorithm Section
-  algorithmWidget = new StandardAlgorithmWidget();
-  SettingsScreenWidgetLayout->addWidget(algorithmWidget, 1, 1);
-
-  // Logs Location Section
-  logsLocationWidget = new LogsLocationWidget();
-  SettingsScreenWidgetLayout->addWidget(logsLocationWidget, 2, 0);
-
-  // Set New Password Section
-  passwordWidget = new NewPasswordWidget();
-  SettingsScreenWidgetLayout->addWidget(passwordWidget, 2, 1);
+  SettingsScreenWidgetLayout->addWidget(title.get(), 0, 0, 1, 2);
 
   // Language Selection Section
-  languageWidget = new LanguageSelectionWidget();
-  SettingsScreenWidgetLayout->addWidget(languageWidget, 3, 0);
+  languageWidget = std::make_unique<LanguageSelectionWidget>();
+  SettingsScreenWidgetLayout->addWidget(languageWidget.get(), 1, 0, 1, 2);
+
+  // Standard Algorithm Section
+  algorithmWidget = std::make_unique<StandardAlgorithmWidget>();
+  SettingsScreenWidgetLayout->addWidget(algorithmWidget.get(), 2, 1);
 
   // Database Export Section
-  databaseExportWidget = new DatabaseManagementWidget();
-  SettingsScreenWidgetLayout->addWidget(databaseExportWidget, 3, 1);
+  databaseExportWidget = std::make_unique<DatabaseManagementWidget>();
+  SettingsScreenWidgetLayout->addWidget(databaseExportWidget.get(), 2, 0);
+
+  // File Deletion Section
+  fileDeletionWidget = std::make_unique<FileDeletionWidget>();
+  SettingsScreenWidgetLayout->addWidget(fileDeletionWidget.get(), 3, 0);
+
+  // Set std::make_unique<Password Section
+  passwordWidget = std::make_unique<NewPasswordWidget>();
+  SettingsScreenWidgetLayout->addWidget(passwordWidget.get(), 3, 1);
+
+  // Logs Location Section
+  logsLocationWidget = std::make_unique<LogsLocationWidget>();
+  SettingsScreenWidgetLayout->addWidget(logsLocationWidget.get(), 4, 0, 1, 2);
 
   // Central Storage Section
-  centralStorageWidget = new CentralFileStorageWidget();
-  SettingsScreenWidgetLayout->addWidget(centralStorageWidget, 4, 0, 1, 2);
+  centralStorageWidget = std::make_unique<CentralFileStorageWidget>();
+  SettingsScreenWidgetLayout->addWidget(centralStorageWidget.get(), 5, 0, 1, 2);
 
-  setLayout(SettingsScreenWidgetLayout);
+  setLayout(SettingsScreenWidgetLayout.get());
 
   // Connect signals to slots
-  connect(logsLocationWidget->selectLogsLocationButton, &QPushButton::clicked, this, &SettingsScreenWidget::selectLogsLocation);
-  connect(passwordWidget->setPasswordButton, &QPushButton::clicked, this, &SettingsScreenWidget::setPassword);
-  connect(centralStorageWidget->selectStoragePathButton, &QPushButton::clicked, this, &SettingsScreenWidget::selectStoragePath);
+  connect(logsLocationWidget->selectLogsLocationButton.get(), &QPushButton::clicked, this,
+          &SettingsScreenWidget::selectLogsLocation);
+  connect(passwordWidget->setPasswordButton.get(), &QPushButton::clicked, this, &SettingsScreenWidget::setPassword);
+  connect(centralStorageWidget->selectStoragePathButton.get(), &QPushButton::clicked, this,
+          &SettingsScreenWidget::selectStoragePath);
 
   // Load settings from file
   loadSettings();
 }
 
 void SettingsScreenWidget::selectLogsLocation() {
-  QString dir = QFileDialog::getExistingDirectory(this, tr("Select Logs Directory"), "", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+  QString dir = QFileDialog::getExistingDirectory(this, tr("Select Logs Directory"), "",
+                                                  QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
   if (!dir.isEmpty()) {
     // Update the label and save the setting
     logsLocationWidget->logsLocationLabel->setText("Current Path: " + dir);
@@ -64,7 +72,8 @@ void SettingsScreenWidget::setPassword() {
 }
 
 void SettingsScreenWidget::selectStoragePath() {
-  QString dir = QFileDialog::getExistingDirectory(this, tr("Select Storage Directory"), "", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+  QString dir = QFileDialog::getExistingDirectory(this, tr("Select Storage Directory"), "",
+                                                  QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
   if (!dir.isEmpty()) {
     // Update the label and save the setting
     centralStorageWidget->storagePathLabel->setText("Current Path: " + dir);
@@ -73,66 +82,42 @@ void SettingsScreenWidget::selectStoragePath() {
 }
 
 void SettingsScreenWidget::saveSettings() {
-  QFile file("settings.txt");
-  if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-    QTextStream out(&file);
-    // Save settings to file
-    out << "DeleteAfterEncryption=" << fileDeletionWidget->deleteAfterEncryption->isChecked() << "\n";
-    out << "DeleteAfterDecryption=" << fileDeletionWidget->deleteAfterDecryption->isChecked() << "\n";
-    out << "Algorithm=" << algorithmWidget->algorithmComboBox->currentText() << "\n";
-    out << "LogsLocation=" << logsLocationWidget->logsLocationLabel->text().remove("Current Path: ") << "\n";
-    out << "Language=" << languageWidget->languageComboBox->currentText() << "\n";
-    out << "DatabaseExport=" << databaseExportWidget->databaseExportComboBox->currentText() << "\n";
-    out << "EnableCentralStorage=" << centralStorageWidget->enableCentralStorage->isChecked() << "\n";
-    out << "UseEncryption=" << centralStorageWidget->useEncryption->isChecked() << "\n";
-    out << "StoragePath=" << centralStorageWidget->storagePathLabel->text().remove("Current Path: ") << "\n";
+  QJsonObject settings;
+  settings["DeleteAfterEncryption"] = fileDeletionWidget->deleteAfterEncryption->isChecked();
+  settings["DeleteAfterDecryption"] = fileDeletionWidget->deleteAfterDecryption->isChecked();
+  settings["Algorithm"] = algorithmWidget->algorithmComboBox->currentText();
+  settings["LogsLocation"] = logsLocationWidget->logsLocationLabel->text().remove("Current Path: ");
+  settings["Language"] = languageWidget->languageComboBox->currentText();
+  settings["DatabaseExport"] = databaseExportWidget->databaseExportComboBox->currentText();
+  settings["ForEncryptedFiles"] = centralStorageWidget->forEncryptedFiles->isChecked();
+  settings["ForDecryptedFiles"] = centralStorageWidget->forDecryptedFiles->isChecked();
+  settings["StoragePath"] = centralStorageWidget->storagePathLabel->text().remove("Current Path: ");
+
+  QJsonDocument doc(settings);
+  QFile file("settings.json");
+  if (file.open(QIODevice::WriteOnly)) {
+    file.write(doc.toJson());
     file.close();
   }
 }
 
 void SettingsScreenWidget::loadSettings() {
-  QFile file("settings.txt");
-  if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    QTextStream in(&file);
-    // Load settings from file
-    while (!in.atEnd()) {
-      QString line = in.readLine();
-      QStringList parts = line.split("=");
-      if (parts.size() == 2) {
-        QString key = parts[0];
-        QString value = parts[1];
-        if (key == "DeleteAfterEncryption") {
-          fileDeletionWidget->deleteAfterEncryption->setChecked(value == "1");
-        } else if (key == "DeleteAfterDecryption") {
-          fileDeletionWidget->deleteAfterDecryption->setChecked(value == "1");
-        } else if (key == "Algorithm") {
-          algorithmWidget->algorithmComboBox->setCurrentText(value);
-        } else if (key == "LogsLocation") {
-          logsLocationWidget->logsLocationLabel->setText("Current Path: " + value);
-        } else if (key == "Language") {
-          languageWidget->languageComboBox->setCurrentText(value);
-        } else if (key == "DatabaseExport") {
-          databaseExportWidget->databaseExportComboBox->setCurrentText(value);
-        } else if (key == "EnableCentralStorage") {
-          centralStorageWidget->enableCentralStorage->setChecked(value == "1");
-        } else if (key == "UseEncryption") {
-          centralStorageWidget->useEncryption->setChecked(value == "1");
-        } else if (key == "StoragePath") {
-          centralStorageWidget->storagePathLabel->setText("Current Path: " + value);
-        }
-      }
-    }
+  QFile file("settings.json");
+  if (file.open(QIODevice::ReadOnly)) {
+    QByteArray data = file.readAll();
+    QJsonDocument doc(QJsonDocument::fromJson(data));
+    QJsonObject settings = doc.object();
+
+    fileDeletionWidget->deleteAfterEncryption->setChecked(settings["DeleteAfterEncryption"].toBool());
+    fileDeletionWidget->deleteAfterDecryption->setChecked(settings["DeleteAfterDecryption"].toBool());
+    algorithmWidget->algorithmComboBox->setCurrentText(settings["Algorithm"].toString());
+    logsLocationWidget->logsLocationLabel->setText("Current Path: " + settings["LogsLocation"].toString());
+    languageWidget->languageComboBox->setCurrentText(settings["Language"].toString());
+    databaseExportWidget->databaseExportComboBox->setCurrentText(settings["DatabaseExport"].toString());
+    centralStorageWidget->forEncryptedFiles->setChecked(settings["ForEncryptedFiles"].toBool());
+    centralStorageWidget->forDecryptedFiles->setChecked(settings["ForDecryptedFiles"].toBool());
+    centralStorageWidget->storagePathLabel->setText("Current Path: " + settings["StoragePath"].toString());
+
     file.close();
   }
-}
-
-SettingsScreenWidget::~SettingsScreenWidget() {
-  delete fileDeletionWidget;
-  delete algorithmWidget;
-  delete logsLocationWidget;
-  delete passwordWidget;
-  delete languageWidget;
-  delete databaseExportWidget;
-  delete centralStorageWidget;
-  delete SettingsScreenWidgetLayout;
 }
