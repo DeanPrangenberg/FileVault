@@ -22,3 +22,5 @@ template void StyleSetter::setLineEditStyle(std::shared_ptr<QLineEdit>);
 template void StyleSetter::setLineEditStyle(std::unique_ptr<QLineEdit>);
 template void StyleSetter::setWidgetBackgroundStyle(std::shared_ptr<QWidget>);
 template void StyleSetter::setWidgetBackgroundStyle(std::unique_ptr<QWidget>);
+template void StyleSetter::setScrollAreaStyle(std::shared_ptr<QScrollArea>);
+template void StyleSetter::setScrollAreaStyle(std::unique_ptr<QScrollArea>);

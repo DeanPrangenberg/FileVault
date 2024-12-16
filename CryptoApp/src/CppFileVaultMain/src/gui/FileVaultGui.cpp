@@ -10,18 +10,17 @@ FileVaultGui::FileVaultGui(QMainWindow *parent) : QMainWindow(parent) {
   centralWidget = std::make_unique<QWidget>(this);
   setCentralWidget(centralWidget.get());
 
-  mainLayout = std::make_unique<QVBoxLayout>(centralWidget.get());
-  SplitterLayout = std::make_unique<QHBoxLayout>();
-  screenStack = std::make_unique<QStackedWidget>();
+  SplitterLayout = std::make_unique<QHBoxLayout>(centralWidget.get());
 
-  sidebar = std::make_unique<QWidget>();
+  sidebar = std::make_unique<QWidget>(this);
   sideBarLayout = std::make_unique<QVBoxLayout>(sidebar.get());
-
   Logo = std::make_unique<QLabel>();
-  StatisticsSwitch = std::make_unique<QPushButton>();
-  EncryptSwitch = std::make_unique<QPushButton>();
-  DecryptSwitch = std::make_unique<QPushButton>();
-  SettingsSwitch = std::make_unique<QPushButton>();
+  StatisticsSwitch = std::make_unique<QPushButton>(this);
+  EncryptSwitch = std::make_unique<QPushButton>(this);
+  DecryptSwitch = std::make_unique<QPushButton>(this);
+  SettingsSwitch = std::make_unique<QPushButton>(this);
+
+  screenStack = std::make_unique<QStackedWidget>(this);
 
   setupUi();
 }
@@ -29,11 +28,9 @@ FileVaultGui::FileVaultGui(QMainWindow *parent) : QMainWindow(parent) {
 FileVaultGui::~FileVaultGui() = default;
 
 void FileVaultGui::setupUi() {
-  mainLayout->addLayout(SplitterLayout.get());
   SplitterLayout->addWidget(sidebar.get());
   SplitterLayout->addWidget(screenStack.get());
 
-  sidebar->setLayout(sideBarLayout.get());
   sidebar->setFixedWidth(200);
 
   // Set radial gradient background for the central widget
@@ -90,11 +87,14 @@ void FileVaultGui::setupSideBar() {
   sideBarLayout->addWidget(Logo.get());
   sideBarLayout->addStretch(); // spacer
 
+  qDebug() << "FileVaultMainGui: Set button text";
+
   // Adding buttons to the sidebar
   StatisticsSwitch->setText("Statistics");
   EncryptSwitch->setText("Encrypt");
   DecryptSwitch->setText("Decrypt");
 
+  qDebug() << "FileVaultMainGui: Adding buttons to the sidebar";
   sideBarLayout->addWidget(StatisticsSwitch.get());
   sideBarLayout->addWidget(EncryptSwitch.get());
   sideBarLayout->addWidget(DecryptSwitch.get());
@@ -105,18 +105,25 @@ void FileVaultGui::setupSideBar() {
 }
 
 void FileVaultGui::setupStackedWidget() {
+  qDebug() << "FileVaultMainGui: Setting up screen hashmap";
   // Add the screens to the screenHash
   screenHash.insert("Statistics", std::make_shared<StatisticsScreenWidget>());
+  qDebug() << "FileVaultMainGui: Added statistics screen";
   screenHash.insert("Encrypt", std::make_shared<EncryptionScreenWidget>());
+  qDebug() << "FileVaultMainGui: Added encryption screen";
   screenHash.insert("Decrypt", std::make_shared<DecryptionScreenWidget>());
+  qDebug() << "FileVaultMainGui: Added decryption screen";
   screenHash.insert("Settings", std::make_shared<SettingsScreenWidget>());
+  qDebug() << "FileVaultMainGui: Added settings screen";
 
+  qDebug() << "FileVaultMainGui: Setting up the stacked widget";
   // Add the screens to the stacked widget
   screenStack->addWidget(screenHash["Statistics"].get());
   screenStack->addWidget(screenHash["Encrypt"].get());
   screenStack->addWidget(screenHash["Decrypt"].get());
   screenStack->addWidget(screenHash["Settings"].get());
 
+  qDebug() << "FileVaultMainGui: Setting start screen";
   // Set the default screen
   screenStack->setCurrentWidget(screenHash["Settings"].get());
 }

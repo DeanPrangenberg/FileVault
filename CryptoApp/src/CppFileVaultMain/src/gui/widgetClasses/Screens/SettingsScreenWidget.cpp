@@ -1,60 +1,78 @@
 #include "SettingsScreenWidget.h"
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QFile>
-#include <QFileDialog>
 
 SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
-  SettingsScreenWidgetLayout = std::make_unique<QGridLayout>(this);
-  SettingsScreenWidgetLayout->setAlignment(Qt::AlignTop);
-  SettingsScreenWidgetLayout->setContentsMargins(0, 0, 0, 0);
+  qDebug() << "SettingsScreenWidget: Creating SettingsScreenWidget";
 
-  // Title
-  title = std::make_unique<QLabel>("Settings", this);
+  scrollArea = std::make_unique<QScrollArea>(this);
+  scrollArea->setWidgetResizable(true);
+  scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  scrollArea->setContentsMargins(0, 0, 0, 0);
+
+  StyleSetter styleSetter;
+  styleSetter.setScrollAreaStyle(scrollArea.get());
+
+  containerWidget = std::make_unique<QWidget>(scrollArea.get());
+  containerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  containerWidget->setObjectName("SettingsScreenWidget");
+  containerWidget->setStyleSheet(QString("QWidget#%1 {"
+                                         "background: Transparent;"
+                                         "}"
+  ).arg(containerWidget->objectName()));
+  scrollArea->setWidget(containerWidget.get());
+
+  SettingsScreenWidgetLayout = std::make_unique<QGridLayout>(containerWidget.get());
+
+  SettingsScreenWidgetLayout->setRowStretch(0, 1);
+  SettingsScreenWidgetLayout->setRowStretch(1, 4);
+  SettingsScreenWidgetLayout->setRowStretch(2, 4);
+  SettingsScreenWidgetLayout->setRowStretch(3, 5);
+  SettingsScreenWidgetLayout->setRowStretch(4, 4);
+  SettingsScreenWidgetLayout->setRowStretch(5, 5);
+
+  SettingsScreenWidgetLayout->setColumnStretch(0, 1);
+  SettingsScreenWidgetLayout->setColumnStretch(1, 1);
+
+  title = std::make_unique<QLabel>("Settings", containerWidget.get());
   title->setAlignment(Qt::AlignCenter);
   SettingsScreenWidgetLayout->addWidget(title.get(), 0, 0, 1, 2);
 
-  // Language Selection Section
-  languageWidget = std::make_unique<LanguageSelectionWidget>();
+  languageWidget = std::make_unique<LanguageSelectionWidget>(containerWidget.get());
   SettingsScreenWidgetLayout->addWidget(languageWidget.get(), 1, 0, 1, 2);
 
-  // Standard Algorithm Section
-  algorithmWidget = std::make_unique<StandardAlgorithmWidget>();
+  algorithmWidget = std::make_unique<StandardAlgorithmWidget>(containerWidget.get());
   SettingsScreenWidgetLayout->addWidget(algorithmWidget.get(), 2, 1);
 
-  // Database Export Section
-  databaseExportWidget = std::make_unique<DatabaseManagementWidget>();
+  databaseExportWidget = std::make_unique<DatabaseManagementWidget>(containerWidget.get());
   SettingsScreenWidgetLayout->addWidget(databaseExportWidget.get(), 2, 0);
 
-  // File Deletion Section
-  fileDeletionWidget = std::make_unique<FileDeletionWidget>();
+  fileDeletionWidget = std::make_unique<FileDeletionWidget>(containerWidget.get());
   SettingsScreenWidgetLayout->addWidget(fileDeletionWidget.get(), 3, 0);
 
-  // Set std::make_unique<Password Section
-  passwordWidget = std::make_unique<NewPasswordWidget>();
+  passwordWidget = std::make_unique<NewPasswordWidget>(containerWidget.get());
   SettingsScreenWidgetLayout->addWidget(passwordWidget.get(), 3, 1);
 
-  // Logs Location Section
-  logsLocationWidget = std::make_unique<LogsLocationWidget>();
+  logsLocationWidget = std::make_unique<LogsLocationWidget>(containerWidget.get());
   SettingsScreenWidgetLayout->addWidget(logsLocationWidget.get(), 4, 0, 1, 2);
 
-  // Central Storage Section
-  centralStorageWidget = std::make_unique<CentralFileStorageWidget>();
+  centralStorageWidget = std::make_unique<CentralFileStorageWidget>(containerWidget.get());
   SettingsScreenWidgetLayout->addWidget(centralStorageWidget.get(), 5, 0, 1, 2);
 
-  setLayout(SettingsScreenWidgetLayout.get());
+  containerWidget->setLayout(SettingsScreenWidgetLayout.get());
 
-  // Connect signals to slots
+  mainLayout = std::make_unique<QVBoxLayout>(this);
+  mainLayout->addWidget(scrollArea.get());
+  setLayout(mainLayout.get());
+
   connect(logsLocationWidget->selectLogsLocationButton.get(), &QPushButton::clicked, this,
           &SettingsScreenWidget::selectLogsLocation);
   connect(passwordWidget->setPasswordButton.get(), &QPushButton::clicked, this, &SettingsScreenWidget::setPassword);
   connect(centralStorageWidget->selectStoragePathButton.get(), &QPushButton::clicked, this,
           &SettingsScreenWidget::selectStoragePath);
 
-  // Load settings from file
   loadSettings();
 }
+
 
 void SettingsScreenWidget::selectLogsLocation() {
   QString dir = QFileDialog::getExistingDirectory(this, tr("Select Logs Directory"), "",

@@ -2,6 +2,7 @@
 
 LanguageSelectionWidget::LanguageSelectionWidget(QWidget *parent) : MasterSettingsWidget(parent) {
   title = std::make_unique<QLabel>("Language Selection", this);
+
   languageComboBox = std::make_shared<QComboBox>(this);
   languageComboBox->addItems({"English", "German"});
 
@@ -11,4 +12,5 @@ LanguageSelectionWidget::LanguageSelectionWidget(QWidget *parent) : MasterSettin
   centralLayout->addWidget(languageComboBox.get());
 
   applyStyle();
+
 }

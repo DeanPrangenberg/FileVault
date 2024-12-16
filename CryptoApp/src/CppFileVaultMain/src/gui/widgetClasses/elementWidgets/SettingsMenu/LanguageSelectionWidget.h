@@ -12,6 +12,7 @@ Q_OBJECT
 
 public:
   explicit LanguageSelectionWidget(QWidget *parent = nullptr);
+  ~LanguageSelectionWidget() override = default;
 
   std::shared_ptr<QComboBox> languageComboBox;
 

@@ -93,7 +93,7 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/elementWidgets/SettingsMenu/DatabaseManagementWidget.h
     src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.cpp
     src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.h
-    "src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h"
+    src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h
     src/gui/styleClass/StyleSetter.cpp
 )
 

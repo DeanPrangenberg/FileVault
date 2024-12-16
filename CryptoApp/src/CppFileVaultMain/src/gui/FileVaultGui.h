@@ -21,7 +21,6 @@ public:
 private:
   // UI Elements
   std::unique_ptr<QWidget> centralWidget;
-  std::unique_ptr<QVBoxLayout> mainLayout;
   std::unique_ptr<QHBoxLayout> SplitterLayout;
   std::unique_ptr<QStackedWidget> screenStack;
 

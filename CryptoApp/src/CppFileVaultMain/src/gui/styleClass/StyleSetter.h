@@ -1,3 +1,4 @@
+// In StyleSetter.h
 #ifndef STYLESETTER_H
 #define STYLESETTER_H
 
@@ -6,6 +7,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QScrollArea>
 #include <QStackedWidget>
 
 class StyleSetter {
@@ -36,6 +38,9 @@ public:
 
   template <typename T>
   void setWidgetBackgroundStyle(T widget);
+
+  template <typename T>
+  void setScrollAreaStyle(T scrollArea);
 };
 
 #include "StyleSetter.tpp"

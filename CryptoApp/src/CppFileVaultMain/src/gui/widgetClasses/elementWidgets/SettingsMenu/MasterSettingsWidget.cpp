@@ -1,13 +1,13 @@
 #include "MasterSettingsWidget.h"
 
 MasterSettingsWidget::MasterSettingsWidget(QWidget *parent) : QWidget(parent) {
-  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
   auto mainLayout = std::make_unique<QVBoxLayout>(this);
   mainLayout->setContentsMargins(0, 0, 0, 0);
   mainLayout->setSpacing(0);
 
-  backgroundLabel = std::shared_ptr<QLabel>();
+  backgroundLabel = std::make_shared<QLabel>(this);
   backgroundLabel->setObjectName("MasterSettingsWidget");
   backgroundLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -15,28 +15,31 @@ MasterSettingsWidget::MasterSettingsWidget(QWidget *parent) : QWidget(parent) {
   setLayout(mainLayout.release());
 
   centralLayout = std::make_unique<QVBoxLayout>(backgroundLabel.get());
-  centralLayout->setContentsMargins(0, 0, 0, 0);
-  centralLayout->setSpacing(0);
+  centralLayout->setContentsMargins(5, 5, 5, 5);
+  centralLayout->setSpacing(5);
 }
 
 void MasterSettingsWidget::applyStyle() {
   StyleSetter styleSetter;
+  styleSetter.setWidgetBackgroundStyle(backgroundLabel);
 
   for (auto& button  : buttons) {
-    styleSetter.setButtonStyle(button.get());
+    styleSetter.setButtonStyle(button);
   }
 
   for (auto& comboBox : comboBoxes) {
-    styleSetter.setComboBoxStyle(comboBox.get());
+    styleSetter.setComboBoxStyle(comboBox);
   }
 
   for (auto& checkBox : checkBoxes) {
-    styleSetter.setCheckBoxStyle(checkBox.get());
+    styleSetter.setCheckBoxStyle(checkBox);
   }
 
   for (auto& lineEdit : lineEdits) {
-    styleSetter.setLineEditStyle(lineEdit.get());
+    styleSetter.setLineEditStyle(lineEdit);
   }
+
+  adjustSize();
 }
 
 MasterSettingsWidget::~MasterSettingsWidget() = default;
