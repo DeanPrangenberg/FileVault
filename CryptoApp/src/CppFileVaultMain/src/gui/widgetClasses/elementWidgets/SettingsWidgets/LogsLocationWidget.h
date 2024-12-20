@@ -15,9 +15,6 @@ public:
 
   std::unique_ptr<QLabel> logsLocationLabel;
   std::shared_ptr<QPushButton> selectLogsLocationButton;
-
-private:
-  std::unique_ptr<QLabel> title;
 };
 
 #endif // LOGSLOCATIONWIDGET_H

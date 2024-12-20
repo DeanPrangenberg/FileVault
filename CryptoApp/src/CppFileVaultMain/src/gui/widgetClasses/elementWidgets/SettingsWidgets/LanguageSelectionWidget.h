@@ -15,9 +15,6 @@ public:
   ~LanguageSelectionWidget() override = default;
 
   std::shared_ptr<QComboBox> languageComboBox;
-
-private:
-  std::unique_ptr<QLabel> title;
 };
 
 #endif // LANGUAGESELECTIONWIDGET_H

@@ -18,9 +18,6 @@ public:
   std::unique_ptr<PasswordWidget> oldPasswordInput;
   std::unique_ptr<PasswordWidget> newPasswordInput;
   std::shared_ptr<QPushButton> setPasswordButton;
-
-private:
-  std::unique_ptr<QLabel> title;
 };
 
 #endif // NEWPASSWORDWIDGET_H

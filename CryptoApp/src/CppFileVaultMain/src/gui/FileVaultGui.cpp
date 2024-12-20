@@ -5,7 +5,8 @@
 #include "widgetClasses/Screens/EncryptionScreenWidget.h"
 
 FileVaultGui::FileVaultGui(QMainWindow *parent) : QMainWindow(parent) {
-  setFixedSize(screenWidth, screenHeight);
+  setWindowTitle("FileVault");
+  setMinimumSize(screenWidth, screenHeight);
 
   centralWidget = std::make_unique<QWidget>(this);
   setCentralWidget(centralWidget.get());
@@ -102,6 +103,11 @@ void FileVaultGui::setupSideBar() {
 
   SettingsSwitch->setText("Settings");
   sideBarLayout->addWidget(SettingsSwitch.get());
+
+  connect(StatisticsSwitch.get(), &QPushButton::clicked, this, [this] { switchScreens("Statistics"); });
+  connect(EncryptSwitch.get(), &QPushButton::clicked, this, [this] { switchScreens("Encrypt"); });
+  connect(DecryptSwitch.get(), &QPushButton::clicked, this, [this] { switchScreens("Decrypt"); });
+  connect(SettingsSwitch.get(), &QPushButton::clicked, this, [this] { switchScreens("Settings"); });
 }
 
 void FileVaultGui::setupStackedWidget() {
@@ -125,5 +131,9 @@ void FileVaultGui::setupStackedWidget() {
 
   qDebug() << "FileVaultMainGui: Setting start screen";
   // Set the default screen
-  screenStack->setCurrentWidget(screenHash["Settings"].get());
+  screenStack->setCurrentWidget(screenHash["Encrypt"].get());
+}
+
+void FileVaultGui::switchScreens(const QString &screenName) {
+  screenStack->setCurrentWidget(screenHash[screenName].get());
 }

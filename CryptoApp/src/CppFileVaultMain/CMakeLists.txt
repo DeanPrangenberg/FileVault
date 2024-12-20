@@ -77,24 +77,29 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/Screens/SettingsScreenWidget.h
     src/gui/widgetClasses/Screens/StatisticsScreenWidget.cpp
     src/gui/widgetClasses/Screens/StatisticsScreenWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/MasterSettingsWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/MasterSettingsWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/FileDeletionWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/FileDeletionWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/StandardAlgorithmWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/StandardAlgorithmWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/LogsLocationWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/LogsLocationWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/NewPasswordWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/NewPasswordWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/LanguageSelectionWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/LanguageSelectionWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/DatabaseManagementWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/DatabaseManagementWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsMenu/CentralFileStorageWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/MasterSettingsWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/MasterSettingsWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/FileDeletionWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/FileDeletionWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/StandardAlgorithmWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/StandardAlgorithmWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/LogsLocationWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/LogsLocationWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/NewPasswordWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/NewPasswordWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/LanguageSelectionWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/LanguageSelectionWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.h
     src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h
     src/gui/styleClass/StyleSetter.cpp
+    src/gui/widgetClasses/elementWidgets/MasterClasses/FilePicker.h
+    src/gui/widgetClasses/elementWidgets/MasterClasses/FilePicker.cpp
+    ../shared/Threadpool.cpp
+    ../shared/Threadpool.h
+    src/gui/widgetClasses/elementWidgets/smallElements/LoadingWindow.cpp
 )
 
 # Ensure the custom target is built before the main executable

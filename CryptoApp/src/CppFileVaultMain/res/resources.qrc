@@ -5,6 +5,7 @@
         <file>checkmark.png</file>
         <file>Eye.png</file>
         <file>NoEye.png</file>
+        <file>loading.gif</file>
     </qresource>
     <qresource prefix="/logos">
         <file>LogoWithNameH.png</file>

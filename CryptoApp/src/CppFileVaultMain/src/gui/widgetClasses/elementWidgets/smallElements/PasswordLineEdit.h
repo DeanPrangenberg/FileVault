@@ -28,6 +28,7 @@ public:
 
     passwordField = std::make_unique<QLineEdit>(this);
     passwordField->setEchoMode(QLineEdit::Password);
+    passwordField->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     toggleButton = std::make_unique<QPushButton>(this);
     toggleButton->setIcon(QIcon(":/icons/Eye.png"));
@@ -40,6 +41,8 @@ public:
 
     mainLayout->addWidget(passwordField.get());
     mainLayout->addWidget(toggleButton.get());
+
+    setLayout(mainLayout.get());
 
     connect(toggleButton.get(), &QPushButton::clicked, this, &PasswordWidget::togglePasswordVisibility);
   }

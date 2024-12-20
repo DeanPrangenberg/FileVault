@@ -41,6 +41,7 @@ private:
   void setupUi();
   void setupSideBar();
   void setupStackedWidget();
+  void switchScreens(const QString &screenName);
 };
 
 #endif // FILEVAULTGUI_H

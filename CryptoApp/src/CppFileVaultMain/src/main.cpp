@@ -210,8 +210,9 @@ void testRun(int testRuns) {
 }
 
 int main(int argc, char *argv[]) {
-  /*int testRuns = 20;
-  testRun(testRuns);*/
+ /*int testRuns = 20;
+  testRun(testRuns);
+  return 0;*/
 
   QApplication app(argc, argv);
 

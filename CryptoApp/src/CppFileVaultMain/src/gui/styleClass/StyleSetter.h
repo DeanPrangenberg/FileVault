@@ -41,6 +41,12 @@ public:
 
   template <typename T>
   void setScrollAreaStyle(T scrollArea);
+
+  template <typename T>
+  void setButtonStyleNoBorder(T button);
+
+  template <typename T>
+  void setLabelStyleNoBorder(T label);
 };
 
 #include "StyleSetter.tpp"

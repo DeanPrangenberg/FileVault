@@ -3,73 +3,89 @@
 SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   qDebug() << "SettingsScreenWidget: Creating SettingsScreenWidget";
 
+  // Scroll Area setup
   scrollArea = std::make_unique<QScrollArea>(this);
   scrollArea->setWidgetResizable(true);
   scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  scrollArea->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
   scrollArea->setContentsMargins(0, 0, 0, 0);
 
+  // Apply styling to scroll area
   StyleSetter styleSetter;
   styleSetter.setScrollAreaStyle(scrollArea.get());
 
+  // Container widget inside the scroll area
   containerWidget = std::make_unique<QWidget>(scrollArea.get());
   containerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   containerWidget->setObjectName("SettingsScreenWidget");
-  containerWidget->setStyleSheet(QString("QWidget#%1 {"
-                                         "background: Transparent;"
-                                         "}"
-  ).arg(containerWidget->objectName()));
-  scrollArea->setWidget(containerWidget.get());
+  containerWidget->setStyleSheet(QString("QWidget#%1 { background: Transparent; }")
+                                     .arg(containerWidget->objectName()));
 
+  // Layout for the container widget
   SettingsScreenWidgetLayout = std::make_unique<QGridLayout>(containerWidget.get());
+  SettingsScreenWidgetLayout->setContentsMargins(10, 10, 10, 10);
+  SettingsScreenWidgetLayout->setSpacing(10);
 
-  SettingsScreenWidgetLayout->setRowStretch(0, 1);
-  SettingsScreenWidgetLayout->setRowStretch(1, 4);
-  SettingsScreenWidgetLayout->setRowStretch(2, 4);
-  SettingsScreenWidgetLayout->setRowStretch(3, 5);
-  SettingsScreenWidgetLayout->setRowStretch(4, 4);
-  SettingsScreenWidgetLayout->setRowStretch(5, 5);
-
-  SettingsScreenWidgetLayout->setColumnStretch(0, 1);
-  SettingsScreenWidgetLayout->setColumnStretch(1, 1);
-
+  // Add widgets to the layout
   title = std::make_unique<QLabel>("Settings", containerWidget.get());
   title->setAlignment(Qt::AlignCenter);
+  title->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   SettingsScreenWidgetLayout->addWidget(title.get(), 0, 0, 1, 2);
 
   languageWidget = std::make_unique<LanguageSelectionWidget>(containerWidget.get());
+  languageWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(languageWidget.get(), 1, 0, 1, 2);
+  qDebug() << "SettingsScreenWidget: LanguageSelectionWidget added";
 
   algorithmWidget = std::make_unique<StandardAlgorithmWidget>(containerWidget.get());
+  algorithmWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(algorithmWidget.get(), 2, 1);
 
   databaseExportWidget = std::make_unique<DatabaseManagementWidget>(containerWidget.get());
+  databaseExportWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(databaseExportWidget.get(), 2, 0);
 
   fileDeletionWidget = std::make_unique<FileDeletionWidget>(containerWidget.get());
+  fileDeletionWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(fileDeletionWidget.get(), 3, 0);
 
   passwordWidget = std::make_unique<NewPasswordWidget>(containerWidget.get());
+  passwordWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(passwordWidget.get(), 3, 1);
 
   logsLocationWidget = std::make_unique<LogsLocationWidget>(containerWidget.get());
+  logsLocationWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(logsLocationWidget.get(), 4, 0, 1, 2);
 
   centralStorageWidget = std::make_unique<CentralFileStorageWidget>(containerWidget.get());
+  centralStorageWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(centralStorageWidget.get(), 5, 0, 1, 2);
 
+  // Set the layout for the container widget
   containerWidget->setLayout(SettingsScreenWidgetLayout.get());
+  containerWidget->setMinimumSize(SettingsScreenWidgetLayout->sizeHint().width(),
+                                  SettingsScreenWidgetLayout->sizeHint().height());
 
+
+  // Add the container widget to the scroll area
+  scrollArea->setWidget(containerWidget.get());
+
+  // Main layout
   mainLayout = std::make_unique<QVBoxLayout>(this);
   mainLayout->addWidget(scrollArea.get());
+  mainLayout->setContentsMargins(0, 0, 0, 0);
   setLayout(mainLayout.get());
 
+  // Connect signals
   connect(logsLocationWidget->selectLogsLocationButton.get(), &QPushButton::clicked, this,
           &SettingsScreenWidget::selectLogsLocation);
   connect(passwordWidget->setPasswordButton.get(), &QPushButton::clicked, this, &SettingsScreenWidget::setPassword);
   connect(centralStorageWidget->selectStoragePathButton.get(), &QPushButton::clicked, this,
           &SettingsScreenWidget::selectStoragePath);
 
+  // Load settings
   loadSettings();
 }
 

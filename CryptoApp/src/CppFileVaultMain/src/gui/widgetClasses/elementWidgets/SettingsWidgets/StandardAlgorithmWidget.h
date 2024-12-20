@@ -13,9 +13,6 @@ Q_OBJECT
 public:
   explicit StandardAlgorithmWidget(QWidget *parent = nullptr);
   std::shared_ptr<QComboBox> algorithmComboBox;
-
-private:
-  std::unique_ptr<QLabel> title;
 };
 
 #endif // STANDARDALGORITHMWIDGET_H

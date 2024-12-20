@@ -1,7 +1,3 @@
-//
-// Created by prang on 14.12.2024.
-//
-
 #include "StyleSetter.h"
 
 template void StyleSetter::setPasswordToggleButtonStyle(std::shared_ptr<QPushButton>);
@@ -24,3 +20,7 @@ template void StyleSetter::setWidgetBackgroundStyle(std::shared_ptr<QWidget>);
 template void StyleSetter::setWidgetBackgroundStyle(std::unique_ptr<QWidget>);
 template void StyleSetter::setScrollAreaStyle(std::shared_ptr<QScrollArea>);
 template void StyleSetter::setScrollAreaStyle(std::unique_ptr<QScrollArea>);
+template void StyleSetter::setButtonStyleNoBorder(std::shared_ptr<QPushButton>);
+template void StyleSetter::setButtonStyleNoBorder(std::unique_ptr<QPushButton>);
+template void StyleSetter::setLabelStyleNoBorder(std::shared_ptr<QLabel>); // New method
+template void StyleSetter::setLabelStyleNoBorder(std::unique_ptr<QLabel>); // New method

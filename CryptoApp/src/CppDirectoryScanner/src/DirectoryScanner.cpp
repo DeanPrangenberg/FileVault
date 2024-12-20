@@ -1,7 +1,3 @@
-//
-// Created by prang on 21.10.2024.
-//
-
 #include "DirectoryScanner.h"
 #include "../../CppFileVaultMain/src/GlobalDefinitions.h"
 #include <filesystem>

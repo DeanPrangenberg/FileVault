@@ -18,9 +18,6 @@ public:
   std::shared_ptr<QCheckBox> forDecryptedFiles;
   std::shared_ptr<QPushButton> selectStoragePathButton;
   std::shared_ptr<QLabel> storagePathLabel;
-
-private:
-  std::unique_ptr<QLabel> title;
 };
 
 #endif // CENTRALFILESTORAGEWIDGET_H

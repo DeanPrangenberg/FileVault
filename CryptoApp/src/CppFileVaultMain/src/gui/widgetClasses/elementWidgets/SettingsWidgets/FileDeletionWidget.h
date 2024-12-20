@@ -15,9 +15,6 @@ public:
 
   std::shared_ptr<QCheckBox> deleteAfterEncryption;
   std::shared_ptr<QCheckBox> deleteAfterDecryption;
-
-private:
-  std::unique_ptr<QLabel> title;
 };
 
 #endif // FILEDELETIONWIDGET_H

@@ -11,14 +11,14 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QFileDialog>
-#include "../elementWidgets/SettingsMenu/MasterSettingsWidget.h"
-#include "../elementWidgets/SettingsMenu/LanguageSelectionWidget.h"
-#include "../elementWidgets/SettingsMenu/StandardAlgorithmWidget.h"
-#include "../elementWidgets/SettingsMenu/DatabaseManagementWidget.h"
-#include "../elementWidgets/SettingsMenu/FileDeletionWidget.h"
-#include "../elementWidgets/SettingsMenu/NewPasswordWidget.h"
-#include "../elementWidgets/SettingsMenu/LogsLocationWidget.h"
-#include "../elementWidgets/SettingsMenu/CentralFileStorageWidget.h"
+#include "../elementWidgets/SettingsWidgets/MasterSettingsWidget.h"
+#include "../elementWidgets/SettingsWidgets/LanguageSelectionWidget.h"
+#include "../elementWidgets/SettingsWidgets/StandardAlgorithmWidget.h"
+#include "../elementWidgets/SettingsWidgets/DatabaseManagementWidget.h"
+#include "../elementWidgets/SettingsWidgets/FileDeletionWidget.h"
+#include "../elementWidgets/SettingsWidgets/NewPasswordWidget.h"
+#include "../elementWidgets/SettingsWidgets/LogsLocationWidget.h"
+#include "../elementWidgets/SettingsWidgets/CentralFileStorageWidget.h"
 
 class SettingsScreenWidget : public QWidget {
 Q_OBJECT

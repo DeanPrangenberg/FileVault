@@ -1,7 +1,7 @@
 #include "MasterSettingsWidget.h"
 
 MasterSettingsWidget::MasterSettingsWidget(QWidget *parent) : QWidget(parent) {
-  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   auto mainLayout = std::make_unique<QVBoxLayout>(this);
   mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -11,12 +11,21 @@ MasterSettingsWidget::MasterSettingsWidget(QWidget *parent) : QWidget(parent) {
   backgroundLabel->setObjectName("MasterSettingsWidget");
   backgroundLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+  titleLabel = std::make_unique<QLabel>(this);
+
   mainLayout->addWidget(backgroundLabel.get());
   setLayout(mainLayout.release());
 
   centralLayout = std::make_unique<QVBoxLayout>(backgroundLabel.get());
   centralLayout->setContentsMargins(5, 5, 5, 5);
   centralLayout->setSpacing(5);
+  centralLayout->addWidget(titleLabel.get());
+
+  // Initialisieren Sie die Container
+  buttons = QVector<std::shared_ptr<QPushButton>>();
+  comboBoxes = QVector<std::shared_ptr<QComboBox>>();
+  checkBoxes = QVector<std::shared_ptr<QCheckBox>>();
+  lineEdits = QVector<std::shared_ptr<QLineEdit>>();
 }
 
 void MasterSettingsWidget::applyStyle() {
@@ -38,8 +47,6 @@ void MasterSettingsWidget::applyStyle() {
   for (auto& lineEdit : lineEdits) {
     styleSetter.setLineEditStyle(lineEdit);
   }
-
-  adjustSize();
 }
 
 MasterSettingsWidget::~MasterSettingsWidget() = default;

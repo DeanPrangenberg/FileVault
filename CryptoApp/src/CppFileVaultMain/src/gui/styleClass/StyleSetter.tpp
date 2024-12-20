@@ -206,12 +206,12 @@ void StyleSetter::setScrollAreaStyle(T scrollArea) {
                                     "background: transparent;"
                                     "width: 13px;"
                                     "margin: 0px 3px 0px 3px;"
-                                    "border-radius: 5px;"
+                                    "border-radius: 20px;"  // Rounded corners
                                     "}"
                                     "QScrollBar::handle:vertical {"
                                     "background: rgba(100, 43, 115, 1);"
                                     "min-height: 20px;"
-                                    "border-radius: 5px;"
+                                    "border-radius: 10px;"  // Rounded corners
                                     "}"
                                     "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {"
                                     "background: none;"
@@ -219,8 +219,57 @@ void StyleSetter::setScrollAreaStyle(T scrollArea) {
                                     "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {"
                                     "background: none;"
                                     "}"
+                                    "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {"
+                                    "width: 0;"
+                                    "height: 0;"
+                                    "border-left: 7px solid transparent;"
+                                    "border-right: 7px solid transparent;"
+                                    "}"
   );
   scrollArea->setStyleSheet(scrollAreaStyle);
+}
+
+template<typename T>
+void StyleSetter::setButtonStyleNoBorder(T button) {
+  int buttonHeight = button->height();
+  int borderRadius = buttonHeight / 40;
+
+  int maxBorderRadius = 20;
+  int minBorderRadius = 5;
+
+  if (borderRadius > maxBorderRadius) {
+    borderRadius = maxBorderRadius;
+  } else if (borderRadius < minBorderRadius) {
+    borderRadius = minBorderRadius;
+  }
+
+  QString buttonStyle = QString("QPushButton {"
+                                "background-color: rgba(25, 0, 51, 1);"
+                                "color: white;"
+                                "border-radius: %1px;"
+                                "font-size: %2px;"
+                                "}"
+                                "QPushButton:hover {"
+                                "background-color: rgba(15, 0, 31, 1);"
+                                "}"
+                                "QPushButton:pressed {"
+                                "background-color: rgba(10, 0, 21, 1);"
+                                "}"
+  ).arg(borderRadius).arg(buttonHeight >= 32 ? 16 : buttonHeight / 2.5);
+  button->setStyleSheet(buttonStyle);
+}
+
+template<typename T>
+void StyleSetter::setLabelStyleNoBorder(T label) {
+  QString labelStyle = QString("QLabel {"
+                               "background-color: rgba(25, 0, 51, 1);"
+                               "color: white;"
+                               "border-radius: 10px;"
+                               "padding: 10px 20px;"
+                               "font-size: 14px;"
+                               "}"
+  );
+  label->setStyleSheet(labelStyle);
 }
 
 #endif // STYLESETTER_TPP

@@ -22,12 +22,14 @@ public:
 protected:
   std::shared_ptr<QLabel> backgroundLabel;
   std::unique_ptr<QVBoxLayout> centralLayout;
+  std::unique_ptr<QLabel> titleLabel;
   QVector<std::shared_ptr<QPushButton>> buttons;
   QVector<std::shared_ptr<QComboBox>> comboBoxes;
   QVector<std::shared_ptr<QCheckBox>> checkBoxes;
   QVector<std::shared_ptr<QLineEdit>> lineEdits;
   QVector<std::shared_ptr<QLineEdit>> passwordFields;
   QVector<std::shared_ptr<QPushButton>> passwordToggleButtons;
+
 
   void applyStyle();
 };

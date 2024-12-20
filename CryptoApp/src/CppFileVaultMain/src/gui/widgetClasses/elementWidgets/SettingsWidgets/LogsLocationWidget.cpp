@@ -1,7 +1,8 @@
 #include "LogsLocationWidget.h"
 
 LogsLocationWidget::LogsLocationWidget(QWidget *parent) : MasterSettingsWidget(parent) {
-  title = std::make_unique<QLabel>("Logs Location", this);
+  titleLabel->setText("Logs Location");
+  setMinimumHeight(130);
   selectLogsLocationButton = std::make_shared<QPushButton>("Select Logs Location", this);
   logsLocationLabel = std::make_unique<QLabel>("Current Path: ", this);
 
@@ -9,7 +10,7 @@ LogsLocationWidget::LogsLocationWidget(QWidget *parent) : MasterSettingsWidget(p
 
   buttons.push_back(selectLogsLocationButton);
 
-  centralLayout->addWidget(title.get());
+
   centralLayout->addWidget(selectLogsLocationButton.get());
   centralLayout->addWidget(logsLocationLabel.get());
 

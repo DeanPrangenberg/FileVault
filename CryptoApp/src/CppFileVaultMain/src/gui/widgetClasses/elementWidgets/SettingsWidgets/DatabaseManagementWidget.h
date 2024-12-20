@@ -14,9 +14,6 @@ public:
   explicit DatabaseManagementWidget(QWidget *parent = nullptr);
 
   std::shared_ptr<QComboBox>databaseExportComboBox;
-
-private:
-  std::unique_ptr<QLabel> title;
 };
 
 #endif // DATABASEMANAGEMENTWIDGET_H
