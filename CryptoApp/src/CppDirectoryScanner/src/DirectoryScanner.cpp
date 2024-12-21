@@ -1,26 +1,16 @@
 #include "DirectoryScanner.h"
 #include "../../CppFileVaultMain/src/GlobalDefinitions.h"
-#include <filesystem>
-#include <algorithm>
-#include <iostream>
-#include <exception>
-#include <cwctype>
 
-namespace fs = std::filesystem;
-
-std::vector<fs::path> DirectoryScanner::listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles) const {
-  std::vector<fs::path> fileList;
+void DirectoryScanner::listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles, std::vector<fs::path> &fileList, FileFoundCallback callback) const {
   if (!fs::exists(directory) || !fs::is_directory(directory)) {
     std::wcerr << "Error: Invalid directory: " << directory << std::endl;
-    return fileList;
+    return;
   }
 
   std::vector<fs::path> dirs;
   dirs.push_back(directory);
 
   while (!dirs.empty()) {
-    if (printDebug) std::wcout << L"Dirs size: " << dirs.size() << std::endl;
-    if (printDebug) std::wcout << L"Found " << fileList.size() << " files" << std::endl;
     fs::path current_dir = dirs.back();
     dirs.pop_back();
 
@@ -29,9 +19,7 @@ std::vector<fs::path> DirectoryScanner::listFiles(const fs::path &directory, con
       continue;
     }
 
-    if (printDebug) std::wcout << L"Start Scanning directory: " << current_dir << std::endl;
     for (const auto &entry: fs::directory_iterator(current_dir)) {
-      if (printDebug) std::wcout << L"Entry: " << entry.path() << std::endl;
       try {
         if (!isValidPath(entry.path()) ||
             (fs::status(entry).permissions() & fs::perms::owner_read) == fs::perms::none) {
@@ -45,8 +33,10 @@ std::vector<fs::path> DirectoryScanner::listFiles(const fs::path &directory, con
                    && fs::file_size(entry.path()) > 0) {
           if ((!searchOnlyForDecryptedFiles && !hasEncFileExtension(entry.path())) ||
               (searchOnlyForDecryptedFiles && hasEncFileExtension(entry.path()))) {
-            if (printDebug) std::wcout << L"Found file: " << entry.path() << std::endl;
             fileList.push_back(entry.path());
+            if (callback) {
+              callback(entry.path());
+            }
           }
         }
       } catch (const std::exception &e) {
@@ -58,13 +48,9 @@ std::vector<fs::path> DirectoryScanner::listFiles(const fs::path &directory, con
   std::sort(fileList.begin(), fileList.end(), [](const fs::path &a, const fs::path &b) {
     return fs::file_size(a) > fs::file_size(b);
   });
-
-  if (printDebug) std::wcout << L"Found " << fileList.size() << L" files in directory: " << directory << std::endl;
-  return fileList;
 }
 
 bool DirectoryScanner::isValidPath(const fs::path &p) {
-  // Check if each character in the path is printable
   for (const auto &ch: p.wstring()) {
     if (!std::iswprint(ch)) {
       std::wcerr << L"Invalid character in path: " << p << std::endl;
@@ -75,7 +61,6 @@ bool DirectoryScanner::isValidPath(const fs::path &p) {
 }
 
 bool DirectoryScanner::isSystemCritical(const fs::path &filePath) {
-  // List of critical paths
   const std::vector<std::wstring> critical_paths = {
       L"Windows",
       L"Program Files",
@@ -87,38 +72,25 @@ bool DirectoryScanner::isSystemCritical(const fs::path &filePath) {
       L"Boot"
   };
 
-  // Check if the file path contains any critical path
   for (const auto &critical_path : critical_paths) {
     if (filePath.wstring().find(critical_path) != std::wstring::npos) {
-      return true; // Path is critical
+      return true;
     }
   }
 
-  return false; // Path is not critical
+  return false;
 }
 
 bool DirectoryScanner::hasEncFileExtension(const fs::path &filepath) {
   fs::path personalDataExtensions = globalDefinitions::encFileSuffix;
-
-  // Get the extension of the file path
   fs::path extension = filepath.extension();
-
   return extension == personalDataExtensions;
 }
 
-const wchar_t **DirectoryScanner::convertVectorToWCharArray(const std::vector<std::filesystem::path> &paths) {
-  auto **result = new const wchar_t *[paths.size() + 1]; // +1 for null terminator
-  for (size_t i = 0; i < paths.size(); ++i) {
-    result[i] = _wcsdup(paths[i].c_str()); // Duplicate the string to ensure it is properly managed
-  }
-  result[paths.size()] = nullptr; // Null-terminate the array
-  return result;
-}
-
 extern "C" {
-[[maybe_unused]] FILESCANNER_API const wchar_t **ScanForFilesInDirectory(const wchar_t *originalFilePath, const bool searchOnlyForDecryptedFiles) {
-    fs::path directory(originalFilePath);
-    DirectoryScanner directoryScanner;
-    return DirectoryScanner::convertVectorToWCharArray(directoryScanner.listFiles(directory, searchOnlyForDecryptedFiles));
-  }
+[[maybe_unused]] FILESCANNER_API void ScanForFilesInDirectory(const wchar_t *originalFilePath, const bool searchOnlyForDecryptedFiles, std::vector<fs::path> &fileList, DirectoryScanner::FileFoundCallback callback) {
+  fs::path directory(originalFilePath);
+  DirectoryScanner directoryScanner;
+  directoryScanner.listFiles(directory, searchOnlyForDecryptedFiles, fileList, callback);
+}
 }

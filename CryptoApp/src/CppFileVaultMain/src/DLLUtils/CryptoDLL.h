@@ -6,6 +6,9 @@
 #define FILEVAULTROOT_CRYPTODLL_H
 
 #include "MasterDLLClass.h"
+#include "../../../shared/FileData.h"
+#include <thread>
+#include <memory>
 
 class CryptoDLL : MasterDLLClass  {
 public:

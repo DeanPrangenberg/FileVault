@@ -272,4 +272,39 @@ void StyleSetter::setLabelStyleNoBorder(T label) {
   label->setStyleSheet(labelStyle);
 }
 
+template<typename T>
+void StyleSetter::setScrollAreaBorderStyle(T scrollArea) {
+  QString scrollAreaStyle = QString("QScrollArea {"
+                                    "background-color: rgba(25, 0, 51, 1);"
+                                    "border: 2px solid rgba(100, 43, 115, 1);"
+                                    "border-radius: 10px;"
+                                    "padding: 10px;"
+                                    "}"
+                                    "QScrollBar:vertical {"
+                                    "background: transparent;"
+                                    "width: 13px;"
+                                    "margin: 0px 3px 0px 3px;"
+                                    "border-radius: 20px;"
+                                    "}"
+                                    "QScrollBar::handle:vertical {"
+                                    "background: rgba(100, 43, 115, 1);"
+                                    "min-height: 20px;"
+                                    "border-radius: 10px;"
+                                    "}"
+                                    "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {"
+                                    "background: none;"
+                                    "}"
+                                    "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {"
+                                    "background: none;"
+                                    "}"
+                                    "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {"
+                                    "width: 0;"
+                                    "height: 0;"
+                                    "border-left: 7px solid transparent;"
+                                    "border-right: 7px solid transparent;"
+                                    "}"
+  );
+  scrollArea->setStyleSheet(scrollAreaStyle);
+}
+
 #endif // STYLESETTER_TPP

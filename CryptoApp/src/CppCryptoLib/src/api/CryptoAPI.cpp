@@ -1,38 +1,51 @@
 #include "CryptoAPI.h"
+#include <thread>
+#include <future>
+#include <vector>
 
 extern "C" {
 [[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(FileData *fileData, const int numFiles) {
-  std::vector<bool> results;
+  std::vector<std::future<bool>> futures;
   for (int i = 0; i < numFiles; i++) {
-    FileData &file = fileData[i];
-    auto timeHash = new unsigned char[64];
-    getCurrentTimeHash(timeHash);
+    fileData[i].setEncryptionId(new unsigned char[64]);
+    fileData[i].setEncryptionIdLength(64);
 
-    file.setEncryptionId(timeHash);
-    file.setEncryptionIdLength(64);
-    if (file.getKeyLength() == 16) { // AES-128
-      results.push_back(AES128::encryptFile(&file));
-    } else if (file.getKeyLength() == 32) { // AES-256
-      results.push_back(AES256::encryptFile(&file));
+    getCurrentTimeHash(fileData[i].getEncryptionId());
+
+    // Debugging output for EncryptionID
+    std::cout << "EncryptFileWrapper - EncryptionID: "
+              << globalDefinitions::toHexString(fileData[i].getEncryptionId(), fileData[i].getEncryptionIdLength())
+              << std::endl;
+
+    if (fileData[i].getKeyLength() == 16) { // AES-128
+      futures.push_back(std::async(std::launch::async, AES128::encryptFile, &fileData[i]));
+    } else if (fileData[i].getKeyLength() == 32) { // AES-256
+      futures.push_back(std::async(std::launch::async, AES256::encryptFile, &fileData[i]));
     }
   }
-  bool *resultArray = new bool[results.size()];
-  std::copy(results.begin(), results.end(), resultArray);
+
+  bool *resultArray = new bool[numFiles];
+  for (int i = 0; i < numFiles; i++) {
+    resultArray[i] = futures[i].get();
+  }
   return resultArray;
 }
 
 [[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, const int numFiles) {
-  std::vector<bool> results;
+  std::vector<std::future<bool>> futures;
   for (int i = 0; i < numFiles; i++) {
-    const FileData &file = fileData[i];
-    if (file.getKeyLength() == 16) { // AES-128
-      results.push_back(AES128::decryptFile(&file));
-    } else if (file.getKeyLength() == 32) { // AES-256
-      results.push_back(AES256::decryptFile(&file));
+    std::unique_ptr<FileData> file = std::make_unique<FileData>(fileData[i]);
+    if (file->getKeyLength() == 16) { // AES-128
+      futures.push_back(std::async(std::launch::async, AES128::decryptFile, file.get()));
+    } else if (file->getKeyLength() == 32) { // AES-256
+      futures.push_back(std::async(std::launch::async, AES256::decryptFile, file.get()));
     }
   }
-  bool *resultArray = new bool[results.size()];
-  std::copy(results.begin(), results.end(), resultArray);
+
+  bool *resultArray = new bool[numFiles];
+  for (int i = 0; i < numFiles; i++) {
+    resultArray[i] = futures[i].get();
+  }
   return resultArray;
 }
 
@@ -46,7 +59,6 @@ extern "C" {
 
   std::vector<unsigned char> keyVec(keySize);
   std::vector<unsigned char> ivVec(16); // 128-bit IV
-
 
   keyGen.generateKeyIv(keySize, keyVec, ivVec);
 
@@ -69,7 +81,6 @@ extern "C" {
 }
 
 [[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash) {
-
   auto time = HelperUtils::getCurrentTime();
   auto hashedTime = SHA512::hashArray(time);
 

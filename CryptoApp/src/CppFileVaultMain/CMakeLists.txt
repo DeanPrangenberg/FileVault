@@ -95,8 +95,8 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.h
     src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h
     src/gui/styleClass/StyleSetter.cpp
-    src/gui/widgetClasses/elementWidgets/MasterClasses/FilePicker.h
-    src/gui/widgetClasses/elementWidgets/MasterClasses/FilePicker.cpp
+    src/gui/widgetClasses/elementWidgets/smallElements/FilePicker.h
+    src/gui/widgetClasses/elementWidgets/smallElements/FilePicker.cpp
     ../shared/Threadpool.cpp
     ../shared/Threadpool.h
     src/gui/widgetClasses/elementWidgets/smallElements/LoadingWindow.cpp

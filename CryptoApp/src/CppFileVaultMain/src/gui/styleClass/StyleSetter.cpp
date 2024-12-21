@@ -22,5 +22,7 @@ template void StyleSetter::setScrollAreaStyle(std::shared_ptr<QScrollArea>);
 template void StyleSetter::setScrollAreaStyle(std::unique_ptr<QScrollArea>);
 template void StyleSetter::setButtonStyleNoBorder(std::shared_ptr<QPushButton>);
 template void StyleSetter::setButtonStyleNoBorder(std::unique_ptr<QPushButton>);
-template void StyleSetter::setLabelStyleNoBorder(std::shared_ptr<QLabel>); // New method
-template void StyleSetter::setLabelStyleNoBorder(std::unique_ptr<QLabel>); // New method
+template void StyleSetter::setLabelStyleNoBorder(std::shared_ptr<QLabel>);
+template void StyleSetter::setLabelStyleNoBorder(std::unique_ptr<QLabel>);
+template void StyleSetter::setScrollAreaBorderStyle(std::shared_ptr<QScrollArea>);
+template void StyleSetter::setScrollAreaBorderStyle(std::unique_ptr<QScrollArea>);

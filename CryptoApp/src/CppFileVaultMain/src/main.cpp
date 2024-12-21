@@ -7,7 +7,6 @@
 #include "../DLLUtils/CryptoDLL.h"
 #include "../DLLUtils/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
-#include "../../shared/FileData.h"
 #include "gui/FileVaultGui.h"
 #include <QApplication>
 
@@ -52,7 +51,8 @@ void printDiv() {
 void scanAndBuildStructs(FileScannerDLL &fileScannerDll, std::vector<FileData> &fileDataVec) {
   printDiv();
   if (printDebug) std::cout << "--Starting file scan--" << std::endl;
-  auto pathList = fileScannerDll.ScanDirectory(pathToCrypt, false);
+  std::vector<fs::path> pathList;
+  fileScannerDll.ScanDirectory(pathToCrypt, false, pathList, [](const fs::path){});
   if (printDebug) std::cout << "++Scan completed: found " << pathList.size() << " files!++" << std::endl;
 
   if (!pathList.empty()) {
@@ -101,7 +101,8 @@ void repairAndReloadFiles(FileScannerDLL &fileScannerDll, FileMarkDLL &fileMarkD
 
   fileDataVec.clear();
   if (printDebug) std::cout << "--Rescanning Directory for encrypted files--" << std::endl;
-  auto pathList = fileScannerDll.ScanDirectory(pathToCrypt, true);
+  std::vector<fs::path> pathList;
+  fileScannerDll.ScanDirectory(pathToCrypt, true, pathList, [](const fs::path){});
   if (printDebug) std::cout << "++Scan completed: found " << pathList.size() << " files!++" << std::endl;
 
   if (printDebug) std::cout << "--Reloading File Data--" << std::endl;
@@ -186,8 +187,11 @@ void testRun(int testRuns) {
     repairAndReloadFiles(fileScannerDll, fileMarkDll, restApiDll, fileDataVec);
     decryptAndDeleteFiles(cryptoDll, restApiDll, fileDataVec);
 
-    auto encryptedFile = fileScannerDll.ScanDirectory(pathToCrypt, false);
-    auto decryptedFile = fileScannerDll.ScanDirectory(pathToCrypt, true);
+    std::vector<fs::path> decryptedFile;
+        fileScannerDll.ScanDirectory(pathToCrypt, false, decryptedFile, [](const fs::path){});
+
+    std::vector<fs::path> encryptedFile;
+    fileScannerDll.ScanDirectory(pathToCrypt, true, encryptedFile, [](const fs::path){});
 
     testedFileCount += (encryptedFile.size() + decryptedFile.size());
     succeededFileCount += encryptedFile.size();
@@ -210,11 +214,18 @@ void testRun(int testRuns) {
 }
 
 int main(int argc, char *argv[]) {
+  system(".\\RustFileCopy.exe");
+  startDBContainer();
  /*int testRuns = 20;
   testRun(testRuns);
   return 0;*/
 
   QApplication app(argc, argv);
+
+  QObject::connect(&app, &QApplication::aboutToQuit, []() {
+    // Code to execute when the application is about to quit
+    stopDBContainer();
+  });
 
   FileVaultGui fileVaultGui;
   fileVaultGui.setWindowIcon(QIcon(":/icons/Icon.png"));

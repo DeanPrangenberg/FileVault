@@ -20,7 +20,14 @@ void CryptoDLL::EncryptFiles(FileData *fileData, int count, std::vector<bool> &r
   bool *resultArray = encryptFilesFunc(fileData, count);
   results.assign(resultArray, resultArray + count);
 
-  delete[]  resultArray;
+  // Debugging output for EncryptionID
+  for (int i = 0; i < count; i++) {
+    std::cout << "CryptoDLL::EncryptFiles - EncryptionID: "
+              << globalDefinitions::toHexString(fileData[i].getEncryptionId(), fileData[i].getEncryptionIdLength())
+              << std::endl;
+  }
+
+  delete[] resultArray;
   resultArray = nullptr;
 
   unloadDll(hMultiThreadCryptoLib);
@@ -42,7 +49,7 @@ void CryptoDLL::DecryptFiles(FileData *fileData, int count, std::vector<bool> &r
   bool *resultArray = decryptFilesFunc(fileData, count);
   results.assign(resultArray, resultArray + count);
 
-  delete[]  resultArray;
+  delete[] resultArray;
   resultArray = nullptr;
 
   unloadDll(hMultiThreadCryptoLib);

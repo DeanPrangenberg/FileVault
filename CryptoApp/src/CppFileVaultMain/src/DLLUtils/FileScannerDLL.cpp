@@ -1,29 +1,19 @@
-//
-// Created by prang on 20.11.2024.
-//
-
 #include "FileScannerDLL.h"
 
-std::vector<fs::path> FileScannerDLL::ScanDirectory(const fs::path& directory, const bool searchOnlyForDecryptedFiles) {
+void FileScannerDLL::ScanDirectory(const std::filesystem::path& directory, const bool searchOnlyForEncFiles, std::vector<std::filesystem::path> &fileList, FileFoundCallback callback) {
   HMODULE hDirectoryScannerDll = loadDll(L"CppDirectoryScannerLib.dll");
   if (!hDirectoryScannerDll) {
-    return {};
+    return;
   }
 
   auto scanDirectoryFunc = (ScanDirectoryFunc) GetProcAddress(hDirectoryScannerDll, "ScanForFilesInDirectory");
   if (!scanDirectoryFunc) {
-    logError("Failed to get function address for GenerateFileID");
+    logError("Failed to get function address for ScanForFilesInDirectory");
     unloadDll(hDirectoryScannerDll);
-    return {};
+    return;
   }
 
-  const wchar_t **filePaths = scanDirectoryFunc(directory.wstring().c_str(), searchOnlyForDecryptedFiles);
-
-  std::vector<fs::path> paths;
-  for (size_t i = 0; filePaths[i] != nullptr; ++i) {
-    paths.push_back(fs::path(filePaths[i]));
-  }
+  scanDirectoryFunc(directory.wstring().c_str(), searchOnlyForEncFiles, fileList, callback);
 
   unloadDll(hDirectoryScannerDll);
-  return paths;
 }

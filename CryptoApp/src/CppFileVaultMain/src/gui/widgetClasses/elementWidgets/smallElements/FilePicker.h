@@ -17,9 +17,10 @@
 #include <QFileDialog>
 #include <QFontMetrics>
 #include "styleClass/StyleSetter.h"
-#include "../../../../DLLUtils/FileScannerDLL.h"
-#include "../smallElements/LoadingWindow.h"
-#include "../../../shared/ThreadPool.h"
+#include "FileScannerDLL.h"
+#include "LoadingWindow.h"
+#include <thread>
+#include "../../../../GlobalDefinitions.h"
 
 namespace fs = std::filesystem;
 
@@ -66,28 +67,26 @@ public:
   std::vector<fs::path> FileScannerPaths;
 
   void configureUI();
-  void convertPathsToQVector(const std::vector<fs::path>& paths, QVector<QString>& output);
-  void convertBackToPaths(const QVector<QString>& input, std::vector<fs::path>& output);
-
   void addFile();
   void addDirectory();
   void resetPaths();
   void updateFileToProcessLabel();
   void globalCheckStateChanged(int state);
   void globalAlgorithmChanged(const QString &algorithm);
+  QVector<encryptionConfig> getEncItems();
+  QVector<decryptionConfig> getDecItems();
 
 private:
   FilePickerType filePickerType;
   QSet<QString> addedPaths; // Declare addedPaths here
   StyleSetter styleSetter;
   std::unique_ptr<LoadingWindow> loadingWindow; // Add LoadingWindow
-  std::unique_ptr<ThreadPool> threadPool; // Add ThreadPool
 
   void addEntry(const QString &path);
   void scanDirectoryInThread(const QString &directory); // Add method to scan directory in thread
 
-private slots:
-  void appendConsoleOutput(const QString &text); // Declare appendConsoleOutput slot
+signals:
+  void fileFound(const QString &filePath);
 };
 
 #endif // FILEVAULTROOT_FILEPICKER_H

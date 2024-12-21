@@ -6,7 +6,11 @@
 #include <memory>
 #include <QLabel>
 #include <QPushButton>
-#include "../elementWidgets/MasterClasses/FilePicker.h"
+#include "widgetClasses/elementWidgets/smallElements/FilePicker.h"
+#include "../../../StructUtils/StructUtils.h"
+#include "../../../GlobalDefinitions.h"
+#include "../../../DLLUtils/CryptoDLL.h"
+#include "../../../HelperUtils/HelperUtils.h"
 
 class EncryptionScreenWidget : public QWidget {
 Q_OBJECT
@@ -14,6 +18,7 @@ Q_OBJECT
 public:
   explicit EncryptionScreenWidget(QWidget *parent = nullptr);
   ~EncryptionScreenWidget() override = default;
+
 private:
   StyleSetter StyleSettings;
   std::unique_ptr<QVBoxLayout> EncryptionScreenWidgetLayout;
@@ -24,7 +29,8 @@ private:
 
   void configureUI();
 
-  void configureFilePicker();
+private slots:
+  void onStartProcessButtonClicked();
 };
 
-#endif //ENCRYPTIONSCREENWIDGET
+#endif //ENCRYPTIONSCREENWIDGET_H

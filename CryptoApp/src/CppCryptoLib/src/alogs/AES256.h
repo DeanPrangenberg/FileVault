@@ -1,7 +1,4 @@
-//
-// Created by prang on 23.11.2024.
-//
-
+// AES256.h
 #ifndef FILEVAULTROOT_AES256_H
 #define FILEVAULTROOT_AES256_H
 
@@ -10,22 +7,21 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include <thread>
 #include <vector>
-#include <algorithm>
+#include <future>
+#include <mutex>
 #include "../../../CppFileVaultMain/src/GlobalDefinitions.h"
 #include "../Helper/HelperUtils.h"
 #undef min
-#undef max
 
 namespace fs = std::filesystem;
 
 class AES256 {
-    public:
-    static bool encryptFile(const FileData *fileData);
-    static bool decryptFile(const FileData *fileData);
+public:
+  static bool encryptFile(const FileData *fileData);
+  static bool decryptFile(const FileData *fileData);
 private:
-  bool printDebug = false;
+  static std::mutex fileMutex;
 };
 
 #endif //FILEVAULTROOT_AES256_H

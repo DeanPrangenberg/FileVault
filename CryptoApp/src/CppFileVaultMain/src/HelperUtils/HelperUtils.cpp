@@ -7,6 +7,7 @@
 #include "../DLLUtils/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
 #include "../DLLUtils/CryptoDLL.h"
+#include "../StructUtils/StructUtils.h"
 
 void debugFileIDData(const HelperUtils::FileIDData &fileIDData) {
   std::cout << "***************************************************" << std::endl;
@@ -45,7 +46,8 @@ std::vector<fs::path> HelperUtils::scanForAllFiles(const std::vector<fs::path> &
 
   if (printDebug) std::cout << "repairLostEncFileStructs: Scanning for all files" << std::endl;
   for (const auto &directory: directorys) {
-    auto foundFiles = fileScannerDll.ScanDirectory(directory, true);
+    std::vector<fs::path> foundFiles;
+    fileScannerDll.ScanDirectory(directory, true, foundFiles, [](const fs::path){});
     totalFiles.insert(totalFiles.end(), foundFiles.begin(), foundFiles.end());
   }
   if (printDebug)
@@ -211,4 +213,97 @@ void HelperUtils::updateFileDataInDB(std::vector<FileData> &fileDataList, const 
 void HelperUtils::repairAllLostStruct() {
   auto drives = SystemUtils::getAllDrives();
   repairLostEncFileStructs(drives);
+}
+
+std::vector<int> HelperUtils::decryptFiles(const std::vector<fs::path> &filePaths) {
+  CryptoDLL cryptoDll;
+  RestApiDLL restApiDll;
+  FileMarkDLL fileMarkDll;
+  std::vector<int> results;
+  std::vector<FileData> fileDataVec;
+
+  for (const auto &filePath : filePaths) {
+    // Create the FileData structure
+    FileData fileData;
+    fileData.setEncryptedFilePath(const_cast<wchar_t*>(filePath.wstring().c_str()));
+    fileData.setEncryptionId(new unsigned char[64]);
+    fileData.setEncryptionIdLength(64);
+    fileData.setFileId(new unsigned char[64]);
+    fileData.setFileIdLength(64);
+
+    fileMarkDll.extractIDsFromFile(filePath.wstring().c_str(), fileData.getFileId(), fileData.getEncryptionId());
+
+    if (!restApiDll.SearchEntry(fileData)) {
+      results.push_back(1); // Error finding the entry
+      continue;
+    }
+
+    fileDataVec.push_back(fileData);
+  }
+
+  // Decrypt the files
+  std::vector<bool> decryptResults(fileDataVec.size(), false);
+  cryptoDll.DecryptFiles(fileDataVec.data(), static_cast<int>(fileDataVec.size()), decryptResults);
+
+  for (size_t i = 0; i < fileDataVec.size(); ++i) {
+    // Check if decryption was successful
+    if (!decryptResults[i]) {
+      results.push_back(2); // Error during decryption
+      continue;
+    }
+
+    // Delete the entry from the database
+    if (!restApiDll.DeleteEntry(fileDataVec[i])) {
+      results.push_back(3); // Error deleting the entry
+      continue;
+    }
+
+    // Clean up the FileData structure
+    fileDataVec[i].cleanupFileData();
+    results.push_back(-1); // Success
+  }
+
+  return results;
+}
+
+std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePaths, const std::vector<std::string> &algorithm) {
+  CryptoDLL cryptoDll;
+  RestApiDLL restApiDll;
+  std::vector<int> results;
+  std::vector<FileData> fileDataVec;
+
+  for (int i = 0; i < filePaths.size(); i++) {
+    // Create the FileData structure
+    FileData fileData;
+    if (algorithm[i] == "AES-128") {
+      fileData = StructUtils::createFileDataStruct(globalDefinitions::AlgorithmType::AES128, filePaths[i]);
+    } else {
+      fileData = StructUtils::createFileDataStruct(globalDefinitions::AlgorithmType::AES256, filePaths[i]);
+    }
+    fileDataVec.push_back(fileData);
+  }
+
+  // Encrypt the file
+  std::vector<bool> encryptResults(fileDataVec.size(), false);
+  cryptoDll.EncryptFiles(fileDataVec.data(), static_cast<int>(fileDataVec.size()), encryptResults);
+
+  for (auto fileData : fileDataVec) {
+    // Check if encryption was successful
+    if (!fileData.getEncryptedFilePath() || !encryptResults[0]) {
+      results.push_back(1); // Error during encryption
+      continue;
+    }
+
+    // Insert the entry into the database
+    if (!restApiDll.InsertEntry(fileData)) {
+      results.push_back(2); // Error inserting the entry
+      continue;
+    }
+
+    // Clean up the FileData structure
+    fileData.cleanupFileData();
+    results.push_back(-1); // Success
+  }
+
+  return results;
 }

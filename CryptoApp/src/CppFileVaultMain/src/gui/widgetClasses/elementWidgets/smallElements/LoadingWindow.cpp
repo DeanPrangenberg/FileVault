@@ -22,14 +22,30 @@ LoadingWindow::LoadingWindow(QWidget *parent) : QDialog(parent) {
 }
 
 void LoadingWindow::appendConsoleOutput(const QString &text) {
-  consoleOutput->append(text);
+  consoleBuffer.push_back(text);
 
   // Remove lines if the number of lines exceeds maxLines
-  while (consoleOutput->document()->blockCount() > maxLines) {
-    QTextCursor cursor = consoleOutput->textCursor();
-    cursor.movePosition(QTextCursor::Start);
-    cursor.select(QTextCursor::BlockUnderCursor);
-    cursor.removeSelectedText();
-    cursor.deleteChar();
+  if (consoleBuffer.size() > maxLines) {
+    consoleBuffer.pop_front();
   }
+
+  updateConsoleOutput();
+}
+
+void LoadingWindow::setConsoleOutput(const QString &text) {
+  consoleOutput->clear();
+  consoleOutput->setText(text);
+}
+
+void LoadingWindow::updateConsoleOutput() {
+  consoleOutput->clear();
+  for (const auto &line : consoleBuffer) {
+    consoleOutput->append(line);
+  }
+}
+
+void LoadingWindow::showEvent(QShowEvent *event) {
+  QDialog::showEvent(event);
+  consoleBuffer.clear(); // Clear the console buffer when the window is shown
+  updateConsoleOutput();
 }

@@ -1,14 +1,11 @@
 #include "ThreadPool.h"
 #include <iostream>
-#include <QTimer>
 
 // Konstruktor: Initialisiere Thread-Pool
 ThreadPool::ThreadPool(size_t numThreads) : stop(false) {
   // Starte den GUI-Thread für kontinuierliche Updates
-  workers.push_back(std::thread(&ThreadPool::guiWorker, this));
-
   // Starte die Worker-Threads für parallele Aufgaben
-  for (size_t i = 1; i < numThreads; ++i) {
+  for (size_t i = 0; i < numThreads; ++i) {
     workers.push_back(std::thread(&ThreadPool::worker, this));
   }
 }
@@ -48,14 +45,5 @@ void ThreadPool::worker() {
       tasks.pop();
     }
     task();  // Aufgabe ausführen
-  }
-}
-
-// GUI-Arbeiter-Thread für kontinuierliche GUI-Updates
-void ThreadPool::guiWorker() {
-  while (true) {
-    // Beispiel: Alle 100ms GUI-Updates senden
-    emit updateGuiSignal("GUI aktualisiert!");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 }

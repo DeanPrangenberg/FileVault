@@ -7,26 +7,19 @@
 #include <functional>
 #include <mutex>
 #include <condition_variable>
-#include <QObject>
 
 // ThreadPool Klasse
-class ThreadPool : public QObject {
-  Q_OBJECT
+class ThreadPool {
 
 public:
   explicit ThreadPool(size_t numThreads);
-
   ~ThreadPool();
 
-  void addTask(std::function<void()> task);  // Füge Aufgabe zum Pool hinzu
-  void startWorkerThreads();  // Starte die Worker-Threads
-
-  signals:
-      void updateGuiSignal(const QString& message);  // Signal für GUI-Updates
+  // Füge Aufgabe zum Pool hinzu
+  void addTask(std::function<void()> task);
 
 private:
   void worker();  // Arbeiter-Thread für Aufgaben
-  void guiWorker();  // GUI-Arbeiter-Thread, läuft kontinuierlich
 
   std::vector<std::thread> workers;
   std::queue<std::function<void()>> tasks;

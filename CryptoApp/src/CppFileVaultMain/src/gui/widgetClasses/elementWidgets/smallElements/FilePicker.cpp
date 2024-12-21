@@ -22,7 +22,11 @@ FilePicker::FilePicker(QWidget *parent, FilePickerType type) : QWidget(parent) {
   configureUI();
 
   loadingWindow = std::make_unique<LoadingWindow>(this); // Initialize LoadingWindow
-  threadPool = std::make_unique<ThreadPool>(4); // Initialize ThreadPool with 4 threads
+
+  connect(this, &FilePicker::fileFound, this, [this](const QString &filePath) {
+    addEntry(filePath);
+    loadingWindow->appendConsoleOutput(filePath);
+  });
 }
 
 void FilePicker::configureUI() {
@@ -35,6 +39,8 @@ void FilePicker::configureUI() {
   if (filePickerType == FilePickerType::ENCRYPT) {
     GlobalAlgorithmComboBox->addItems({"AES-128", "AES-256"});
     GlobalControlLayout->addWidget(GlobalAlgorithmComboBox.get());
+  } else {
+    GlobalAlgorithmComboBox->hide();
   }
 
   GlobalControlLayout->addWidget(GlobalCheckBox.get());
@@ -56,26 +62,72 @@ void FilePicker::configureUI() {
   styleSetter.setButtonStyle(AddDirectoryButton.get());
   styleSetter.setButtonStyle(ResetPathsButton.get());
   styleSetter.setCheckBoxStyle(GlobalCheckBox.get());
-  styleSetter.setComboBoxStyle(GlobalAlgorithmComboBox.get());
-  styleSetter.setScrollAreaStyle(FilePickerScrollArea.get());
+  if (filePickerType == FilePickerType::ENCRYPT) {
+    styleSetter.setComboBoxStyle(GlobalAlgorithmComboBox.get());
+  }
+  styleSetter.setScrollAreaBorderStyle(FilePickerScrollArea.get());
 
   connect(AddFileButton.get(), &QPushButton::clicked, this, &FilePicker::addFile);
   connect(AddDirectoryButton.get(), &QPushButton::clicked, this, &FilePicker::addDirectory);
   connect(ResetPathsButton.get(), &QPushButton::clicked, this, &FilePicker::resetPaths);
   connect(GlobalCheckBox.get(), &QCheckBox::stateChanged, this, &FilePicker::globalCheckStateChanged);
-  connect(GlobalAlgorithmComboBox.get(), &QComboBox::currentTextChanged, this, &FilePicker::globalAlgorithmChanged);
+  if (filePickerType == FilePickerType::ENCRYPT) {
+    connect(GlobalAlgorithmComboBox.get(), &QComboBox::currentTextChanged, this, &FilePicker::globalAlgorithmChanged);
+  }
+}
+
+void FilePicker::addEntry(const QString &path) {
+  auto entryLayout = new QHBoxLayout();
+  auto checkbox = new QCheckBox(this);
+  auto label = new QLabel(path, this);
+
+  styleSetter.setCheckBoxStyle(checkbox);
+  checkbox->setFixedWidth(35);
+
+  label->setToolTip(path);
+
+  QString displayText = path;
+  if (displayText.length() > 80) {
+    displayText = displayText.left(25) + " ... " + displayText.right(50);
+  }
+  label->setText(displayText);
+
+  entryLayout->addWidget(label);
+  entryLayout->addWidget(checkbox);
+
+  if (filePickerType == FilePickerType::ENCRYPT) {
+    auto comboBox = new QComboBox(this);
+    comboBox->setFixedWidth(35);
+    styleSetter.setComboBoxStyle(comboBox);
+    comboBox->addItems({"AES-128", "AES-256"});
+    entryLayout->addWidget(comboBox);
+  }
+
+  FilePickerScrollAreaLayout->addLayout(entryLayout);
+  qDebug() << "Added entry for path:" << path;
+
+  // Connect the checkbox state change to updateFileToProcessLabel
+  connect(checkbox, &QCheckBox::checkStateChanged, this, &FilePicker::updateFileToProcessLabel);
+
+  updateFileToProcessLabel();
+  FilePickerScrollAreaWidget->update(); // Force widget to redraw
 }
 
 void FilePicker::addFile() {
-  QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Select Files"), "", tr("All Files (*)"));
+  QStringList fileNames;
+
+  if (filePickerType == FilePickerType::DECRYPT) {
+    fileNames = QFileDialog::getOpenFileNames(this, tr("Select Files"), "", tr(
+        QString("Encrypted Files (*%1)").arg(
+            QString::fromStdWString(globalDefinitions::encFileSuffix)).toStdString().c_str()));
+  } else if (filePickerType == FilePickerType::ENCRYPT) {
+    fileNames = QFileDialog::getOpenFileNames(this, tr("Select Files"), "", tr("All Files (*)"));
+  }
 
   for (const QString &fileName : fileNames) {
-    qDebug() << "Trying to add file:" << fileName;
     if (!addedPaths.contains(fileName)) {
       addedPaths.insert(fileName);
       addEntry(fileName);
-    } else {
-      qDebug() << "File already added:" << fileName;
     }
   }
   updateFileToProcessLabel();
@@ -159,82 +211,71 @@ void FilePicker::globalAlgorithmChanged(const QString &algorithm) {
   }
 }
 
-void FilePicker::addEntry(const QString &path) {
-  auto entryLayout = new QHBoxLayout();
-  auto checkbox = new QCheckBox(this);
-  auto label = new QLabel(path, this);
-
-  styleSetter.setCheckBoxStyle(checkbox);
-  checkbox->setFixedWidth(35);
-
-  label->setToolTip(path);
-
-  QString displayText = path;
-  if (displayText.length() > 80) {
-    displayText = displayText.left(25) + " ... " + displayText.right(50);
-  }
-  label->setText(displayText);
-
-  entryLayout->addWidget(label);
-  entryLayout->addWidget(checkbox);
-
-  if (filePickerType == FilePickerType::ENCRYPT) {
-    auto comboBox = new QComboBox(this);
-    comboBox->setFixedWidth(35);
-    styleSetter.setComboBoxStyle(comboBox);
-    comboBox->addItems({"AES-128", "AES-256"});
-    entryLayout->addWidget(comboBox);
-  }
-
-  FilePickerScrollAreaLayout->addLayout(entryLayout);
-  qDebug() << "Added entry for path:" << path;
-
-  // Connect the checkbox state change to updateFileToProcessLabel
-  connect(checkbox, &QCheckBox::stateChanged, this, &FilePicker::updateFileToProcessLabel);
-
-  updateFileToProcessLabel();
-  FilePickerScrollAreaWidget->update(); // Force widget to redraw
-}
-
-void FilePicker::convertPathsToQVector(const std::vector<fs::path>& paths, QVector<QString>& output) {
-  for (const auto &path : paths) {
-    output.push_back(QString::fromStdWString(path.wstring()));
-  }
-}
-
-void FilePicker::convertBackToPaths(const QVector<QString>& input, std::vector<fs::path>& output) {
-  for (const auto &path : input) {
-    output.push_back(path.toStdWString());
-  }
-}
-
 void FilePicker::scanDirectoryInThread(const QString &directory) {
   loadingWindow->show(); // Show LoadingWindow
-  threadPool->addTask([this, directory]() {
+
+  // Start a new thread for scanning the directory
+  std::thread([this, directory]() {
     fs::path dirPath = directory.toStdWString();
-    if (filePickerType == FilePickerType::ENCRYPT) {
-      FileScannerPaths = fileScanner.ScanDirectory(dirPath, false);
-    } else {
-      FileScannerPaths = fileScanner.ScanDirectory(dirPath, true);
-    }
+    std::vector<fs::path> scannedPaths;
 
-    convertPathsToQVector(FileScannerPaths, FilePickerPaths);
-
-    for (const auto &path : FilePickerPaths) {
-      if (!addedPaths.contains(path)) {
-        addedPaths.insert(path);
-        QMetaObject::invokeMethod(this, [this, path]() { addEntry(path); }, Qt::QueuedConnection);
+    fileScanner.ScanDirectory(dirPath, filePickerType == FilePickerType::DECRYPT, scannedPaths, [this](const fs::path &path) {
+      QString qPath = QString::fromStdWString(path.wstring());
+      if (!addedPaths.contains(qPath)) {
+        addedPaths.insert(qPath);
+        QMetaObject::invokeMethod(this, [this, qPath]() {
+          addEntry(qPath);
+          loadingWindow->counter++;
+          loadingWindow->setConsoleOutput(QString("Found %1 Files").arg(loadingWindow->counter));
+        }, Qt::QueuedConnection);
       }
-    }
+    });
 
-    FileScannerPaths.clear();
-    FilePickerPaths.clear();
+    loadingWindow->counter = 0;
 
-    emit threadPool->updateGuiSignal("Scanning completed");
-    QMetaObject::invokeMethod(loadingWindow.get(), "hide", Qt::QueuedConnection); // Hide LoadingWindow when done
-  });
+    // Signal that scanning is completed
+    QMetaObject::invokeMethod(this, [this]() {
+      loadingWindow->hide(); // Hide LoadingWindow when done
+    }, Qt::QueuedConnection);
+  }).detach(); // Detach the thread to run independently
 }
 
-void FilePicker::appendConsoleOutput(const QString &text) {
-  loadingWindow->appendConsoleOutput(text);
+QVector<decryptionConfig> FilePicker::getDecItems() {
+  QVector<decryptionConfig> decItems;
+  int totalItems = FilePickerScrollAreaLayout->count();
+  for (int i = 0; i < totalItems; ++i) {
+    QHBoxLayout* entryLayout = qobject_cast<QHBoxLayout*>(FilePickerScrollAreaLayout->itemAt(i)->layout());
+    if (entryLayout) {
+      QCheckBox* checkbox = qobject_cast<QCheckBox*>(entryLayout->itemAt(1)->widget());
+      QLabel* label = qobject_cast<QLabel*>(entryLayout->itemAt(0)->widget());
+      if (checkbox && checkbox->isChecked() && label) {
+        decryptionConfig config;
+        config.checkForDec = checkbox->isChecked();
+        config.Path = label->toolTip(); // Use the full path stored in the tooltip
+        decItems.append(config);
+      }
+    }
+  }
+  return decItems;
+}
+
+QVector<encryptionConfig> FilePicker::getEncItems() {
+  QVector<encryptionConfig> encItems;
+  int totalItems = FilePickerScrollAreaLayout->count();
+  for (int i = 0; i < totalItems; ++i) {
+    QHBoxLayout* entryLayout = qobject_cast<QHBoxLayout*>(FilePickerScrollAreaLayout->itemAt(i)->layout());
+    if (entryLayout) {
+      QCheckBox* checkbox = qobject_cast<QCheckBox*>(entryLayout->itemAt(1)->widget());
+      QLabel* label = qobject_cast<QLabel*>(entryLayout->itemAt(0)->widget());
+      QComboBox* comboBox = qobject_cast<QComboBox*>(entryLayout->itemAt(2)->widget());
+      if (checkbox && checkbox->isChecked() && label && comboBox) {
+        encryptionConfig config;
+        config.checkForEnc = checkbox->isChecked();
+        config.Path = label->toolTip(); // Use the full path stored in the tooltip
+        config.Algorithm = comboBox->currentText();
+        encItems.append(config);
+      }
+    }
+  }
+  return encItems;
 }

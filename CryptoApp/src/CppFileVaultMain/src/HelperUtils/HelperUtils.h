@@ -12,6 +12,8 @@ namespace fs = std::filesystem;
 
 class HelperUtils {
 public:
+  std::vector<int> encryptFiles(const std::vector<fs::path> &filePaths, const std::vector<std::string> &algorithm);
+  std::vector<int> decryptFiles(const std::vector<fs::path> &filePaths);
   void repairLostEncFileStructs(std::vector<fs::path> &directorys);
   void repairAllLostStruct();
 
@@ -20,6 +22,7 @@ public:
     std::array<unsigned char, 64> EncryptionID;
     fs::path newEncryptedFilePath;
   };
+
 private:
   bool printDebug = true;
 
