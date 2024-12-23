@@ -12,11 +12,6 @@ extern "C" {
 
     getCurrentTimeHash(fileData[i].getEncryptionId());
 
-    // Debugging output for EncryptionID
-    std::cout << "EncryptFileWrapper - EncryptionID: "
-              << globalDefinitions::toHexString(fileData[i].getEncryptionId(), fileData[i].getEncryptionIdLength())
-              << std::endl;
-
     if (fileData[i].getKeyLength() == 16) { // AES-128
       futures.push_back(std::async(std::launch::async, AES128::encryptFile, &fileData[i]));
     } else if (fileData[i].getKeyLength() == 32) { // AES-256
@@ -49,7 +44,7 @@ extern "C" {
   return resultArray;
 }
 
-[[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, unsigned char *key, unsigned char *iv) {
+[[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv) {
   KeyGen keyGen;
 
   if (key == nullptr || iv == nullptr) {
@@ -57,10 +52,10 @@ extern "C" {
     return;
   }
 
-  std::vector<unsigned char> keyVec(keySize);
-  std::vector<unsigned char> ivVec(16); // 128-bit IV
+  std::vector<unsigned char> keyVec;
+  std::vector<unsigned char> ivVec;
 
-  keyGen.generateKeyIv(keySize, keyVec, ivVec);
+  keyGen.generateKeyIv(keySize, ivSize, keyVec, ivVec);
 
   std::copy(keyVec.begin(), keyVec.end(), key);
   std::copy(ivVec.begin(), ivVec.end(), iv);

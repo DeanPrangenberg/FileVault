@@ -169,7 +169,6 @@ void decryptAndDeleteFiles(CryptoDLL &cryptoDll, RestApiDLL &restApiDll, std::ve
 }
 
 void testRun(int testRuns) {
-  startDBContainer();
   FileScannerDLL fileScannerDll;
   CryptoDLL cryptoDll;
   RestApiDLL restApiDll;
@@ -205,7 +204,6 @@ void testRun(int testRuns) {
   std::cout << "Failed files: " << failedFileCount << std::endl;
   std::cout << "Success rate: " << (static_cast<double>(testedFileCount - failedFileCount) / testedFileCount) * 100
             << "%" << std::endl;
-  stopDBContainer();
 
   std::vector<int> result;
   result.push_back(testedFileCount);
@@ -214,13 +212,15 @@ void testRun(int testRuns) {
 }
 
 int main(int argc, char *argv[]) {
-  system(".\\RustFileCopy.exe");
-  startDBContainer();
- /*int testRuns = 20;
+  /*startDBContainer();
+  int testRuns = 10;
   testRun(testRuns);
+  stopDBContainer();
   return 0;*/
 
   QApplication app(argc, argv);
+  startDBContainer();
+  system(".\\RustFileCopy.exe");
 
   QObject::connect(&app, &QApplication::aboutToQuit, []() {
     // Code to execute when the application is about to quit

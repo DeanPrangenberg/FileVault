@@ -2,17 +2,14 @@
 #include <iomanip>
 #include <sstream>
 
-void KeyGen::generateKeyIv(const size_t &keySize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV) {
-  std::vector<unsigned char> key(keySize);
-  const int ivSize = 16; // 128-bit IV
-  std::vector<unsigned char> iv(ivSize);
+void KeyGen::generateKeyIv(const size_t &keySize, const size_t &ivSize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV) {
+  KEY.resize(keySize);
+  IV.resize(ivSize);
 
-  if (!RAND_bytes(key.data(), static_cast<int>(key.size())) || !RAND_bytes(iv.data(), static_cast<int>(iv.size()))) {
+  if (!RAND_bytes(KEY.data(), static_cast<int>(keySize))
+  || !RAND_bytes(IV.data(), static_cast<int>(ivSize))) {
     throw std::runtime_error("Failed to generate key or IV");
   }
-
-  KEY = key;
-  IV = iv;
 
   if (printDebug) {
     std::cout << "Key and IV generated successfully" << std::endl;

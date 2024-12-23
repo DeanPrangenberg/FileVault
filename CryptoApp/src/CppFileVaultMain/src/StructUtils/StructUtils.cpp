@@ -22,24 +22,32 @@ wchar_t *StructUtils::ConvertWStringToWChar(const std::wstring &input) {
 
 FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType, const fs::path &originalFilePath) {
   CryptoDLL cryptoDll;
-  unsigned char IV[16];
-  unsigned char *KEY = nullptr;
+  unsigned char *IV;
+  int ivLength = 0;
+  unsigned char *KEY;
   int keyLength = 0;
 
   switch (algorithmenType) {
     case AlgorithmType::AES128:
+      ivLength = 16;
       keyLength = 16;
       KEY = new unsigned char[keyLength];
+      IV = new unsigned char[ivLength];
       break;
     case AlgorithmType::AES256:
+      ivLength = 16;
       keyLength = 32;
       KEY = new unsigned char[keyLength];
+      IV = new unsigned char[ivLength];
       break;
     default:
       throw std::invalid_argument("Unsupported algorithm type");
   }
 
-  cryptoDll.GenerateKeyIv(keyLength, KEY, IV);
+  std::memset(KEY, 0, keyLength);
+  std::memset(IV, 0, ivLength);
+
+  cryptoDll.GenerateKeyIv(keyLength, ivLength, KEY, IV);
 
   unsigned char fileID[64];
   cryptoDll.GenerateFileID(originalFilePath.wstring().c_str(), fileID);
@@ -64,13 +72,11 @@ FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType,
   fileData.setEncryptedFilePath(ConvertWStringToWChar(encryptedFilePath));
   fileData.setDecryptedFilePath(ConvertWStringToWChar(originalFilePath.wstring()));
 
-  fileData.setKey(new unsigned char[keyLength]);
-  std::memcpy(fileData.getKey(), KEY, keyLength);
+  fileData.setKey(KEY);
   fileData.setKeyLength(keyLength);
 
-  fileData.setIv(new unsigned char[16]);
-  std::memcpy(fileData.getIv(), IV, 16);
-  fileData.setIvLength(16);
+  fileData.setIv(IV);
+  fileData.setIvLength(ivLength);
 
   fileData.debugFileData();
 

@@ -20,13 +20,6 @@ void CryptoDLL::EncryptFiles(FileData *fileData, int count, std::vector<bool> &r
   bool *resultArray = encryptFilesFunc(fileData, count);
   results.assign(resultArray, resultArray + count);
 
-  // Debugging output for EncryptionID
-  for (int i = 0; i < count; i++) {
-    std::cout << "CryptoDLL::EncryptFiles - EncryptionID: "
-              << globalDefinitions::toHexString(fileData[i].getEncryptionId(), fileData[i].getEncryptionIdLength())
-              << std::endl;
-  }
-
   delete[] resultArray;
   resultArray = nullptr;
 
@@ -55,7 +48,7 @@ void CryptoDLL::DecryptFiles(FileData *fileData, int count, std::vector<bool> &r
   unloadDll(hMultiThreadCryptoLib);
 }
 
-void CryptoDLL::GenerateKeyIv(size_t size, unsigned char *key, unsigned char *iv) {
+void CryptoDLL::GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv) {
   HMODULE hCryptographyDll = loadDll(L"CppCryptoLib.dll");
   if (!hCryptographyDll) {
     return;
@@ -68,7 +61,7 @@ void CryptoDLL::GenerateKeyIv(size_t size, unsigned char *key, unsigned char *iv
     return;
   }
 
-  generateKeyIvFunc(size, key, iv);
+  generateKeyIvFunc(keySize, ivSize, key, iv);
   unloadDll(hCryptographyDll);
 }
 

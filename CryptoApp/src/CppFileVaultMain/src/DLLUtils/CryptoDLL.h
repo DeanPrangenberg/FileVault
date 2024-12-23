@@ -12,14 +12,14 @@
 
 class CryptoDLL : MasterDLLClass  {
 public:
-  void GenerateKeyIv(size_t size, unsigned char *key, unsigned char *iv);
+  void GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv);
   void GenerateFileID(const wchar_t *filePath, unsigned char *fileID);
   void EncryptFiles(class FileData *fileData, int count, std::vector<bool> &results);
   void DecryptFiles(class FileData *fileData, int count, std::vector<bool> &results);
   void getCurrentTimeHash(unsigned char *timeHash);
 
 private:
-  typedef void (*GenerateKeyIvFunc)(size_t, unsigned char *, unsigned char *);
+  typedef void (*GenerateKeyIvFunc)(size_t, size_t, unsigned char *, unsigned char *);
   typedef void (*GenerateFileIDFunc)(const wchar_t *, unsigned char *);
   typedef bool* (*EncryptFilesFunc)(class FileData *, int);
   typedef bool* (*DecryptFilesFunc)(class FileData *, int);

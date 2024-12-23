@@ -13,7 +13,7 @@
 // Key generation class for generating keys and initialization vectors (IV)
 class KeyGen {
 public:
-  void generateKeyIv(const size_t &keySize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV);
+  void generateKeyIv(const size_t &keySize, const size_t &ivSize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV);
   static std::string toHexString(const std::vector<unsigned char> &data);
 private:
   bool printDebug = false;

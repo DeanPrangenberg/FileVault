@@ -10,6 +10,7 @@
 #include <array>
 #include <fstream>
 #include <stdexcept>
+#include <windows.h>
 
 class SHA512 {
 public:

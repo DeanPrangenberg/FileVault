@@ -1,4 +1,6 @@
 #include "DirectoryScanner.h"
+
+#include <utility>
 #include "../../CppFileVaultMain/src/GlobalDefinitions.h"
 
 void DirectoryScanner::listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles, std::vector<fs::path> &fileList, FileFoundCallback callback) const {
@@ -91,6 +93,6 @@ extern "C" {
 [[maybe_unused]] FILESCANNER_API void ScanForFilesInDirectory(const wchar_t *originalFilePath, const bool searchOnlyForDecryptedFiles, std::vector<fs::path> &fileList, DirectoryScanner::FileFoundCallback callback) {
   fs::path directory(originalFilePath);
   DirectoryScanner directoryScanner;
-  directoryScanner.listFiles(directory, searchOnlyForDecryptedFiles, fileList, callback);
+  directoryScanner.listFiles(directory, searchOnlyForDecryptedFiles, fileList, std::move(callback));
 }
 }
