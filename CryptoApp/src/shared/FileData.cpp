@@ -4,7 +4,7 @@
 
 #include "FileData.h"
 
-bool FileData::operator==(const FileData& other) const {
+bool FileData::operator==(const FileData &other) const {
   if (fileIDLength != other.fileIDLength ||
       EncryptionIDLength != other.EncryptionIDLength ||
       LastUpdateIDLength != other.LastUpdateIDLength ||
@@ -65,19 +65,21 @@ void FileData::safeDeleteWChar(wchar_t *&ptr) {
 
 void FileData::cleanupFileData() {
   this->debugFileData();
-  std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << std::endl;
-  std::cout << "$ Global-cleanupFileData: Cleaning up FileData" << std::endl;
-  std::cout << "$ Global-cleanupFileData: Cleaning up FileID" << std::endl;
-  safeDeleteUCharArray(this->FileID, this->fileIDLength);
-  std::cout << "$ Global-cleanupFileData: Cleaning up EncryptionID" << std::endl;
-  safeDeleteUCharArray(this->EncryptionID, this->EncryptionIDLength);
-  std::cout << "$ Global-cleanupFileData: Cleaning up LastUpdateID" << std::endl;
-  safeDeleteUCharArray(this->LastUpdateID, this->LastUpdateIDLength);
-  std::cout << "$ Global-cleanupFileData: Cleaning up Key" << std::endl;
-  safeDeleteUCharArray(this->Key, this->keyLength);
-  std::cout << "$ Global-cleanupFileData: Cleaning up Iv" << std::endl;
-  safeDeleteUCharArray(this->Iv, this->ivLength);
-
+  if (printDebug) {
+    std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << std::endl;
+    std::cout << "$ Global-cleanupFileData: Cleaning up FileData" << std::endl;
+    std::cout << "$ Global-cleanupFileData: Cleaning up FileID" << std::endl;
+    safeDeleteUCharArray(this->FileID, this->fileIDLength);
+    std::cout << "$ Global-cleanupFileData: Cleaning up EncryptionID" << std::endl;
+    safeDeleteUCharArray(this->EncryptionID, this->EncryptionIDLength);
+    std::cout << "$ Global-cleanupFileData: Cleaning up LastUpdateID" << std::endl;
+    safeDeleteUCharArray(this->LastUpdateID, this->LastUpdateIDLength);
+    std::cout << "$ Global-cleanupFileData: Cleaning up Key" << std::endl;
+    safeDeleteUCharArray(this->Key, this->keyLength);
+    std::cout << "$ Global-cleanupFileData: Cleaning up Iv" << std::endl;
+    safeDeleteUCharArray(this->Iv, this->ivLength);
+    std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << std::endl;
+  }
   this->FileID = nullptr;
   this->fileIDLength = 0;
   this->EncryptionID = nullptr;
@@ -92,8 +94,6 @@ void FileData::cleanupFileData() {
   this->keyLength = 0;
   this->Iv = nullptr;
   this->ivLength = 0;
-
-  std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << std::endl;
 }
 
 std::string FileData::toHexString(const unsigned char *pUChar, size_t length) {
@@ -136,23 +136,31 @@ void FileData::debugFileData() {
   std::wstring keyWstr(keyStr.begin(), keyStr.end());
   std::wstring ivWstr(ivStr.begin(), ivStr.end());
 
-  std::wcout << L"-------------------------------------------------------------"<< std::endl;
-  std::wcout << L"- FileData Debug:" << std::endl;
-  std::wcout << L"- FileID: " << (this->FileID ? fileIDwstr : L"null") << std::endl;
-  std::wcout << L"- FileIDLength: " << this->fileIDLength << std::endl;
-  std::wcout << L"- EncryptionID: " << (this->EncryptionID ? encryptionIDwstr : L"null") << std::endl;
-  std::wcout << L"- EncryptionIDLength: " << this->EncryptionIDLength << std::endl;
-  std::wcout << L"- LastUpdateID: " << (this->LastUpdateID ? lastUpdateIDwstr : L"null") << std::endl;
-  std::wcout << L"- LastUpdateIDLength: " << this->LastUpdateIDLength << std::endl;
-  std::wcout << L"- EncryptedFilePath: " << (this->EncryptedFilePath && *this->EncryptedFilePath ? this->EncryptedFilePath : L"null") << std::endl;
-  std::wcout << L"- OriginalFilePath: " << (this->OriginalFilePath && *this->OriginalFilePath ? this->OriginalFilePath : L"null") << std::endl;
-  std::wcout << L"- DecryptedFilePath: " << (this->DecryptedFilePath && *this->DecryptedFilePath ? this->DecryptedFilePath : L"null") << std::endl;
-  std::wcout << L"- AlgorithmenType: " << (this->AlgorithmenType && *this->AlgorithmenType ? this->AlgorithmenType : L"null") << std::endl;
-  std::wcout << L"- Key: " << (this->Key ? keyWstr : L"null") << std::endl;
-  std::wcout << L"- KeyLength: " << this->keyLength << std::endl;
-  std::wcout << L"- Iv: " << (this->Iv ? ivWstr : L"null") << std::endl;
-  std::wcout << L"- IvLength: " << this->ivLength << std::endl;
-  std::wcout << L"------------------------------------------------------------" << std::endl;
+  if (printDebug) {
+    std::wcout << L"-------------------------------------------------------------" << std::endl;
+    std::wcout << L"- FileData Debug:" << std::endl;
+    std::wcout << L"- FileID: " << (this->FileID ? fileIDwstr : L"null") << std::endl;
+    std::wcout << L"- FileIDLength: " << this->fileIDLength << std::endl;
+    std::wcout << L"- EncryptionID: " << (this->EncryptionID ? encryptionIDwstr : L"null") << std::endl;
+    std::wcout << L"- EncryptionIDLength: " << this->EncryptionIDLength << std::endl;
+    std::wcout << L"- LastUpdateID: " << (this->LastUpdateID ? lastUpdateIDwstr : L"null") << std::endl;
+    std::wcout << L"- LastUpdateIDLength: " << this->LastUpdateIDLength << std::endl;
+    std::wcout << L"- EncryptedFilePath: "
+               << (this->EncryptedFilePath && *this->EncryptedFilePath ? this->EncryptedFilePath : L"null")
+               << std::endl;
+    std::wcout << L"- OriginalFilePath: "
+               << (this->OriginalFilePath && *this->OriginalFilePath ? this->OriginalFilePath : L"null") << std::endl;
+    std::wcout << L"- DecryptedFilePath: "
+               << (this->DecryptedFilePath && *this->DecryptedFilePath ? this->DecryptedFilePath : L"null")
+               << std::endl;
+    std::wcout << L"- AlgorithmenType: "
+               << (this->AlgorithmenType && *this->AlgorithmenType ? this->AlgorithmenType : L"null") << std::endl;
+    std::wcout << L"- Key: " << (this->Key ? keyWstr : L"null") << std::endl;
+    std::wcout << L"- KeyLength: " << this->keyLength << std::endl;
+    std::wcout << L"- Iv: " << (this->Iv ? ivWstr : L"null") << std::endl;
+    std::wcout << L"- IvLength: " << this->ivLength << std::endl;
+    std::wcout << L"------------------------------------------------------------" << std::endl;
+  }
 }
 
 unsigned char *FileData::getFileId() const {

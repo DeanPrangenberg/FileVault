@@ -80,6 +80,7 @@ bool AES256::decryptFile(const FileData *fileData) {
   }
 
   if (!HelperUtils::UnmarkFile(fileData)) {
+    std::wcerr << L"Failed to unmark file: " << fileData->getEncryptedFilePath() << std::endl;
     return false;
   }
 

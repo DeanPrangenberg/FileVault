@@ -3,6 +3,11 @@
 
 #include "../../CppFileVaultMain/src/GlobalDefinitions.h"
 #include "../../shared/FileData.h"
+#include <codecvt>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <cstring>
 
 #ifdef FILEMARKLIB_EXPORTS
 #define FILEMARKLIB_API __declspec(dllexport)

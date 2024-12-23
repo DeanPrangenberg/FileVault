@@ -46,6 +46,7 @@ public:
   bool operator==(const FileData& other) const;
 
 private:
+  bool printDebug = false;
   void safeDeleteUCharArray(unsigned char *&ptr, size_t &length);
   void safeDeleteWChar(wchar_t *&ptr);
   std::string toHexString(const unsigned char *pUChar, size_t length);

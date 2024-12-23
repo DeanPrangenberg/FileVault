@@ -29,11 +29,10 @@ extern "C" {
 [[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, const int numFiles) {
   std::vector<std::future<bool>> futures;
   for (int i = 0; i < numFiles; i++) {
-    std::unique_ptr<FileData> file = std::make_unique<FileData>(fileData[i]);
-    if (file->getKeyLength() == 16) { // AES-128
-      futures.push_back(std::async(std::launch::async, AES128::decryptFile, file.get()));
-    } else if (file->getKeyLength() == 32) { // AES-256
-      futures.push_back(std::async(std::launch::async, AES256::decryptFile, file.get()));
+    if (fileData[i].getKeyLength() == 16) { // AES-128
+      futures.push_back(std::async(std::launch::async, AES128::decryptFile, &fileData[i]));
+    } else if (fileData[i].getKeyLength() == 32) { // AES-256
+      futures.push_back(std::async(std::launch::async, AES256::decryptFile, &fileData[i]));
     }
   }
 
