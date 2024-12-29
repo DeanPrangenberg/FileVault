@@ -112,12 +112,13 @@ void FileVaultGui::setupSideBar() {
 
 void FileVaultGui::setupStackedWidget() {
   qDebug() << "FileVaultMainGui: Setting up screen hashmap";
+  auto statisticsScreen = std::make_shared<StatisticsScreenWidget>();
   // Add the screens to the screenHash
-  screenHash.insert("Statistics", std::make_shared<StatisticsScreenWidget>());
+  screenHash.insert("Statistics", statisticsScreen);
   qDebug() << "FileVaultMainGui: Added statistics screen";
-  screenHash.insert("Encrypt", std::make_shared<EncryptionScreenWidget>());
+  screenHash.insert("Encrypt", std::make_shared<EncryptionScreenWidget>(this, statisticsScreen));
   qDebug() << "FileVaultMainGui: Added encryption screen";
-  screenHash.insert("Decrypt", std::make_shared<DecryptionScreenWidget>());
+  screenHash.insert("Decrypt", std::make_shared<DecryptionScreenWidget>(this, statisticsScreen));
   qDebug() << "FileVaultMainGui: Added decryption screen";
   screenHash.insert("Settings", std::make_shared<SettingsScreenWidget>());
   qDebug() << "FileVaultMainGui: Added settings screen";
@@ -131,7 +132,7 @@ void FileVaultGui::setupStackedWidget() {
 
   qDebug() << "FileVaultMainGui: Setting start screen";
   // Set the default screen
-  screenStack->setCurrentWidget(screenHash["Encrypt"].get());
+  screenStack->setCurrentWidget(screenHash["Statistics"].get());
 }
 
 void FileVaultGui::switchScreens(const QString &screenName) {

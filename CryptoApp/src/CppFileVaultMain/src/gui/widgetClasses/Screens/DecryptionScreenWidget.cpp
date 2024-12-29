@@ -1,6 +1,9 @@
 #include "DecryptionScreenWidget.h"
 
-DecryptionScreenWidget::DecryptionScreenWidget(QWidget *parent) : QWidget(parent) {
+DecryptionScreenWidget::DecryptionScreenWidget(QWidget *parent, std::shared_ptr<StatisticsScreenWidget> statisticsPtr) : QWidget(parent) {
+  statisticsScreenWidget = std::make_shared<StatisticsScreenWidget>();
+  statisticsScreenWidget = statisticsPtr;
+
   DecryptionScreenWidgetLayout = std::make_unique<QVBoxLayout>(this);
 
   DecryptionScreenTitle = std::make_unique<QLabel>("Decryption Screen", this);
@@ -22,11 +25,24 @@ void DecryptionScreenWidget::configureUI() {
 
 void DecryptionScreenWidget::onStartProcessButtonClicked() {
   std::vector<fs::path> filePathVector;
-  std::vector<int> results;
+  std::unordered_map<std::string, int> results;
   for (const auto &fileConfig: FilePickerWidget->getDecItems()) {
     fs::path filePath = fileConfig.Path.toStdWString();
     filePathVector.push_back(filePath);
   }
   HelperUtils helperUtils;
   results = helperUtils.decryptFiles(filePathVector);
+
+  for (const auto &result: results) {
+    if (result.second == -1) {
+      statisticsScreenWidget->updateDecryptedFilesCount(1);
+      if (result.first == "AES128") {
+        statisticsScreenWidget->updateAes128Count(-1);
+      } else if (result.first == "AES256") {
+        statisticsScreenWidget->updateAes256Count(-1);
+      }
+    } else {
+      qDebug() << "Decryption failed code:" << result;
+    }
+  }
 }

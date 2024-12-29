@@ -18,7 +18,6 @@
 #include <QFontMetrics>
 #include "styleClass/StyleSetter.h"
 #include "FileScannerDLL.h"
-#include "LoadingWindow.h"
 #include <thread>
 #include "../../../../GlobalDefinitions.h"
 
@@ -80,7 +79,6 @@ private:
   FilePickerType filePickerType;
   QSet<QString> addedPaths; // Declare addedPaths here
   StyleSetter styleSetter;
-  std::unique_ptr<LoadingWindow> loadingWindow; // Add LoadingWindow
 
   void addEntry(const QString &path);
   void scanDirectoryInThread(const QString &directory); // Add method to scan directory in thread

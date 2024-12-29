@@ -21,11 +21,8 @@ FilePicker::FilePicker(QWidget *parent, FilePickerType type) : QWidget(parent) {
   setLayout(FilePickerLayout.get());
   configureUI();
 
-  loadingWindow = std::make_unique<LoadingWindow>(this); // Initialize LoadingWindow
-
   connect(this, &FilePicker::fileFound, this, [this](const QString &filePath) {
     addEntry(filePath);
-    loadingWindow->appendConsoleOutput(filePath);
   });
 }
 
@@ -212,7 +209,6 @@ void FilePicker::globalAlgorithmChanged(const QString &algorithm) {
 }
 
 void FilePicker::scanDirectoryInThread(const QString &directory) {
-  loadingWindow->show(); // Show LoadingWindow
 
   // Start a new thread for scanning the directory
   std::thread([this, directory]() {
@@ -225,18 +221,9 @@ void FilePicker::scanDirectoryInThread(const QString &directory) {
         addedPaths.insert(qPath);
         QMetaObject::invokeMethod(this, [this, qPath]() {
           addEntry(qPath);
-          loadingWindow->counter++;
-          loadingWindow->setConsoleOutput(QString("Found %1 Files").arg(loadingWindow->counter));
         }, Qt::QueuedConnection);
       }
     });
-
-    loadingWindow->counter = 0;
-
-    // Signal that scanning is completed
-    QMetaObject::invokeMethod(this, [this]() {
-      loadingWindow->hide(); // Hide LoadingWindow when done
-    }, Qt::QueuedConnection);
   }).detach(); // Detach the thread to run independently
 }
 

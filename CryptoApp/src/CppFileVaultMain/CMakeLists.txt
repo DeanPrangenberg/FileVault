@@ -95,11 +95,14 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.h
     src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h
     src/gui/styleClass/StyleSetter.cpp
-    src/gui/widgetClasses/elementWidgets/smallElements/FilePicker.h
-    src/gui/widgetClasses/elementWidgets/smallElements/FilePicker.cpp
+    src/gui/widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h
+    src/gui/widgetClasses/elementWidgets/cryptionWidgets/FilePicker.cpp
     ../shared/Threadpool.cpp
     ../shared/Threadpool.h
     src/gui/widgetClasses/elementWidgets/smallElements/LoadingWindow.cpp
+    src/gui/widgetClasses/elementWidgets/statisticWidgets/CakeDiagram.h
+    src/gui/widgetClasses/elementWidgets/statisticWidgets/CakeDiagram.cpp
+    src/gui/widgetClasses/elementWidgets/statisticWidgets/AlgorithmStatisticWidget.cpp
 )
 
 # Ensure the custom target is built before the main executable

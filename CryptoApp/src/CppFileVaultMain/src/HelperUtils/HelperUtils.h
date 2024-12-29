@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <unordered_map>
 #include "../GlobalDefinitions.h"
 #include "../../../shared/FileData.h"
 
@@ -13,7 +14,7 @@ namespace fs = std::filesystem;
 class HelperUtils {
 public:
   std::vector<int> encryptFiles(const std::vector<fs::path> &filePaths, const std::vector<std::string> &algorithm);
-  std::vector<int> decryptFiles(const std::vector<fs::path> &filePaths);
+  std::unordered_map<std::string, int> decryptFiles(const std::vector<fs::path> &filePaths);
   void repairLostEncFileStructs(std::vector<fs::path> &directorys);
   void repairAllLostStruct();
 

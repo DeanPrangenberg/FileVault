@@ -6,17 +6,19 @@
 #include <memory>
 #include <QLabel>
 #include <QPushButton>
-#include "widgetClasses/elementWidgets/smallElements/FilePicker.h"
+#include <unordered_map>
+#include "widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h"
 #include "../../../StructUtils/StructUtils.h"
 #include "../../../HelperUtils/HelperUtils.h"
 #include "../../../GlobalDefinitions.h"
 #include "../../../DLLUtils/CryptoDLL.h"
+#include "StatisticsScreenWidget.h"
 
 class DecryptionScreenWidget : public QWidget {
 Q_OBJECT
 
 public:
-  explicit DecryptionScreenWidget(QWidget *parent = nullptr);
+  explicit DecryptionScreenWidget(QWidget *parent = nullptr, std::shared_ptr<StatisticsScreenWidget> statisticsPtr = nullptr);
   ~DecryptionScreenWidget() override = default;
 
 private:
@@ -26,6 +28,8 @@ private:
   std::unique_ptr<QLabel> DecryptionScreenTitle;
   std::unique_ptr<QPushButton> StartProcessButton;
   std::unique_ptr<FilePicker> FilePickerWidget;
+
+  std::shared_ptr<StatisticsScreenWidget> statisticsScreenWidget;
 
   void configureUI();
 

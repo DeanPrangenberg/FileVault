@@ -1,7 +1,10 @@
 #include "EncryptionScreenWidget.h"
 
-EncryptionScreenWidget::EncryptionScreenWidget(QWidget *parent) : QWidget(parent) {
+EncryptionScreenWidget::EncryptionScreenWidget(QWidget *parent, std::shared_ptr<StatisticsScreenWidget> statisticsPtr) : QWidget(parent) {
   EncryptionScreenWidgetLayout = std::make_unique<QVBoxLayout>(this);
+
+  statisticsScreenWidget = std::make_shared<StatisticsScreenWidget>();
+  statisticsScreenWidget = statisticsPtr;
 
   EncryptionScreenTitle = std::make_unique<QLabel>("Encryption Screen", this);
   StartProcessButton = std::make_unique<QPushButton>("Start Process", this);
@@ -32,4 +35,20 @@ void EncryptionScreenWidget::onStartProcessButtonClicked() {
   }
   HelperUtils helperUtils;
   results = helperUtils.encryptFiles(filePathVector, algorithmVector);
+
+  int index = 0;
+
+  for (const auto &result: results) {
+    if (result == -1) {
+      statisticsScreenWidget->updateEncryptedFilesCount(1);
+      if (algorithmVector[index] == "AES-128") {
+        statisticsScreenWidget->updateAes128Count(1);
+      } else {
+        statisticsScreenWidget->updateAes256Count(1);
+      }
+    } else {
+    qDebug() << "Encryption failed code:" << result;
+    }
+    ++index;
+  }
 }

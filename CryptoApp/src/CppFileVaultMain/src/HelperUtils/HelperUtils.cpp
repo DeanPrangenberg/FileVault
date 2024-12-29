@@ -1,6 +1,7 @@
 #include <vector>
 #include <array>
 #include <iostream>
+#include <codecvt>
 #include "HelperUtils.h"
 #include "../System/SystemUtils.h"
 #include "../DLLUtils/FileScannerDLL.h"
@@ -215,11 +216,11 @@ void HelperUtils::repairAllLostStruct() {
   repairLostEncFileStructs(drives);
 }
 
-std::vector<int> HelperUtils::decryptFiles(const std::vector<fs::path> &filePaths) {
+std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector<fs::path> &filePaths) {
   CryptoDLL cryptoDll;
   RestApiDLL restApiDll;
   FileMarkDLL fileMarkDll;
-  std::vector<int> results;
+  std::unordered_map<std::string, int> results;
   std::vector<FileData> fileDataVec;
 
   for (const auto &filePath : filePaths) {
@@ -234,7 +235,7 @@ std::vector<int> HelperUtils::decryptFiles(const std::vector<fs::path> &filePath
     fileMarkDll.extractIDsFromFile(filePath.wstring().c_str(), fileData.getFileId(), fileData.getEncryptionId());
 
     if (!restApiDll.SearchEntry(fileData)) {
-      results.push_back(1); // Error finding the entry
+      results.insert({"Search", 1}); // Error finding the entry
       continue;
     }
 
@@ -246,21 +247,23 @@ std::vector<int> HelperUtils::decryptFiles(const std::vector<fs::path> &filePath
   cryptoDll.DecryptFiles(fileDataVec.data(), static_cast<int>(fileDataVec.size()), decryptResults);
 
   for (size_t i = 0; i < fileDataVec.size(); ++i) {
+    std::string algorithm = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(fileDataVec[i].getAlgorithmenType());
+
     // Check if decryption was successful
     if (!decryptResults[i]) {
-      results.push_back(2); // Error during decryption
+      results.insert({algorithm, 2}); // Error during decryption
       continue;
     }
 
     // Delete the entry from the database
     if (!restApiDll.DeleteEntry(fileDataVec[i])) {
-      results.push_back(3); // Error deleting the entry
+      results.insert({algorithm, 3}); // Error deleting the entry
       continue;
     }
 
     // Clean up the FileData structure
     fileDataVec[i].cleanupFileData();
-    results.push_back(-1); // Success
+    results.insert({algorithm, -1}); // Success
   }
 
   return results;
