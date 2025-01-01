@@ -225,8 +225,9 @@ std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector
 
   for (const auto &filePath : filePaths) {
     // Create the FileData structure
+    auto filePathAsWchar = const_cast<wchar_t*>(filePath.wstring().c_str());
     FileData fileData;
-    fileData.setEncryptedFilePath(const_cast<wchar_t*>(filePath.wstring().c_str()));
+    fileData.setEncryptedFilePath(filePathAsWchar);
     fileData.setEncryptionId(new unsigned char[64]);
     fileData.setEncryptionIdLength(64);
     fileData.setFileId(new unsigned char[64]);
@@ -238,7 +239,7 @@ std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector
       results.insert({"Search", 1}); // Error finding the entry
       continue;
     }
-
+    fileData.setEncryptedFilePath(filePathAsWchar);
     fileDataVec.push_back(fileData);
   }
 
