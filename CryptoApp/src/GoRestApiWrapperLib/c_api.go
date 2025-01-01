@@ -12,8 +12,27 @@ import (
   "io/ioutil"
   "net/http"
   "runtime"
-  "unsafe"
 )
+
+//export GetDatabaseFileSize
+func GetDatabaseFileSize(result *C.int) {
+  resp, err := http.Get("http://localhost:8000/api/getDBSize")
+  if err != nil {
+    *result = -1
+    return
+  }
+  defer resp.Body.Close()
+
+  body, _ := ioutil.ReadAll(resp.Body)
+  var sizeInKB int
+  err = json.Unmarshal(body, &sizeInKB)
+  if err != nil {
+    *result = -1
+    return
+  }
+
+  *result = C.int(sizeInKB)
+}
 
 //export DeleteEntry
 func DeleteEntry(data *C.FileDataDB, result *C.bool) {
@@ -118,10 +137,12 @@ func SearchEntry(data *C.FileDataDB, result *C.bool) {
 }
 
 //export GetAllFileIDsAndEncryptedPaths
-func GetAllFileIDsAndEncryptedPaths() **C.FileDataDB {
+func GetAllFileIDsAndEncryptedPaths(result **C.FileDataDB, count *C.int) {
   resp, err := http.Get("http://localhost:8000/api/getAllFileIDsAndEncryptedPaths")
   if err != nil {
-    return nil
+    *result = nil
+    *count = 0
+    return
   }
   defer resp.Body.Close()
 
@@ -129,23 +150,24 @@ func GetAllFileIDsAndEncryptedPaths() **C.FileDataDB {
   var goData []GoFileData
   err = json.Unmarshal(body, &goData)
   if err != nil {
-    return nil
+    *result = nil
+    *count = 0
+    return
   }
 
   cData := make([]C.FileDataDB, len(goData))
   for i, data := range goData {
     cData[i] = C.FileDataDB{
       FileID:            stringToWcharT(data.FileID),
-      AlgorithmenType:   stringToWcharT(data.AlgorithmenType),
-      OriginalFilePath:  stringToWcharT(data.OriginalFilePath),
+      EncryptionID:      stringToWcharT(data.EncryptionID),
       EncryptedFilePath: stringToWcharT(data.EncryptedFilePath),
-      DecryptedFilePath: stringToWcharT(data.DecryptedFilePath),
-      Key:               stringToWcharT(data.Key),
-      Iv:                stringToWcharT(data.Iv),
     }
   }
 
-  return (**C.FileDataDB)(unsafe.Pointer(&cData[0]))
+  // Pin the cData slice to prevent it from being moved by the garbage collector
+  runtime.KeepAlive(cData)
+  *result = &cData[0]
+  *count = C.int(len(goData))
 }
 
 //export ReplaceEntry

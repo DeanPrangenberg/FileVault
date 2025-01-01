@@ -10,9 +10,7 @@ StatisticsScreenWidget::StatisticsScreenWidget(QWidget *parent) : QWidget(parent
   titleLabel = std::make_unique<QLabel>(this);
 
   checkFileStateButton = std::make_unique<QPushButton>("Check File State", this);
-  tryRepairFileButton = std::make_unique<QPushButton>("Try Repair File", this);
-  saveStatisticsButton = std::make_unique<QPushButton>("Save Statistics", this);
-  loadStatisticsButton = std::make_unique<QPushButton>("Load Statistics", this);
+  tryRepairFileButton = std::make_unique<QPushButton>("Try File Repair", this);
 
   algoCakeDiagram = std::make_unique<CakeDiagram>(this);
   LostFilesCakeDiagram = std::make_unique<CakeDiagram>(this);
@@ -24,24 +22,19 @@ StatisticsScreenWidget::StatisticsScreenWidget(QWidget *parent) : QWidget(parent
   algoStatsWidget = std::make_unique<AlgorithmStatisticWidget>(this, algoFileCounts);
 
   infoTextsLayout->addWidget(titleLabel.get(), 0, 0, 1, 2);
-  infoTextsLayout->addWidget(saveStatisticsButton.get(), 1, 0, 1, 1);
-  infoTextsLayout->addWidget(loadStatisticsButton.get(), 1, 1, 1, 1);
-  infoTextsLayout->addWidget(algoCakeDiagram.get(), 2, 0, 1, 1);
-  infoTextsLayout->addWidget(LostFilesCakeDiagram.get(), 2, 1, 1, 1);
-  infoTextsLayout->addWidget(decryptedFilesLabel.get(), 3, 0, 1, 1);
-  infoTextsLayout->addWidget(algoStatsWidget.get(), 3, 1, 1, 1);
-  infoTextsLayout->addWidget(encryptedFilesLabel.get(), 4, 0, 1, 1);
-  infoTextsLayout->addWidget(sizeOfDatabaseLabel.get(), 4, 1, 1, 1);
-  infoTextsLayout->addWidget(checkFileStateButton.get(), 5, 0, 1, 1);
-  infoTextsLayout->addWidget(tryRepairFileButton.get(), 5, 1, 1, 1);
+  infoTextsLayout->addWidget(algoCakeDiagram.get(), 1, 0, 1, 1);
+  infoTextsLayout->addWidget(LostFilesCakeDiagram.get(), 1, 1, 1, 1);
+  infoTextsLayout->addWidget(decryptedFilesLabel.get(), 2, 0, 1, 1);
+  infoTextsLayout->addWidget(algoStatsWidget.get(), 2, 1, 1, 1);
+  infoTextsLayout->addWidget(encryptedFilesLabel.get(), 3, 0, 1, 1);
+  infoTextsLayout->addWidget(sizeOfDatabaseLabel.get(), 3, 1, 1, 1);
+  infoTextsLayout->addWidget(checkFileStateButton.get(), 4, 0, 1, 1);
+  infoTextsLayout->addWidget(tryRepairFileButton.get(), 4, 1, 1, 1);
+
+  helperUtils = std::make_unique<HelperUtils>();
 
   setLayout(infoTextsLayout.get());
   SetupUI();
-
-  connect(saveStatisticsButton.get(), &QPushButton::clicked, this,
-          &StatisticsScreenWidget::onSaveStatisticsButtonClicked);
-  connect(loadStatisticsButton.get(), &QPushButton::clicked, this,
-          &StatisticsScreenWidget::onLoadStatisticsButtonClicked);
 
   ensureStatisticsFileExists("statistics.json");
   loadStatisticsFromJson("statistics.json");
@@ -56,22 +49,34 @@ void StatisticsScreenWidget::SetupUI() {
 
   checkFileStateButton->setMinimumHeight(40);
   tryRepairFileButton->setMinimumHeight(40);
-  saveStatisticsButton->setMinimumHeight(40);
-  loadStatisticsButton->setMinimumHeight(40);
 
   StyleSetter styleSetter;
   styleSetter.setButtonStyle(checkFileStateButton.get());
   styleSetter.setButtonStyle(tryRepairFileButton.get());
-  styleSetter.setButtonStyle(saveStatisticsButton.get());
-  styleSetter.setButtonStyle(loadStatisticsButton.get());
   styleSetter.setLabelBackgroundStyle(decryptedFilesLabel.get());
   styleSetter.setLabelBackgroundStyle(encryptedFilesLabel.get());
   styleSetter.setLabelBackgroundStyle(sizeOfDatabaseLabel.get());
+
+  connect(checkFileStateButton.get(), &QPushButton::clicked, this, [this](){
+    FoundFilesCount = 0;
+    lostFilesCount = 0;
+    auto results = helperUtils->checkDBFileState();
+    updateFoundFilesCount(results[0]);
+    updateLostFilesCount(results[1]);
+  });
+
+  connect(tryRepairFileButton.get(), &QPushButton::clicked, this, [this](){
+    helperUtils->repairAllLostStruct();
+  });
 
   updateStatistics();
 }
 
 void StatisticsScreenWidget::updateStatistics() {
+  RestApiDLL restApiDll;
+
+  databaseSize = restApiDll.getDatabaseFileSize();
+
   algoCakeDiagram->reset();
   LostFilesCakeDiagram->reset();
 

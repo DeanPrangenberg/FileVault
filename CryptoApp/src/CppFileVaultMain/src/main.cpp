@@ -5,7 +5,7 @@
 #include <string>
 #include "../DLLUtils/FileScannerDLL.h"
 #include "../DLLUtils/CryptoDLL.h"
-#include "../DLLUtils/RestApiDLL.h"
+#include "RestAPI/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
 #include "gui/FileVaultGui.h"
 #include <QApplication>
@@ -16,7 +16,7 @@ bool printDebug = true;
 bool printConverterDebug = true;
 
 #define pathToCrypt "S:\\clips\\cut"
-#define dockerHash "a5d0aa35ab0c107e7a04e4618a9fe80c1c6ddb4eeef2e03fd2114fcb7e8be62a"
+#define dockerHash "cd7e3f142099e939a96abb56bc0202f51ca7fe9244fb28ae4700e8304cb020b2"
 
 void startDBContainer() {
   std::string command = "docker start " + std::string(dockerHash);

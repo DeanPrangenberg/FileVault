@@ -2,7 +2,7 @@
 #define FILEVAULTROOT_RESTAPIDLL_H
 
 #include "MasterDLLClass.h"
-#include "../../../shared/FileData.h"
+#include "../../../../shared/FileData.h"
 #include <vector>
 #include <iostream>
 #include <stdexcept>
@@ -13,6 +13,7 @@ public:
   bool DeleteEntry(const FileData &data);
   bool SearchEntry(FileData &data);
   bool ReplaceEntry(const FileData &data);
+  int getDatabaseFileSize();
 
   std::vector<FileData> GetAllFileIDsAndEncryptedPaths();
 
@@ -40,7 +41,8 @@ private:
   typedef void (*DeleteEntryFunc)(const FileDataDB *, bool *);
   typedef void (*SearchEntryFunc)(FileDataDB *, bool *);
   typedef void (*ReplaceEntryFunc)(const FileDataDB *, bool *);
-  typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileDataDB **, bool *);
+  typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileDataDB **, int *);
+  typedef void (*GetDatabaseFileSizeFunc)(int *);
 
   FileDataDB convertFileDataToDBStruct(const FileData &data);
   FileData convertDBStructToFileData(const FileDataDB &data);

@@ -52,8 +52,6 @@ add_executable(CppFileVaultMain
     src/HelperUtils/HelperUtils.cpp
     src/HelperUtils/HelperUtils.h
     src/DLLUtils/MasterDLLClass.h
-    src/DLLUtils/RestApiDLL.cpp
-    src/DLLUtils/RestApiDLL.h
     src/DLLUtils/CryptoDLL.cpp
     src/DLLUtils/CryptoDLL.h
     src/DLLUtils/FileMarkDLL.cpp
@@ -62,7 +60,6 @@ add_executable(CppFileVaultMain
     src/DLLUtils/FileScannerDLL.h
     ../shared/FileData.cpp
     ../shared/FileData.h
-
     src/gui/FileVaultGui.cpp
     src/gui/FileVaultGui.h
     ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp
@@ -103,6 +100,9 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/elementWidgets/statisticWidgets/CakeDiagram.h
     src/gui/widgetClasses/elementWidgets/statisticWidgets/CakeDiagram.cpp
     src/gui/widgetClasses/elementWidgets/statisticWidgets/AlgorithmStatisticWidget.cpp
+    src/DLLUtils/RestAPI/converter.cpp
+    src/DLLUtils/RestAPI/RestApiDLL.cpp
+    src/DLLUtils/RestAPI/RestApiDLL.h
 )
 
 # Ensure the custom target is built before the main executable

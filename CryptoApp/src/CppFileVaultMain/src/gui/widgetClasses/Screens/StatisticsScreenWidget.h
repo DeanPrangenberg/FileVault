@@ -12,6 +12,8 @@
 #include "../elementWidgets/statisticWidgets/CakeDiagram.h"
 #include "../elementWidgets/statisticWidgets/AlgorithmStatisticWidget.h"
 #include "styleClass/StyleSetter.h"
+#include "../../../HelperUtils/HelperUtils.h"
+#include "RestAPI/RestApiDLL.h"
 
 class StatisticsScreenWidget : public QWidget {
 Q_OBJECT
@@ -44,14 +46,14 @@ private:
   std::unique_ptr<QLabel> titleLabel;
   std::unique_ptr<QPushButton> checkFileStateButton;
   std::unique_ptr<QPushButton> tryRepairFileButton;
-  std::unique_ptr<QPushButton> saveStatisticsButton;
-  std::unique_ptr<QPushButton> loadStatisticsButton;
 
   std::unique_ptr<QGridLayout> infoTextsLayout;
   std::unique_ptr<AlgorithmStatisticWidget> algoStatsWidget;
   std::unique_ptr<QLabel> decryptedFilesLabel;
   std::unique_ptr<QLabel> encryptedFilesLabel;
   std::unique_ptr<QLabel> sizeOfDatabaseLabel;
+
+  std::unique_ptr<HelperUtils> helperUtils;
 
 private slots:
   void updateStatistics();

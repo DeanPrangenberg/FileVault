@@ -5,7 +5,7 @@
 #include "HelperUtils.h"
 #include "../System/SystemUtils.h"
 #include "../DLLUtils/FileScannerDLL.h"
-#include "../DLLUtils/RestApiDLL.h"
+#include "../DLLUtils/RestAPI/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
 #include "../DLLUtils/CryptoDLL.h"
 #include "../StructUtils/StructUtils.h"
@@ -306,6 +306,26 @@ std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePath
     // Clean up the FileData structure
     fileData.cleanupFileData();
     results.push_back(-1); // Success
+  }
+
+  return results;
+}
+
+std::vector<int> HelperUtils::checkDBFileState() {
+  RestApiDLL restApiDll;
+  auto fileDataList = restApiDll.GetAllFileIDsAndEncryptedPaths();
+  std::vector<int> results = {0, 0};
+
+  FileMarkDLL fileMarkDll;
+
+  for (const auto &fileData : fileDataList) {
+    auto fileID = std::make_unique<unsigned char[]>(64);
+    auto encryptionID = std::make_unique<unsigned char[]>(64);
+    if (fileMarkDll.extractIDsFromFile(fileData.getEncryptedFilePath(), fileID.get(), encryptionID.get())) {
+      results[0] += 1;
+    } else {
+      results[1] += 1;
+    }
   }
 
   return results;

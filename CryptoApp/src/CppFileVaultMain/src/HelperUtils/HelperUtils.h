@@ -24,6 +24,8 @@ public:
     fs::path newEncryptedFilePath;
   };
 
+  std::vector<int> checkDBFileState();
+
 private:
   bool printDebug = true;
 

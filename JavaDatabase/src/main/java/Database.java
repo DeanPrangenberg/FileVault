@@ -5,6 +5,10 @@ import java.util.List;
 public class Database {
     private Connection conn;
 
+    public String getDatabasePath() {
+        return "filedata.db";
+    }
+
     public static class GoFileData {
         public String FileID;
         public int FileIDLength;
