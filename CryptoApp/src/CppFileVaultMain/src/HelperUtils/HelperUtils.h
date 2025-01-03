@@ -29,6 +29,7 @@ public:
 private:
   bool printDebug = true;
 
+  wchar_t* convertPathToWchar(const fs::path &filePath);
   std::vector<fs::path> scanForAllFiles(const std::vector<fs::path> &directorys);
   std::vector<FileIDData> checkFilesForFileID(const std::vector<fs::path> &totalFiles);
   std::vector<FileData> findFileDataStructsInDatabase(const std::vector<FileIDData> &lostFiles);

@@ -225,15 +225,14 @@ std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector
 
   for (const auto &filePath : filePaths) {
     // Create the FileData structure
-    auto filePathAsWchar = const_cast<wchar_t*>(filePath.wstring().c_str());
+    auto filePathAsWchar = convertPathToWchar(filePath);
     FileData fileData;
-    fileData.setEncryptedFilePath(filePathAsWchar);
     fileData.setEncryptionId(new unsigned char[64]);
     fileData.setEncryptionIdLength(64);
     fileData.setFileId(new unsigned char[64]);
     fileData.setFileIdLength(64);
 
-    fileMarkDll.extractIDsFromFile(filePath.wstring().c_str(), fileData.getFileId(), fileData.getEncryptionId());
+    fileMarkDll.extractIDsFromFile(filePathAsWchar, fileData.getFileId(), fileData.getEncryptionId());
 
     if (!restApiDll.SearchEntry(fileData)) {
       results.insert({"Search", 1}); // Error finding the entry
@@ -330,4 +329,12 @@ std::vector<int> HelperUtils::checkDBFileState() {
   }
 
   return results;
+}
+
+wchar_t* HelperUtils::convertPathToWchar(const fs::path &filePath) {
+  std::wstring filePathWStr = filePath.wstring();
+  auto* filePathWChar = new wchar_t[filePathWStr.size() + 1];
+  std::copy(filePathWStr.begin(), filePathWStr.end(), filePathWChar);
+  filePathWChar[filePathWStr.size()] = L'\0';
+  return filePathWChar;
 }
