@@ -74,6 +74,8 @@ public:
   void globalAlgorithmChanged(const QString &algorithm);
   QVector<encryptionConfig> getEncItems();
   QVector<decryptionConfig> getDecItems();
+  void removeEncItems(const std::vector<int>& results);
+  void removeDecItems(const std::vector<int>& results);
 
 private:
   FilePickerType filePickerType;
@@ -82,9 +84,7 @@ private:
 
   void addEntry(const QString &path);
   void scanDirectoryInThread(const QString &directory); // Add method to scan directory in thread
-
-signals:
-  void fileFound(const QString &filePath);
+  void removeItems(const std::vector<int>& results, bool isEncryption);
 };
 
 #endif // FILEVAULTROOT_FILEPICKER_H

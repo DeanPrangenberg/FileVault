@@ -33,6 +33,14 @@ void DecryptionScreenWidget::onStartProcessButtonClicked() {
   HelperUtils helperUtils;
   results = helperUtils.decryptFiles(filePathVector);
 
+  std::vector<int> resultsVec;
+
+  for (const auto &result: results) {
+    resultsVec.push_back(result.second);
+  }
+
+  FilePickerWidget->removeDecItems(resultsVec);
+
   for (const auto &result: results) {
     if (result.second == -1) {
       statisticsScreenWidget->updateDecryptedFilesCount(1);

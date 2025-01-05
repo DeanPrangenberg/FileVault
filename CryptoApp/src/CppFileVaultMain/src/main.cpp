@@ -220,7 +220,7 @@ int main(int argc, char *argv[]) {
 
   QApplication app(argc, argv);
   startDBContainer();
-  system(".\\RustFileCopy.exe");
+  //system(".\\RustFileCopy.exe");
 
   QObject::connect(&app, &QApplication::aboutToQuit, []() {
     // Code to execute when the application is about to quit

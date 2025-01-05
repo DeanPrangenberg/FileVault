@@ -36,8 +36,9 @@ void EncryptionScreenWidget::onStartProcessButtonClicked() {
   HelperUtils helperUtils;
   results = helperUtils.encryptFiles(filePathVector, algorithmVector);
 
-  int index = 0;
+  FilePickerWidget->removeEncItems(results);
 
+  int index = 0;
   for (const auto &result: results) {
     if (result == -1) {
       statisticsScreenWidget->updateEncryptedFilesCount(1);

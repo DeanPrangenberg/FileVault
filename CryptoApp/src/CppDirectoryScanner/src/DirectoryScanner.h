@@ -23,10 +23,11 @@ public:
 
   void listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles, std::vector<fs::path> &fileList, FileFoundCallback callback) const;
 
+  static bool hasEncFileExtension(const fs::path &filepath);
+
 private:
   static bool isValidPath(const fs::path &p);
   static bool isSystemCritical(const fs::path &filePath);
-  static bool hasEncFileExtension(const fs::path &filepath);
 
   const bool printDebug = false;
 };

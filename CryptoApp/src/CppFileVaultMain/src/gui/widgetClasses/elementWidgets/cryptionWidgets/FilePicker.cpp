@@ -20,10 +20,6 @@ FilePicker::FilePicker(QWidget *parent, FilePickerType type) : QWidget(parent) {
 
   setLayout(FilePickerLayout.get());
   configureUI();
-
-  connect(this, &FilePicker::fileFound, this, [this](const QString &filePath) {
-    addEntry(filePath);
-  });
 }
 
 void FilePicker::configureUI() {
@@ -265,4 +261,46 @@ QVector<encryptionConfig> FilePicker::getEncItems() {
     }
   }
   return encItems;
+}
+
+void FilePicker::removeEncItems(const std::vector<int>& results) {
+  removeItems(results, true);
+}
+
+void FilePicker::removeDecItems(const std::vector<int>& results) {
+  removeItems(results, false);
+}
+
+void FilePicker::removeItems(const std::vector<int>& results, bool isEncryption) {
+  for (auto & res : results) {
+    qDebug() << "Result: " << res;
+  }
+  int totalItems = FilePickerScrollAreaLayout->count();
+  for (int i = totalItems - 1; i >= 0; --i) {
+    QHBoxLayout* entryLayout = qobject_cast<QHBoxLayout*>(FilePickerScrollAreaLayout->itemAt(i)->layout());
+    if (entryLayout) {
+      QCheckBox* checkbox = qobject_cast<QCheckBox*>(entryLayout->itemAt(1)->widget());
+      QLabel* label = qobject_cast<QLabel*>(entryLayout->itemAt(0)->widget());
+      QComboBox* comboBox = isEncryption ? qobject_cast<QComboBox*>(entryLayout->itemAt(2)->widget()) : nullptr;
+      if (checkbox && checkbox->isChecked() && label) {
+        int result = results[i];
+        if (result == -1) {
+          // Remove the entry
+          while (QLayoutItem* subItem = entryLayout->takeAt(0)) {
+            if (subItem->widget()) {
+              subItem->widget()->deleteLater();
+            }
+            delete subItem;
+          }
+          delete entryLayout;
+        } else {
+          // Show error message
+          QString errorMessage = QString("Error code: %1").arg(QString::number(result));
+          label->setToolTip(errorMessage);
+        }
+      }
+    }
+  }
+  updateFileToProcessLabel();
+  FilePickerScrollAreaWidget->update(); // Force widget to redraw
 }
