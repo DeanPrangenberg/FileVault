@@ -2,6 +2,110 @@
 #include "../../../../shared/FileData.h"
 #include <windows.h>
 
+std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
+  HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
+  if (!hDll) {
+    logError("RestApiDLL-Export: Failed to load DLL");
+    return {};
+  }
+
+  auto func = (ExportDatabaseFunc) GetProcAddress(hDll, "ExportDatabase");
+  if (!func) {
+    logError("RestApiDLL-Export: Failed to get function address for ExportDatabase");
+    unloadDll(hDll);
+    return {};
+  }
+
+  char *data = nullptr;
+  int dataSize = 0;
+  char *key = nullptr;
+  int keySize = 0;
+
+  func(&data, &dataSize, &key, &keySize);
+  logInfo("RestApiDLL-Export: Successfully exported database");
+
+  std::string dataStr;
+  for (int i = 0; i < dataSize; ++i) {
+    dataStr.push_back(data[i]);
+  }
+
+  std::string keyStr;
+  for (int i = 0; i < keySize; ++i) {
+    keyStr.push_back(key[i]);
+  }
+
+  std::unordered_map<std::string, std::string> exportResult;
+  exportResult["Data"] = dataStr;
+  exportResult["Key"] = keyStr;
+  logInfo("RestApiDLL-Export: Successfully converted database to std::unordered_map");
+
+  unloadDll(hDll);
+  return exportResult;
+}
+
+bool RestApiDLL::InsertDatabase(const std::string &key, const std::string &data) {
+  HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
+  if (!hDll) {
+    logError("RestApiDLL-InsertDB: Failed to load DLL");
+    return false;
+  }
+
+  auto func = (InsertDatabaseFunc) GetProcAddress(hDll, "InsertDatabase");
+  if (!func) {
+    logError("RestApiDLL-InsertDB: Failed to get function address for InsertDatabase");
+    unloadDll(hDll);
+    return false;
+  }
+
+  bool result = false;
+  func(data.c_str(), key.c_str(), &result);
+
+  unloadDll(hDll);
+  return result;
+}
+
+bool RestApiDLL::ReplaceDatabase(const std::string &key, const std::string &data) {
+  HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
+  if (!hDll) {
+    logError("RestApiDLL-ReplaceDB: Failed to load DLL");
+    return false;
+  }
+
+  auto func = (ReplaceDatabaseFunc) GetProcAddress(hDll, "ReplaceDatabase");
+  if (!func) {
+    logError("RestApiDLL-ReplaceDB: Failed to get function address for ReplaceDatabase");
+    unloadDll(hDll);
+    return false;
+  }
+
+  bool result = false;
+  func(data.c_str(), key.c_str(), &result);
+
+  unloadDll(hDll);
+  return result;
+}
+
+bool RestApiDLL::ResetDatabase() {
+  HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
+  if (!hDll) {
+    logError("RestApiDLL-ResetDB: Failed to load DLL");
+    return false;
+  }
+
+  auto func = (ResetDatabaseFunc) GetProcAddress(hDll, "ResetDatabase");
+  if (!func) {
+    logError("RestApiDLL-ResetDB: Failed to get function address for ResetDatabase");
+    unloadDll(hDll);
+    return false;
+  }
+
+  bool result = false;
+  func(&result);
+
+  unloadDll(hDll);
+  return result;
+}
+
 bool RestApiDLL::InsertEntry(const FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {

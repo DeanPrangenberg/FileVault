@@ -35,7 +35,7 @@ void DecryptionScreenWidget::onStartProcessButtonClicked() {
 
   std::vector<int> resultsVec;
 
-  for (const auto &result: results) {
+  for (const auto result: results) {
     resultsVec.push_back(result.second);
   }
 

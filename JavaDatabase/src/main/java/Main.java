@@ -15,7 +15,12 @@ public class Main {
     server.createContext("/api/search", new SearchHandler(db));
     server.createContext("/api/replace", new ReplaceHandler(db));
     server.createContext("/api/getAllFileIDsAndEncryptedPaths", new GetAllFileIDsAndEncryptedPathsHandler(db));
-    server.createContext("/api/getDBSize", new GetDBSize(db));
+    server.createContext("/api/getDBSize", new GetDBSizeHandler(db));
+
+    server.createContext("/api/DBM/export", new DBMexportHandler(db));
+    server.createContext("/api/DBM/insert", new DBMinsertHandler(db));
+    server.createContext("/api/DBM/replace", new DBMreplaceHandler(db));
+    server.createContext("/api/DBM/reset", new DBMresetHandler(db));
     server.setExecutor(null);
     server.start();
 

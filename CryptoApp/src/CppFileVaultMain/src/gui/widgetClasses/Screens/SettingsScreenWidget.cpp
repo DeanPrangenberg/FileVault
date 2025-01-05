@@ -89,7 +89,6 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   loadSettings();
 }
 
-
 void SettingsScreenWidget::selectLogsLocation() {
   QString dir = QFileDialog::getExistingDirectory(this, tr("Select Logs Directory"), "",
                                                   QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
@@ -122,7 +121,6 @@ void SettingsScreenWidget::saveSettings() {
   settings["Algorithm"] = algorithmWidget->algorithmComboBox->currentText();
   settings["LogsLocation"] = logsLocationWidget->logsLocationLabel->text().remove("Current Path: ");
   settings["Language"] = languageWidget->languageComboBox->currentText();
-  settings["DatabaseExport"] = databaseExportWidget->databaseExportComboBox->currentText();
   settings["ForEncryptedFiles"] = centralStorageWidget->forEncryptedFiles->isChecked();
   settings["ForDecryptedFiles"] = centralStorageWidget->forDecryptedFiles->isChecked();
   settings["StoragePath"] = centralStorageWidget->storagePathLabel->text().remove("Current Path: ");
@@ -147,7 +145,6 @@ void SettingsScreenWidget::loadSettings() {
     algorithmWidget->algorithmComboBox->setCurrentText(settings["Algorithm"].toString());
     logsLocationWidget->logsLocationLabel->setText("Current Path: " + settings["LogsLocation"].toString());
     languageWidget->languageComboBox->setCurrentText(settings["Language"].toString());
-    databaseExportWidget->databaseExportComboBox->setCurrentText(settings["DatabaseExport"].toString());
     centralStorageWidget->forEncryptedFiles->setChecked(settings["ForEncryptedFiles"].toBool());
     centralStorageWidget->forDecryptedFiles->setChecked(settings["ForDecryptedFiles"].toBool());
     centralStorageWidget->storagePathLabel->setText("Current Path: " + settings["StoragePath"].toString());

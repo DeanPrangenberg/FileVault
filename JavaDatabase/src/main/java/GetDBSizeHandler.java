@@ -5,10 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class GetDBSize implements HttpHandler {
+public class GetDBSizeHandler implements HttpHandler {
   private Database db;
 
-  public GetDBSize(Database db) {
+  public GetDBSizeHandler(Database db) {
     this.db = db;
   }
 

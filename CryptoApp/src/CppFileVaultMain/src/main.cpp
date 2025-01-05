@@ -16,7 +16,7 @@ bool printDebug = true;
 bool printConverterDebug = true;
 
 #define pathToCrypt "S:\\clips\\cut"
-#define dockerHash "cd7e3f142099e939a96abb56bc0202f51ca7fe9244fb28ae4700e8304cb020b2"
+#define dockerHash "f27a7d409e11ea3c7aee017e2fe6f44485483ec21cd034cf864cb2ab802e7b44"
 
 void startDBContainer() {
   std::string command = "docker start " + std::string(dockerHash);
@@ -220,7 +220,7 @@ int main(int argc, char *argv[]) {
 
   QApplication app(argc, argv);
   startDBContainer();
-  //system(".\\RustFileCopy.exe");
+  system(".\\RustFileCopy.exe");
 
   QObject::connect(&app, &QApplication::aboutToQuit, []() {
     // Code to execute when the application is about to quit

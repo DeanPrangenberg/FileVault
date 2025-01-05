@@ -1,14 +1,4 @@
-#include <vector>
-#include <array>
-#include <iostream>
-#include <codecvt>
 #include "HelperUtils.h"
-#include "../System/SystemUtils.h"
-#include "../DLLUtils/FileScannerDLL.h"
-#include "../DLLUtils/RestAPI/RestApiDLL.h"
-#include "../DLLUtils/FileMarkDLL.h"
-#include "../DLLUtils/CryptoDLL.h"
-#include "../StructUtils/StructUtils.h"
 
 void debugFileIDData(const HelperUtils::FileIDData &fileIDData) {
   std::cout << "***************************************************" << std::endl;
@@ -337,4 +327,66 @@ wchar_t* HelperUtils::convertPathToWchar(const fs::path &filePath) {
   std::copy(filePathWStr.begin(), filePathWStr.end(), filePathWChar);
   filePathWChar[filePathWStr.size()] = L'\0';
   return filePathWChar;
+}
+
+void HelperUtils::saveDatabaseToFile(const fs::path &targetDir, std::unordered_map<std::string, std::string> database) {
+  auto timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  std::stringstream ss;
+  ss << "expoDatabase" << timestamp << ".FvDB";
+  fs::path targetPath = targetDir / ss.str();
+
+  std::ofstream outFile(targetPath, std::ios::binary);
+  if (!outFile) {
+    throw std::runtime_error("Failed to open file for writing: " + targetPath.string());
+  }
+
+  size_t mapSize = database.size();
+  outFile.write(reinterpret_cast<const char*>(&mapSize), sizeof(mapSize));
+
+  for (const auto& pair : database) {
+    size_t keySize = pair.first.size();
+    size_t valueSize = pair.second.size();
+
+    outFile.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
+    outFile.write(pair.first.data(), keySize);
+
+    outFile.write(reinterpret_cast<const char*>(&valueSize), sizeof(valueSize));
+    outFile.write(pair.second.data(), valueSize);
+  }
+
+  outFile.close();
+}
+
+std::unordered_map<std::string, std::string> HelperUtils::loadDatabaseFromFile(const fs::path &targetDir) {
+  auto timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  std::stringstream ss;
+  ss << "expoDatabase" << timestamp << ".FvDB";
+  fs::path targetPath = targetDir / ss.str();
+
+  std::ifstream inFile(targetPath, std::ios::binary);
+  if (!inFile) {
+    throw std::runtime_error("Failed to open file for reading: " + targetPath.string());
+  }
+
+  std::unordered_map<std::string, std::string> database;
+  size_t mapSize;
+  inFile.read(reinterpret_cast<char*>(&mapSize), sizeof(mapSize));
+
+  for (size_t i = 0; i < mapSize; ++i) {
+    size_t keySize, valueSize;
+    inFile.read(reinterpret_cast<char*>(&keySize), sizeof(keySize));
+
+    std::string key(keySize, '\0');
+    inFile.read(&key[0], keySize);
+
+    inFile.read(reinterpret_cast<char*>(&valueSize), sizeof(valueSize));
+
+    std::string value(valueSize, '\0');
+    inFile.read(&value[0], valueSize);
+
+    database[key] = value;
+  }
+
+  inFile.close();
+  return database;
 }

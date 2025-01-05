@@ -6,9 +6,14 @@
 #include <vector>
 #include <iostream>
 #include <stdexcept>
+#include <unordered_map>
 
 class RestApiDLL : MasterDLLClass {
 public:
+  std::unordered_map<std::string, std::string> ExportDatabase();
+  bool InsertDatabase(const std::string &key, const std::string &data);
+  bool ReplaceDatabase(const std::string &key, const std::string &data);
+  bool ResetDatabase();
   bool InsertEntry(const FileData &data);
   bool DeleteEntry(const FileData &data);
   bool SearchEntry(FileData &data);
@@ -43,6 +48,10 @@ private:
   typedef void (*ReplaceEntryFunc)(const FileDataDB *, bool *);
   typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileDataDB **, int *);
   typedef void (*GetDatabaseFileSizeFunc)(int *);
+  typedef void (*ExportDatabaseFunc)(char **, int *, char **, int *);
+  typedef void (*InsertDatabaseFunc)(const char *, const char *, bool *);
+  typedef void (*ReplaceDatabaseFunc)(const char *, const char *, bool *);
+  typedef void (*ResetDatabaseFunc)(bool *);
 
   FileDataDB convertFileDataToDBStruct(const FileData &data);
   FileData convertDBStructToFileData(const FileDataDB &data);
