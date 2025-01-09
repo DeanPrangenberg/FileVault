@@ -34,6 +34,9 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
     keyStr.push_back(key[i]);
   }
 
+  logInfo("Data: " + dataStr);
+  logInfo("Key: " + keyStr);
+
   std::unordered_map<std::string, std::string> exportResult;
   exportResult["Data"] = dataStr;
   exportResult["Key"] = keyStr;
@@ -79,6 +82,10 @@ bool RestApiDLL::ReplaceDatabase(const std::string &key, const std::string &data
   }
 
   bool result = false;
+
+  logInfo("RestApiDLL-ReplaceDB: Replacing database with key: " + key);
+  logInfo("RestApiDLL-ReplaceDB: Replacing database with data: " + data);
+
   func(data.c_str(), key.c_str(), &result);
 
   unloadDll(hDll);

@@ -14,7 +14,6 @@
 #include "../alogs/AES256.h"
 #include "../alogs/KeyGen.h"
 #include "../alogs/SHA512.h"
-#include "../../../shared/ThreadPool.h"
 
 #ifdef CRYPTOLIBRARY_EXPORTS
 #define CRYPTOLIB_API __declspec(dllexport)

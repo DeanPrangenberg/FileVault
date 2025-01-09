@@ -52,6 +52,7 @@ void DatabaseManagementWidget::exportDB() {
 }
 
 void DatabaseManagementWidget::insertDB() {
+
   QString filePath = QFileDialog::getOpenFileName(this, tr("Select Database File Location"), "",
                                                   tr("Database Files (*.FvDB)"));
 
