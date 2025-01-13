@@ -48,7 +48,7 @@ private:
   typedef void (*ReplaceEntryFunc)(const FileDataDB *, bool *);
   typedef void (*GetAllFileIDsAndEncryptedPathsFunc)(FileDataDB **, int *);
   typedef void (*GetDatabaseFileSizeFunc)(int *);
-  typedef void (*ExportDatabaseFunc)(char **, int *, char **, int *);
+  typedef void (*ExportDatabaseFunc)(char **, int *, char **, int *, int *);
   typedef void (*InsertDatabaseFunc)(const char *, const char *, bool *);
   typedef void (*ReplaceDatabaseFunc)(const char *, const char *, bool *);
   typedef void (*ResetDatabaseFunc)(bool *);

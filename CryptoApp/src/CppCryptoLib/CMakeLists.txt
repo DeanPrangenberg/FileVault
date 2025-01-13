@@ -33,6 +33,10 @@ add_library(CppCryptoLib SHARED
 		src/alogs/KeyGen.h
 		../shared/FileData.cpp
 		../shared/FileData.h
+		../shared/settingsClasses/Logs.cpp
+		../shared/settingsClasses/Logs.h
+		../shared/settingsClasses/CentralFileStorage.cpp
+		../shared/settingsClasses/CentralFileStorage.h
 )
 
 # Link OpenSSL libraries

@@ -7,13 +7,27 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Handles HTTP requests for inserting database entries.
+ */
 public class InsertHandler implements HttpHandler {
   private Database db;
 
+  /**
+   * Constructs a new InsertHandler with the specified database.
+   *
+   * @param db the database to insert entries into
+   */
   public InsertHandler(Database db) {
     this.db = db;
   }
 
+  /**
+   * Handles an HTTP request by inserting a database entry based on the provided JSON data.
+   *
+   * @param t the HttpExchange containing the request and response
+   * @throws IOException if an I/O error occurs
+   */
   @Override
   public void handle(HttpExchange t) throws IOException {
     InputStream is = t.getRequestBody();
@@ -43,6 +57,12 @@ public class InsertHandler implements HttpHandler {
     }
   }
 
+  /**
+   * Parses the input JSON string to create a Database.GoFileData object.
+   *
+   * @param input the JSON string representing the file data
+   * @return the parsed Database.GoFileData object
+   */
   private Database.GoFileData parseFileData(String input) {
     ObjectMapper mapper = new ObjectMapper();
     try {

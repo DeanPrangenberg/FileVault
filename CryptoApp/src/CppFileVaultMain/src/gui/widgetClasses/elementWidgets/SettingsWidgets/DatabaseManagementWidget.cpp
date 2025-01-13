@@ -52,26 +52,34 @@ void DatabaseManagementWidget::exportDB() {
 }
 
 void DatabaseManagementWidget::insertDB() {
-
   QString filePath = QFileDialog::getOpenFileName(this, tr("Select Database File Location"), "",
                                                   tr("Database Files (*.FvDB)"));
+
+  if (filePath.isEmpty()) {
+    qDebug() << "No file selected";
+    return;
+  }
 
   qDebug() << "File Path: " << filePath;
   auto DBmap = helperUtils->loadDatabaseFromFile(fs::path(filePath.toStdString()));
   qDebug() << "Got DB map";
 
-  auto data = DBmap.at("Data");
-  auto key = DBmap.at("Key");
+  if (DBmap.find("Data") != DBmap.end() && DBmap.find("Key") != DBmap.end()) {
+    auto data = DBmap.at("Data");
+    auto key = DBmap.at("Key");
 
-  qDebug() << "Data: " << data;
-  qDebug() << "Key: " << key;
+    qDebug() << "Data: " << data;
+    qDebug() << "Key: " << key;
 
-  if (!data.empty() && !key.empty()) {
-    if (restApiDLL->InsertDatabase(key, data)) {
-      qDebug() << "Database inserted successfully";
-    } else {
-      qDebug() << "Database insert failed";
+    if (!data.empty() && !key.empty()) {
+      if (restApiDLL->InsertDatabase(key, data)) {
+        qDebug() << "Database inserted successfully";
+      } else {
+        qDebug() << "Database insert failed";
+      }
     }
+  } else {
+    qDebug() << "Required keys not found in the database map";
   }
 }
 
@@ -79,15 +87,30 @@ void DatabaseManagementWidget::replaceDB() {
   QString filePath = QFileDialog::getOpenFileName(this, tr("Select Database File Location"), "",
                                                   tr("Database Files (*.FvDB)"));
 
+  if (filePath.isEmpty()) {
+    qDebug() << "No file selected";
+    return;
+  }
+
+  qDebug() << "File Path: " << filePath;
   auto DBmap = helperUtils->loadDatabaseFromFile(fs::path(filePath.toStdString()));
-  auto data = DBmap.at("Data");
-  auto key = DBmap.at("Key");
-  if (!data.empty() && !key.empty()) {
-    if (restApiDLL->ReplaceDatabase(key, data)) {
-      qDebug() << "Database replace successfully";
-    } else {
-      qDebug() << "Database replace failed";
+  qDebug() << "Got DB map";
+  qDebug() << "Data: " << DBmap.at("Data");
+  qDebug() << "Key: " << DBmap.at("Key");
+
+  if (DBmap.find("Data") != DBmap.end() && DBmap.find("Key") != DBmap.end()) {
+    auto data = DBmap.at("Data");
+    auto key = DBmap.at("Key");
+
+    if (!data.empty() && !key.empty()) {
+      if (restApiDLL->ReplaceDatabase(key, data)) {
+        qDebug() << "Database replaced successfully";
+      } else {
+        qDebug() << "Database replace failed";
+      }
     }
+  } else {
+    qDebug() << "Required keys not found in the database map";
   }
 }
 

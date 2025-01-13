@@ -41,9 +41,6 @@ private:
   std::unique_ptr<QWidget> containerWidget;
   std::unique_ptr<QVBoxLayout> mainLayout;
 
-  void selectLogsLocation();
-  void setPassword();
-  void selectStoragePath();
   void saveSettings();
   void loadSettings();
 };

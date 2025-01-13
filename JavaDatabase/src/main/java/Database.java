@@ -9,7 +9,36 @@ public class Database {
         return "filedata.db";
     }
 
-    public static class GoFileData {
+public List<GoFileData> getAllEntries() {
+    List<GoFileData> entries = new ArrayList<>();
+    String sql = "SELECT * FROM file_data";
+    try (Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
+        while (rs.next()) {
+            GoFileData data = new GoFileData();
+            data.FileID = rs.getString("FileID");
+            data.FileIDLength = rs.getInt("FileIDLength");
+            data.EncryptionID = rs.getString("EncryptionID");
+            data.EncryptionIDLength = rs.getInt("EncryptionIDLength");
+            data.LastUpdateID = rs.getString("LastUpdateID");
+            data.LastUpdateIDLength = rs.getInt("LastUpdateIDLength");
+            data.AlgorithmenType = rs.getString("AlgorithmenType");
+            data.OriginalFilePath = rs.getString("OriginalFilePath");
+            data.EncryptedFilePath = rs.getString("EncryptedFilePath");
+            data.DecryptedFilePath = rs.getString("DecryptedFilePath");
+            data.Key = rs.getString("Key");
+            data.KeyLength = rs.getInt("KeyLength");
+            data.Iv = rs.getString("Iv");
+            data.IvLength = rs.getInt("IvLength");
+            entries.add(data);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return entries;
+}
+
+  public static class GoFileData {
         public String FileID;
         public int FileIDLength;
         public String EncryptionID;

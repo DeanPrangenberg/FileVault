@@ -1,8 +1,7 @@
 package main
 
 type GoFileData struct {
-
-}FileID             string `json:"FileID"`
+  FileID             string `json:"FileID"`
  	FileIDLength       int    `json:"FileIDLength"`
  	EncryptionID       string `json:"EncryptionID"`
  	EncryptionIDLength int    `json:"EncryptionIDLength"`
@@ -16,3 +15,4 @@ type GoFileData struct {
  	KeyLength          int    `json:"KeyLength"`
  	Iv                 string `json:"Iv"`
  	IvLength           int    `json:"IvLength"`
+}

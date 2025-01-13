@@ -7,13 +7,27 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Handles HTTP requests for replacing database entries.
+ */
 public class ReplaceHandler implements HttpHandler {
   private final Database db;
 
+  /**
+   * Constructs a new ReplaceHandler with the specified database.
+   *
+   * @param db the database to replace entries in
+   */
   public ReplaceHandler(Database db) {
     this.db = db;
   }
 
+  /**
+   * Handles an HTTP request by replacing a database entry based on the provided JSON data.
+   *
+   * @param exchange the HttpExchange containing the request and response
+   * @throws IOException if an I/O error occurs
+   */
   @Override
   public void handle(HttpExchange exchange) throws IOException {
     if ("POST".equals(exchange.getRequestMethod())) {

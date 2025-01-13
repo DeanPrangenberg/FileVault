@@ -9,7 +9,7 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
     return {};
   }
 
-  auto func = (ExportDatabaseFunc) GetProcAddress(hDll, "ExportDatabase");
+  auto func = (ExportDatabaseFunc)GetProcAddress(hDll, "ExportDatabase");
   if (!func) {
     logError("RestApiDLL-Export: Failed to get function address for ExportDatabase");
     unloadDll(hDll);
@@ -17,22 +17,41 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
   }
 
   char *data = nullptr;
-  int dataSize = 0;
   char *key = nullptr;
+  int dataSize = 0;
   int keySize = 0;
+  int result = 0;
 
-  func(&data, &dataSize, &key, &keySize);
-  logInfo("RestApiDLL-Export: Successfully exported database");
+  func(&data, &dataSize, &key, &keySize, &result);
 
-  std::string dataStr;
-  for (int i = 0; i < dataSize; ++i) {
-    dataStr.push_back(data[i]);
+  switch (result) {
+    case -1:
+      logInfo("RestApiDLL-Export: Successfully exported database");
+      break;
+    case 1:
+      logError("RestApiDLL-Export: Couldn't reach db container");
+      break;
+    case 2:
+      logError("RestApiDLL-Export: Response body could not be unmarshaled");
+      break;
+    case 3:
+      logError("RestApiDLL-Export: Key and Data fields are not present in Json response");
+      break;
+    default:
+      logError("RestApiDLL-Export: Unknown error code");
+      break;
   }
 
-  std::string keyStr;
-  for (int i = 0; i < keySize; ++i) {
-    keyStr.push_back(key[i]);
+  if (dataSize == 0 || keySize == 0 || data == nullptr || key == nullptr) {
+    logError("RestApiDLL-Export: Database is empty");
+    free(data);
+    free(key);
+    unloadDll(hDll);
+    return {};
   }
+
+  std::string dataStr(data, dataSize);
+  std::string keyStr(key, keySize);
 
   logInfo("Data: " + dataStr);
   logInfo("Key: " + keyStr);
@@ -41,6 +60,9 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
   exportResult["Data"] = dataStr;
   exportResult["Key"] = keyStr;
   logInfo("RestApiDLL-Export: Successfully converted database to std::unordered_map");
+
+  free(data);
+  free(key);
 
   unloadDll(hDll);
   return exportResult;

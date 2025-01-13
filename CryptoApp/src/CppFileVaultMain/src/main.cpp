@@ -8,6 +8,7 @@
 #include "RestAPI/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
 #include "gui/FileVaultGui.h"
+#include "../../shared/settingsClasses/Logs.h"
 #include <QApplication>
 
 namespace fs = std::filesystem;
@@ -16,7 +17,7 @@ bool printDebug = true;
 bool printConverterDebug = true;
 
 #define pathToCrypt "S:\\clips\\cut"
-#define dockerHash "f27a7d409e11ea3c7aee017e2fe6f44485483ec21cd034cf864cb2ab802e7b44"
+#define dockerHash "37574e72f692a41848cd6cb852dbbd5920541ffb2002d7bb3ad3712913abf29a"
 
 void startDBContainer() {
   std::string command = "docker start " + std::string(dockerHash);
@@ -218,12 +219,13 @@ int main(int argc, char *argv[]) {
   stopDBContainer();
   return 0;*/
 
+  Logs::writeToInfoLog("name: prang");
+  Logs::writeToErrorLog("name: kammel");
   QApplication app(argc, argv);
   startDBContainer();
   system(".\\RustFileCopy.exe");
 
   QObject::connect(&app, &QApplication::aboutToQuit, []() {
-    // Code to execute when the application is about to quit
     stopDBContainer();
   });
 

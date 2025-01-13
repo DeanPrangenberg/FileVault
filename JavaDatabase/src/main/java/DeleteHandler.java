@@ -8,13 +8,27 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Handles HTTP requests for deleting database entries.
+ */
 public class DeleteHandler implements HttpHandler {
   private Database db;
 
+  /**
+   * Constructs a new DeleteHandler with the specified database.
+   *
+   * @param db the database to delete entries from
+   */
   public DeleteHandler(Database db) {
     this.db = db;
   }
 
+  /**
+   * Handles an HTTP request by deleting a database entry based on the provided JSON data.
+   *
+   * @param t the HttpExchange containing the request and response
+   * @throws IOException if an I/O error occurs
+   */
   @Override
   public void handle(HttpExchange t) throws IOException {
     InputStream is = t.getRequestBody();
@@ -28,6 +42,7 @@ public class DeleteHandler implements HttpHandler {
     String encryptionID = jsonNode.get("EncryptionID").asText();
 
     try {
+      // Delete the entry from the database
       db.deleteEntry(fileID, encryptionID);
       String response = "true";
       t.sendResponseHeaders(200, response.length());

@@ -1,4 +1,3 @@
-// DBMreplaceHandler.java
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpHandler;
@@ -12,13 +11,27 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+/**
+ * Handles HTTP requests for replacing database entries.
+ */
 public class DBMreplaceHandler implements HttpHandler {
   private Database db;
 
+  /**
+   * Constructs a new DBMreplaceHandler with the specified database.
+   *
+   * @param db the database to replace entries in
+   */
   public DBMreplaceHandler(Database db) {
     this.db = db;
   }
 
+  /**
+   * Handles an HTTP request by replacing all database entries with encrypted JSON data.
+   *
+   * @param t the HttpExchange containing the request and response
+   * @throws IOException if an I/O error occurs
+   */
   @Override
   public void handle(HttpExchange t) throws IOException {
     InputStream is = t.getRequestBody();

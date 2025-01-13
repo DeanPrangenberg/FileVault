@@ -101,6 +101,10 @@ add_executable(CppFileVaultMain
     src/DLLUtils/RestAPI/converter.cpp
     src/DLLUtils/RestAPI/RestApiDLL.cpp
     src/DLLUtils/RestAPI/RestApiDLL.h
+    ../shared/settingsClasses/Logs.cpp
+    ../shared/settingsClasses/Logs.h
+    ../shared/settingsClasses/CentralFileStorage.cpp
+    ../shared/settingsClasses/CentralFileStorage.h
 )
 
 # Ensure the custom target is built before the main executable

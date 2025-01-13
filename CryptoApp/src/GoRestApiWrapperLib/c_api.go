@@ -12,30 +12,41 @@ import (
 	"io/ioutil"
 	"net/http"
 	"runtime"
-	"strings"
 )
 
 //export ExportDatabase
-func ExportDatabase(data **C.char, dataSize *C.int, key **C.char, keySize *C.int) {
+func ExportDatabase(data **C.char, dataSize *C.int, key **C.char, keySize *C.int, result *C.int) {
 	resp, err := http.Get("http://localhost:8000/api/DBM/export")
 	if err != nil {
 		*data = nil
 		*key = nil
+		*result = C.int(1)
 		return
 	}
 	defer resp.Body.Close()
 
 	body, _ := ioutil.ReadAll(resp.Body)
-	responseStr := string(body)
-	lines := strings.Split(responseStr, "\n")
-	if len(lines) < 2 {
+	var jsonResponse map[string]string
+	err = json.Unmarshal(body, &jsonResponse)
+	if err != nil {
 		*data = nil
 		*key = nil
+		*result = C.int(2)
 		return
 	}
 
-	keyStr := strings.TrimPrefix(lines[0], "Key: ")
-	dataStr := strings.TrimPrefix(lines[1], "Data: ")
+	keyStr, keyExists := jsonResponse["Key"]
+	dataStr, dataExists := jsonResponse["Data"]
+	if !keyExists || !dataExists {
+		*data = nil
+		*key = nil
+		*result = C.int(3)
+		return
+	}
+
+	fmt.Println("Go body:", string(body))
+	fmt.Println("Go Key:", keyStr)
+	fmt.Println("Go Data:", dataStr)
 
 	*data = C.CString(dataStr)
 	*dataSize = C.int(len(dataStr))
@@ -46,6 +57,9 @@ func ExportDatabase(data **C.char, dataSize *C.int, key **C.char, keySize *C.int
 	runtime.KeepAlive(dataSize)
 	runtime.KeepAlive(key)
 	runtime.KeepAlive(keySize)
+	runtime.KeepAlive(result)
+
+	*result = C.int(-1)
 }
 
 //export InsertDatabase

@@ -78,40 +78,9 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   mainLayout->setContentsMargins(0, 0, 0, 0);
   setLayout(mainLayout.get());
 
-  // Connect signals
-  connect(logsLocationWidget->selectLogsLocationButton.get(), &QPushButton::clicked, this,
-          &SettingsScreenWidget::selectLogsLocation);
-  connect(passwordWidget->setPasswordButton.get(), &QPushButton::clicked, this, &SettingsScreenWidget::setPassword);
-  connect(centralStorageWidget->selectStoragePathButton.get(), &QPushButton::clicked, this,
-          &SettingsScreenWidget::selectStoragePath);
 
   // Load settings
   loadSettings();
-}
-
-void SettingsScreenWidget::selectLogsLocation() {
-  QString dir = QFileDialog::getExistingDirectory(this, tr("Select Logs Directory"), "",
-                                                  QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-  if (!dir.isEmpty()) {
-    // Update the label and save the setting
-    logsLocationWidget->logsLocationLabel->setText("Current Path: " + dir);
-    saveSettings();
-  }
-}
-
-void SettingsScreenWidget::setPassword() {
-  // Implement password setting logic here
-  saveSettings();
-}
-
-void SettingsScreenWidget::selectStoragePath() {
-  QString dir = QFileDialog::getExistingDirectory(this, tr("Select Storage Directory"), "",
-                                                  QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-  if (!dir.isEmpty()) {
-    // Update the label and save the setting
-    centralStorageWidget->storagePathLabel->setText("Current Path: " + dir);
-    saveSettings();
-  }
 }
 
 void SettingsScreenWidget::saveSettings() {
