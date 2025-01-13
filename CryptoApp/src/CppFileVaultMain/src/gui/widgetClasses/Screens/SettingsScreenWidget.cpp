@@ -21,7 +21,7 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   containerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   containerWidget->setObjectName("SettingsScreenWidget");
   containerWidget->setStyleSheet(QString("QWidget#%1 { background: Transparent; }")
-                                     .arg(containerWidget->objectName()));
+    .arg(containerWidget->objectName()));
 
   // Layout for the container widget
   SettingsScreenWidgetLayout = std::make_unique<QGridLayout>(containerWidget.get());
@@ -55,7 +55,8 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   passwordWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(passwordWidget.get(), 3, 1);
 
-  logsLocationWidget = std::make_unique<LogsLocationWidget>(containerWidget.get());
+  logsLocationWidget = std::make_unique<LogsLocationWidget>(containerWidget.get(),
+                                                            [this] { saveSettings(); });
   logsLocationWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   SettingsScreenWidgetLayout->addWidget(logsLocationWidget.get(), 4, 0, 1, 2);
 
@@ -83,6 +84,27 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   loadSettings();
 }
 
+void SettingsScreenWidget::createFileIfNotExists(const QString &filePath) {
+  QFile file(filePath);
+  if (!file.exists()) {
+    if (file.open(QIODevice::WriteOnly)) {
+      QJsonObject defaultSettings;
+      defaultSettings["DeleteAfterEncryption"] = false;
+      defaultSettings["DeleteAfterDecryption"] = false;
+      defaultSettings["Algorithm"] = "AES-128";
+      defaultSettings["LogsLocation"] = QCoreApplication::applicationDirPath() + "/logs";
+      defaultSettings["Language"] = "English";
+      defaultSettings["ForEncryptedFiles"] = false;
+      defaultSettings["ForDecryptedFiles"] = false;
+      defaultSettings["StoragePath"] = QCoreApplication::applicationDirPath() + "/centralStorage";
+
+      QJsonDocument doc(defaultSettings);
+      file.write(doc.toJson());
+      file.close();
+    }
+  }
+}
+
 void SettingsScreenWidget::saveSettings() {
   QJsonObject settings;
   settings["DeleteAfterEncryption"] = fileDeletionWidget->deleteAfterEncryption->isChecked();
@@ -94,8 +116,10 @@ void SettingsScreenWidget::saveSettings() {
   settings["ForDecryptedFiles"] = centralStorageWidget->forDecryptedFiles->isChecked();
   settings["StoragePath"] = centralStorageWidget->storagePathLabel->text().remove("Current Path: ");
 
-  QJsonDocument doc(settings);
-  QFile file("settings.json");
+  const QJsonDocument doc(settings);
+  const QString filePath = "settings.json";
+  createFileIfNotExists(filePath);
+  QFile file(filePath);
   if (file.open(QIODevice::WriteOnly)) {
     file.write(doc.toJson());
     file.close();
@@ -103,7 +127,9 @@ void SettingsScreenWidget::saveSettings() {
 }
 
 void SettingsScreenWidget::loadSettings() {
-  QFile file("settings.json");
+  QString filePath = "settings.json";
+  createFileIfNotExists(filePath);
+  QFile file(filePath);
   if (file.open(QIODevice::ReadOnly)) {
     QByteArray data = file.readAll();
     QJsonDocument doc(QJsonDocument::fromJson(data));
@@ -112,11 +138,15 @@ void SettingsScreenWidget::loadSettings() {
     fileDeletionWidget->deleteAfterEncryption->setChecked(settings["DeleteAfterEncryption"].toBool());
     fileDeletionWidget->deleteAfterDecryption->setChecked(settings["DeleteAfterDecryption"].toBool());
     algorithmWidget->algorithmComboBox->setCurrentText(settings["Algorithm"].toString());
-    logsLocationWidget->logsLocationLabel->setText("Current Path: " + settings["LogsLocation"].toString());
     languageWidget->languageComboBox->setCurrentText(settings["Language"].toString());
     centralStorageWidget->forEncryptedFiles->setChecked(settings["ForEncryptedFiles"].toBool());
     centralStorageWidget->forDecryptedFiles->setChecked(settings["ForDecryptedFiles"].toBool());
     centralStorageWidget->storagePathLabel->setText("Current Path: " + settings["StoragePath"].toString());
+
+    if (!settings["LogsLocation"].toString().isEmpty()) {
+      Logs::moveLogsDirectory(settings["LogsLocation"].toString().toStdWString());
+      logsLocationWidget->logsLocationLabel->setText("Current Path: " + settings["LogsLocation"].toString());
+    }
 
     file.close();
   }

@@ -17,7 +17,7 @@ void Logs::writeToErrorLog(const std::string &message) {
   }
   std::cerr << getCurrentTimeFormatted() << message << std::endl;
   std::ofstream errorLog(logsDirectory / "errorLog.txt", std::ios::app);
-  errorLog << getCurrentTimeFormatted() << message << std::endl;
+  errorLog << "Error Log: " << getCurrentTimeFormatted() << message << std::endl;
   errorLog.close();
 }
 
@@ -28,7 +28,7 @@ void Logs::writeToInfoLog(const std::string &message) {
     infoLog << "Info Log: " << std::endl;
     infoLog.close();
   }
-  std::cout << getCurrentTimeFormatted() << message << std::endl;
+  std::cout << "Info Log: " << getCurrentTimeFormatted() << message << std::endl;
   std::ofstream infoLog(logsDirectory / "infoLog.txt", std::ios::app);
   infoLog << getCurrentTimeFormatted() << message << std::endl;
   infoLog.close();
@@ -52,6 +52,9 @@ std::string Logs::getCurrentTimeFormatted() {
 }
 
 void Logs::moveLogsDirectory(const fs::path &newLogsDirectory) {
+  if (logsDirectory == newLogsDirectory) {
+    return;
+  }
   constexpr int maxRetries = 5;
 
   for (int attempt = 0; attempt < maxRetries; ++attempt) {

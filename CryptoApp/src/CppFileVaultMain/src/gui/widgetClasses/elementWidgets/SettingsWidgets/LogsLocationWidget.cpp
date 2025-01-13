@@ -1,11 +1,11 @@
 #include "LogsLocationWidget.h"
 
-LogsLocationWidget::LogsLocationWidget(QWidget *parent) : MasterSettingsWidget(parent) {
+LogsLocationWidget::LogsLocationWidget(QWidget *parent, std::function<void()> ptrUpdateSettings)
+  : MasterSettingsWidget(parent), updateSettings(ptrUpdateSettings) {
   titleLabel->setText("Logs Location");
   setMinimumHeight(130);
   selectLogsLocationButton = std::make_shared<QPushButton>("Select Logs Location", this);
-  logsLocationLabel = std::make_unique<QLabel>("Current Path: " + QString::fromStdWString(Logs::getLogsDirectory()),
-                                               this);
+  logsLocationLabel = std::make_unique<QLabel>("Current Path: " + QString::fromStdWString(Logs::getLogsDirectory()), this);
 
   selectLogsLocationButton->setFixedHeight(30);
 
@@ -26,5 +26,8 @@ void LogsLocationWidget::updateLogsLocation() {
     logsLocationLabel->setText("Current Path: " + dir);
     Logs::moveLogsDirectory(dir.toStdString());
     Logs::writeToInfoLog("Moved logs directory to: " + dir.toStdString());
+    if (updateSettings) {
+      updateSettings();
+    }
   }
 }

@@ -30,7 +30,6 @@ protected:
   QVector<std::shared_ptr<QLineEdit>> passwordFields;
   QVector<std::shared_ptr<QPushButton>> passwordToggleButtons;
 
-
   void applyStyle();
 };
 

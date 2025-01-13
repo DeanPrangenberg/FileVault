@@ -11,6 +11,8 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QFileDialog>
+#include <qcoreapplication.h>
+#include "../../../shared/settingsClasses/Logs.h"
 #include "../elementWidgets/SettingsWidgets/MasterSettingsWidget.h"
 #include "../elementWidgets/SettingsWidgets/LanguageSelectionWidget.h"
 #include "../elementWidgets/SettingsWidgets/StandardAlgorithmWidget.h"
@@ -21,11 +23,16 @@
 #include "../elementWidgets/SettingsWidgets/CentralFileStorageWidget.h"
 
 class SettingsScreenWidget : public QWidget {
-Q_OBJECT
+  Q_OBJECT
 
 public:
   explicit SettingsScreenWidget(QWidget *parent = nullptr);
+
+  void createFileIfNotExists(const QString &filePath);
+
   ~SettingsScreenWidget() override = default;
+
+  void saveSettings();
 
 private:
   std::unique_ptr<QScrollArea> scrollArea;
@@ -41,7 +48,7 @@ private:
   std::unique_ptr<QWidget> containerWidget;
   std::unique_ptr<QVBoxLayout> mainLayout;
 
-  void saveSettings();
+
   void loadSettings();
 };
 
