@@ -1,10 +1,7 @@
 #include "CryptoAPI.h"
-#include <thread>
-#include <future>
-#include <vector>
 
 extern "C" {
-[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(FileData *fileData, const int numFiles) {
+[[maybe_unused]] CRYPTOLIB_API bool EncryptFileWrapper(FileData *fileData, const int numFiles) {
   std::vector<std::future<bool>> futures;
   for (int i = 0; i < numFiles; i++) {
     fileData[i].setEncryptionId(new unsigned char[64]);
@@ -26,7 +23,7 @@ extern "C" {
   return resultArray;
 }
 
-[[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, const int numFiles) {
+[[maybe_unused]] CRYPTOLIB_API bool DecryptFileWrapper(const FileData *fileData, const int numFiles) {
   std::vector<std::future<bool>> futures;
   for (int i = 0; i < numFiles; i++) {
     if (fileData[i].getKeyLength() == 16) { // AES-128

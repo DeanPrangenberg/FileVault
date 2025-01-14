@@ -8,6 +8,8 @@
 #include <array>
 #include <iostream>
 #include <chrono>
+#include <future>
+#include <vector>
 #include <memory>
 #include "../../../shared/FileData.h"
 #include "../alogs/AES128.h"
@@ -24,8 +26,8 @@
 namespace fs = std::filesystem;
 
 extern "C" {
-[[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(FileData *fileData, int numFiles);
-[[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, int numFiles);
+[[maybe_unused]] CRYPTOLIB_API bool EncryptFileWrapper(FileData *fileData, int numFiles);
+[[maybe_unused]] CRYPTOLIB_API bool DecryptFileWrapper(const FileData *fileData, int numFiles);
 [[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv);
 [[maybe_unused]] CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID);
 [[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash);
