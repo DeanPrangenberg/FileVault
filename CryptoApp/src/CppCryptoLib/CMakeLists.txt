@@ -14,39 +14,40 @@ set(BUILD_SHARED_LIBS ON)
 # Find OpenSSL
 find_package(OpenSSL REQUIRED)
 
+# Add the shared classes project if not already added
+if (NOT TARGET SharedClasses)
+  add_subdirectory(../shared ${CMAKE_BINARY_DIR}/shared_CppCryptoLib)
+endif()
+
 # Create the shared library
 add_library(CppCryptoLib SHARED
-		src/alogs/AES128.cpp
-		src/alogs/AES256.cpp
-		src/alogs/KeyGen.cpp
-		src/api/CryptoAPI.cpp
-		src/api/CryptoAPI.h
-		src/alogs/SHA512.cpp
-		../CppFileVaultMain/src/GlobalDefinitions.h
-		../CppFileVaultMain/src/GlobalDefinitions.cpp
-		src/Helper/HelperUtils.cpp
-		src/Helper/HelperUtils.cpp
-		src/alogs/AES128.h
-		src/alogs/AES256.h
-		src/alogs/SHA512.h
-		src/Helper/HelperUtils.h
-		src/alogs/KeyGen.h
-		../shared/FileData.cpp
-		../shared/FileData.h
-		../shared/settingsClasses/Logs.cpp
-		../shared/settingsClasses/Logs.h
-		../shared/settingsClasses/CentralFileStorage.cpp
-		../shared/settingsClasses/CentralFileStorage.h
+  src/alogs/AES128.cpp
+  src/alogs/AES256.cpp
+  src/alogs/KeyGen.cpp
+  src/api/CryptoAPI.cpp
+  src/api/CryptoAPI.h
+  src/alogs/SHA512.cpp
+  src/Helper/CryptoHelperUtils.cpp
+  src/Helper/CryptoHelperUtils.h
+  src/alogs/AES128.h
+  src/alogs/AES256.h
+  src/alogs/SHA512.h
+  src/alogs/KeyGen.h
+    ../shared/src/GlobalDefinitions.h
+    ../shared/src/GlobalDefinitions.cpp
+    ../shared/src/GlobalDefinitions.h
+    ../shared/src/FileData.cpp
+    ../shared/src/FileData.h
 )
 
-# Link OpenSSL libraries
-target_link_libraries(CppCryptoLib PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+# Link OpenSSL and shared classes libraries
+target_link_libraries(CppCryptoLib PRIVATE OpenSSL::SSL OpenSSL::Crypto SharedClasses)
 
 # Compile options
 if (MSVC)
-	target_compile_options(CppCryptoLib PRIVATE /W4)
+ target_compile_options(CppCryptoLib PRIVATE /W4)
 else ()
-	target_compile_options(CppCryptoLib PRIVATE -Wall -Wextra)
+ target_compile_options(CppCryptoLib PRIVATE -Wall -Wextra)
 endif ()
 
 # Define the export macro for DLL

@@ -19,7 +19,7 @@
 #include "styleClass/StyleSetter.h"
 #include "FileScannerDLL.h"
 #include <thread>
-#include "../../../../GlobalDefinitions.h"
+#include "../../../../shared/src/GlobalDefinitions.h"
 
 namespace fs = std::filesystem;
 

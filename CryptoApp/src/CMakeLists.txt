@@ -16,6 +16,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # Add subprojects
+add_subdirectory(shared)  # Shared classes project
 add_subdirectory(CppCryptoLib)  # Your cryptography module
 add_subdirectory(CppFileVaultMain)  # Main application logic
 add_subdirectory(CppFileMarkLib)  # File marking module
@@ -36,9 +37,7 @@ add_custom_target(GoRestApiWrapperLib ALL
 
 # Specify dependencies between projects
 add_dependencies(CppFileVaultMain RustFileCopy)  # Main app depends on Rust project
-#[[add_dependencies(GoMultiThreadCryptoLib CppCryptoLib)  # Go DLL depends on C++ Cryptography]]
 add_dependencies(CppFileVaultMain CppCryptoLib)  # Main app depends on cryptography
-#[[add_dependencies(CppFileVaultMain GoMultiThreadCryptoLib)  # Main app depends on Go DLL]]
 add_dependencies(CppFileVaultMain GoRestApiWrapperLib)  # Main app depends on Go DLL
 add_dependencies(CppFileVaultMain CppDirectoryScannerLib)  # Main app depends on C# project
 add_dependencies(CppFileVaultMain CppFileMarkLib)  # Main app depends on C# project

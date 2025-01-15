@@ -11,23 +11,29 @@ set(VCPKG_TARGET_TRIPLET "x64-windows-static")
 # Enable building shared libraries
 set(BUILD_SHARED_LIBS ON)
 
+# Add the shared classes project if not already added
+if (NOT TARGET SharedClasses)
+  add_subdirectory(../shared ${CMAKE_BINARY_DIR}/shared_CppFileMarkLib)
+endif ()
+
 # Create the shared library
 add_library(CppFileMarkLib SHARED
-		src/FileMark.cpp
-		src/FileMark.h
-		../CppFileVaultMain/src/GlobalDefinitions.h
-		../CppFileVaultMain/src/GlobalDefinitions.cpp
-		../shared/FileData.cpp
-		../shared/FileData.h
-    ../shared/settingsClasses/Logs.cpp
-    ../shared/settingsClasses/Logs.h
+    src/FileMark.cpp
+    src/FileMark.h
+    ../shared/src/GlobalDefinitions.h
+    ../shared/src/GlobalDefinitions.cpp
+    ../shared/src/FileData.cpp
+    ../shared/src/FileData.h
 )
+
+# Link the shared classes library
+target_link_libraries(CppFileMarkLib PRIVATE SharedClasses)
 
 # Compile options
 if (MSVC)
-	target_compile_options(CppFileMarkLib PRIVATE /W4)
+  target_compile_options(CppFileMarkLib PRIVATE /W4)
 else ()
-	target_compile_options(CppFileMarkLib PRIVATE -Wall -Wextra)
+  target_compile_options(CppFileMarkLib PRIVATE -Wall -Wextra)
 endif ()
 
 # Define the export macro for DLL

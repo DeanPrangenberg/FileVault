@@ -8,7 +8,7 @@
 #include <QPushButton>
 #include "widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h"
 #include "../../../StructUtils/StructUtils.h"
-#include "../../../GlobalDefinitions.h"
+#include "../../../shared/src/GlobalDefinitions.h"
 #include "../../../DLLUtils/CryptoDLL.h"
 #include "../../../HelperUtils/HelperUtils.h"
 #include "StatisticsScreenWidget.h"

@@ -8,7 +8,7 @@
 #include <QFileDialog>
 #include <functional>
 #include "MasterSettingsWidget.h"
-#include "../../../shared/settingsClasses/Logs.h"
+#include "../../../shared/src/settingsClasses/Logs.h"
 
 class LogsLocationWidget : public MasterSettingsWidget {
   Q_OBJECT

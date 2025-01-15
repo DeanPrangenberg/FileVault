@@ -41,12 +41,15 @@ add_custom_target(compile_resources ALL
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp
 )
 
+# Add the shared classes project if not already added
+if (NOT TARGET SharedClasses)
+  add_subdirectory(../shared ${CMAKE_BINARY_DIR}/shared_CppFileVaultMain)
+endif()
+
 add_executable(CppFileVaultMain
     src/main.cpp
     src/StructUtils/StructUtils.cpp
     src/StructUtils/StructUtils.h
-    src/GlobalDefinitions.h
-    src/GlobalDefinitions.cpp
     src/System/SystemUtils.h
     src/System/SystemUtils.cpp
     src/HelperUtils/HelperUtils.cpp
@@ -58,8 +61,6 @@ add_executable(CppFileVaultMain
     src/DLLUtils/FileMarkDLL.h
     src/DLLUtils/FileScannerDLL.cpp
     src/DLLUtils/FileScannerDLL.h
-    ../shared/FileData.cpp
-    ../shared/FileData.h
     src/gui/FileVaultGui.cpp
     src/gui/FileVaultGui.h
     ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp
@@ -88,8 +89,6 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/LanguageSelectionWidget.h
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.cpp
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.h
-    src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.cpp
-    src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.h
     src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h
     src/gui/styleClass/StyleSetter.cpp
     src/gui/widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h
@@ -101,10 +100,10 @@ add_executable(CppFileVaultMain
     src/DLLUtils/RestAPI/converter.cpp
     src/DLLUtils/RestAPI/RestApiDLL.cpp
     src/DLLUtils/RestAPI/RestApiDLL.h
-    ../shared/settingsClasses/Logs.cpp
-    ../shared/settingsClasses/Logs.h
-    ../shared/settingsClasses/CentralFileStorage.cpp
-    ../shared/settingsClasses/CentralFileStorage.h
+    ../shared/src/GlobalDefinitions.h
+    ../shared/src/GlobalDefinitions.cpp
+    ../shared/src/FileData.cpp
+    ../shared/src/FileData.h
 )
 
 # Ensure the custom target is built before the main executable
@@ -121,6 +120,7 @@ target_link_libraries(CppFileVaultMain PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+    SharedClasses
 )
 
 if (MSVC)

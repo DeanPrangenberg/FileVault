@@ -72,7 +72,7 @@ extern "C" {
 }
 
 [[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash) {
-  auto time = HelperUtils::getCurrentTime();
+  auto time = CryptoHelperUtils::getCurrentTime();
   auto hashedTime = SHA512::hashArray(time);
 
   std::copy(hashedTime.begin(), hashedTime.begin() + 64, timeHash);

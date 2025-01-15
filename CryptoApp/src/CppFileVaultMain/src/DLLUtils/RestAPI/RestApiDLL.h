@@ -2,7 +2,7 @@
 #define FILEVAULTROOT_RESTAPIDLL_H
 
 #include "MasterDLLClass.h"
-#include "../../../../shared/FileData.h"
+#include "../../../../shared/src/FileData.h"
 #include <vector>
 #include <iostream>
 #include <stdexcept>

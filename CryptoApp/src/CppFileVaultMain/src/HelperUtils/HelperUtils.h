@@ -16,8 +16,8 @@
 #include <iomanip>
 #include <algorithm>
 #include <codecvt>
-#include "../GlobalDefinitions.h"
-#include "../../../shared/FileData.h"
+#include "../../../shared/src/GlobalDefinitions.h"
+#include "../../../shared/src/FileData.h"
 #include "../System/SystemUtils.h"
 #include "../DLLUtils/FileScannerDLL.h"
 #include "../DLLUtils/RestAPI/RestApiDLL.h"

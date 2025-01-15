@@ -3,11 +3,11 @@
 #include <cstring>
 #include <iostream>
 
-std::wstring StructUtils::AlgorithmTypeToString(AlgorithmType type) {
+std::wstring StructUtils::AlgorithmTypeToString(globalDefinitions::AlgorithmType type) {
   switch (type) {
-    case AlgorithmType::AES128:
+    case globalDefinitions::AlgorithmType::AES128:
       return L"AES128";
-    case AlgorithmType::AES256:
+    case globalDefinitions::AlgorithmType::AES256:
       return L"AES256";
     default:
       return L"Unknown";
@@ -20,7 +20,7 @@ wchar_t *StructUtils::ConvertWStringToWChar(const std::wstring &input) {
   return output;
 }
 
-FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType, const fs::path &originalFilePath) {
+FileData StructUtils::createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath) {
   CryptoDLL cryptoDll;
   unsigned char *IV;
   int ivLength = 0;
@@ -28,13 +28,13 @@ FileData StructUtils::createFileDataStruct(const AlgorithmType &algorithmenType,
   int keyLength = 0;
 
   switch (algorithmenType) {
-    case AlgorithmType::AES128:
+    case globalDefinitions::AlgorithmType::AES128:
       ivLength = 16;
       keyLength = 16;
       KEY = new unsigned char[keyLength];
       IV = new unsigned char[ivLength];
       break;
-    case AlgorithmType::AES256:
+    case globalDefinitions::AlgorithmType::AES256:
       ivLength = 16;
       keyLength = 32;
       KEY = new unsigned char[keyLength];

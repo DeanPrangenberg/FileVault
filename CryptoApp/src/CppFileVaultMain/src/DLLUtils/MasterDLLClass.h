@@ -8,7 +8,7 @@
 #include <windows.h>
 #include <filesystem>
 #include <iostream>
-#include "../GlobalDefinitions.h"
+#include "../../../shared/src/GlobalDefinitions.h"
 
 namespace fs = std::filesystem;
 

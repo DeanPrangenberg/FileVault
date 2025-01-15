@@ -1,8 +1,5 @@
 #include "DirectoryScanner.h"
 
-#include <utility>
-#include "../../CppFileVaultMain/src/GlobalDefinitions.h"
-
 void DirectoryScanner::listFiles(const fs::path &directory, const bool searchOnlyForDecryptedFiles, std::vector<fs::path> &fileList, FileFoundCallback callback) const {
   if (!fs::exists(directory) || !fs::is_directory(directory)) {
     std::wcerr << "Error: Invalid directory: " << directory << std::endl;

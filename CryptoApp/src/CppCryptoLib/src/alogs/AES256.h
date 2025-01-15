@@ -10,8 +10,8 @@
 #include <vector>
 #include <future>
 #include <mutex>
-#include "../../../CppFileVaultMain/src/GlobalDefinitions.h"
-#include "../Helper/HelperUtils.h"
+#include "../../../shared/src/GlobalDefinitions.h"
+#include "../Helper/CryptoHelperUtils.h"
 #undef min
 
 namespace fs = std::filesystem;

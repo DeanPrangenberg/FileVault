@@ -12,7 +12,8 @@
 #include <QFile>
 #include <QFileDialog>
 #include <qcoreapplication.h>
-#include "../../../shared/settingsClasses/Logs.h"
+#include "../../../shared/src/settingsClasses/Logs.h"
+#include "../../../shared/src/GlobalDefinitions.h"
 #include "../elementWidgets/SettingsWidgets/MasterSettingsWidget.h"
 #include "../elementWidgets/SettingsWidgets/LanguageSelectionWidget.h"
 #include "../elementWidgets/SettingsWidgets/StandardAlgorithmWidget.h"

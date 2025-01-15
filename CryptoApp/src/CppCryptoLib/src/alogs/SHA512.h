@@ -5,12 +5,12 @@
 #ifndef FILEVAULTROOT_SHA512_H
 #define FILEVAULTROOT_SHA512_H
 
-#include "../../../CppFileVaultMain/src/GlobalDefinitions.h"
 #include <openssl/evp.h>
 #include <array>
 #include <fstream>
 #include <stdexcept>
 #include <windows.h>
+#include <vector>
 
 class SHA512 {
 public:

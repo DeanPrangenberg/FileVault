@@ -1,8 +1,8 @@
 #ifndef FILEVAULTROOT_FILEMARK_H
 #define FILEVAULTROOT_FILEMARK_H
 
-#include "../../CppFileVaultMain/src/GlobalDefinitions.h"
-#include "../../shared/FileData.h"
+#include "../shared/src/GlobalDefinitions.h"
+#include "../shared/src/FileData.h"
 #include <codecvt>
 #include <fstream>
 #include <iostream>

@@ -13,20 +13,17 @@ set(BUILD_SHARED_LIBS ON)
 
 # Create the shared library
 add_library(CppDirectoryScannerLib SHARED
-        src/DirectoryScanner.cpp
-        src/DirectoryScanner.h
-		../CppFileVaultMain/src/GlobalDefinitions.cpp
-    ../shared/FileData.cpp
-    ../shared/FileData.h
-    ../shared/settingsClasses/Logs.cpp
-    ../shared/settingsClasses/Logs.h
+    src/DirectoryScanner.cpp
+    src/DirectoryScanner.h
+    ../shared/src/GlobalDefinitions.h
+    ../shared/src/GlobalDefinitions.cpp
 )
 
 # Compile options
 if (MSVC)
-    target_compile_options(CppDirectoryScannerLib PRIVATE /W4)
+  target_compile_options(CppDirectoryScannerLib PRIVATE /W4)
 else ()
-    target_compile_options(CppDirectoryScannerLib PRIVATE -Wall -Wextra)
+  target_compile_options(CppDirectoryScannerLib PRIVATE -Wall -Wextra)
 endif ()
 
 # Define the export macro for DLL

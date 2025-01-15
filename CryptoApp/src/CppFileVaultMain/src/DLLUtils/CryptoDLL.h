@@ -6,7 +6,7 @@
 #define FILEVAULTROOT_CRYPTODLL_H
 
 #include "MasterDLLClass.h"
-#include "../../../shared/FileData.h"
+#include "../../../shared/src/FileData.h"
 #include <thread>
 #include <memory>
 

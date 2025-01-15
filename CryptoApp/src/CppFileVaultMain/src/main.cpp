@@ -8,7 +8,7 @@
 #include "RestAPI/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
 #include "gui/FileVaultGui.h"
-#include "../../shared/settingsClasses/Logs.h"
+#include "../../shared/src/settingsClasses/Logs.h"
 #include <QApplication>
 
 namespace fs = std::filesystem;

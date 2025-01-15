@@ -12,6 +12,7 @@ namespace fs = std::filesystem;
 
 class Logs {
 public:
+  Logs() = default;
   static void writeToErrorLog(const std::string &message);
   static void writeToInfoLog(const std::string &message);
   static void moveLogsDirectory(const fs::path &newLogsDirectory);

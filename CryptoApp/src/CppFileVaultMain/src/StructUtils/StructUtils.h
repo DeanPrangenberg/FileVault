@@ -2,10 +2,8 @@
 #define ROOTPROJECT_STRUCTUTILS_H
 
 #include <filesystem>
-#include "../GlobalDefinitions.h"
-#include "../../../shared/FileData.h"
-
-using globalDefinitions::AlgorithmType;
+#include "../../../shared/src/GlobalDefinitions.h"
+#include "../../../shared/src/FileData.h"
 
 namespace fs = std::filesystem;
 

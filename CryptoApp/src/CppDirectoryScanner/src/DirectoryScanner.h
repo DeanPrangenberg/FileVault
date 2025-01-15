@@ -3,11 +3,13 @@
 
 #include <vector>
 #include <filesystem>
+#include <utility>
 #include <algorithm>
 #include <iostream>
 #include <exception>
 #include <cwctype>
 #include <functional>
+#include "../../shared/src/GlobalDefinitions.h"
 
 #ifdef FILESCANNER_EXPORTS
 #define FILESCANNER_API __declspec(dllexport)

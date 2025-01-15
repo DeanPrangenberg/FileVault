@@ -8,14 +8,14 @@
 #include <filesystem>
 #include <string>
 #include <windows.h>
-#include "../../../CppFileVaultMain/src/GlobalDefinitions.h"
+#include "../../../shared/src/GlobalDefinitions.h"
 #include <iostream>
 #include <openssl/err.h>
 #include "../api/CryptoAPI.h"
 
 namespace fs = std::filesystem;
 
-class HelperUtils {
+class CryptoHelperUtils {
 public:
   static void printError(const std::wstring &msg);
   static void deleteFile(const fs::path &filePath);

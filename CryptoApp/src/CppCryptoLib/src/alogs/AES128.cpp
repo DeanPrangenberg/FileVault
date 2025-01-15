@@ -42,14 +42,14 @@ bool AES128::encryptFile(const FileData *fileData) {
   }
 
   if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, keyVec.data(), ivVec.data())) {
-    HelperUtils::printError(L"EVP_EncryptInit_ex failed");
+    CryptoHelperUtils::printError(L"EVP_EncryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
 
   while (infile.read(reinterpret_cast<char *>(buffer.data()), buffer.size()) || infile.gcount() > 0) {
     if (1 != EVP_EncryptUpdate(ctx, ciphertext.data(), &len, buffer.data(), infile.gcount())) {
-      HelperUtils::printError(L"EVP_EncryptUpdate failed");
+      CryptoHelperUtils::printError(L"EVP_EncryptUpdate failed");
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
@@ -57,7 +57,7 @@ bool AES128::encryptFile(const FileData *fileData) {
   }
 
   if (1 != EVP_EncryptFinal_ex(ctx, ciphertext.data(), &len)) {
-    HelperUtils::printError(L"EVP_EncryptFinal_ex failed");
+    CryptoHelperUtils::printError(L"EVP_EncryptFinal_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
@@ -67,8 +67,8 @@ bool AES128::encryptFile(const FileData *fileData) {
   infile.close();
   outfile.close();
 
-  HelperUtils::deleteFile(originalFile);
-  HelperUtils::MarkFile(fileData);
+  CryptoHelperUtils::deleteFile(originalFile);
+  CryptoHelperUtils::MarkFile(fileData);
 
   return true;
 }
@@ -79,7 +79,7 @@ bool AES128::decryptFile(const FileData *fileData) {
     return false;
   }
 
-  if (!HelperUtils::UnmarkFile(fileData)) {
+  if (!CryptoHelperUtils::UnmarkFile(fileData)) {
     std::wcerr << L"Failed to unmark file: " << fileData->getEncryptedFilePath() << std::endl;
     return false;
   }
@@ -117,14 +117,14 @@ bool AES128::decryptFile(const FileData *fileData) {
   }
 
   if (1 != EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, keyVec.data(), ivVec.data())) {
-    HelperUtils::printError(L"EVP_DecryptInit_ex failed");
+    CryptoHelperUtils::printError(L"EVP_DecryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
 
   while (infile.read(reinterpret_cast<char *>(buffer.data()), buffer.size()) || infile.gcount() > 0) {
     if (1 != EVP_DecryptUpdate(ctx, plaintext.data(), &len, buffer.data(), infile.gcount())) {
-      HelperUtils::printError(L"EVP_DecryptUpdate failed");
+      CryptoHelperUtils::printError(L"EVP_DecryptUpdate failed");
       EVP_CIPHER_CTX_free(ctx);
       return false;
     }
@@ -132,7 +132,7 @@ bool AES128::decryptFile(const FileData *fileData) {
   }
 
   if (1 != EVP_DecryptFinal_ex(ctx, plaintext.data(), &len)) {
-    HelperUtils::printError(L"EVP_DecryptFinal_ex failed");
+    CryptoHelperUtils::printError(L"EVP_DecryptFinal_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
   }
@@ -142,7 +142,7 @@ bool AES128::decryptFile(const FileData *fileData) {
   infile.close();
   outfile.close();
 
-  HelperUtils::deleteFile(encryptedFile);
+  CryptoHelperUtils::deleteFile(encryptedFile);
 
   return true;
 }

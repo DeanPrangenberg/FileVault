@@ -11,6 +11,7 @@
 
 class FileData {
 public:
+  FileData() = default;
   void cleanupFileData();
   void debugFileData();
 

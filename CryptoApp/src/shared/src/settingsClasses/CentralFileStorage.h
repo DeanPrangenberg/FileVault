@@ -11,6 +11,7 @@ namespace fs = std::filesystem;
 
 class CentralFileStorage {
 public:
+  CentralFileStorage() = default;
   static bool centralEncFileStorage;
   static bool centralDecFileStorage;
   static fs::path fileStoragePath;

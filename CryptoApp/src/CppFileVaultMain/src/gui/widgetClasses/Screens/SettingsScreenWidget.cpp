@@ -79,6 +79,15 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   mainLayout->setContentsMargins(0, 0, 0, 0);
   setLayout(mainLayout.get());
 
+  connect(fileDeletionWidget->deleteAfterEncryption.get(), &QCheckBox::stateChanged, [this](const int state) {
+    globalDefinitions::deleteFileAfterEncryption = (state == Qt::Checked);
+    saveSettings();
+  });
+
+  connect(fileDeletionWidget->deleteAfterDecryption.get(), &QCheckBox::stateChanged, [this](const int state) {
+    globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);
+    saveSettings();
+  });
 
   // Load settings
   loadSettings();
@@ -142,6 +151,14 @@ void SettingsScreenWidget::loadSettings() {
     centralStorageWidget->forEncryptedFiles->setChecked(settings["ForEncryptedFiles"].toBool());
     centralStorageWidget->forDecryptedFiles->setChecked(settings["ForDecryptedFiles"].toBool());
     centralStorageWidget->storagePathLabel->setText("Current Path: " + settings["StoragePath"].toString());
+
+    if (settings["DeleteAfterEncryption"].toBool()) {
+      globalDefinitions::deleteFileAfterEncryption = true;
+    }
+
+    if (settings["DeleteAfterDecryption"].toBool()) {
+      globalDefinitions::deleteFileAfterDecryption = true;
+    }
 
     if (!settings["LogsLocation"].toString().isEmpty()) {
       Logs::moveLogsDirectory(settings["LogsLocation"].toString().toStdWString());

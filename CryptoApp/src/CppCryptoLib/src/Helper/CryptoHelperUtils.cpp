@@ -2,25 +2,32 @@
 // Created by prang on 23.10.2024.
 //
 
-#include "HelperUtils.h"
+#include "CryptoHelperUtils.h"
 
-void HelperUtils::printError(const std::wstring &msg) {
+void CryptoHelperUtils::printError(const std::wstring &msg) {
   std::wcerr << msg << L" Error: " << ERR_reason_error_string(ERR_get_error()) << std::endl;
 }
 
-void HelperUtils::deleteFile(const fs::path &filePath) {
+void CryptoHelperUtils::deleteFile(const fs::path &filePath) {
   try {
-    if (fs::remove(filePath)) {
-      std::cout << "File deleted successfully." << std::endl;
+    if (filePath.extension() == globalDefinitions::encFileSuffix && globalDefinitions::deleteFileAfterDecryption) {
+      std::cout << "Deleting original file after encryption: " << filePath << std::endl;
+      fs::remove(filePath);
+    } else if (globalDefinitions::deleteFileAfterDecryption) {
+      std::cout << "Deleting encrypted file after decryption: " << filePath << std::endl;
+      fs::remove(filePath);
     } else {
-      std::cout << "File not found." << std::endl;
+      std::cout << "Skipped file deletion for: " << filePath << std::endl;
+      std::cout << (filePath.extension() == globalDefinitions::encFileSuffix ? "Encrypted File" : "Decrypted File") << std::endl;
+      std::cout << "Delete after decryption: " << globalDefinitions::deleteFileAfterDecryption << std::endl;
+      std::cout << "Delete after encryption: " << globalDefinitions::deleteFileAfterEncryption << std::endl;
     }
   } catch (const fs::filesystem_error &e) {
     std::cerr << "Error: " << e.what() << std::endl;
   }
 }
 
-void HelperUtils::MarkFile(const class FileData *fileData) {
+void CryptoHelperUtils::MarkFile(const class FileData *fileData) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
   if (!hFileMarkDll) {
     return;
@@ -37,7 +44,7 @@ void HelperUtils::MarkFile(const class FileData *fileData) {
   unloadDll(hFileMarkDll);
 }
 
-bool HelperUtils::UnmarkFile(const class FileData *fileData) {
+bool CryptoHelperUtils::UnmarkFile(const class FileData *fileData) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
   if (!hFileMarkDll) {
     return false;
@@ -57,7 +64,7 @@ bool HelperUtils::UnmarkFile(const class FileData *fileData) {
   return result;
 }
 
-std::vector<unsigned char> HelperUtils::getCurrentTime() {
+std::vector<unsigned char> CryptoHelperUtils::getCurrentTime() {
   auto now = std::chrono::system_clock::now();
   auto duration = now.time_since_epoch();
   auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
@@ -67,11 +74,11 @@ std::vector<unsigned char> HelperUtils::getCurrentTime() {
   return std::vector<unsigned char>(ms_string.begin(), ms_string.end());
 }
 
-void HelperUtils::logError(const std::string &message) {
+void CryptoHelperUtils::logError(const std::string &message) {
   std::cerr << message << std::endl;
 }
 
-HMODULE HelperUtils::loadDll(const wchar_t *dllName) {
+HMODULE CryptoHelperUtils::loadDll(const wchar_t *dllName) {
   HMODULE hDll = LoadLibraryW(dllName);
   if (!hDll) {
     std::wcerr << L"Failed to load DLL: " << dllName << std::endl;
@@ -79,7 +86,7 @@ HMODULE HelperUtils::loadDll(const wchar_t *dllName) {
   return hDll;
 }
 
-void HelperUtils::unloadDll(HMODULE hDll) {
+void CryptoHelperUtils::unloadDll(HMODULE hDll) {
   if (hDll) {
     FreeLibrary(hDll);
   }
