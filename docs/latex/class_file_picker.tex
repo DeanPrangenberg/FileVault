@@ -1,0 +1,384 @@
+\doxysection{File\+Picker Class Reference}
+\hypertarget{class_file_picker}{}\label{class_file_picker}\index{FilePicker@{FilePicker}}
+
+
+{\ttfamily \#include $<$File\+Picker.\+h$>$}
+
+Inheritance diagram for File\+Picker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_file_picker}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_file_picker_acceb48ab6a49f7fd83d1fd0558570204}{File\+Picker}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr, \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11}{File\+Picker\+Type}} type=\mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8}{File\+Picker\+Type\+::\+ENCRYPT}})
+\item 
+\mbox{\hyperlink{class_file_picker_a9434e199900c5cf3147c63baa8479069}{\texorpdfstring{$\sim$}{\string~}\+File\+Picker}} () override=default
+\item 
+void \mbox{\hyperlink{class_file_picker_a70cd78f71673ce2bb2fd0024aaa2ecc9}{configure\+UI}} ()
+\item 
+void \mbox{\hyperlink{class_file_picker_abfdc32d43959b4c3deaafbc7b5713bbc}{add\+File}} ()
+\item 
+void \mbox{\hyperlink{class_file_picker_a9d9b6d1d47236bcf595c5fac7320abb8}{add\+Directory}} ()
+\item 
+void \mbox{\hyperlink{class_file_picker_acbb919d981b97bf4935f816772eafdb8}{reset\+Paths}} ()
+\item 
+void \mbox{\hyperlink{class_file_picker_ad1aa5dcc94020b94da99d42d044da0f4}{update\+File\+To\+Process\+Label}} ()
+\item 
+void \mbox{\hyperlink{class_file_picker_ac46b7e48548af985329b3154981b80b3}{global\+Check\+State\+Changed}} (int state)
+\item 
+void \mbox{\hyperlink{class_file_picker_a0f6a6d6b25fdf2fd78242d3103bbec60}{global\+Algorithm\+Changed}} (const QString \&algorithm)
+\item 
+QVector$<$ \mbox{\hyperlink{structencryption_config}{encryption\+Config}} $>$ \mbox{\hyperlink{class_file_picker_a13c07dabffc7698e34959310bb620d67}{get\+Enc\+Items}} ()
+\item 
+QVector$<$ \mbox{\hyperlink{structdecryption_config}{decryption\+Config}} $>$ \mbox{\hyperlink{class_file_picker_a8f60e56bc0852a2ae33edc2a3d64577c}{get\+Dec\+Items}} ()
+\item 
+void \mbox{\hyperlink{class_file_picker_ae9af795f20bcb7962ce310dc86250a22}{remove\+Enc\+Items}} (const std\+::vector$<$ int $>$ \&results)
+\item 
+void \mbox{\hyperlink{class_file_picker_a450dcb98adb65b44af3f1b2858b8a8ba}{remove\+Dec\+Items}} (const std\+::vector$<$ int $>$ \&results)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ QVBox\+Layout $>$ \mbox{\hyperlink{class_file_picker_ad979c1f0fe3e98cae582bace0c236454}{File\+Picker\+Layout}}
+\item 
+std\+::unique\+\_\+ptr$<$ QHBox\+Layout $>$ \mbox{\hyperlink{class_file_picker_a4948da647ec92fa5300efee1169087b7}{File\+Picker\+Top\+Layout}}
+\item 
+std\+::unique\+\_\+ptr$<$ QHBox\+Layout $>$ \mbox{\hyperlink{class_file_picker_a1119adf2971d198f809326dada4d59f4}{Global\+Control\+Layout}}
+\item 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ \mbox{\hyperlink{class_file_picker_a568c0abc1e8ebffacfb10d20341dc0e7}{Background\+Label}}
+\item 
+std\+::shared\+\_\+ptr$<$ QPush\+Button $>$ \mbox{\hyperlink{class_file_picker_a911515a9a7e6a879b11033224f14f4b9}{Add\+File\+Button}}
+\item 
+std\+::shared\+\_\+ptr$<$ QPush\+Button $>$ \mbox{\hyperlink{class_file_picker_afb7d9510cf1d901154558784b6d017c4}{Add\+Directory\+Button}}
+\item 
+std\+::shared\+\_\+ptr$<$ QPush\+Button $>$ \mbox{\hyperlink{class_file_picker_a3ceea6569f40d63cd10f8f960bca3efb}{Reset\+Paths\+Button}}
+\item 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ \mbox{\hyperlink{class_file_picker_a6a0bb84e0fb39639f7c0786b25fcd3d6}{File\+To\+Process\+Label}}
+\item 
+std\+::unique\+\_\+ptr$<$ QCheck\+Box $>$ \mbox{\hyperlink{class_file_picker_ab8afc86fbe2ee19b310e1ec57d8c93b2}{Global\+Check\+Box}}
+\item 
+std\+::unique\+\_\+ptr$<$ QCombo\+Box $>$ \mbox{\hyperlink{class_file_picker_ac01cb15c13bdf412fc3b8a7785da2513}{Global\+Algorithm\+Combo\+Box}}
+\item 
+std\+::unique\+\_\+ptr$<$ QScroll\+Area $>$ \mbox{\hyperlink{class_file_picker_a57a1eb6dbe60d8d285319250c031e443}{File\+Picker\+Scroll\+Area}}
+\item 
+std\+::unique\+\_\+ptr$<$ QWidget $>$ \mbox{\hyperlink{class_file_picker_aa48e775c87b7c5a9aed26a98d7149d19}{File\+Picker\+Scroll\+Area\+Widget}}
+\item 
+std\+::unique\+\_\+ptr$<$ QVBox\+Layout $>$ \mbox{\hyperlink{class_file_picker_ac50ebf2636fdac4e075f1707cf6a7fb7}{File\+Picker\+Scroll\+Area\+Layout}}
+\item 
+\mbox{\hyperlink{class_file_scanner_d_l_l}{File\+Scanner\+DLL}} \mbox{\hyperlink{class_file_picker_a4f15cbd25a7eb35bbf398f8f19f37418}{file\+Scanner}}
+\item 
+QVector$<$ QString $>$ \mbox{\hyperlink{class_file_picker_a4d387ffb98ab46d8fd6ad7c4e91ba78a}{File\+Picker\+Paths}}
+\item 
+std\+::vector$<$ fs\+::path $>$ \mbox{\hyperlink{class_file_picker_af68aa5c30d799898982da90e61247cff}{File\+Scanner\+Paths}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00042}{42}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_file_picker_acceb48ab6a49f7fd83d1fd0558570204}\index{FilePicker@{FilePicker}!FilePicker@{FilePicker}}
+\index{FilePicker@{FilePicker}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FilePicker()}{FilePicker()}}
+{\footnotesize\ttfamily \label{class_file_picker_acceb48ab6a49f7fd83d1fd0558570204} 
+File\+Picker\+::\+File\+Picker (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}, }\item[{\mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11}{File\+Picker\+Type}}}]{type}{ = {\ttfamily \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8}{File\+Picker\+Type\+::\+ENCRYPT}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00003}{3}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_a9434e199900c5cf3147c63baa8479069}\index{FilePicker@{FilePicker}!````~FilePicker@{\texorpdfstring{$\sim$}{\string~}FilePicker}}
+\index{````~FilePicker@{\texorpdfstring{$\sim$}{\string~}FilePicker}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FilePicker()}{\string~FilePicker()}}
+{\footnotesize\ttfamily \label{class_file_picker_a9434e199900c5cf3147c63baa8479069} 
+File\+Picker\+::\texorpdfstring{$\sim$}{\string~}\+File\+Picker (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_file_picker_a9d9b6d1d47236bcf595c5fac7320abb8}\index{FilePicker@{FilePicker}!addDirectory@{addDirectory}}
+\index{addDirectory@{addDirectory}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{addDirectory()}{addDirectory()}}
+{\footnotesize\ttfamily \label{class_file_picker_a9d9b6d1d47236bcf595c5fac7320abb8} 
+void File\+Picker\+::add\+Directory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00129}{129}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_abfdc32d43959b4c3deaafbc7b5713bbc}\index{FilePicker@{FilePicker}!addFile@{addFile}}
+\index{addFile@{addFile}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{addFile()}{addFile()}}
+{\footnotesize\ttfamily \label{class_file_picker_abfdc32d43959b4c3deaafbc7b5713bbc} 
+void File\+Picker\+::add\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00109}{109}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_a70cd78f71673ce2bb2fd0024aaa2ecc9}\index{FilePicker@{FilePicker}!configureUI@{configureUI}}
+\index{configureUI@{configureUI}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{configureUI()}{configureUI()}}
+{\footnotesize\ttfamily \label{class_file_picker_a70cd78f71673ce2bb2fd0024aaa2ecc9} 
+void File\+Picker\+::configure\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00025}{25}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_a8f60e56bc0852a2ae33edc2a3d64577c}\index{FilePicker@{FilePicker}!getDecItems@{getDecItems}}
+\index{getDecItems@{getDecItems}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{getDecItems()}{getDecItems()}}
+{\footnotesize\ttfamily \label{class_file_picker_a8f60e56bc0852a2ae33edc2a3d64577c} 
+QVector$<$ \mbox{\hyperlink{structdecryption_config}{decryption\+Config}} $>$ File\+Picker\+::get\+Dec\+Items (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00226}{226}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_a13c07dabffc7698e34959310bb620d67}\index{FilePicker@{FilePicker}!getEncItems@{getEncItems}}
+\index{getEncItems@{getEncItems}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{getEncItems()}{getEncItems()}}
+{\footnotesize\ttfamily \label{class_file_picker_a13c07dabffc7698e34959310bb620d67} 
+QVector$<$ \mbox{\hyperlink{structencryption_config}{encryption\+Config}} $>$ File\+Picker\+::get\+Enc\+Items (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00245}{245}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_a0f6a6d6b25fdf2fd78242d3103bbec60}\index{FilePicker@{FilePicker}!globalAlgorithmChanged@{globalAlgorithmChanged}}
+\index{globalAlgorithmChanged@{globalAlgorithmChanged}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{globalAlgorithmChanged()}{globalAlgorithmChanged()}}
+{\footnotesize\ttfamily \label{class_file_picker_a0f6a6d6b25fdf2fd78242d3103bbec60} 
+void File\+Picker\+::global\+Algorithm\+Changed (\begin{DoxyParamCaption}\item[{const QString \&}]{algorithm}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00194}{194}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_ac46b7e48548af985329b3154981b80b3}\index{FilePicker@{FilePicker}!globalCheckStateChanged@{globalCheckStateChanged}}
+\index{globalCheckStateChanged@{globalCheckStateChanged}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{globalCheckStateChanged()}{globalCheckStateChanged()}}
+{\footnotesize\ttfamily \label{class_file_picker_ac46b7e48548af985329b3154981b80b3} 
+void File\+Picker\+::global\+Check\+State\+Changed (\begin{DoxyParamCaption}\item[{int}]{state}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00179}{179}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_a450dcb98adb65b44af3f1b2858b8a8ba}\index{FilePicker@{FilePicker}!removeDecItems@{removeDecItems}}
+\index{removeDecItems@{removeDecItems}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{removeDecItems()}{removeDecItems()}}
+{\footnotesize\ttfamily \label{class_file_picker_a450dcb98adb65b44af3f1b2858b8a8ba} 
+void File\+Picker\+::remove\+Dec\+Items (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{results}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00270}{270}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_ae9af795f20bcb7962ce310dc86250a22}\index{FilePicker@{FilePicker}!removeEncItems@{removeEncItems}}
+\index{removeEncItems@{removeEncItems}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{removeEncItems()}{removeEncItems()}}
+{\footnotesize\ttfamily \label{class_file_picker_ae9af795f20bcb7962ce310dc86250a22} 
+void File\+Picker\+::remove\+Enc\+Items (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{results}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00266}{266}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_acbb919d981b97bf4935f816772eafdb8}\index{FilePicker@{FilePicker}!resetPaths@{resetPaths}}
+\index{resetPaths@{resetPaths}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{resetPaths()}{resetPaths()}}
+{\footnotesize\ttfamily \label{class_file_picker_acbb919d981b97bf4935f816772eafdb8} 
+void File\+Picker\+::reset\+Paths (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00141}{141}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+\Hypertarget{class_file_picker_ad1aa5dcc94020b94da99d42d044da0f4}\index{FilePicker@{FilePicker}!updateFileToProcessLabel@{updateFileToProcessLabel}}
+\index{updateFileToProcessLabel@{updateFileToProcessLabel}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{updateFileToProcessLabel()}{updateFileToProcessLabel()}}
+{\footnotesize\ttfamily \label{class_file_picker_ad1aa5dcc94020b94da99d42d044da0f4} 
+void File\+Picker\+::update\+File\+To\+Process\+Label (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8cpp_source_l00164}{164}} of file \mbox{\hyperlink{_file_picker_8cpp_source}{File\+Picker.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_file_picker_afb7d9510cf1d901154558784b6d017c4}\index{FilePicker@{FilePicker}!AddDirectoryButton@{AddDirectoryButton}}
+\index{AddDirectoryButton@{AddDirectoryButton}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{AddDirectoryButton}{AddDirectoryButton}}
+{\footnotesize\ttfamily \label{class_file_picker_afb7d9510cf1d901154558784b6d017c4} 
+std\+::shared\+\_\+ptr$<$QPush\+Button$>$ File\+Picker\+::\+Add\+Directory\+Button}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00054}{54}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a911515a9a7e6a879b11033224f14f4b9}\index{FilePicker@{FilePicker}!AddFileButton@{AddFileButton}}
+\index{AddFileButton@{AddFileButton}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{AddFileButton}{AddFileButton}}
+{\footnotesize\ttfamily \label{class_file_picker_a911515a9a7e6a879b11033224f14f4b9} 
+std\+::shared\+\_\+ptr$<$QPush\+Button$>$ File\+Picker\+::\+Add\+File\+Button}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00053}{53}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a568c0abc1e8ebffacfb10d20341dc0e7}\index{FilePicker@{FilePicker}!BackgroundLabel@{BackgroundLabel}}
+\index{BackgroundLabel@{BackgroundLabel}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{BackgroundLabel}{BackgroundLabel}}
+{\footnotesize\ttfamily \label{class_file_picker_a568c0abc1e8ebffacfb10d20341dc0e7} 
+std\+::unique\+\_\+ptr$<$QLabel$>$ File\+Picker\+::\+Background\+Label}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00052}{52}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_ad979c1f0fe3e98cae582bace0c236454}\index{FilePicker@{FilePicker}!FilePickerLayout@{FilePickerLayout}}
+\index{FilePickerLayout@{FilePickerLayout}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FilePickerLayout}{FilePickerLayout}}
+{\footnotesize\ttfamily \label{class_file_picker_ad979c1f0fe3e98cae582bace0c236454} 
+std\+::unique\+\_\+ptr$<$QVBox\+Layout$>$ File\+Picker\+::\+File\+Picker\+Layout}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00049}{49}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a4d387ffb98ab46d8fd6ad7c4e91ba78a}\index{FilePicker@{FilePicker}!FilePickerPaths@{FilePickerPaths}}
+\index{FilePickerPaths@{FilePickerPaths}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FilePickerPaths}{FilePickerPaths}}
+{\footnotesize\ttfamily \label{class_file_picker_a4d387ffb98ab46d8fd6ad7c4e91ba78a} 
+QVector$<$QString$>$ File\+Picker\+::\+File\+Picker\+Paths}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00065}{65}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a57a1eb6dbe60d8d285319250c031e443}\index{FilePicker@{FilePicker}!FilePickerScrollArea@{FilePickerScrollArea}}
+\index{FilePickerScrollArea@{FilePickerScrollArea}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FilePickerScrollArea}{FilePickerScrollArea}}
+{\footnotesize\ttfamily \label{class_file_picker_a57a1eb6dbe60d8d285319250c031e443} 
+std\+::unique\+\_\+ptr$<$QScroll\+Area$>$ File\+Picker\+::\+File\+Picker\+Scroll\+Area}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00060}{60}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_ac50ebf2636fdac4e075f1707cf6a7fb7}\index{FilePicker@{FilePicker}!FilePickerScrollAreaLayout@{FilePickerScrollAreaLayout}}
+\index{FilePickerScrollAreaLayout@{FilePickerScrollAreaLayout}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FilePickerScrollAreaLayout}{FilePickerScrollAreaLayout}}
+{\footnotesize\ttfamily \label{class_file_picker_ac50ebf2636fdac4e075f1707cf6a7fb7} 
+std\+::unique\+\_\+ptr$<$QVBox\+Layout$>$ File\+Picker\+::\+File\+Picker\+Scroll\+Area\+Layout}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00062}{62}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_aa48e775c87b7c5a9aed26a98d7149d19}\index{FilePicker@{FilePicker}!FilePickerScrollAreaWidget@{FilePickerScrollAreaWidget}}
+\index{FilePickerScrollAreaWidget@{FilePickerScrollAreaWidget}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FilePickerScrollAreaWidget}{FilePickerScrollAreaWidget}}
+{\footnotesize\ttfamily \label{class_file_picker_aa48e775c87b7c5a9aed26a98d7149d19} 
+std\+::unique\+\_\+ptr$<$QWidget$>$ File\+Picker\+::\+File\+Picker\+Scroll\+Area\+Widget}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00061}{61}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a4948da647ec92fa5300efee1169087b7}\index{FilePicker@{FilePicker}!FilePickerTopLayout@{FilePickerTopLayout}}
+\index{FilePickerTopLayout@{FilePickerTopLayout}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FilePickerTopLayout}{FilePickerTopLayout}}
+{\footnotesize\ttfamily \label{class_file_picker_a4948da647ec92fa5300efee1169087b7} 
+std\+::unique\+\_\+ptr$<$QHBox\+Layout$>$ File\+Picker\+::\+File\+Picker\+Top\+Layout}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00050}{50}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a4f15cbd25a7eb35bbf398f8f19f37418}\index{FilePicker@{FilePicker}!fileScanner@{fileScanner}}
+\index{fileScanner@{fileScanner}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{fileScanner}{fileScanner}}
+{\footnotesize\ttfamily \label{class_file_picker_a4f15cbd25a7eb35bbf398f8f19f37418} 
+\mbox{\hyperlink{class_file_scanner_d_l_l}{File\+Scanner\+DLL}} File\+Picker\+::file\+Scanner}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00064}{64}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_af68aa5c30d799898982da90e61247cff}\index{FilePicker@{FilePicker}!FileScannerPaths@{FileScannerPaths}}
+\index{FileScannerPaths@{FileScannerPaths}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FileScannerPaths}{FileScannerPaths}}
+{\footnotesize\ttfamily \label{class_file_picker_af68aa5c30d799898982da90e61247cff} 
+std\+::vector$<$fs\+::path$>$ File\+Picker\+::\+File\+Scanner\+Paths}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00066}{66}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a6a0bb84e0fb39639f7c0786b25fcd3d6}\index{FilePicker@{FilePicker}!FileToProcessLabel@{FileToProcessLabel}}
+\index{FileToProcessLabel@{FileToProcessLabel}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{FileToProcessLabel}{FileToProcessLabel}}
+{\footnotesize\ttfamily \label{class_file_picker_a6a0bb84e0fb39639f7c0786b25fcd3d6} 
+std\+::unique\+\_\+ptr$<$QLabel$>$ File\+Picker\+::\+File\+To\+Process\+Label}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00056}{56}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_ac01cb15c13bdf412fc3b8a7785da2513}\index{FilePicker@{FilePicker}!GlobalAlgorithmComboBox@{GlobalAlgorithmComboBox}}
+\index{GlobalAlgorithmComboBox@{GlobalAlgorithmComboBox}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{GlobalAlgorithmComboBox}{GlobalAlgorithmComboBox}}
+{\footnotesize\ttfamily \label{class_file_picker_ac01cb15c13bdf412fc3b8a7785da2513} 
+std\+::unique\+\_\+ptr$<$QCombo\+Box$>$ File\+Picker\+::\+Global\+Algorithm\+Combo\+Box}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00058}{58}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_ab8afc86fbe2ee19b310e1ec57d8c93b2}\index{FilePicker@{FilePicker}!GlobalCheckBox@{GlobalCheckBox}}
+\index{GlobalCheckBox@{GlobalCheckBox}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{GlobalCheckBox}{GlobalCheckBox}}
+{\footnotesize\ttfamily \label{class_file_picker_ab8afc86fbe2ee19b310e1ec57d8c93b2} 
+std\+::unique\+\_\+ptr$<$QCheck\+Box$>$ File\+Picker\+::\+Global\+Check\+Box}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00057}{57}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a1119adf2971d198f809326dada4d59f4}\index{FilePicker@{FilePicker}!GlobalControlLayout@{GlobalControlLayout}}
+\index{GlobalControlLayout@{GlobalControlLayout}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{GlobalControlLayout}{GlobalControlLayout}}
+{\footnotesize\ttfamily \label{class_file_picker_a1119adf2971d198f809326dada4d59f4} 
+std\+::unique\+\_\+ptr$<$QHBox\+Layout$>$ File\+Picker\+::\+Global\+Control\+Layout}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00051}{51}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+\Hypertarget{class_file_picker_a3ceea6569f40d63cd10f8f960bca3efb}\index{FilePicker@{FilePicker}!ResetPathsButton@{ResetPathsButton}}
+\index{ResetPathsButton@{ResetPathsButton}!FilePicker@{FilePicker}}
+\doxysubsubsection{\texorpdfstring{ResetPathsButton}{ResetPathsButton}}
+{\footnotesize\ttfamily \label{class_file_picker_a3ceea6569f40d63cd10f8f960bca3efb} 
+std\+::shared\+\_\+ptr$<$QPush\+Button$>$ File\+Picker\+::\+Reset\+Paths\+Button}
+
+
+
+Definition at line \mbox{\hyperlink{_file_picker_8h_source_l00055}{55}} of file \mbox{\hyperlink{_file_picker_8h_source}{File\+Picker.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/gui/widget\+Classes/element\+Widgets/cryption\+Widgets/\mbox{\hyperlink{_file_picker_8h}{File\+Picker.\+h}}\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/gui/widget\+Classes/element\+Widgets/cryption\+Widgets/\mbox{\hyperlink{_file_picker_8cpp}{File\+Picker.\+cpp}}\end{DoxyCompactItemize}

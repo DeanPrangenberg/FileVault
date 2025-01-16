@@ -1,0 +1,33 @@
+\doxysection{Key\+Gen.\+cpp}
+\hypertarget{_key_gen_8cpp_source}{}\label{_key_gen_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/alogs/KeyGen.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/alogs/KeyGen.cpp}}
+\mbox{\hyperlink{_key_gen_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_key_gen_8h}{KeyGen.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00005}\mbox{\hyperlink{class_key_gen_acacea676914dbba43cc767ac57abd917}{00005}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_key_gen_acacea676914dbba43cc767ac57abd917}{KeyGen::generateKeyIv}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \&keySize,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \&ivSize,\ std::vector<unsigned\ char>\ \&KEY,\ std::vector<unsigned\ char>\ \&IV)\ \{}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00006}00006\ \ \ KEY.resize(keySize);}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00007}00007\ \ \ IV.resize(ivSize);}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00009}00009\ \ \ \textcolor{keywordflow}{if}\ (!RAND\_bytes(KEY.data(),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(keySize))}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00010}00010\ \ \ ||\ !RAND\_bytes(IV.data(),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(ivSize)))\ \{}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00011}00011\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ to\ generate\ key\ or\ IV"{}});}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00012}00012\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00014}00014\ \ \ \textcolor{keywordflow}{if}\ (printDebug)\ \{}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00015}00015\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Key\ and\ IV\ generated\ successfully"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00016}00016\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Key:\ "{}}\ <<\ \mbox{\hyperlink{class_key_gen_a6e1407fc7c1842288e9c27247141c96a}{toHexString}}(KEY)\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00017}00017\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}IV:\ "{}}\ <<\ \mbox{\hyperlink{class_key_gen_a6e1407fc7c1842288e9c27247141c96a}{toHexString}}(IV)\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00018}00018\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00021}\mbox{\hyperlink{class_key_gen_a6e1407fc7c1842288e9c27247141c96a}{00021}}\ std::string\ \mbox{\hyperlink{class_key_gen_a6e1407fc7c1842288e9c27247141c96a}{KeyGen::toHexString}}(\textcolor{keyword}{const}\ std::vector<unsigned\ char>\ \&data)\ \{}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00022}00022\ \ \ std::ostringstream\ oss;}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00023}00023\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&\textcolor{keywordtype}{byte}\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00024}00024\ \ \ \ \ oss\ <<\ std::hex\ <<\ std::setw(2)\ <<\ std::setfill('0')\ <<\ static\_cast<int>(\textcolor{keywordtype}{byte});}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00025}00025\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00026}00026\ \ \ \textcolor{keywordflow}{return}\ oss.str();}
+\DoxyCodeLine{\Hypertarget{_key_gen_8cpp_source_l00027}00027\ \}}
+
+\end{DoxyCode}

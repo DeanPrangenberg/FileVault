@@ -1,0 +1,152 @@
+\doxysection{Rest\+Api\+DLL Class Reference}
+\hypertarget{class_rest_api_d_l_l}{}\label{class_rest_api_d_l_l}\index{RestApiDLL@{RestApiDLL}}
+
+
+{\ttfamily \#include $<$Rest\+Api\+DLL.\+h$>$}
+
+Inheritance diagram for Rest\+Api\+DLL\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_rest_api_d_l_l}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{class_rest_api_d_l_l_ad4f21c396e643e72e50adc9400703ffa}{Export\+Database}} ()
+\item 
+bool \mbox{\hyperlink{class_rest_api_d_l_l_a9b0b24946996a597707af043b4d6f0ce}{Insert\+Database}} (const std\+::string \&key, const std\+::string \&data)
+\item 
+bool \mbox{\hyperlink{class_rest_api_d_l_l_a617d9711486a2d4b8cc7e66db994e72a}{Replace\+Database}} (const std\+::string \&key, const std\+::string \&data)
+\item 
+bool \mbox{\hyperlink{class_rest_api_d_l_l_af58f148076fb3970f281a108679c2d85}{Reset\+Database}} ()
+\item 
+bool \mbox{\hyperlink{class_rest_api_d_l_l_abc65e1d970ffe325db76f15e486612b6}{Insert\+Entry}} (const \mbox{\hyperlink{class_file_data}{File\+Data}} \&data)
+\item 
+bool \mbox{\hyperlink{class_rest_api_d_l_l_ae9eb8b43e8abddcd559978422cb0f9b5}{Delete\+Entry}} (const \mbox{\hyperlink{class_file_data}{File\+Data}} \&data)
+\item 
+bool \mbox{\hyperlink{class_rest_api_d_l_l_aaaf844d7321084197a19ae7988ccd90e}{Search\+Entry}} (\mbox{\hyperlink{class_file_data}{File\+Data}} \&data)
+\item 
+bool \mbox{\hyperlink{class_rest_api_d_l_l_a5bbe25c55f4fbb490d11f0db9abafdd5}{Replace\+Entry}} (const \mbox{\hyperlink{class_file_data}{File\+Data}} \&data)
+\item 
+int \mbox{\hyperlink{class_rest_api_d_l_l_ab3aa5528a3bd746d64633f9d3e091af2}{get\+Database\+File\+Size}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \mbox{\hyperlink{class_rest_api_d_l_l_a988227e41a51c25faa9a861b9d2b11de}{Get\+All\+File\+IDs\+And\+Encrypted\+Paths}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8h_source_l00011}{11}} of file \mbox{\hyperlink{_rest_api_d_l_l_8h_source}{Rest\+Api\+DLL.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_rest_api_d_l_l_ae9eb8b43e8abddcd559978422cb0f9b5}\index{RestApiDLL@{RestApiDLL}!DeleteEntry@{DeleteEntry}}
+\index{DeleteEntry@{DeleteEntry}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{DeleteEntry()}{DeleteEntry()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_ae9eb8b43e8abddcd559978422cb0f9b5} 
+bool Rest\+Api\+DLL\+::\+Delete\+Entry (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_file_data}{File\+Data}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00165}{165}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_ad4f21c396e643e72e50adc9400703ffa}\index{RestApiDLL@{RestApiDLL}!ExportDatabase@{ExportDatabase}}
+\index{ExportDatabase@{ExportDatabase}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{ExportDatabase()}{ExportDatabase()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_ad4f21c396e643e72e50adc9400703ffa} 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ Rest\+Api\+DLL\+::\+Export\+Database (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00005}{5}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_a988227e41a51c25faa9a861b9d2b11de}\index{RestApiDLL@{RestApiDLL}!GetAllFileIDsAndEncryptedPaths@{GetAllFileIDsAndEncryptedPaths}}
+\index{GetAllFileIDsAndEncryptedPaths@{GetAllFileIDsAndEncryptedPaths}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{GetAllFileIDsAndEncryptedPaths()}{GetAllFileIDsAndEncryptedPaths()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_a988227e41a51c25faa9a861b9d2b11de} 
+std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ Rest\+Api\+DLL\+::\+Get\+All\+File\+IDs\+And\+Encrypted\+Paths (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00270}{270}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_ab3aa5528a3bd746d64633f9d3e091af2}\index{RestApiDLL@{RestApiDLL}!getDatabaseFileSize@{getDatabaseFileSize}}
+\index{getDatabaseFileSize@{getDatabaseFileSize}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{getDatabaseFileSize()}{getDatabaseFileSize()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_ab3aa5528a3bd746d64633f9d3e091af2} 
+int Rest\+Api\+DLL\+::get\+Database\+File\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00306}{306}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_a9b0b24946996a597707af043b4d6f0ce}\index{RestApiDLL@{RestApiDLL}!InsertDatabase@{InsertDatabase}}
+\index{InsertDatabase@{InsertDatabase}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{InsertDatabase()}{InsertDatabase()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_a9b0b24946996a597707af043b4d6f0ce} 
+bool Rest\+Api\+DLL\+::\+Insert\+Database (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00071}{71}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_abc65e1d970ffe325db76f15e486612b6}\index{RestApiDLL@{RestApiDLL}!InsertEntry@{InsertEntry}}
+\index{InsertEntry@{InsertEntry}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{InsertEntry()}{InsertEntry()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_abc65e1d970ffe325db76f15e486612b6} 
+bool Rest\+Api\+DLL\+::\+Insert\+Entry (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_file_data}{File\+Data}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00138}{138}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_a617d9711486a2d4b8cc7e66db994e72a}\index{RestApiDLL@{RestApiDLL}!ReplaceDatabase@{ReplaceDatabase}}
+\index{ReplaceDatabase@{ReplaceDatabase}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{ReplaceDatabase()}{ReplaceDatabase()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_a617d9711486a2d4b8cc7e66db994e72a} 
+bool Rest\+Api\+DLL\+::\+Replace\+Database (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00092}{92}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_a5bbe25c55f4fbb490d11f0db9abafdd5}\index{RestApiDLL@{RestApiDLL}!ReplaceEntry@{ReplaceEntry}}
+\index{ReplaceEntry@{ReplaceEntry}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{ReplaceEntry()}{ReplaceEntry()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_a5bbe25c55f4fbb490d11f0db9abafdd5} 
+bool Rest\+Api\+DLL\+::\+Replace\+Entry (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_file_data}{File\+Data}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00242}{242}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_af58f148076fb3970f281a108679c2d85}\index{RestApiDLL@{RestApiDLL}!ResetDatabase@{ResetDatabase}}
+\index{ResetDatabase@{ResetDatabase}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{ResetDatabase()}{ResetDatabase()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_af58f148076fb3970f281a108679c2d85} 
+bool Rest\+Api\+DLL\+::\+Reset\+Database (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00117}{117}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+\Hypertarget{class_rest_api_d_l_l_aaaf844d7321084197a19ae7988ccd90e}\index{RestApiDLL@{RestApiDLL}!SearchEntry@{SearchEntry}}
+\index{SearchEntry@{SearchEntry}!RestApiDLL@{RestApiDLL}}
+\doxysubsubsection{\texorpdfstring{SearchEntry()}{SearchEntry()}}
+{\footnotesize\ttfamily \label{class_rest_api_d_l_l_aaaf844d7321084197a19ae7988ccd90e} 
+bool Rest\+Api\+DLL\+::\+Search\+Entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_file_data}{File\+Data}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source_l00199}{199}} of file \mbox{\hyperlink{_rest_api_d_l_l_8cpp_source}{Rest\+Api\+DLL.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/\+DLLUtils/\+Rest\+API/\mbox{\hyperlink{_rest_api_d_l_l_8h}{Rest\+Api\+DLL.\+h}}\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/\+DLLUtils/\+Rest\+API/\mbox{\hyperlink{converter_8cpp}{converter.\+cpp}}\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/\+DLLUtils/\+Rest\+API/\mbox{\hyperlink{_rest_api_d_l_l_8cpp}{Rest\+Api\+DLL.\+cpp}}\end{DoxyCompactItemize}

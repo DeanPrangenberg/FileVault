@@ -1,0 +1,53 @@
+\doxysection{File\+Vault\+Gui.\+h}
+\hypertarget{_file_vault_gui_8h_source}{}\label{_file_vault_gui_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/FileVaultGui.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/FileVaultGui.h}}
+\mbox{\hyperlink{_file_vault_gui_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTGUI\_H}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ FILEVAULTGUI\_H}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <QStackedWidget>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <QHash>}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_style_setter_8h}{styleClass/StyleSetter.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00014}\mbox{\hyperlink{class_file_vault_gui}{00014}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_vault_gui_aaf9dac00ceca7e5bf79e980aa710f1fa}{FileVaultGui}}\ :\ \textcolor{keyword}{public}\ QMainWindow\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00015}00015\ Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00017}00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00018}00018\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_file_vault_gui_aaf9dac00ceca7e5bf79e980aa710f1fa}{FileVaultGui}}(QMainWindow\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00019}\mbox{\hyperlink{class_file_vault_gui_a7d30f16c9169292252f9b35bd20f5acf}{00019}}\ \ \ \mbox{\hyperlink{class_file_vault_gui_a7d30f16c9169292252f9b35bd20f5acf}{\string~FileVaultGui}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00021}00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00022}00022\ \ \ \textcolor{comment}{//\ UI\ Elements}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00023}00023\ \ \ std::unique\_ptr<QWidget>\ centralWidget;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00024}00024\ \ \ std::unique\_ptr<QHBoxLayout>\ SplitterLayout;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00025}00025\ \ \ std::unique\_ptr<QStackedWidget>\ screenStack;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00027}00027\ \ \ std::unique\_ptr<QWidget>\ sidebar;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00028}00028\ \ \ std::unique\_ptr<QVBoxLayout>\ sideBarLayout;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00029}00029\ \ \ std::unique\_ptr<QLabel>\ Logo;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00030}00030\ \ \ std::unique\_ptr<QPushButton>\ StatisticsSwitch;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00031}00031\ \ \ std::unique\_ptr<QPushButton>\ EncryptSwitch;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00032}00032\ \ \ std::unique\_ptr<QPushButton>\ DecryptSwitch;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00033}00033\ \ \ std::unique\_ptr<QPushButton>\ SettingsSwitch;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00035}00035\ \ \ \textcolor{comment}{//\ Variables}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00036}00036\ \ \ \textcolor{keywordtype}{int}\ screenWidth\ =\ 1000;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00037}00037\ \ \ \textcolor{keywordtype}{int}\ screenHeight\ =\ 600;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00038}00038\ \ \ QHash<QString,\ std::shared\_ptr<QWidget>>\ screenHash;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00040}00040\ \ \ \textcolor{comment}{//\ Functions}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00041}00041\ \ \ \textcolor{keywordtype}{void}\ setupUi();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00042}00042\ \ \ \textcolor{keywordtype}{void}\ setupSideBar();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00043}00043\ \ \ \textcolor{keywordtype}{void}\ setupStackedWidget();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00044}00044\ \ \ \textcolor{keywordtype}{void}\ switchScreens(\textcolor{keyword}{const}\ QString\ \&screenName);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00045}00045\ \};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8h_source_l00047}00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FILEVAULTGUI\_H}}
+
+\end{DoxyCode}

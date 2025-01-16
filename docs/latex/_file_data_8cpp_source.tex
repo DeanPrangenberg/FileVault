@@ -1,0 +1,282 @@
+\doxysection{File\+Data.\+cpp}
+\hypertarget{_file_data_8cpp_source}{}\label{_file_data_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/shared/src/FileData.cpp@{D:/MyRepo/FileVault/CryptoApp/src/shared/src/FileData.cpp}}
+\mbox{\hyperlink{_file_data_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\ prang\ on\ 06.12.2024.}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_data_8h}{FileData.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00007}\mbox{\hyperlink{class_file_data_a64f7ab7f3ef18606166a20bec9543b6b}{00007}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_file_data_a64f7ab7f3ef18606166a20bec9543b6b}{FileData::operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data_a2de7d3105f5e9c43ae36e1be33216975}{FileData}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00008}00008\ \ \ \textcolor{keywordflow}{if}\ (fileIDLength\ !=\ other.fileIDLength\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00009}00009\ \ \ \ \ \ \ EncryptionIDLength\ !=\ other.EncryptionIDLength\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00010}00010\ \ \ \ \ \ \ LastUpdateIDLength\ !=\ other.LastUpdateIDLength\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00011}00011\ \ \ \ \ \ \ keyLength\ !=\ other.keyLength\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00012}00012\ \ \ \ \ \ \ ivLength\ !=\ other.ivLength)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00014}00014\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00016}00016\ \ \ \textcolor{keywordflow}{if}\ (memcmp(FileID,\ other.FileID,\ fileIDLength)\ !=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00017}00017\ \ \ \ \ \ \ memcmp(EncryptionID,\ other.EncryptionID,\ EncryptionIDLength)\ !=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00018}00018\ \ \ \ \ \ \ memcmp(LastUpdateID,\ other.LastUpdateID,\ LastUpdateIDLength)\ !=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00019}00019\ \ \ \ \ \ \ memcmp(Key,\ other.Key,\ keyLength)\ !=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00020}00020\ \ \ \ \ \ \ memcmp(Iv,\ other.Iv,\ ivLength)\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00022}00022\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00024}00024\ \ \ \textcolor{keywordflow}{if}\ (wcscmp(AlgorithmenType,\ other.AlgorithmenType)\ !=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00025}00025\ \ \ \ \ \ \ wcscmp(OriginalFilePath,\ other.OriginalFilePath)\ !=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00026}00026\ \ \ \ \ \ \ wcscmp(EncryptedFilePath,\ other.EncryptedFilePath)\ !=\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00027}00027\ \ \ \ \ \ \ wcscmp(DecryptedFilePath,\ other.DecryptedFilePath)\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00029}00029\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00031}00031\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00034}00034\ \textcolor{keywordtype}{void}\ FileData::safeDeleteUCharArray(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\&ptr,\ \textcolor{keywordtype}{size\_t}\ \&length)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00035}00035\ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00037}00037\ \ \ \ \ \ \ std::memset(ptr,\ 0,\ length);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00038}00038\ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ ptr;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00039}00039\ \ \ \ \ \ \ ptr\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00040}00040\ \ \ \ \ \ \ length\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00041}00041\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00042}00042\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Attempted\ to\ delete\ a\ nullptr\ (unsigned\ char\ array)"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00044}00044\ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\ \&e)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00045}00045\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Exception\ during\ deletion\ of\ unsigned\ char\ array:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00046}00046\ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00047}00047\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Unknown\ exception\ during\ deletion\ of\ unsigned\ char\ array!"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00048}00048\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00051}00051\ \textcolor{keywordtype}{void}\ FileData::safeDeleteWChar(\textcolor{keywordtype}{wchar\_t}\ *\&ptr)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00052}00052\ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00054}00054\ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ ptr;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00055}00055\ \ \ \ \ \ \ ptr\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00056}00056\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00057}00057\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Attempted\ to\ delete\ a\ nullptr\ (wchar\_t\ array)"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00059}00059\ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\ \&e)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00060}00060\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Exception\ during\ deletion\ of\ wchar\_t\ array:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00061}00061\ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00062}00062\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Unknown\ exception\ during\ deletion\ of\ wchar\_t\ array!"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00063}00063\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00066}\mbox{\hyperlink{class_file_data_a55af03d8c6e30ad54afae5db2e8651cc}{00066}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a55af03d8c6e30ad54afae5db2e8651cc}{FileData::cleanupFileData}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00067}00067\ \ \ this-\/>\mbox{\hyperlink{class_file_data_a6339217c63f4ad7eb0c2a8e581096574}{debugFileData}}();}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00068}00068\ \ \ \textcolor{keywordflow}{if}\ (printDebug)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00069}00069\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00070}00070\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\ Global-\/cleanupFileData:\ Cleaning\ up\ FileData"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00071}00071\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\ Global-\/cleanupFileData:\ Cleaning\ up\ FileID"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00072}00072\ \ \ \ \ safeDeleteUCharArray(this-\/>FileID,\ this-\/>fileIDLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00073}00073\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\ Global-\/cleanupFileData:\ Cleaning\ up\ EncryptionID"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00074}00074\ \ \ \ \ safeDeleteUCharArray(this-\/>EncryptionID,\ this-\/>EncryptionIDLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00075}00075\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\ Global-\/cleanupFileData:\ Cleaning\ up\ LastUpdateID"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00076}00076\ \ \ \ \ safeDeleteUCharArray(this-\/>LastUpdateID,\ this-\/>LastUpdateIDLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00077}00077\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\ Global-\/cleanupFileData:\ Cleaning\ up\ Key"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00078}00078\ \ \ \ \ safeDeleteUCharArray(this-\/>Key,\ this-\/>keyLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00079}00079\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\ Global-\/cleanupFileData:\ Cleaning\ up\ Iv"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00080}00080\ \ \ \ \ safeDeleteUCharArray(this-\/>Iv,\ this-\/>ivLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00081}00081\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00082}00082\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00083}00083\ \ \ this-\/>FileID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00084}00084\ \ \ this-\/>fileIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00085}00085\ \ \ this-\/>EncryptionID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00086}00086\ \ \ this-\/>EncryptionIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00087}00087\ \ \ this-\/>LastUpdateID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00088}00088\ \ \ this-\/>LastUpdateIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00089}00089\ \ \ this-\/>AlgorithmenType\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00090}00090\ \ \ this-\/>OriginalFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00091}00091\ \ \ this-\/>EncryptedFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00092}00092\ \ \ this-\/>DecryptedFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00093}00093\ \ \ this-\/>Key\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00094}00094\ \ \ this-\/>keyLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00095}00095\ \ \ this-\/>Iv\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00096}00096\ \ \ this-\/>ivLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00099}00099\ std::string\ FileData::toHexString(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *pUChar,\ \textcolor{keywordtype}{size\_t}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00100}00100\ \ \ \textcolor{keywordflow}{if}\ (pUChar\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Null\ pointer\ passed\ to\ toHexString"{}});}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00102}00102\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00104}00104\ \ \ \textcolor{comment}{//\ Optimierte\ String-\/Speicherreservierung}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00105}00105\ \ \ std::ostringstream\ oss;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00106}00106\ \ \ oss\ <<\ std::hex\ <<\ std::setw(2)\ <<\ std::setfill(\textcolor{charliteral}{'0'});}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00108}00108\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ length;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00109}00109\ \ \ \ \ oss\ <<\ static\_cast<int>(pUChar[i]);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00110}00110\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00111}00111\ \ \ \textcolor{keywordflow}{return}\ oss.str();}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00112}00112\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00114}\mbox{\hyperlink{class_file_data_a6339217c63f4ad7eb0c2a8e581096574}{00114}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a6339217c63f4ad7eb0c2a8e581096574}{FileData::debugFileData}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00115}00115\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Global-\/debugFileData:\ Converting\ FileData\ to\ hex\ strings"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00117}00117\ \ \ std::string\ fileIDstr;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00118}00118\ \ \ std::string\ encryptionIDstr;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00119}00119\ \ \ std::string\ lastUpdateIDstr;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00120}00120\ \ \ std::string\ keyStr;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00121}00121\ \ \ std::string\ ivStr;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00123}00123\ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00124}00124\ \ \ \ \ fileIDstr\ =\ toHexString(this-\/>FileID,\ this-\/>fileIDLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00125}00125\ \ \ \ \ encryptionIDstr\ =\ toHexString(this-\/>EncryptionID,\ this-\/>EncryptionIDLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00126}00126\ \ \ \ \ lastUpdateIDstr\ =\ toHexString(this-\/>LastUpdateID,\ this-\/>LastUpdateIDLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00127}00127\ \ \ \ \ keyStr\ =\ toHexString(this-\/>Key,\ this-\/>keyLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00128}00128\ \ \ \ \ ivStr\ =\ toHexString(this-\/>Iv,\ this-\/>ivLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00129}00129\ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::invalid\_argument\ \&e)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00130}00130\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00131}00131\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00133}00133\ \ \ std::wstring\ fileIDwstr(fileIDstr.begin(),\ fileIDstr.end());}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00134}00134\ \ \ std::wstring\ encryptionIDwstr(encryptionIDstr.begin(),\ encryptionIDstr.end());}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00135}00135\ \ \ std::wstring\ lastUpdateIDwstr(lastUpdateIDstr.begin(),\ lastUpdateIDstr.end());}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00136}00136\ \ \ std::wstring\ keyWstr(keyStr.begin(),\ keyStr.end());}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00137}00137\ \ \ std::wstring\ ivWstr(ivStr.begin(),\ ivStr.end());}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00139}00139\ \ \ \textcolor{keywordflow}{if}\ (printDebug)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00140}00140\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00141}00141\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ FileData\ Debug:"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00142}00142\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ FileID:\ "{}}\ <<\ (this-\/>FileID\ ?\ fileIDwstr\ :\ L\textcolor{stringliteral}{"{}null"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00143}00143\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ FileIDLength:\ "{}}\ <<\ this-\/>fileIDLength\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00144}00144\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ EncryptionID:\ "{}}\ <<\ (this-\/>EncryptionID\ ?\ encryptionIDwstr\ :\ L\textcolor{stringliteral}{"{}null"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00145}00145\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ EncryptionIDLength:\ "{}}\ <<\ this-\/>EncryptionIDLength\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00146}00146\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ LastUpdateID:\ "{}}\ <<\ (this-\/>LastUpdateID\ ?\ lastUpdateIDwstr\ :\ L\textcolor{stringliteral}{"{}null"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00147}00147\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ LastUpdateIDLength:\ "{}}\ <<\ this-\/>LastUpdateIDLength\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00148}00148\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ EncryptedFilePath:\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ (this-\/>EncryptedFilePath\ \&\&\ *this-\/>EncryptedFilePath\ ?\ this-\/>EncryptedFilePath\ :\ L\textcolor{stringliteral}{"{}null"{}})}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00151}00151\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ OriginalFilePath:\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ (this-\/>OriginalFilePath\ \&\&\ *this-\/>OriginalFilePath\ ?\ this-\/>OriginalFilePath\ :\ L\textcolor{stringliteral}{"{}null"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00153}00153\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ DecryptedFilePath:\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ (this-\/>DecryptedFilePath\ \&\&\ *this-\/>DecryptedFilePath\ ?\ this-\/>DecryptedFilePath\ :\ L\textcolor{stringliteral}{"{}null"{}})}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00156}00156\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ AlgorithmenType:\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ (this-\/>AlgorithmenType\ \&\&\ *this-\/>AlgorithmenType\ ?\ this-\/>AlgorithmenType\ :\ L\textcolor{stringliteral}{"{}null"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00158}00158\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ Key:\ "{}}\ <<\ (this-\/>Key\ ?\ keyWstr\ :\ L\textcolor{stringliteral}{"{}null"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00159}00159\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ KeyLength:\ "{}}\ <<\ this-\/>keyLength\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00160}00160\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ Iv:\ "{}}\ <<\ (this-\/>Iv\ ?\ ivWstr\ :\ L\textcolor{stringliteral}{"{}null"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00161}00161\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/\ IvLength:\ "{}}\ <<\ this-\/>ivLength\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00162}00162\ \ \ \ \ std::wcout\ <<\ L\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00163}00163\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00164}00164\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00166}\mbox{\hyperlink{class_file_data_a61d54af806d2a8a823c4bda69a3c4d14}{00166}}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_a61d54af806d2a8a823c4bda69a3c4d14}{FileData::getFileId}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00167}00167\ \ \ \textcolor{keywordflow}{return}\ FileID;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00168}00168\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00170}\mbox{\hyperlink{class_file_data_a61fe8d33e78982509c886e9f17a6018f}{00170}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a61fe8d33e78982509c886e9f17a6018f}{FileData::setFileId}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *fileId)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00171}00171\ \ \ FileID\ =\ fileId;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00172}00172\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00174}\mbox{\hyperlink{class_file_data_a88af8adde55a3a4a177b5bd9c0b4a074}{00174}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_a88af8adde55a3a4a177b5bd9c0b4a074}{FileData::getFileIdLength}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00175}00175\ \ \ \textcolor{keywordflow}{return}\ fileIDLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00176}00176\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00178}\mbox{\hyperlink{class_file_data_ae48d14af2f9a1781109d272234f34d2c}{00178}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_ae48d14af2f9a1781109d272234f34d2c}{FileData::setFileIdLength}}(\textcolor{keywordtype}{size\_t}\ fileIdLength)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00179}00179\ \ \ fileIDLength\ =\ fileIdLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00180}00180\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00182}\mbox{\hyperlink{class_file_data_afe323e64d99b4fa77871ecaaf8d0ae39}{00182}}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_afe323e64d99b4fa77871ecaaf8d0ae39}{FileData::getEncryptionId}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00183}00183\ \ \ \textcolor{keywordflow}{return}\ EncryptionID;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00184}00184\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00186}\mbox{\hyperlink{class_file_data_a860e6262dacc9a4a19bc35e48b9b13f9}{00186}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a860e6262dacc9a4a19bc35e48b9b13f9}{FileData::setEncryptionId}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *encryptionId)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00187}00187\ \ \ EncryptionID\ =\ encryptionId;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00188}00188\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00190}\mbox{\hyperlink{class_file_data_aedcfd3a5f09ce3b7385c2881c9bb0756}{00190}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_aedcfd3a5f09ce3b7385c2881c9bb0756}{FileData::getEncryptionIdLength}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00191}00191\ \ \ \textcolor{keywordflow}{return}\ EncryptionIDLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00192}00192\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00194}\mbox{\hyperlink{class_file_data_afa7707bf598c8687ea5912b20c02b0f2}{00194}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_afa7707bf598c8687ea5912b20c02b0f2}{FileData::setEncryptionIdLength}}(\textcolor{keywordtype}{size\_t}\ encryptionIdLength)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00195}00195\ \ \ EncryptionIDLength\ =\ encryptionIdLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00196}00196\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00198}\mbox{\hyperlink{class_file_data_a015b6d9cf2e1d81cdeb8246627d94f53}{00198}}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_a015b6d9cf2e1d81cdeb8246627d94f53}{FileData::getLastUpdateId}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00199}00199\ \ \ \textcolor{keywordflow}{return}\ LastUpdateID;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00200}00200\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00202}\mbox{\hyperlink{class_file_data_a209ef1fd6d2ec41cc46f4fbf5c8fee3f}{00202}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a209ef1fd6d2ec41cc46f4fbf5c8fee3f}{FileData::setLastUpdateId}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *lastUpdateId)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00203}00203\ \ \ LastUpdateID\ =\ lastUpdateId;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00204}00204\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00206}\mbox{\hyperlink{class_file_data_aab8a07bb05f35b4940ea0c2370b749d2}{00206}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_aab8a07bb05f35b4940ea0c2370b749d2}{FileData::getLastUpdateIdLength}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00207}00207\ \ \ \textcolor{keywordflow}{return}\ LastUpdateIDLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00208}00208\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00210}\mbox{\hyperlink{class_file_data_abf53f1838aec6872a1a738b6b4c6b110}{00210}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_abf53f1838aec6872a1a738b6b4c6b110}{FileData::setLastUpdateIdLength}}(\textcolor{keywordtype}{size\_t}\ lastUpdateIdLength)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00211}00211\ \ \ LastUpdateIDLength\ =\ lastUpdateIdLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00212}00212\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00214}\mbox{\hyperlink{class_file_data_a4b13097dff11090ca9c85ee1ae3a9f44}{00214}}\ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_a4b13097dff11090ca9c85ee1ae3a9f44}{FileData::getAlgorithmenType}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00215}00215\ \ \ \textcolor{keywordflow}{return}\ AlgorithmenType;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00216}00216\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00218}\mbox{\hyperlink{class_file_data_abbd4282428fdb0cf0cdf721e01761286}{00218}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_abbd4282428fdb0cf0cdf721e01761286}{FileData::setAlgorithmenType}}(\textcolor{keywordtype}{wchar\_t}\ *algorithmenType)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00219}00219\ \ \ AlgorithmenType\ =\ algorithmenType;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00220}00220\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00222}\mbox{\hyperlink{class_file_data_a1ebcc573edf8bdcb0861f0592735dbb6}{00222}}\ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_a1ebcc573edf8bdcb0861f0592735dbb6}{FileData::getOriginalFilePath}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00223}00223\ \ \ \textcolor{keywordflow}{return}\ OriginalFilePath;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00224}00224\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00226}\mbox{\hyperlink{class_file_data_a22b0752bbf088b0e652495f85f398b4d}{00226}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a22b0752bbf088b0e652495f85f398b4d}{FileData::setOriginalFilePath}}(\textcolor{keywordtype}{wchar\_t}\ *originalFilePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00227}00227\ \ \ OriginalFilePath\ =\ originalFilePath;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00228}00228\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00230}\mbox{\hyperlink{class_file_data_ad1d7163e1e791a66ab7e83ba09e9ff57}{00230}}\ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_ad1d7163e1e791a66ab7e83ba09e9ff57}{FileData::getEncryptedFilePath}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00231}00231\ \ \ \textcolor{keywordflow}{return}\ EncryptedFilePath;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00232}00232\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00234}\mbox{\hyperlink{class_file_data_af694db899a9646faf30a06c211d7c94d}{00234}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_af694db899a9646faf30a06c211d7c94d}{FileData::setEncryptedFilePath}}(\textcolor{keywordtype}{wchar\_t}\ *encryptedFilePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00235}00235\ \ \ EncryptedFilePath\ =\ encryptedFilePath;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00236}00236\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00238}\mbox{\hyperlink{class_file_data_a52a4766ece29bf34ff93a9eb22296665}{00238}}\ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_a52a4766ece29bf34ff93a9eb22296665}{FileData::getDecryptedFilePath}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00239}00239\ \ \ \textcolor{keywordflow}{return}\ DecryptedFilePath;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00240}00240\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00242}\mbox{\hyperlink{class_file_data_a234e7adf47029afffcc98cc203ed455f}{00242}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a234e7adf47029afffcc98cc203ed455f}{FileData::setDecryptedFilePath}}(\textcolor{keywordtype}{wchar\_t}\ *decryptedFilePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00243}00243\ \ \ DecryptedFilePath\ =\ decryptedFilePath;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00244}00244\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00246}\mbox{\hyperlink{class_file_data_a26db189da07f783f434509104da8d0d8}{00246}}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_a26db189da07f783f434509104da8d0d8}{FileData::getKey}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00247}00247\ \ \ \textcolor{keywordflow}{return}\ Key;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00248}00248\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00250}\mbox{\hyperlink{class_file_data_acc6a0619fdc59dc3d7fa318fd375d504}{00250}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_acc6a0619fdc59dc3d7fa318fd375d504}{FileData::setKey}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *key)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00251}00251\ \ \ Key\ =\ key;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00252}00252\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00254}\mbox{\hyperlink{class_file_data_a7bbd8ef481a308bf0be8636b0f8b482d}{00254}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_a7bbd8ef481a308bf0be8636b0f8b482d}{FileData::getKeyLength}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00255}00255\ \ \ \textcolor{keywordflow}{return}\ keyLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00256}00256\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00258}\mbox{\hyperlink{class_file_data_a2996547b43535fb1be342f17e622634f}{00258}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a2996547b43535fb1be342f17e622634f}{FileData::setKeyLength}}(\textcolor{keywordtype}{size\_t}\ keyLength)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00259}00259\ \ \ FileData::keyLength\ =\ keyLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00260}00260\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00262}\mbox{\hyperlink{class_file_data_afd643e62c2ace45c0a23e57dd4be8866}{00262}}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_afd643e62c2ace45c0a23e57dd4be8866}{FileData::getIv}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00263}00263\ \ \ \textcolor{keywordflow}{return}\ Iv;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00264}00264\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00266}\mbox{\hyperlink{class_file_data_ac079012041bbceae11bb564197c74698}{00266}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_ac079012041bbceae11bb564197c74698}{FileData::setIv}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *iv)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00267}00267\ \ \ Iv\ =\ iv;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00268}00268\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00270}\mbox{\hyperlink{class_file_data_a28a5e8a4206f20be92b86a2b1c208ea6}{00270}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_a28a5e8a4206f20be92b86a2b1c208ea6}{FileData::getIvLength}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00271}00271\ \ \ \textcolor{keywordflow}{return}\ ivLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00272}00272\ \}}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00274}\mbox{\hyperlink{class_file_data_ad802f9a8be1f6c0ee4dbf8f9615cd889}{00274}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_ad802f9a8be1f6c0ee4dbf8f9615cd889}{FileData::setIvLength}}(\textcolor{keywordtype}{size\_t}\ ivLength)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00275}00275\ \ \ FileData::ivLength\ =\ ivLength;}
+\DoxyCodeLine{\Hypertarget{_file_data_8cpp_source_l00276}00276\ \}}
+
+\end{DoxyCode}

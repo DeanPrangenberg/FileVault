@@ -1,0 +1,100 @@
+\doxysection{D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+Crypto\+Lib/src/api/\+Crypto\+API.h File Reference}
+\hypertarget{_crypto_a_p_i_8h}{}\label{_crypto_a_p_i_8h}\index{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/api/CryptoAPI.h@{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/api/CryptoAPI.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$windows.\+h$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$future$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include "{}../../../shared/src/\+File\+Data.\+h"{}}\newline
+{\ttfamily \#include "{}../alogs/\+AES128.\+h"{}}\newline
+{\ttfamily \#include "{}../alogs/\+AES256.\+h"{}}\newline
+{\ttfamily \#include "{}../alogs/\+Key\+Gen.\+h"{}}\newline
+{\ttfamily \#include "{}../alogs/\+SHA512.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}}~\+\_\+\+\_\+declspec(dllimport)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} bool \mbox{\hyperlink{_crypto_a_p_i_8h_ae3142ce75ed25d84207041447aa8b945}{Encrypt\+File\+Wrapper}} (\mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}file\+Data, int num\+Files)
+\item 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} bool \mbox{\hyperlink{_crypto_a_p_i_8h_ae120bc077206bcd0cb863eab8b513572}{Decrypt\+File\+Wrapper}} (const \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}file\+Data, int num\+Files)
+\item 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} void \mbox{\hyperlink{_crypto_a_p_i_8h_abd041ea6d7162d501e00548feb22ad65}{Generate\+Key\+Iv}} (size\+\_\+t key\+Size, size\+\_\+t iv\+Size, unsigned char \texorpdfstring{$\ast$}{*}key, unsigned char \texorpdfstring{$\ast$}{*}iv)
+\item 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} void \mbox{\hyperlink{_crypto_a_p_i_8h_a88bfb02feaadb25f304da31f5929e80b}{Generate\+File\+ID}} (const wchar\+\_\+t \texorpdfstring{$\ast$}{*}file\+Path, unsigned char \texorpdfstring{$\ast$}{*}file\+ID)
+\item 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} void \mbox{\hyperlink{_crypto_a_p_i_8h_a81f42969859874d08481f042846c6ccd}{get\+Current\+Time\+Hash}} (unsigned char \texorpdfstring{$\ast$}{*}time\+Hash)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}\index{CryptoAPI.h@{CryptoAPI.h}!CRYPTOLIB\_API@{CRYPTOLIB\_API}}
+\index{CRYPTOLIB\_API@{CRYPTOLIB\_API}!CryptoAPI.h@{CryptoAPI.h}}
+\doxysubsubsection{\texorpdfstring{CRYPTOLIB\_API}{CRYPTOLIB\_API}}
+{\footnotesize\ttfamily \label{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b} 
+\#define CRYPTOLIB\+\_\+\+API~\+\_\+\+\_\+declspec(dllimport)}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_a_p_i_8h_source_l00023}{23}} of file \mbox{\hyperlink{_crypto_a_p_i_8h_source}{Crypto\+API.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_crypto_a_p_i_8h_ae120bc077206bcd0cb863eab8b513572}\index{CryptoAPI.h@{CryptoAPI.h}!DecryptFileWrapper@{DecryptFileWrapper}}
+\index{DecryptFileWrapper@{DecryptFileWrapper}!CryptoAPI.h@{CryptoAPI.h}}
+\doxysubsubsection{\texorpdfstring{DecryptFileWrapper()}{DecryptFileWrapper()}}
+{\footnotesize\ttfamily \label{_crypto_a_p_i_8h_ae120bc077206bcd0cb863eab8b513572} 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} bool Decrypt\+File\+Wrapper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}}]{file\+Data}{, }\item[{int}]{num\+Files}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_a_p_i_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{_crypto_a_p_i_8cpp_source}{Crypto\+API.\+cpp}}.
+
+\Hypertarget{_crypto_a_p_i_8h_ae3142ce75ed25d84207041447aa8b945}\index{CryptoAPI.h@{CryptoAPI.h}!EncryptFileWrapper@{EncryptFileWrapper}}
+\index{EncryptFileWrapper@{EncryptFileWrapper}!CryptoAPI.h@{CryptoAPI.h}}
+\doxysubsubsection{\texorpdfstring{EncryptFileWrapper()}{EncryptFileWrapper()}}
+{\footnotesize\ttfamily \label{_crypto_a_p_i_8h_ae3142ce75ed25d84207041447aa8b945} 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} bool Encrypt\+File\+Wrapper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}}]{file\+Data}{, }\item[{int}]{num\+Files}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_a_p_i_8cpp_source_l00004}{4}} of file \mbox{\hyperlink{_crypto_a_p_i_8cpp_source}{Crypto\+API.\+cpp}}.
+
+\Hypertarget{_crypto_a_p_i_8h_a88bfb02feaadb25f304da31f5929e80b}\index{CryptoAPI.h@{CryptoAPI.h}!GenerateFileID@{GenerateFileID}}
+\index{GenerateFileID@{GenerateFileID}!CryptoAPI.h@{CryptoAPI.h}}
+\doxysubsubsection{\texorpdfstring{GenerateFileID()}{GenerateFileID()}}
+{\footnotesize\ttfamily \label{_crypto_a_p_i_8h_a88bfb02feaadb25f304da31f5929e80b} 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} void Generate\+File\+ID (\begin{DoxyParamCaption}\item[{const wchar\+\_\+t \texorpdfstring{$\ast$}{*}}]{file\+Path}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{file\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_a_p_i_8cpp_source_l00060}{60}} of file \mbox{\hyperlink{_crypto_a_p_i_8cpp_source}{Crypto\+API.\+cpp}}.
+
+\Hypertarget{_crypto_a_p_i_8h_abd041ea6d7162d501e00548feb22ad65}\index{CryptoAPI.h@{CryptoAPI.h}!GenerateKeyIv@{GenerateKeyIv}}
+\index{GenerateKeyIv@{GenerateKeyIv}!CryptoAPI.h@{CryptoAPI.h}}
+\doxysubsubsection{\texorpdfstring{GenerateKeyIv()}{GenerateKeyIv()}}
+{\footnotesize\ttfamily \label{_crypto_a_p_i_8h_abd041ea6d7162d501e00548feb22ad65} 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} void Generate\+Key\+Iv (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{key\+Size}{, }\item[{size\+\_\+t}]{iv\+Size}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{iv}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_a_p_i_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{_crypto_a_p_i_8cpp_source}{Crypto\+API.\+cpp}}.
+
+\Hypertarget{_crypto_a_p_i_8h_a81f42969859874d08481f042846c6ccd}\index{CryptoAPI.h@{CryptoAPI.h}!getCurrentTimeHash@{getCurrentTimeHash}}
+\index{getCurrentTimeHash@{getCurrentTimeHash}!CryptoAPI.h@{CryptoAPI.h}}
+\doxysubsubsection{\texorpdfstring{getCurrentTimeHash()}{getCurrentTimeHash()}}
+{\footnotesize\ttfamily \label{_crypto_a_p_i_8h_a81f42969859874d08481f042846c6ccd} 
+\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\+\_\+\+API}} void get\+Current\+Time\+Hash (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{time\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_a_p_i_8cpp_source_l00074}{74}} of file \mbox{\hyperlink{_crypto_a_p_i_8cpp_source}{Crypto\+API.\+cpp}}.
+

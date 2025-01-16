@@ -1,0 +1,31 @@
+\doxysection{SHA512.\+h}
+\hypertarget{_s_h_a512_8h_source}{}\label{_s_h_a512_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/alogs/SHA512.h@{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/alogs/SHA512.h}}
+\mbox{\hyperlink{_s_h_a512_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\ prang\ on\ 23.11.2024.}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00005}00005\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_SHA512\_H}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00006}00006\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_SHA512\_H}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <openssl/evp.h>}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00015}\mbox{\hyperlink{class_s_h_a512}{00015}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_h_a512}{SHA512}}\ \{}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00016}00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00017}00017\ \ \ \textcolor{keyword}{static}\ std::array<unsigned\ char,\ EVP\_MAX\_MD\_SIZE>\ \mbox{\hyperlink{class_s_h_a512_aa7ae66f88694732f653e3ed114fc104f}{hashFile}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *filePath);}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00018}00018\ \ \ \textcolor{keyword}{static}\ std::array<unsigned\ char,\ EVP\_MAX\_MD\_SIZE>\ \mbox{\hyperlink{class_s_h_a512_a101f96457f096d48f121fbf75562ce68}{hashString}}(\textcolor{keyword}{const}\ std::wstring\ \&input);}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00019}00019\ \ \ \textcolor{keyword}{static}\ std::array<unsigned\ char,\ EVP\_MAX\_MD\_SIZE>\ \mbox{\hyperlink{class_s_h_a512_a892866c109cbc620209c6381f9dcc064}{hashArray}}(\textcolor{keyword}{const}\ std::vector<unsigned\ char>\ \&input);}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00021}00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00022}00022\ \ \ \textcolor{keywordtype}{bool}\ printDebug\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00023}00023\ \};}
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_s_h_a512_8h_source_l00025}00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FILEVAULTROOT\_SHA512\_H}}
+
+\end{DoxyCode}

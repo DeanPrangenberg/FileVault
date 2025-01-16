@@ -1,0 +1,91 @@
+\doxysection{Crypto\+DLL Class Reference}
+\hypertarget{class_crypto_d_l_l}{}\label{class_crypto_d_l_l}\index{CryptoDLL@{CryptoDLL}}
+
+
+{\ttfamily \#include $<$Crypto\+DLL.\+h$>$}
+
+Inheritance diagram for Crypto\+DLL\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_crypto_d_l_l}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_crypto_d_l_l_ad377410f792824ef4b7bbc5db4e71980}{Generate\+Key\+Iv}} (size\+\_\+t key\+Size, size\+\_\+t iv\+Size, unsigned char \texorpdfstring{$\ast$}{*}key, unsigned char \texorpdfstring{$\ast$}{*}iv)
+\item 
+void \mbox{\hyperlink{class_crypto_d_l_l_a010be6b25f7046d5b95f56a73afbbd4e}{Generate\+File\+ID}} (const wchar\+\_\+t \texorpdfstring{$\ast$}{*}file\+Path, unsigned char \texorpdfstring{$\ast$}{*}file\+ID)
+\item 
+void \mbox{\hyperlink{class_crypto_d_l_l_a2eabf7f6c2ca1aa2708591fb082e92ec}{Encrypt\+Files}} (class \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}file\+Data, int count, std\+::vector$<$ bool $>$ \&results)
+\item 
+void \mbox{\hyperlink{class_crypto_d_l_l_a67110ca087436c883f24b4206fe90b8a}{Decrypt\+Files}} (class \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}file\+Data, int count, std\+::vector$<$ bool $>$ \&results)
+\item 
+void \mbox{\hyperlink{class_crypto_d_l_l_a6b9f7773ffd8121b128d7a9392c38614}{get\+Current\+Time\+Hash}} (unsigned char \texorpdfstring{$\ast$}{*}time\+Hash)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_crypto_d_l_l_8h_source_l00013}{13}} of file \mbox{\hyperlink{_crypto_d_l_l_8h_source}{Crypto\+DLL.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_crypto_d_l_l_a67110ca087436c883f24b4206fe90b8a}\index{CryptoDLL@{CryptoDLL}!DecryptFiles@{DecryptFiles}}
+\index{DecryptFiles@{DecryptFiles}!CryptoDLL@{CryptoDLL}}
+\doxysubsubsection{\texorpdfstring{DecryptFiles()}{DecryptFiles()}}
+{\footnotesize\ttfamily \label{class_crypto_d_l_l_a67110ca087436c883f24b4206fe90b8a} 
+void Crypto\+DLL\+::\+Decrypt\+Files (\begin{DoxyParamCaption}\item[{class \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}}]{file\+Data}{, }\item[{int}]{count}{, }\item[{std\+::vector$<$ bool $>$ \&}]{results}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_d_l_l_8cpp_source_l00029}{29}} of file \mbox{\hyperlink{_crypto_d_l_l_8cpp_source}{Crypto\+DLL.\+cpp}}.
+
+\Hypertarget{class_crypto_d_l_l_a2eabf7f6c2ca1aa2708591fb082e92ec}\index{CryptoDLL@{CryptoDLL}!EncryptFiles@{EncryptFiles}}
+\index{EncryptFiles@{EncryptFiles}!CryptoDLL@{CryptoDLL}}
+\doxysubsubsection{\texorpdfstring{EncryptFiles()}{EncryptFiles()}}
+{\footnotesize\ttfamily \label{class_crypto_d_l_l_a2eabf7f6c2ca1aa2708591fb082e92ec} 
+void Crypto\+DLL\+::\+Encrypt\+Files (\begin{DoxyParamCaption}\item[{class \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}}]{file\+Data}{, }\item[{int}]{count}{, }\item[{std\+::vector$<$ bool $>$ \&}]{results}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_d_l_l_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{_crypto_d_l_l_8cpp_source}{Crypto\+DLL.\+cpp}}.
+
+\Hypertarget{class_crypto_d_l_l_a010be6b25f7046d5b95f56a73afbbd4e}\index{CryptoDLL@{CryptoDLL}!GenerateFileID@{GenerateFileID}}
+\index{GenerateFileID@{GenerateFileID}!CryptoDLL@{CryptoDLL}}
+\doxysubsubsection{\texorpdfstring{GenerateFileID()}{GenerateFileID()}}
+{\footnotesize\ttfamily \label{class_crypto_d_l_l_a010be6b25f7046d5b95f56a73afbbd4e} 
+void Crypto\+DLL\+::\+Generate\+File\+ID (\begin{DoxyParamCaption}\item[{const wchar\+\_\+t \texorpdfstring{$\ast$}{*}}]{file\+Path}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{file\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_d_l_l_8cpp_source_l00068}{68}} of file \mbox{\hyperlink{_crypto_d_l_l_8cpp_source}{Crypto\+DLL.\+cpp}}.
+
+\Hypertarget{class_crypto_d_l_l_ad377410f792824ef4b7bbc5db4e71980}\index{CryptoDLL@{CryptoDLL}!GenerateKeyIv@{GenerateKeyIv}}
+\index{GenerateKeyIv@{GenerateKeyIv}!CryptoDLL@{CryptoDLL}}
+\doxysubsubsection{\texorpdfstring{GenerateKeyIv()}{GenerateKeyIv()}}
+{\footnotesize\ttfamily \label{class_crypto_d_l_l_ad377410f792824ef4b7bbc5db4e71980} 
+void Crypto\+DLL\+::\+Generate\+Key\+Iv (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{key\+Size}{, }\item[{size\+\_\+t}]{iv\+Size}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{iv}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_d_l_l_8cpp_source_l00051}{51}} of file \mbox{\hyperlink{_crypto_d_l_l_8cpp_source}{Crypto\+DLL.\+cpp}}.
+
+\Hypertarget{class_crypto_d_l_l_a6b9f7773ffd8121b128d7a9392c38614}\index{CryptoDLL@{CryptoDLL}!getCurrentTimeHash@{getCurrentTimeHash}}
+\index{getCurrentTimeHash@{getCurrentTimeHash}!CryptoDLL@{CryptoDLL}}
+\doxysubsubsection{\texorpdfstring{getCurrentTimeHash()}{getCurrentTimeHash()}}
+{\footnotesize\ttfamily \label{class_crypto_d_l_l_a6b9f7773ffd8121b128d7a9392c38614} 
+void Crypto\+DLL\+::get\+Current\+Time\+Hash (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{time\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_crypto_d_l_l_8cpp_source_l00090}{90}} of file \mbox{\hyperlink{_crypto_d_l_l_8cpp_source}{Crypto\+DLL.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/\+DLLUtils/\mbox{\hyperlink{_crypto_d_l_l_8h}{Crypto\+DLL.\+h}}\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/\+DLLUtils/\mbox{\hyperlink{_crypto_d_l_l_8cpp}{Crypto\+DLL.\+cpp}}\end{DoxyCompactItemize}

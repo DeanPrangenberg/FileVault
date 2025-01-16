@@ -1,0 +1,41 @@
+\doxysection{DBMreset\+Handler.\+java}
+\hypertarget{_d_b_mreset_handler_8java_source}{}\label{_d_b_mreset_handler_8java_source}\index{D:/MyRepo/FileVault/JavaDatabase/src/main/java/DBMresetHandler.java@{D:/MyRepo/FileVault/JavaDatabase/src/main/java/DBMresetHandler.java}}
+\mbox{\hyperlink{_d_b_mreset_handler_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00001}00001\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpHandler;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00002}00002\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpExchange;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00005}00005\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00010}\mbox{\hyperlink{class_d_b_mreset_handler}{00010}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_d_b_mreset_handler_ab98252c37d581599604996cda2c400a5}{DBMresetHandler}}\ \textcolor{keyword}{implements}\ HttpHandler\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00011}00011\ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_database}{Database}}\ db;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00018}\mbox{\hyperlink{class_d_b_mreset_handler_ab98252c37d581599604996cda2c400a5}{00018}}\ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_d_b_mreset_handler_ab98252c37d581599604996cda2c400a5}{DBMresetHandler}}(\mbox{\hyperlink{class_database}{Database}}\ db)\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00019}00019\ \ \ \ \ this.db\ =\ db;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00020}00020\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00028}00028\ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00029}\mbox{\hyperlink{class_d_b_mreset_handler_afcd10dda7f841dd9d2d0887131ecd31c}{00029}}\ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_b_mreset_handler_afcd10dda7f841dd9d2d0887131ecd31c}{handle}}(HttpExchange\ t)\ \textcolor{keywordflow}{throws}\ IOException\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00031}00031\ \ \ \ \ \ \ \textcolor{comment}{//\ Drop\ the\ database\ table}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00032}00032\ \ \ \ \ \ \ db.dropTable();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00033}00033\ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}true"{}};}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00034}00034\ \ \ \ \ \ \ t.sendResponseHeaders(200,\ response.length());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00035}00035\ \ \ \ \ \ \ OutputStream\ os\ =\ t.getResponseBody();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00036}00036\ \ \ \ \ \ \ os.write(response.getBytes());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00037}00037\ \ \ \ \ \ \ os.close();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00038}00038\ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Database\ reset\ successfully."{}});}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00039}00039\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00040}00040\ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00041}00041\ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}false"{}};}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00042}00042\ \ \ \ \ \ \ t.sendResponseHeaders(500,\ response.length());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00043}00043\ \ \ \ \ \ \ OutputStream\ os\ =\ t.getResponseBody();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00044}00044\ \ \ \ \ \ \ os.write(response.getBytes());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00045}00045\ \ \ \ \ \ \ os.close();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00046}00046\ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Failed\ to\ reset\ database."{}});}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00048}00048\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreset_handler_8java_source_l00049}00049\ \}}
+
+\end{DoxyCode}

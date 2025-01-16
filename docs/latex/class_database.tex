@@ -1,0 +1,145 @@
+\doxysection{Database Class Reference}
+\hypertarget{class_database}{}\label{class_database}\index{Database@{Database}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Go\+File\+Data}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{class_database_a78fe6673c191d27190c916c786c57373}{get\+Database\+Path}} ()
+\item 
+List$<$ Go\+File\+Data $>$ \mbox{\hyperlink{class_database_a6dc9e421f70c4a22fea7c2ed0acc7bcf}{get\+All\+Entries}} ()
+\item 
+void \mbox{\hyperlink{class_database_adb771d528fd6e50ba157715468ccc2fe}{connect}} ()
+\item 
+void \mbox{\hyperlink{class_database_a6e18770ab601e030a05f34741d3fc0e0}{drop\+Table}} ()
+\item 
+void \mbox{\hyperlink{class_database_ad9815c090667c3b6ce08d3ff0802a072}{disconnect}} ()
+\item 
+void \mbox{\hyperlink{class_database_a109521463610c13e19de07c396cf0c58}{insert\+Entry}} (Go\+File\+Data data)
+\item 
+void \mbox{\hyperlink{class_database_a6ed3cdc50c916209a1e364df73196989}{replace\+Entry}} (Go\+File\+Data data)
+\item 
+void \mbox{\hyperlink{class_database_a68ca162d7eb6b990548f1977233c9822}{delete\+Entry}} (String file\+ID, String encryption\+ID)
+\item 
+Go\+File\+Data \mbox{\hyperlink{class_database_aa932f886dc2e12a313d1d675e16f65d6}{search\+Entry}} (String file\+ID, String encryption\+ID)
+\item 
+List$<$ Go\+File\+Data $>$ \mbox{\hyperlink{class_database_aaa796b9c610e1549b7234f9c6a2063b6}{get\+All\+File\+IDs\+And\+Encrypted\+Paths}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00005}{5}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_database_adb771d528fd6e50ba157715468ccc2fe}\index{Database@{Database}!connect@{connect}}
+\index{connect@{connect}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily \label{class_database_adb771d528fd6e50ba157715468ccc2fe} 
+void Database.\+connect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00058}{58}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_a68ca162d7eb6b990548f1977233c9822}\index{Database@{Database}!deleteEntry@{deleteEntry}}
+\index{deleteEntry@{deleteEntry}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{deleteEntry()}{deleteEntry()}}
+{\footnotesize\ttfamily \label{class_database_a68ca162d7eb6b990548f1977233c9822} 
+void Database.\+delete\+Entry (\begin{DoxyParamCaption}\item[{String}]{file\+ID}{, }\item[{String}]{encryption\+ID}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00156}{156}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_ad9815c090667c3b6ce08d3ff0802a072}\index{Database@{Database}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily \label{class_database_ad9815c090667c3b6ce08d3ff0802a072} 
+void Database.\+disconnect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00100}{100}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_a6e18770ab601e030a05f34741d3fc0e0}\index{Database@{Database}!dropTable@{dropTable}}
+\index{dropTable@{dropTable}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{dropTable()}{dropTable()}}
+{\footnotesize\ttfamily \label{class_database_a6e18770ab601e030a05f34741d3fc0e0} 
+void Database.\+drop\+Table (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00068}{68}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_a6dc9e421f70c4a22fea7c2ed0acc7bcf}\index{Database@{Database}!getAllEntries@{getAllEntries}}
+\index{getAllEntries@{getAllEntries}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{getAllEntries()}{getAllEntries()}}
+{\footnotesize\ttfamily \label{class_database_a6dc9e421f70c4a22fea7c2ed0acc7bcf} 
+List$<$ Go\+File\+Data $>$ Database.\+get\+All\+Entries (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00012}{12}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_aaa796b9c610e1549b7234f9c6a2063b6}\index{Database@{Database}!getAllFileIDsAndEncryptedPaths@{getAllFileIDsAndEncryptedPaths}}
+\index{getAllFileIDsAndEncryptedPaths@{getAllFileIDsAndEncryptedPaths}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{getAllFileIDsAndEncryptedPaths()}{getAllFileIDsAndEncryptedPaths()}}
+{\footnotesize\ttfamily \label{class_database_aaa796b9c610e1549b7234f9c6a2063b6} 
+List$<$ Go\+File\+Data $>$ Database.\+get\+All\+File\+IDs\+And\+Encrypted\+Paths (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00198}{198}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_a78fe6673c191d27190c916c786c57373}\index{Database@{Database}!getDatabasePath@{getDatabasePath}}
+\index{getDatabasePath@{getDatabasePath}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{getDatabasePath()}{getDatabasePath()}}
+{\footnotesize\ttfamily \label{class_database_a78fe6673c191d27190c916c786c57373} 
+String Database.\+get\+Database\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00008}{8}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_a109521463610c13e19de07c396cf0c58}\index{Database@{Database}!insertEntry@{insertEntry}}
+\index{insertEntry@{insertEntry}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{insertEntry()}{insertEntry()}}
+{\footnotesize\ttfamily \label{class_database_a109521463610c13e19de07c396cf0c58} 
+void Database.\+insert\+Entry (\begin{DoxyParamCaption}\item[{Go\+File\+Data}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00110}{110}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_a6ed3cdc50c916209a1e364df73196989}\index{Database@{Database}!replaceEntry@{replaceEntry}}
+\index{replaceEntry@{replaceEntry}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{replaceEntry()}{replaceEntry()}}
+{\footnotesize\ttfamily \label{class_database_a6ed3cdc50c916209a1e364df73196989} 
+void Database.\+replace\+Entry (\begin{DoxyParamCaption}\item[{Go\+File\+Data}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00148}{148}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+\Hypertarget{class_database_aa932f886dc2e12a313d1d675e16f65d6}\index{Database@{Database}!searchEntry@{searchEntry}}
+\index{searchEntry@{searchEntry}!Database@{Database}}
+\doxysubsubsection{\texorpdfstring{searchEntry()}{searchEntry()}}
+{\footnotesize\ttfamily \label{class_database_aa932f886dc2e12a313d1d675e16f65d6} 
+Go\+File\+Data Database.\+search\+Entry (\begin{DoxyParamCaption}\item[{String}]{file\+ID}{, }\item[{String}]{encryption\+ID}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_database_8java_source_l00167}{167}} of file \mbox{\hyperlink{_database_8java_source}{Database.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Java\+Database/src/main/java/\mbox{\hyperlink{_database_8java}{Database.\+java}}\end{DoxyCompactItemize}

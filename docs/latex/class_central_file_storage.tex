@@ -1,0 +1,93 @@
+\doxysection{Central\+File\+Storage Class Reference}
+\hypertarget{class_central_file_storage}{}\label{class_central_file_storage}\index{CentralFileStorage@{CentralFileStorage}}
+
+
+{\ttfamily \#include $<$Central\+File\+Storage.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_central_file_storage_a82d767483fed91b81d34691a6819ccef}{Central\+File\+Storage}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_central_file_storage_a51f0023d5f251289c3a8802b16884dfb}{move\+File\+To\+Central\+Storage}} (const fs\+::path \&file\+Path, bool is\+Encrypted)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_central_file_storage_ad058e46defa1400712539b01a65019a2}{central\+Enc\+File\+Storage}} = false
+\item 
+static bool \mbox{\hyperlink{class_central_file_storage_a567a10377f253f4b598a5ee6f099003a}{central\+Dec\+File\+Storage}} = false
+\item 
+static fs\+::path \mbox{\hyperlink{class_central_file_storage_abe5392de16d14d1ebfb3118a7951a6ff}{file\+Storage\+Path}} = fs\+::current\+\_\+path() / "{}central\+Storage"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_central_file_storage_8h_source_l00012}{12}} of file \mbox{\hyperlink{_central_file_storage_8h_source}{Central\+File\+Storage.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_central_file_storage_a82d767483fed91b81d34691a6819ccef}\index{CentralFileStorage@{CentralFileStorage}!CentralFileStorage@{CentralFileStorage}}
+\index{CentralFileStorage@{CentralFileStorage}!CentralFileStorage@{CentralFileStorage}}
+\doxysubsubsection{\texorpdfstring{CentralFileStorage()}{CentralFileStorage()}}
+{\footnotesize\ttfamily \label{class_central_file_storage_a82d767483fed91b81d34691a6819ccef} 
+Central\+File\+Storage\+::\+Central\+File\+Storage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_central_file_storage_a51f0023d5f251289c3a8802b16884dfb}\index{CentralFileStorage@{CentralFileStorage}!moveFileToCentralStorage@{moveFileToCentralStorage}}
+\index{moveFileToCentralStorage@{moveFileToCentralStorage}!CentralFileStorage@{CentralFileStorage}}
+\doxysubsubsection{\texorpdfstring{moveFileToCentralStorage()}{moveFileToCentralStorage()}}
+{\footnotesize\ttfamily \label{class_central_file_storage_a51f0023d5f251289c3a8802b16884dfb} 
+bool Central\+File\+Storage\+::move\+File\+To\+Central\+Storage (\begin{DoxyParamCaption}\item[{const fs\+::path \&}]{file\+Path}{, }\item[{bool}]{is\+Encrypted}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_central_file_storage_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{_central_file_storage_8cpp_source}{Central\+File\+Storage.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_central_file_storage_a567a10377f253f4b598a5ee6f099003a}\index{CentralFileStorage@{CentralFileStorage}!centralDecFileStorage@{centralDecFileStorage}}
+\index{centralDecFileStorage@{centralDecFileStorage}!CentralFileStorage@{CentralFileStorage}}
+\doxysubsubsection{\texorpdfstring{centralDecFileStorage}{centralDecFileStorage}}
+{\footnotesize\ttfamily \label{class_central_file_storage_a567a10377f253f4b598a5ee6f099003a} 
+bool Central\+File\+Storage\+::central\+Dec\+File\+Storage = false\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_central_file_storage_8h_source_l00016}{16}} of file \mbox{\hyperlink{_central_file_storage_8h_source}{Central\+File\+Storage.\+h}}.
+
+\Hypertarget{class_central_file_storage_ad058e46defa1400712539b01a65019a2}\index{CentralFileStorage@{CentralFileStorage}!centralEncFileStorage@{centralEncFileStorage}}
+\index{centralEncFileStorage@{centralEncFileStorage}!CentralFileStorage@{CentralFileStorage}}
+\doxysubsubsection{\texorpdfstring{centralEncFileStorage}{centralEncFileStorage}}
+{\footnotesize\ttfamily \label{class_central_file_storage_ad058e46defa1400712539b01a65019a2} 
+bool Central\+File\+Storage\+::central\+Enc\+File\+Storage = false\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_central_file_storage_8h_source_l00015}{15}} of file \mbox{\hyperlink{_central_file_storage_8h_source}{Central\+File\+Storage.\+h}}.
+
+\Hypertarget{class_central_file_storage_abe5392de16d14d1ebfb3118a7951a6ff}\index{CentralFileStorage@{CentralFileStorage}!fileStoragePath@{fileStoragePath}}
+\index{fileStoragePath@{fileStoragePath}!CentralFileStorage@{CentralFileStorage}}
+\doxysubsubsection{\texorpdfstring{fileStoragePath}{fileStoragePath}}
+{\footnotesize\ttfamily \label{class_central_file_storage_abe5392de16d14d1ebfb3118a7951a6ff} 
+fs\+::path Central\+File\+Storage\+::file\+Storage\+Path = fs\+::current\+\_\+path() / "{}central\+Storage"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_central_file_storage_8h_source_l00017}{17}} of file \mbox{\hyperlink{_central_file_storage_8h_source}{Central\+File\+Storage.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/shared/src/settings\+Classes/\mbox{\hyperlink{_central_file_storage_8h}{Central\+File\+Storage.\+h}}\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/shared/src/settings\+Classes/\mbox{\hyperlink{_central_file_storage_8cpp}{Central\+File\+Storage.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,114 @@
+\doxysection{Helper\+Utils Class Reference}
+\hypertarget{class_helper_utils}{}\label{class_helper_utils}\index{HelperUtils@{HelperUtils}}
+
+
+{\ttfamily \#include $<$Helper\+Utils.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_helper_utils_1_1_file_i_d_data}{File\+IDData}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{class_helper_utils_a26a4759881bc3710c66f2e4adcd9191a}{encrypt\+Files}} (const std\+::vector$<$ fs\+::path $>$ \&file\+Paths, const std\+::vector$<$ std\+::string $>$ \&algorithm)
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, int $>$ \mbox{\hyperlink{class_helper_utils_abc1d201ed708698a407d94839a780f31}{decrypt\+Files}} (const std\+::vector$<$ fs\+::path $>$ \&file\+Paths)
+\item 
+void \mbox{\hyperlink{class_helper_utils_a7d9d0e9418b023e2ebd33a72e96ebe17}{repair\+Lost\+Enc\+File\+Structs}} (std\+::vector$<$ fs\+::path $>$ \&directorys)
+\item 
+void \mbox{\hyperlink{class_helper_utils_ad7df47a2df665f729e8a910db90a2a35}{repair\+All\+Lost\+Struct}} ()
+\item 
+void \mbox{\hyperlink{class_helper_utils_a6d12c0a2bcbc72613078a45f0bd38e36}{save\+Database\+To\+File}} (const fs\+::path \&target\+Path, std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$)
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{class_helper_utils_a87921a6998e3bb5ab809fa680989387d}{load\+Database\+From\+File}} (const fs\+::path \&target\+Path)
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{class_helper_utils_a5afa1a1ddaee71b9e5283aca37accaf9}{check\+DBFile\+State}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8h_source_l00030}{30}} of file \mbox{\hyperlink{_helper_utils_8h_source}{Helper\+Utils.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_helper_utils_a5afa1a1ddaee71b9e5283aca37accaf9}\index{HelperUtils@{HelperUtils}!checkDBFileState@{checkDBFileState}}
+\index{checkDBFileState@{checkDBFileState}!HelperUtils@{HelperUtils}}
+\doxysubsubsection{\texorpdfstring{checkDBFileState()}{checkDBFileState()}}
+{\footnotesize\ttfamily \label{class_helper_utils_a5afa1a1ddaee71b9e5283aca37accaf9} 
+std\+::vector$<$ int $>$ Helper\+Utils\+::check\+DBFile\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8cpp_source_l00304}{304}} of file \mbox{\hyperlink{_helper_utils_8cpp_source}{Helper\+Utils.\+cpp}}.
+
+\Hypertarget{class_helper_utils_abc1d201ed708698a407d94839a780f31}\index{HelperUtils@{HelperUtils}!decryptFiles@{decryptFiles}}
+\index{decryptFiles@{decryptFiles}!HelperUtils@{HelperUtils}}
+\doxysubsubsection{\texorpdfstring{decryptFiles()}{decryptFiles()}}
+{\footnotesize\ttfamily \label{class_helper_utils_abc1d201ed708698a407d94839a780f31} 
+std\+::unordered\+\_\+map$<$ std\+::string, int $>$ Helper\+Utils\+::decrypt\+Files (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ fs\+::path $>$ \&}]{file\+Paths}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8cpp_source_l00209}{209}} of file \mbox{\hyperlink{_helper_utils_8cpp_source}{Helper\+Utils.\+cpp}}.
+
+\Hypertarget{class_helper_utils_a26a4759881bc3710c66f2e4adcd9191a}\index{HelperUtils@{HelperUtils}!encryptFiles@{encryptFiles}}
+\index{encryptFiles@{encryptFiles}!HelperUtils@{HelperUtils}}
+\doxysubsubsection{\texorpdfstring{encryptFiles()}{encryptFiles()}}
+{\footnotesize\ttfamily \label{class_helper_utils_a26a4759881bc3710c66f2e4adcd9191a} 
+std\+::vector$<$ int $>$ Helper\+Utils\+::encrypt\+Files (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ fs\+::path $>$ \&}]{file\+Paths}{, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{algorithm}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8cpp_source_l00262}{262}} of file \mbox{\hyperlink{_helper_utils_8cpp_source}{Helper\+Utils.\+cpp}}.
+
+\Hypertarget{class_helper_utils_a87921a6998e3bb5ab809fa680989387d}\index{HelperUtils@{HelperUtils}!loadDatabaseFromFile@{loadDatabaseFromFile}}
+\index{loadDatabaseFromFile@{loadDatabaseFromFile}!HelperUtils@{HelperUtils}}
+\doxysubsubsection{\texorpdfstring{loadDatabaseFromFile()}{loadDatabaseFromFile()}}
+{\footnotesize\ttfamily \label{class_helper_utils_a87921a6998e3bb5ab809fa680989387d} 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ Helper\+Utils\+::load\+Database\+From\+File (\begin{DoxyParamCaption}\item[{const fs\+::path \&}]{target\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8cpp_source_l00360}{360}} of file \mbox{\hyperlink{_helper_utils_8cpp_source}{Helper\+Utils.\+cpp}}.
+
+\Hypertarget{class_helper_utils_ad7df47a2df665f729e8a910db90a2a35}\index{HelperUtils@{HelperUtils}!repairAllLostStruct@{repairAllLostStruct}}
+\index{repairAllLostStruct@{repairAllLostStruct}!HelperUtils@{HelperUtils}}
+\doxysubsubsection{\texorpdfstring{repairAllLostStruct()}{repairAllLostStruct()}}
+{\footnotesize\ttfamily \label{class_helper_utils_ad7df47a2df665f729e8a910db90a2a35} 
+void Helper\+Utils\+::repair\+All\+Lost\+Struct (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8cpp_source_l00204}{204}} of file \mbox{\hyperlink{_helper_utils_8cpp_source}{Helper\+Utils.\+cpp}}.
+
+\Hypertarget{class_helper_utils_a7d9d0e9418b023e2ebd33a72e96ebe17}\index{HelperUtils@{HelperUtils}!repairLostEncFileStructs@{repairLostEncFileStructs}}
+\index{repairLostEncFileStructs@{repairLostEncFileStructs}!HelperUtils@{HelperUtils}}
+\doxysubsubsection{\texorpdfstring{repairLostEncFileStructs()}{repairLostEncFileStructs()}}
+{\footnotesize\ttfamily \label{class_helper_utils_a7d9d0e9418b023e2ebd33a72e96ebe17} 
+void Helper\+Utils\+::repair\+Lost\+Enc\+File\+Structs (\begin{DoxyParamCaption}\item[{std\+::vector$<$ fs\+::path $>$ \&}]{directorys}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8cpp_source_l00021}{21}} of file \mbox{\hyperlink{_helper_utils_8cpp_source}{Helper\+Utils.\+cpp}}.
+
+\Hypertarget{class_helper_utils_a6d12c0a2bcbc72613078a45f0bd38e36}\index{HelperUtils@{HelperUtils}!saveDatabaseToFile@{saveDatabaseToFile}}
+\index{saveDatabaseToFile@{saveDatabaseToFile}!HelperUtils@{HelperUtils}}
+\doxysubsubsection{\texorpdfstring{saveDatabaseToFile()}{saveDatabaseToFile()}}
+{\footnotesize\ttfamily \label{class_helper_utils_a6d12c0a2bcbc72613078a45f0bd38e36} 
+void Helper\+Utils\+::save\+Database\+To\+File (\begin{DoxyParamCaption}\item[{const fs\+::path \&}]{target\+Path}{, }\item[{std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$}]{database}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_helper_utils_8cpp_source_l00332}{332}} of file \mbox{\hyperlink{_helper_utils_8cpp_source}{Helper\+Utils.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/\+Helper\+Utils/\mbox{\hyperlink{_helper_utils_8h}{Helper\+Utils.\+h}}\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/\+Helper\+Utils/\mbox{\hyperlink{_helper_utils_8cpp}{Helper\+Utils.\+cpp}}\end{DoxyCompactItemize}

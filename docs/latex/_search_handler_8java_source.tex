@@ -1,0 +1,54 @@
+\doxysection{Search\+Handler.\+java}
+\hypertarget{_search_handler_8java_source}{}\label{_search_handler_8java_source}\index{D:/MyRepo/FileVault/JavaDatabase/src/main/java/SearchHandler.java@{D:/MyRepo/FileVault/JavaDatabase/src/main/java/SearchHandler.java}}
+\mbox{\hyperlink{_search_handler_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00001}00001\ \textcolor{keyword}{import}\ com.fasterxml.jackson.databind.JsonNode;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00002}00002\ \textcolor{keyword}{import}\ com.fasterxml.jackson.databind.ObjectMapper;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpHandler;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpExchange;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.io.InputStream;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.nio.charset.StandardCharsets;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00014}\mbox{\hyperlink{class_search_handler}{00014}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_search_handler_a9dd4ee1996b1f34ac3cf2753827de0bc}{SearchHandler}}\ \textcolor{keyword}{implements}\ HttpHandler\ \{}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00015}00015\ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_database}{Database}}\ db;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00016}00016\ \ \ \textcolor{keyword}{private}\ ObjectMapper\ objectMapper\ =\ \textcolor{keyword}{new}\ ObjectMapper();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00023}\mbox{\hyperlink{class_search_handler_a9dd4ee1996b1f34ac3cf2753827de0bc}{00023}}\ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_search_handler_a9dd4ee1996b1f34ac3cf2753827de0bc}{SearchHandler}}(\mbox{\hyperlink{class_database}{Database}}\ db)\ \{}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00024}00024\ \ \ \ \ this.db\ =\ db;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00025}00025\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00033}00033\ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00034}\mbox{\hyperlink{class_search_handler_a09635f8f84e192552bd46fd25c5733da}{00034}}\ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_search_handler_a09635f8f84e192552bd46fd25c5733da}{handle}}(HttpExchange\ t)\ \textcolor{keywordflow}{throws}\ IOException\ \{}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00035}00035\ \ \ \ \ InputStream\ is\ =\ t.getRequestBody();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{byte}[]\ inputBytes\ =\ is.readAllBytes();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00037}00037\ \ \ \ \ String\ input\ =\ \textcolor{keyword}{new}\ String(inputBytes,\ StandardCharsets.UTF\_8);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00038}00038\ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Received\ input\ for\ search:\ "{}}\ +\ input);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00040}00040\ \ \ \ \ ObjectMapper\ mapper\ =\ \textcolor{keyword}{new}\ ObjectMapper();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00041}00041\ \ \ \ \ JsonNode\ jsonNode\ =\ mapper.readTree(input);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00042}00042\ \ \ \ \ String\ fileID\ =\ jsonNode.get(\textcolor{stringliteral}{"{}FileID"{}}).asText();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00043}00043\ \ \ \ \ String\ encryptionID\ =\ jsonNode.get(\textcolor{stringliteral}{"{}EncryptionID"{}}).asText();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00045}00045\ \ \ \ \ Database.GoFileData\ data\ =\ db.searchEntry(fileID,\ encryptionID);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00047}00047\ \ \ \ \ String\ response;}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{if}\ (data\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00049}00049\ \ \ \ \ \ \ response\ =\ objectMapper.writeValueAsString(data);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00050}00050\ \ \ \ \ \ \ t.sendResponseHeaders(200,\ response.getBytes().length);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00051}00051\ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Found\ entry\ with\ FileID:\ "{}}\ +\ fileID\ +\ \textcolor{stringliteral}{"{}\ and\ EncryptionID:\ "{}}\ +\ encryptionID);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00052}00052\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00053}00053\ \ \ \ \ \ \ response\ =\ \textcolor{stringliteral}{"{}false"{}};}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00054}00054\ \ \ \ \ \ \ t.sendResponseHeaders(404,\ response.getBytes().length);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00055}00055\ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Entry\ not\ found\ for\ FileID:\ "{}}\ +\ fileID\ +\ \textcolor{stringliteral}{"{}\ and\ EncryptionID:\ "{}}\ +\ encryptionID);}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00058}00058\ \ \ \ \ OutputStream\ os\ =\ t.getResponseBody();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00059}00059\ \ \ \ \ os.write(response.getBytes());}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00060}00060\ \ \ \ \ os.close();}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00061}00061\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_handler_8java_source_l00062}00062\ \}}
+
+\end{DoxyCode}

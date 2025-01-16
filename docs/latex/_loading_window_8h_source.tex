@@ -1,0 +1,41 @@
+\doxysection{Loading\+Window.\+h}
+\hypertarget{_loading_window_8h_source}{}\label{_loading_window_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/smallElements/LoadingWindow.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/smallElements/LoadingWindow.h}}
+\mbox{\hyperlink{_loading_window_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ LOADINGWINDOW\_H}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ LOADINGWINDOW\_H}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <QTextEdit>}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <QMovie>}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00012}\mbox{\hyperlink{class_loading_window}{00012}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_loading_window_af5f12330abe41411f81df432d0aa1c00}{LoadingWindow}}\ :\ \textcolor{keyword}{public}\ QDialog\ \{}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00013}00013\ \ \ Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00015}00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00016}00016\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_loading_window_af5f12330abe41411f81df432d0aa1c00}{LoadingWindow}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00017}\mbox{\hyperlink{class_loading_window_a4be2cf13d76f330c832939d92019b201}{00017}}\ \ \ \mbox{\hyperlink{class_loading_window_a4be2cf13d76f330c832939d92019b201}{\string~LoadingWindow}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00018}00018\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_loading_window_a83995b4476776bc2004c3fbad05d0647}{appendConsoleOutput}}(\textcolor{keyword}{const}\ QString\ \&text);}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00019}00019\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_loading_window_a6bac2157edf2e1e050b1b1569b5df422}{setConsoleOutput}}(\textcolor{keyword}{const}\ QString\ \&text);}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00020}\mbox{\hyperlink{class_loading_window_a1356286aef3efa174d068936cadfefa1}{00020}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_loading_window_a1356286aef3efa174d068936cadfefa1}{counter}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00022}00022\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00023}00023\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_loading_window_a025da6066607ea5539ca40eb47517c73}{showEvent}}(QShowEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00025}00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00026}00026\ \ \ std::unique\_ptr<QVBoxLayout>\ LoadingWindowLayout;}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00027}00027\ \ \ std::unique\_ptr<QLabel>\ loadingLabel;}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00028}00028\ \ \ std::unique\_ptr<QTextEdit>\ consoleOutput;}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00029}00029\ \ \ std::unique\_ptr<QMovie>\ movie;}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00030}00030\ \ \ std::deque<QString>\ consoleBuffer;}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00031}00031\ \ \ \textcolor{keywordtype}{int}\ maxLines\ =\ 100;\ \textcolor{comment}{//\ Maximum\ number\ of\ lines\ in\ the\ console}}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00032}00032\ \ \ \textcolor{keywordtype}{void}\ updateConsoleOutput();}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00033}00033\ \};}
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_loading_window_8h_source_l00035}00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LOADINGWINDOW\_H}}
+
+\end{DoxyCode}

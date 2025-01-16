@@ -1,0 +1,125 @@
+\doxysection{Database\+Management\+Widget.\+cpp}
+\hypertarget{_database_management_widget_8cpp_source}{}\label{_database_management_widget_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.cpp}}
+\mbox{\hyperlink{_database_management_widget_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <QFileDialog>}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_database_management_widget_8h}{DatabaseManagementWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00004}\mbox{\hyperlink{class_database_management_widget_ac7b5972991e5603e1b884d8d280ae81a}{00004}}\ \mbox{\hyperlink{class_database_management_widget_ac7b5972991e5603e1b884d8d280ae81a}{DatabaseManagementWidget::DatabaseManagementWidget}}(QWidget\ *parent)\ :\ \mbox{\hyperlink{class_master_settings_widget_ab60b5b3608ee94b0f5f297777414bb37}{MasterSettingsWidget}}(parent)\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00005}00005\ \ \ \mbox{\hyperlink{class_master_settings_widget_a56c91155a206138b2e2bf60deba9f886}{titleLabel}}-\/>setText(\textcolor{stringliteral}{"{}Database\ Management"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00006}00006\ \ \ setMinimumHeight(100);}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00008}00008\ \ \ \mbox{\hyperlink{class_database_management_widget_a20aa672982851af3cce46ffce9797257}{restApiDLL}}\ =\ std::make\_unique<RestApiDLL>();}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00009}00009\ \ \ \mbox{\hyperlink{class_database_management_widget_a360eede9cf5cd0b574394e6cd02979ab}{helperUtils}}\ =\ std::make\_unique<HelperUtils>();}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00011}00011\ \ \ \mbox{\hyperlink{class_database_management_widget_aa687756d9c450dd0b5aedec23949ecda}{hLayout1}}\ =\ std::make\_unique<QHBoxLayout>();}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00012}00012\ \ \ \mbox{\hyperlink{class_database_management_widget_a127b8bb2f91c2eccbee2faf19c53fc89}{hLayout2}}\ =\ std::make\_unique<QHBoxLayout>();}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00014}00014\ \ \ \mbox{\hyperlink{class_database_management_widget_a7da974dbba5ad7f49dd2b76a789fa834}{exportButton}}\ =\ std::make\_shared<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00015}00015\ \ \ \mbox{\hyperlink{class_database_management_widget_a7da974dbba5ad7f49dd2b76a789fa834}{exportButton}}-\/>setText(\textcolor{stringliteral}{"{}Export"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00016}00016\ \ \ \mbox{\hyperlink{class_database_management_widget_afcbef817703e0bd95a9bc9f6bc709b1f}{insertButton}}\ =\ std::make\_shared<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00017}00017\ \ \ \mbox{\hyperlink{class_database_management_widget_afcbef817703e0bd95a9bc9f6bc709b1f}{insertButton}}-\/>setText(\textcolor{stringliteral}{"{}Insert"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00018}00018\ \ \ \mbox{\hyperlink{class_database_management_widget_ae7a66e2c76c3f6989491ce88940c3ca1}{replaceButton}}\ =\ std::make\_shared<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00019}00019\ \ \ \mbox{\hyperlink{class_database_management_widget_ae7a66e2c76c3f6989491ce88940c3ca1}{replaceButton}}-\/>setText(\textcolor{stringliteral}{"{}Replace"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00020}00020\ \ \ \mbox{\hyperlink{class_database_management_widget_adaa072a92170f8c3e1b29c20108de1d7}{resetButton}}\ =\ std::make\_shared<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00021}00021\ \ \ \mbox{\hyperlink{class_database_management_widget_adaa072a92170f8c3e1b29c20108de1d7}{resetButton}}-\/>setText(\textcolor{stringliteral}{"{}Reset"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00023}00023\ \ \ \mbox{\hyperlink{class_database_management_widget_aa687756d9c450dd0b5aedec23949ecda}{hLayout1}}-\/>addWidget(\mbox{\hyperlink{class_database_management_widget_a7da974dbba5ad7f49dd2b76a789fa834}{exportButton}}.get());}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00024}00024\ \ \ \mbox{\hyperlink{class_database_management_widget_aa687756d9c450dd0b5aedec23949ecda}{hLayout1}}-\/>addWidget(\mbox{\hyperlink{class_database_management_widget_afcbef817703e0bd95a9bc9f6bc709b1f}{insertButton}}.get());}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00025}00025\ \ \ \mbox{\hyperlink{class_database_management_widget_a127b8bb2f91c2eccbee2faf19c53fc89}{hLayout2}}-\/>addWidget(\mbox{\hyperlink{class_database_management_widget_ae7a66e2c76c3f6989491ce88940c3ca1}{replaceButton}}.get());}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00026}00026\ \ \ \mbox{\hyperlink{class_database_management_widget_a127b8bb2f91c2eccbee2faf19c53fc89}{hLayout2}}-\/>addWidget(\mbox{\hyperlink{class_database_management_widget_adaa072a92170f8c3e1b29c20108de1d7}{resetButton}}.get());}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00028}00028\ \ \ \mbox{\hyperlink{class_master_settings_widget_a5a2357ac24cd08bf25672ff2040af81e}{buttons}}.push\_back(\mbox{\hyperlink{class_database_management_widget_a7da974dbba5ad7f49dd2b76a789fa834}{exportButton}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00029}00029\ \ \ \mbox{\hyperlink{class_master_settings_widget_a5a2357ac24cd08bf25672ff2040af81e}{buttons}}.push\_back(\mbox{\hyperlink{class_database_management_widget_afcbef817703e0bd95a9bc9f6bc709b1f}{insertButton}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00030}00030\ \ \ \mbox{\hyperlink{class_master_settings_widget_a5a2357ac24cd08bf25672ff2040af81e}{buttons}}.push\_back(\mbox{\hyperlink{class_database_management_widget_ae7a66e2c76c3f6989491ce88940c3ca1}{replaceButton}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00031}00031\ \ \ \mbox{\hyperlink{class_master_settings_widget_a5a2357ac24cd08bf25672ff2040af81e}{buttons}}.push\_back(\mbox{\hyperlink{class_database_management_widget_adaa072a92170f8c3e1b29c20108de1d7}{resetButton}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00033}00033\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>addLayout(\mbox{\hyperlink{class_database_management_widget_aa687756d9c450dd0b5aedec23949ecda}{hLayout1}}.release());}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00034}00034\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>addLayout(\mbox{\hyperlink{class_database_management_widget_a127b8bb2f91c2eccbee2faf19c53fc89}{hLayout2}}.release());}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00035}00035\ \ \ \mbox{\hyperlink{class_master_settings_widget_afa5c74b29051ca9e2a97f3680a2339dc}{applyStyle}}();}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00037}00037\ \ \ connect(\mbox{\hyperlink{class_database_management_widget_a7da974dbba5ad7f49dd2b76a789fa834}{exportButton}}.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_database_management_widget_ac5e0f58ca3ad36854bf0a19b693aac65}{DatabaseManagementWidget::exportDB}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00038}00038\ \ \ connect(\mbox{\hyperlink{class_database_management_widget_afcbef817703e0bd95a9bc9f6bc709b1f}{insertButton}}.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_database_management_widget_a6254361e930ae9e99043bf1a409d4312}{DatabaseManagementWidget::insertDB}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00039}00039\ \ \ connect(\mbox{\hyperlink{class_database_management_widget_ae7a66e2c76c3f6989491ce88940c3ca1}{replaceButton}}.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_database_management_widget_a419ce6d9a9fa91b98965729d7ca4133d}{DatabaseManagementWidget::replaceDB}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00040}00040\ \ \ connect(\mbox{\hyperlink{class_database_management_widget_adaa072a92170f8c3e1b29c20108de1d7}{resetButton}}.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_database_management_widget_ab02032bb44e0172d7c5dd63f004e9256}{DatabaseManagementWidget::resetDB}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00043}\mbox{\hyperlink{class_database_management_widget_ac5e0f58ca3ad36854bf0a19b693aac65}{00043}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_database_management_widget_ac5e0f58ca3ad36854bf0a19b693aac65}{DatabaseManagementWidget::exportDB}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00044}00044\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ databaseExport\ =\ \mbox{\hyperlink{class_database_management_widget_a20aa672982851af3cce46ffce9797257}{restApiDLL}}-\/>ExportDatabase();}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00046}00046\ \ \ QString\ dir\ =\ QFileDialog::getExistingDirectory(\textcolor{keyword}{this},\ tr(\textcolor{stringliteral}{"{}Select\ Database\ File\ Location"{}}),\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QFileDialog::ShowDirsOnly\ |\ QFileDialog::DontResolveSymlinks);}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00048}00048\ \ \ \textcolor{keywordflow}{if}\ (!dir.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{class_database_management_widget_a360eede9cf5cd0b574394e6cd02979ab}{helperUtils}}-\/>saveDatabaseToFile(fs::path(dir.toStdString()),\ databaseExport);}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00050}00050\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00052}00052\ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00054}\mbox{\hyperlink{class_database_management_widget_a6254361e930ae9e99043bf1a409d4312}{00054}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_database_management_widget_a6254361e930ae9e99043bf1a409d4312}{DatabaseManagementWidget::insertDB}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00055}00055\ \ \ QString\ filePath\ =\ QFileDialog::getOpenFileName(\textcolor{keyword}{this},\ tr(\textcolor{stringliteral}{"{}Select\ Database\ File\ Location"{}}),\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tr(\textcolor{stringliteral}{"{}Database\ Files\ (*.FvDB)"{}}));}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00058}00058\ \ \ \textcolor{keywordflow}{if}\ (filePath.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00059}00059\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}No\ file\ selected"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00061}00061\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00063}00063\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}File\ Path:\ "{}}\ <<\ filePath;}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00064}00064\ \ \ \textcolor{keyword}{auto}\ DBmap\ =\ \mbox{\hyperlink{class_database_management_widget_a360eede9cf5cd0b574394e6cd02979ab}{helperUtils}}-\/>loadDatabaseFromFile(fs::path(filePath.toStdString()));}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00065}00065\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Got\ DB\ map"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00067}00067\ \ \ \textcolor{keywordflow}{if}\ (DBmap.find(\textcolor{stringliteral}{"{}Data"{}})\ !=\ DBmap.end()\ \&\&\ DBmap.find(\textcolor{stringliteral}{"{}Key"{}})\ !=\ DBmap.end())\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ DBmap.at(\textcolor{stringliteral}{"{}Data"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{auto}\ key\ =\ DBmap.at(\textcolor{stringliteral}{"{}Key"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00071}00071\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Data:\ "{}}\ <<\ data;}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00072}00072\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Key:\ "{}}\ <<\ key;}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (!data.empty()\ \&\&\ !key.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00075}00075\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_database_management_widget_a20aa672982851af3cce46ffce9797257}{restApiDLL}}-\/>InsertDatabase(key,\ data))\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Database\ inserted\ successfully"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00077}00077\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Database\ insert\ failed"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00079}00079\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00081}00081\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00082}00082\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Required\ keys\ not\ found\ in\ the\ database\ map"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00083}00083\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00084}00084\ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00086}\mbox{\hyperlink{class_database_management_widget_a419ce6d9a9fa91b98965729d7ca4133d}{00086}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_database_management_widget_a419ce6d9a9fa91b98965729d7ca4133d}{DatabaseManagementWidget::replaceDB}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00087}00087\ \ \ QString\ filePath\ =\ QFileDialog::getOpenFileName(\textcolor{keyword}{this},\ tr(\textcolor{stringliteral}{"{}Select\ Database\ File\ Location"{}}),\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tr(\textcolor{stringliteral}{"{}Database\ Files\ (*.FvDB)"{}}));}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00090}00090\ \ \ \textcolor{keywordflow}{if}\ (filePath.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00091}00091\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}No\ file\ selected"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00093}00093\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00095}00095\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}File\ Path:\ "{}}\ <<\ filePath;}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00096}00096\ \ \ \textcolor{keyword}{auto}\ DBmap\ =\ \mbox{\hyperlink{class_database_management_widget_a360eede9cf5cd0b574394e6cd02979ab}{helperUtils}}-\/>loadDatabaseFromFile(fs::path(filePath.toStdString()));}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00097}00097\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Got\ DB\ map"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00098}00098\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Data:\ "{}}\ <<\ DBmap.at(\textcolor{stringliteral}{"{}Data"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00099}00099\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Key:\ "{}}\ <<\ DBmap.at(\textcolor{stringliteral}{"{}Key"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00101}00101\ \ \ \textcolor{keywordflow}{if}\ (DBmap.find(\textcolor{stringliteral}{"{}Data"{}})\ !=\ DBmap.end()\ \&\&\ DBmap.find(\textcolor{stringliteral}{"{}Key"{}})\ !=\ DBmap.end())\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ DBmap.at(\textcolor{stringliteral}{"{}Data"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00103}00103\ \ \ \ \ \textcolor{keyword}{auto}\ key\ =\ DBmap.at(\textcolor{stringliteral}{"{}Key"{}});}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{if}\ (!data.empty()\ \&\&\ !key.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00106}00106\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_database_management_widget_a20aa672982851af3cce46ffce9797257}{restApiDLL}}-\/>ReplaceDatabase(key,\ data))\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Database\ replaced\ successfully"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00108}00108\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Database\ replace\ failed"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00110}00110\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00111}00111\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00112}00112\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00113}00113\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Required\ keys\ not\ found\ in\ the\ database\ map"{}};}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00114}00114\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00115}00115\ \}}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00117}\mbox{\hyperlink{class_database_management_widget_ab02032bb44e0172d7c5dd63f004e9256}{00117}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_database_management_widget_ab02032bb44e0172d7c5dd63f004e9256}{DatabaseManagementWidget::resetDB}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00118}00118\ \ \ \mbox{\hyperlink{class_database_management_widget_a20aa672982851af3cce46ffce9797257}{restApiDLL}}-\/>ResetDatabase();}
+\DoxyCodeLine{\Hypertarget{_database_management_widget_8cpp_source_l00119}00119\ \}}
+
+\end{DoxyCode}

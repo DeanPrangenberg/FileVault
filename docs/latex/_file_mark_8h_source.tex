@@ -1,0 +1,32 @@
+\doxysection{File\+Mark.\+h}
+\hypertarget{_file_mark_8h_source}{}\label{_file_mark_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileMarkLib/src/FileMark.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileMarkLib/src/FileMark.h}}
+\mbox{\hyperlink{_file_mark_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_FILEMARK\_H}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_FILEMARK\_H}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}../shared/src/GlobalDefinitions.h"{}}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}../shared/src/FileData.h"{}}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <codecvt>}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00012}00012\ \textcolor{preprocessor}{\#ifdef\ FILEMARKLIB\_EXPORTS}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00013}00013\ \textcolor{preprocessor}{\#define\ FILEMARKLIB\_API\ \_\_declspec(dllexport)}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00014}00014\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00015}\mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{00015}}\ \textcolor{preprocessor}{\#define\ FILEMARKLIB\_API\ \_\_declspec(dllimport)}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00016}00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00018}\mbox{\hyperlink{_file_mark_8h_a804a2deda8bd4820b904932c70df0ce5}{00018}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_file_mark_8h_a804a2deda8bd4820b904932c70df0ce5}{debugPrint}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00020}00020\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00021}00021\ [[maybe\_unused]]\ \mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\_API}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_file_mark_8h_afd7c1d2fdd4863cad4be76c5716f28bb}{extractIDsFromFile}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *\ filePath,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ FileID[64],\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ EncryptionID[64]);}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00022}00022\ [[maybe\_unused]]\ \mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_file_mark_8h_aaef49c92fbc6aebba4eafaa4b5d88b67}{markFile}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData);}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00023}00023\ [[maybe\_unused]]\ \mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\_API}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_file_mark_8h_a27d975033037e5342a1b20eec6f5ec96}{unmarkFile}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData);}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_file_mark_8h_source_l00026}00026\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FILEVAULTROOT\_FILEMARK\_H}}
+
+\end{DoxyCode}

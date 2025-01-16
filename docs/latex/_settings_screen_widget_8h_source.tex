@@ -1,0 +1,62 @@
+\doxysection{Settings\+Screen\+Widget.\+h}
+\hypertarget{_settings_screen_widget_8h_source}{}\label{_settings_screen_widget_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/SettingsScreenWidget.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/SettingsScreenWidget.h}}
+\mbox{\hyperlink{_settings_screen_widget_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00001}00001\ \textcolor{comment}{//\ In\ SettingsScreenWidget.h}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00002}00002\ \textcolor{preprocessor}{\#ifndef\ SETTINGSSCREENWIDGET\_H}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00003}00003\ \textcolor{preprocessor}{\#define\ SETTINGSSCREENWIDGET\_H}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <QGridLayout>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <QScrollArea>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <QJsonDocument>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <QJsonObject>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <QJsonArray>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <QFile>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <QFileDialog>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <qcoreapplication.h>}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}../../../shared/src/settingsClasses/Logs.h"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}../../../shared/src/GlobalDefinitions.h"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_master_settings_widget_8h}{../elementWidgets/SettingsWidgets/MasterSettingsWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_language_selection_widget_8h}{../elementWidgets/SettingsWidgets/LanguageSelectionWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_standard_algorithm_widget_8h}{../elementWidgets/SettingsWidgets/StandardAlgorithmWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_database_management_widget_8h}{../elementWidgets/SettingsWidgets/DatabaseManagementWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_deletion_widget_8h}{../elementWidgets/SettingsWidgets/FileDeletionWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_new_password_widget_8h}{../elementWidgets/SettingsWidgets/NewPasswordWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_logs_location_widget_8h}{../elementWidgets/SettingsWidgets/LogsLocationWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_central_file_storage_widget_8h}{../elementWidgets/SettingsWidgets/CentralFileStorageWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00026}\mbox{\hyperlink{class_settings_screen_widget}{00026}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_settings_screen_widget_a68090bd823c4298b0a428be90de168e0}{SettingsScreenWidget}}\ :\ \textcolor{keyword}{public}\ QWidget\ \{}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00027}00027\ \ \ Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00029}00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00030}00030\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_settings_screen_widget_a68090bd823c4298b0a428be90de168e0}{SettingsScreenWidget}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00032}00032\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_settings_screen_widget_a92b82b12339fc201cf0c977a1456c260}{createFileIfNotExists}}(\textcolor{keyword}{const}\ QString\ \&filePath);}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00034}\mbox{\hyperlink{class_settings_screen_widget_a3a43d9d8dcc93f96ba3b3886275b7aff}{00034}}\ \ \ \mbox{\hyperlink{class_settings_screen_widget_a3a43d9d8dcc93f96ba3b3886275b7aff}{\string~SettingsScreenWidget}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00036}00036\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_settings_screen_widget_a6953fc2ebadae85520b16432ba6ab782}{saveSettings}}();}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00038}00038\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00039}00039\ \ \ std::unique\_ptr<QScrollArea>\ scrollArea;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00040}00040\ \ \ std::unique\_ptr<QGridLayout>\ SettingsScreenWidgetLayout;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00041}00041\ \ \ std::unique\_ptr<QLabel>\ title;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00042}00042\ \ \ std::unique\_ptr<LanguageSelectionWidget>\ languageWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00043}00043\ \ \ std::unique\_ptr<StandardAlgorithmWidget>\ algorithmWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00044}00044\ \ \ std::unique\_ptr<DatabaseManagementWidget>\ databaseExportWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00045}00045\ \ \ std::unique\_ptr<FileDeletionWidget>\ fileDeletionWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00046}00046\ \ \ std::unique\_ptr<NewPasswordWidget>\ passwordWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00047}00047\ \ \ std::unique\_ptr<LogsLocationWidget>\ logsLocationWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00048}00048\ \ \ std::unique\_ptr<CentralFileStorageWidget>\ centralStorageWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00049}00049\ \ \ std::unique\_ptr<QWidget>\ containerWidget;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00050}00050\ \ \ std::unique\_ptr<QVBoxLayout>\ mainLayout;}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00053}00053\ \ \ \textcolor{keywordtype}{void}\ loadSettings();}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00054}00054\ \};}
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_settings_screen_widget_8h_source_l00056}00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SETTINGSSCREENWIDGET\_H}}
+
+\end{DoxyCode}

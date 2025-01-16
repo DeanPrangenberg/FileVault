@@ -1,0 +1,57 @@
+\doxysection{Replace\+Handler.\+java}
+\hypertarget{_replace_handler_8java_source}{}\label{_replace_handler_8java_source}\index{D:/MyRepo/FileVault/JavaDatabase/src/main/java/ReplaceHandler.java@{D:/MyRepo/FileVault/JavaDatabase/src/main/java/ReplaceHandler.java}}
+\mbox{\hyperlink{_replace_handler_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00001}00001\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpExchange;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00002}00002\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpHandler;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.fasterxml.jackson.databind.ObjectMapper;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00005}00005\ \textcolor{keyword}{import}\ java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.io.InputStream;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.nio.charset.StandardCharsets;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00013}\mbox{\hyperlink{class_replace_handler}{00013}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_replace_handler_a9941f573a1f276d53b41d76a1e782149}{ReplaceHandler}}\ \textcolor{keyword}{implements}\ HttpHandler\ \{}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00014}00014\ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{class_database}{Database}}\ db;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00021}\mbox{\hyperlink{class_replace_handler_a9941f573a1f276d53b41d76a1e782149}{00021}}\ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_replace_handler_a9941f573a1f276d53b41d76a1e782149}{ReplaceHandler}}(\mbox{\hyperlink{class_database}{Database}}\ db)\ \{}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00022}00022\ \ \ \ \ this.db\ =\ db;}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00023}00023\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00031}00031\ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00032}\mbox{\hyperlink{class_replace_handler_ac7a2c28b3f52f4e5695685e73ad87073}{00032}}\ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_replace_handler_ac7a2c28b3f52f4e5695685e73ad87073}{handle}}(HttpExchange\ exchange)\ \textcolor{keywordflow}{throws}\ IOException\ \{}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{stringliteral}{"{}POST"{}}.equals(exchange.getRequestMethod()))\ \{}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00034}00034\ \ \ \ \ \ \ InputStream\ is\ =\ exchange.getRequestBody();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00035}00035\ \ \ \ \ \ \ \textcolor{keywordtype}{byte}[]\ inputBytes\ =\ is.readAllBytes();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00036}00036\ \ \ \ \ \ \ String\ input\ =\ \textcolor{keyword}{new}\ String(inputBytes,\ StandardCharsets.UTF\_8);}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00037}00037\ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Received\ input\ for\ replace:\ "{}}\ +\ input);}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00039}00039\ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ input\ to\ create\ Database.GoFileData\ object\ (assuming\ JSON\ input)}}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00040}00040\ \ \ \ \ \ \ ObjectMapper\ mapper\ =\ \textcolor{keyword}{new}\ ObjectMapper();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00041}00041\ \ \ \ \ \ \ Database.GoFileData\ data\ =\ mapper.readValue(input,\ \mbox{\hyperlink{class_database}{Database}}.\mbox{\hyperlink{class_database_1_1_go_file_data}{GoFileData}}.class);}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00043}00043\ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Replace\ the\ entry\ in\ the\ database}}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ db.replaceEntry(data);}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}true"{}};}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ exchange.sendResponseHeaders(200,\ response.getBytes().length);}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ OutputStream\ os\ =\ exchange.getResponseBody();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ os.write(response.getBytes());}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ os.close();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Replaced\ entry\ with\ FileID:\ "{}}\ +\ data.FileID\ +\ \textcolor{stringliteral}{"{}\ and\ EncryptionID:\ "{}}\ +\ data.EncryptionID);}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00052}00052\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}false"{}};}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ exchange.sendResponseHeaders(500,\ response.length());}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ OutputStream\ os\ =\ exchange.getResponseBody();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ os.write(response.getBytes());}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ os.close();}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Failed\ to\ replace\ entry\ with\ FileID:\ "{}}\ +\ data.FileID\ +\ \textcolor{stringliteral}{"{}\ and\ EncryptionID:\ "{}}\ +\ data.EncryptionID);}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00060}00060\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00061}00061\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00062}00062\ \ \ \ \ \ \ exchange.sendResponseHeaders(405,\ -\/1);\ \textcolor{comment}{//\ Method\ Not\ Allowed}}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00064}00064\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_replace_handler_8java_source_l00065}00065\ \}}
+
+\end{DoxyCode}

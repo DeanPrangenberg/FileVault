@@ -1,0 +1,45 @@
+\doxysection{Main.\+java}
+\hypertarget{_main_8java_source}{}\label{_main_8java_source}\index{D:/MyRepo/FileVault/JavaDatabase/src/main/java/Main.java@{D:/MyRepo/FileVault/JavaDatabase/src/main/java/Main.java}}
+\mbox{\hyperlink{_main_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00001}00001\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpServer;}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.net.InetSocketAddress;}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00006}\mbox{\hyperlink{class_main}{00006}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_main}{Main}}\ \{}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00013}\mbox{\hyperlink{class_main_a8a5d0f827edddff706cc0e6740d0579a}{00013}}\ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_a8a5d0f827edddff706cc0e6740d0579a}{main}}(String[]\ args)\ \textcolor{keywordflow}{throws}\ IOException\ \{}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00014}00014\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ database}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00015}00015\ \ \ \ \ \mbox{\hyperlink{class_database}{Database}}\ db\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_database}{Database}}();}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00016}00016\ \ \ \ \ db.\mbox{\hyperlink{class_database_a6e18770ab601e030a05f34741d3fc0e0}{dropTable}}();}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00017}00017\ \ \ \ \ db.\mbox{\hyperlink{class_database_adb771d528fd6e50ba157715468ccc2fe}{connect}}();}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00019}00019\ \ \ \ \ \textcolor{comment}{//\ Create\ and\ configure\ the\ HTTP\ server}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00020}00020\ \ \ \ \ HttpServer\ server\ =\ HttpServer.create(\textcolor{keyword}{new}\ InetSocketAddress(8000),\ 0);}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ the\ context\ handlers\ for\ various\ API\ endpoints}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00023}00023\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/insert"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_insert_handler}{InsertHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00024}00024\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/delete"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_delete_handler}{DeleteHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00025}00025\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/search"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_search_handler}{SearchHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00026}00026\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/replace"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_replace_handler}{ReplaceHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00027}00027\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/getAllFileIDsAndEncryptedPaths"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_get_all_file_i_ds_and_encrypted_paths_handler}{GetAllFileIDsAndEncryptedPathsHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00028}00028\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/getDBSize"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_get_d_b_size_handler}{GetDBSizeHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ the\ context\ handlers\ for\ DBM\ operations}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00031}00031\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/DBM/export"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_d_b_mexport_handler}{DBMexportHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00032}00032\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/DBM/insert"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_d_b_minsert_handler}{DBMinsertHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00033}00033\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/DBM/replace"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_d_b_mreplace_handler}{DBMreplaceHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00034}00034\ \ \ \ \ server.createContext(\textcolor{stringliteral}{"{}/api/DBM/reset"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_d_b_mreset_handler}{DBMresetHandler}}(db));}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ executor\ to\ null,\ which\ means\ the\ default\ executor\ will\ be\ used}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00037}00037\ \ \ \ \ server.setExecutor(\textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ Start\ the\ server}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00040}00040\ \ \ \ \ server.start();}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Print\ a\ message\ indicating\ the\ server\ has\ started}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00043}00043\ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Server\ started\ on\ port\ 8000"{}});}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00044}00044\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_main_8java_source_l00045}00045\ \}}
+
+\end{DoxyCode}

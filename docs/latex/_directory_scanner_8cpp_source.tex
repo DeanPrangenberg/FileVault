@@ -1,0 +1,101 @@
+\doxysection{Directory\+Scanner.\+cpp}
+\hypertarget{_directory_scanner_8cpp_source}{}\label{_directory_scanner_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppDirectoryScanner/src/DirectoryScanner.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppDirectoryScanner/src/DirectoryScanner.cpp}}
+\mbox{\hyperlink{_directory_scanner_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_directory_scanner_8h}{DirectoryScanner.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00003}\mbox{\hyperlink{class_directory_scanner_a846687e4ea24e119163ede2d19bc6a08}{00003}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_directory_scanner_a846687e4ea24e119163ede2d19bc6a08}{DirectoryScanner::listFiles}}(\textcolor{keyword}{const}\ fs::path\ \&directory,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ searchOnlyForDecryptedFiles,\ std::vector<fs::path>\ \&fileList,\ \mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{FileFoundCallback}}\ callback)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00004}00004\ \ \ \textcolor{keywordflow}{if}\ (!fs::exists(directory)\ ||\ !fs::is\_directory(directory))\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00005}00005\ \ \ \ \ std::wcerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Invalid\ directory:\ "{}}\ <<\ directory\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00006}00006\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00007}00007\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00009}00009\ \ \ std::vector<fs::path>\ dirs;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00010}00010\ \ \ dirs.push\_back(directory);}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00012}00012\ \ \ \textcolor{keywordflow}{while}\ (!dirs.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00013}00013\ \ \ \ \ fs::path\ current\_dir\ =\ dirs.back();}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00014}00014\ \ \ \ \ dirs.pop\_back();}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (isSystemCritical(current\_dir))\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00017}00017\ \ \ \ \ \ \ std::wcerr\ <<\ L\textcolor{stringliteral}{"{}Skipping\ system-\/critical\ directory:\ "{}}\ <<\ current\_dir\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00018}00018\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00019}00019\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&entry:\ fs::directory\_iterator(current\_dir))\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00022}00022\ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!isValidPath(entry.path())\ ||}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ (fs::status(entry).permissions()\ \&\ fs::perms::owner\_read)\ ==\ fs::perms::none)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fs::is\_directory(entry)\ \&\&\ !isSystemCritical(entry.path()))\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ dirs.push\_back(entry.path());}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fs::is\_regular\_file(entry)}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ !isSystemCritical(entry.path())}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ fs::file\_size(entry.path())\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((!searchOnlyForDecryptedFiles\ \&\&\ !\mbox{\hyperlink{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4}{hasEncFileExtension}}(entry.path()))\ ||}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (searchOnlyForDecryptedFiles\ \&\&\ \mbox{\hyperlink{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4}{hasEncFileExtension}}(entry.path())))\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ fileList.push\_back(entry.path());}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (callback)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ callback(entry.path());}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00041}00041\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\ \&e)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ std::wcerr\ <<\ L\textcolor{stringliteral}{"{}Error\ accessing\ entry:\ "{}}\ <<\ entry.path()\ <<\ L\textcolor{stringliteral}{"{}\ -\/>\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00043}00043\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00045}00045\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00047}00047\ \ \ std::sort(fileList.begin(),\ fileList.end(),\ [](\textcolor{keyword}{const}\ fs::path\ \&a,\ \textcolor{keyword}{const}\ fs::path\ \&b)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00048}00048\ \ \ \ \ return\ fs::file\_size(a)\ >\ fs::file\_size(b);}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00049}00049\ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00052}00052\ \textcolor{keywordtype}{bool}\ DirectoryScanner::isValidPath(\textcolor{keyword}{const}\ fs::path\ \&p)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00053}00053\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&ch:\ p.wstring())\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{if}\ (!std::iswprint(ch))\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00055}00055\ \ \ \ \ \ \ std::wcerr\ <<\ L\textcolor{stringliteral}{"{}Invalid\ character\ in\ path:\ "{}}\ <<\ p\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00056}00056\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00058}00058\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00059}00059\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00062}00062\ \textcolor{keywordtype}{bool}\ DirectoryScanner::isSystemCritical(\textcolor{keyword}{const}\ fs::path\ \&filePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00063}00063\ \ \ \textcolor{keyword}{const}\ std::vector<std::wstring>\ critical\_paths\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00064}00064\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Windows"{}},}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00065}00065\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Program\ Files"{}},}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00066}00066\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Program\ Files\ (x86)"{}},}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00067}00067\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}System\ Volume\ Information"{}},}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00068}00068\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}\$Recycle.Bin"{}},}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00069}00069\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}\$RECYCLE.BIN"{}},}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00070}00070\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}PerfLogs"{}},}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00071}00071\ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Boot"{}}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00072}00072\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00074}00074\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&critical\_path\ :\ critical\_paths)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (filePath.wstring().find(critical\_path)\ !=\ std::wstring::npos)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00076}00076\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00078}00078\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00080}00080\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00083}\mbox{\hyperlink{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4}{00083}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4}{DirectoryScanner::hasEncFileExtension}}(\textcolor{keyword}{const}\ fs::path\ \&filepath)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00084}00084\ \ \ fs::path\ personalDataExtensions\ =\ \mbox{\hyperlink{classglobal_definitions_a05b8690537c86aa0bcb0683ad8cafab3}{globalDefinitions::encFileSuffix}};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00085}00085\ \ \ fs::path\ extension\ =\ filepath.extension();}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00086}00086\ \ \ \textcolor{keywordflow}{return}\ extension\ ==\ personalDataExtensions;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00089}00089\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00090}\mbox{\hyperlink{_directory_scanner_8cpp_a14c1619454d17d6c45bfa7b9f3929b0c}{00090}}\ [[maybe\_unused]]\ \mbox{\hyperlink{_directory_scanner_8h_aa7de2ccd317b25d28b1d6110c1afea15}{FILESCANNER\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_directory_scanner_8cpp_a14c1619454d17d6c45bfa7b9f3929b0c}{ScanForFilesInDirectory}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *originalFilePath,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ searchOnlyForDecryptedFiles,\ std::vector<fs::path>\ \&fileList,\ \mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{DirectoryScanner::FileFoundCallback}}\ callback)\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00091}00091\ \ \ fs::path\ directory(originalFilePath);}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00092}00092\ \ \ \mbox{\hyperlink{class_directory_scanner}{DirectoryScanner}}\ directoryScanner;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00093}00093\ \ \ directoryScanner.\mbox{\hyperlink{class_directory_scanner_a846687e4ea24e119163ede2d19bc6a08}{listFiles}}(directory,\ searchOnlyForDecryptedFiles,\ fileList,\ std::move(callback));}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00094}00094\ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8cpp_source_l00095}00095\ \}}
+
+\end{DoxyCode}

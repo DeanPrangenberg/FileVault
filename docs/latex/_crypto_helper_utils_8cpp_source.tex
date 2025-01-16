@@ -1,0 +1,99 @@
+\doxysection{Crypto\+Helper\+Utils.\+cpp}
+\hypertarget{_crypto_helper_utils_8cpp_source}{}\label{_crypto_helper_utils_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/Helper/CryptoHelperUtils.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/Helper/CryptoHelperUtils.cpp}}
+\mbox{\hyperlink{_crypto_helper_utils_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\ prang\ on\ 23.10.2024.}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_crypto_helper_utils_8h}{CryptoHelperUtils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00007}\mbox{\hyperlink{class_crypto_helper_utils_a062f2dfb41b0c404efe752c2fb4004d2}{00007}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_helper_utils_a062f2dfb41b0c404efe752c2fb4004d2}{CryptoHelperUtils::printError}}(\textcolor{keyword}{const}\ std::wstring\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00008}00008\ \ \ std::wcerr\ <<\ msg\ <<\ L\textcolor{stringliteral}{"{}\ Error:\ "{}}\ <<\ ERR\_reason\_error\_string(ERR\_get\_error())\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00009}00009\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00011}\mbox{\hyperlink{class_crypto_helper_utils_a5ab1dcba8c0859199a473075cba4e74f}{00011}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_helper_utils_a5ab1dcba8c0859199a473075cba4e74f}{CryptoHelperUtils::deleteFile}}(\textcolor{keyword}{const}\ fs::path\ \&filePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00012}00012\ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordflow}{if}\ (filePath.extension()\ ==\ \mbox{\hyperlink{classglobal_definitions_a05b8690537c86aa0bcb0683ad8cafab3}{globalDefinitions::encFileSuffix}}\ \&\&\ \mbox{\hyperlink{classglobal_definitions_ad157075e507b1b04cf0ee40a6120d8cb}{globalDefinitions::deleteFileAfterDecryption}})\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00014}00014\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Deleting\ original\ file\ after\ encryption:\ "{}}\ <<\ filePath\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00015}00015\ \ \ \ \ \ \ fs::remove(filePath);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00016}00016\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classglobal_definitions_ad157075e507b1b04cf0ee40a6120d8cb}{globalDefinitions::deleteFileAfterDecryption}})\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00017}00017\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Deleting\ encrypted\ file\ after\ decryption:\ "{}}\ <<\ filePath\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00018}00018\ \ \ \ \ \ \ fs::remove(filePath);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00019}00019\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00020}00020\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Skipped\ file\ deletion\ for:\ "{}}\ <<\ filePath\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00021}00021\ \ \ \ \ \ \ std::cout\ <<\ (filePath.extension()\ ==\ \mbox{\hyperlink{classglobal_definitions_a05b8690537c86aa0bcb0683ad8cafab3}{globalDefinitions::encFileSuffix}}\ ?\ \textcolor{stringliteral}{"{}Encrypted\ File"{}}\ :\ \textcolor{stringliteral}{"{}Decrypted\ File"{}})\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00022}00022\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Delete\ after\ decryption:\ "{}}\ <<\ \mbox{\hyperlink{classglobal_definitions_ad157075e507b1b04cf0ee40a6120d8cb}{globalDefinitions::deleteFileAfterDecryption}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00023}00023\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Delete\ after\ encryption:\ "{}}\ <<\ \mbox{\hyperlink{classglobal_definitions_a03b8ff29d795cfc828357c0b4d96028b}{globalDefinitions::deleteFileAfterEncryption}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00025}00025\ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ fs::filesystem\_error\ \&e)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00026}00026\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00027}00027\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00030}\mbox{\hyperlink{class_crypto_helper_utils_a98c2503c4952376f5ad3f3bc83e9afcf}{00030}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_helper_utils_a98c2503c4952376f5ad3f3bc83e9afcf}{CryptoHelperUtils::MarkFile}}(\textcolor{keyword}{const}\ \textcolor{keyword}{class}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00031}00031\ \ \ HMODULE\ hFileMarkDll\ =\ loadDll(L\textcolor{stringliteral}{"{}CppFileMarkLib.dll"{}});}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00032}00032\ \ \ \textcolor{keywordflow}{if}\ (!hFileMarkDll)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00034}00034\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00036}00036\ \ \ \textcolor{keyword}{auto}\ markFileFunc\ =\ (MarkFileFunc)\ GetProcAddress(hFileMarkDll,\ \textcolor{stringliteral}{"{}markFile"{}});}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00037}00037\ \ \ \textcolor{keywordflow}{if}\ (!markFileFunc)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00038}00038\ \ \ \ \ logError(\textcolor{stringliteral}{"{}Failed\ to\ get\ function\ address\ for\ markFile"{}});}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00039}00039\ \ \ \ \ unloadDll(hFileMarkDll);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00041}00041\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00043}00043\ \ \ markFileFunc(fileData);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00044}00044\ \ \ unloadDll(hFileMarkDll);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00047}\mbox{\hyperlink{class_crypto_helper_utils_a33cd6ec51fc19593de1a5176f269a2f2}{00047}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_crypto_helper_utils_a33cd6ec51fc19593de1a5176f269a2f2}{CryptoHelperUtils::UnmarkFile}}(\textcolor{keyword}{const}\ \textcolor{keyword}{class}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00048}00048\ \ \ HMODULE\ hFileMarkDll\ =\ loadDll(L\textcolor{stringliteral}{"{}CppFileMarkLib.dll"{}});}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00049}00049\ \ \ \textcolor{keywordflow}{if}\ (!hFileMarkDll)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00051}00051\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00053}00053\ \ \ \textcolor{keyword}{auto}\ unmarkFileFunc\ =\ (UnmarkFileFunc)\ GetProcAddress(hFileMarkDll,\ \textcolor{stringliteral}{"{}unmarkFile"{}});}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00054}00054\ \ \ \textcolor{keywordflow}{if}\ (!unmarkFileFunc)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00055}00055\ \ \ \ \ logError(\textcolor{stringliteral}{"{}Failed\ to\ get\ function\ address\ for\ unmarkFile"{}});}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00056}00056\ \ \ \ \ unloadDll(hFileMarkDll);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00058}00058\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00060}00060\ \ \ \textcolor{keywordtype}{bool}\ result\ =\ unmarkFileFunc(fileData);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00062}00062\ \ \ unloadDll(hFileMarkDll);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00064}00064\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00067}\mbox{\hyperlink{class_crypto_helper_utils_a54797d8bf179b9084df2cb47597d5d95}{00067}}\ std::vector<unsigned\ char>\ \mbox{\hyperlink{class_crypto_helper_utils_a54797d8bf179b9084df2cb47597d5d95}{CryptoHelperUtils::getCurrentTime}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00068}00068\ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00069}00069\ \ \ \textcolor{keyword}{auto}\ duration\ =\ now.time\_since\_epoch();}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00070}00070\ \ \ \textcolor{keyword}{auto}\ milliseconds\ =\ std::chrono::duration\_cast<std::chrono::milliseconds>(duration).count();}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00072}00072\ \ \ std::string\ ms\_string\ =\ std::to\_string(milliseconds);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00074}00074\ \ \ \textcolor{keywordflow}{return}\ std::vector<unsigned\ char>(ms\_string.begin(),\ ms\_string.end());}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00077}00077\ \textcolor{keywordtype}{void}\ CryptoHelperUtils::logError(\textcolor{keyword}{const}\ std::string\ \&message)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00078}00078\ \ \ std::cerr\ <<\ message\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00081}00081\ HMODULE\ CryptoHelperUtils::loadDll(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *dllName)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00082}00082\ \ \ HMODULE\ hDll\ =\ LoadLibraryW(dllName);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00083}00083\ \ \ \textcolor{keywordflow}{if}\ (!hDll)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00084}00084\ \ \ \ \ std::wcerr\ <<\ L\textcolor{stringliteral}{"{}Failed\ to\ load\ DLL:\ "{}}\ <<\ dllName\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00085}00085\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00086}00086\ \ \ \textcolor{keywordflow}{return}\ hDll;}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00089}00089\ \textcolor{keywordtype}{void}\ CryptoHelperUtils::unloadDll(HMODULE\ hDll)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00090}00090\ \ \ \textcolor{keywordflow}{if}\ (hDll)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00091}00091\ \ \ \ \ FreeLibrary(hDll);}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00092}00092\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_helper_utils_8cpp_source_l00093}00093\ \}}
+
+\end{DoxyCode}

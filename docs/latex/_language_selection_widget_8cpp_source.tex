@@ -1,0 +1,23 @@
+\doxysection{Language\+Selection\+Widget.\+cpp}
+\hypertarget{_language_selection_widget_8cpp_source}{}\label{_language_selection_widget_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/LanguageSelectionWidget.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/LanguageSelectionWidget.cpp}}
+\mbox{\hyperlink{_language_selection_widget_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_language_selection_widget_8h}{LanguageSelectionWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00003}\mbox{\hyperlink{class_language_selection_widget_a5973bbe5a1e18574635bed60f7544de4}{00003}}\ \mbox{\hyperlink{class_language_selection_widget_a5973bbe5a1e18574635bed60f7544de4}{LanguageSelectionWidget::LanguageSelectionWidget}}(QWidget\ *parent)\ :\ \mbox{\hyperlink{class_master_settings_widget_ab60b5b3608ee94b0f5f297777414bb37}{MasterSettingsWidget}}(parent)\ \{}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00004}00004\ \ \ \mbox{\hyperlink{class_master_settings_widget_a56c91155a206138b2e2bf60deba9f886}{titleLabel}}-\/>setText(\textcolor{stringliteral}{"{}Language\ Selection"{}});}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00005}00005\ \ \ setMinimumHeight(100);}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00007}00007\ \ \ \mbox{\hyperlink{class_language_selection_widget_a7f3d9cd827b64fb701114cbe12ca49f7}{languageComboBox}}\ =\ std::make\_shared<QComboBox>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00008}00008\ \ \ \mbox{\hyperlink{class_language_selection_widget_a7f3d9cd827b64fb701114cbe12ca49f7}{languageComboBox}}-\/>addItems(\{\textcolor{stringliteral}{"{}English"{}},\ \textcolor{stringliteral}{"{}German"{}}\});}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00010}00010\ \ \ \mbox{\hyperlink{class_master_settings_widget_a9892d8810e32db4dd036feb89f222f8c}{comboBoxes}}.push\_back(\mbox{\hyperlink{class_language_selection_widget_a7f3d9cd827b64fb701114cbe12ca49f7}{languageComboBox}});}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00013}00013\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>addWidget(\mbox{\hyperlink{class_language_selection_widget_a7f3d9cd827b64fb701114cbe12ca49f7}{languageComboBox}}.get());}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00015}00015\ \ \ \mbox{\hyperlink{class_master_settings_widget_afa5c74b29051ca9e2a97f3680a2339dc}{applyStyle}}();}
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_language_selection_widget_8cpp_source_l00017}00017\ \}}
+
+\end{DoxyCode}

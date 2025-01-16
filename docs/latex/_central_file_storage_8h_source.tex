@@ -1,0 +1,33 @@
+\doxysection{Central\+File\+Storage.\+h}
+\hypertarget{_central_file_storage_8h_source}{}\label{_central_file_storage_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/shared/src/settingsClasses/CentralFileStorage.h@{D:/MyRepo/FileVault/CryptoApp/src/shared/src/settingsClasses/CentralFileStorage.h}}
+\mbox{\hyperlink{_central_file_storage_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\ prang\ on\ 13.01.2025.}}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00005}00005\ \textcolor{preprocessor}{\#ifndef\ CENTRALSTORAGE\_H}}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00006}00006\ \textcolor{preprocessor}{\#define\ CENTRALSTORAGE\_H}}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00012}\mbox{\hyperlink{class_central_file_storage}{00012}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_central_file_storage_a82d767483fed91b81d34691a6819ccef}{CentralFileStorage}}\ \{}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00013}00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00014}\mbox{\hyperlink{class_central_file_storage_a82d767483fed91b81d34691a6819ccef}{00014}}\ \ \ \mbox{\hyperlink{class_central_file_storage_a82d767483fed91b81d34691a6819ccef}{CentralFileStorage}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00015}\mbox{\hyperlink{class_central_file_storage_ad058e46defa1400712539b01a65019a2}{00015}}\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_central_file_storage_ad058e46defa1400712539b01a65019a2}{centralEncFileStorage}};}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00016}\mbox{\hyperlink{class_central_file_storage_a567a10377f253f4b598a5ee6f099003a}{00016}}\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_central_file_storage_a567a10377f253f4b598a5ee6f099003a}{centralDecFileStorage}};}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00017}\mbox{\hyperlink{class_central_file_storage_abe5392de16d14d1ebfb3118a7951a6ff}{00017}}\ \ \ \textcolor{keyword}{static}\ fs::path\ \mbox{\hyperlink{class_central_file_storage_abe5392de16d14d1ebfb3118a7951a6ff}{fileStoragePath}};}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00018}00018\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_central_file_storage_a51f0023d5f251289c3a8802b16884dfb}{moveFileToCentralStorage}}(\textcolor{keyword}{const}\ fs::path\ \&filePath,\ \textcolor{keywordtype}{bool}\ isEncrypted);}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00019}00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00020}00020\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ checkCentralFileStoragePath();}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00021}00021\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ encFileCounter;}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00022}00022\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ decFileCounter;}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00023}00023\ \};}
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_central_file_storage_8h_source_l00027}00027\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//CENTRALSTORAGE\_H}}
+
+\end{DoxyCode}

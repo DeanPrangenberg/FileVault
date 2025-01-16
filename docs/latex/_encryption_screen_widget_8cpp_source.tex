@@ -1,0 +1,61 @@
+\doxysection{Encryption\+Screen\+Widget.\+cpp}
+\hypertarget{_encryption_screen_widget_8cpp_source}{}\label{_encryption_screen_widget_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/EncryptionScreenWidget.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/EncryptionScreenWidget.cpp}}
+\mbox{\hyperlink{_encryption_screen_widget_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_encryption_screen_widget_8h}{EncryptionScreenWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00003}\mbox{\hyperlink{class_encryption_screen_widget_a0bd3578836f5a0dbb3bcf84f01f8d482}{00003}}\ \mbox{\hyperlink{class_encryption_screen_widget_a0bd3578836f5a0dbb3bcf84f01f8d482}{EncryptionScreenWidget::EncryptionScreenWidget}}(QWidget\ *parent,\ std::shared\_ptr<StatisticsScreenWidget>\ statisticsPtr)\ :\ QWidget(parent)\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00004}00004\ \ \ EncryptionScreenWidgetLayout\ =\ std::make\_unique<QVBoxLayout>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00006}00006\ \ \ statisticsScreenWidget\ =\ std::make\_shared<StatisticsScreenWidget>();}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00007}00007\ \ \ statisticsScreenWidget\ =\ statisticsPtr;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00009}00009\ \ \ EncryptionScreenTitle\ =\ std::make\_unique<QLabel>(\textcolor{stringliteral}{"{}Encryption\ Screen"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00010}00010\ \ \ StartProcessButton\ =\ std::make\_unique<QPushButton>(\textcolor{stringliteral}{"{}Start\ Process"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00011}00011\ \ \ FilePickerWidget\ =\ std::make\_unique<FilePicker>(\textcolor{keyword}{this},\ \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8}{FilePickerType::ENCRYPT}});}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00013}00013\ \ \ configureUI();}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00014}00014\ \}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00016}00016\ \textcolor{keywordtype}{void}\ EncryptionScreenWidget::configureUI()\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00017}00017\ \ \ EncryptionScreenTitle-\/>setAlignment(Qt::AlignCenter);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00018}00018\ \ \ EncryptionScreenWidgetLayout-\/>addWidget(EncryptionScreenTitle.get());}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00019}00019\ \ \ EncryptionScreenWidgetLayout-\/>addWidget(FilePickerWidget.get());}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00020}00020\ \ \ EncryptionScreenWidgetLayout-\/>addWidget(StartProcessButton.get());}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00022}00022\ \ \ StyleSettings.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(StartProcessButton.get());}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00023}00023\ \ \ connect(StartProcessButton.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ \&EncryptionScreenWidget::onStartProcessButtonClicked);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00026}00026\ \textcolor{keywordtype}{void}\ EncryptionScreenWidget::onStartProcessButtonClicked()\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00027}00027\ \ \ std::vector<fs::path>\ filePathVector;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00028}00028\ \ \ std::vector<std::string>\ algorithmVector;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00029}00029\ \ \ std::vector<int>\ results;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00030}00030\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&fileConfig:\ FilePickerWidget-\/>getEncItems())\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00031}00031\ \ \ \ \ fs::path\ filePath\ =\ fileConfig.Path.toStdWString();}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00032}00032\ \ \ \ \ std::string\ algorithm\ =\ fileConfig.Algorithm.toStdString();}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00033}00033\ \ \ \ \ filePathVector.push\_back(filePath);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00034}00034\ \ \ \ \ algorithmVector.push\_back(algorithm);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00035}00035\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00036}00036\ \ \ HelperUtils\ helperUtils;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00037}00037\ \ \ results\ =\ helperUtils.\mbox{\hyperlink{class_helper_utils_a26a4759881bc3710c66f2e4adcd9191a}{encryptFiles}}(filePathVector,\ algorithmVector);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00039}00039\ \ \ FilePickerWidget-\/>removeEncItems(results);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00041}00041\ \ \ \textcolor{keywordtype}{int}\ index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00042}00042\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&result:\ results)\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00044}00044\ \ \ \ \ \ \ statisticsScreenWidget-\/>updateEncryptedFilesCount(1);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00045}00045\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (algorithmVector[index]\ ==\ \textcolor{stringliteral}{"{}AES-\/128"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ statisticsScreenWidget-\/>updateAes128Count(1);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00047}00047\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ statisticsScreenWidget-\/>updateAes256Count(1);}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00049}00049\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00050}00050\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00051}00051\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Encryption\ failed\ code:"{}}\ <<\ result;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00053}00053\ \ \ \ \ ++index;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00054}00054\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8cpp_source_l00055}00055\ \}}
+
+\end{DoxyCode}

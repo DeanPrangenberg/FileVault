@@ -1,0 +1,34 @@
+\doxysection{Logs.\+h}
+\hypertarget{_logs_8h_source}{}\label{_logs_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/shared/src/settingsClasses/Logs.h@{D:/MyRepo/FileVault/CryptoApp/src/shared/src/settingsClasses/Logs.h}}
+\mbox{\hyperlink{_logs_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ LOGS\_H}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ LOGS\_H}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00011}00011\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00013}\mbox{\hyperlink{class_logs}{00013}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_logs_a344e2e425cb08055b6eefd19aca2cdf0}{Logs}}\ \{}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00014}00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00015}\mbox{\hyperlink{class_logs_a344e2e425cb08055b6eefd19aca2cdf0}{00015}}\ \ \ \mbox{\hyperlink{class_logs_a344e2e425cb08055b6eefd19aca2cdf0}{Logs}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00016}00016\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_logs_a3e713ca7bf65f71fb8310d86894e5373}{writeToErrorLog}}(\textcolor{keyword}{const}\ std::string\ \&message);}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00017}00017\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_logs_a6f2bd87c20785d8da0918bb20f7d7f30}{writeToInfoLog}}(\textcolor{keyword}{const}\ std::string\ \&message);}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00018}00018\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_logs_a5570d06ec08c65d6c172ceb73262de42}{moveLogsDirectory}}(\textcolor{keyword}{const}\ fs::path\ \&newLogsDirectory);}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00019}00019\ \ \ \textcolor{keyword}{static}\ fs::path\ \mbox{\hyperlink{class_logs_af18d8e41efd28714e2c22f53810cebeb}{getLogsDirectory}}();}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00021}00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00022}00022\ \ \ \textcolor{keyword}{static}\ fs::path\ logsDirectory;}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00023}00023\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ checkFileExists(\textcolor{keyword}{const}\ fs::path\ \&filePath);}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00024}00024\ \ \ \textcolor{keyword}{static}\ std::string\ getCurrentTimeFormatted();}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00025}00025\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ensureLogsDirectoryExists(\textcolor{keyword}{const}\ fs::path\ \&logsDir);}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00026}00026\ \};}
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_logs_8h_source_l00028}00028\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//LOGS\_H}}
+
+\end{DoxyCode}

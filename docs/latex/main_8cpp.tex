@@ -1,0 +1,200 @@
+\doxysection{D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Vault\+Main/src/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/main.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/main.cpp}}
+{\ttfamily \#include "{}Struct\+Utils/\+Struct\+Utils.\+h"{}}\newline
+{\ttfamily \#include "{}Helper\+Utils/\+Helper\+Utils.\+h"{}}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}../\+DLLUtils/\+File\+Scanner\+DLL.\+h"{}}\newline
+{\ttfamily \#include "{}../\+DLLUtils/\+Crypto\+DLL.\+h"{}}\newline
+{\ttfamily \#include "{}Rest\+API/\+Rest\+Api\+DLL.\+h"{}}\newline
+{\ttfamily \#include "{}../\+DLLUtils/\+File\+Mark\+DLL.\+h"{}}\newline
+{\ttfamily \#include "{}gui/\+File\+Vault\+Gui.\+h"{}}\newline
+{\ttfamily \#include "{}../../shared/src/settings\+Classes/\+Logs.\+h"{}}\newline
+{\ttfamily \#include $<$QApplication$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_aa5fd3ba1cef464a3b64f65b6d806c591}{path\+To\+Crypt}}~"{}S\+:\textbackslash{}\textbackslash{}clips\textbackslash{}\textbackslash{}cut"{}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_aee0d1c3abd0ab50f1c387ce602ef6ba8}{docker\+Hash}}~"{}37574e72f692a41848cd6cb852dbbd5920541ffb2002d7bb3ad3712913abf29a"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a3cc055c5aa026dd2f9de3215a4dceef9}{start\+DBContainer}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a74ddb070bc3270f6a08b14447b9ae7ec}{stop\+DBContainer}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_aae895b6617445a3424159d3a87958661}{remove\+Failed\+Entries}} (std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&file\+Data\+Vec, std\+::vector$<$ bool $>$ \&results)
+\item 
+void \mbox{\hyperlink{main_8cpp_afebce0cd98b4583cf78461dd80f2195b}{print\+Div}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a401e669fb611f37850c98d6c31673eee}{scan\+And\+Build\+Structs}} (\mbox{\hyperlink{class_file_scanner_d_l_l}{File\+Scanner\+DLL}} \&file\+Scanner\+Dll, std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&file\+Data\+Vec)
+\item 
+void \mbox{\hyperlink{main_8cpp_ab958cdb8982061d5c6e37940f11bc85a}{encrypt\+And\+Save\+Files}} (\mbox{\hyperlink{class_crypto_d_l_l}{Crypto\+DLL}} \&crypto\+Dll, \mbox{\hyperlink{class_rest_api_d_l_l}{Rest\+Api\+DLL}} \&rest\+Api\+Dll, std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&file\+Data\+Vec)
+\item 
+void \mbox{\hyperlink{main_8cpp_a9fc7089364f880caa47e5bce1a3e3822}{repair\+And\+Reload\+Files}} (\mbox{\hyperlink{class_file_scanner_d_l_l}{File\+Scanner\+DLL}} \&file\+Scanner\+Dll, \mbox{\hyperlink{class_file_mark_d_l_l}{File\+Mark\+DLL}} \&file\+Mark\+Dll, \mbox{\hyperlink{class_rest_api_d_l_l}{Rest\+Api\+DLL}} \&rest\+Api\+Dll, std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&file\+Data\+Vec)
+\item 
+void \mbox{\hyperlink{main_8cpp_a6463934e5d847640cc882d5d276c66c5}{decrypt\+And\+Delete\+Files}} (\mbox{\hyperlink{class_crypto_d_l_l}{Crypto\+DLL}} \&crypto\+Dll, \mbox{\hyperlink{class_rest_api_d_l_l}{Rest\+Api\+DLL}} \&rest\+Api\+Dll, std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&file\+Data\+Vec)
+\item 
+void \mbox{\hyperlink{main_8cpp_a299e785c00bb78751b9ff3c522c6bcdb}{test\+Run}} (int test\+Runs)
+\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{main_8cpp_a22e723d5cd6660c5725c5a33221093d8}{print\+Debug}} = true
+\item 
+bool \mbox{\hyperlink{main_8cpp_a740e92005e3e79e44f6feadbedc7df20}{print\+Converter\+Debug}} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8cpp_aee0d1c3abd0ab50f1c387ce602ef6ba8}\index{main.cpp@{main.cpp}!dockerHash@{dockerHash}}
+\index{dockerHash@{dockerHash}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{dockerHash}{dockerHash}}
+{\footnotesize\ttfamily \label{main_8cpp_aee0d1c3abd0ab50f1c387ce602ef6ba8} 
+\#define docker\+Hash~"{}37574e72f692a41848cd6cb852dbbd5920541ffb2002d7bb3ad3712913abf29a"{}}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00020}{20}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_aa5fd3ba1cef464a3b64f65b6d806c591}\index{main.cpp@{main.cpp}!pathToCrypt@{pathToCrypt}}
+\index{pathToCrypt@{pathToCrypt}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{pathToCrypt}{pathToCrypt}}
+{\footnotesize\ttfamily \label{main_8cpp_aa5fd3ba1cef464a3b64f65b6d806c591} 
+\#define path\+To\+Crypt~"{}S\+:\textbackslash{}\textbackslash{}clips\textbackslash{}\textbackslash{}cut"{}}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a6463934e5d847640cc882d5d276c66c5}\index{main.cpp@{main.cpp}!decryptAndDeleteFiles@{decryptAndDeleteFiles}}
+\index{decryptAndDeleteFiles@{decryptAndDeleteFiles}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{decryptAndDeleteFiles()}{decryptAndDeleteFiles()}}
+{\footnotesize\ttfamily \label{main_8cpp_a6463934e5d847640cc882d5d276c66c5} 
+void decrypt\+And\+Delete\+Files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_crypto_d_l_l}{Crypto\+DLL}} \&}]{crypto\+Dll}{, }\item[{\mbox{\hyperlink{class_rest_api_d_l_l}{Rest\+Api\+DLL}} \&}]{rest\+Api\+Dll}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&}]{file\+Data\+Vec}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00146}{146}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_ab958cdb8982061d5c6e37940f11bc85a}\index{main.cpp@{main.cpp}!encryptAndSaveFiles@{encryptAndSaveFiles}}
+\index{encryptAndSaveFiles@{encryptAndSaveFiles}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{encryptAndSaveFiles()}{encryptAndSaveFiles()}}
+{\footnotesize\ttfamily \label{main_8cpp_ab958cdb8982061d5c6e37940f11bc85a} 
+void encrypt\+And\+Save\+Files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_crypto_d_l_l}{Crypto\+DLL}} \&}]{crypto\+Dll}{, }\item[{\mbox{\hyperlink{class_rest_api_d_l_l}{Rest\+Api\+DLL}} \&}]{rest\+Api\+Dll}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&}]{file\+Data\+Vec}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00073}{73}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00215}{215}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_afebce0cd98b4583cf78461dd80f2195b}\index{main.cpp@{main.cpp}!printDiv@{printDiv}}
+\index{printDiv@{printDiv}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{printDiv()}{printDiv()}}
+{\footnotesize\ttfamily \label{main_8cpp_afebce0cd98b4583cf78461dd80f2195b} 
+void print\+Div (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_aae895b6617445a3424159d3a87958661}\index{main.cpp@{main.cpp}!removeFailedEntries@{removeFailedEntries}}
+\index{removeFailedEntries@{removeFailedEntries}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{removeFailedEntries()}{removeFailedEntries()}}
+{\footnotesize\ttfamily \label{main_8cpp_aae895b6617445a3424159d3a87958661} 
+void remove\+Failed\+Entries (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&}]{file\+Data\+Vec}{, }\item[{std\+::vector$<$ bool $>$ \&}]{results}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00032}{32}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a9fc7089364f880caa47e5bce1a3e3822}\index{main.cpp@{main.cpp}!repairAndReloadFiles@{repairAndReloadFiles}}
+\index{repairAndReloadFiles@{repairAndReloadFiles}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{repairAndReloadFiles()}{repairAndReloadFiles()}}
+{\footnotesize\ttfamily \label{main_8cpp_a9fc7089364f880caa47e5bce1a3e3822} 
+void repair\+And\+Reload\+Files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_file_scanner_d_l_l}{File\+Scanner\+DLL}} \&}]{file\+Scanner\+Dll}{, }\item[{\mbox{\hyperlink{class_file_mark_d_l_l}{File\+Mark\+DLL}} \&}]{file\+Mark\+Dll}{, }\item[{\mbox{\hyperlink{class_rest_api_d_l_l}{Rest\+Api\+DLL}} \&}]{rest\+Api\+Dll}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&}]{file\+Data\+Vec}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00095}{95}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a401e669fb611f37850c98d6c31673eee}\index{main.cpp@{main.cpp}!scanAndBuildStructs@{scanAndBuildStructs}}
+\index{scanAndBuildStructs@{scanAndBuildStructs}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{scanAndBuildStructs()}{scanAndBuildStructs()}}
+{\footnotesize\ttfamily \label{main_8cpp_a401e669fb611f37850c98d6c31673eee} 
+void scan\+And\+Build\+Structs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_file_scanner_d_l_l}{File\+Scanner\+DLL}} \&}]{file\+Scanner\+Dll}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{class_file_data}{File\+Data}} $>$ \&}]{file\+Data\+Vec}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00052}{52}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a3cc055c5aa026dd2f9de3215a4dceef9}\index{main.cpp@{main.cpp}!startDBContainer@{startDBContainer}}
+\index{startDBContainer@{startDBContainer}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{startDBContainer()}{startDBContainer()}}
+{\footnotesize\ttfamily \label{main_8cpp_a3cc055c5aa026dd2f9de3215a4dceef9} 
+void start\+DBContainer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00022}{22}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a74ddb070bc3270f6a08b14447b9ae7ec}\index{main.cpp@{main.cpp}!stopDBContainer@{stopDBContainer}}
+\index{stopDBContainer@{stopDBContainer}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{stopDBContainer()}{stopDBContainer()}}
+{\footnotesize\ttfamily \label{main_8cpp_a74ddb070bc3270f6a08b14447b9ae7ec} 
+void stop\+DBContainer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a299e785c00bb78751b9ff3c522c6bcdb}\index{main.cpp@{main.cpp}!testRun@{testRun}}
+\index{testRun@{testRun}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testRun()}{testRun()}}
+{\footnotesize\ttfamily \label{main_8cpp_a299e785c00bb78751b9ff3c522c6bcdb} 
+void test\+Run (\begin{DoxyParamCaption}\item[{int}]{test\+Runs}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00172}{172}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_a740e92005e3e79e44f6feadbedc7df20}\index{main.cpp@{main.cpp}!printConverterDebug@{printConverterDebug}}
+\index{printConverterDebug@{printConverterDebug}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{printConverterDebug}{printConverterDebug}}
+{\footnotesize\ttfamily \label{main_8cpp_a740e92005e3e79e44f6feadbedc7df20} 
+bool print\+Converter\+Debug = true}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00017}{17}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\Hypertarget{main_8cpp_a22e723d5cd6660c5725c5a33221093d8}\index{main.cpp@{main.cpp}!printDebug@{printDebug}}
+\index{printDebug@{printDebug}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{printDebug}{printDebug}}
+{\footnotesize\ttfamily \label{main_8cpp_a22e723d5cd6660c5725c5a33221093d8} 
+bool print\+Debug = true}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+

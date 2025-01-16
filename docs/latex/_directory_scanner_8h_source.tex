@@ -1,0 +1,47 @@
+\doxysection{Directory\+Scanner.\+h}
+\hypertarget{_directory_scanner_8h_source}{}\label{_directory_scanner_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppDirectoryScanner/src/DirectoryScanner.h@{D:/MyRepo/FileVault/CryptoApp/src/CppDirectoryScanner/src/DirectoryScanner.h}}
+\mbox{\hyperlink{_directory_scanner_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_DIRECTORYSCANNER\_H}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_DIRECTORYSCANNER\_H}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <exception>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <cwctype>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_definitions_8h}{../../shared/src/GlobalDefinitions.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00014}00014\ \textcolor{preprocessor}{\#ifdef\ FILESCANNER\_EXPORTS}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00015}00015\ \textcolor{preprocessor}{\#define\ FILESCANNER\_API\ \_\_declspec(dllexport)}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00016}00016\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00017}\mbox{\hyperlink{_directory_scanner_8h_aa7de2ccd317b25d28b1d6110c1afea15}{00017}}\ \textcolor{preprocessor}{\#define\ FILESCANNER\_API\ \_\_declspec(dllimport)}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00018}00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00020}00020\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00022}\mbox{\hyperlink{class_directory_scanner}{00022}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{_directory_scanner_8h_aa7de2ccd317b25d28b1d6110c1afea15}{FILESCANNER\_API}}\ \mbox{\hyperlink{class_directory_scanner}{DirectoryScanner}}\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00023}00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00024}\mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{00024}}\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{FileFoundCallback}}\ =\ std::function<void(\textcolor{keyword}{const}\ fs::path\&)>;}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00026}00026\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_directory_scanner_a846687e4ea24e119163ede2d19bc6a08}{listFiles}}(\textcolor{keyword}{const}\ fs::path\ \&directory,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ searchOnlyForDecryptedFiles,\ std::vector<fs::path>\ \&fileList,\ \mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{FileFoundCallback}}\ callback)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00028}00028\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4}{hasEncFileExtension}}(\textcolor{keyword}{const}\ fs::path\ \&filepath);}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00030}00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00031}00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ isValidPath(\textcolor{keyword}{const}\ fs::path\ \&p);}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00032}00032\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ isSystemCritical(\textcolor{keyword}{const}\ fs::path\ \&filePath);}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00034}00034\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ printDebug\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00035}00035\ \};}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00037}00037\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00038}00038\ [[maybe\_unused]]\ \mbox{\hyperlink{_directory_scanner_8h_aa7de2ccd317b25d28b1d6110c1afea15}{FILESCANNER\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_directory_scanner_8h_a14c1619454d17d6c45bfa7b9f3929b0c}{ScanForFilesInDirectory}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *originalFilePath,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ searchOnlyForDecryptedFiles,\ std::vector<fs::path>\ \&fileList,\ \mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{DirectoryScanner::FileFoundCallback}}\ callback);}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_directory_scanner_8h_source_l00041}00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FILEVAULTROOT\_DIRECTORYSCANNER\_H}}
+
+\end{DoxyCode}

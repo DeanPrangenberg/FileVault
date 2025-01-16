@@ -1,0 +1,70 @@
+\doxysection{Directory\+Scanner Class Reference}
+\hypertarget{class_directory_scanner}{}\label{class_directory_scanner}\index{DirectoryScanner@{DirectoryScanner}}
+
+
+{\ttfamily \#include $<$Directory\+Scanner.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{File\+Found\+Callback}} = std\+::function$<$void(const fs\+::path\&)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_directory_scanner_a846687e4ea24e119163ede2d19bc6a08}{list\+Files}} (const fs\+::path \&directory, const bool search\+Only\+For\+Decrypted\+Files, std\+::vector$<$ fs\+::path $>$ \&file\+List, \mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{File\+Found\+Callback}} callback) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4}{has\+Enc\+File\+Extension}} (const fs\+::path \&filepath)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_directory_scanner_8h_source_l00022}{22}} of file \mbox{\hyperlink{_directory_scanner_8h_source}{Directory\+Scanner.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}\index{DirectoryScanner@{DirectoryScanner}!FileFoundCallback@{FileFoundCallback}}
+\index{FileFoundCallback@{FileFoundCallback}!DirectoryScanner@{DirectoryScanner}}
+\doxysubsubsection{\texorpdfstring{FileFoundCallback}{FileFoundCallback}}
+{\footnotesize\ttfamily \label{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d} 
+using \mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{Directory\+Scanner\+::\+File\+Found\+Callback}} = std\+::function$<$void(const fs\+::path\&)$>$}
+
+
+
+Definition at line \mbox{\hyperlink{_directory_scanner_8h_source_l00024}{24}} of file \mbox{\hyperlink{_directory_scanner_8h_source}{Directory\+Scanner.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4}\index{DirectoryScanner@{DirectoryScanner}!hasEncFileExtension@{hasEncFileExtension}}
+\index{hasEncFileExtension@{hasEncFileExtension}!DirectoryScanner@{DirectoryScanner}}
+\doxysubsubsection{\texorpdfstring{hasEncFileExtension()}{hasEncFileExtension()}}
+{\footnotesize\ttfamily \label{class_directory_scanner_a846647ebbeba56cb9f6bb4c730b531b4} 
+bool Directory\+Scanner\+::has\+Enc\+File\+Extension (\begin{DoxyParamCaption}\item[{const fs\+::path \&}]{filepath}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_directory_scanner_8cpp_source_l00083}{83}} of file \mbox{\hyperlink{_directory_scanner_8cpp_source}{Directory\+Scanner.\+cpp}}.
+
+\Hypertarget{class_directory_scanner_a846687e4ea24e119163ede2d19bc6a08}\index{DirectoryScanner@{DirectoryScanner}!listFiles@{listFiles}}
+\index{listFiles@{listFiles}!DirectoryScanner@{DirectoryScanner}}
+\doxysubsubsection{\texorpdfstring{listFiles()}{listFiles()}}
+{\footnotesize\ttfamily \label{class_directory_scanner_a846687e4ea24e119163ede2d19bc6a08} 
+void Directory\+Scanner\+::list\+Files (\begin{DoxyParamCaption}\item[{const fs\+::path \&}]{directory}{, }\item[{const bool}]{search\+Only\+For\+Decrypted\+Files}{, }\item[{std\+::vector$<$ fs\+::path $>$ \&}]{file\+List}{, }\item[{\mbox{\hyperlink{class_directory_scanner_a30c02803ace06fb0bb1a723a9642870d}{File\+Found\+Callback}}}]{callback}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \mbox{\hyperlink{_directory_scanner_8cpp_source_l00003}{3}} of file \mbox{\hyperlink{_directory_scanner_8cpp_source}{Directory\+Scanner.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+Directory\+Scanner/src/\mbox{\hyperlink{_directory_scanner_8h}{Directory\+Scanner.\+h}}\item 
+D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+Directory\+Scanner/src/\mbox{\hyperlink{_directory_scanner_8cpp}{Directory\+Scanner.\+cpp}}\end{DoxyCompactItemize}

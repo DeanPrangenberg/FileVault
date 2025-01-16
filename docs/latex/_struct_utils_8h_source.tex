@@ -1,0 +1,27 @@
+\doxysection{Struct\+Utils.\+h}
+\hypertarget{_struct_utils_8h_source}{}\label{_struct_utils_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/StructUtils/StructUtils.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/StructUtils/StructUtils.h}}
+\mbox{\hyperlink{_struct_utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ ROOTPROJECT\_STRUCTUTILS\_H}}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ ROOTPROJECT\_STRUCTUTILS\_H}}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_definitions_8h}{../../../shared/src/GlobalDefinitions.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_data_8h}{../../../shared/src/FileData.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00008}00008\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00010}\mbox{\hyperlink{class_struct_utils}{00010}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_struct_utils}{StructUtils}}\ \{}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00011}00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_file_data}{FileData}}\ \mbox{\hyperlink{class_struct_utils_ac9f831bf931be282ed4a4d8224270094}{createFileDataStruct}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classglobal_definitions_ad241caf4168904fea0da5660441b6fe7}{globalDefinitions::AlgorithmType}}\ \&algorithmenType,\ \textcolor{keyword}{const}\ fs::path\ \&originalFilePath);}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00014}00014\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_struct_utils_a312fac8e3c35f0711629a222703b7245}{ConvertWStringToWChar}}(\textcolor{keyword}{const}\ std::wstring\ \&input);}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00016}00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00017}00017\ \ \ \textcolor{keyword}{static}\ std::wstring\ AlgorithmTypeToString(\mbox{\hyperlink{classglobal_definitions_ad241caf4168904fea0da5660441b6fe7}{globalDefinitions::AlgorithmType}}\ type);}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00019}00019\ \};}
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_struct_utils_8h_source_l00021}00021\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//ROOTPROJECT\_STRUCTUTILS\_H}}
+
+\end{DoxyCode}

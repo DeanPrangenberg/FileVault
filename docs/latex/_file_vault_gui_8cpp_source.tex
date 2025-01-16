@@ -1,0 +1,146 @@
+\doxysection{File\+Vault\+Gui.\+cpp}
+\hypertarget{_file_vault_gui_8cpp_source}{}\label{_file_vault_gui_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/FileVaultGui.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/FileVaultGui.cpp}}
+\mbox{\hyperlink{_file_vault_gui_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_vault_gui_8h}{FileVaultGui.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_statistics_screen_widget_8h}{widgetClasses/Screens/StatisticsScreenWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_settings_screen_widget_8h}{widgetClasses/Screens/SettingsScreenWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_decryption_screen_widget_8h}{widgetClasses/Screens/DecryptionScreenWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_encryption_screen_widget_8h}{widgetClasses/Screens/EncryptionScreenWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00007}\mbox{\hyperlink{class_file_vault_gui_aaf9dac00ceca7e5bf79e980aa710f1fa}{00007}}\ \mbox{\hyperlink{class_file_vault_gui_aaf9dac00ceca7e5bf79e980aa710f1fa}{FileVaultGui::FileVaultGui}}(QMainWindow\ *parent)\ :\ QMainWindow(parent)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00008}00008\ \ \ setWindowTitle(\textcolor{stringliteral}{"{}FileVault"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00009}00009\ \ \ setMinimumSize(screenWidth,\ screenHeight);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00011}00011\ \ \ centralWidget\ =\ std::make\_unique<QWidget>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00012}00012\ \ \ setCentralWidget(centralWidget.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00014}00014\ \ \ SplitterLayout\ =\ std::make\_unique<QHBoxLayout>(centralWidget.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00016}00016\ \ \ sidebar\ =\ std::make\_unique<QWidget>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00017}00017\ \ \ sideBarLayout\ =\ std::make\_unique<QVBoxLayout>(sidebar.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00018}00018\ \ \ Logo\ =\ std::make\_unique<QLabel>();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00019}00019\ \ \ StatisticsSwitch\ =\ std::make\_unique<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00020}00020\ \ \ EncryptSwitch\ =\ std::make\_unique<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00021}00021\ \ \ DecryptSwitch\ =\ std::make\_unique<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00022}00022\ \ \ SettingsSwitch\ =\ std::make\_unique<QPushButton>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00024}00024\ \ \ screenStack\ =\ std::make\_unique<QStackedWidget>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00026}00026\ \ \ setupUi();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00027}00027\ \}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00029}00029\ \mbox{\hyperlink{class_file_vault_gui_a7d30f16c9169292252f9b35bd20f5acf}{FileVaultGui::\string~FileVaultGui}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00031}00031\ \textcolor{keywordtype}{void}\ FileVaultGui::setupUi()\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00032}00032\ \ \ SplitterLayout-\/>addWidget(sidebar.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00033}00033\ \ \ SplitterLayout-\/>addWidget(screenStack.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00035}00035\ \ \ sidebar-\/>setFixedWidth(200);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00037}00037\ \ \ \textcolor{comment}{//\ Set\ radial\ gradient\ background\ for\ the\ central\ widget}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00038}00038\ \ \ QString\ objectName\ =\ \textcolor{stringliteral}{"{}centralWidget"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00039}00039\ \ \ centralWidget-\/>setObjectName(objectName);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00040}00040\ \ \ QString\ gradientStyle\ =\ QString(\textcolor{stringliteral}{"{}QWidget\#\%1\ \{"{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}background:\ qradialgradient("{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cx:0.1,\ cy:0.2,\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}radius:1.0,\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fx:0.1,\ fy:0.2,\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}stop:0\ rgba(100,\ 43,\ 115,\ 1),\ "{}}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}stop:0.9\ rgba(25,\ 0,\ 51,\ 1))\}"{}}).arg(centralWidget-\/>objectName());\ \textcolor{comment}{//\ Dark\ mix\ of\ blue\ and\ purple}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00047}00047\ \ \ centralWidget-\/>setStyleSheet(gradientStyle);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00049}00049\ \ \ \textcolor{comment}{//\ Make\ other\ widgets\ transparent}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00050}00050\ \ \ sidebar-\/>setStyleSheet(\textcolor{stringliteral}{"{}background:\ transparent;"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00051}00051\ \ \ screenStack-\/>setObjectName(\textcolor{stringliteral}{"{}screenStack"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00052}00052\ \ \ screenStack-\/>setStyleSheet(QString(\textcolor{stringliteral}{"{}QStackedWidget\#\%1\ \{\ background:\ transparent;\}"{}}).arg(screenStack-\/>objectName()));}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00053}00053\ \ \ \mbox{\hyperlink{class_style_setter}{StyleSetter}}\ styleSetter;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00054}00054\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a3053e0a73089c1989b9b8ca537aac5aa}{setWidgetStyle}}(screenStack.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00056}00056\ \ \ \textcolor{comment}{//\ Call\ other\ setup\ functions}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00057}00057\ \ \ setupSideBar();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00058}00058\ \ \ setupStackedWidget();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00061}00061\ \textcolor{keywordtype}{void}\ FileVaultGui::setupSideBar()\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00062}00062\ \ \ \textcolor{comment}{//\ Adjust\ button\ sizes\ and\ spacing}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00063}00063\ \ \ StatisticsSwitch-\/>setMinimumHeight(50);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00064}00064\ \ \ EncryptSwitch-\/>setMinimumHeight(50);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00065}00065\ \ \ DecryptSwitch-\/>setMinimumHeight(50);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00066}00066\ \ \ SettingsSwitch-\/>setMinimumHeight(50);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00067}00067\ \ \ sideBarLayout-\/>setSpacing(20);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00069}00069\ \ \ \textcolor{comment}{//\ Set\ button\ styles\ using\ the\ helper\ function}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00070}00070\ \ \ StyleSetter\ styleSetter;}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00071}00071\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(StatisticsSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00072}00072\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(EncryptSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00073}00073\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(DecryptSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00074}00074\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(SettingsSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00076}00076\ \ \ \textcolor{comment}{//\ Add\ logo\ to\ the\ sidebar}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00077}00077\ \ \ Logo-\/>setAlignment(Qt::AlignTop);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00078}00078\ \ \ Logo-\/>setFixedHeight(100);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00079}00079\ \ \ QPixmap\ logoPixmap(\textcolor{stringliteral}{"{}:/logos/LogoWithName.png"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00080}00080\ \ \ \textcolor{keywordflow}{if}\ (!logoPixmap.isNull())\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00081}00081\ \ \ \ \ logoPixmap\ =\ logoPixmap.scaled(Logo-\/>size(),\ Qt::KeepAspectRatio,\ Qt::SmoothTransformation);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00082}00082\ \ \ \ \ Logo-\/>setPixmap(logoPixmap);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00083}00083\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Logo\ pixmap\ loaded\ and\ scaled\ successfully"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00084}00084\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00085}00085\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Failed\ to\ load\ logo\ pixmap"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00086}00086\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00088}00088\ \ \ sideBarLayout-\/>addWidget(Logo.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00089}00089\ \ \ sideBarLayout-\/>addStretch();\ \textcolor{comment}{//\ spacer}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00091}00091\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Set\ button\ text"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00093}00093\ \ \ \textcolor{comment}{//\ Adding\ buttons\ to\ the\ sidebar}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00094}00094\ \ \ StatisticsSwitch-\/>setText(\textcolor{stringliteral}{"{}Statistics"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00095}00095\ \ \ EncryptSwitch-\/>setText(\textcolor{stringliteral}{"{}Encrypt"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00096}00096\ \ \ DecryptSwitch-\/>setText(\textcolor{stringliteral}{"{}Decrypt"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00098}00098\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Adding\ buttons\ to\ the\ sidebar"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00099}00099\ \ \ sideBarLayout-\/>addWidget(StatisticsSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00100}00100\ \ \ sideBarLayout-\/>addWidget(EncryptSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00101}00101\ \ \ sideBarLayout-\/>addWidget(DecryptSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00102}00102\ \ \ sideBarLayout-\/>addStretch();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00104}00104\ \ \ SettingsSwitch-\/>setText(\textcolor{stringliteral}{"{}Settings"{}});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00105}00105\ \ \ sideBarLayout-\/>addWidget(SettingsSwitch.get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00107}00107\ \ \ connect(StatisticsSwitch.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ [\textcolor{keyword}{this}]\ \{\ switchScreens(\textcolor{stringliteral}{"{}Statistics"{}});\ \});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00108}00108\ \ \ connect(EncryptSwitch.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ [\textcolor{keyword}{this}]\ \{\ switchScreens(\textcolor{stringliteral}{"{}Encrypt"{}});\ \});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00109}00109\ \ \ connect(DecryptSwitch.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ [\textcolor{keyword}{this}]\ \{\ switchScreens(\textcolor{stringliteral}{"{}Decrypt"{}});\ \});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00110}00110\ \ \ connect(SettingsSwitch.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ [\textcolor{keyword}{this}]\ \{\ switchScreens(\textcolor{stringliteral}{"{}Settings"{}});\ \});}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00113}00113\ \textcolor{keywordtype}{void}\ FileVaultGui::setupStackedWidget()\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00114}00114\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Setting\ up\ screen\ hashmap"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00115}00115\ \ \ \textcolor{keyword}{auto}\ statisticsScreen\ =\ std::make\_shared<StatisticsScreenWidget>();}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00116}00116\ \ \ \textcolor{comment}{//\ Add\ the\ screens\ to\ the\ screenHash}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00117}00117\ \ \ screenHash.insert(\textcolor{stringliteral}{"{}Statistics"{}},\ statisticsScreen);}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00118}00118\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Added\ statistics\ screen"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00119}00119\ \ \ screenHash.insert(\textcolor{stringliteral}{"{}Encrypt"{}},\ std::make\_shared<EncryptionScreenWidget>(\textcolor{keyword}{this},\ statisticsScreen));}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00120}00120\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Added\ encryption\ screen"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00121}00121\ \ \ screenHash.insert(\textcolor{stringliteral}{"{}Decrypt"{}},\ std::make\_shared<DecryptionScreenWidget>(\textcolor{keyword}{this},\ statisticsScreen));}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00122}00122\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Added\ decryption\ screen"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00123}00123\ \ \ screenHash.insert(\textcolor{stringliteral}{"{}Settings"{}},\ std::make\_shared<SettingsScreenWidget>());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00124}00124\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Added\ settings\ screen"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00126}00126\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Setting\ up\ the\ stacked\ widget"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00127}00127\ \ \ \textcolor{comment}{//\ Add\ the\ screens\ to\ the\ stacked\ widget}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00128}00128\ \ \ screenStack-\/>addWidget(screenHash[\textcolor{stringliteral}{"{}Statistics"{}}].get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00129}00129\ \ \ screenStack-\/>addWidget(screenHash[\textcolor{stringliteral}{"{}Encrypt"{}}].get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00130}00130\ \ \ screenStack-\/>addWidget(screenHash[\textcolor{stringliteral}{"{}Decrypt"{}}].get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00131}00131\ \ \ screenStack-\/>addWidget(screenHash[\textcolor{stringliteral}{"{}Settings"{}}].get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00133}00133\ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}FileVaultMainGui:\ Setting\ start\ screen"{}};}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00134}00134\ \ \ \textcolor{comment}{//\ Set\ the\ default\ screen}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00135}00135\ \ \ screenStack-\/>setCurrentWidget(screenHash[\textcolor{stringliteral}{"{}Statistics"{}}].get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00136}00136\ \}}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00138}00138\ \textcolor{keywordtype}{void}\ FileVaultGui::switchScreens(\textcolor{keyword}{const}\ QString\ \&screenName)\ \{}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00139}00139\ \ \ screenStack-\/>setCurrentWidget(screenHash[screenName].get());}
+\DoxyCodeLine{\Hypertarget{_file_vault_gui_8cpp_source_l00140}00140\ \}}
+
+\end{DoxyCode}

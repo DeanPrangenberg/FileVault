@@ -1,0 +1,39 @@
+\doxysection{Logs\+Location\+Widget.\+cpp}
+\hypertarget{_logs_location_widget_8cpp_source}{}\label{_logs_location_widget_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/LogsLocationWidget.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/LogsLocationWidget.cpp}}
+\mbox{\hyperlink{_logs_location_widget_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_logs_location_widget_8h}{LogsLocationWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00003}\mbox{\hyperlink{class_logs_location_widget_ac45eebc88d0974c89e8bd121325a2bf3}{00003}}\ \mbox{\hyperlink{class_logs_location_widget_ac45eebc88d0974c89e8bd121325a2bf3}{LogsLocationWidget::LogsLocationWidget}}(QWidget\ *parent,\ std::function<\textcolor{keywordtype}{void}()>\ ptrUpdateSettings)}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00004}00004\ \ \ :\ \mbox{\hyperlink{class_master_settings_widget_ab60b5b3608ee94b0f5f297777414bb37}{MasterSettingsWidget}}(parent),\ updateSettings(ptrUpdateSettings)\ \{}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00005}00005\ \ \ \mbox{\hyperlink{class_master_settings_widget_a56c91155a206138b2e2bf60deba9f886}{titleLabel}}-\/>setText(\textcolor{stringliteral}{"{}Logs\ Location"{}});}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00006}00006\ \ \ setMinimumHeight(130);}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00007}00007\ \ \ \mbox{\hyperlink{class_logs_location_widget_a78d1d468fff3ba75414a4392c5a113b1}{selectLogsLocationButton}}\ =\ std::make\_shared<QPushButton>(\textcolor{stringliteral}{"{}Select\ Logs\ Location"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00008}00008\ \ \ \mbox{\hyperlink{class_logs_location_widget_a2f8248c547f28514724370ea7aea38b0}{logsLocationLabel}}\ =\ std::make\_unique<QLabel>(\textcolor{stringliteral}{"{}Current\ Path:\ "{}}\ +\ QString::fromStdWString(\mbox{\hyperlink{class_logs_af18d8e41efd28714e2c22f53810cebeb}{Logs::getLogsDirectory}}()),\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00010}00010\ \ \ \mbox{\hyperlink{class_logs_location_widget_a78d1d468fff3ba75414a4392c5a113b1}{selectLogsLocationButton}}-\/>setFixedHeight(30);}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00012}00012\ \ \ \mbox{\hyperlink{class_master_settings_widget_a5a2357ac24cd08bf25672ff2040af81e}{buttons}}.push\_back(\mbox{\hyperlink{class_logs_location_widget_a78d1d468fff3ba75414a4392c5a113b1}{selectLogsLocationButton}});}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00014}00014\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>addWidget(\mbox{\hyperlink{class_logs_location_widget_a78d1d468fff3ba75414a4392c5a113b1}{selectLogsLocationButton}}.get());}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00015}00015\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>addWidget(\mbox{\hyperlink{class_logs_location_widget_a2f8248c547f28514724370ea7aea38b0}{logsLocationLabel}}.get());}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00017}00017\ \ \ connect(\mbox{\hyperlink{class_logs_location_widget_a78d1d468fff3ba75414a4392c5a113b1}{selectLogsLocationButton}}.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ \&LogsLocationWidget::updateLogsLocation,\ Qt::UniqueConnection);}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00019}00019\ \ \ \mbox{\hyperlink{class_master_settings_widget_afa5c74b29051ca9e2a97f3680a2339dc}{applyStyle}}();}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00022}00022\ \textcolor{keywordtype}{void}\ LogsLocationWidget::updateLogsLocation()\ \{}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00023}00023\ \ \ QString\ dir\ =\ QFileDialog::getExistingDirectory(\textcolor{keyword}{this},\ tr(\textcolor{stringliteral}{"{}Select\ Logs\ Directory"{}}),\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QFileDialog::ShowDirsOnly\ |\ QFileDialog::DontResolveSymlinks);}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00025}00025\ \ \ \textcolor{keywordflow}{if}\ (!dir.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00026}00026\ \ \ \ \ \mbox{\hyperlink{class_logs_location_widget_a2f8248c547f28514724370ea7aea38b0}{logsLocationLabel}}-\/>setText(\textcolor{stringliteral}{"{}Current\ Path:\ "{}}\ +\ dir);}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{class_logs_a5570d06ec08c65d6c172ceb73262de42}{Logs::moveLogsDirectory}}(dir.toStdString());}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00028}00028\ \ \ \ \ \mbox{\hyperlink{class_logs_a6f2bd87c20785d8da0918bb20f7d7f30}{Logs::writeToInfoLog}}(\textcolor{stringliteral}{"{}Moved\ logs\ directory\ to:\ "{}}\ +\ dir.toStdString());}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (updateSettings)\ \{}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00030}00030\ \ \ \ \ \ \ updateSettings();}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00032}00032\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_logs_location_widget_8cpp_source_l00033}00033\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,253 @@
+\doxysection{Statistics\+Screen\+Widget.\+cpp}
+\hypertarget{_statistics_screen_widget_8cpp_source}{}\label{_statistics_screen_widget_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/StatisticsScreenWidget.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/StatisticsScreenWidget.cpp}}
+\mbox{\hyperlink{_statistics_screen_widget_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_statistics_screen_widget_8h}{StatisticsScreenWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00003}\mbox{\hyperlink{class_statistics_screen_widget_a11fa14b23b580d44f18462f03f3506d6}{00003}}\ \mbox{\hyperlink{class_statistics_screen_widget_a11fa14b23b580d44f18462f03f3506d6}{StatisticsScreenWidget::StatisticsScreenWidget}}(QWidget\ *parent)\ :\ QWidget(parent),}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00004}00004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a578098969cc29cd5f48e7e90263c2e9a}{aes128Count}}(0),\ \mbox{\hyperlink{class_statistics_screen_widget_a3adabc0fba2b889f8a913b2b5c2738ea}{aes256Count}}(0),}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00005}00005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a05714f9ad7ff3f62044a9c702d846648}{lostFilesCount}}(0),\ \mbox{\hyperlink{class_statistics_screen_widget_a9b8d6661531c8d1824e1c8648d0f589a}{FoundFilesCount}}(0),}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00006}00006\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a7e9065bd808a93e47d556c4996cbe669}{decryptedFilesCount}}(0),\ \mbox{\hyperlink{class_statistics_screen_widget_a9b900cea87a9d3ba991799a5d4498936}{encryptedFilesCount}}(0),}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00007}00007\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a667e6e5fe4e133d1e505f18aaca3923e}{databaseSize}}(0),\ \mbox{\hyperlink{class_statistics_screen_widget_a8d2100e1e09d492b363487b695280770}{lifetimeAes128Count}}(0),}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00008}00008\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_statistics_screen_widget_aa6e55709a7922fc35c20c8515ce09d6e}{lifetimeAes256Count}}(0)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00009}00009\ \ \ infoTextsLayout\ =\ std::make\_unique<QGridLayout>();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00010}00010\ \ \ titleLabel\ =\ std::make\_unique<QLabel>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00012}00012\ \ \ checkFileStateButton\ =\ std::make\_unique<QPushButton>(\textcolor{stringliteral}{"{}Check\ File\ State"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00013}00013\ \ \ tryRepairFileButton\ =\ std::make\_unique<QPushButton>(\textcolor{stringliteral}{"{}Try\ File\ Repair"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00015}00015\ \ \ algoCakeDiagram\ =\ std::make\_unique<CakeDiagram>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00016}00016\ \ \ LostFilesCakeDiagram\ =\ std::make\_unique<CakeDiagram>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00018}00018\ \ \ decryptedFilesLabel\ =\ std::make\_unique<QLabel>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00019}00019\ \ \ encryptedFilesLabel\ =\ std::make\_unique<QLabel>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00020}00020\ \ \ sizeOfDatabaseLabel\ =\ std::make\_unique<QLabel>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00022}00022\ \ \ algoStatsWidget\ =\ std::make\_unique<AlgorithmStatisticWidget>(\textcolor{keyword}{this},\ \mbox{\hyperlink{class_statistics_screen_widget_a0694140eb7f3df5a1473d479ed9720ed}{algoFileCounts}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00024}00024\ \ \ infoTextsLayout-\/>addWidget(titleLabel.get(),\ 0,\ 0,\ 1,\ 2);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00025}00025\ \ \ infoTextsLayout-\/>addWidget(algoCakeDiagram.get(),\ 1,\ 0,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00026}00026\ \ \ infoTextsLayout-\/>addWidget(LostFilesCakeDiagram.get(),\ 1,\ 1,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00027}00027\ \ \ infoTextsLayout-\/>addWidget(decryptedFilesLabel.get(),\ 2,\ 0,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00028}00028\ \ \ infoTextsLayout-\/>addWidget(algoStatsWidget.get(),\ 2,\ 1,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00029}00029\ \ \ infoTextsLayout-\/>addWidget(encryptedFilesLabel.get(),\ 3,\ 0,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00030}00030\ \ \ infoTextsLayout-\/>addWidget(sizeOfDatabaseLabel.get(),\ 3,\ 1,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00031}00031\ \ \ infoTextsLayout-\/>addWidget(checkFileStateButton.get(),\ 4,\ 0,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00032}00032\ \ \ infoTextsLayout-\/>addWidget(tryRepairFileButton.get(),\ 4,\ 1,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00034}00034\ \ \ helperUtils\ =\ std::make\_unique<HelperUtils>();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00036}00036\ \ \ setLayout(infoTextsLayout.get());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00037}00037\ \ \ SetupUI();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00039}00039\ \ \ ensureStatisticsFileExists(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00040}00040\ \ \ loadStatisticsFromJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00041}00041\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00044}00044\ \textcolor{keywordtype}{void}\ StatisticsScreenWidget::SetupUI()\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00045}00045\ \ \ titleLabel-\/>setText(\textcolor{stringliteral}{"{}Statistics"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00046}00046\ \ \ titleLabel-\/>setMaximumHeight(20);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00047}00047\ \ \ titleLabel-\/>setAlignment(Qt::AlignCenter);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00048}00048\ \ \ titleLabel-\/>setStyleSheet(\textcolor{stringliteral}{"{}background:\ transparent;"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00050}00050\ \ \ checkFileStateButton-\/>setMinimumHeight(40);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00051}00051\ \ \ tryRepairFileButton-\/>setMinimumHeight(40);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00053}00053\ \ \ \mbox{\hyperlink{class_style_setter}{StyleSetter}}\ styleSetter;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00054}00054\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(checkFileStateButton.get());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00055}00055\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(tryRepairFileButton.get());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00056}00056\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_af6ae52fa188e94d08a7fbf1884941f49}{setLabelBackgroundStyle}}(decryptedFilesLabel.get());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00057}00057\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_af6ae52fa188e94d08a7fbf1884941f49}{setLabelBackgroundStyle}}(encryptedFilesLabel.get());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00058}00058\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_af6ae52fa188e94d08a7fbf1884941f49}{setLabelBackgroundStyle}}(sizeOfDatabaseLabel.get());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00060}00060\ \ \ connect(checkFileStateButton.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ [\textcolor{keyword}{this}]()\{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00061}00061\ \ \ \ \ FoundFilesCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00062}00062\ \ \ \ \ lostFilesCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00063}00063\ \ \ \ \ auto\ results\ =\ helperUtils-\/>checkDBFileState();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00064}00064\ \ \ \ \ updateFoundFilesCount(results[0]);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00065}00065\ \ \ \ \ updateLostFilesCount(results[1]);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00066}00066\ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00068}00068\ \ \ connect(tryRepairFileButton.get(),\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ [\textcolor{keyword}{this}]()\{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00069}00069\ \ \ \ \ helperUtils-\/>repairAllLostStruct();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00070}00070\ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00072}00072\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00075}00075\ \textcolor{keywordtype}{void}\ StatisticsScreenWidget::updateStatistics()\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00076}00076\ \ \ RestApiDLL\ restApiDll;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00078}00078\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a667e6e5fe4e133d1e505f18aaca3923e}{databaseSize}}\ =\ restApiDll.\mbox{\hyperlink{class_rest_api_d_l_l_ab3aa5528a3bd746d64633f9d3e091af2}{getDatabaseFileSize}}();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00080}00080\ \ \ algoCakeDiagram-\/>reset();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00081}00081\ \ \ LostFilesCakeDiagram-\/>reset();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00083}00083\ \ \ decryptedFilesLabel-\/>setText(QString(\textcolor{stringliteral}{"{}Total\ Decrypted\ Files:\ \%1"{}}).arg(\mbox{\hyperlink{class_statistics_screen_widget_a7e9065bd808a93e47d556c4996cbe669}{decryptedFilesCount}}));}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00084}00084\ \ \ encryptedFilesLabel-\/>setText(QString(\textcolor{stringliteral}{"{}Total\ Encrypted\ Files:\ \%1"{}}).arg(\mbox{\hyperlink{class_statistics_screen_widget_a9b900cea87a9d3ba991799a5d4498936}{encryptedFilesCount}}));}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00085}00085\ \ \ sizeOfDatabaseLabel-\/>setText(QString(\textcolor{stringliteral}{"{}Size\ of\ Database:\ \%1KB"{}}).arg(\mbox{\hyperlink{class_statistics_screen_widget_a667e6e5fe4e133d1e505f18aaca3923e}{databaseSize}}));}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00087}00087\ \ \ algoCakeDiagram-\/>addValue(\textcolor{stringliteral}{"{}AES-\/128"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a578098969cc29cd5f48e7e90263c2e9a}{aes128Count}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00088}00088\ \ \ algoCakeDiagram-\/>addValue(\textcolor{stringliteral}{"{}AES-\/256"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a3adabc0fba2b889f8a913b2b5c2738ea}{aes256Count}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00089}00089\ \ \ LostFilesCakeDiagram-\/>addValue(\textcolor{stringliteral}{"{}Lost\ Files"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a05714f9ad7ff3f62044a9c702d846648}{lostFilesCount}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00090}00090\ \ \ LostFilesCakeDiagram-\/>addValue(\textcolor{stringliteral}{"{}Found\ Files"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a9b8d6661531c8d1824e1c8648d0f589a}{FoundFilesCount}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00092}00092\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a0694140eb7f3df5a1473d479ed9720ed}{algoFileCounts}}[\textcolor{stringliteral}{"{}AES-\/128"{}}]\ =\ \mbox{\hyperlink{class_statistics_screen_widget_a8d2100e1e09d492b363487b695280770}{lifetimeAes128Count}};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00093}00093\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a0694140eb7f3df5a1473d479ed9720ed}{algoFileCounts}}[\textcolor{stringliteral}{"{}AES-\/256"{}}]\ =\ \mbox{\hyperlink{class_statistics_screen_widget_aa6e55709a7922fc35c20c8515ce09d6e}{lifetimeAes256Count}};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00094}00094\ \ \ algoStatsWidget-\/>update(\mbox{\hyperlink{class_statistics_screen_widget_a0694140eb7f3df5a1473d479ed9720ed}{algoFileCounts}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00096}00096\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00099}00099\ \textcolor{keywordtype}{void}\ StatisticsScreenWidget::onSaveStatisticsButtonClicked()\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00100}00100\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00103}00103\ \textcolor{keywordtype}{void}\ StatisticsScreenWidget::onLoadStatisticsButtonClicked()\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00104}00104\ \ \ loadStatisticsFromJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00105}00105\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00106}00106\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00108}00108\ \textcolor{keywordtype}{void}\ StatisticsScreenWidget::saveStatisticsToJson(\textcolor{keyword}{const}\ QString\ \&filePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00109}00109\ \ \ QJsonObject\ json;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00110}00110\ \ \ QJsonObject\ lifetimeAlgoJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00111}00111\ \ \ QJsonObject\ currentSessionAlgoJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00112}00112\ \ \ QJsonObject\ lostFilesJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00114}00114\ \ \ lifetimeAlgoJson.insert(\textcolor{stringliteral}{"{}AES-\/128"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a8d2100e1e09d492b363487b695280770}{lifetimeAes128Count}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00115}00115\ \ \ lifetimeAlgoJson.insert(\textcolor{stringliteral}{"{}AES-\/256"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_aa6e55709a7922fc35c20c8515ce09d6e}{lifetimeAes256Count}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00116}00116\ \ \ currentSessionAlgoJson.insert(\textcolor{stringliteral}{"{}AES-\/128"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a578098969cc29cd5f48e7e90263c2e9a}{aes128Count}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00117}00117\ \ \ currentSessionAlgoJson.insert(\textcolor{stringliteral}{"{}AES-\/256"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a3adabc0fba2b889f8a913b2b5c2738ea}{aes256Count}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00118}00118\ \ \ lostFilesJson.insert(\textcolor{stringliteral}{"{}Lost\ Files"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a05714f9ad7ff3f62044a9c702d846648}{lostFilesCount}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00119}00119\ \ \ lostFilesJson.insert(\textcolor{stringliteral}{"{}Found\ Files"{}},\ \mbox{\hyperlink{class_statistics_screen_widget_a9b8d6661531c8d1824e1c8648d0f589a}{FoundFilesCount}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00121}00121\ \ \ QJsonObject\ lifetimeStatistics;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00122}00122\ \ \ lifetimeStatistics[\textcolor{stringliteral}{"{}Algorithms"{}}]\ =\ lifetimeAlgoJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00124}00124\ \ \ QJsonObject\ currentSessionStatistics;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00125}00125\ \ \ currentSessionStatistics[\textcolor{stringliteral}{"{}Algorithms"{}}]\ =\ currentSessionAlgoJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00126}00126\ \ \ currentSessionStatistics[\textcolor{stringliteral}{"{}DecryptedFilesCount"{}}]\ =\ \mbox{\hyperlink{class_statistics_screen_widget_a7e9065bd808a93e47d556c4996cbe669}{decryptedFilesCount}};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00127}00127\ \ \ currentSessionStatistics[\textcolor{stringliteral}{"{}EncryptedFilesCount"{}}]\ =\ \mbox{\hyperlink{class_statistics_screen_widget_a9b900cea87a9d3ba991799a5d4498936}{encryptedFilesCount}};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00129}00129\ \ \ json[\textcolor{stringliteral}{"{}LifetimeStatistics"{}}]\ =\ lifetimeStatistics;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00130}00130\ \ \ json[\textcolor{stringliteral}{"{}CurrentSessionStatistics"{}}]\ =\ currentSessionStatistics;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00131}00131\ \ \ json[\textcolor{stringliteral}{"{}LostFiles"{}}]\ =\ lostFilesJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00132}00132\ \ \ json[\textcolor{stringliteral}{"{}DatabaseSize"{}}]\ =\ \mbox{\hyperlink{class_statistics_screen_widget_a667e6e5fe4e133d1e505f18aaca3923e}{databaseSize}};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00134}00134\ \ \ QJsonDocument\ doc(json);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00135}00135\ \ \ QFile\ file(filePath);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00136}00136\ \ \ \textcolor{keywordflow}{if}\ (file.open(QIODevice::WriteOnly))\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00137}00137\ \ \ \ \ file.write(doc.toJson());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00138}00138\ \ \ \ \ file.close();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00139}00139\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00140}00140\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00142}00142\ \textcolor{keywordtype}{void}\ StatisticsScreenWidget::loadStatisticsFromJson(\textcolor{keyword}{const}\ QString\ \&filePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00143}00143\ \ \ QFile\ file(filePath);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00144}00144\ \ \ \textcolor{keywordflow}{if}\ (!file.open(QIODevice::ReadOnly))\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00146}00146\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00148}00148\ \ \ QByteArray\ data\ =\ file.readAll();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00149}00149\ \ \ file.close();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00151}00151\ \ \ QJsonDocument\ doc(QJsonDocument::fromJson(data));}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00152}00152\ \ \ QJsonObject\ json\ =\ doc.object();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00154}00154\ \ \ QJsonObject\ lifetimeStatistics\ =\ json[\textcolor{stringliteral}{"{}LifetimeStatistics"{}}].toObject();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00155}00155\ \ \ QJsonObject\ currentSessionStatistics\ =\ json[\textcolor{stringliteral}{"{}CurrentSessionStatistics"{}}].toObject();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00156}00156\ \ \ QJsonObject\ algoJson\ =\ currentSessionStatistics[\textcolor{stringliteral}{"{}Algorithms"{}}].toObject();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00157}00157\ \ \ QJsonObject\ lostFilesJson\ =\ json[\textcolor{stringliteral}{"{}LostFiles"{}}].toObject();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00159}00159\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a8d2100e1e09d492b363487b695280770}{lifetimeAes128Count}}\ =\ lifetimeStatistics[\textcolor{stringliteral}{"{}Algorithms"{}}].toObject()[\textcolor{stringliteral}{"{}AES-\/128"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00160}00160\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_aa6e55709a7922fc35c20c8515ce09d6e}{lifetimeAes256Count}}\ =\ lifetimeStatistics[\textcolor{stringliteral}{"{}Algorithms"{}}].toObject()[\textcolor{stringliteral}{"{}AES-\/256"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00161}00161\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a0694140eb7f3df5a1473d479ed9720ed}{algoFileCounts}}[\textcolor{stringliteral}{"{}AES-\/128"{}}]\ =\ \mbox{\hyperlink{class_statistics_screen_widget_a8d2100e1e09d492b363487b695280770}{lifetimeAes128Count}};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00162}00162\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a0694140eb7f3df5a1473d479ed9720ed}{algoFileCounts}}[\textcolor{stringliteral}{"{}AES-\/256"{}}]\ =\ \mbox{\hyperlink{class_statistics_screen_widget_aa6e55709a7922fc35c20c8515ce09d6e}{lifetimeAes256Count}};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00164}00164\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a578098969cc29cd5f48e7e90263c2e9a}{aes128Count}}\ =\ algoJson[\textcolor{stringliteral}{"{}AES-\/128"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00165}00165\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a3adabc0fba2b889f8a913b2b5c2738ea}{aes256Count}}\ =\ algoJson[\textcolor{stringliteral}{"{}AES-\/256"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00166}00166\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a05714f9ad7ff3f62044a9c702d846648}{lostFilesCount}}\ =\ lostFilesJson[\textcolor{stringliteral}{"{}Lost\ Files"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00167}00167\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a9b8d6661531c8d1824e1c8648d0f589a}{FoundFilesCount}}\ =\ lostFilesJson[\textcolor{stringliteral}{"{}Found\ Files"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00169}00169\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a7e9065bd808a93e47d556c4996cbe669}{decryptedFilesCount}}\ =\ currentSessionStatistics[\textcolor{stringliteral}{"{}DecryptedFilesCount"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00170}00170\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a9b900cea87a9d3ba991799a5d4498936}{encryptedFilesCount}}\ =\ currentSessionStatistics[\textcolor{stringliteral}{"{}EncryptedFilesCount"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00171}00171\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a667e6e5fe4e133d1e505f18aaca3923e}{databaseSize}}\ =\ json[\textcolor{stringliteral}{"{}DatabaseSize"{}}].toInt();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00173}00173\ \ \ decryptedFilesLabel-\/>setText(QString(\textcolor{stringliteral}{"{}Total\ Decrypted\ Files:\ \%1"{}}).arg(\mbox{\hyperlink{class_statistics_screen_widget_a7e9065bd808a93e47d556c4996cbe669}{decryptedFilesCount}}));}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00174}00174\ \ \ encryptedFilesLabel-\/>setText(QString(\textcolor{stringliteral}{"{}Total\ Encrypted\ Files:\ \%1"{}}).arg(\mbox{\hyperlink{class_statistics_screen_widget_a9b900cea87a9d3ba991799a5d4498936}{encryptedFilesCount}}));}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00175}00175\ \ \ sizeOfDatabaseLabel-\/>setText(QString(\textcolor{stringliteral}{"{}Size\ of\ Database:\ \%1MB"{}}).arg(\mbox{\hyperlink{class_statistics_screen_widget_a667e6e5fe4e133d1e505f18aaca3923e}{databaseSize}}));}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00176}00176\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00178}00178\ \textcolor{keywordtype}{void}\ StatisticsScreenWidget::ensureStatisticsFileExists(\textcolor{keyword}{const}\ QString\ \&filePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00179}00179\ \ \ QFile\ file(filePath);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00180}00180\ \ \ \textcolor{keywordflow}{if}\ (!file.exists())\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00181}00181\ \ \ \ \ QJsonObject\ json;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00182}00182\ \ \ \ \ QJsonObject\ algoJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00183}00183\ \ \ \ \ QJsonObject\ lostFilesJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00185}00185\ \ \ \ \ algoJson.insert(\textcolor{stringliteral}{"{}AES-\/128"{}},\ 0);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00186}00186\ \ \ \ \ algoJson.insert(\textcolor{stringliteral}{"{}AES-\/256"{}},\ 0);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00187}00187\ \ \ \ \ lostFilesJson.insert(\textcolor{stringliteral}{"{}Lost\ Files"{}},\ 0);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00188}00188\ \ \ \ \ lostFilesJson.insert(\textcolor{stringliteral}{"{}Found\ Files"{}},\ 0);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00190}00190\ \ \ \ \ json[\textcolor{stringliteral}{"{}LifetimeStatistics"{}}]\ =\ QJsonObject\{\{\textcolor{stringliteral}{"{}Algorithms"{}},\ algoJson\}\};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00191}00191\ \ \ \ \ json[\textcolor{stringliteral}{"{}CurrentSessionStatistics"{}}]\ =\ QJsonObject\{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00192}00192\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}Algorithms"{}},\ algoJson\},}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}DecryptedFilesCount"{}},\ 0\},}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}EncryptedFilesCount"{}},\ 0\}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00195}00195\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00196}00196\ \ \ \ \ json[\textcolor{stringliteral}{"{}LostFiles"{}}]\ =\ lostFilesJson;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00197}00197\ \ \ \ \ json[\textcolor{stringliteral}{"{}DatabaseSize"{}}]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00199}00199\ \ \ \ \ QJsonDocument\ doc(json);}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00200}00200\ \ \ \ \ \textcolor{keywordflow}{if}\ (file.open(QIODevice::WriteOnly))\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00201}00201\ \ \ \ \ \ \ file.write(doc.toJson());}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00202}00202\ \ \ \ \ \ \ file.close();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00203}00203\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00204}00204\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00205}00205\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00207}\mbox{\hyperlink{class_statistics_screen_widget_a7d741e3ea3c0bcf1e9aca708738228ed}{00207}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_statistics_screen_widget_a7d741e3ea3c0bcf1e9aca708738228ed}{StatisticsScreenWidget::updateAes128Count}}(\textcolor{keywordtype}{int}\ amount)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00208}00208\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a578098969cc29cd5f48e7e90263c2e9a}{aes128Count}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00209}00209\ \ \ \textcolor{keywordflow}{if}\ (amount\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00210}00210\ \ \ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a8d2100e1e09d492b363487b695280770}{lifetimeAes128Count}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00211}00211\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00212}00212\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00213}00213\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00214}00214\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00216}\mbox{\hyperlink{class_statistics_screen_widget_a5ed8d7b4470153bbb17f5fd21d746f2e}{00216}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_statistics_screen_widget_a5ed8d7b4470153bbb17f5fd21d746f2e}{StatisticsScreenWidget::updateAes256Count}}(\textcolor{keywordtype}{int}\ amount)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00217}00217\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a3adabc0fba2b889f8a913b2b5c2738ea}{aes256Count}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00218}00218\ \ \ \textcolor{keywordflow}{if}\ (amount\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00219}00219\ \ \ \ \ \mbox{\hyperlink{class_statistics_screen_widget_aa6e55709a7922fc35c20c8515ce09d6e}{lifetimeAes256Count}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00220}00220\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00221}00221\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00222}00222\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00223}00223\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00225}\mbox{\hyperlink{class_statistics_screen_widget_a60b1b72e78468e588f6665d41bfbef7b}{00225}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_statistics_screen_widget_a60b1b72e78468e588f6665d41bfbef7b}{StatisticsScreenWidget::updateLostFilesCount}}(\textcolor{keywordtype}{int}\ amount)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00226}00226\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a05714f9ad7ff3f62044a9c702d846648}{lostFilesCount}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00227}00227\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00228}00228\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00229}00229\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00231}\mbox{\hyperlink{class_statistics_screen_widget_ad5216401543fb2f203d19abefdc0a537}{00231}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_statistics_screen_widget_ad5216401543fb2f203d19abefdc0a537}{StatisticsScreenWidget::updateFoundFilesCount}}(\textcolor{keywordtype}{int}\ amount)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00232}00232\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a9b8d6661531c8d1824e1c8648d0f589a}{FoundFilesCount}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00233}00233\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00234}00234\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00235}00235\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00237}\mbox{\hyperlink{class_statistics_screen_widget_abe3e0f3c5739db4d8dbc7f94482c755c}{00237}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_statistics_screen_widget_abe3e0f3c5739db4d8dbc7f94482c755c}{StatisticsScreenWidget::updateDecryptedFilesCount}}(\textcolor{keywordtype}{int}\ amount)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00238}00238\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a7e9065bd808a93e47d556c4996cbe669}{decryptedFilesCount}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00239}00239\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00240}00240\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00241}00241\ \}}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00243}\mbox{\hyperlink{class_statistics_screen_widget_ae693d91f075919ba08bc0581fe57da5e}{00243}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_statistics_screen_widget_ae693d91f075919ba08bc0581fe57da5e}{StatisticsScreenWidget::updateEncryptedFilesCount}}(\textcolor{keywordtype}{int}\ amount)\ \{}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00244}00244\ \ \ \mbox{\hyperlink{class_statistics_screen_widget_a9b900cea87a9d3ba991799a5d4498936}{encryptedFilesCount}}\ +=\ amount;}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00245}00245\ \ \ updateStatistics();}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00246}00246\ \ \ saveStatisticsToJson(\textcolor{stringliteral}{"{}statistics.json"{}});}
+\DoxyCodeLine{\Hypertarget{_statistics_screen_widget_8cpp_source_l00247}00247\ \}}
+
+\end{DoxyCode}

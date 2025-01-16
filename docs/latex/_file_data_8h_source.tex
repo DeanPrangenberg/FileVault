@@ -1,0 +1,78 @@
+\doxysection{File\+Data.\+h}
+\hypertarget{_file_data_8h_source}{}\label{_file_data_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/shared/src/FileData.h@{D:/MyRepo/FileVault/CryptoApp/src/shared/src/FileData.h}}
+\mbox{\hyperlink{_file_data_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\ prang\ on\ 06.12.2024.}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00005}00005\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_FILEDATA\_H}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00006}00006\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_FILEDATA\_H}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00012}\mbox{\hyperlink{class_file_data}{00012}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_data_a2de7d3105f5e9c43ae36e1be33216975}{FileData}}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00013}00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00014}\mbox{\hyperlink{class_file_data_a2de7d3105f5e9c43ae36e1be33216975}{00014}}\ \ \ \mbox{\hyperlink{class_file_data_a2de7d3105f5e9c43ae36e1be33216975}{FileData}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00015}00015\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a55af03d8c6e30ad54afae5db2e8651cc}{cleanupFileData}}();}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00016}00016\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a6339217c63f4ad7eb0c2a8e581096574}{debugFileData}}();}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00018}00018\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_a61d54af806d2a8a823c4bda69a3c4d14}{getFileId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00019}00019\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a61fe8d33e78982509c886e9f17a6018f}{setFileId}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *fileId);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00020}00020\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_a88af8adde55a3a4a177b5bd9c0b4a074}{getFileIdLength}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00021}00021\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_ae48d14af2f9a1781109d272234f34d2c}{setFileIdLength}}(\textcolor{keywordtype}{size\_t}\ fileIdLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00022}00022\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_afe323e64d99b4fa77871ecaaf8d0ae39}{getEncryptionId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00023}00023\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a860e6262dacc9a4a19bc35e48b9b13f9}{setEncryptionId}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *encryptionId);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00024}00024\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_aedcfd3a5f09ce3b7385c2881c9bb0756}{getEncryptionIdLength}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00025}00025\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_afa7707bf598c8687ea5912b20c02b0f2}{setEncryptionIdLength}}(\textcolor{keywordtype}{size\_t}\ encryptionIdLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00026}00026\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_a015b6d9cf2e1d81cdeb8246627d94f53}{getLastUpdateId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00027}00027\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a209ef1fd6d2ec41cc46f4fbf5c8fee3f}{setLastUpdateId}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *lastUpdateId);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00028}00028\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_aab8a07bb05f35b4940ea0c2370b749d2}{getLastUpdateIdLength}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00029}00029\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_abf53f1838aec6872a1a738b6b4c6b110}{setLastUpdateIdLength}}(\textcolor{keywordtype}{size\_t}\ lastUpdateIdLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00030}00030\ \ \ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_a4b13097dff11090ca9c85ee1ae3a9f44}{getAlgorithmenType}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00031}00031\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_abbd4282428fdb0cf0cdf721e01761286}{setAlgorithmenType}}(\textcolor{keywordtype}{wchar\_t}\ *algorithmenType);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00032}00032\ \ \ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_a1ebcc573edf8bdcb0861f0592735dbb6}{getOriginalFilePath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00033}00033\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a22b0752bbf088b0e652495f85f398b4d}{setOriginalFilePath}}(\textcolor{keywordtype}{wchar\_t}\ *originalFilePath);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00034}00034\ \ \ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_ad1d7163e1e791a66ab7e83ba09e9ff57}{getEncryptedFilePath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00035}00035\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_af694db899a9646faf30a06c211d7c94d}{setEncryptedFilePath}}(\textcolor{keywordtype}{wchar\_t}\ *encryptedFilePath);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00036}00036\ \ \ \textcolor{keywordtype}{wchar\_t}\ *\mbox{\hyperlink{class_file_data_a52a4766ece29bf34ff93a9eb22296665}{getDecryptedFilePath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00037}00037\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a234e7adf47029afffcc98cc203ed455f}{setDecryptedFilePath}}(\textcolor{keywordtype}{wchar\_t}\ *decryptedFilePath);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00038}00038\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_a26db189da07f783f434509104da8d0d8}{getKey}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00039}00039\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_acc6a0619fdc59dc3d7fa318fd375d504}{setKey}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *key);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00040}00040\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_a7bbd8ef481a308bf0be8636b0f8b482d}{getKeyLength}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00041}00041\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_a2996547b43535fb1be342f17e622634f}{setKeyLength}}(\textcolor{keywordtype}{size\_t}\ keyLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00042}00042\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_file_data_afd643e62c2ace45c0a23e57dd4be8866}{getIv}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00043}00043\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_ac079012041bbceae11bb564197c74698}{setIv}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *iv);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00044}00044\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_file_data_a28a5e8a4206f20be92b86a2b1c208ea6}{getIvLength}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00045}00045\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_data_ad802f9a8be1f6c0ee4dbf8f9615cd889}{setIvLength}}(\textcolor{keywordtype}{size\_t}\ ivLength);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00047}00047\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_file_data_a64f7ab7f3ef18606166a20bec9543b6b}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data_a2de7d3105f5e9c43ae36e1be33216975}{FileData}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00049}00049\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00050}00050\ \ \ \textcolor{keywordtype}{bool}\ printDebug\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00051}00051\ \ \ \textcolor{keywordtype}{void}\ safeDeleteUCharArray(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *\&ptr,\ \textcolor{keywordtype}{size\_t}\ \&length);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00052}00052\ \ \ \textcolor{keywordtype}{void}\ safeDeleteWChar(\textcolor{keywordtype}{wchar\_t}\ *\&ptr);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00053}00053\ \ \ std::string\ toHexString(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *pUChar,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00055}00055\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *FileID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00056}00056\ \ \ \textcolor{keywordtype}{size\_t}\ fileIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00057}00057\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *EncryptionID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00058}00058\ \ \ \textcolor{keywordtype}{size\_t}\ EncryptionIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00059}00059\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *LastUpdateID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00060}00060\ \ \ \textcolor{keywordtype}{size\_t}\ LastUpdateIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00061}00061\ \ \ \textcolor{keywordtype}{wchar\_t}\ *AlgorithmenType\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00062}00062\ \ \ \textcolor{keywordtype}{wchar\_t}\ *OriginalFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00063}00063\ \ \ \textcolor{keywordtype}{wchar\_t}\ *EncryptedFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00064}00064\ \ \ \textcolor{keywordtype}{wchar\_t}\ *DecryptedFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00065}00065\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *Key\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00066}00066\ \ \ \textcolor{keywordtype}{size\_t}\ keyLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00067}00067\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *Iv\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00068}00068\ \ \ \textcolor{keywordtype}{size\_t}\ ivLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00069}00069\ \};}
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_file_data_8h_source_l00072}00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FILEVAULTROOT\_FILEDATA\_H}}
+
+\end{DoxyCode}

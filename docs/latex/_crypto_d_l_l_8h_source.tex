@@ -1,0 +1,36 @@
+\doxysection{Crypto\+DLL.\+h}
+\hypertarget{_crypto_d_l_l_8h_source}{}\label{_crypto_d_l_l_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/DLLUtils/CryptoDLL.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/DLLUtils/CryptoDLL.h}}
+\mbox{\hyperlink{_crypto_d_l_l_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00002}00002\ \textcolor{comment}{//\ Created\ by\ prang\ on\ 20.11.2024.}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00005}00005\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_CRYPTODLL\_H}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00006}00006\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_CRYPTODLL\_H}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_master_d_l_l_class_8h}{MasterDLLClass.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_data_8h}{../../../shared/src/FileData.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00013}\mbox{\hyperlink{class_crypto_d_l_l}{00013}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_crypto_d_l_l}{CryptoDLL}}\ :\ \mbox{\hyperlink{class_master_d_l_l_class}{MasterDLLClass}}\ \ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00014}00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00015}00015\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_d_l_l_ad377410f792824ef4b7bbc5db4e71980}{GenerateKeyIv}}(\textcolor{keywordtype}{size\_t}\ keySize,\ \textcolor{keywordtype}{size\_t}\ ivSize,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *key,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *iv);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00016}00016\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_d_l_l_a010be6b25f7046d5b95f56a73afbbd4e}{GenerateFileID}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *filePath,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *fileID);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00017}00017\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_d_l_l_a2eabf7f6c2ca1aa2708591fb082e92ec}{EncryptFiles}}(\textcolor{keyword}{class}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData,\ \textcolor{keywordtype}{int}\ count,\ std::vector<bool>\ \&results);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00018}00018\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_d_l_l_a67110ca087436c883f24b4206fe90b8a}{DecryptFiles}}(\textcolor{keyword}{class}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData,\ \textcolor{keywordtype}{int}\ count,\ std::vector<bool>\ \&results);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00019}00019\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_crypto_d_l_l_a6b9f7773ffd8121b128d7a9392c38614}{getCurrentTimeHash}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *timeHash);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00021}00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00022}00022\ \ \ \textcolor{keyword}{typedef}\ void\ (*GenerateKeyIvFunc)(size\_t,\ size\_t,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00023}00023\ \ \ \textcolor{keyword}{typedef}\ void\ (*GenerateFileIDFunc)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00024}00024\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{bool}*\ (*EncryptFilesFunc)(\textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_data}{FileData}}\ *,\ int);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00025}00025\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{bool}*\ (*DecryptFilesFunc)(\textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_data}{FileData}}\ *,\ int);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00026}00026\ \ \ \textcolor{keyword}{typedef}\ void\ (*getCurrentTimeHashFunc)(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00027}00027\ \};}
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_crypto_d_l_l_8h_source_l00030}00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FILEVAULTROOT\_CRYPTODLL\_H}}
+
+\end{DoxyCode}

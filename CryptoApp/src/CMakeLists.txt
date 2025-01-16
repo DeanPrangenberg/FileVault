@@ -29,6 +29,12 @@ add_custom_target(RustFileCopy ALL
     COMMENT "Building Rust FileCopy"
 )
 
+add_custom_target(GenDoc ALL
+    COMMAND doxygen Doxyfile
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/../../docs
+    COMMENT "Generating documentation"
+)
+
 add_custom_target(GoRestApiWrapperLib ALL
     COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoRestApiWrapperLib.dll -buildmode=c-shared .
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/GoRestApiWrapperLib
@@ -36,6 +42,7 @@ add_custom_target(GoRestApiWrapperLib ALL
 )
 
 # Specify dependencies between projects
+add_dependencies(CppFileVaultMain GenDoc)  # Main app depends on shared classes
 add_dependencies(CppFileVaultMain RustFileCopy)  # Main app depends on Rust project
 add_dependencies(CppFileVaultMain CppCryptoLib)  # Main app depends on cryptography
 add_dependencies(CppFileVaultMain GoRestApiWrapperLib)  # Main app depends on Go DLL

@@ -1,0 +1,96 @@
+\doxysection{File\+Picker.\+h}
+\hypertarget{_file_picker_8h_source}{}\label{_file_picker_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h}}
+\mbox{\hyperlink{_file_picker_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_FILEPICKER\_H}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_FILEPICKER\_H}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <QScrollArea>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <QCheckBox>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <QComboBox>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <QVector>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <QSet>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <QFileDialog>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <QFontMetrics>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_style_setter_8h}{styleClass/StyleSetter.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_scanner_d_l_l_8h}{FileScannerDLL.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}../../../../shared/src/GlobalDefinitions.h"{}}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00024}00024\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00026}\mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11}{00026}}\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11}{FilePickerType}}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00027}\mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8}{00027}}\ \ \ \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8}{ENCRYPT}},}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00028}\mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c}{00028}}\ \ \ \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c}{DECRYPT}}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00029}00029\ \};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00031}\mbox{\hyperlink{structencryption_config}{00031}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structencryption_config}{encryptionConfig}}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00032}\mbox{\hyperlink{structencryption_config_ab46dc07f6ce1ede7546b353c495af8f4}{00032}}\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structencryption_config_ab46dc07f6ce1ede7546b353c495af8f4}{checkForEnc}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00033}\mbox{\hyperlink{structencryption_config_ad85dfd6a8f7c90e17c638990cddc6d69}{00033}}\ \ \ QString\ \mbox{\hyperlink{structencryption_config_ad85dfd6a8f7c90e17c638990cddc6d69}{Algorithm}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00034}\mbox{\hyperlink{structencryption_config_ab9a2e64fd1fcedffc82b0b8e2092a612}{00034}}\ \ \ QString\ \mbox{\hyperlink{structencryption_config_ab9a2e64fd1fcedffc82b0b8e2092a612}{Path}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00035}00035\ \};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00037}\mbox{\hyperlink{structdecryption_config}{00037}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdecryption_config}{decryptionConfig}}\ \{}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00038}\mbox{\hyperlink{structdecryption_config_aaf7d467c448124a281793ed767d08683}{00038}}\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structdecryption_config_aaf7d467c448124a281793ed767d08683}{checkForDec}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00039}\mbox{\hyperlink{structdecryption_config_a5e306f94a28513b53d40b8b07cb10016}{00039}}\ \ \ QString\ \mbox{\hyperlink{structdecryption_config_a5e306f94a28513b53d40b8b07cb10016}{Path}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00040}00040\ \};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00042}\mbox{\hyperlink{class_file_picker}{00042}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_picker_acceb48ab6a49f7fd83d1fd0558570204}{FilePicker}}\ :\ \textcolor{keyword}{public}\ QWidget\ \{}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00043}00043\ \ \ Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00045}00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00046}00046\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_file_picker_acceb48ab6a49f7fd83d1fd0558570204}{FilePicker}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr},\ \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11}{FilePickerType}}\ type\ =\ \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8}{FilePickerType::ENCRYPT}});}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00047}\mbox{\hyperlink{class_file_picker_a9434e199900c5cf3147c63baa8479069}{00047}}\ \ \ \mbox{\hyperlink{class_file_picker_a9434e199900c5cf3147c63baa8479069}{\string~FilePicker}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00049}\mbox{\hyperlink{class_file_picker_ad979c1f0fe3e98cae582bace0c236454}{00049}}\ \ \ std::unique\_ptr<QVBoxLayout>\ \mbox{\hyperlink{class_file_picker_ad979c1f0fe3e98cae582bace0c236454}{FilePickerLayout}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00050}\mbox{\hyperlink{class_file_picker_a4948da647ec92fa5300efee1169087b7}{00050}}\ \ \ std::unique\_ptr<QHBoxLayout>\ \mbox{\hyperlink{class_file_picker_a4948da647ec92fa5300efee1169087b7}{FilePickerTopLayout}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00051}\mbox{\hyperlink{class_file_picker_a1119adf2971d198f809326dada4d59f4}{00051}}\ \ \ std::unique\_ptr<QHBoxLayout>\ \mbox{\hyperlink{class_file_picker_a1119adf2971d198f809326dada4d59f4}{GlobalControlLayout}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00052}\mbox{\hyperlink{class_file_picker_a568c0abc1e8ebffacfb10d20341dc0e7}{00052}}\ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_file_picker_a568c0abc1e8ebffacfb10d20341dc0e7}{BackgroundLabel}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00053}\mbox{\hyperlink{class_file_picker_a911515a9a7e6a879b11033224f14f4b9}{00053}}\ \ \ std::shared\_ptr<QPushButton>\ \mbox{\hyperlink{class_file_picker_a911515a9a7e6a879b11033224f14f4b9}{AddFileButton}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00054}\mbox{\hyperlink{class_file_picker_afb7d9510cf1d901154558784b6d017c4}{00054}}\ \ \ std::shared\_ptr<QPushButton>\ \mbox{\hyperlink{class_file_picker_afb7d9510cf1d901154558784b6d017c4}{AddDirectoryButton}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00055}\mbox{\hyperlink{class_file_picker_a3ceea6569f40d63cd10f8f960bca3efb}{00055}}\ \ \ std::shared\_ptr<QPushButton>\ \mbox{\hyperlink{class_file_picker_a3ceea6569f40d63cd10f8f960bca3efb}{ResetPathsButton}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00056}\mbox{\hyperlink{class_file_picker_a6a0bb84e0fb39639f7c0786b25fcd3d6}{00056}}\ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_file_picker_a6a0bb84e0fb39639f7c0786b25fcd3d6}{FileToProcessLabel}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00057}\mbox{\hyperlink{class_file_picker_ab8afc86fbe2ee19b310e1ec57d8c93b2}{00057}}\ \ \ std::unique\_ptr<QCheckBox>\ \mbox{\hyperlink{class_file_picker_ab8afc86fbe2ee19b310e1ec57d8c93b2}{GlobalCheckBox}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00058}\mbox{\hyperlink{class_file_picker_ac01cb15c13bdf412fc3b8a7785da2513}{00058}}\ \ \ std::unique\_ptr<QComboBox>\ \mbox{\hyperlink{class_file_picker_ac01cb15c13bdf412fc3b8a7785da2513}{GlobalAlgorithmComboBox}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00060}\mbox{\hyperlink{class_file_picker_a57a1eb6dbe60d8d285319250c031e443}{00060}}\ \ \ std::unique\_ptr<QScrollArea>\ \mbox{\hyperlink{class_file_picker_a57a1eb6dbe60d8d285319250c031e443}{FilePickerScrollArea}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00061}\mbox{\hyperlink{class_file_picker_aa48e775c87b7c5a9aed26a98d7149d19}{00061}}\ \ \ std::unique\_ptr<QWidget>\ \mbox{\hyperlink{class_file_picker_aa48e775c87b7c5a9aed26a98d7149d19}{FilePickerScrollAreaWidget}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00062}\mbox{\hyperlink{class_file_picker_ac50ebf2636fdac4e075f1707cf6a7fb7}{00062}}\ \ \ std::unique\_ptr<QVBoxLayout>\ \mbox{\hyperlink{class_file_picker_ac50ebf2636fdac4e075f1707cf6a7fb7}{FilePickerScrollAreaLayout}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00064}\mbox{\hyperlink{class_file_picker_a4f15cbd25a7eb35bbf398f8f19f37418}{00064}}\ \ \ \mbox{\hyperlink{class_file_scanner_d_l_l}{FileScannerDLL}}\ \mbox{\hyperlink{class_file_picker_a4f15cbd25a7eb35bbf398f8f19f37418}{fileScanner}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00065}\mbox{\hyperlink{class_file_picker_a4d387ffb98ab46d8fd6ad7c4e91ba78a}{00065}}\ \ \ QVector<QString>\ \mbox{\hyperlink{class_file_picker_a4d387ffb98ab46d8fd6ad7c4e91ba78a}{FilePickerPaths}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00066}\mbox{\hyperlink{class_file_picker_af68aa5c30d799898982da90e61247cff}{00066}}\ \ \ std::vector<fs::path>\ \mbox{\hyperlink{class_file_picker_af68aa5c30d799898982da90e61247cff}{FileScannerPaths}};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00068}00068\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_a70cd78f71673ce2bb2fd0024aaa2ecc9}{configureUI}}();}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00069}00069\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_abfdc32d43959b4c3deaafbc7b5713bbc}{addFile}}();}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00070}00070\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_a9d9b6d1d47236bcf595c5fac7320abb8}{addDirectory}}();}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00071}00071\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_acbb919d981b97bf4935f816772eafdb8}{resetPaths}}();}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00072}00072\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_ad1aa5dcc94020b94da99d42d044da0f4}{updateFileToProcessLabel}}();}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00073}00073\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_ac46b7e48548af985329b3154981b80b3}{globalCheckStateChanged}}(\textcolor{keywordtype}{int}\ state);}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00074}00074\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_a0f6a6d6b25fdf2fd78242d3103bbec60}{globalAlgorithmChanged}}(\textcolor{keyword}{const}\ QString\ \&algorithm);}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00075}00075\ \ \ QVector<encryptionConfig>\ \mbox{\hyperlink{class_file_picker_a13c07dabffc7698e34959310bb620d67}{getEncItems}}();}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00076}00076\ \ \ QVector<decryptionConfig>\ \mbox{\hyperlink{class_file_picker_a8f60e56bc0852a2ae33edc2a3d64577c}{getDecItems}}();}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00077}00077\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_ae9af795f20bcb7962ce310dc86250a22}{removeEncItems}}(\textcolor{keyword}{const}\ std::vector<int>\&\ results);}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00078}00078\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_picker_a450dcb98adb65b44af3f1b2858b8a8ba}{removeDecItems}}(\textcolor{keyword}{const}\ std::vector<int>\&\ results);}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00080}00080\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00081}00081\ \ \ \mbox{\hyperlink{_file_picker_8h_a7fa646836905015e276adb6df68dbd11}{FilePickerType}}\ filePickerType;}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00082}00082\ \ \ QSet<QString>\ addedPaths;\ \textcolor{comment}{//\ Declare\ addedPaths\ here}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00083}00083\ \ \ \mbox{\hyperlink{class_style_setter}{StyleSetter}}\ styleSetter;}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00085}00085\ \ \ \textcolor{keywordtype}{void}\ addEntry(\textcolor{keyword}{const}\ QString\ \&path);}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00086}00086\ \ \ \textcolor{keywordtype}{void}\ scanDirectoryInThread(\textcolor{keyword}{const}\ QString\ \&directory);\ \textcolor{comment}{//\ Add\ method\ to\ scan\ directory\ in\ thread}}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00087}00087\ \ \ \textcolor{keywordtype}{void}\ removeItems(\textcolor{keyword}{const}\ std::vector<int>\&\ results,\ \textcolor{keywordtype}{bool}\ isEncryption);}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00088}00088\ \};}
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_file_picker_8h_source_l00090}00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FILEVAULTROOT\_FILEPICKER\_H}}
+
+\end{DoxyCode}

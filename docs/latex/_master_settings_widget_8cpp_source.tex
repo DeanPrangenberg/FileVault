@@ -1,0 +1,58 @@
+\doxysection{Master\+Settings\+Widget.\+cpp}
+\hypertarget{_master_settings_widget_8cpp_source}{}\label{_master_settings_widget_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/MasterSettingsWidget.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/elementWidgets/SettingsWidgets/MasterSettingsWidget.cpp}}
+\mbox{\hyperlink{_master_settings_widget_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_master_settings_widget_8h}{MasterSettingsWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00003}\mbox{\hyperlink{class_master_settings_widget_ab60b5b3608ee94b0f5f297777414bb37}{00003}}\ \mbox{\hyperlink{class_master_settings_widget_ab60b5b3608ee94b0f5f297777414bb37}{MasterSettingsWidget::MasterSettingsWidget}}(QWidget\ *parent)\ :\ QWidget(parent)\ \{}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00004}00004\ \ \ setSizePolicy(QSizePolicy::Expanding,\ QSizePolicy::Expanding);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00006}00006\ \ \ \textcolor{keyword}{auto}\ mainLayout\ =\ std::make\_unique<QVBoxLayout>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00007}00007\ \ \ mainLayout-\/>setContentsMargins(0,\ 0,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00008}00008\ \ \ mainLayout-\/>setSpacing(0);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00010}00010\ \ \ \mbox{\hyperlink{class_master_settings_widget_a991990be52adaa304f798599f6de237c}{backgroundLabel}}\ =\ std::make\_shared<QLabel>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00011}00011\ \ \ \mbox{\hyperlink{class_master_settings_widget_a991990be52adaa304f798599f6de237c}{backgroundLabel}}-\/>setObjectName(\textcolor{stringliteral}{"{}MasterSettingsWidget"{}});}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00012}00012\ \ \ \mbox{\hyperlink{class_master_settings_widget_a991990be52adaa304f798599f6de237c}{backgroundLabel}}-\/>setSizePolicy(QSizePolicy::Expanding,\ QSizePolicy::Expanding);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00014}00014\ \ \ \mbox{\hyperlink{class_master_settings_widget_a56c91155a206138b2e2bf60deba9f886}{titleLabel}}\ =\ std::make\_unique<QLabel>(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00016}00016\ \ \ mainLayout-\/>addWidget(\mbox{\hyperlink{class_master_settings_widget_a991990be52adaa304f798599f6de237c}{backgroundLabel}}.get());}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00017}00017\ \ \ setLayout(mainLayout.release());}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00019}00019\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}\ =\ std::make\_unique<QVBoxLayout>(\mbox{\hyperlink{class_master_settings_widget_a991990be52adaa304f798599f6de237c}{backgroundLabel}}.get());}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00020}00020\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>setContentsMargins(5,\ 5,\ 5,\ 5);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00021}00021\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>setSpacing(5);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00022}00022\ \ \ \mbox{\hyperlink{class_master_settings_widget_ae2014677239c0442cbfcb292484e7e02}{centralLayout}}-\/>addWidget(\mbox{\hyperlink{class_master_settings_widget_a56c91155a206138b2e2bf60deba9f886}{titleLabel}}.get());}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00024}00024\ \ \ \textcolor{comment}{//\ Initialisieren\ Sie\ die\ Container}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00025}00025\ \ \ \mbox{\hyperlink{class_master_settings_widget_a5a2357ac24cd08bf25672ff2040af81e}{buttons}}\ =\ QVector<std::shared\_ptr<QPushButton>>();}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00026}00026\ \ \ \mbox{\hyperlink{class_master_settings_widget_a9892d8810e32db4dd036feb89f222f8c}{comboBoxes}}\ =\ QVector<std::shared\_ptr<QComboBox>>();}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00027}00027\ \ \ \mbox{\hyperlink{class_master_settings_widget_addf6c9312d73ac880b08053034d43ea1}{checkBoxes}}\ =\ QVector<std::shared\_ptr<QCheckBox>>();}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00028}00028\ \ \ \mbox{\hyperlink{class_master_settings_widget_a7134402f27045a73fd601e187981d203}{lineEdits}}\ =\ QVector<std::shared\_ptr<QLineEdit>>();}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00031}\mbox{\hyperlink{class_master_settings_widget_afa5c74b29051ca9e2a97f3680a2339dc}{00031}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_master_settings_widget_afa5c74b29051ca9e2a97f3680a2339dc}{MasterSettingsWidget::applyStyle}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00032}00032\ \ \ \mbox{\hyperlink{class_style_setter}{StyleSetter}}\ styleSetter;}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00033}00033\ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a65efec2b8d660f7f20088639fb9eebf1}{setWidgetBackgroundStyle}}(\mbox{\hyperlink{class_master_settings_widget_a991990be52adaa304f798599f6de237c}{backgroundLabel}});}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00035}00035\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ button\ \ :\ \mbox{\hyperlink{class_master_settings_widget_a5a2357ac24cd08bf25672ff2040af81e}{buttons}})\ \{}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00036}00036\ \ \ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a01a415ee9f7f97f8606b1873f595075e}{setButtonStyle}}(button);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00037}00037\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00039}00039\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ comboBox\ :\ \mbox{\hyperlink{class_master_settings_widget_a9892d8810e32db4dd036feb89f222f8c}{comboBoxes}})\ \{}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00040}00040\ \ \ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a7acaa863bcce7f019264f2f20598da93}{setComboBoxStyle}}(comboBox);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00041}00041\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00043}00043\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ checkBox\ :\ \mbox{\hyperlink{class_master_settings_widget_addf6c9312d73ac880b08053034d43ea1}{checkBoxes}})\ \{}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00044}00044\ \ \ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a164c973892b524dea9a766679f65fcd5}{setCheckBoxStyle}}(checkBox);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00045}00045\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00047}00047\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ lineEdit\ :\ \mbox{\hyperlink{class_master_settings_widget_a7134402f27045a73fd601e187981d203}{lineEdits}})\ \{}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00048}00048\ \ \ \ \ styleSetter.\mbox{\hyperlink{class_style_setter_a096f1ca0b27cfc5a083db1ee315b1055}{setLineEditStyle}}(lineEdit);}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00049}00049\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_master_settings_widget_8cpp_source_l00052}00052\ \mbox{\hyperlink{class_master_settings_widget_ad8b0266950f67adf9849aba14f5e52e0}{MasterSettingsWidget::\string~MasterSettingsWidget}}()\ =\ \textcolor{keywordflow}{default};}
+
+\end{DoxyCode}

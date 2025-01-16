@@ -1,0 +1,42 @@
+\doxysection{Crypto\+API.\+h}
+\hypertarget{_crypto_a_p_i_8h_source}{}\label{_crypto_a_p_i_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/api/CryptoAPI.h@{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/api/CryptoAPI.h}}
+\mbox{\hyperlink{_crypto_a_p_i_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ CRYPTOLIB\_H}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ CRYPTOLIB\_H}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <future>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_data_8h}{../../../shared/src/FileData.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_e_s128_8h}{../alogs/AES128.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_e_s256_8h}{../alogs/AES256.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_key_gen_8h}{../alogs/KeyGen.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_h_a512_8h}{../alogs/SHA512.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00020}00020\ \textcolor{preprocessor}{\#ifdef\ CRYPTOLIBRARY\_EXPORTS}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00021}00021\ \textcolor{preprocessor}{\#define\ CRYPTOLIB\_API\ \_\_declspec(dllexport)}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00022}00022\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00023}\mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{00023}}\ \textcolor{preprocessor}{\#define\ CRYPTOLIB\_API\ \_\_declspec(dllimport)}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00024}00024\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00026}00026\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00028}00028\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00029}00029\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_crypto_a_p_i_8h_ae3142ce75ed25d84207041447aa8b945}{EncryptFileWrapper}}(\mbox{\hyperlink{class_file_data}{FileData}}\ *fileData,\ \textcolor{keywordtype}{int}\ numFiles);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00030}00030\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_crypto_a_p_i_8h_ae120bc077206bcd0cb863eab8b513572}{DecryptFileWrapper}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData,\ \textcolor{keywordtype}{int}\ numFiles);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00031}00031\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_crypto_a_p_i_8h_abd041ea6d7162d501e00548feb22ad65}{GenerateKeyIv}}(\textcolor{keywordtype}{size\_t}\ keySize,\ \textcolor{keywordtype}{size\_t}\ ivSize,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *key,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *iv);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00032}00032\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_crypto_a_p_i_8h_a88bfb02feaadb25f304da31f5929e80b}{GenerateFileID}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *filePath,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *fileID);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00033}00033\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_crypto_a_p_i_8h_a81f42969859874d08481f042846c6ccd}{getCurrentTimeHash}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *timeHash);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8h_source_l00036}00036\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//CRYPTOLIB\_H}}
+
+\end{DoxyCode}

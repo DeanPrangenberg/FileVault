@@ -1,0 +1,72 @@
+\doxysection{Rest\+Api\+DLL.\+h}
+\hypertarget{_rest_api_d_l_l_8h_source}{}\label{_rest_api_d_l_l_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/DLLUtils/RestAPI/RestApiDLL.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/DLLUtils/RestAPI/RestApiDLL.h}}
+\mbox{\hyperlink{_rest_api_d_l_l_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_RESTAPIDLL\_H}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_RESTAPIDLL\_H}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_master_d_l_l_class_8h}{MasterDLLClass.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_data_8h}{../../../../shared/src/FileData.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00011}\mbox{\hyperlink{class_rest_api_d_l_l}{00011}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_rest_api_d_l_l}{RestApiDLL}}\ :\ \mbox{\hyperlink{class_master_d_l_l_class}{MasterDLLClass}}\ \{}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00012}00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00013}00013\ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{class_rest_api_d_l_l_ad4f21c396e643e72e50adc9400703ffa}{ExportDatabase}}();}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00014}00014\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_rest_api_d_l_l_a9b0b24946996a597707af043b4d6f0ce}{InsertDatabase}}(\textcolor{keyword}{const}\ std::string\ \&key,\ \textcolor{keyword}{const}\ std::string\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00015}00015\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_rest_api_d_l_l_a617d9711486a2d4b8cc7e66db994e72a}{ReplaceDatabase}}(\textcolor{keyword}{const}\ std::string\ \&key,\ \textcolor{keyword}{const}\ std::string\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00016}00016\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_rest_api_d_l_l_af58f148076fb3970f281a108679c2d85}{ResetDatabase}}();}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00017}00017\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_rest_api_d_l_l_abc65e1d970ffe325db76f15e486612b6}{InsertEntry}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00018}00018\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_rest_api_d_l_l_ae9eb8b43e8abddcd559978422cb0f9b5}{DeleteEntry}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00019}00019\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_rest_api_d_l_l_aaaf844d7321084197a19ae7988ccd90e}{SearchEntry}}(\mbox{\hyperlink{class_file_data}{FileData}}\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00020}00020\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_rest_api_d_l_l_a5bbe25c55f4fbb490d11f0db9abafdd5}{ReplaceEntry}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00021}00021\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_rest_api_d_l_l_ab3aa5528a3bd746d64633f9d3e091af2}{getDatabaseFileSize}}();}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00023}00023\ \ \ std::vector<FileData>\ \mbox{\hyperlink{class_rest_api_d_l_l_a988227e41a51c25faa9a861b9d2b11de}{GetAllFileIDsAndEncryptedPaths}}();}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00025}00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00026}00026\ \ \ \textcolor{keywordtype}{bool}\ printDebug\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00027}00027\ \ \ \textcolor{keywordtype}{bool}\ printConverterDebug\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00028}00028\ \ \ \textcolor{keyword}{struct\ }FileDataDB\ \{}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *FileID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ FileIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *EncryptedID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ EncryptedIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *LastUpdateID\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ LastUpdateIDLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *AlgorithmenType\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *OriginalFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *EncryptedFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *DecryptedFilePath\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *Key\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ KeyLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ *Iv\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ IvLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00043}00043\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00045}00045\ \ \ \textcolor{keyword}{typedef}\ void\ (*InsertEntryFunc)(\textcolor{keyword}{const}\ FileDataDB\ *,\ \textcolor{keywordtype}{bool}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00046}00046\ \ \ \textcolor{keyword}{typedef}\ void\ (*DeleteEntryFunc)(\textcolor{keyword}{const}\ FileDataDB\ *,\ \textcolor{keywordtype}{bool}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00047}00047\ \ \ \textcolor{keyword}{typedef}\ void\ (*SearchEntryFunc)(FileDataDB\ *,\ \textcolor{keywordtype}{bool}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00048}00048\ \ \ \textcolor{keyword}{typedef}\ void\ (*ReplaceEntryFunc)(\textcolor{keyword}{const}\ FileDataDB\ *,\ \textcolor{keywordtype}{bool}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00049}00049\ \ \ \textcolor{keyword}{typedef}\ void\ (*GetAllFileIDsAndEncryptedPathsFunc)(FileDataDB\ **,\ \textcolor{keywordtype}{int}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00050}00050\ \ \ \textcolor{keyword}{typedef}\ void\ (*GetDatabaseFileSizeFunc)(\textcolor{keywordtype}{int}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00051}00051\ \ \ \textcolor{keyword}{typedef}\ void\ (*ExportDatabaseFunc)(\textcolor{keywordtype}{char}\ **,\ \textcolor{keywordtype}{int}\ *,\ \textcolor{keywordtype}{char}\ **,\ \textcolor{keywordtype}{int}\ *,\ \textcolor{keywordtype}{int}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00052}00052\ \ \ \textcolor{keyword}{typedef}\ void\ (*InsertDatabaseFunc)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *,\ \textcolor{keywordtype}{bool}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00053}00053\ \ \ \textcolor{keyword}{typedef}\ void\ (*ReplaceDatabaseFunc)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *,\ \textcolor{keywordtype}{bool}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00054}00054\ \ \ \textcolor{keyword}{typedef}\ void\ (*ResetDatabaseFunc)(\textcolor{keywordtype}{bool}\ *);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00056}00056\ \ \ FileDataDB\ convertFileDataToDBStruct(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00057}00057\ \ \ \mbox{\hyperlink{class_file_data}{FileData}}\ convertDBStructToFileData(\textcolor{keyword}{const}\ FileDataDB\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00058}00058\ \ \ FileDataDB\ convertFileDataForSearch(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00060}00060\ \ \ \textcolor{keywordtype}{wchar\_t}\ *convertToHexWChar(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *input,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00061}00061\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *convertFromHexWChar(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *input,\ \textcolor{keywordtype}{size\_t}\ \&size);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00063}00063\ \ \ \textcolor{keywordtype}{void}\ debugFileDataDB(\textcolor{keyword}{const}\ FileDataDB\ \&data);}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00064}00064\ \};}
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_rest_api_d_l_l_8h_source_l00066}00066\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FILEVAULTROOT\_RESTAPIDLL\_H}}
+
+\end{DoxyCode}

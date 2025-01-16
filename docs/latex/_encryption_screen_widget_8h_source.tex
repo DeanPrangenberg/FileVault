@@ -1,0 +1,45 @@
+\doxysection{Encryption\+Screen\+Widget.\+h}
+\hypertarget{_encryption_screen_widget_8h_source}{}\label{_encryption_screen_widget_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/EncryptionScreenWidget.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileVaultMain/src/gui/widgetClasses/Screens/EncryptionScreenWidget.h}}
+\mbox{\hyperlink{_encryption_screen_widget_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ ENCRYPTIONSCREENWIDGET\_H}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ ENCRYPTIONSCREENWIDGET\_H}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_file_picker_8h}{widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_struct_utils_8h}{../../../StructUtils/StructUtils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}../../../shared/src/GlobalDefinitions.h"{}}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_crypto_d_l_l_8h}{../../../DLLUtils/CryptoDLL.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_helper_utils_8h}{../../../HelperUtils/HelperUtils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_statistics_screen_widget_8h}{StatisticsScreenWidget.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00016}\mbox{\hyperlink{class_encryption_screen_widget}{00016}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_encryption_screen_widget_a0bd3578836f5a0dbb3bcf84f01f8d482}{EncryptionScreenWidget}}\ :\ \textcolor{keyword}{public}\ QWidget\ \{}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00017}00017\ Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00019}00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00020}00020\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_encryption_screen_widget_a0bd3578836f5a0dbb3bcf84f01f8d482}{EncryptionScreenWidget}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr},\ std::shared\_ptr<StatisticsScreenWidget>\ statisticsPtr\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00021}\mbox{\hyperlink{class_encryption_screen_widget_a5a40b5b4bc8751749e16b409d378068c}{00021}}\ \ \ \mbox{\hyperlink{class_encryption_screen_widget_a5a40b5b4bc8751749e16b409d378068c}{\string~EncryptionScreenWidget}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00023}00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00024}00024\ \ \ \mbox{\hyperlink{class_style_setter}{StyleSetter}}\ StyleSettings;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00025}00025\ \ \ std::unique\_ptr<QVBoxLayout>\ EncryptionScreenWidgetLayout;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00026}00026\ \ \ std::unique\_ptr<QVBoxLayout>\ EncryptionScreenMainLayout;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00027}00027\ \ \ std::unique\_ptr<QLabel>\ EncryptionScreenTitle;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00028}00028\ \ \ std::unique\_ptr<QPushButton>\ StartProcessButton;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00029}00029\ \ \ std::unique\_ptr<FilePicker>\ FilePickerWidget;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00031}00031\ \ \ std::shared\_ptr<StatisticsScreenWidget>\ statisticsScreenWidget;}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00033}00033\ \ \ \textcolor{keywordtype}{void}\ configureUI();}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00035}00035\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00036}00036\ \ \ \textcolor{keywordtype}{void}\ onStartProcessButtonClicked();}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00037}00037\ \};}
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_encryption_screen_widget_8h_source_l00039}00039\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//ENCRYPTIONSCREENWIDGET\_H}}
+
+\end{DoxyCode}

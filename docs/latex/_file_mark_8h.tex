@@ -1,0 +1,87 @@
+\doxysection{D\+:/\+My\+Repo/\+File\+Vault/\+Crypto\+App/src/\+Cpp\+File\+Mark\+Lib/src/\+File\+Mark.h File Reference}
+\hypertarget{_file_mark_8h}{}\label{_file_mark_8h}\index{D:/MyRepo/FileVault/CryptoApp/src/CppFileMarkLib/src/FileMark.h@{D:/MyRepo/FileVault/CryptoApp/src/CppFileMarkLib/src/FileMark.h}}
+{\ttfamily \#include "{}../shared/src/\+Global\+Definitions.\+h"{}}\newline
+{\ttfamily \#include "{}../shared/src/\+File\+Data.\+h"{}}\newline
+{\ttfamily \#include $<$codecvt$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\+\_\+\+API}}~\+\_\+\+\_\+declspec(dllimport)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\+\_\+\+API}} bool \mbox{\hyperlink{_file_mark_8h_afd7c1d2fdd4863cad4be76c5716f28bb}{extract\+IDs\+From\+File}} (const wchar\+\_\+t \texorpdfstring{$\ast$}{*}file\+Path, unsigned char File\+ID\mbox{[}64\mbox{]}, unsigned char Encryption\+ID\mbox{[}64\mbox{]})
+\item 
+\mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\+\_\+\+API}} void \mbox{\hyperlink{_file_mark_8h_aaef49c92fbc6aebba4eafaa4b5d88b67}{mark\+File}} (const \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}file\+Data)
+\item 
+\mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\+\_\+\+API}} bool \mbox{\hyperlink{_file_mark_8h_a27d975033037e5342a1b20eec6f5ec96}{unmark\+File}} (const \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}file\+Data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const bool \mbox{\hyperlink{_file_mark_8h_a804a2deda8bd4820b904932c70df0ce5}{debug\+Print}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}\index{FileMark.h@{FileMark.h}!FILEMARKLIB\_API@{FILEMARKLIB\_API}}
+\index{FILEMARKLIB\_API@{FILEMARKLIB\_API}!FileMark.h@{FileMark.h}}
+\doxysubsubsection{\texorpdfstring{FILEMARKLIB\_API}{FILEMARKLIB\_API}}
+{\footnotesize\ttfamily \label{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa} 
+\#define FILEMARKLIB\+\_\+\+API~\+\_\+\+\_\+declspec(dllimport)}
+
+
+
+Definition at line \mbox{\hyperlink{_file_mark_8h_source_l00015}{15}} of file \mbox{\hyperlink{_file_mark_8h_source}{File\+Mark.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_file_mark_8h_afd7c1d2fdd4863cad4be76c5716f28bb}\index{FileMark.h@{FileMark.h}!extractIDsFromFile@{extractIDsFromFile}}
+\index{extractIDsFromFile@{extractIDsFromFile}!FileMark.h@{FileMark.h}}
+\doxysubsubsection{\texorpdfstring{extractIDsFromFile()}{extractIDsFromFile()}}
+{\footnotesize\ttfamily \label{_file_mark_8h_afd7c1d2fdd4863cad4be76c5716f28bb} 
+\mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\+\_\+\+API}} bool extract\+IDs\+From\+File (\begin{DoxyParamCaption}\item[{const wchar\+\_\+t \texorpdfstring{$\ast$}{*}}]{file\+Path}{, }\item[{unsigned char}]{File\+ID}{\mbox{[}64\mbox{]}, }\item[{unsigned char}]{Encryption\+ID}{\mbox{[}64\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_mark_8cpp_source_l00004}{4}} of file \mbox{\hyperlink{_file_mark_8cpp_source}{File\+Mark.\+cpp}}.
+
+\Hypertarget{_file_mark_8h_aaef49c92fbc6aebba4eafaa4b5d88b67}\index{FileMark.h@{FileMark.h}!markFile@{markFile}}
+\index{markFile@{markFile}!FileMark.h@{FileMark.h}}
+\doxysubsubsection{\texorpdfstring{markFile()}{markFile()}}
+{\footnotesize\ttfamily \label{_file_mark_8h_aaef49c92fbc6aebba4eafaa4b5d88b67} 
+\mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\+\_\+\+API}} void mark\+File (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}}]{file\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_mark_8cpp_source_l00073}{73}} of file \mbox{\hyperlink{_file_mark_8cpp_source}{File\+Mark.\+cpp}}.
+
+\Hypertarget{_file_mark_8h_a27d975033037e5342a1b20eec6f5ec96}\index{FileMark.h@{FileMark.h}!unmarkFile@{unmarkFile}}
+\index{unmarkFile@{unmarkFile}!FileMark.h@{FileMark.h}}
+\doxysubsubsection{\texorpdfstring{unmarkFile()}{unmarkFile()}}
+{\footnotesize\ttfamily \label{_file_mark_8h_a27d975033037e5342a1b20eec6f5ec96} 
+\mbox{\hyperlink{_file_mark_8h_a9e4d89749a1bb71962b6db2d529e9aaa}{FILEMARKLIB\+\_\+\+API}} bool unmark\+File (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_file_data}{File\+Data}} \texorpdfstring{$\ast$}{*}}]{file\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_file_mark_8cpp_source_l00104}{104}} of file \mbox{\hyperlink{_file_mark_8cpp_source}{File\+Mark.\+cpp}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_file_mark_8h_a804a2deda8bd4820b904932c70df0ce5}\index{FileMark.h@{FileMark.h}!debugPrint@{debugPrint}}
+\index{debugPrint@{debugPrint}!FileMark.h@{FileMark.h}}
+\doxysubsubsection{\texorpdfstring{debugPrint}{debugPrint}}
+{\footnotesize\ttfamily \label{_file_mark_8h_a804a2deda8bd4820b904932c70df0ce5} 
+const bool debug\+Print = false}
+
+
+
+Definition at line \mbox{\hyperlink{_file_mark_8h_source_l00018}{18}} of file \mbox{\hyperlink{_file_mark_8h_source}{File\+Mark.\+h}}.
+

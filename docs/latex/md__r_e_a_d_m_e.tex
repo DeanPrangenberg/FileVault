@@ -1,0 +1,154 @@
+\chapter{\texorpdfstring{$<$}{<}strong\texorpdfstring{$>$}{>}File\+Vault\+: Frontend and Backend Solution with C++ and Qt\texorpdfstring{$<$}{<}/strong\texorpdfstring{$>$}{>}}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{$<$strong$>$FileVault: Frontend and Backend Solution with C++ and Qt$<$/strong$>$@{$<$strong$>$FileVault: Frontend and Backend Solution with C++ and Qt$<$/strong$>$}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{{\bfseries{Frontend in C++ and Qt}}}{{\bfseries{Frontend in C++ and Qt}}}}\label{md__r_e_a_d_m_e_autotoc_md1}
+This project features a modern user interface designed in dark purple and with {\bfseries{4 tabs}} for different functionalities\+:\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{\texorpdfstring{{\bfseries{1. Settings}}}{{\bfseries{1. Settings}}}}\label{md__r_e_a_d_m_e_autotoc_md2}
+
+\begin{DoxyItemize}
+\item {\bfseries{Language Selection}}\+: Choose between English (ENG) and German (DE).
+\item {\bfseries{\doxylink{class_database}{Database} Export}}\+: Export the database, either {\bfseries{encrypted}} (using a key and IV) or {\bfseries{unencrypted}}.
+\item {\bfseries{Default Algorithm}}\+: Select the encryption algorithm ({\bfseries{AES-\/128}} or {\bfseries{AES-\/256}}).
+\item {\bfseries{File Deletion}}\+: Option to delete files after encryption or decryption.
+\item {\bfseries{Log Save Folder}}\+: Choose a location to save log files.
+\item {\bfseries{Central Storage}}\+: Move all encrypted or decrypted files to a single directory.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{\texorpdfstring{{\bfseries{2. Statistics}}}{{\bfseries{2. Statistics}}}}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyItemize}
+\item {\bfseries{Circular Diagram}}\+: Visualize how many files have been decrypted using AES-\/128 or AES-\/256.
+\item {\bfseries{Directory Status}}\+: Display whether files are moved to another directory (outdated database) or remain in their proper location (up-\/to-\/date database).
+\item {\bfseries{Decrypted File Counter}}\+: Count how many files are currently decrypted.
+\item {\bfseries{Encryption/\+Decryption Counters}}\+: Show the total number of encrypted and decrypted files.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{{\bfseries{3. Encryption}}}{{\bfseries{3. Encryption}}}}\label{md__r_e_a_d_m_e_autotoc_md4}
+
+\begin{DoxyItemize}
+\item {\bfseries{Algorithm Info}}\+: Display the selected encryption algorithm ({\bfseries{AES-\/128}} or {\bfseries{AES-\/256}}).
+\item {\bfseries{Add/\+Remove Directory}}\+: Buttons to manage directories for encryption.
+\item {\bfseries{Statistics}}\+:
+\begin{DoxyItemize}
+\item Percentage of encryption by algorithm.
+\item Number of files to be encrypted.
+\end{DoxyItemize}
+\item {\bfseries{Custom File Picker}}\+: Configure files for encryption.
+\item {\bfseries{Start Button}}\+: Begin the encryption process.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{{\bfseries{4. Decryption}}}{{\bfseries{4. Decryption}}}}\label{md__r_e_a_d_m_e_autotoc_md5}
+
+\begin{DoxyItemize}
+\item {\bfseries{Decrypt All Button}}\+: Option to decrypt all encrypted files.
+\item {\bfseries{Quick Selection Menu}}\+: Easily select encrypted files for decryption.
+\item {\bfseries{Add/\+Remove Directory}}\+: Buttons to manage directories for decryption.
+\item {\bfseries{Statistics}}\+:
+\begin{DoxyItemize}
+\item Percentage of decryption by algorithm.
+\item Number of files to be decrypted.
+\end{DoxyItemize}
+\item {\bfseries{Custom File Picker}}\+: Configure files for decryption.
+\item {\bfseries{Start Button}}\+: Begin the decryption process.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysection{\texorpdfstring{{\bfseries{Backend Logic in C++ and Golang}}}{{\bfseries{Backend Logic in C++ and Golang}}}}\label{md__r_e_a_d_m_e_autotoc_md7}
+The core logic of the program is divided into {\bfseries{4 modules}}\+:\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsection{\texorpdfstring{{\bfseries{1. Cpp\+Crypto\+Lib (C++)}}}{{\bfseries{1. Cpp\+Crypto\+Lib (C++)}}}}\label{md__r_e_a_d_m_e_autotoc_md8}
+A custom DLL that uses {\bfseries{Open\+SSL}} to enable various cryptographic features\+:
+\begin{DoxyItemize}
+\item {\bfseries{Key \& IV Generator}}\+: Generates cryptographically secure random keys and IVs for encryption and decryption.
+\item {\bfseries{File\+ID Generator}}\+: Uses file metadata (content and path) to generate a {\bfseries{512-\/bit hash}} using Open\+SSL\textquotesingle{}s SHA-\/512.
+\item {\bfseries{Time-\/\+Hash}}\+: Creates a hash of the current timestamp using SHA-\/512.
+\item {\bfseries{Encryption/\+Decryption}}\+: Implements AES-\/128-\/\+CBC and AES-\/256-\/\+CBC for encryption and decryption with {\bfseries{multithreading}} support. During encryption, an {\bfseries{Encryption\+ID}} is generated with the Time-\/\+Hash.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{\texorpdfstring{{\bfseries{2. Cpp\+Directory\+Scanner (C++)}}}{{\bfseries{2. Cpp\+Directory\+Scanner (C++)}}}}\label{md__r_e_a_d_m_e_autotoc_md9}
+A custom DLL that scans directories to find files based on specific criteria.\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{{\bfseries{3. File\+Marking (C++)}}}{{\bfseries{3. File\+Marking (C++)}}}}\label{md__r_e_a_d_m_e_autotoc_md10}
+This custom DLL marks files with a specific prefix and suffix after encryption, allowing files to be moved while still being identifiable in the database.
+\begin{DoxyItemize}
+\item {\bfseries{Marking Example}}\+: ~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}File\+Vault\texorpdfstring{$>$}{>}512-\/bit File\+ID\texorpdfstring{$<$}{<}File\+Vault\texorpdfstring{$>$}{>}512-\/bit Encryption\+ID\texorpdfstring{$<$}{<}File\+Vault\texorpdfstring{$>$}{>}}
+\item {\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item Add or remove file markings.
+\item Maintain database consistency even after file movement.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsection{\texorpdfstring{{\bfseries{4. REST API Connector (Go)}}}{{\bfseries{4. REST API Connector (Go)}}}}\label{md__r_e_a_d_m_e_autotoc_md11}
+A DLL written in Go that connects to the backend database container via HTTP to\+:
+\begin{DoxyItemize}
+\item Add new entries.
+\item Search for existing entries using {\bfseries{File\+ID}} and {\bfseries{Encryption\+ID}}.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysection{\texorpdfstring{{\bfseries{Backend Database Container in Java and Docker}}}{{\bfseries{Backend Database Container in Java and Docker}}}}\label{md__r_e_a_d_m_e_autotoc_md13}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsection{\texorpdfstring{{\bfseries{Docker}}}{{\bfseries{Docker}}}}\label{md__r_e_a_d_m_e_autotoc_md14}
+Docker ensures the database runs in a lightweight, isolated {\bfseries{container}}. Each container provides a consistent environment, making the application deployment seamless.\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysubsection{\texorpdfstring{{\bfseries{Database}}}{{\bfseries{Database}}}}\label{md__r_e_a_d_m_e_autotoc_md15}
+The database stores all metadata required for file handling\+:
+
+
+\begin{DoxyEnumerate}
+\item File\+ID (Unique File-\/\+Hash identifier)
+\item Encryption\+ID (Unique Time-\/\+Hash identifier)
+\item Last\+Update\+ID (Unique Time-\/\+Hash identifier)
+\item Algorithm\+Type (The selected encryption algorithm)
+\item Original\+Path (Path to the original file)
+\item Encrypted\+Path (Path to the encrypted file)
+\item Decrypted\+Path (Path to the decrypted file)
+\item KEY (Encryption key)
+\item IV (Initialization vector)
+\end{DoxyEnumerate}
+
+{\bfseries{\doxylink{class_database}{Database} Functions}}\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Insert\+Entry}}\+: Add a new record to the database.
+\item {\bfseries{Replace\+Entry}}\+: Replace an existing record using the {\bfseries{File\+ID}} and {\bfseries{Encryption\+ID}}.
+\item {\bfseries{Delete\+Entry}}\+: Remove an entry based on {\bfseries{File\+ID}} and {\bfseries{Encryption\+ID}}.
+\item {\bfseries{Search\+Entry}}\+: Search for an entry using {\bfseries{File\+ID}} and {\bfseries{Encryption\+ID}}.
+\item {\bfseries{Get\+All\+Entries}}\+: Retrieve all primary keys and paths.
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysection{\texorpdfstring{{\bfseries{Backend Testing in Rust}}}{{\bfseries{Backend Testing in Rust}}}}\label{md__r_e_a_d_m_e_autotoc_md17}
+A Rust-\/based module to stress test the backend system\+:
+\begin{DoxyItemize}
+\item Generates test directories containing a specified number of files.
+\item Runs the files through the entire backend workflow multiple times.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysection{\texorpdfstring{{\bfseries{Backend Utilities and Frontend-\/\+Backend Connector in C++}}}{{\bfseries{Backend Utilities and Frontend-\/\+Backend Connector in C++}}}}\label{md__r_e_a_d_m_e_autotoc_md19}
+
+\begin{DoxyItemize}
+\item {\bfseries{Utility Functions}}\+: Provides helper functions to connect the custom DLLs and update lost files in the database.
+\item {\bfseries{C-\/\+API Integration}}\+: Enables communication between the DLLs and the main application.
+\item {\bfseries{Qt Integration}}\+: Connects the GUI (Qt) with the backend logic, allowing seamless data exchange between the frontend and backend.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysection{\texorpdfstring{{\bfseries{Technologies Used}}}{{\bfseries{Technologies Used}}}}\label{md__r_e_a_d_m_e_autotoc_md21}
+
+\begin{DoxyItemize}
+\item {\bfseries{Frontend}}\+: C++ with Qt Framework
+\item {\bfseries{Core Logic}}\+: C++ and Go
+\item {\bfseries{\doxylink{class_database}{Database}}}\+: Java and Docker
+\item {\bfseries{Testing}}\+: Rust
+\item {\bfseries{Cryptography}}\+: Open\+SSL
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md23}{}\doxysection{\texorpdfstring{{\bfseries{Key Features}}}{{\bfseries{Key Features}}}}\label{md__r_e_a_d_m_e_autotoc_md23}
+
+\begin{DoxyItemize}
+\item Fully modular architecture.
+\item Multithreaded encryption and decryption (AES-\/128/\+AES-\/256).
+\item Robust database management with Docker.
+\item GUI with customizable settings and live statistics.
+\item File scanning, marking, and movement capabilities.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md25}{}\doxysection{\texorpdfstring{{\bfseries{How to Run}}}{{\bfseries{How to Run}}}}\label{md__r_e_a_d_m_e_autotoc_md25}
+
+\begin{DoxyEnumerate}
+\item Clone the repository.
+\item Ensure all dependencies (Qt, Open\+SSL, Go, Rust, Docker) are installed.
+\item Build the project using your preferred IDE or CMake.
+\item Launch the application and configure the settings.
+\item Use the {\bfseries{Encryption}} or {\bfseries{Decryption}} tabs to process files.
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md26}{}\doxysection{\texorpdfstring{{\bfseries{License}}}{{\bfseries{License}}}}\label{md__r_e_a_d_m_e_autotoc_md26}
+This project is licensed under the MIT License.\hypertarget{md__r_e_a_d_m_e_autotoc_md27}{}\doxysection{\texorpdfstring{{\bfseries{Contact}}}{{\bfseries{Contact}}}}\label{md__r_e_a_d_m_e_autotoc_md27}
+For questions, feedback, or collaboration, feel free to reach out to me via Git\+Hub. 

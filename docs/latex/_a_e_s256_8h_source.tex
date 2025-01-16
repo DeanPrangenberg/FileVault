@@ -1,0 +1,33 @@
+\doxysection{AES256.\+h}
+\hypertarget{_a_e_s256_8h_source}{}\label{_a_e_s256_8h_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/alogs/AES256.h@{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/alogs/AES256.h}}
+\mbox{\hyperlink{_a_e_s256_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00001}00001\ \textcolor{comment}{//\ AES256.h}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00002}00002\ \textcolor{preprocessor}{\#ifndef\ FILEVAULTROOT\_AES256\_H}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00003}00003\ \textcolor{preprocessor}{\#define\ FILEVAULTROOT\_AES256\_H}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <openssl/err.h>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <openssl/evp.h>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <future>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_definitions_8h}{../../../shared/src/GlobalDefinitions.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_crypto_helper_utils_8h}{../Helper/CryptoHelperUtils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00015}00015\ \textcolor{preprocessor}{\#undef\ min}}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00017}00017\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00019}\mbox{\hyperlink{class_a_e_s256}{00019}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_e_s256}{AES256}}\ \{}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00020}00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00021}00021\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_e_s256_a21273e2c5c4097c14176bcff79a6c34c}{encryptFile}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData);}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00022}00022\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_e_s256_a183a5717f75098bfc92686f3281f96fc}{decryptFile}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData);}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00023}00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00024}00024\ \ \ \textcolor{keyword}{static}\ std::mutex\ fileMutex;}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00025}00025\ \};}
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_a_e_s256_8h_source_l00027}00027\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FILEVAULTROOT\_AES256\_H}}
+
+\end{DoxyCode}

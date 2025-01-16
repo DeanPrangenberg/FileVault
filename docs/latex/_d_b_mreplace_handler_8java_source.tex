@@ -1,0 +1,73 @@
+\doxysection{DBMreplace\+Handler.\+java}
+\hypertarget{_d_b_mreplace_handler_8java_source}{}\label{_d_b_mreplace_handler_8java_source}\index{D:/MyRepo/FileVault/JavaDatabase/src/main/java/DBMreplaceHandler.java@{D:/MyRepo/FileVault/JavaDatabase/src/main/java/DBMreplaceHandler.java}}
+\mbox{\hyperlink{_d_b_mreplace_handler_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00001}00001\ \textcolor{keyword}{import}\ com.fasterxml.jackson.databind.JsonNode;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00002}00002\ \textcolor{keyword}{import}\ com.fasterxml.jackson.databind.ObjectMapper;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpHandler;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.sun.net.httpserver.HttpExchange;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00006}00006\ \textcolor{keyword}{import}\ javax.crypto.Cipher;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00007}00007\ \textcolor{keyword}{import}\ javax.crypto.spec.SecretKeySpec;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00010}00010\ \textcolor{keyword}{import}\ java.io.InputStream;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00011}00011\ \textcolor{keyword}{import}\ java.nio.charset.StandardCharsets;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00012}00012\ \textcolor{keyword}{import}\ java.util.Base64;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00017}\mbox{\hyperlink{class_d_b_mreplace_handler}{00017}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_d_b_mreplace_handler_a278c0cd49a7840cdf0b25a50d1ae20ea}{DBMreplaceHandler}}\ \textcolor{keyword}{implements}\ HttpHandler\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00018}00018\ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_database}{Database}}\ db;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00025}\mbox{\hyperlink{class_d_b_mreplace_handler_a278c0cd49a7840cdf0b25a50d1ae20ea}{00025}}\ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_d_b_mreplace_handler_a278c0cd49a7840cdf0b25a50d1ae20ea}{DBMreplaceHandler}}(\mbox{\hyperlink{class_database}{Database}}\ db)\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00026}00026\ \ \ \ \ this.db\ =\ db;}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00027}00027\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00035}00035\ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00036}\mbox{\hyperlink{class_d_b_mreplace_handler_a161b61a21f5c8cc7099c35003ad9370e}{00036}}\ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_b_mreplace_handler_a161b61a21f5c8cc7099c35003ad9370e}{handle}}(HttpExchange\ t)\ \textcolor{keywordflow}{throws}\ IOException\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00037}00037\ \ \ \ \ InputStream\ is\ =\ t.getRequestBody();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{byte}[]\ inputBytes\ =\ is.readAllBytes();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00039}00039\ \ \ \ \ String\ input\ =\ \textcolor{keyword}{new}\ String(inputBytes,\ StandardCharsets.UTF\_8);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00041}00041\ \ \ \ \ ObjectMapper\ mapper\ =\ \textcolor{keyword}{new}\ ObjectMapper();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00042}00042\ \ \ \ \ JsonNode\ jsonNode\ =\ mapper.readTree(input);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00043}00043\ \ \ \ \ String\ encodedKey\ =\ jsonNode.get(\textcolor{stringliteral}{"{}Key"{}}).asText();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00044}00044\ \ \ \ \ String\ encodedData\ =\ jsonNode.get(\textcolor{stringliteral}{"{}Data"{}}).asText();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00047}00047\ \ \ \ \ \ \ \textcolor{comment}{//\ Decrypt\ the\ data}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00048}00048\ \ \ \ \ \ \ \textcolor{keywordtype}{byte}[]\ keyBytes\ =\ Base64.getDecoder().decode(encodedKey);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00049}00049\ \ \ \ \ \ \ \textcolor{keywordtype}{byte}[]\ encryptedBytes\ =\ Base64.getDecoder().decode(encodedData);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00050}00050\ \ \ \ \ \ \ Cipher\ cipher\ =\ Cipher.getInstance(\textcolor{stringliteral}{"{}AES"{}});}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00051}00051\ \ \ \ \ \ \ cipher.init(Cipher.DECRYPT\_MODE,\ \textcolor{keyword}{new}\ SecretKeySpec(keyBytes,\ \textcolor{stringliteral}{"{}AES"{}}));}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00052}00052\ \ \ \ \ \ \ \textcolor{keywordtype}{byte}[]\ decryptedBytes\ =\ cipher.doFinal(encryptedBytes);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00053}00053\ \ \ \ \ \ \ String\ decryptedData\ =\ \textcolor{keyword}{new}\ String(decryptedBytes,\ StandardCharsets.UTF\_8);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00055}00055\ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ the\ decrypted\ data\ as\ a\ list\ of\ entries}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00056}00056\ \ \ \ \ \ \ \mbox{\hyperlink{class_database}{Database}}.\mbox{\hyperlink{class_database_1_1_go_file_data}{GoFileData}}[]\ dataEntries\ =\ mapper.readValue(decryptedData,\ \mbox{\hyperlink{class_database}{Database}}.\mbox{\hyperlink{class_database_1_1_go_file_data}{GoFileData}}[].class);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00058}00058\ \ \ \ \ \ \ \textcolor{comment}{//\ Drop\ the\ existing\ table\ and\ reinitialize\ it}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00059}00059\ \ \ \ \ \ \ db.dropTable();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00060}00060\ \ \ \ \ \ \ db.connect();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00062}00062\ \ \ \ \ \ \ \textcolor{comment}{//\ Insert\ all\ entries\ into\ the\ database}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00063}00063\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_database}{Database}}.\mbox{\hyperlink{class_database_1_1_go_file_data}{GoFileData}}\ data\ :\ dataEntries)\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ db.insertEntry(data);}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00065}00065\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00067}00067\ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}true"{}};}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00068}00068\ \ \ \ \ \ \ t.sendResponseHeaders(200,\ response.length());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00069}00069\ \ \ \ \ \ \ OutputStream\ os\ =\ t.getResponseBody();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00070}00070\ \ \ \ \ \ \ os.write(response.getBytes());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00071}00071\ \ \ \ \ \ \ os.close();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00072}00072\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00073}00073\ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00074}00074\ \ \ \ \ \ \ String\ response\ =\ \textcolor{stringliteral}{"{}false"{}};}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00075}00075\ \ \ \ \ \ \ t.sendResponseHeaders(500,\ response.length());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00076}00076\ \ \ \ \ \ \ OutputStream\ os\ =\ t.getResponseBody();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00077}00077\ \ \ \ \ \ \ os.write(response.getBytes());}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00078}00078\ \ \ \ \ \ \ os.close();}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00080}00080\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_mreplace_handler_8java_source_l00081}00081\ \}}
+
+\end{DoxyCode}

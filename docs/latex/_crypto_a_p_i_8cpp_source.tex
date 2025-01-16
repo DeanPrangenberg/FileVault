@@ -1,0 +1,86 @@
+\doxysection{Crypto\+API.\+cpp}
+\hypertarget{_crypto_a_p_i_8cpp_source}{}\label{_crypto_a_p_i_8cpp_source}\index{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/api/CryptoAPI.cpp@{D:/MyRepo/FileVault/CryptoApp/src/CppCryptoLib/src/api/CryptoAPI.cpp}}
+\mbox{\hyperlink{_crypto_a_p_i_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_crypto_a_p_i_8h}{CryptoAPI.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00003}00003\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00004}\mbox{\hyperlink{_crypto_a_p_i_8cpp_a7c30ada943b0d7fdd6a44bf919e924b1}{00004}}\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_crypto_a_p_i_8cpp_a7c30ada943b0d7fdd6a44bf919e924b1}{EncryptFileWrapper}}(\mbox{\hyperlink{class_file_data}{FileData}}\ *fileData,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ numFiles)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00005}00005\ \ \ std::vector<std::future<bool>>\ futures;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00006}00006\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numFiles;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00007}00007\ \ \ \ \ fileData[i].\mbox{\hyperlink{class_file_data_a860e6262dacc9a4a19bc35e48b9b13f9}{setEncryptionId}}(\textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}[64]);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00008}00008\ \ \ \ \ fileData[i].\mbox{\hyperlink{class_file_data_afa7707bf598c8687ea5912b20c02b0f2}{setEncryptionIdLength}}(64);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00010}00010\ \ \ \ \ \mbox{\hyperlink{_crypto_a_p_i_8cpp_a81f42969859874d08481f042846c6ccd}{getCurrentTimeHash}}(fileData[i].getEncryptionId());}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00012}00012\ \ \ \ \ \textcolor{keywordflow}{if}\ (fileData[i].getKeyLength()\ ==\ 16)\ \{\ \textcolor{comment}{//\ AES-\/128}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00013}00013\ \ \ \ \ \ \ futures.push\_back(std::async(std::launch::async,\ \mbox{\hyperlink{class_a_e_s128_a524cff3bd710b09b2eebf44094ca2367}{AES128::encryptFile}},\ \&fileData[i]));}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00014}00014\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fileData[i].getKeyLength()\ ==\ 32)\ \{\ \textcolor{comment}{//\ AES-\/256}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00015}00015\ \ \ \ \ \ \ futures.push\_back(std::async(std::launch::async,\ \mbox{\hyperlink{class_a_e_s256_a21273e2c5c4097c14176bcff79a6c34c}{AES256::encryptFile}},\ \&fileData[i]));}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00016}00016\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00017}00017\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00019}00019\ \ \ \textcolor{keywordtype}{bool}\ *resultArray\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{bool}[numFiles];}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00020}00020\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numFiles;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00021}00021\ \ \ \ \ resultArray[i]\ =\ futures[i].get();}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00022}00022\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00023}00023\ \ \ \textcolor{keywordflow}{return}\ resultArray;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00026}\mbox{\hyperlink{_crypto_a_p_i_8cpp_a7be657d1b51b6b5a871f25d13b294ed2}{00026}}\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_crypto_a_p_i_8cpp_a7be657d1b51b6b5a871f25d13b294ed2}{DecryptFileWrapper}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_data}{FileData}}\ *fileData,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ numFiles)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00027}00027\ \ \ std::vector<std::future<bool>>\ futures;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00028}00028\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numFiles;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (fileData[i].getKeyLength()\ ==\ 16)\ \{\ \textcolor{comment}{//\ AES-\/128}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00030}00030\ \ \ \ \ \ \ futures.push\_back(std::async(std::launch::async,\ \mbox{\hyperlink{class_a_e_s128_afbf0042b3bb727f46f3b7a1310a822c2}{AES128::decryptFile}},\ \&fileData[i]));}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00031}00031\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fileData[i].getKeyLength()\ ==\ 32)\ \{\ \textcolor{comment}{//\ AES-\/256}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00032}00032\ \ \ \ \ \ \ futures.push\_back(std::async(std::launch::async,\ \mbox{\hyperlink{class_a_e_s256_a183a5717f75098bfc92686f3281f96fc}{AES256::decryptFile}},\ \&fileData[i]));}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00034}00034\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00036}00036\ \ \ \textcolor{keywordtype}{bool}\ *resultArray\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{bool}[numFiles];}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00037}00037\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numFiles;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00038}00038\ \ \ \ \ resultArray[i]\ =\ futures[i].get();}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00039}00039\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00040}00040\ \ \ \textcolor{keywordflow}{return}\ resultArray;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00043}\mbox{\hyperlink{_crypto_a_p_i_8cpp_abd041ea6d7162d501e00548feb22ad65}{00043}}\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_crypto_a_p_i_8cpp_abd041ea6d7162d501e00548feb22ad65}{GenerateKeyIv}}(\textcolor{keywordtype}{size\_t}\ keySize,\ \textcolor{keywordtype}{size\_t}\ ivSize,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *key,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *iv)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00044}00044\ \ \ \mbox{\hyperlink{class_key_gen}{KeyGen}}\ keyGen;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00046}00046\ \ \ \textcolor{keywordflow}{if}\ (key\ ==\ \textcolor{keyword}{nullptr}\ ||\ iv\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00047}00047\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ key\ or\ iv\ pointer\ is\ null."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00049}00049\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00051}00051\ \ \ std::vector<unsigned\ char>\ keyVec;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00052}00052\ \ \ std::vector<unsigned\ char>\ ivVec;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00054}00054\ \ \ keyGen.\mbox{\hyperlink{class_key_gen_acacea676914dbba43cc767ac57abd917}{generateKeyIv}}(keySize,\ ivSize,\ keyVec,\ ivVec);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00056}00056\ \ \ std::copy(keyVec.begin(),\ keyVec.end(),\ key);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00057}00057\ \ \ std::copy(ivVec.begin(),\ ivVec.end(),\ iv);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00060}\mbox{\hyperlink{_crypto_a_p_i_8cpp_a88bfb02feaadb25f304da31f5929e80b}{00060}}\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_crypto_a_p_i_8cpp_a88bfb02feaadb25f304da31f5929e80b}{GenerateFileID}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}\ *filePath,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *fileID)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00061}00061\ \ \ \textcolor{keyword}{auto}\ hash\ =\ \mbox{\hyperlink{class_s_h_a512_aa7ae66f88694732f653e3ed114fc104f}{SHA512::hashFile}}(filePath);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00062}00062\ \ \ \textcolor{keyword}{auto}\ hashStr\ =\ \mbox{\hyperlink{class_s_h_a512_a101f96457f096d48f121fbf75562ce68}{SHA512::hashString}}(std::wstring(filePath));}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00064}00064\ \ \ std::vector<unsigned\ char>\ combinedHash;}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00065}00065\ \ \ combinedHash.reserve(hash.size()\ +\ hashStr.size());}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00066}00066\ \ \ combinedHash.insert(combinedHash.end(),\ hash.begin(),\ hash.end());}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00067}00067\ \ \ combinedHash.insert(combinedHash.end(),\ hashStr.begin(),\ hashStr.end());}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00069}00069\ \ \ std::array<unsigned\ char,\ EVP\_MAX\_MD\_SIZE>\ hashID\ =\ \mbox{\hyperlink{class_s_h_a512_a892866c109cbc620209c6381f9dcc064}{SHA512::hashArray}}(combinedHash);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00071}00071\ \ \ std::copy(hashID.begin(),\ hashID.begin()\ +\ 64,\ fileID);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00072}00072\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00074}\mbox{\hyperlink{_crypto_a_p_i_8cpp_a81f42969859874d08481f042846c6ccd}{00074}}\ [[maybe\_unused]]\ \mbox{\hyperlink{_crypto_a_p_i_8h_ab74bd50ee375880c4e60e55929a9f39b}{CRYPTOLIB\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_crypto_a_p_i_8cpp_a81f42969859874d08481f042846c6ccd}{getCurrentTimeHash}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *timeHash)\ \{}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00075}00075\ \ \ \textcolor{keyword}{auto}\ time\ =\ \mbox{\hyperlink{class_crypto_helper_utils_a54797d8bf179b9084df2cb47597d5d95}{CryptoHelperUtils::getCurrentTime}}();}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00076}00076\ \ \ \textcolor{keyword}{auto}\ hashedTime\ =\ \mbox{\hyperlink{class_s_h_a512_a892866c109cbc620209c6381f9dcc064}{SHA512::hashArray}}(time);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00078}00078\ \ \ std::copy(hashedTime.begin(),\ hashedTime.begin()\ +\ 64,\ timeHash);}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{_crypto_a_p_i_8cpp_source_l00080}00080\ \}}
+
+\end{DoxyCode}
