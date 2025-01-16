@@ -26,8 +26,5 @@ var searchData=
   ['restapidll_2ecpp_23',['RestApiDLL.cpp',['../_rest_api_d_l_l_8cpp.html',1,'']]],
   ['restapidll_2eh_24',['RestApiDLL.h',['../_rest_api_d_l_l_8h.html',1,'']]],
   ['run_20strong_25',['&lt;strong&gt;How to Run&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md25',1,'']]],
-  ['rust_20strong_26',['&lt;strong&gt;Backend Testing in Rust&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md17',1,'']]],
-  ['rustfilecopy_2d9c77753eb26b5d67_2ed_27',['RustFileCopy-9c77753eb26b5d67.d',['../_rust_file_copy-9c77753eb26b5d67_8d.html',1,'']]],
-  ['rustfilecopy_2dbb7c97ce86a25e1c_2ed_28',['RustFileCopy-bb7c97ce86a25e1c.d',['../_rust_file_copy-bb7c97ce86a25e1c_8d.html',1,'']]],
-  ['rustfilecopy_2ed_29',['RustFileCopy.d',['../deps_2_rust_file_copy_8d.html',1,'(Global Namespace)'],['../_rust_file_copy_8d.html',1,'(Global Namespace)']]]
+  ['rust_20strong_26',['&lt;strong&gt;Backend Testing in Rust&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md17',1,'']]]
 ];
