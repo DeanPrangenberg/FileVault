@@ -42,12 +42,12 @@ add_custom_target(GoRestApiWrapperLib ALL
 )
 
 # Specify dependencies between projects
-add_dependencies(CppFileVaultMain GenDoc)  # Main app depends on shared classes
-add_dependencies(CppFileVaultMain RustFileCopy)  # Main app depends on Rust project
-add_dependencies(CppFileVaultMain CppCryptoLib)  # Main app depends on cryptography
-add_dependencies(CppFileVaultMain GoRestApiWrapperLib)  # Main app depends on Go DLL
-add_dependencies(CppFileVaultMain CppDirectoryScannerLib)  # Main app depends on C# project
-add_dependencies(CppFileVaultMain CppFileMarkLib)  # Main app depends on C# project
+add_dependencies(CppFileVaultMain GenDoc)
+add_dependencies(CppFileVaultMain RustFileCopy)
+add_dependencies(CppFileVaultMain CppCryptoLib)
+add_dependencies(CppFileVaultMain GoRestApiWrapperLib)
+add_dependencies(CppFileVaultMain CppDirectoryScannerLib)
+add_dependencies(CppFileVaultMain CppFileMarkLib)
 
 # Compilation options for warnings
 if (MSVC)

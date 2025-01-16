@@ -89,6 +89,8 @@ add_executable(CppFileVaultMain
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/LanguageSelectionWidget.h
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.cpp
     src/gui/widgetClasses/elementWidgets/SettingsWidgets/DatabaseManagementWidget.h
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.cpp
+    src/gui/widgetClasses/elementWidgets/SettingsWidgets/CentralFileStorageWidget.h
     src/gui/widgetClasses/elementWidgets/smallElements/PasswordLineEdit.h
     src/gui/styleClass/StyleSetter.cpp
     src/gui/widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h
