@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['main_0',['Main',['../class_main.html',1,'']]],
-  ['masterdllclass_1',['MasterDLLClass',['../class_master_d_l_l_class.html',1,'']]],
-  ['mastersettingswidget_2',['MasterSettingsWidget',['../class_master_settings_widget.html',1,'']]]
+  ['languageselectionwidget_0',['LanguageSelectionWidget',['../class_language_selection_widget.html',1,'']]],
+  ['loadingwindow_1',['LoadingWindow',['../class_loading_window.html',1,'']]],
+  ['logs_2',['Logs',['../class_logs.html',1,'']]],
+  ['logslocationwidget_3',['LogsLocationWidget',['../class_logs_location_widget.html',1,'']]]
 ];

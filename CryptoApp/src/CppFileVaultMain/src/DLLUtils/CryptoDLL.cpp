@@ -4,6 +4,13 @@
 
 #include "CryptoDLL.h"
 
+/**
+ * @brief Encrypts multiple files using the CppCryptoLib DLL.
+ *
+ * @param fileData Pointer to an array of FileData objects representing the files to encrypt.
+ * @param count The number of files to encrypt.
+ * @param results A vector to store the results of the encryption for each file.
+ */
 void CryptoDLL::EncryptFiles(FileData *fileData, int count, std::vector<bool> &results) {
   HMODULE hMultiThreadCryptoLib = loadDll(L"CppCryptoLib.dll");
   if (!hMultiThreadCryptoLib) {
@@ -12,7 +19,7 @@ void CryptoDLL::EncryptFiles(FileData *fileData, int count, std::vector<bool> &r
 
   auto encryptFilesFunc = (EncryptFilesFunc) GetProcAddress(hMultiThreadCryptoLib, "EncryptFileWrapper");
   if (!encryptFilesFunc) {
-    logError("Failed to get function address for EncryptFilesWrapper");
+    Logs::writeToErrorLog("Failed to get function address for EncryptFilesWrapper");
     unloadDll(hMultiThreadCryptoLib);
     return;
   }
@@ -26,6 +33,13 @@ void CryptoDLL::EncryptFiles(FileData *fileData, int count, std::vector<bool> &r
   unloadDll(hMultiThreadCryptoLib);
 }
 
+/**
+ * @brief Decrypts multiple files using the CppCryptoLib DLL.
+ *
+ * @param fileData Pointer to an array of FileData objects representing the files to decrypt.
+ * @param count The number of files to decrypt.
+ * @param results A vector to store the results of the decryption for each file.
+ */
 void CryptoDLL::DecryptFiles(FileData *fileData, int count, std::vector<bool> &results) {
   HMODULE hMultiThreadCryptoLib = loadDll(L"CppCryptoLib.dll");
   if (!hMultiThreadCryptoLib) {
@@ -34,7 +48,7 @@ void CryptoDLL::DecryptFiles(FileData *fileData, int count, std::vector<bool> &r
 
   auto decryptFilesFunc = (DecryptFilesFunc) GetProcAddress(hMultiThreadCryptoLib, "DecryptFileWrapper");
   if (!decryptFilesFunc) {
-    logError("Failed to get function address for DecryptFilesWrapper");
+    Logs::writeToErrorLog("Failed to get function address for DecryptFilesWrapper");
     unloadDll(hMultiThreadCryptoLib);
     return;
   }
@@ -48,6 +62,14 @@ void CryptoDLL::DecryptFiles(FileData *fileData, int count, std::vector<bool> &r
   unloadDll(hMultiThreadCryptoLib);
 }
 
+/**
+ * @brief Generates a key and initialization vector (IV) using the CppCryptoLib DLL.
+ *
+ * @param keySize The size of the key to generate.
+ * @param ivSize The size of the IV to generate.
+ * @param key Pointer to the buffer to store the generated key.
+ * @param iv Pointer to the buffer to store the generated IV.
+ */
 void CryptoDLL::GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv) {
   HMODULE hCryptographyDll = loadDll(L"CppCryptoLib.dll");
   if (!hCryptographyDll) {
@@ -56,7 +78,7 @@ void CryptoDLL::GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key,
 
   auto generateKeyIvFunc = (GenerateKeyIvFunc) GetProcAddress(hCryptographyDll, "GenerateKeyIv");
   if (!generateKeyIvFunc) {
-    logError("Failed to get function address for GenerateKeyIv");
+    Logs::writeToErrorLog("Failed to get function address for GenerateKeyIv");
     unloadDll(hCryptographyDll);
     return;
   }
@@ -65,9 +87,15 @@ void CryptoDLL::GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key,
   unloadDll(hCryptographyDll);
 }
 
+/**
+ * @brief Generates a file ID for a given file path using the CppCryptoLib DLL.
+ *
+ * @param filePath The path of the file to generate the ID for.
+ * @param fileID Pointer to the buffer to store the generated file ID.
+ */
 void CryptoDLL::GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
   if (!filePath || !fileID) {
-    logError("Invalid file path or fileID buffer");
+    Logs::writeToErrorLog("Invalid file path or fileID buffer");
     return;
   }
 
@@ -78,7 +106,7 @@ void CryptoDLL::GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
 
   auto generateFileIDFunc = (GenerateFileIDFunc) GetProcAddress(hCryptographyDll, "GenerateFileID");
   if (!generateFileIDFunc) {
-    logError("Failed to get function address for GenerateFileID");
+    Logs::writeToErrorLog("Failed to get function address for GenerateFileID");
     unloadDll(hCryptographyDll);
     return;
   }
@@ -87,9 +115,14 @@ void CryptoDLL::GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
   unloadDll(hCryptographyDll);
 }
 
+/**
+ * @brief Generates a hash of the current time using the CppCryptoLib DLL.
+ *
+ * @param timeHash Pointer to the buffer to store the generated time hash.
+ */
 void CryptoDLL::getCurrentTimeHash(unsigned char *timeHash) {
   if (!timeHash) {
-    logError("Invalid timeHash buffer");
+    Logs::writeToErrorLog("Invalid timeHash buffer");
     return;
   }
 
@@ -100,7 +133,7 @@ void CryptoDLL::getCurrentTimeHash(unsigned char *timeHash) {
 
   auto getCurrentTimeHash = (getCurrentTimeHashFunc) GetProcAddress(hCryptographyDll, "getCurrentTimeHash");
   if (!getCurrentTimeHash) {
-    logError("Failed to get function address for GenerateFileID");
+    Logs::writeToErrorLog("Failed to get function address for GenerateFileID");
     unloadDll(hCryptographyDll);
     return;
   }

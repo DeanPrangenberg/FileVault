@@ -1,18 +1,16 @@
-//
-// Created by prang on 13.01.2025.
-//
-
 #include "CentralFileStorage.h"
-
 #include <string>
 
+// Static member variables initialization
 bool CentralFileStorage::centralEncFileStorage = false;
 bool CentralFileStorage::centralDecFileStorage = false;
 unsigned long long CentralFileStorage::encFileCounter = 0;
 unsigned long long CentralFileStorage::decFileCounter = 0;
-
 fs::path CentralFileStorage::fileStoragePath = fs::current_path() / "centralStorage";
 
+/**
+ * @brief Checks and creates the central file storage path and its subdirectories if they do not exist.
+ */
 void CentralFileStorage::checkCentralFileStoragePath() {
   if (!fs::exists(fileStoragePath) || !fs::is_directory(fileStoragePath)
       || !fs::exists(fileStoragePath / "Encrypted") || !fs::is_directory(fileStoragePath / "Encrypted")
@@ -24,6 +22,13 @@ void CentralFileStorage::checkCentralFileStoragePath() {
   }
 }
 
+/**
+ * @brief Moves a file to the central storage, either to the Encrypted or Decrypted subdirectory.
+ *
+ * @param filePath The path of the file to be moved.
+ * @param isEncrypted A boolean indicating whether the file is encrypted.
+ * @return True if the file was successfully moved, false otherwise.
+ */
 bool CentralFileStorage::moveFileToCentralStorage(const fs::path &filePath, bool isEncrypted) {
   checkCentralFileStoragePath();
 

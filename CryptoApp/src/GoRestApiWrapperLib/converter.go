@@ -10,6 +10,12 @@ import (
   "unsafe"
 )
 
+/**
+ * Converts a wide character string to a Go string.
+ *
+ * @param wstr Pointer to the wide character string.
+ * @return The converted Go string.
+ */
 func wcharToString(wstr *C.wchar_t) string {
   var runes []rune
   for {
@@ -23,6 +29,12 @@ func wcharToString(wstr *C.wchar_t) string {
   return string(runes)
 }
 
+/**
+ * Converts a Go string to a wide character string.
+ *
+ * @param s The Go string to convert.
+ * @return Pointer to the wide character string.
+ */
 func stringToWcharT(s string) *C.wchar_t {
   runes := []rune(s)
   wcharArray := make([]C.wchar_t, len(runes)+1)
@@ -35,6 +47,12 @@ func stringToWcharT(s string) *C.wchar_t {
   return &wcharArray[0]
 }
 
+/**
+ * Converts a C FileDataDB struct to a Go GoFileData struct.
+ *
+ * @param data Pointer to the C FileDataDB struct.
+ * @return The converted Go GoFileData struct.
+ */
 func convertToGoFileData(data *C.FileDataDB) GoFileData {
   var fileID, encryptionID, lastUpdateID, algorithmenType, originalFilePath, encryptedFilePath, decryptedFilePath, key, iv string
   var fileIDLength, encryptionIDLength, lastUpdateIDLength, keyLength, ivLength int
@@ -100,6 +118,12 @@ func convertToGoFileData(data *C.FileDataDB) GoFileData {
   }
 }
 
+/**
+ * Converts a Go GoFileData struct to a C FileDataDB struct.
+ *
+ * @param data The Go GoFileData struct to convert.
+ * @return Pointer to the converted C FileDataDB struct.
+ */
 func convertToCFileData(data GoFileData) *C.FileDataDB {
   return &C.FileDataDB{
     FileID:             stringToWcharT(data.FileID),

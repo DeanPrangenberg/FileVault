@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keygen_0',['KeyGen',['../class_key_gen.html',1,'']]]
+  ['inserthandler_0',['InsertHandler',['../class_insert_handler.html',1,'']]]
 ];

@@ -97,41 +97,62 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Logs.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_logs_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef LOGS_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define LOGS_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>fs = std::filesystem;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_logs.html">   13</a></span><span class="keyword">class </span><a class="code hl_function" href="class_logs.html#a344e2e425cb08055b6eefd19aca2cdf0">Logs</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_logs.html#a344e2e425cb08055b6eefd19aca2cdf0">   15</a></span>  <a class="code hl_function" href="class_logs.html#a344e2e425cb08055b6eefd19aca2cdf0">Logs</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_logs.html#a3e713ca7bf65f71fb8310d86894e5373">writeToErrorLog</a>(<span class="keyword">const</span> std::string &amp;message);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_logs.html#a6f2bd87c20785d8da0918bb20f7d7f30">writeToInfoLog</a>(<span class="keyword">const</span> std::string &amp;message);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_logs.html#a5570d06ec08c65d6c172ceb73262de42">moveLogsDirectory</a>(<span class="keyword">const</span> fs::path &amp;newLogsDirectory);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keyword">static</span> fs::path <a class="code hl_function" href="class_logs.html#af18d8e41efd28714e2c22f53810cebeb">getLogsDirectory</a>();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">static</span> fs::path logsDirectory;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> checkFileExists(<span class="keyword">const</span> fs::path &amp;filePath);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keyword">static</span> std::string getCurrentTimeFormatted();</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> ensureLogsDirectoryExists(<span class="keyword">const</span> fs::path &amp;logsDir);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+<a href="_logs_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Logs.h</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#ifndef LOGS_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define LOGS_H</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>fs = std::filesystem;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_logs.html">   14</a></span><span class="keyword">class </span><a class="code hl_function" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_logs.html#a64c3e98569c9ceb3cc30e587d4902647">   20</a></span>  <span class="keyword">static</span> <a class="code hl_function" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs</a>&amp; <a class="code hl_function" href="class_logs.html#a64c3e98569c9ceb3cc30e587d4902647">getInstance</a>() {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">static</span> <a class="code hl_function" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs</a> instance;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  }</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif </span><span class="comment">//LOGS_H</span></div>
-<div class="ttc" id="aclass_logs_html_a344e2e425cb08055b6eefd19aca2cdf0"><div class="ttname"><a href="class_logs.html#a344e2e425cb08055b6eefd19aca2cdf0">Logs::Logs</a></div><div class="ttdeci">Logs()=default</div></div>
-<div class="ttc" id="aclass_logs_html_a3e713ca7bf65f71fb8310d86894e5373"><div class="ttname"><a href="class_logs.html#a3e713ca7bf65f71fb8310d86894e5373">Logs::writeToErrorLog</a></div><div class="ttdeci">static void writeToErrorLog(const std::string &amp;message)</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00011">Logs.cpp:11</a></div></div>
-<div class="ttc" id="aclass_logs_html_a5570d06ec08c65d6c172ceb73262de42"><div class="ttname"><a href="class_logs.html#a5570d06ec08c65d6c172ceb73262de42">Logs::moveLogsDirectory</a></div><div class="ttdeci">static void moveLogsDirectory(const fs::path &amp;newLogsDirectory)</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00054">Logs.cpp:54</a></div></div>
-<div class="ttc" id="aclass_logs_html_a6f2bd87c20785d8da0918bb20f7d7f30"><div class="ttname"><a href="class_logs.html#a6f2bd87c20785d8da0918bb20f7d7f30">Logs::writeToInfoLog</a></div><div class="ttdeci">static void writeToInfoLog(const std::string &amp;message)</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00024">Logs.cpp:24</a></div></div>
-<div class="ttc" id="aclass_logs_html_af18d8e41efd28714e2c22f53810cebeb"><div class="ttname"><a href="class_logs.html#af18d8e41efd28714e2c22f53810cebeb">Logs::getLogsDirectory</a></div><div class="ttdeci">static fs::path getLogsDirectory()</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00102">Logs.cpp:102</a></div></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="comment">// Delete copy constructor and assignment operator to prevent copies</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">   26</a></span>  <a class="code hl_function" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs</a>(<span class="keyword">const</span> <a class="code hl_function" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_logs.html#a78dd9621a75d728255a9d7a527c00987">   27</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_logs.html#a78dd9621a75d728255a9d7a527c00987">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_logs.html#a3e713ca7bf65f71fb8310d86894e5373">writeToErrorLog</a>(<span class="keyword">const</span> std::string &amp;message);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_logs.html#a6f2bd87c20785d8da0918bb20f7d7f30">writeToInfoLog</a>(<span class="keyword">const</span> std::string &amp;message);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_logs.html#a5570d06ec08c65d6c172ceb73262de42">moveLogsDirectory</a>(<span class="keyword">const</span> fs::path &amp;newLogsDirectory);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keyword">static</span> fs::path <a class="code hl_function" href="class_logs.html#af18d8e41efd28714e2c22f53810cebeb">getLogsDirectory</a>();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <a class="code hl_function" href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">static</span> fs::path logsDirectory;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> checkFileExists(<span class="keyword">const</span> fs::path &amp;filePath);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keyword">static</span> std::string getCurrentTimeFormatted();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> ensureLogsDirectoryExists(<span class="keyword">const</span> fs::path &amp;logsDir);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif </span><span class="comment">//LOGS_H</span></div>
+<div class="ttc" id="aclass_logs_html_a3e713ca7bf65f71fb8310d86894e5373"><div class="ttname"><a href="class_logs.html#a3e713ca7bf65f71fb8310d86894e5373">Logs::writeToErrorLog</a></div><div class="ttdeci">static void writeToErrorLog(const std::string &amp;message)</div><div class="ttdoc">Writes a message to the error log.</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00021">Logs.cpp:21</a></div></div>
+<div class="ttc" id="aclass_logs_html_a5570d06ec08c65d6c172ceb73262de42"><div class="ttname"><a href="class_logs.html#a5570d06ec08c65d6c172ceb73262de42">Logs::moveLogsDirectory</a></div><div class="ttdeci">static void moveLogsDirectory(const fs::path &amp;newLogsDirectory)</div><div class="ttdoc">Moves the logs directory to a new location.</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00085">Logs.cpp:85</a></div></div>
+<div class="ttc" id="aclass_logs_html_a64c3e98569c9ceb3cc30e587d4902647"><div class="ttname"><a href="class_logs.html#a64c3e98569c9ceb3cc30e587d4902647">Logs::getInstance</a></div><div class="ttdeci">static Logs &amp; getInstance()</div><div class="ttdoc">Gets the singleton instance of Logs.</div><div class="ttdef"><b>Definition</b> <a href="#l00020">Logs.h:20</a></div></div>
+<div class="ttc" id="aclass_logs_html_a6f2bd87c20785d8da0918bb20f7d7f30"><div class="ttname"><a href="class_logs.html#a6f2bd87c20785d8da0918bb20f7d7f30">Logs::writeToInfoLog</a></div><div class="ttdeci">static void writeToInfoLog(const std::string &amp;message)</div><div class="ttdoc">Writes a message to the info log.</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00039">Logs.cpp:39</a></div></div>
+<div class="ttc" id="aclass_logs_html_a78dd9621a75d728255a9d7a527c00987"><div class="ttname"><a href="class_logs.html#a78dd9621a75d728255a9d7a527c00987">Logs::operator=</a></div><div class="ttdeci">void operator=(const Logs &amp;)=delete</div></div>
+<div class="ttc" id="aclass_logs_html_aeafc01d597306bc80bca06dbec033169"><div class="ttname"><a href="class_logs.html#aeafc01d597306bc80bca06dbec033169">Logs::Logs</a></div><div class="ttdeci">Logs(const Logs &amp;)=delete</div></div>
+<div class="ttc" id="aclass_logs_html_af18d8e41efd28714e2c22f53810cebeb"><div class="ttname"><a href="class_logs.html#af18d8e41efd28714e2c22f53810cebeb">Logs::getLogsDirectory</a></div><div class="ttdeci">static fs::path getLogsDirectory()</div><div class="ttdoc">Gets the current logs directory path.</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00138">Logs.cpp:138</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

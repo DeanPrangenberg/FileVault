@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['key_0',['Key',['../struct_file_data_d_b.html#a340b49b2ed080d33422ee9e82205e8b4',1,'FileDataDB']]],
+  ['key_0',['Key',['../struct_file_data_d_b.html#a340b49b2ed080d33422ee9e82205e8b4',1,'FileDataDB::Key'],['../class_file_data.html#a0e232f54f107f859bb6d3c6fbb6885c1',1,'FileData::Key']]],
   ['key_20features_20strong_1',['&lt;strong&gt;Key Features&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md23',1,'']]],
   ['keygen_2',['KeyGen',['../class_key_gen.html',1,'']]],
   ['keygen_2ecpp_3',['KeyGen.cpp',['../_key_gen_8cpp.html',1,'']]],

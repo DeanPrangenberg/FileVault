@@ -16,7 +16,7 @@ var searchData=
   ['algofilecounts_13',['algoFileCounts',['../class_statistics_screen_widget.html#a0694140eb7f3df5a1473d479ed9720ed',1,'StatisticsScreenWidget']]],
   ['algorithm_14',['Algorithm',['../structencryption_config.html#ad85dfd6a8f7c90e17c638990cddc6d69',1,'encryptionConfig']]],
   ['algorithmcombobox_15',['algorithmComboBox',['../class_standard_algorithm_widget.html#a89472ba76f7313bb64bc38c87448c612',1,'StandardAlgorithmWidget']]],
-  ['algorithmentype_16',['AlgorithmenType',['../struct_file_data_d_b.html#a8114737896c26d2cec2fa9646f614013',1,'FileDataDB']]],
+  ['algorithmentype_16',['AlgorithmenType',['../struct_file_data_d_b.html#a8114737896c26d2cec2fa9646f614013',1,'FileDataDB::AlgorithmenType'],['../class_file_data.html#a2df5cfa9b8f7a1e039adeffc2772a91f',1,'FileData::AlgorithmenType']]],
   ['algorithmstatisticwidget_17',['AlgorithmStatisticWidget',['../class_algorithm_statistic_widget.html',1,'AlgorithmStatisticWidget'],['../class_algorithm_statistic_widget.html#ae44108d81c81652fe00013add386825d',1,'AlgorithmStatisticWidget::AlgorithmStatisticWidget()']]],
   ['algorithmstatisticwidget_2ecpp_18',['AlgorithmStatisticWidget.cpp',['../_algorithm_statistic_widget_8cpp.html',1,'']]],
   ['algorithmstatisticwidget_2eh_19',['AlgorithmStatisticWidget.h',['../_algorithm_statistic_widget_8h.html',1,'']]],

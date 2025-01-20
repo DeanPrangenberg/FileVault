@@ -105,27 +105,23 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="_file_data_8h.html">../../../shared/src/FileData.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>fs = std::filesystem;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_struct_utils.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="class_struct_utils.html">StructUtils</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_file_data.html">FileData</a> <a class="code hl_function" href="class_struct_utils.html#ac9f831bf931be282ed4a4d8224270094">createFileDataStruct</a>(<span class="keyword">const</span> <a class="code hl_enumeration" href="classglobal_definitions.html#ad241caf4168904fea0da5660441b6fe7">globalDefinitions::AlgorithmType</a> &amp;algorithmenType, <span class="keyword">const</span> fs::path &amp;originalFilePath);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keyword">static</span> <span class="keywordtype">wchar_t</span> *<a class="code hl_function" href="class_struct_utils.html#a312fac8e3c35f0711629a222703b7245">ConvertWStringToWChar</a>(<span class="keyword">const</span> std::wstring &amp;input);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keyword">static</span> std::wstring AlgorithmTypeToString(<a class="code hl_enumeration" href="classglobal_definitions.html#ad241caf4168904fea0da5660441b6fe7">globalDefinitions::AlgorithmType</a> type);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>};</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_struct_utils.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="class_struct_utils.html">StructUtils</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_file_data.html">FileData</a> <a class="code hl_function" href="class_struct_utils.html#ac9f831bf931be282ed4a4d8224270094">createFileDataStruct</a>(<span class="keyword">const</span> <a class="code hl_enumeration" href="classglobal_definitions.html#ad241caf4168904fea0da5660441b6fe7">globalDefinitions::AlgorithmType</a> &amp;algorithmenType, <span class="keyword">const</span> fs::path &amp;originalFilePath);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static</span> std::wstring AlgorithmTypeToString(<a class="code hl_enumeration" href="classglobal_definitions.html#ad241caf4168904fea0da5660441b6fe7">globalDefinitions::AlgorithmType</a> type);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
 </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif </span><span class="comment">//ROOTPROJECT_STRUCTUTILS_H</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">//ROOTPROJECT_STRUCTUTILS_H</span></div>
 <div class="ttc" id="a_file_data_8h_html"><div class="ttname"><a href="_file_data_8h.html">FileData.h</a></div></div>
 <div class="ttc" id="a_global_definitions_8h_html"><div class="ttname"><a href="_global_definitions_8h.html">GlobalDefinitions.h</a></div></div>
-<div class="ttc" id="aclass_file_data_html"><div class="ttname"><a href="class_file_data.html">FileData</a></div><div class="ttdef"><b>Definition</b> <a href="_file_data_8h_source.html#l00012">FileData.h:12</a></div></div>
-<div class="ttc" id="aclass_struct_utils_html"><div class="ttname"><a href="class_struct_utils.html">StructUtils</a></div><div class="ttdef"><b>Definition</b> <a href="#l00010">StructUtils.h:10</a></div></div>
-<div class="ttc" id="aclass_struct_utils_html_a312fac8e3c35f0711629a222703b7245"><div class="ttname"><a href="class_struct_utils.html#a312fac8e3c35f0711629a222703b7245">StructUtils::ConvertWStringToWChar</a></div><div class="ttdeci">static wchar_t * ConvertWStringToWChar(const std::wstring &amp;input)</div><div class="ttdef"><b>Definition</b> <a href="_struct_utils_8cpp_source.html#l00017">StructUtils.cpp:17</a></div></div>
-<div class="ttc" id="aclass_struct_utils_html_ac9f831bf931be282ed4a4d8224270094"><div class="ttname"><a href="class_struct_utils.html#ac9f831bf931be282ed4a4d8224270094">StructUtils::createFileDataStruct</a></div><div class="ttdeci">static FileData createFileDataStruct(const globalDefinitions::AlgorithmType &amp;algorithmenType, const fs::path &amp;originalFilePath)</div><div class="ttdef"><b>Definition</b> <a href="_struct_utils_8cpp_source.html#l00023">StructUtils.cpp:23</a></div></div>
+<div class="ttc" id="aclass_file_data_html"><div class="ttname"><a href="class_file_data.html">FileData</a></div><div class="ttdef"><b>Definition</b> <a href="_file_data_8h_source.html#l00010">FileData.h:10</a></div></div>
+<div class="ttc" id="aclass_struct_utils_html"><div class="ttname"><a href="class_struct_utils.html">StructUtils</a></div><div class="ttdoc">Utility class for handling file data structures and conversions.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">StructUtils.h:14</a></div></div>
+<div class="ttc" id="aclass_struct_utils_html_ac9f831bf931be282ed4a4d8224270094"><div class="ttname"><a href="class_struct_utils.html#ac9f831bf931be282ed4a4d8224270094">StructUtils::createFileDataStruct</a></div><div class="ttdeci">static FileData createFileDataStruct(const globalDefinitions::AlgorithmType &amp;algorithmenType, const fs::path &amp;originalFilePath)</div><div class="ttdoc">Creates a FileData structure for the given algorithm type and original file path.</div><div class="ttdef"><b>Definition</b> <a href="_struct_utils_8cpp_source.html#l00029">StructUtils.cpp:29</a></div></div>
 <div class="ttc" id="aclassglobal_definitions_html_ad241caf4168904fea0da5660441b6fe7"><div class="ttname"><a href="classglobal_definitions.html#ad241caf4168904fea0da5660441b6fe7">globalDefinitions::AlgorithmType</a></div><div class="ttdeci">AlgorithmType</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00025">GlobalDefinitions.h:25</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

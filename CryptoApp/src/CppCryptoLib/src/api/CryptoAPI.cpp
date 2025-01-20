@@ -1,80 +1,117 @@
 #include "CryptoAPI.h"
 
 extern "C" {
-[[maybe_unused]] CRYPTOLIB_API bool EncryptFileWrapper(FileData *fileData, const int numFiles) {
-  std::vector<std::future<bool>> futures;
-  for (int i = 0; i < numFiles; i++) {
-    fileData[i].setEncryptionId(new unsigned char[64]);
-    fileData[i].setEncryptionIdLength(64);
+  /**
+   * Encrypts multiple files using AES-128 or AES-256 encryption based on the key length.
+   *
+   * @param fileData Pointer to an array of FileData objects containing file paths, keys, and IVs.
+   * @param numFiles The number of files to encrypt.
+   * @return A pointer to an array of booleans indicating the success of each file encryption.
+   */
+  [[maybe_unused]] CRYPTOLIB_API bool *EncryptFileWrapper(FileData *fileData, const int numFiles) {
+    std::vector<std::future<bool>> futures;
+    for (int i = 0; i < numFiles; i++) {
+      getCurrentTimeHash(fileData[i].EncryptionID->data());
 
-    getCurrentTimeHash(fileData[i].getEncryptionId());
-
-    if (fileData[i].getKeyLength() == 16) { // AES-128
-      futures.push_back(std::async(std::launch::async, AES128::encryptFile, &fileData[i]));
-    } else if (fileData[i].getKeyLength() == 32) { // AES-256
-      futures.push_back(std::async(std::launch::async, AES256::encryptFile, &fileData[i]));
+      if (std::string(fileData->AlgorithmenType->begin(), fileData->AlgorithmenType->end()) == "AES128") {
+        futures.push_back(std::async(std::launch::async, AES128::encryptFile, &fileData[i]));
+      } else if (std::string(fileData->AlgorithmenType->begin(), fileData->AlgorithmenType->end()) == "AES256") {
+        futures.push_back(std::async(std::launch::async, AES256::encryptFile, &fileData[i]));
+      } else {
+        std::cerr << "Error: Invalid algorithm type." << std::endl;
+        return nullptr;
+      }
     }
-  }
 
-  bool *resultArray = new bool[numFiles];
-  for (int i = 0; i < numFiles; i++) {
-    resultArray[i] = futures[i].get();
-  }
-  return resultArray;
-}
-
-[[maybe_unused]] CRYPTOLIB_API bool DecryptFileWrapper(const FileData *fileData, const int numFiles) {
-  std::vector<std::future<bool>> futures;
-  for (int i = 0; i < numFiles; i++) {
-    if (fileData[i].getKeyLength() == 16) { // AES-128
-      futures.push_back(std::async(std::launch::async, AES128::decryptFile, &fileData[i]));
-    } else if (fileData[i].getKeyLength() == 32) { // AES-256
-      futures.push_back(std::async(std::launch::async, AES256::decryptFile, &fileData[i]));
+    bool *resultArray = new bool[numFiles];
+    for (int i = 0; i < numFiles; i++) {
+      resultArray[i] = futures[i].get();
     }
+    return resultArray;
   }
 
-  bool *resultArray = new bool[numFiles];
-  for (int i = 0; i < numFiles; i++) {
-    resultArray[i] = futures[i].get();
+  /**
+   * Decrypts multiple files using AES-128 or AES-256 decryption based on the key length.
+   *
+   * @param fileData Pointer to an array of FileData objects containing file paths, keys, and IVs.
+   * @param numFiles The number of files to decrypt.
+   * @return A pointer to an array of booleans indicating the success of each file decryption.
+   */
+  [[maybe_unused]] CRYPTOLIB_API bool *DecryptFileWrapper(const FileData *fileData, const int numFiles) {
+    std::vector<std::future<bool>> futures;
+
+    for (int i = 0; i < numFiles; i++) {
+      if (std::string(fileData->AlgorithmenType->begin(), fileData->AlgorithmenType->end()) == "AES128") {
+        futures.push_back(std::async(std::launch::async, AES128::decryptFile, &fileData[i]));
+      } else if (std::string(fileData->AlgorithmenType->begin(), fileData->AlgorithmenType->end()) == "AES256") {
+        futures.push_back(std::async(std::launch::async, AES256::decryptFile, &fileData[i]));
+      } else {
+        std::cerr << "Error: Invalid algorithm type." << std::endl;
+        return nullptr;
+      }
+    }
+
+    bool *resultArray = new bool[numFiles];
+    for (int i = 0; i < numFiles; i++) {
+      resultArray[i] = futures[i].get();
+    }
+    return resultArray;
   }
-  return resultArray;
-}
 
-[[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv) {
-  KeyGen keyGen;
+  /**
+   * Generates a cryptographic key and initialization vector (IV).
+   *
+   * @param keySize The size of the key to generate.
+   * @param ivSize The size of the IV to generate.
+   * @param key Pointer to a buffer where the generated key will be stored.
+   * @param iv Pointer to a buffer where the generated IV will be stored.
+   */
+  [[maybe_unused]] CRYPTOLIB_API void GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv) {
+    KeyGen keyGen;
 
-  if (key == nullptr || iv == nullptr) {
-    std::cerr << "Error: key or iv pointer is null." << std::endl;
-    return;
+    if (key == nullptr || iv == nullptr) {
+      std::cerr << "Error: key or iv pointer is null." << std::endl;
+      return;
+    }
+
+    std::vector<unsigned char> keyVec;
+    std::vector<unsigned char> ivVec;
+
+    keyGen.generateKeyIv(keySize, ivSize, keyVec, ivVec);
+
+    std::copy(keyVec.begin(), keyVec.end(), key);
+    std::copy(ivVec.begin(), ivVec.end(), iv);
   }
 
-  std::vector<unsigned char> keyVec;
-  std::vector<unsigned char> ivVec;
+  /**
+   * Generates a unique file ID by computing the BLAKE2-512 hash of the file path.
+   *
+   * @param filePath The path to the file.
+   * @param fileID Pointer to a buffer where the generated file ID will be stored.
+   */
+  [[maybe_unused]] CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
+    auto hash = BLAKE2::hashFile(filePath);
+    auto hashStr = BLAKE2::hashString(std::wstring(filePath));
 
-  keyGen.generateKeyIv(keySize, ivSize, keyVec, ivVec);
+    std::vector<unsigned char> combinedHash;
+    combinedHash.reserve(hash.size() + hashStr.size());
+    combinedHash.insert(combinedHash.end(), hash.begin(), hash.end());
+    combinedHash.insert(combinedHash.end(), hashStr.begin(), hashStr.end());
 
-  std::copy(keyVec.begin(), keyVec.end(), key);
-  std::copy(ivVec.begin(), ivVec.end(), iv);
-}
+    std::array<unsigned char, EVP_MAX_MD_SIZE> hashID = BLAKE2::hashArray(combinedHash);
 
-[[maybe_unused]] CRYPTOLIB_API void GenerateFileID(const wchar_t *filePath, unsigned char *fileID) {
-  auto hash = SHA512::hashFile(filePath);
-  auto hashStr = SHA512::hashString(std::wstring(filePath));
+    std::copy(hashID.begin(), hashID.begin() + 64, fileID);
+  }
 
-  std::vector<unsigned char> combinedHash;
-  combinedHash.reserve(hash.size() + hashStr.size());
-  combinedHash.insert(combinedHash.end(), hash.begin(), hash.end());
-  combinedHash.insert(combinedHash.end(), hashStr.begin(), hashStr.end());
+  /**
+   * Generates a hash of the current time.
+   *
+   * @param timeHash Pointer to a buffer where the generated time hash will be stored.
+   */
+  [[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash) {
+    auto time = CryptoHelperUtils::getCurrentTime();
+    auto hashedTime = BLAKE2::hashArray(time);
 
-  std::array<unsigned char, EVP_MAX_MD_SIZE> hashID = SHA512::hashArray(combinedHash);
-
-  std::copy(hashID.begin(), hashID.begin() + 64, fileID);
-}
-
-[[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash) {
-  auto time = CryptoHelperUtils::getCurrentTime();
-  auto hashedTime = SHA512::hashArray(time);
-
-  std::copy(hashedTime.begin(), hashedTime.begin() + 64, timeHash);
-}
+    std::copy(hashedTime.begin(), hashedTime.begin() + 64, timeHash);
+  }
 }

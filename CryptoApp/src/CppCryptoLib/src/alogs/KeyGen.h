@@ -10,12 +10,32 @@
 #include <stdexcept>
 #include "../api/CryptoAPI.h"
 
-// Key generation class for generating keys and initialization vectors (IV)
+/**
+ * Key generation class for generating keys and initialization vectors (IV).
+ */
 class KeyGen {
 public:
+  /**
+   * Generates a cryptographic key and initialization vector (IV).
+   *
+   * @param keySize The size of the key to generate.
+   * @param ivSize The size of the IV to generate.
+   * @param KEY A reference to a vector where the generated key will be stored.
+   * @param IV A reference to a vector where the generated IV will be stored.
+   * @throws std::runtime_error if key or IV generation fails.
+   */
   void generateKeyIv(const size_t &keySize, const size_t &ivSize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV);
+
+  /**
+   * Converts a vector of bytes to a hexadecimal string representation.
+   *
+   * @param data The vector of bytes to convert.
+   * @return A string containing the hexadecimal representation of the input data.
+   */
   static std::string toHexString(const std::vector<unsigned char> &data);
+
 private:
+  /// Flag to enable or disable debug printing.
   bool printDebug = false;
 };
 

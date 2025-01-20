@@ -8,7 +8,7 @@
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00004}00004\ }
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_rest_api_d_l_l_8h}{RestApiDLL.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00006}00006\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00007}00007\ \textcolor{keywordtype}{wchar\_t}*\ RestApiDLL::convertToHexWChar(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ input,\ \textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00007}00007\ \textcolor{keywordtype}{wchar_t}*\ RestApiDLL::convertToHexWChar(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ input,\ \textcolor{keywordtype}{size_t}\ size)\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00008}00008\ \ \ \textcolor{keywordflow}{if}\ (input\ ==\ \textcolor{keyword}{nullptr}\ ||\ size\ ==\ 0)\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00009}00009\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}convertToHexWChar:\ Input\ is\ null\ or\ size\ is\ zero"{}}\ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00010}00010\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
@@ -16,28 +16,28 @@
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00012}00012\ }
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00013}00013\ \ \ \textcolor{comment}{//\ Stream\ für\ die\ Hex-\/Darstellung}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00014}00014\ \ \ std::wstringstream\ wss;}
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00015}00015\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ size;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00015}00015\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size_t}\ i\ =\ 0;\ i\ <\ size;\ ++i)\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00016}00016\ \ \ \ \ wss\ <<\ std::setw(2)\ <<\ std::setfill(L'0')\ <<\ std::hex\ <<\ static\_cast<int>(input[i]);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00017}00017\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00018}00018\ }
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00019}00019\ \ \ \textcolor{comment}{//\ Hex-\/Darstellung\ als\ wstring\ speichern}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00020}00020\ \ \ std::wstring\ hexStr\ =\ wss.str();}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00022}00022\ \ \ \textcolor{comment}{//\ Speicher\ für\ wchar\_t*\ (inklusive\ Null-\/Terminierung)}}
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00023}00023\ \ \ \textcolor{keywordtype}{wchar\_t}*\ result\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{wchar\_t}[hexStr.size()\ +\ 1];}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00022}00022\ \ \ \textcolor{comment}{//\ Speicher\ für\ wchar_t*\ (inklusive\ Null-\/Terminierung)}}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00023}00023\ \ \ \textcolor{keywordtype}{wchar_t}*\ result\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{wchar_t}[hexStr.size()\ +\ 1];}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00024}00024\ \ \ std::wmemcpy(result,\ hexStr.c\_str(),\ hexStr.size()\ +\ 1);\ \ \textcolor{comment}{//\ Null-\/Terminierung\ beachten}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00025}00025\ }
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00026}00026\ \ \ \textcolor{keywordflow}{return}\ result;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00027}00027\ \}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00028}00028\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00029}00029\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ RestApiDLL::convertFromHexWChar(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar\_t}*\ input,\ \textcolor{keywordtype}{size\_t}\&\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00029}00029\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ RestApiDLL::convertFromHexWChar(\textcolor{keyword}{const}\ \textcolor{keywordtype}{wchar_t}*\ input,\ \textcolor{keywordtype}{size_t}\&\ size)\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00030}00030\ \ \ \textcolor{keywordflow}{if}\ (input\ ==\ \textcolor{keyword}{nullptr})\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00031}00031\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}convertFromHexWChar:\ Input\ is\ null"{}}\ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00032}00032\ \ \ \ \ size\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00034}00034\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00035}00035\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00036}00036\ \ \ \textcolor{keywordtype}{size\_t}\ len\ =\ std::wcslen(input);}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00036}00036\ \ \ \textcolor{keywordtype}{size_t}\ len\ =\ std::wcslen(input);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00037}00037\ \ \ \textcolor{keywordflow}{if}\ (len\ \%\ 2\ !=\ 0)\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00038}00038\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}convertFromHexWChar:\ Invalid\ hex\ string\ length"{}}\ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00039}00039\ \ \ \ \ size\ =\ 0;}
@@ -47,7 +47,7 @@
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00043}00043\ \ \ size\ =\ len\ /\ 2;\ \ \textcolor{comment}{//\ Jede\ zwei\ Hex-\/Ziffern\ entsprechen\ einem\ Byte}}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00044}00044\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ result\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}[size];}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00045}00045\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00046}00046\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ size;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00046}00046\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size_t}\ i\ =\ 0;\ i\ <\ size;\ ++i)\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ byte;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00048}00048\ \ \ \ \ std::swscanf(input\ +\ 2\ *\ i,\ L\textcolor{stringliteral}{"{}\%2x"{}},\ \&\textcolor{keywordtype}{byte});}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00049}00049\ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\textcolor{keyword}{>}(byte);}
@@ -90,27 +90,27 @@
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00086}00086\ \mbox{\hyperlink{class_file_data}{FileData}}\ RestApiDLL::convertDBStructToFileData(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_file_data_d_b}{FileDataDB}}\ \&data)\ \{}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00087}00087\ \ \ FileData\ fileData\{\};}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00088}00088\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00089}00089\ \ \ \textcolor{keywordtype}{size\_t}\ fileIdLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00089}00089\ \ \ \textcolor{keywordtype}{size_t}\ fileIdLength\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00090}00090\ \ \ \textcolor{keyword}{auto}\ fileId\ =\ convertFromHexWChar(data.\mbox{\hyperlink{struct_file_data_d_b_a7d1b65c660e2d2ac6809643ae88ffadd}{FileID}},\ fileIdLength);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00091}00091\ \ \ fileData.setFileId(fileId);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00092}00092\ \ \ fileData.setFileIdLength(data.\mbox{\hyperlink{struct_file_data_d_b_ab1e84d0427b31892b8ff12f632653118}{FileIDLength}});}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00093}00093\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00094}00094\ \ \ \textcolor{keywordtype}{size\_t}\ encryptedIdLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00094}00094\ \ \ \textcolor{keywordtype}{size_t}\ encryptedIdLength\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00095}00095\ \ \ \textcolor{keyword}{auto}\ encryptedId\ =\ convertFromHexWChar(data.EncryptedID,\ encryptedIdLength);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00096}00096\ \ \ fileData.setEncryptionId(encryptedId);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00097}00097\ \ \ fileData.setEncryptionIdLength(data.EncryptedIDLength);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00098}00098\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00099}00099\ \ \ \textcolor{keywordtype}{size\_t}\ lastUpdateIdLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00099}00099\ \ \ \textcolor{keywordtype}{size_t}\ lastUpdateIdLength\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00100}00100\ \ \ \textcolor{keyword}{auto}\ lastUpdateId\ =\ convertFromHexWChar(data.\mbox{\hyperlink{struct_file_data_d_b_a327c83dc3763d584c6aa6209cfbe32cb}{LastUpdateID}},\ lastUpdateIdLength);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00101}00101\ \ \ fileData.setLastUpdateId(lastUpdateId);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00102}00102\ \ \ fileData.setLastUpdateIdLength(data.\mbox{\hyperlink{struct_file_data_d_b_ad848e1a4a23774263f2d7dbdbb3a79e7}{LastUpdateIDLength}});}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00103}00103\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00104}00104\ \ \ \textcolor{keywordtype}{size\_t}\ keyLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00104}00104\ \ \ \textcolor{keywordtype}{size_t}\ keyLength\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00105}00105\ \ \ \textcolor{keyword}{auto}\ key\ =\ convertFromHexWChar(data.\mbox{\hyperlink{struct_file_data_d_b_a340b49b2ed080d33422ee9e82205e8b4}{Key}},\ keyLength);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00106}00106\ \ \ fileData.setKey(key);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00107}00107\ \ \ fileData.setKeyLength(data.\mbox{\hyperlink{struct_file_data_d_b_a864fdc9886e849db878877328e666fb9}{KeyLength}});}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00108}00108\ }
-\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00109}00109\ \ \ \textcolor{keywordtype}{size\_t}\ ivLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00109}00109\ \ \ \textcolor{keywordtype}{size_t}\ ivLength\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00110}00110\ \ \ \textcolor{keyword}{auto}\ iv\ =\ convertFromHexWChar(data.\mbox{\hyperlink{struct_file_data_d_b_a766b28ed84f2b9ac86d1dd129684e24e}{Iv}},\ ivLength);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00111}00111\ \ \ fileData.setIv(iv);}
 \DoxyCodeLine{\Hypertarget{converter_8cpp_source_l00112}00112\ \ \ fileData.setIvLength(data.\mbox{\hyperlink{struct_file_data_d_b_ab94150d11c6e065de23c5e12353d703f}{IvLength}});}

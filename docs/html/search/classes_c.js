@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['passwordwidget_0',['PasswordWidget',['../class_password_widget.html',1,'']]]
+  ['newpasswordwidget_0',['NewPasswordWidget',['../class_new_password_widget.html',1,'']]]
 ];

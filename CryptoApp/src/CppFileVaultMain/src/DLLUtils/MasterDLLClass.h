@@ -9,11 +9,18 @@
 #include <filesystem>
 #include <iostream>
 #include "../../../shared/src/GlobalDefinitions.h"
+#include "../../../shared/src/settingsClasses/Logs.h"
 
 namespace fs = std::filesystem;
 
 class MasterDLLClass {
 protected:
+  /**
+   * @brief Loads a DLL with the given name.
+   *
+   * @param dllName The name of the DLL to load.
+   * @return A handle to the loaded DLL, or nullptr if the DLL could not be loaded.
+   */
   static HMODULE loadDll(const wchar_t *dllName) {
     HMODULE hDll = LoadLibraryW(dllName);
     if (!hDll) {
@@ -21,17 +28,16 @@ protected:
     }
     return hDll;
   }
+
+  /**
+   * @brief Unloads the specified DLL.
+   *
+   * @param hDll A handle to the DLL to unload.
+   */
   static void unloadDll(HMODULE hDll) {
     if (hDll) {
       FreeLibrary(hDll);
     }
-  }
-  static void logError(const std::string &message) {
-    std::cerr << message << std::endl;
-  }
-
-  static void logInfo(const std::string &message) {
-    std::cout << message << std::endl;
   }
 };
 

@@ -1,5 +1,10 @@
 #include "EncryptionScreenWidget.h"
 
+/**
+ * @brief Constructs the EncryptionScreenWidget object.
+ * @param parent The parent widget.
+ * @param statisticsPtr A shared pointer to the StatisticsScreenWidget.
+ */
 EncryptionScreenWidget::EncryptionScreenWidget(QWidget *parent, std::shared_ptr<StatisticsScreenWidget> statisticsPtr) : QWidget(parent) {
   EncryptionScreenWidgetLayout = std::make_unique<QVBoxLayout>(this);
 
@@ -13,6 +18,9 @@ EncryptionScreenWidget::EncryptionScreenWidget(QWidget *parent, std::shared_ptr<
   configureUI();
 }
 
+/**
+ * @brief Configures the user interface for the encryption screen.
+ */
 void EncryptionScreenWidget::configureUI() {
   EncryptionScreenTitle->setAlignment(Qt::AlignCenter);
   EncryptionScreenWidgetLayout->addWidget(EncryptionScreenTitle.get());
@@ -23,6 +31,9 @@ void EncryptionScreenWidget::configureUI() {
   connect(StartProcessButton.get(), &QPushButton::clicked, this, &EncryptionScreenWidget::onStartProcessButtonClicked);
 }
 
+/**
+ * @brief Slot for handling the start process button click.
+ */
 void EncryptionScreenWidget::onStartProcessButtonClicked() {
   std::vector<fs::path> filePathVector;
   std::vector<std::string> algorithmVector;
@@ -48,7 +59,7 @@ void EncryptionScreenWidget::onStartProcessButtonClicked() {
         statisticsScreenWidget->updateAes256Count(1);
       }
     } else {
-    qDebug() << "Encryption failed code:" << result;
+      qDebug() << "Encryption failed code:" << result;
     }
     ++index;
   }

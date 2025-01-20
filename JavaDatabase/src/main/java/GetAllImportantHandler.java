@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Handles HTTP requests for retrieving all file IDs and their encrypted paths.
  */
-public class GetAllFileIDsAndEncryptedPathsHandler implements HttpHandler {
+public class GetAllImportantHandler implements HttpHandler {
     private final Database db;
 
     /**
@@ -17,7 +17,7 @@ public class GetAllFileIDsAndEncryptedPathsHandler implements HttpHandler {
      *
      * @param db the database to retrieve file IDs and encrypted paths from
      */
-    public GetAllFileIDsAndEncryptedPathsHandler(Database db) {
+    public GetAllImportantHandler(Database db) {
         this.db = db;
     }
 

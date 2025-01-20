@@ -9,11 +9,22 @@
 
 class FileMarkDLL : MasterDLLClass {
 public:
-  bool extractIDsFromFile(const wchar_t * filePath, unsigned char FileID[64], unsigned char EncryptionID[64]);
+  /**
+   * @brief Extracts FileID and EncryptionID from a file using the CppFileMarkLib DLL.
+   *
+   * @param filePath The path of the file to extract IDs from.
+   * @param FileID Buffer to store the extracted FileID.
+   * @param EncryptionID Buffer to store the extracted EncryptionID.
+   * @return True if the extraction was successful, false otherwise.
+   */
+  bool extractIDsFromFile(const fs::path* filePath, std::vector<unsigned char> *FileID,
+                          std::vector<unsigned char> *EncryptionID);
 
 private:
-  typedef bool (*ExtractIDsFromFileFunc)(const wchar_t *, unsigned char[64], unsigned char[64]);
+  /**
+   * @brief Function pointer type for extracting IDs from a file.
+   */
+  typedef bool (*ExtractIDsFromFileFunc)(const fs::path*, std::vector<unsigned char> *, std::vector<unsigned char> *);
 };
-
 
 #endif //FILEVAULTROOT_FILEMARKDLL_H

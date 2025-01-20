@@ -1,5 +1,9 @@
 #include "StatisticsScreenWidget.h"
 
+/**
+ * @brief Constructs the StatisticsScreenWidget object.
+ * @param parent The parent widget.
+ */
 StatisticsScreenWidget::StatisticsScreenWidget(QWidget *parent) : QWidget(parent),
                                                                   aes128Count(0), aes256Count(0),
                                                                   lostFilesCount(0), FoundFilesCount(0),
@@ -41,6 +45,9 @@ StatisticsScreenWidget::StatisticsScreenWidget(QWidget *parent) : QWidget(parent
   updateStatistics();
 }
 
+/**
+ * @brief Sets up the user interface for the widget.
+ */
 void StatisticsScreenWidget::SetupUI() {
   titleLabel->setText("Statistics");
   titleLabel->setMaximumHeight(20);
@@ -72,6 +79,9 @@ void StatisticsScreenWidget::SetupUI() {
   updateStatistics();
 }
 
+/**
+ * @brief Updates the statistics displayed in the widget.
+ */
 void StatisticsScreenWidget::updateStatistics() {
   RestApiDLL restApiDll;
 
@@ -96,15 +106,25 @@ void StatisticsScreenWidget::updateStatistics() {
   saveStatisticsToJson("statistics.json");
 }
 
+/**
+ * @brief Slot for handling save statistics button click.
+ */
 void StatisticsScreenWidget::onSaveStatisticsButtonClicked() {
   saveStatisticsToJson("statistics.json");
 }
 
+/**
+ * @brief Slot for handling load statistics button click.
+ */
 void StatisticsScreenWidget::onLoadStatisticsButtonClicked() {
   loadStatisticsFromJson("statistics.json");
   updateStatistics();
 }
 
+/**
+ * @brief Saves the statistics to a JSON file.
+ * @param filePath The path to the JSON file.
+ */
 void StatisticsScreenWidget::saveStatisticsToJson(const QString &filePath) {
   QJsonObject json;
   QJsonObject lifetimeAlgoJson;
@@ -139,6 +159,10 @@ void StatisticsScreenWidget::saveStatisticsToJson(const QString &filePath) {
   }
 }
 
+/**
+ * @brief Loads the statistics from a JSON file.
+ * @param filePath The path to the JSON file.
+ */
 void StatisticsScreenWidget::loadStatisticsFromJson(const QString &filePath) {
   QFile file(filePath);
   if (!file.open(QIODevice::ReadOnly)) {
@@ -175,6 +199,10 @@ void StatisticsScreenWidget::loadStatisticsFromJson(const QString &filePath) {
   sizeOfDatabaseLabel->setText(QString("Size of Database: %1MB").arg(databaseSize));
 }
 
+/**
+ * @brief Ensures that the statistics file exists.
+ * @param filePath The path to the statistics file.
+ */
 void StatisticsScreenWidget::ensureStatisticsFileExists(const QString &filePath) {
   QFile file(filePath);
   if (!file.exists()) {
@@ -204,6 +232,10 @@ void StatisticsScreenWidget::ensureStatisticsFileExists(const QString &filePath)
   }
 }
 
+/**
+ * @brief Updates the AES-128 file count.
+ * @param amount The amount to update by.
+ */
 void StatisticsScreenWidget::updateAes128Count(int amount) {
   aes128Count += amount;
   if (amount > 0) {
@@ -213,6 +245,10 @@ void StatisticsScreenWidget::updateAes128Count(int amount) {
   saveStatisticsToJson("statistics.json");
 }
 
+/**
+ * @brief Updates the AES-256 file count.
+ * @param amount The amount to update by.
+ */
 void StatisticsScreenWidget::updateAes256Count(int amount) {
   aes256Count += amount;
   if (amount > 0) {
@@ -222,24 +258,40 @@ void StatisticsScreenWidget::updateAes256Count(int amount) {
   saveStatisticsToJson("statistics.json");
 }
 
+/**
+ * @brief Updates the lost files count.
+ * @param amount The amount to update by.
+ */
 void StatisticsScreenWidget::updateLostFilesCount(int amount) {
   lostFilesCount += amount;
   updateStatistics();
   saveStatisticsToJson("statistics.json");
 }
 
+/**
+ * @brief Updates the found files count.
+ * @param amount The amount to update by.
+ */
 void StatisticsScreenWidget::updateFoundFilesCount(int amount) {
   FoundFilesCount += amount;
   updateStatistics();
   saveStatisticsToJson("statistics.json");
 }
 
+/**
+ * @brief Updates the decrypted files count.
+ * @param amount The amount to update by.
+ */
 void StatisticsScreenWidget::updateDecryptedFilesCount(int amount) {
   decryptedFilesCount += amount;
   updateStatistics();
   saveStatisticsToJson("statistics.json");
 }
 
+/**
+ * @brief Updates the encrypted files count.
+ * @param amount The amount to update by.
+ */
 void StatisticsScreenWidget::updateEncryptedFilesCount(int amount) {
   encryptedFilesCount += amount;
   updateStatistics();

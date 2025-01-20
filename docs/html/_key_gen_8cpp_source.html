@@ -100,37 +100,37 @@ $(function(){ initResizable(false); });
 <a href="_key_gen_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_key_gen_8h.html">KeyGen.h</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="foldopen" id="foldopen00005" data-start="{" data-end="}">
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="class_key_gen.html#acacea676914dbba43cc767ac57abd917">    5</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_key_gen.html#acacea676914dbba43cc767ac57abd917">KeyGen::generateKeyIv</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> &amp;keySize, <span class="keyword">const</span> <span class="keywordtype">size_t</span> &amp;ivSize, std::vector&lt;unsigned char&gt; &amp;KEY, std::vector&lt;unsigned char&gt; &amp;IV) {</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>  KEY.resize(keySize);</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>  IV.resize(ivSize);</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  <span class="keywordflow">if</span> (!RAND_bytes(KEY.data(), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(keySize))</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  || !RAND_bytes(IV.data(), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(ivSize))) {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Failed to generate key or IV&quot;</span>);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  }</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordflow">if</span> (printDebug) {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Key and IV generated successfully&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Key: &quot;</span> &lt;&lt; <a class="code hl_function" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">toHexString</a>(KEY) &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;IV: &quot;</span> &lt;&lt; <a class="code hl_function" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">toHexString</a>(IV) &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  }</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_key_gen.html#acacea676914dbba43cc767ac57abd917">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_key_gen.html#acacea676914dbba43cc767ac57abd917">KeyGen::generateKeyIv</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> &amp;keySize, <span class="keyword">const</span> <span class="keywordtype">size_t</span> &amp;ivSize, std::vector&lt;unsigned char&gt; &amp;KEY, std::vector&lt;unsigned char&gt; &amp;IV) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  KEY.resize(keySize);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  IV.resize(ivSize);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordflow">if</span> (!RAND_bytes(KEY.data(), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(keySize))</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  || !RAND_bytes(IV.data(), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(ivSize))) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Failed to generate key or IV&quot;</span>);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">if</span> (printDebug) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Key and IV generated successfully&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Key: &quot;</span> &lt;&lt; <a class="code hl_function" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">toHexString</a>(KEY) &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;IV: &quot;</span> &lt;&lt; <a class="code hl_function" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">toHexString</a>(IV) &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
 </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">   21</a></span>std::string <a class="code hl_function" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">KeyGen::toHexString</a>(<span class="keyword">const</span> std::vector&lt;unsigned char&gt; &amp;data) {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  std::ostringstream oss;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;<span class="keywordtype">byte</span> : data) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    oss &lt;&lt; std::hex &lt;&lt; std::setw(2) &lt;&lt; std::setfill(&#39;0&#39;) &lt;&lt; static_cast&lt;int&gt;(<span class="keywordtype">byte</span>);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  }</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordflow">return</span> oss.str();</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">   36</a></span>std::string <a class="code hl_function" href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">KeyGen::toHexString</a>(<span class="keyword">const</span> std::vector&lt;unsigned char&gt; &amp;data) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  std::ostringstream oss;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;<span class="keywordtype">byte</span> : data) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    oss &lt;&lt; std::hex &lt;&lt; std::setw(2) &lt;&lt; std::setfill(&#39;0&#39;) &lt;&lt; static_cast&lt;int&gt;(<span class="keywordtype">byte</span>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">return</span> oss.str();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
 </div>
 <div class="ttc" id="a_key_gen_8h_html"><div class="ttname"><a href="_key_gen_8h.html">KeyGen.h</a></div></div>
-<div class="ttc" id="aclass_key_gen_html_a6e1407fc7c1842288e9c27247141c96a"><div class="ttname"><a href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">KeyGen::toHexString</a></div><div class="ttdeci">static std::string toHexString(const std::vector&lt; unsigned char &gt; &amp;data)</div><div class="ttdef"><b>Definition</b> <a href="#l00021">KeyGen.cpp:21</a></div></div>
-<div class="ttc" id="aclass_key_gen_html_acacea676914dbba43cc767ac57abd917"><div class="ttname"><a href="class_key_gen.html#acacea676914dbba43cc767ac57abd917">KeyGen::generateKeyIv</a></div><div class="ttdeci">void generateKeyIv(const size_t &amp;keySize, const size_t &amp;ivSize, std::vector&lt; unsigned char &gt; &amp;KEY, std::vector&lt; unsigned char &gt; &amp;IV)</div><div class="ttdef"><b>Definition</b> <a href="#l00005">KeyGen.cpp:5</a></div></div>
+<div class="ttc" id="aclass_key_gen_html_a6e1407fc7c1842288e9c27247141c96a"><div class="ttname"><a href="class_key_gen.html#a6e1407fc7c1842288e9c27247141c96a">KeyGen::toHexString</a></div><div class="ttdeci">static std::string toHexString(const std::vector&lt; unsigned char &gt; &amp;data)</div><div class="ttdef"><b>Definition</b> <a href="#l00036">KeyGen.cpp:36</a></div></div>
+<div class="ttc" id="aclass_key_gen_html_acacea676914dbba43cc767ac57abd917"><div class="ttname"><a href="class_key_gen.html#acacea676914dbba43cc767ac57abd917">KeyGen::generateKeyIv</a></div><div class="ttdeci">void generateKeyIv(const size_t &amp;keySize, const size_t &amp;ivSize, std::vector&lt; unsigned char &gt; &amp;KEY, std::vector&lt; unsigned char &gt; &amp;IV)</div><div class="ttdef"><b>Definition</b> <a href="#l00014">KeyGen.cpp:14</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

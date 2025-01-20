@@ -1,7 +1,7 @@
 var searchData=
 [
   ['features_20strong_0',['&lt;strong&gt;Key Features&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md23',1,'']]],
-  ['filedata_1',['FileData',['../class_file_data.html',1,'FileData'],['../class_file_data.html#a2de7d3105f5e9c43ae36e1be33216975',1,'FileData::FileData()']]],
+  ['filedata_1',['FileData',['../class_file_data.html',1,'FileData'],['../class_file_data.html#a30b20e96f6ac9712a9e3c161b949112f',1,'FileData::FileData()']]],
   ['filedata_2ecpp_2',['FileData.cpp',['../_file_data_8cpp.html',1,'']]],
   ['filedata_2eh_3',['FileData.h',['../_file_data_8h.html',1,'']]],
   ['filedatadb_4',['FileDataDB',['../struct_file_data_d_b.html',1,'']]],
@@ -10,7 +10,7 @@ var searchData=
   ['filedeletionwidget_2ecpp_7',['FileDeletionWidget.cpp',['../_file_deletion_widget_8cpp.html',1,'']]],
   ['filedeletionwidget_2eh_8',['FileDeletionWidget.h',['../_file_deletion_widget_8h.html',1,'']]],
   ['filefoundcallback_9',['FileFoundCallback',['../class_directory_scanner.html#a30c02803ace06fb0bb1a723a9642870d',1,'DirectoryScanner::FileFoundCallback'],['../class_file_scanner_d_l_l.html#a1a84bc9e13aaef0297b88351c831085d',1,'FileScannerDLL::FileFoundCallback']]],
-  ['fileid_10',['FileID',['../struct_helper_utils_1_1_file_i_d_data.html#abc9a2879724e3161b59d9d4910f4f1cb',1,'HelperUtils::FileIDData::FileID'],['../struct_file_data_d_b.html#a7d1b65c660e2d2ac6809643ae88ffadd',1,'FileDataDB::FileID']]],
+  ['fileid_10',['FileID',['../struct_helper_utils_1_1_file_i_d_data.html#add99bed854082801f52dbeb599e1eccf',1,'HelperUtils::FileIDData::FileID'],['../struct_file_data_d_b.html#a7d1b65c660e2d2ac6809643ae88ffadd',1,'FileDataDB::FileID'],['../class_file_data.html#a84c215b002544cca170cf44727fd5d41',1,'FileData::FileID']]],
   ['fileiddata_11',['FileIDData',['../struct_helper_utils_1_1_file_i_d_data.html',1,'HelperUtils']]],
   ['fileidlength_12',['FileIDLength',['../struct_file_data_d_b.html#ab1e84d0427b31892b8ff12f632653118',1,'FileDataDB']]],
   ['filemark_2ecpp_13',['FileMark.cpp',['../_file_mark_8cpp.html',1,'']]],

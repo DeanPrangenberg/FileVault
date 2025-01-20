@@ -110,10 +110,12 @@ $(function(){ initResizable(false); });
 <code>#include &lt;future&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &quot;<a class="el" href="_file_data_8h_source.html">../../../shared/src/FileData.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_logs_8h_source.html">../../../shared/src/settingsClasses/Logs.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_a_e_s128_8h_source.html">../alogs/AES128.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_a_e_s256_8h_source.html">../alogs/AES256.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_key_gen_8h_source.html">../alogs/KeyGen.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_s_h_a512_8h_source.html">../alogs/SHA512.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_b_l_a_k_e2_8h_source.html">../alogs/BLAKE2.h</a>&quot;</code><br />
 </div>
 <p><a href="_crypto_a_p_i_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -124,10 +126,10 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae3142ce75ed25d84207041447aa8b945" id="r_ae3142ce75ed25d84207041447aa8b945"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3142ce75ed25d84207041447aa8b945">EncryptFileWrapper</a> (<a class="el" href="class_file_data.html">FileData</a> *fileData, int numFiles)</td></tr>
-<tr class="separator:ae3142ce75ed25d84207041447aa8b945"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae120bc077206bcd0cb863eab8b513572" id="r_ae120bc077206bcd0cb863eab8b513572"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae120bc077206bcd0cb863eab8b513572">DecryptFileWrapper</a> (const <a class="el" href="class_file_data.html">FileData</a> *fileData, int numFiles)</td></tr>
-<tr class="separator:ae120bc077206bcd0cb863eab8b513572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95000a89da7856c30135d6b10374d2b0" id="r_a95000a89da7856c30135d6b10374d2b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95000a89da7856c30135d6b10374d2b0">EncryptFileWrapper</a> (<a class="el" href="class_file_data.html">FileData</a> *fileData, int numFiles)</td></tr>
+<tr class="separator:a95000a89da7856c30135d6b10374d2b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a660c3a342df553e8f19e5a972d8355c5" id="r_a660c3a342df553e8f19e5a972d8355c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a660c3a342df553e8f19e5a972d8355c5">DecryptFileWrapper</a> (const <a class="el" href="class_file_data.html">FileData</a> *fileData, int numFiles)</td></tr>
+<tr class="separator:a660c3a342df553e8f19e5a972d8355c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd041ea6d7162d501e00548feb22ad65" id="r_abd041ea6d7162d501e00548feb22ad65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd041ea6d7162d501e00548feb22ad65">GenerateKeyIv</a> (size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv)</td></tr>
 <tr class="separator:abd041ea6d7162d501e00548feb22ad65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88bfb02feaadb25f304da31f5929e80b" id="r_a88bfb02feaadb25f304da31f5929e80b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88bfb02feaadb25f304da31f5929e80b">GenerateFileID</a> (const wchar_t *filePath, unsigned char *fileID)</td></tr>
@@ -148,54 +150,72 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8h_source.html#l00023">23</a> of file <a class="el" href="_crypto_a_p_i_8h_source.html">CryptoAPI.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8h_source.html#l00025">25</a> of file <a class="el" href="_crypto_a_p_i_8h_source.html">CryptoAPI.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae120bc077206bcd0cb863eab8b513572" name="ae120bc077206bcd0cb863eab8b513572"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae120bc077206bcd0cb863eab8b513572">&#9670;&#160;</a></span>DecryptFileWrapper()</h2>
+<a id="a660c3a342df553e8f19e5a972d8355c5" name="a660c3a342df553e8f19e5a972d8355c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a660c3a342df553e8f19e5a972d8355c5">&#9670;&#160;</a></span>DecryptFileWrapper()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool DecryptFileWrapper </td>
+          <td class="memname"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool * DecryptFileWrapper </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_file_data.html">FileData</a> *</td>          <td class="paramname"><span class="paramname"><em>fileData</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numFiles</em></span>&#160;)</td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>numFiles</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Decrypts multiple files using AES-128 or AES-256 decryption based on the key length.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to an array of <a class="el" href="class_file_data.html">FileData</a> objects containing file paths, keys, and IVs. </td></tr>
+    <tr><td class="paramname">numFiles</td><td>The number of files to decrypt. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to an array of booleans indicating the success of each file decryption. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00026">26</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00040">40</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae3142ce75ed25d84207041447aa8b945" name="ae3142ce75ed25d84207041447aa8b945"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3142ce75ed25d84207041447aa8b945">&#9670;&#160;</a></span>EncryptFileWrapper()</h2>
+<a id="a95000a89da7856c30135d6b10374d2b0" name="a95000a89da7856c30135d6b10374d2b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95000a89da7856c30135d6b10374d2b0">&#9670;&#160;</a></span>EncryptFileWrapper()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool EncryptFileWrapper </td>
+          <td class="memname"><a class="el" href="#ab74bd50ee375880c4e60e55929a9f39b">CRYPTOLIB_API</a> bool * EncryptFileWrapper </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_file_data.html">FileData</a> *</td>          <td class="paramname"><span class="paramname"><em>fileData</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numFiles</em></span>&#160;)</td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>numFiles</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Encrypts multiple files using AES-128 or AES-256 encryption based on the key length.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to an array of <a class="el" href="class_file_data.html">FileData</a> objects containing file paths, keys, and IVs. </td></tr>
+    <tr><td class="paramname">numFiles</td><td>The number of files to encrypt. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to an array of booleans indicating the success of each file encryption. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00004">4</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00011">11</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
 
 </div>
 </div>
@@ -217,8 +237,24 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Generates a unique file ID by computing the SHA-512 hash of the file path.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The path to the file. </td></tr>
+    <tr><td class="paramname">fileID</td><td>Pointer to a buffer where the generated file ID will be stored.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Generates a unique file ID by computing the BLAKE2-512 hash of the file path.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The path to the file. </td></tr>
+    <tr><td class="paramname">fileID</td><td>Pointer to a buffer where the generated file ID will be stored. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00060">60</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00094">94</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
 
 </div>
 </div>
@@ -250,8 +286,18 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Generates a cryptographic key and initialization vector (IV).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keySize</td><td>The size of the key to generate. </td></tr>
+    <tr><td class="paramname">ivSize</td><td>The size of the IV to generate. </td></tr>
+    <tr><td class="paramname">key</td><td>Pointer to a buffer where the generated key will be stored. </td></tr>
+    <tr><td class="paramname">iv</td><td>Pointer to a buffer where the generated IV will be stored. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00043">43</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00071">71</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
 
 </div>
 </div>
@@ -269,8 +315,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Generates a hash of the current time.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeHash</td><td>Pointer to a buffer where the generated time hash will be stored. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00074">74</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00113">113</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
 
 </div>
 </div>

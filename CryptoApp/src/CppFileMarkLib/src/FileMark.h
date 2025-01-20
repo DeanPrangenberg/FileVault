@@ -6,8 +6,10 @@
 #include <codecvt>
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <cstring>
+#include <vector>
+#include <sstream>
+#include <iomanip>
 
 #ifdef FILEMARKLIB_EXPORTS
 #define FILEMARKLIB_API __declspec(dllexport)
@@ -15,12 +17,22 @@
 #define FILEMARKLIB_API __declspec(dllimport)
 #endif
 
-const bool debugPrint = false;
-
 extern "C" {
-[[maybe_unused]] FILEMARKLIB_API bool extractIDsFromFile(const wchar_t * filePath, unsigned char FileID[64], unsigned char EncryptionID[64]);
-[[maybe_unused]] FILEMARKLIB_API void markFile(const FileData *fileData);
-[[maybe_unused]] FILEMARKLIB_API bool unmarkFile(const FileData *fileData);
+  FILEMARKLIB_API bool extractIDsFromFile(const fs::path *encryptedFilePath, std::vector<unsigned char> *FileID, std::vector<unsigned char> *EncryptionID);
+  FILEMARKLIB_API bool markFile(const FileData *fileData);
+  FILEMARKLIB_API bool unmarkFile(const FileData *fileData);
 }
+
+class FileMarker {
+public:
+  static bool extractIDsFromFile(const fs::path *encryptedFilePath, std::vector<unsigned char> &FileID, std::vector<unsigned char> &EncryptionID);
+  static bool markFile(const FileData *fileData);
+  static bool unmarkFile(const FileData *fileData);
+
+private:
+  static bool printDebug;
+  static std::string toHexString(const unsigned char *pUChar, size_t length);
+  static std::vector<unsigned char> fromHexString(const std::string &hexStr);
+};
 
 #endif //FILEVAULTROOT_FILEMARK_H

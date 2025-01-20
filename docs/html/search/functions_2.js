@@ -11,7 +11,7 @@ var searchData=
   ['decryptfile_8',['decryptFile',['../class_a_e_s128.html#afbf0042b3bb727f46f3b7a1310a822c2',1,'AES128::decryptFile()'],['../class_a_e_s256.html#a183a5717f75098bfc92686f3281f96fc',1,'AES256::decryptFile()']]],
   ['decryptfiles_9',['DecryptFiles',['../class_crypto_d_l_l.html#a67110ca087436c883f24b4206fe90b8a',1,'CryptoDLL']]],
   ['decryptfiles_10',['decryptFiles',['../class_helper_utils.html#abc1d201ed708698a407d94839a780f31',1,'HelperUtils']]],
-  ['decryptfilewrapper_11',['DecryptFileWrapper',['../_crypto_a_p_i_8cpp.html#a7be657d1b51b6b5a871f25d13b294ed2',1,'DecryptFileWrapper(const FileData *fileData, const int numFiles):&#160;CryptoAPI.cpp'],['../_crypto_a_p_i_8h.html#ae120bc077206bcd0cb863eab8b513572',1,'DecryptFileWrapper(const FileData *fileData, int numFiles):&#160;CryptoAPI.cpp']]],
+  ['decryptfilewrapper_11',['DecryptFileWrapper',['../_crypto_a_p_i_8cpp.html#a031742fca5bb4c41e94cbf030fc3da2e',1,'DecryptFileWrapper(const FileData *fileData, const int numFiles):&#160;CryptoAPI.cpp'],['../_crypto_a_p_i_8h.html#a660c3a342df553e8f19e5a972d8355c5',1,'DecryptFileWrapper(const FileData *fileData, int numFiles):&#160;CryptoAPI.cpp']]],
   ['decryptionscreenwidget_12',['DecryptionScreenWidget',['../class_decryption_screen_widget.html#a7ba4432d1d5c5d65afbcde55953d44e9',1,'DecryptionScreenWidget']]],
   ['deleteentry_13',['DeleteEntry',['../class_rest_api_d_l_l.html#ae9eb8b43e8abddcd559978422cb0f9b5',1,'RestApiDLL']]],
   ['deleteentry_14',['deleteEntry',['../class_database.html#a68ca162d7eb6b990548f1977233c9822',1,'Database']]],

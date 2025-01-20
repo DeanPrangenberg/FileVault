@@ -1,5 +1,10 @@
 #include "AlgorithmStatisticWidget.h"
 
+/**
+ * @brief Constructs the AlgorithmStatisticWidget object.
+ * @param parent The parent widget.
+ * @param data The initial data to display in the widget.
+ */
 AlgorithmStatisticWidget::AlgorithmStatisticWidget(QWidget *parent, const QMap<QString, int> &data)
   : QWidget(parent) {
   setObjectName("AlgorithmStatisticWidget");
@@ -17,6 +22,10 @@ AlgorithmStatisticWidget::AlgorithmStatisticWidget(QWidget *parent, const QMap<Q
   update(data);
 }
 
+/**
+ * @brief Updates the widget with new data.
+ * @param data The new data to display in the widget.
+ */
 void AlgorithmStatisticWidget::update(const QMap<QString, int> &data) {
   // Start from 1 to skip the titelLabel
   for (int i = AlgorithmStatisticWidgetLayout->count() - 1; i > 0; --i) {

@@ -1,31 +1,28 @@
-// AES128.cpp
 #include "AES128.h"
 
-std::mutex AES128::fileMutex;
-
+/**
+ * Encrypts a file using AES-128-CBC encryption.
+ *
+ * @param fileData Pointer to the FileData object containing file paths, key, and IV.
+ * @return True if the encryption is successful, false otherwise.
+ */
 bool AES128::encryptFile(const FileData *fileData) {
-  if (!fileData || !fileData->getKey() || !fileData->getIv()) {
+  if (!fileData || fileData->Key->empty() <= 0 || fileData->Iv->empty() ) {
     std::cerr << "AES128: Null pointer in FileData" << std::endl;
     return false;
   }
 
-  std::vector<unsigned char> keyVec(fileData->getKey(), fileData->getKey() + fileData->getKeyLength());
-  std::vector<unsigned char> ivVec(fileData->getIv(), fileData->getIv() + fileData->getIvLength());
+  fs::create_directories(fileData->EncryptedFilePath->parent_path());
 
-  fs::path originalFile(fileData->getOriginalFilePath());
-  fs::path encryptedFile(fileData->getEncryptedFilePath());
-
-  fs::create_directories(encryptedFile.parent_path());
-
-  std::ifstream infile(originalFile, std::ios::binary);
+  std::ifstream infile(fileData->OriginalFilePath->string(), std::ios::binary);
   if (!infile.is_open()) {
-    std::wcerr << L"Failed to open input file: " << originalFile.wstring() << std::endl;
+    std::wcerr << L"Failed to open input file: " << fileData->OriginalFilePath << std::endl;
     return false;
   }
 
-  std::ofstream outfile(encryptedFile, std::ios::binary);
+  std::ofstream outfile(fileData->EncryptedFilePath->string(), std::ios::binary);
   if (!outfile.is_open()) {
-    std::wcerr << L"Failed to open output file: " << encryptedFile.wstring() << std::endl;
+    std::wcerr << L"Failed to open output file: " << fileData->EncryptedFilePath->wstring() << std::endl;
     infile.close();
     return false;
   }
@@ -41,7 +38,7 @@ bool AES128::encryptFile(const FileData *fileData) {
     return false;
   }
 
-  if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, keyVec.data(), ivVec.data())) {
+  if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, fileData->Key->data(), fileData->Iv->data())) {
     CryptoHelperUtils::printError(L"EVP_EncryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
@@ -67,40 +64,43 @@ bool AES128::encryptFile(const FileData *fileData) {
   infile.close();
   outfile.close();
 
-  CryptoHelperUtils::deleteFile(originalFile);
-  CryptoHelperUtils::MarkFile(fileData);
+  CryptoHelperUtils::deleteFile(fileData->OriginalFilePath->wstring());
+
+  if (!CryptoHelperUtils::MarkFile(fileData)) {
+    return false;
+  }
 
   return true;
 }
 
+/**
+ * Decrypts a file using AES-128-CBC decryption.
+ *
+ * @param fileData Pointer to the FileData object containing file paths, key, and IV.
+ * @return True if the decryption is successful, false otherwise.
+ */
 bool AES128::decryptFile(const FileData *fileData) {
-  if (!fileData || !fileData->getKey() || !fileData->getIv()) {
+  if (!fileData || fileData->Key->empty() <= 0 || fileData->Iv->empty() ) {
     std::cerr << "AES128: Null pointer in FileData" << std::endl;
     return false;
   }
 
   if (!CryptoHelperUtils::UnmarkFile(fileData)) {
-    std::wcerr << L"Failed to unmark file: " << fileData->getEncryptedFilePath() << std::endl;
+    std::wcerr << L"Failed to unmark file: " << fileData->EncryptedFilePath->wstring() << std::endl;
     return false;
   }
 
-  std::vector<unsigned char> keyVec(fileData->getKey(), fileData->getKey() + fileData->getKeyLength());
-  std::vector<unsigned char> ivVec(fileData->getIv(), fileData->getIv() + fileData->getIvLength());
+  fs::create_directories(fileData->DecryptedFilePath->parent_path());
 
-  fs::path encryptedFile(fileData->getEncryptedFilePath());
-  fs::path decryptedFile(fileData->getDecryptedFilePath());
-
-  fs::create_directories(decryptedFile.parent_path());
-
-  std::ifstream infile(encryptedFile, std::ios::binary);
+  std::ifstream infile(fileData->EncryptedFilePath->string(), std::ios::binary);
   if (!infile.is_open()) {
-    std::wcerr << L"Failed to open input file: " << encryptedFile.wstring() << std::endl;
+    std::wcerr << L"Failed to open input file: " << fileData->EncryptedFilePath->wstring() << std::endl;
     return false;
   }
 
-  std::ofstream outfile(decryptedFile, std::ios::binary);
+  std::ofstream outfile(fileData->DecryptedFilePath->string(), std::ios::binary);
   if (!outfile.is_open()) {
-    std::wcerr << L"Failed to open output file: " << decryptedFile.wstring() << std::endl;
+    std::wcerr << L"Failed to open output file: " << fileData->DecryptedFilePath->wstring() << std::endl;
     infile.close();
     return false;
   }
@@ -116,7 +116,7 @@ bool AES128::decryptFile(const FileData *fileData) {
     return false;
   }
 
-  if (1 != EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, keyVec.data(), ivVec.data())) {
+  if (1 != EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), nullptr, fileData->Key->data(), fileData->Iv->data())) {
     CryptoHelperUtils::printError(L"EVP_DecryptInit_ex failed");
     EVP_CIPHER_CTX_free(ctx);
     return false;
@@ -142,7 +142,7 @@ bool AES128::decryptFile(const FileData *fileData) {
   infile.close();
   outfile.close();
 
-  CryptoHelperUtils::deleteFile(encryptedFile);
+  CryptoHelperUtils::deleteFile(fileData->EncryptedFilePath->wstring());
 
   return true;
 }

@@ -103,29 +103,38 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a82d767483fed91b81d34691a6819ccef" id="r_a82d767483fed91b81d34691a6819ccef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82d767483fed91b81d34691a6819ccef">CentralFileStorage</a> ()=default</td></tr>
-<tr class="separator:a82d767483fed91b81d34691a6819ccef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93dfda2a1c19b737e4748cde09432ef8" id="r_a93dfda2a1c19b737e4748cde09432ef8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93dfda2a1c19b737e4748cde09432ef8">CentralFileStorage</a> (const <a class="el" href="class_central_file_storage.html">CentralFileStorage</a> &amp;)=delete</td></tr>
+<tr class="separator:a93dfda2a1c19b737e4748cde09432ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab708b6ca5178f5310d4eb2976e65e41d" id="r_ab708b6ca5178f5310d4eb2976e65e41d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab708b6ca5178f5310d4eb2976e65e41d">operator=</a> (const <a class="el" href="class_central_file_storage.html">CentralFileStorage</a> &amp;)=delete</td></tr>
+<tr class="separator:ab708b6ca5178f5310d4eb2976e65e41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51f0023d5f251289c3a8802b16884dfb" id="r_a51f0023d5f251289c3a8802b16884dfb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51f0023d5f251289c3a8802b16884dfb">moveFileToCentralStorage</a> (const fs::path &amp;filePath, bool isEncrypted)</td></tr>
+<tr class="memdesc:a51f0023d5f251289c3a8802b16884dfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves a file to the central storage.  <br /></td></tr>
+<tr class="separator:a51f0023d5f251289c3a8802b16884dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a51f0023d5f251289c3a8802b16884dfb" id="r_a51f0023d5f251289c3a8802b16884dfb"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51f0023d5f251289c3a8802b16884dfb">moveFileToCentralStorage</a> (const fs::path &amp;filePath, bool isEncrypted)</td></tr>
-<tr class="separator:a51f0023d5f251289c3a8802b16884dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60facb9f9c210a2845578639478d5a41" id="r_a60facb9f9c210a2845578639478d5a41"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_central_file_storage.html">CentralFileStorage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60facb9f9c210a2845578639478d5a41">getInstance</a> ()</td></tr>
+<tr class="memdesc:a60facb9f9c210a2845578639478d5a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the singleton instance of <a class="el" href="class_central_file_storage.html">CentralFileStorage</a>.  <br /></td></tr>
+<tr class="separator:a60facb9f9c210a2845578639478d5a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ad058e46defa1400712539b01a65019a2" id="r_ad058e46defa1400712539b01a65019a2"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad058e46defa1400712539b01a65019a2">centralEncFileStorage</a> = false</td></tr>
+<tr class="memdesc:ad058e46defa1400712539b01a65019a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the central encrypted file storage is enabled.  <br /></td></tr>
 <tr class="separator:ad058e46defa1400712539b01a65019a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a567a10377f253f4b598a5ee6f099003a" id="r_a567a10377f253f4b598a5ee6f099003a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a567a10377f253f4b598a5ee6f099003a">centralDecFileStorage</a> = false</td></tr>
+<tr class="memdesc:a567a10377f253f4b598a5ee6f099003a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the central decrypted file storage is enabled.  <br /></td></tr>
 <tr class="separator:a567a10377f253f4b598a5ee6f099003a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe5392de16d14d1ebfb3118a7951a6ff" id="r_abe5392de16d14d1ebfb3118a7951a6ff"><td class="memItemLeft" align="right" valign="top">static fs::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe5392de16d14d1ebfb3118a7951a6ff">fileStoragePath</a> = fs::current_path() / &quot;centralStorage&quot;</td></tr>
+<tr class="memdesc:abe5392de16d14d1ebfb3118a7951a6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to the central file storage.  <br /></td></tr>
 <tr class="separator:abe5392de16d14d1ebfb3118a7951a6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00012">12</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00009">9</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a82d767483fed91b81d34691a6819ccef" name="a82d767483fed91b81d34691a6819ccef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82d767483fed91b81d34691a6819ccef">&#9670;&#160;</a></span>CentralFileStorage()</h2>
+<a id="a93dfda2a1c19b737e4748cde09432ef8" name="a93dfda2a1c19b737e4748cde09432ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93dfda2a1c19b737e4748cde09432ef8">&#9670;&#160;</a></span>CentralFileStorage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,13 +145,13 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">CentralFileStorage::CentralFileStorage </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="class_central_file_storage.html">CentralFileStorage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -150,14 +159,41 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a51f0023d5f251289c3a8802b16884dfb" name="a51f0023d5f251289c3a8802b16884dfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51f0023d5f251289c3a8802b16884dfb">&#9670;&#160;</a></span>moveFileToCentralStorage()</h2>
+<a id="a60facb9f9c210a2845578639478d5a41" name="a60facb9f9c210a2845578639478d5a41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60facb9f9c210a2845578639478d5a41">&#9670;&#160;</a></span>getInstance()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_central_file_storage.html">CentralFileStorage</a> &amp; CentralFileStorage::getInstance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the singleton instance of <a class="el" href="class_central_file_storage.html">CentralFileStorage</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The singleton instance. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00015">15</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
+
+</div>
+</div>
+<a id="a51f0023d5f251289c3a8802b16884dfb" name="a51f0023d5f251289c3a8802b16884dfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f0023d5f251289c3a8802b16884dfb">&#9670;&#160;</a></span>moveFileToCentralStorage()</h2>
+
+<div class="memitem">
+<div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool CentralFileStorage::moveFileToCentralStorage </td>
@@ -170,14 +206,45 @@ Static Public Attributes</h2></td></tr>
           <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isEncrypted</em></span>&#160;)</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+<p>Moves a file to the central storage. </p>
+<p>Moves a file to the central storage, either to the Encrypted or Decrypted subdirectory.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The path of the file to be moved. </td></tr>
+    <tr><td class="paramname">isEncrypted</td><td>A boolean indicating whether the file is encrypted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the file was successfully moved, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_central_file_storage_8cpp_source.html#l00032">32</a> of file <a class="el" href="_central_file_storage_8cpp_source.html">CentralFileStorage.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab708b6ca5178f5310d4eb2976e65e41d" name="ab708b6ca5178f5310d4eb2976e65e41d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab708b6ca5178f5310d4eb2976e65e41d">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CentralFileStorage::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_central_file_storage.html">CentralFileStorage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_central_file_storage_8cpp_source.html#l00027">27</a> of file <a class="el" href="_central_file_storage_8cpp_source.html">CentralFileStorage.cpp</a>.</p>
 
 </div>
 </div>
@@ -202,7 +269,9 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00016">16</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
+<p>Indicates if the central decrypted file storage is enabled. </p>
+
+<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00032">32</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
 
 </div>
 </div>
@@ -226,7 +295,9 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00015">15</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
+<p>Indicates if the central encrypted file storage is enabled. </p>
+
+<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00027">27</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
 
 </div>
 </div>
@@ -250,7 +321,9 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00017">17</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
+<p>Path to the central file storage. </p>
+
+<p class="definition">Definition at line <a class="el" href="_central_file_storage_8h_source.html#l00037">37</a> of file <a class="el" href="_central_file_storage_8h_source.html">CentralFileStorage.h</a>.</p>
 
 </div>
 </div>

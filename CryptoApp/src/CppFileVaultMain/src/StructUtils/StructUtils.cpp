@@ -1,82 +1,65 @@
 #include "StructUtils.h"
-#include "../DLLUtils/CryptoDLL.h"
-#include <cstring>
-#include <iostream>
 
-std::wstring StructUtils::AlgorithmTypeToString(globalDefinitions::AlgorithmType type) {
+namespace fs = std::filesystem;
+
+/**
+ * @brief Converts an AlgorithmType enum to a string representation.
+ * @param type The AlgorithmType enum value.
+ * @return A string representing the algorithm type.
+ */
+std::string StructUtils::AlgorithmTypeToString(globalDefinitions::AlgorithmType type) {
   switch (type) {
     case globalDefinitions::AlgorithmType::AES128:
-      return L"AES128";
+      return "AES128";
     case globalDefinitions::AlgorithmType::AES256:
-      return L"AES256";
+      return "AES256";
     default:
-      return L"Unknown";
+      return "Unknown";
   }
 }
 
-wchar_t *StructUtils::ConvertWStringToWChar(const std::wstring &input) {
-  wchar_t *output = new wchar_t[input.size() + 1];
-  std::wcscpy(output, input.c_str());
-  return output;
-}
-
+/**
+ * @brief Creates a FileData structure for the given algorithm type and original file path.
+ * @param algorithmenType The algorithm type to be used for encryption.
+ * @param originalFilePath The path to the original file.
+ * @return A FileData structure containing the file's metadata and encryption information.
+ * @throws std::invalid_argument if the algorithm type is unsupported.
+ */
 FileData StructUtils::createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath) {
   CryptoDLL cryptoDll;
-  unsigned char *IV;
-  int ivLength = 0;
-  unsigned char *KEY;
+  FileData fileData;
+
   int keyLength = 0;
+  int ivLength = 0;
 
   switch (algorithmenType) {
     case globalDefinitions::AlgorithmType::AES128:
-      ivLength = 16;
       keyLength = 16;
-      KEY = new unsigned char[keyLength];
-      IV = new unsigned char[ivLength];
+      ivLength = 16;
       break;
     case globalDefinitions::AlgorithmType::AES256:
-      ivLength = 16;
       keyLength = 32;
-      KEY = new unsigned char[keyLength];
-      IV = new unsigned char[ivLength];
+      ivLength = 16;
       break;
     default:
       throw std::invalid_argument("Unsupported algorithm type");
   }
 
-  std::memset(KEY, 0, keyLength);
-  std::memset(IV, 0, ivLength);
-
-  cryptoDll.GenerateKeyIv(keyLength, ivLength, KEY, IV);
-
-  unsigned char fileID[64];
-  cryptoDll.GenerateFileID(originalFilePath.wstring().c_str(), fileID);
-
-  unsigned char lastUpdateID[64];
-  cryptoDll.getCurrentTimeHash(lastUpdateID);
+  fileData.Key->resize(keyLength);
+  fileData.Iv->resize(ivLength);
 
   std::wstring encryptedFilePath = originalFilePath.wstring() + globalDefinitions::encFileSuffix;
-  std::wstring algorithmenTypeStr = AlgorithmTypeToString(algorithmenType);
+  std::string algorithmenTypeStr = AlgorithmTypeToString(algorithmenType);
 
-  FileData fileData;
-  fileData.setFileId(new unsigned char[64]);
-  std::memcpy(fileData.getFileId(), fileID, 64);
-  fileData.setFileIdLength(64);
+  cryptoDll.GenerateFileID(originalFilePath.wstring().c_str(), fileData.FileID->data());
 
-  fileData.setLastUpdateId(new unsigned char[64]);
-  std::memcpy(fileData.getLastUpdateId(), lastUpdateID, 64);
-  fileData.setLastUpdateIdLength(64);
-
-  fileData.setAlgorithmenType(ConvertWStringToWChar(algorithmenTypeStr));
-  fileData.setOriginalFilePath(ConvertWStringToWChar(originalFilePath.wstring()));
-  fileData.setEncryptedFilePath(ConvertWStringToWChar(encryptedFilePath));
-  fileData.setDecryptedFilePath(ConvertWStringToWChar(originalFilePath.wstring()));
-
-  fileData.setKey(KEY);
-  fileData.setKeyLength(keyLength);
-
-  fileData.setIv(IV);
-  fileData.setIvLength(ivLength);
+  // encryptionID gets generated in the DLL
+  cryptoDll.getCurrentTimeHash(fileData.LastUpdateID->data());
+  fileData.AlgorithmenType->assign(algorithmenTypeStr);
+  fileData.OriginalFilePath->assign(originalFilePath);
+  fileData.EncryptedFilePath->assign(fs::path (encryptedFilePath));
+  fileData.DecryptedFilePath->assign(originalFilePath);
+  cryptoDll.GenerateKeyIv(keyLength, ivLength, fileData.Key->data(), fileData.Iv->data());
 
   fileData.debugFileData();
 

@@ -9,67 +9,23 @@ public class Database {
         return "filedata.db";
     }
 
-public List<GoFileData> getAllEntries() {
-    List<GoFileData> entries = new ArrayList<>();
-    String sql = "SELECT * FROM file_data";
-    try (Statement stmt = conn.createStatement();
-         ResultSet rs = stmt.executeQuery(sql)) {
-        while (rs.next()) {
-            GoFileData data = new GoFileData();
-            data.FileID = rs.getString("FileID");
-            data.FileIDLength = rs.getInt("FileIDLength");
-            data.EncryptionID = rs.getString("EncryptionID");
-            data.EncryptionIDLength = rs.getInt("EncryptionIDLength");
-            data.LastUpdateID = rs.getString("LastUpdateID");
-            data.LastUpdateIDLength = rs.getInt("LastUpdateIDLength");
-            data.AlgorithmenType = rs.getString("AlgorithmenType");
-            data.OriginalFilePath = rs.getString("OriginalFilePath");
-            data.EncryptedFilePath = rs.getString("EncryptedFilePath");
-            data.DecryptedFilePath = rs.getString("DecryptedFilePath");
-            data.Key = rs.getString("Key");
-            data.KeyLength = rs.getInt("KeyLength");
-            data.Iv = rs.getString("Iv");
-            data.IvLength = rs.getInt("IvLength");
-            entries.add(data);
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return entries;
-}
-
-  public static class GoFileData {
-        public String FileID;
-        public int FileIDLength;
-        public String EncryptionID;
-        public int EncryptionIDLength;
-        public String LastUpdateID;
-        public int LastUpdateIDLength;
-        public String AlgorithmenType;
-        public String OriginalFilePath;
-        public String EncryptedFilePath;
-        public String DecryptedFilePath;
-        public String Key;
-        public int KeyLength;
-        public String Iv;
-        public int IvLength;
-    }
-
     public void connect() {
         try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:filedata.db");
-            initializeTable();
+            if (conn == null || conn.isClosed()) {
+                Class.forName("org.sqlite.JDBC");
+                conn = DriverManager.getConnection("jdbc:sqlite:" + getDatabasePath());
+                initializeTable();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void dropTable() {
-        connect();
-        String sql = "DROP TABLE IF EXISTS file_data";
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
+    public void disconnect() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,17 +53,23 @@ public List<GoFileData> getAllEntries() {
         }
     }
 
-    public void disconnect() {
-        try {
-            if (conn != null) {
-                conn.close();
+    public void resetTable() {
+        connect();
+        String checkTableExists = "SELECT name FROM sqlite_master WHERE type='table' AND name='file_data'";
+        String deleteData = "DELETE FROM file_data";
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(checkTableExists)) {
+            if (rs.next()) {
+                stmt.execute(deleteData);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        disconnect();
     }
 
     public void insertEntry(GoFileData data) {
+        connect();
         String sql = "INSERT OR REPLACE INTO file_data (" +
             "FileID, " +
             "FileIDLength, " +
@@ -143,17 +105,21 @@ public List<GoFileData> getAllEntries() {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        disconnect();
     }
 
     public void replaceEntry(GoFileData data) {
+        connect();
         GoFileData searchData = searchEntry(data.FileID, data.EncryptionID);
         if (searchData.LastUpdateID != data.LastUpdateID) {
             deleteEntry(data.FileID, data.EncryptionID);
             insertEntry(data);
         }
+        disconnect();
     }
 
     public void deleteEntry(String fileID, String encryptionID) {
+        connect();
         String sql = "DELETE FROM file_data WHERE FileID = ? AND EncryptionID = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, fileID);
@@ -162,9 +128,11 @@ public List<GoFileData> getAllEntries() {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        disconnect();
     }
 
     public GoFileData searchEntry(String fileID, String encryptionID) {
+        connect();
         String sql = "SELECT * FROM file_data WHERE FileID = ? AND EncryptionID = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, fileID);
@@ -192,10 +160,43 @@ public List<GoFileData> getAllEntries() {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        disconnect();
         return null;
     }
 
+    public List<GoFileData> getAllEntries() {
+        connect();
+        List<GoFileData> entries = new ArrayList<>();
+        String sql = "SELECT * FROM file_data";
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                GoFileData data = new GoFileData();
+                data.FileID = rs.getString("FileID");
+                data.FileIDLength = rs.getInt("FileIDLength");
+                data.EncryptionID = rs.getString("EncryptionID");
+                data.EncryptionIDLength = rs.getInt("EncryptionIDLength");
+                data.LastUpdateID = rs.getString("LastUpdateID");
+                data.LastUpdateIDLength = rs.getInt("LastUpdateIDLength");
+                data.AlgorithmenType = rs.getString("AlgorithmenType");
+                data.OriginalFilePath = rs.getString("OriginalFilePath");
+                data.EncryptedFilePath = rs.getString("EncryptedFilePath");
+                data.DecryptedFilePath = rs.getString("DecryptedFilePath");
+                data.Key = rs.getString("Key");
+                data.KeyLength = rs.getInt("KeyLength");
+                data.Iv = rs.getString("Iv");
+                data.IvLength = rs.getInt("IvLength");
+                entries.add(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        disconnect();
+        return entries;
+    }
+
     public List<GoFileData> getAllFileIDsAndEncryptedPaths() {
+        connect();
         List<GoFileData> fileList = new ArrayList<>();
         String sql = "SELECT FileID, FileIDLength, EncryptionID, EncryptionIDLength, EncryptedFilePath FROM file_data";
         try (Statement stmt = conn.createStatement();
@@ -210,6 +211,24 @@ public List<GoFileData> getAllEntries() {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        disconnect();
         return fileList;
+    }
+
+    public static class GoFileData {
+        public String FileID;
+        public int FileIDLength;
+        public String EncryptionID;
+        public int EncryptionIDLength;
+        public String LastUpdateID;
+        public int LastUpdateIDLength;
+        public String AlgorithmenType;
+        public String OriginalFilePath;
+        public String EncryptedFilePath;
+        public String DecryptedFilePath;
+        public String Key;
+        public int KeyLength;
+        public String Iv;
+        public int IvLength;
     }
 }

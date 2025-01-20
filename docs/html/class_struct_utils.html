@@ -97,46 +97,22 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
+<p>Utility class for handling file data structures and conversions.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_struct_utils_8h_source.html">StructUtils.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac9f831bf931be282ed4a4d8224270094" id="r_ac9f831bf931be282ed4a4d8224270094"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_file_data.html">FileData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9f831bf931be282ed4a4d8224270094">createFileDataStruct</a> (const <a class="el" href="classglobal_definitions.html#ad241caf4168904fea0da5660441b6fe7">globalDefinitions::AlgorithmType</a> &amp;algorithmenType, const fs::path &amp;originalFilePath)</td></tr>
+<tr class="memdesc:ac9f831bf931be282ed4a4d8224270094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_file_data.html">FileData</a> structure for the given algorithm type and original file path.  <br /></td></tr>
 <tr class="separator:ac9f831bf931be282ed4a4d8224270094"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a312fac8e3c35f0711629a222703b7245" id="r_a312fac8e3c35f0711629a222703b7245"><td class="memItemLeft" align="right" valign="top">static wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a312fac8e3c35f0711629a222703b7245">ConvertWStringToWChar</a> (const std::wstring &amp;input)</td></tr>
-<tr class="separator:a312fac8e3c35f0711629a222703b7245"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_struct_utils_8h_source.html#l00010">10</a> of file <a class="el" href="_struct_utils_8h_source.html">StructUtils.h</a>.</p>
+<div class="textblock"><p>Utility class for handling file data structures and conversions. </p>
+
+<p class="definition">Definition at line <a class="el" href="_struct_utils_8h_source.html#l00014">14</a> of file <a class="el" href="_struct_utils_8h_source.html">StructUtils.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a312fac8e3c35f0711629a222703b7245" name="a312fac8e3c35f0711629a222703b7245"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a312fac8e3c35f0711629a222703b7245">&#9670;&#160;</a></span>ConvertWStringToWChar()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">wchar_t * StructUtils::ConvertWStringToWChar </td>
-          <td>(</td>
-          <td class="paramtype">const std::wstring &amp;</td>          <td class="paramname"><span class="paramname"><em>input</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_struct_utils_8cpp_source.html#l00017">17</a> of file <a class="el" href="_struct_utils_8cpp_source.html">StructUtils.cpp</a>.</p>
-
-</div>
-</div>
 <a id="ac9f831bf931be282ed4a4d8224270094" name="ac9f831bf931be282ed4a4d8224270094"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9f831bf931be282ed4a4d8224270094">&#9670;&#160;</a></span>createFileDataStruct()</h2>
 
@@ -164,7 +140,23 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_struct_utils_8cpp_source.html#l00023">23</a> of file <a class="el" href="_struct_utils_8cpp_source.html">StructUtils.cpp</a>.</p>
+<p>Creates a <a class="el" href="class_file_data.html">FileData</a> structure for the given algorithm type and original file path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">algorithmenType</td><td>The algorithm type to be used for encryption. </td></tr>
+    <tr><td class="paramname">originalFilePath</td><td>The path to the original file. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="class_file_data.html">FileData</a> structure containing the file's metadata and encryption information. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if the algorithm type is unsupported. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_struct_utils_8cpp_source.html#l00029">29</a> of file <a class="el" href="_struct_utils_8cpp_source.html">StructUtils.cpp</a>.</p>
 
 </div>
 </div>

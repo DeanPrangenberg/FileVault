@@ -1,15 +1,20 @@
 #include "HelperUtils.h"
 
+/**
+ * @brief Prints the FileID and EncryptionID data for debugging purposes.
+ *
+ * @param fileIDData The FileIDData structure containing the FileID and EncryptionID to debug.
+ */
 void debugFileIDData(const HelperUtils::FileIDData &fileIDData) {
   std::cout << "***************************************************" << std::endl;
   std::cout << "FileID: ";
-  for (const auto &byte: fileIDData.FileID) {
+  for (const auto &byte: *fileIDData.FileID) {
     std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
   }
   std::cout << std::endl;
 
   std::cout << "EncryptionID: ";
-  for (const auto &byte: fileIDData.EncryptionID) {
+  for (const auto &byte: *fileIDData.EncryptionID) {
     std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
   }
   std::cout << std::dec << std::endl;
@@ -18,19 +23,30 @@ void debugFileIDData(const HelperUtils::FileIDData &fileIDData) {
   std::cout << "***************************************************" << std::endl;
 }
 
+/**
+ * @brief Repairs lost encrypted file structures in the specified directories.
+ *
+ * @param directorys A vector of paths representing the directories to scan and repair.
+ */
 void HelperUtils::repairLostEncFileStructs(std::vector<fs::path> &directorys) {
   CryptoDLL cryptoDll;
 
   // update id
-  auto updateId = new unsigned char[64];
-  cryptoDll.getCurrentTimeHash(updateId);
+  std::vector<unsigned char> updateIdVec(64);
+  cryptoDll.getCurrentTimeHash(updateIdVec.data());
 
   auto totalFiles = scanForAllFiles(directorys);
   auto lostFiles = checkFilesForFileID(totalFiles);
   auto fileDataList = findFileDataStructsInDatabase(lostFiles);
-  updateFileDataInDB(fileDataList, lostFiles, updateId);
+  updateFileDataInDB(fileDataList, lostFiles, updateIdVec);
 }
 
+/**
+ * @brief Scans the specified directories for all files.
+ *
+ * @param directorys A vector of paths representing the directories to scan.
+ * @return A vector of paths representing all found files.
+ */
 std::vector<fs::path> HelperUtils::scanForAllFiles(const std::vector<fs::path> &directorys) {
   FileScannerDLL fileScannerDll;
   std::vector<fs::path> totalFiles;
@@ -47,16 +63,21 @@ std::vector<fs::path> HelperUtils::scanForAllFiles(const std::vector<fs::path> &
   return totalFiles;
 }
 
+/**
+ * @brief Checks the specified files for FileID and EncryptionID.
+ *
+ * @param totalFiles A vector of paths representing the files to check.
+ * @return A vector of FileIDData structures representing the files with found FileID and EncryptionID.
+ */
 std::vector<HelperUtils::FileIDData> HelperUtils::checkFilesForFileID(const std::vector<fs::path> &totalFiles) {
   FileMarkDLL fileMarkDll;
   std::vector<FileIDData> lostFiles;
 
   if (printDebug) std::cout << "repairLostEncFileStructs: Checking files for FileID" << std::endl;
   for (const auto &filePath: totalFiles) {
-    std::array<unsigned char, 64> FileID{};
-    std::array<unsigned char, 64> EncryptionID{};
-    auto wch = filePath.wstring().c_str();
-    if (fileMarkDll.extractIDsFromFile(wch, FileID.data(), EncryptionID.data())) {
+    auto FileID = std::make_shared<std::vector<unsigned char>>(64);
+    auto EncryptionID = std::make_shared<std::vector<unsigned char>>(64);
+    if (fileMarkDll.extractIDsFromFile(&filePath, FileID.get(), EncryptionID.get())) {
       if (printDebug) std::cout << "FileID and EncryptionID found for file: " << filePath << std::endl;
       lostFiles.push_back({FileID, EncryptionID, filePath});
     } else {
@@ -69,6 +90,12 @@ std::vector<HelperUtils::FileIDData> HelperUtils::checkFilesForFileID(const std:
   return lostFiles;
 }
 
+/**
+ * @brief Finds the FileData structures in the database for the specified lost files.
+ *
+ * @param lostFiles A vector of FileIDData structures representing the lost files.
+ * @return A vector of FileData structures found in the database.
+ */
 std::vector<FileData> HelperUtils::findFileDataStructsInDatabase(const std::vector<FileIDData> &lostFiles) {
   RestApiDLL restApiDll;
   std::vector<FileData> fileDataList;
@@ -77,57 +104,52 @@ std::vector<FileData> HelperUtils::findFileDataStructsInDatabase(const std::vect
   for (const auto &FileIDDataStruct: lostFiles) {
     debugFileIDData(FileIDDataStruct);
     FileData fileData{};
-    fileData.setFileId(new unsigned char[FileIDDataStruct.FileID.size()]);
-    std::copy(FileIDDataStruct.FileID.begin(), FileIDDataStruct.FileID.end(), fileData.getFileId());
-    fileData.setFileIdLength(FileIDDataStruct.FileID.size());
+    fileData.FileID->assign(FileIDDataStruct.FileID->begin(), FileIDDataStruct.FileID->end());
+    fileData.EncryptionID->assign(FileIDDataStruct.EncryptionID->begin(), FileIDDataStruct.EncryptionID->end());
 
-    fileData.setEncryptionId(new unsigned char[FileIDDataStruct.EncryptionID.size()]);
-    std::copy(FileIDDataStruct.EncryptionID.begin(), FileIDDataStruct.EncryptionID.end(), fileData.getEncryptionId());
-    fileData.setEncryptionIdLength(FileIDDataStruct.EncryptionID.size());
-
-    if (fileData.getFileId() == nullptr || fileData.getEncryptionId() == nullptr) {
+    if (fileData.FileID->empty() || fileData.EncryptionID->empty()) {
       std::cerr << "repairLostEncFileStructs: FileID or EncryptionID is null" << std::endl;
       continue;
     } else {
       if (printDebug) {
-        std::cout << "repairLostEncFileStructs: FileID: "
-                  << globalDefinitions::toHexString(fileData.getFileId(), fileData.getFileIdLength()) << std::endl;
-        std::cout << "repairLostEncFileStructs: EncryptionID: "
-                  << globalDefinitions::toHexString(fileData.getEncryptionId(), fileData.getEncryptionIdLength()) << std::endl;
+        std::cout << "repairLostEncFileStructs: FileID: " << fileData.toHexString(fileData.FileID) << std::endl;
+        std::cout << "repairLostEncFileStructs: EncryptionID: " << fileData.toHexString(fileData.EncryptionID) << std::endl;
       }
     }
 
     if (restApiDll.SearchEntry(fileData)) {
       if (printDebug)
-        std::cout << "repairLostEncFileStructs: Found struct for file: " << FileIDDataStruct.newEncryptedFilePath
-                  << std::endl;
-      fileDataList.push_back(fileData);
+        std::cout << "repairLostEncFileStructs: Found struct for file: " << FileIDDataStruct.newEncryptedFilePath << std::endl;
+        fileDataList.push_back(fileData);
       if (printDebug) {
-        std::cout << "repairLostEncFileStructs: FileID: "
-                  << globalDefinitions::toHexString(fileData.getFileId(), fileData.getFileIdLength()) << std::endl;
-        std::cout << "repairLostEncFileStructs: EncryptionID: "
-                  << globalDefinitions::toHexString(fileData.getEncryptionId(), fileData.getEncryptionIdLength()) << std::endl;
+        std::cout << "repairLostEncFileStructs: FileID: " << fileData.toHexString(fileData.FileID) << std::endl;
+        std::cout << "repairLostEncFileStructs: EncryptionID: " << fileData.toHexString(fileData.EncryptionID) << std::endl;
       }
     } else {
       if (printDebug)
-        std::cout << "repairLostEncFileStructs: Could not find struct for file: "
-                  << FileIDDataStruct.newEncryptedFilePath << std::endl;
+        std::cout << "repairLostEncFileStructs: Could not find struct for file: " << FileIDDataStruct.newEncryptedFilePath << std::endl;
     }
   }
   if (printDebug)
-    std::cout << "repairLostEncFileStructs: Found " << fileDataList.size() << " FileData structs in the db"
-              << std::endl;
+    std::cout << "repairLostEncFileStructs: Found " << fileDataList.size() << " FileData structs in the db" << std::endl;
 
   return fileDataList;
 }
 
-void HelperUtils::updateFileDataInDB(std::vector<FileData> &fileDataList, const std::vector<FileIDData> &lostFiles, unsigned char *updateId) {
+/**
+ * @brief Updates the FileData structures in the database with the new encrypted file path.
+ *
+ * @param fileDataList A vector of FileData structures to update.
+ * @param lostFiles A vector of FileIDData structures representing the lost files.
+ * @param updateId The update ID to set in the FileData structures.
+ */
+void HelperUtils::updateFileDataInDB(std::vector<FileData> &fileDataList, const std::vector<FileIDData> &lostFiles, std::vector<unsigned char> &updateId) {
   RestApiDLL restApiDll;
 
   if (printDebug)
     std::cout << "repairLostEncFileStructs: Updating EncryptedFilePath in the FileData structs" << std::endl;
   for (auto &fileData: fileDataList) {
-    if (fileData.getFileId() == nullptr || fileData.getEncryptionId() == nullptr) {
+    if (fileData.FileID->empty() || fileData.EncryptionID->empty()) {
       if (printDebug) std::cout << "repairLostEncFileStructs: FileID or EncryptionID is null" << std::endl;
       continue;
     }
@@ -135,19 +157,16 @@ void HelperUtils::updateFileDataInDB(std::vector<FileData> &fileDataList, const 
     for (const auto &lostFile: lostFiles) {
       if (printDebug) std::cout << "repairLostEncFileStructs: Comparing FileIDs and EncryptionIDs" << std::endl;
       if (printDebug) {
-        std::cout << "repairLostEncFileStructs: LostFileID: "
-                  << globalDefinitions::toHexString(lostFile.FileID.data(), lostFile.FileID.size()) << std::endl;
-        std::cout << "repairLostEncFileStructs: FileID: "
-                  << globalDefinitions::toHexString(fileData.getFileId(), fileData.getFileIdLength()) << std::endl;
-        std::cout << "repairLostEncFileStructs: LostEncryptionID: "
-                  << globalDefinitions::toHexString(lostFile.EncryptionID.data(), lostFile.EncryptionID.size()) << std::endl;
-        std::cout << "repairLostEncFileStructs: EncryptionID: "
-                  << globalDefinitions::toHexString(fileData.getEncryptionId(), fileData.getEncryptionIdLength()) << std::endl;
+        std::cout << "repairLostEncFileStructs: LostFileID: " << fileData.toHexString(lostFile.FileID) << std::endl;
+        std::cout << "repairLostEncFileStructs: FileID: " << fileData.toHexString(fileData.FileID) << std::endl;
+        std::cout << "repairLostEncFileStructs: LostEncryptionID: " << fileData.toHexString(lostFile.EncryptionID) << std::endl;
+        std::cout << "repairLostEncFileStructs: EncryptionID: " << fileData.toHexString(fileData.EncryptionID) << std::endl;
       }
 
       bool equal = true;
-      for (size_t i = 0; i < lostFile.FileID.size(); i++) {
-        if (lostFile.FileID[i] != fileData.getFileId()[i] || lostFile.EncryptionID[i] != fileData.getEncryptionId()[i]) {
+      for (size_t i = 0; i < lostFile.FileID->size(); i++) {
+        if (std::memcmp(lostFile.FileID->data(), fileData.FileID->data(), lostFile.FileID->size()) != 0
+            || std::memcmp(lostFile.EncryptionID->data(), fileData.EncryptionID->data(), lostFile.EncryptionID->size()) != 0) {
           equal = false;
           if (printDebug) std::cout << "repairLostEncFileStructs: FileIDs or EncryptionIDs do not match" << std::endl;
           break;
@@ -157,27 +176,17 @@ void HelperUtils::updateFileDataInDB(std::vector<FileData> &fileDataList, const 
       if (equal) {
         if (printDebug) std::cout << "repairLostEncFileStructs: FileIDs and EncryptionIDs match" << std::endl;
 
-        if (printDebug)
-          std::cout << "repairLostEncFileStructs: Allocating memory for new EncryptedFilePath" << std::endl;
-        fileData.setEncryptedFilePath(new wchar_t[lostFile.newEncryptedFilePath.wstring().size() + 1]);
-
-        if (printDebug) std::cout << "repairLostEncFileStructs: Copying new EncryptedFilePath" << std::endl;
-        if (printDebug)
-          std::cout << "repairLostEncFileStructs: newEncryptedFilePath = "
-                    << const_cast<wchar_t *>(lostFile.newEncryptedFilePath.c_str()) << std::endl;
-
-        fileData.setEncryptedFilePath(const_cast<wchar_t *>(lostFile.newEncryptedFilePath.c_str()));
-        fileData.setLastUpdateId(updateId);
+        if (printDebug) std::cout << "repairLostEncFileStructs: Updating EncryptedFilePath" << std::endl;
+        fileData.EncryptedFilePath->assign(lostFile.newEncryptedFilePath);
+        fileData.LastUpdateID->assign(updateId.begin(), updateId.end());
 
         if (printDebug) std::cout << "repairLostEncFileStructs: Updated EncryptedFilePath" << std::endl;
         // Replace the old FileData struct in the database with the updated one
         if (restApiDll.ReplaceEntry(fileData)) {
-          std::wcout << L"repairLostEncFileStructs: Replaced struct for file: " << fileData.getEncryptedFilePath()
-                     << std::endl;
+          std::wcout << L"repairLostEncFileStructs: Replaced struct for file: " << fileData.EncryptedFilePath->wstring() << std::endl;
           updated = true;
         } else {
-          std::wcout << L"repairLostEncFileStructs: Could not replace struct for file: "
-                     << fileData.getEncryptedFilePath() << std::endl;
+          std::wcout << L"repairLostEncFileStructs: Could not replace struct for file: " << fileData.EncryptedFilePath->wstring() << std::endl;
         }
 
         break;
@@ -197,15 +206,23 @@ void HelperUtils::updateFileDataInDB(std::vector<FileData> &fileDataList, const 
   }
 
   if (printDebug)
-    std::cout << "repairLostEncFileStructs: Updated " << fileDataList.size() << " FileData structs in the db"
-              << std::endl;
+    std::cout << "repairLostEncFileStructs: Updated " << fileDataList.size() << " FileData structs in the db" << std::endl;
 }
 
+/**
+ * @brief Repairs all lost encrypted file structures on all drives.
+ */
 void HelperUtils::repairAllLostStruct() {
   auto drives = SystemUtils::getAllDrives();
   repairLostEncFileStructs(drives);
 }
 
+/**
+ * @brief Decrypts the specified files.
+ *
+ * @param filePaths A vector of paths representing the files to decrypt.
+ * @return An unordered map with the decryption results.
+ */
 std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector<fs::path> &filePaths) {
   CryptoDLL cryptoDll;
   RestApiDLL restApiDll;
@@ -215,20 +232,17 @@ std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector
 
   for (const auto &filePath : filePaths) {
     // Create the FileData structure
-    auto filePathAsWchar = convertPathToWchar(filePath);
     FileData fileData;
-    fileData.setEncryptionId(new unsigned char[64]);
-    fileData.setEncryptionIdLength(64);
-    fileData.setFileId(new unsigned char[64]);
-    fileData.setFileIdLength(64);
+    fileData.EncryptionID->resize(64);
+    fileData.FileID->resize(64);
 
-    fileMarkDll.extractIDsFromFile(filePathAsWchar, fileData.getFileId(), fileData.getEncryptionId());
+    fileMarkDll.extractIDsFromFile(&filePath, fileData.FileID.get(), fileData.EncryptionID.get());
 
     if (!restApiDll.SearchEntry(fileData)) {
       results.insert({"Search", 1}); // Error finding the entry
       continue;
     }
-    fileData.setEncryptedFilePath(filePathAsWchar);
+    fileData.EncryptedFilePath->assign(filePath);
     fileDataVec.push_back(fileData);
   }
 
@@ -237,7 +251,7 @@ std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector
   cryptoDll.DecryptFiles(fileDataVec.data(), static_cast<int>(fileDataVec.size()), decryptResults);
 
   for (size_t i = 0; i < fileDataVec.size(); ++i) {
-    std::string algorithm = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(fileDataVec[i].getAlgorithmenType());
+    std::string algorithm(fileDataVec[i].AlgorithmenType->begin(), fileDataVec[i].AlgorithmenType->end());
 
     // Check if decryption was successful
     if (!decryptResults[i]) {
@@ -252,13 +266,21 @@ std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector
     }
 
     // Clean up the FileData structure
-    fileDataVec[i].cleanupFileData();
+    fileDataVec[i].Key->clear();
+    fileDataVec[i].Iv->clear();
     results.insert({algorithm, -1}); // Success
   }
 
   return results;
 }
 
+/**
+ * @brief Encrypts the specified files using the specified algorithms.
+ *
+ * @param filePaths A vector of paths representing the files to encrypt.
+ * @param algorithm A vector of strings representing the algorithms to use for encryption.
+ * @return A vector of integers representing the encryption results.
+ */
 std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePaths, const std::vector<std::string> &algorithm) {
   CryptoDLL cryptoDll;
   RestApiDLL restApiDll;
@@ -282,7 +304,7 @@ std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePath
 
   for (auto fileData : fileDataVec) {
     // Check if encryption was successful
-    if (!fileData.getEncryptedFilePath() || !encryptResults[0]) {
+    if (fileData.EncryptedFilePath->empty() || !encryptResults[0]) {
       results.push_back(1); // Error during encryption
       continue;
     }
@@ -294,13 +316,19 @@ std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePath
     }
 
     // Clean up the FileData structure
-    fileData.cleanupFileData();
+    fileData.Key->clear();
+    fileData.Iv->clear();
     results.push_back(-1); // Success
   }
 
   return results;
 }
 
+/**
+ * @brief Checks the state of the files in the database.
+ *
+ * @return A vector of integers representing the number of valid and invalid files.
+ */
 std::vector<int> HelperUtils::checkDBFileState() {
   RestApiDLL restApiDll;
   auto fileDataList = restApiDll.GetAllFileIDsAndEncryptedPaths();
@@ -309,9 +337,9 @@ std::vector<int> HelperUtils::checkDBFileState() {
   FileMarkDLL fileMarkDll;
 
   for (const auto &fileData : fileDataList) {
-    auto fileID = std::make_unique<unsigned char[]>(64);
-    auto encryptionID = std::make_unique<unsigned char[]>(64);
-    if (fileMarkDll.extractIDsFromFile(fileData.getEncryptedFilePath(), fileID.get(), encryptionID.get())) {
+    auto fileID = std::make_unique<std::vector<unsigned char>>(64);
+    auto encryptionID = std::make_unique<std::vector<unsigned char>>(64);
+    if (fileMarkDll.extractIDsFromFile(fileData.EncryptedFilePath.get(), fileID.get(), encryptionID.get())) {
       results[0] += 1;
     } else {
       results[1] += 1;
@@ -321,6 +349,12 @@ std::vector<int> HelperUtils::checkDBFileState() {
   return results;
 }
 
+/**
+ * @brief Converts a filesystem path to a wide character string.
+ *
+ * @param filePath The filesystem path to convert.
+ * @return A pointer to the wide character string representing the path.
+ */
 wchar_t* HelperUtils::convertPathToWchar(const fs::path &filePath) {
   std::wstring filePathWStr = filePath.wstring();
   auto* filePathWChar = new wchar_t[filePathWStr.size() + 1];
@@ -329,7 +363,13 @@ wchar_t* HelperUtils::convertPathToWchar(const fs::path &filePath) {
   return filePathWChar;
 }
 
-void HelperUtils::saveDatabaseToFile(const fs::path &targetDir, std::unordered_map<std::string, std::string> database) {
+/**
+ * @brief Saves the database to a file in the specified directory.
+ *
+ * @param targetDir The directory where the database file will be saved.
+ * @param database An unordered map representing the database to save.
+ */
+void HelperUtils::saveDatabaseToFile(const fs::path &targetDir, const std::unordered_map<std::string, std::string> &database) {
   auto timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::stringstream ss;
   ss << "expoDatabase" << timestamp << ".FvDB";
@@ -357,12 +397,13 @@ void HelperUtils::saveDatabaseToFile(const fs::path &targetDir, std::unordered_m
   outFile.close();
 }
 
-std::unordered_map<std::string, std::string> HelperUtils::loadDatabaseFromFile(const fs::path &targetDir) {
-  auto timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-  std::stringstream ss;
-  ss << "expoDatabase" << timestamp << ".FvDB";
-  fs::path targetPath = targetDir / ss.str();
-
+/**
+ * @brief Loads the database from a file in the specified directory.
+ *
+ * @param targetPath The path to the database file.
+ * @return An unordered map representing the loaded database.
+ */
+std::unordered_map<std::string, std::string> HelperUtils::loadDatabaseFromFile(const fs::path &targetPath) {
   std::ifstream inFile(targetPath, std::ios::binary);
   if (!inFile) {
     throw std::runtime_error("Failed to open file for reading: " + targetPath.string());

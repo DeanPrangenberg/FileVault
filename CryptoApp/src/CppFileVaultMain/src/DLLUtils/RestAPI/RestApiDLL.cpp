@@ -2,16 +2,21 @@
 #include "../../../../shared/src/FileData.h"
 #include <windows.h>
 
+/**
+ * @brief Exports the database using the GoRestApiWrapperLib DLL.
+ *
+ * @return A map containing the exported database data and key.
+ */
 std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-Export: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-Export: Failed to load DLL");
     return {};
   }
 
   auto func = (ExportDatabaseFunc)GetProcAddress(hDll, "ExportDatabase");
   if (!func) {
-    logError("RestApiDLL-Export: Failed to get function address for ExportDatabase");
+    Logs::writeToErrorLog("RestApiDLL-Export: Failed to get function address for ExportDatabase");
     unloadDll(hDll);
     return {};
   }
@@ -26,24 +31,24 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
 
   switch (result) {
     case -1:
-      logInfo("RestApiDLL-Export: Successfully exported database");
+      Logs::writeToInfoLog("RestApiDLL-Export: Successfully exported database");
       break;
     case 1:
-      logError("RestApiDLL-Export: Couldn't reach db container");
+      Logs::writeToErrorLog("RestApiDLL-Export: Couldn't reach db container");
       break;
     case 2:
-      logError("RestApiDLL-Export: Response body could not be unmarshaled");
+      Logs::writeToErrorLog("RestApiDLL-Export: Response body could not be unmarshaled");
       break;
     case 3:
-      logError("RestApiDLL-Export: Key and Data fields are not present in Json response");
+      Logs::writeToErrorLog("RestApiDLL-Export: Key and Data fields are not present in Json response");
       break;
     default:
-      logError("RestApiDLL-Export: Unknown error code");
+      Logs::writeToErrorLog("RestApiDLL-Export: Unknown error code");
       break;
   }
 
   if (dataSize == 0 || keySize == 0 || data == nullptr || key == nullptr) {
-    logError("RestApiDLL-Export: Database is empty");
+    Logs::writeToErrorLog("RestApiDLL-Export: Database is empty");
     free(data);
     free(key);
     unloadDll(hDll);
@@ -53,13 +58,13 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
   std::string dataStr(data, dataSize);
   std::string keyStr(key, keySize);
 
-  logInfo("Data: " + dataStr);
-  logInfo("Key: " + keyStr);
+  Logs::writeToInfoLog("Data: " + dataStr);
+  Logs::writeToInfoLog("Key: " + keyStr);
 
   std::unordered_map<std::string, std::string> exportResult;
   exportResult["Data"] = dataStr;
   exportResult["Key"] = keyStr;
-  logInfo("RestApiDLL-Export: Successfully converted database to std::unordered_map");
+  Logs::writeToInfoLog("RestApiDLL-Export: Successfully converted database to std::unordered_map");
 
   free(data);
   free(key);
@@ -68,16 +73,23 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
   return exportResult;
 }
 
+/**
+ * @brief Inserts data into the database using the GoRestApiWrapperLib DLL.
+ *
+ * @param key The key for the data.
+ * @param data The data to insert.
+ * @return True if the insertion was successful, false otherwise.
+ */
 bool RestApiDLL::InsertDatabase(const std::string &key, const std::string &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-InsertDB: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-InsertDB: Failed to load DLL");
     return false;
   }
 
   auto func = (InsertDatabaseFunc) GetProcAddress(hDll, "InsertDatabase");
   if (!func) {
-    logError("RestApiDLL-InsertDB: Failed to get function address for InsertDatabase");
+    Logs::writeToErrorLog("RestApiDLL-InsertDB: Failed to get function address for InsertDatabase");
     unloadDll(hDll);
     return false;
   }
@@ -89,24 +101,31 @@ bool RestApiDLL::InsertDatabase(const std::string &key, const std::string &data)
   return result;
 }
 
+/**
+ * @brief Replaces data in the database using the GoRestApiWrapperLib DLL.
+ *
+ * @param key The key for the data.
+ * @param data The data to replace.
+ * @return True if the replacement was successful, false otherwise.
+ */
 bool RestApiDLL::ReplaceDatabase(const std::string &key, const std::string &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-ReplaceDB: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-ReplaceDB: Failed to load DLL");
     return false;
   }
 
   auto func = (ReplaceDatabaseFunc) GetProcAddress(hDll, "ReplaceDatabase");
   if (!func) {
-    logError("RestApiDLL-ReplaceDB: Failed to get function address for ReplaceDatabase");
+    Logs::writeToErrorLog("RestApiDLL-ReplaceDB: Failed to get function address for ReplaceDatabase");
     unloadDll(hDll);
     return false;
   }
 
   bool result = false;
 
-  logInfo("RestApiDLL-ReplaceDB: Replacing database with key: " + key);
-  logInfo("RestApiDLL-ReplaceDB: Replacing database with data: " + data);
+  Logs::writeToInfoLog("RestApiDLL-ReplaceDB: Replacing database with key: " + key);
+  Logs::writeToInfoLog("RestApiDLL-ReplaceDB: Replacing database with data: " + data);
 
   func(data.c_str(), key.c_str(), &result);
 
@@ -114,16 +133,21 @@ bool RestApiDLL::ReplaceDatabase(const std::string &key, const std::string &data
   return result;
 }
 
+/**
+ * @brief Resets the database using the GoRestApiWrapperLib DLL.
+ *
+ * @return True if the reset was successful, false otherwise.
+ */
 bool RestApiDLL::ResetDatabase() {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-ResetDB: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-ResetDB: Failed to load DLL");
     return false;
   }
 
   auto func = (ResetDatabaseFunc) GetProcAddress(hDll, "ResetDatabase");
   if (!func) {
-    logError("RestApiDLL-ResetDB: Failed to get function address for ResetDatabase");
+    Logs::writeToErrorLog("RestApiDLL-ResetDB: Failed to get function address for ResetDatabase");
     unloadDll(hDll);
     return false;
   }
@@ -135,16 +159,22 @@ bool RestApiDLL::ResetDatabase() {
   return result;
 }
 
+/**
+ * @brief Inserts an entry into the database using the GoRestApiWrapperLib DLL.
+ *
+ * @param data The FileData object to insert.
+ * @return True if the insertion was successful, false otherwise.
+ */
 bool RestApiDLL::InsertEntry(const FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-Insert: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-Insert: Failed to load DLL");
     return false;
   }
 
   auto func = (InsertEntryFunc) GetProcAddress(hDll, "InsertEntry");
   if (!func) {
-    logError("RestApiDLL-Insert: Failed to get function address for InsertEntry");
+    Logs::writeToErrorLog("RestApiDLL-Insert: Failed to get function address for InsertEntry");
     unloadDll(hDll);
     return false;
   }
@@ -153,25 +183,33 @@ bool RestApiDLL::InsertEntry(const FileData &data) {
   auto dbStruct = convertFileDataToDBStruct(data);
   func(&dbStruct, &result);
   if (result) {
-    logInfo("RestApiDLL-Insert: Successfully inserted FileData struct into the database");
+    Logs::writeToInfoLog("RestApiDLL-Insert: Successfully inserted FileData struct into the database");
   } else {
-    logError("RestApiDLL-Insert: Failed to insert FileData struct into the database");
+    Logs::writeToErrorLog("RestApiDLL-Insert: Failed to insert FileData struct into the database");
   }
+
+  delete dbStruct.AlgorithmenType;
 
   unloadDll(hDll);
   return result;
 }
 
+/**
+ * @brief Deletes an entry from the database using the GoRestApiWrapperLib DLL.
+ *
+ * @param data The FileData object to delete.
+ * @return True if the deletion was successful, false otherwise.
+ */
 bool RestApiDLL::DeleteEntry(const FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-Delete: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-Delete: Failed to load DLL");
     return false;
   }
 
   auto func = (DeleteEntryFunc) GetProcAddress(hDll, "DeleteEntry");
   if (!func) {
-    logError("RestApiDLL-Delete: Failed to get function address for DeleteEntry");
+    Logs::writeToErrorLog("RestApiDLL-Delete: Failed to get function address for DeleteEntry");
     unloadDll(hDll);
     return false;
   }
@@ -182,31 +220,38 @@ bool RestApiDLL::DeleteEntry(const FileData &data) {
   try {
     func(&dbStruct, &result);
   } catch (const std::exception &e) {
-    logError(std::string("RestApiDLL-Delete: Exception caught: ") + e.what());
+    Logs::writeToErrorLog(std::string("RestApiDLL-Delete: Exception caught: ") + e.what());
     result = false;
   }
 
-  if (result) {
-    logInfo("RestApiDLL-Delete: Successfully deleted FileData struct from the database");
-  } else {
-    logError("RestApiDLL-Delete: Failed to delete FileData struct from the database");
+  if (!result) {
+    Logs::writeToErrorLog("RestApiDLL-Delete: Failed to delete Entry in the database: "
+    + data.EncryptedFilePath->string());
   }
+
+  delete dbStruct.AlgorithmenType;
 
   unloadDll(hDll);
   return result;
 }
 
+/**
+ * @brief Searches for an entry in the database using the GoRestApiWrapperLib DLL.
+ *
+ * @param data The FileData object to search for.
+ * @return True if the search was successful, false otherwise.
+ */
 bool RestApiDLL::SearchEntry(FileData &data) {
   if (printDebug) std::cout << "RestApiDLL-Search: Searching for FileData struct in the database" << std::endl;
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-Search: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-Search: Failed to load DLL");
     return false;
   }
 
   auto func = (SearchEntryFunc) GetProcAddress(hDll, "SearchEntry");
   if (!func) {
-    logError("RestApiDLL-Search: Failed to get function address for SearchEntry");
+    Logs::writeToErrorLog("RestApiDLL-Search: Failed to get function address for SearchEntry");
     unloadDll(hDll);
     return false;
   }
@@ -220,7 +265,7 @@ bool RestApiDLL::SearchEntry(FileData &data) {
   std::cout.flush();
 
   if (!result) {
-    logError("RestApiDLL-Search: Failed to get FileData struct from the database");
+    Logs::writeToErrorLog("RestApiDLL-Search: Failed to get FileData struct from the database");
     unloadDll(hDll);
     return false;
   }
@@ -228,8 +273,6 @@ bool RestApiDLL::SearchEntry(FileData &data) {
   if (printDebug) std::cout << "RestApiDLL-Search: Successfully got FileData struct from the database" << std::endl;
   if (printConverterDebug) debugFileDataDB(dbStruct);
   if (printDebug) std::cout << "RestApiDLL-Search: Converting FileDataDB struct to FileData struct" << std::endl;
-
-  std::cout << "SearchRestAPI: FileIDLength -> " << dbStruct.FileIDLength << "; KeyLength -> " << dbStruct.KeyLength << "; IvLength -> " << dbStruct.IvLength << std::endl;
 
   data = convertDBStructToFileData(dbStruct);
 
@@ -239,16 +282,22 @@ bool RestApiDLL::SearchEntry(FileData &data) {
   return true;
 }
 
+/**
+ * @brief Replaces an entry in the database using the GoRestApiWrapperLib DLL.
+ *
+ * @param data The FileData object to replace.
+ * @return True if the replacement was successful, false otherwise.
+ */
 bool RestApiDLL::ReplaceEntry(const FileData &data) {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-Replace: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-Replace: Failed to load DLL");
     return false;
   }
 
   auto func = (ReplaceEntryFunc) GetProcAddress(hDll, "ReplaceEntry");
   if (!func) {
-    logError("RestApiDLL-Replace: Failed to get function address for ReplaceEntry");
+    Logs::writeToErrorLog("RestApiDLL-Replace: Failed to get function address for ReplaceEntry");
     unloadDll(hDll);
     return false;
   }
@@ -258,61 +307,73 @@ bool RestApiDLL::ReplaceEntry(const FileData &data) {
   func(&dbStruct, &result);
 
   if (result) {
-    logInfo("RestApiDLL-Replace: Successfully replaced FileData struct into the database");
+    Logs::writeToInfoLog("RestApiDLL-Replace: Successfully replaced FileData struct into the database");
   } else {
-    logError("RestApiDLL-Replace: Failed to replace FileData struct into the database");
+    Logs::writeToErrorLog("RestApiDLL-Replace: Failed to replace FileData struct into the database");
   }
+
+  delete dbStruct.AlgorithmenType;
 
   unloadDll(hDll);
   return result;
 }
 
+/**
+ * @brief Retrieves all FileData objects from the database using the GoRestApiWrapperLib DLL.
+ *
+ * @return A vector containing all FileData objects.
+ */
 std::vector<FileData> RestApiDLL::GetAllFileIDsAndEncryptedPaths() {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-GetAll: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-GetAll: Failed to load DLL");
     return {};
   }
 
   auto func = (GetAllFileIDsAndEncryptedPathsFunc) GetProcAddress(hDll, "GetAllFileIDsAndEncryptedPaths");
   if (!func) {
-    logError("RestApiDLL-GetAll: Failed to get function address for GetAllFileIDsAndEncryptedPaths");
+    Logs::writeToErrorLog("RestApiDLL-GetAll: Failed to get function address for GetAllFileIDsAndEncryptedPaths");
     unloadDll(hDll);
     return {};
   }
 
   FileDataDB* pFileDataList = nullptr;
   int listSize = 0;
-  logInfo("RestApiDLL-GetAll: Getting all FileData structs from the database");
+  Logs::writeToInfoLog("RestApiDLL-GetAll: Getting all FileData structs from the database");
   func(&pFileDataList, &listSize);
   unloadDll(hDll);
 
   if (listSize == 0 || pFileDataList == nullptr) {
-    logError("RestApiDLL-GetAll: No FileData structs found in the database");
+    Logs::writeToErrorLog("RestApiDLL-GetAll: No FileData structs found in the database");
     return {};
   }
 
   std::vector<FileData> FileDataList;
-  logInfo("RestApiDLL-GetAll: Converting FileDataDB structs to FileData structs");
+  Logs::writeToInfoLog("RestApiDLL-GetAll: Converting FileDataDB structs to FileData structs");
   for (int i = 0; i < listSize; i++) {
     FileData fileData = convertDBStructToFileData(pFileDataList[i]);
     FileDataList.push_back(fileData);
   }
 
-  logInfo("RestApiDLL-GetAll: Completed converting FileDataDB structs to FileData structs");
+  Logs::writeToInfoLog("RestApiDLL-GetAll: Completed converting FileDataDB structs to FileData structs");
   return FileDataList;
 }
 
+/**
+ * @brief Gets the size of the database file using the GoRestApiWrapperLib DLL.
+ *
+ * @return The size of the database file, or -1 if an error occurred.
+ */
 int RestApiDLL::getDatabaseFileSize() {
   HMODULE hDll = loadDll(L"GoRestApiWrapperLib.dll");
   if (!hDll) {
-    logError("RestApiDLL-GetFileSize: Failed to load DLL");
+    Logs::writeToErrorLog("RestApiDLL-GetFileSize: Failed to load DLL");
     return -1;
   }
 
   auto func = (GetDatabaseFileSizeFunc) GetProcAddress(hDll, "GetDatabaseFileSize");
   if (!func) {
-    logError("RestApiDLL-GetFileSize: Failed to get function address for GetDatabaseFileSize");
+    Logs::writeToErrorLog("RestApiDLL-GetFileSize: Failed to get function address for GetDatabaseFileSize");
     unloadDll(hDll);
     return -1;
   }

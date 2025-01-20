@@ -10,6 +10,10 @@
 
 namespace fs = std::filesystem;
 
+/**
+ * @brief Retrieves the Windows folder path.
+ * @return The path to the Windows folder.
+ */
 fs::path SystemUtils::getWindowsFolder() {
   WCHAR buffer[MAX_PATH];
   if (GetWindowsDirectoryW(buffer, MAX_PATH) == 0) {
@@ -28,6 +32,10 @@ fs::path SystemUtils::getWindowsFolder() {
   return windowsDrive / fs::path();
 }
 
+/**
+ * @brief Retrieves all logical drives on the system.
+ * @return A vector of paths representing all logical drives.
+ */
 std::vector<fs::path> SystemUtils::getAllDrives() {
   std::vector<fs::path> drives;
   WCHAR buffer[MAX_PATH];

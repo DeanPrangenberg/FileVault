@@ -1,9 +1,13 @@
-// In StyleSetter.tpp
 #ifndef STYLESETTER_TPP
 #define STYLESETTER_TPP
 
 #include "StyleSetter.h"
 
+/**
+ * @brief Sets the style for a password toggle button.
+ * @tparam T The type of the QPushButton (shared_ptr or unique_ptr).
+ * @param button The QPushButton to style.
+ */
 template<typename T>
 void StyleSetter::setPasswordToggleButtonStyle(T button) {
   QString buttonStyle = QString("QPushButton {"
@@ -14,6 +18,11 @@ void StyleSetter::setPasswordToggleButtonStyle(T button) {
   button->setStyleSheet(buttonStyle);
 }
 
+/**
+ * @brief Sets the style for a combo box.
+ * @tparam T The type of the QComboBox (shared_ptr or unique_ptr).
+ * @param comboBox The QComboBox to style.
+ */
 template<typename T>
 void StyleSetter::setComboBoxStyle(T comboBox) {
   QString comboBoxStyle = QString("QComboBox {"
@@ -59,6 +68,11 @@ void StyleSetter::setComboBoxStyle(T comboBox) {
   comboBox->setAttribute(Qt::WA_NoMouseReplay, true);  // Suppress default Windows selection frame
 }
 
+/**
+ * @brief Sets the style for a checkbox.
+ * @tparam T The type of the QCheckBox (shared_ptr or unique_ptr).
+ * @param checkBox The QCheckBox to style.
+ */
 template<typename T>
 void StyleSetter::setCheckBoxStyle(T checkBox) {
   QString checkBoxStyle = QString("QCheckBox {"
@@ -86,6 +100,11 @@ void StyleSetter::setCheckBoxStyle(T checkBox) {
   checkBox->setStyleSheet(checkBoxStyle);
 }
 
+/**
+ * @brief Sets the style for a password field.
+ * @tparam T The type of the QLineEdit (shared_ptr or unique_ptr).
+ * @param field The QLineEdit to style.
+ */
 template<typename T>
 void StyleSetter::setPasswordFieldStyle(T field) {
   QString fieldStyle = QString("QLineEdit {"
@@ -103,6 +122,11 @@ void StyleSetter::setPasswordFieldStyle(T field) {
   field->setEchoMode(QLineEdit::Password);
 }
 
+/**
+ * @brief Sets the background style for a label.
+ * @tparam T The type of the QLabel (shared_ptr or unique_ptr).
+ * @param label The QLabel to style.
+ */
 template<typename T>
 void StyleSetter::setLabelBackgroundStyle(T label) {
   QString labelStyle = QString("QLabel {"
@@ -117,6 +141,11 @@ void StyleSetter::setLabelBackgroundStyle(T label) {
   label->setStyleSheet(labelStyle);
 }
 
+/**
+ * @brief Sets the style for a widget.
+ * @tparam T The type of the QStackedWidget (shared_ptr or unique_ptr).
+ * @param widget The QStackedWidget to style.
+ */
 template<typename T>
 void StyleSetter::setWidgetStyle(T widget) {
   if (widget->objectName().isEmpty()) {
@@ -134,6 +163,11 @@ void StyleSetter::setWidgetStyle(T widget) {
   widget->setStyleSheet(widgetStyle);
 }
 
+/**
+ * @brief Sets the style for a button.
+ * @tparam T The type of the QPushButton (shared_ptr or unique_ptr).
+ * @param button The QPushButton to style.
+ */
 template<typename T>
 void StyleSetter::setButtonStyle(T button) {
   int buttonHeight = button->height();
@@ -167,6 +201,11 @@ void StyleSetter::setButtonStyle(T button) {
   button->setStyleSheet(buttonStyle);
 }
 
+/**
+ * @brief Sets the style for a line edit.
+ * @tparam T The type of the QLineEdit (shared_ptr or unique_ptr).
+ * @param lineEdit The QLineEdit to style.
+ */
 template<typename T>
 void StyleSetter::setLineEditStyle(T lineEdit) {
   QString lineEditStyle = QString("QLineEdit {"
@@ -184,6 +223,11 @@ void StyleSetter::setLineEditStyle(T lineEdit) {
   lineEdit->setStyleSheet(lineEditStyle);
 }
 
+/**
+ * @brief Sets the background style for a widget.
+ * @tparam T The type of the QWidget (shared_ptr or unique_ptr).
+ * @param widget The QWidget to style.
+ */
 template<typename T>
 void StyleSetter::setWidgetBackgroundStyle(T widget) {
   QString widgetStyle = QString("QWidget#%1 {"
@@ -196,6 +240,11 @@ void StyleSetter::setWidgetBackgroundStyle(T widget) {
   widget->setStyleSheet(widgetStyle);
 }
 
+/**
+ * @brief Sets the style for a scroll area.
+ * @tparam T The type of the QScrollArea (shared_ptr or unique_ptr).
+ * @param scrollArea The QScrollArea to style.
+ */
 template<typename T>
 void StyleSetter::setScrollAreaStyle(T scrollArea) {
   QString scrollAreaStyle = QString("QScrollArea {"
@@ -229,6 +278,11 @@ void StyleSetter::setScrollAreaStyle(T scrollArea) {
   scrollArea->setStyleSheet(scrollAreaStyle);
 }
 
+/**
+ * @brief Sets the style for a button without a border.
+ * @tparam T The type of the QPushButton (shared_ptr or unique_ptr).
+ * @param button The QPushButton to style.
+ */
 template<typename T>
 void StyleSetter::setButtonStyleNoBorder(T button) {
   int buttonHeight = button->height();
@@ -259,6 +313,11 @@ void StyleSetter::setButtonStyleNoBorder(T button) {
   button->setStyleSheet(buttonStyle);
 }
 
+/**
+ * @brief Sets the style for a label without a border.
+ * @tparam T The type of the QLabel (shared_ptr or unique_ptr).
+ * @param label The QLabel to style.
+ */
 template<typename T>
 void StyleSetter::setLabelStyleNoBorder(T label) {
   QString labelStyle = QString("QLabel {"
@@ -272,6 +331,11 @@ void StyleSetter::setLabelStyleNoBorder(T label) {
   label->setStyleSheet(labelStyle);
 }
 
+/**
+ * @brief Sets the border style for a scroll area.
+ * @tparam T The type of the QScrollArea (shared_ptr or unique_ptr).
+ * @param scrollArea The QScrollArea to style.
+ */
 template<typename T>
 void StyleSetter::setScrollAreaBorderStyle(T scrollArea) {
   QString scrollAreaStyle = QString("QScrollArea {"

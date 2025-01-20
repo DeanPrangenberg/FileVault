@@ -111,6 +111,7 @@ Inheritance diagram for FileMarkDLL:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2f69d98bbbece97accc948a7a9d82b5e" id="r_a2f69d98bbbece97accc948a7a9d82b5e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f69d98bbbece97accc948a7a9d82b5e">extractIDsFromFile</a> (const wchar_t *filePath, unsigned char FileID[64], unsigned char EncryptionID[64])</td></tr>
+<tr class="memdesc:a2f69d98bbbece97accc948a7a9d82b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts FileID and EncryptionID from a file using the CppFileMarkLib DLL.  <br /></td></tr>
 <tr class="separator:a2f69d98bbbece97accc948a7a9d82b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -141,7 +142,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_d_l_l_8cpp_source.html#l00007">7</a> of file <a class="el" href="_file_mark_d_l_l_8cpp_source.html">FileMarkDLL.cpp</a>.</p>
+<p>Extracts FileID and EncryptionID from a file using the CppFileMarkLib DLL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The path of the file to extract IDs from. </td></tr>
+    <tr><td class="paramname">FileID</td><td>Buffer to store the extracted FileID. </td></tr>
+    <tr><td class="paramname">EncryptionID</td><td>Buffer to store the extracted EncryptionID. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the extraction was successful, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_mark_d_l_l_8cpp_source.html#l00015">15</a> of file <a class="el" href="_file_mark_d_l_l_8cpp_source.html">FileMarkDLL.cpp</a>.</p>
 
 </div>
 </div>

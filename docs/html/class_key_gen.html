@@ -111,8 +111,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a6e1407fc7c1842288e9c27247141c96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_key_gen_8h_source.html#l00014">14</a> of file <a class="el" href="_key_gen_8h_source.html">KeyGen.h</a>.</p>
+<div class="textblock"><p>Key generation class for generating keys and initialization vectors (IV). </p>
+
+<p class="definition">Definition at line <a class="el" href="_key_gen_8h_source.html#l00016">16</a> of file <a class="el" href="_key_gen_8h_source.html">KeyGen.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="acacea676914dbba43cc767ac57abd917" name="acacea676914dbba43cc767ac57abd917"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acacea676914dbba43cc767ac57abd917">&#9670;&#160;</a></span>generateKeyIv()</h2>
@@ -142,8 +143,24 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Generates a cryptographic key and initialization vector (IV).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keySize</td><td>The size of the key to generate. </td></tr>
+    <tr><td class="paramname">ivSize</td><td>The size of the IV to generate. </td></tr>
+    <tr><td class="paramname">KEY</td><td>A reference to a vector where the generated key will be stored. </td></tr>
+    <tr><td class="paramname">IV</td><td>A reference to a vector where the generated IV will be stored. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if key or IV generation fails. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_key_gen_8cpp_source.html#l00005">5</a> of file <a class="el" href="_key_gen_8cpp_source.html">KeyGen.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_key_gen_8cpp_source.html#l00014">14</a> of file <a class="el" href="_key_gen_8cpp_source.html">KeyGen.cpp</a>.</p>
 
 </div>
 </div>
@@ -169,8 +186,16 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Converts a vector of bytes to a hexadecimal string representation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The vector of bytes to convert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string containing the hexadecimal representation of the input data. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_key_gen_8cpp_source.html#l00021">21</a> of file <a class="el" href="_key_gen_8cpp_source.html">KeyGen.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_key_gen_8cpp_source.html#l00036">36</a> of file <a class="el" href="_key_gen_8cpp_source.html">KeyGen.cpp</a>.</p>
 
 </div>
 </div>

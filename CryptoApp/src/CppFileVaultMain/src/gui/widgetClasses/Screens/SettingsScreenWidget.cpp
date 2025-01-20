@@ -1,5 +1,9 @@
 #include "SettingsScreenWidget.h"
 
+/**
+ * @brief Constructs the SettingsScreenWidget object.
+ * @param parent The parent widget.
+ */
 SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   qDebug() << "SettingsScreenWidget: Creating SettingsScreenWidget";
 
@@ -69,7 +73,6 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   containerWidget->setMinimumSize(SettingsScreenWidgetLayout->sizeHint().width(),
                                   SettingsScreenWidgetLayout->sizeHint().height());
 
-
   // Add the container widget to the scroll area
   scrollArea->setWidget(containerWidget.get());
 
@@ -79,13 +82,15 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   mainLayout->setContentsMargins(0, 0, 0, 0);
   setLayout(mainLayout.get());
 
-  connect(fileDeletionWidget->deleteAfterEncryption.get(), &QCheckBox::stateChanged, [this](const int state) {
+  connect(fileDeletionWidget->deleteAfterEncryption.get(), &QCheckBox::checkStateChanged, [this](const int state) {
     globalDefinitions::deleteFileAfterEncryption = (state == Qt::Checked);
+    std::cout << "Delete after encryption: " << globalDefinitions::deleteFileAfterEncryption << std::endl;
     saveSettings();
   });
 
-  connect(fileDeletionWidget->deleteAfterDecryption.get(), &QCheckBox::stateChanged, [this](const int state) {
+  connect(fileDeletionWidget->deleteAfterDecryption.get(), &QCheckBox::checkStateChanged, [this](const int state) {
     globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);
+    std::cout << "Delete after decryption: " << globalDefinitions::deleteFileAfterDecryption << std::endl;
     saveSettings();
   });
 
@@ -93,6 +98,10 @@ SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   loadSettings();
 }
 
+/**
+ * @brief Creates a file if it does not exist.
+ * @param filePath The path to the file.
+ */
 void SettingsScreenWidget::createFileIfNotExists(const QString &filePath) {
   QFile file(filePath);
   if (!file.exists()) {
@@ -114,6 +123,9 @@ void SettingsScreenWidget::createFileIfNotExists(const QString &filePath) {
   }
 }
 
+/**
+ * @brief Saves the settings to a file.
+ */
 void SettingsScreenWidget::saveSettings() {
   QJsonObject settings;
   settings["DeleteAfterEncryption"] = fileDeletionWidget->deleteAfterEncryption->isChecked();
@@ -135,6 +147,9 @@ void SettingsScreenWidget::saveSettings() {
   }
 }
 
+/**
+ * @brief Loads the settings from a file.
+ */
 void SettingsScreenWidget::loadSettings() {
   QString filePath = "settings.json";
   createFileIfNotExists(filePath);
@@ -154,10 +169,14 @@ void SettingsScreenWidget::loadSettings() {
 
     if (settings["DeleteAfterEncryption"].toBool()) {
       globalDefinitions::deleteFileAfterEncryption = true;
+    } else {
+      globalDefinitions::deleteFileAfterEncryption = false;
     }
 
     if (settings["DeleteAfterDecryption"].toBool()) {
       globalDefinitions::deleteFileAfterDecryption = true;
+    } else {
+      globalDefinitions::deleteFileAfterDecryption = false;
     }
 
     if (!settings["LogsLocation"].toString().isEmpty()) {

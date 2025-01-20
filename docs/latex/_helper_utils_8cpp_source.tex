@@ -150,7 +150,7 @@
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00146}00146\ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00147}00147\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00148}00148\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ equal\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00149}00149\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ lostFile.FileID.size();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00149}00149\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size_t}\ i\ =\ 0;\ i\ <\ lostFile.FileID.size();\ i++)\ \{}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lostFile.FileID[i]\ !=\ fileData.getFileId()[i]\ ||\ lostFile.EncryptionID[i]\ !=\ fileData.getEncryptionId()[i])\ \{}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ equal\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (printDebug)\ std::cout\ <<\ \textcolor{stringliteral}{"{}repairLostEncFileStructs:\ FileIDs\ or\ EncryptionIDs\ do\ not\ match"{}}\ <<\ std::endl;}
@@ -163,14 +163,14 @@
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00159}00159\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (printDebug)}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}repairLostEncFileStructs:\ Allocating\ memory\ for\ new\ EncryptedFilePath"{}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ fileData.setEncryptedFilePath(\textcolor{keyword}{new}\ \textcolor{keywordtype}{wchar\_t}[lostFile.newEncryptedFilePath.wstring().size()\ +\ 1]);}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ fileData.setEncryptedFilePath(\textcolor{keyword}{new}\ \textcolor{keywordtype}{wchar_t}[lostFile.newEncryptedFilePath.wstring().size()\ +\ 1]);}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00163}00163\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (printDebug)\ std::cout\ <<\ \textcolor{stringliteral}{"{}repairLostEncFileStructs:\ Copying\ new\ EncryptedFilePath"{}}\ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (printDebug)}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}repairLostEncFileStructs:\ newEncryptedFilePath\ =\ "{}}}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{wchar\_t}\ *\textcolor{keyword}{>}(lostFile.newEncryptedFilePath.c\_str())\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{wchar_t}\ *\textcolor{keyword}{>}(lostFile.newEncryptedFilePath.c\_str())\ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00168}00168\ }
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ fileData.setEncryptedFilePath(\textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{wchar\_t}\ *\textcolor{keyword}{>}(lostFile.newEncryptedFilePath.c\_str()));}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ fileData.setEncryptedFilePath(\textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{wchar_t}\ *\textcolor{keyword}{>}(lostFile.newEncryptedFilePath.c\_str()));}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00170}00170\ \ \ \ \ \ \ \ \ fileData.setLastUpdateId(updateId);}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00171}00171\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (printDebug)\ std::cout\ <<\ \textcolor{stringliteral}{"{}repairLostEncFileStructs:\ Updated\ EncryptedFilePath"{}}\ <<\ std::endl;}
@@ -240,8 +240,8 @@
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00236}00236\ \ \ std::vector<bool>\ decryptResults(fileDataVec.size(),\ \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00237}00237\ \ \ cryptoDll.\mbox{\hyperlink{class_crypto_d_l_l_a67110ca087436c883f24b4206fe90b8a}{DecryptFiles}}(fileDataVec.data(),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(fileDataVec.size()),\ decryptResults);}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00238}00238\ }
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00239}00239\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ fileDataVec.size();\ ++i)\ \{}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00240}00240\ \ \ \ \ std::string\ algorithm\ =\ std::wstring\_convert<std::codecvt\_utf8<wchar\_t>>().to\_bytes(fileDataVec[i].getAlgorithmenType());}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00239}00239\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size_t}\ i\ =\ 0;\ i\ <\ fileDataVec.size();\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00240}00240\ \ \ \ \ std::string\ algorithm\ =\ std::wstring\_convert<std::codecvt\_utf8<wchar_t>>().to\_bytes(fileDataVec[i].getAlgorithmenType());}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00241}00241\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00242}00242\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ decryption\ was\ successful}}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00243}00243\ \ \ \ \ \textcolor{keywordflow}{if}\ (!decryptResults[i])\ \{}
@@ -325,16 +325,16 @@
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00321}00321\ \ \ \textcolor{keywordflow}{return}\ results;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00322}00322\ \}}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00323}00323\ }
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00324}00324\ \textcolor{keywordtype}{wchar\_t}*\ HelperUtils::convertPathToWchar(\textcolor{keyword}{const}\ fs::path\ \&filePath)\ \{}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00324}00324\ \textcolor{keywordtype}{wchar_t}*\ HelperUtils::convertPathToWchar(\textcolor{keyword}{const}\ fs::path\ \&filePath)\ \{}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00325}00325\ \ \ std::wstring\ filePathWStr\ =\ filePath.wstring();}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00326}00326\ \ \ \textcolor{keyword}{auto}*\ filePathWChar\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{wchar\_t}[filePathWStr.size()\ +\ 1];}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00326}00326\ \ \ \textcolor{keyword}{auto}*\ filePathWChar\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{wchar_t}[filePathWStr.size()\ +\ 1];}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00327}00327\ \ \ std::copy(filePathWStr.begin(),\ filePathWStr.end(),\ filePathWChar);}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00328}00328\ \ \ filePathWChar[filePathWStr.size()]\ =\ L\textcolor{charliteral}{'\(\backslash\)0'};}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00329}00329\ \ \ \textcolor{keywordflow}{return}\ filePathWChar;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00330}00330\ \}}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00331}00331\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00332}\mbox{\hyperlink{class_helper_utils_a6d12c0a2bcbc72613078a45f0bd38e36}{00332}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_helper_utils_a6d12c0a2bcbc72613078a45f0bd38e36}{HelperUtils::saveDatabaseToFile}}(\textcolor{keyword}{const}\ fs::path\ \&targetDir,\ std::unordered\_map<std::string,\ std::string>\ database)\ \{}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00333}00333\ \ \ \textcolor{keyword}{auto}\ timestamp\ =\ std::chrono::system\_clock::to\_time\_t(std::chrono::system\_clock::now());}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00333}00333\ \ \ \textcolor{keyword}{auto}\ timestamp\ =\ std::chrono::system\_clock::to_time_t(std::chrono::system\_clock::now());}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00334}00334\ \ \ std::stringstream\ ss;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00335}00335\ \ \ ss\ <<\ \textcolor{stringliteral}{"{}expoDatabase"{}}\ <<\ timestamp\ <<\ \textcolor{stringliteral}{"{}.FvDB"{}};}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00336}00336\ \ \ fs::path\ targetPath\ =\ targetDir\ /\ ss.str();}
@@ -344,12 +344,12 @@
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00340}00340\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ to\ open\ file\ for\ writing:\ "{}}\ +\ targetPath.string());}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00341}00341\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00342}00342\ }
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00343}00343\ \ \ \textcolor{keywordtype}{size\_t}\ mapSize\ =\ database.size();}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00343}00343\ \ \ \textcolor{keywordtype}{size_t}\ mapSize\ =\ database.size();}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00344}00344\ \ \ outFile.write(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const\ }\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&mapSize),\ \textcolor{keyword}{sizeof}(mapSize));}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00345}00345\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00346}00346\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pair\ :\ database)\ \{}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00347}00347\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ keySize\ =\ pair.first.size();}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00348}00348\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ valueSize\ =\ pair.second.size();}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00347}00347\ \ \ \ \ \textcolor{keywordtype}{size_t}\ keySize\ =\ pair.first.size();}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00348}00348\ \ \ \ \ \textcolor{keywordtype}{size_t}\ valueSize\ =\ pair.second.size();}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00349}00349\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00350}00350\ \ \ \ \ outFile.write(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const\ }\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&keySize),\ \textcolor{keyword}{sizeof}(keySize));}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00351}00351\ \ \ \ \ outFile.write(pair.first.data(),\ keySize);}
@@ -362,7 +362,7 @@
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00358}00358\ \}}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00359}00359\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00360}\mbox{\hyperlink{class_helper_utils_a87921a6998e3bb5ab809fa680989387d}{00360}}\ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{class_helper_utils_a87921a6998e3bb5ab809fa680989387d}{HelperUtils::loadDatabaseFromFile}}(\textcolor{keyword}{const}\ fs::path\ \&targetDir)\ \{}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00361}00361\ \ \ \textcolor{keyword}{auto}\ timestamp\ =\ std::chrono::system\_clock::to\_time\_t(std::chrono::system\_clock::now());}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00361}00361\ \ \ \textcolor{keyword}{auto}\ timestamp\ =\ std::chrono::system\_clock::to_time_t(std::chrono::system\_clock::now());}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00362}00362\ \ \ std::stringstream\ ss;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00363}00363\ \ \ ss\ <<\ \textcolor{stringliteral}{"{}expoDatabase"{}}\ <<\ timestamp\ <<\ \textcolor{stringliteral}{"{}.FvDB"{}};}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00364}00364\ \ \ fs::path\ targetPath\ =\ targetDir\ /\ ss.str();}
@@ -373,11 +373,11 @@
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00369}00369\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00370}00370\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00371}00371\ \ \ std::unordered\_map<std::string,\ std::string>\ database;}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00372}00372\ \ \ \textcolor{keywordtype}{size\_t}\ mapSize;}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00372}00372\ \ \ \textcolor{keywordtype}{size_t}\ mapSize;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00373}00373\ \ \ inFile.read(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&mapSize),\ \textcolor{keyword}{sizeof}(mapSize));}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00374}00374\ }
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00375}00375\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ mapSize;\ ++i)\ \{}
-\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00376}00376\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ keySize,\ valueSize;}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00375}00375\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size_t}\ i\ =\ 0;\ i\ <\ mapSize;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00376}00376\ \ \ \ \ \textcolor{keywordtype}{size_t}\ keySize,\ valueSize;}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00377}00377\ \ \ \ \ inFile.read(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&keySize),\ \textcolor{keyword}{sizeof}(keySize));}
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00378}00378\ }
 \DoxyCodeLine{\Hypertarget{_helper_utils_8cpp_source_l00379}00379\ \ \ \ \ std::string\ key(keySize,\ \textcolor{charliteral}{'\(\backslash\)0'});}

@@ -109,8 +109,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a892866c109cbc620209c6381f9dcc064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_s_h_a512_8h_source.html#l00015">15</a> of file <a class="el" href="_s_h_a512_8h_source.html">SHA512.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_s_h_a512.html">SHA512</a> class provides static methods for computing SHA-512 hashes of files, strings, and byte arrays. </p>
+
+<p class="definition">Definition at line <a class="el" href="_s_h_a512_8h_source.html#l00018">18</a> of file <a class="el" href="_s_h_a512_8h_source.html">SHA512.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a892866c109cbc620209c6381f9dcc064" name="a892866c109cbc620209c6381f9dcc064"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a892866c109cbc620209c6381f9dcc064">&#9670;&#160;</a></span>hashArray()</h2>
@@ -134,8 +135,22 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Computes the SHA-512 hash of a byte array.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The byte array to be hashed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A std::array containing the hash value. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if any OpenSSL function fails. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_h_a512_8cpp_source.html#l00080">80</a> of file <a class="el" href="_s_h_a512_8cpp_source.html">SHA512.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_h_a512_8cpp_source.html#l00101">101</a> of file <a class="el" href="_s_h_a512_8cpp_source.html">SHA512.cpp</a>.</p>
 
 </div>
 </div>
@@ -161,8 +176,22 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Computes the SHA-512 hash of a file.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The path to the file to be hashed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A std::array containing the hash value. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the file cannot be opened or if any OpenSSL function fails. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_h_a512_8cpp_source.html#l00003">3</a> of file <a class="el" href="_s_h_a512_8cpp_source.html">SHA512.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_h_a512_8cpp_source.html#l00010">10</a> of file <a class="el" href="_s_h_a512_8cpp_source.html">SHA512.cpp</a>.</p>
 
 </div>
 </div>
@@ -188,8 +217,22 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Computes the SHA-512 hash of a wide string.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The wide string to be hashed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A std::array containing the hash value. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the string cannot be converted to UTF-8 or if any OpenSSL function fails. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_h_a512_8cpp_source.html#l00042">42</a> of file <a class="el" href="_s_h_a512_8cpp_source.html">SHA512.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_h_a512_8cpp_source.html#l00056">56</a> of file <a class="el" href="_s_h_a512_8cpp_source.html">SHA512.cpp</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,12 @@
 #include "SHA512.h"
 
+/**
+ * Computes the SHA-512 hash of a file.
+ *
+ * @param filePath The path to the file to be hashed.
+ * @return A std::array containing the hash value.
+ * @throws std::runtime_error if the file cannot be opened or if any OpenSSL function fails.
+ */
 std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashFile(const wchar_t *filePath) {
   std::ifstream fileStream(filePath, std::ios::binary);
   if (!fileStream.is_open()) {
@@ -8,7 +15,7 @@ std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashFile(const wchar_t *fileP
 
   std::array<unsigned char, EVP_MAX_MD_SIZE> hash{};
   unsigned int hashLength = 0;
-  char buffer[4096] = {0}; // Initialisierter Puffer
+  char buffer[4096] = {0}; // Initialized buffer
 
   EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
   if (!mdctx) {
@@ -24,7 +31,7 @@ std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashFile(const wchar_t *fileP
       if (EVP_DigestUpdate(mdctx, buffer, fileStream.gcount()) != 1) {
         throw std::runtime_error("Failed to update digest");
       }
-      std::memset(buffer, 0, sizeof(buffer)); // Puffer nach jedem Lesen leeren
+      std::memset(buffer, 0, sizeof(buffer)); // Clear buffer after each read
     }
 
     if (EVP_DigestFinal_ex(mdctx, hash.data(), &hashLength) != 1) {
@@ -32,13 +39,20 @@ std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashFile(const wchar_t *fileP
     }
   } catch (...) {
     EVP_MD_CTX_free(mdctx);
-    throw; // Fehler weitergeben
+    throw; // Rethrow the exception
   }
 
   EVP_MD_CTX_free(mdctx);
   return hash;
 }
 
+/**
+ * Computes the SHA-512 hash of a wide string.
+ *
+ * @param input The wide string to be hashed.
+ * @return A std::array containing the hash value.
+ * @throws std::runtime_error if the string cannot be converted to UTF-8 or if any OpenSSL function fails.
+ */
 std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashString(const std::wstring &input) {
   std::array<unsigned char, EVP_MAX_MD_SIZE> hash{};
   unsigned int hashLength = 0;
@@ -77,6 +91,13 @@ std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashString(const std::wstring
   return hash;
 }
 
+/**
+ * Computes the SHA-512 hash of a byte array.
+ *
+ * @param input The byte array to be hashed.
+ * @return A std::array containing the hash value.
+ * @throws std::runtime_error if any OpenSSL function fails.
+ */
 std::array<unsigned char, EVP_MAX_MD_SIZE> SHA512::hashArray(const std::vector<unsigned char> &input) {
   std::array<unsigned char, EVP_MAX_MD_SIZE> hash{};
   unsigned int hashLength = 0;

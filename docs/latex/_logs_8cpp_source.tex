@@ -47,11 +47,11 @@
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00043}00043\ }
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00044}00044\ std::string\ Logs::getCurrentTimeFormatted()\ \{}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00045}00045\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ now\ =\ std::chrono::system\_clock::now();}
-\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00046}00046\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ now\_time\ =\ std::chrono::system\_clock::to\_time\_t(now);}
-\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00047}00047\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ now\_tm\ =\ *std::localtime(\&now\_time);}
+\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00046}00046\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ now_time\ =\ std::chrono::system\_clock::to_time_t(now);}
+\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00047}00047\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ now_tm\ =\ *std::localtime(\&now_time);}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00048}00048\ }
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00049}00049\ \ \ std::ostringstream\ oss;}
-\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00050}00050\ \ \ oss\ <<\ std::put\_time(\&now\_tm,\ \textcolor{stringliteral}{"{}\%d.\%m.\%y\ \%H:\%M:\%S"{}});}
+\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00050}00050\ \ \ oss\ <<\ std::put_time(\&now_tm,\ \textcolor{stringliteral}{"{}\%d.\%m.\%y\ \%H:\%M:\%S"{}});}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00051}00051\ \ \ \textcolor{keywordflow}{return}\ oss.str()\ +\ \textcolor{stringliteral}{"{}:\ "{}};}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00052}00052\ \}}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00053}00053\ }
@@ -95,7 +95,7 @@
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00091}00091\ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ retryDelayMs\ =\ 1000;}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00092}00092\ \ \ \ \ \ \ \mbox{\hyperlink{class_logs_a3e713ca7bf65f71fb8310d86894e5373}{writeToErrorLog}}(}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Failed\ to\ move\ logs\ directory\ (attempt\ "{}}\ +\ std::to\_string(attempt\ +\ 1)\ +\ \textcolor{stringliteral}{"{}):\ "{}}\ +\ std::string(e.what()));}
-\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00094}00094\ \ \ \ \ \ \ std::this\_thread::sleep\_for(std::chrono::milliseconds(retryDelayMs));}
+\DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00094}00094\ \ \ \ \ \ \ std::this_thread::sleep\_for(std::chrono::milliseconds(retryDelayMs));}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00095}00095\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00096}00096\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_logs_8cpp_source_l00097}00097\ }

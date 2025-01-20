@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['passwordlineedit_2eh_0',['PasswordLineEdit.h',['../_password_line_edit_8h.html',1,'']]]
+  ['newpasswordwidget_2ecpp_0',['NewPasswordWidget.cpp',['../_new_password_widget_8cpp.html',1,'']]],
+  ['newpasswordwidget_2eh_1',['NewPasswordWidget.h',['../_new_password_widget_8h.html',1,'']]]
 ];

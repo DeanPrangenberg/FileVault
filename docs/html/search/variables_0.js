@@ -7,5 +7,5 @@ var searchData=
   ['algofilecounts_4',['algoFileCounts',['../class_statistics_screen_widget.html#a0694140eb7f3df5a1473d479ed9720ed',1,'StatisticsScreenWidget']]],
   ['algorithm_5',['Algorithm',['../structencryption_config.html#ad85dfd6a8f7c90e17c638990cddc6d69',1,'encryptionConfig']]],
   ['algorithmcombobox_6',['algorithmComboBox',['../class_standard_algorithm_widget.html#a89472ba76f7313bb64bc38c87448c612',1,'StandardAlgorithmWidget']]],
-  ['algorithmentype_7',['AlgorithmenType',['../struct_file_data_d_b.html#a8114737896c26d2cec2fa9646f614013',1,'FileDataDB']]]
+  ['algorithmentype_7',['AlgorithmenType',['../struct_file_data_d_b.html#a8114737896c26d2cec2fa9646f614013',1,'FileDataDB::AlgorithmenType'],['../class_file_data.html#a2df5cfa9b8f7a1e039adeffc2772a91f',1,'FileData::AlgorithmenType']]]
 ];

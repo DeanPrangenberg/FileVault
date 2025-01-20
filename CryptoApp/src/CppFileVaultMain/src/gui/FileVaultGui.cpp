@@ -4,6 +4,10 @@
 #include "widgetClasses/Screens/DecryptionScreenWidget.h"
 #include "widgetClasses/Screens/EncryptionScreenWidget.h"
 
+/**
+ * @brief Constructs the FileVaultGui object.
+ * @param parent The parent QMainWindow.
+ */
 FileVaultGui::FileVaultGui(QMainWindow *parent) : QMainWindow(parent) {
   setWindowTitle("FileVault");
   setMinimumSize(screenWidth, screenHeight);
@@ -26,8 +30,14 @@ FileVaultGui::FileVaultGui(QMainWindow *parent) : QMainWindow(parent) {
   setupUi();
 }
 
+/**
+ * @brief Destructor for the FileVaultGui class.
+ */
 FileVaultGui::~FileVaultGui() = default;
 
+/**
+ * @brief Sets up the user interface for the FileVaultGui.
+ */
 void FileVaultGui::setupUi() {
   SplitterLayout->addWidget(sidebar.get());
   SplitterLayout->addWidget(screenStack.get());
@@ -58,6 +68,9 @@ void FileVaultGui::setupUi() {
   setupStackedWidget();
 }
 
+/**
+ * @brief Sets up the sidebar with buttons and logo.
+ */
 void FileVaultGui::setupSideBar() {
   // Adjust button sizes and spacing
   StatisticsSwitch->setMinimumHeight(50);
@@ -110,6 +123,9 @@ void FileVaultGui::setupSideBar() {
   connect(SettingsSwitch.get(), &QPushButton::clicked, this, [this] { switchScreens("Settings"); });
 }
 
+/**
+ * @brief Sets up the stacked widget with different screens.
+ */
 void FileVaultGui::setupStackedWidget() {
   qDebug() << "FileVaultMainGui: Setting up screen hashmap";
   auto statisticsScreen = std::make_shared<StatisticsScreenWidget>();
@@ -135,6 +151,10 @@ void FileVaultGui::setupStackedWidget() {
   screenStack->setCurrentWidget(screenHash["Statistics"].get());
 }
 
+/**
+ * @brief Switches the current screen in the stacked widget.
+ * @param screenName The name of the screen to switch to.
+ */
 void FileVaultGui::switchScreens(const QString &screenName) {
   screenStack->setCurrentWidget(screenHash[screenName].get());
 }

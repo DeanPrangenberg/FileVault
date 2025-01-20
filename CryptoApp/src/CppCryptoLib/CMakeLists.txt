@@ -1,17 +1,19 @@
 cmake_minimum_required(VERSION 3.29)
 project(CppCryptoLib)
 
+# Set the C++ standard to C++17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Add vcpkg toolchain file
 set(CMAKE_TOOLCHAIN_FILE "C:/Users/prang/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake")
 set(VCPKG_TARGET_TRIPLET "x64-windows-static")
 
 # Enable building shared libraries
 set(BUILD_SHARED_LIBS ON)
 
-# Find OpenSSL
+# Find OpenSSL library
 find_package(OpenSSL REQUIRED)
 
 # Add the shared classes project if not already added
@@ -33,22 +35,23 @@ add_library(CppCryptoLib SHARED
   src/alogs/AES256.h
   src/alogs/SHA512.h
   src/alogs/KeyGen.h
-    ../shared/src/GlobalDefinitions.h
-    ../shared/src/GlobalDefinitions.cpp
-    ../shared/src/GlobalDefinitions.h
-    ../shared/src/FileData.cpp
-    ../shared/src/FileData.h
+  ../shared/src/GlobalDefinitions.h
+  ../shared/src/GlobalDefinitions.cpp
+  ../shared/src/FileData.cpp
+  ../shared/src/FileData.h
+    src/alogs/BLAKE2.cpp
+    src/alogs/BLAKE2.h
 )
 
 # Link OpenSSL and shared classes libraries
 target_link_libraries(CppCryptoLib PRIVATE OpenSSL::SSL OpenSSL::Crypto SharedClasses)
 
-# Compile options
+# Compile options for warnings
 if (MSVC)
  target_compile_options(CppCryptoLib PRIVATE /W4)
 else ()
  target_compile_options(CppCryptoLib PRIVATE -Wall -Wextra)
-endif ()
+endif()
 
 # Define the export macro for DLL
 target_compile_definitions(CppCryptoLib PRIVATE CppCryptoLib_EXPORTS CRYPTOLIBRARY_EXPORTS)

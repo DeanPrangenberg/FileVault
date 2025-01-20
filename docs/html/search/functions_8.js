@@ -7,6 +7,6 @@ var searchData=
   ['loadingwindow_4',['LoadingWindow',['../class_loading_window.html#af5f12330abe41411f81df432d0aa1c00',1,'LoadingWindow']]],
   ['logerror_5',['logError',['../class_master_d_l_l_class.html#afd63073d5d63dd9d41a1cd549e7827be',1,'MasterDLLClass']]],
   ['loginfo_6',['logInfo',['../class_master_d_l_l_class.html#a78baa583c9a2155cfd57cbeb2a918214',1,'MasterDLLClass']]],
-  ['logs_7',['Logs',['../class_logs.html#a344e2e425cb08055b6eefd19aca2cdf0',1,'Logs']]],
+  ['logs_7',['Logs',['../class_logs.html#aeafc01d597306bc80bca06dbec033169',1,'Logs']]],
   ['logslocationwidget_8',['LogsLocationWidget',['../class_logs_location_widget.html#ac45eebc88d0974c89e8bd121325a2bf3',1,'LogsLocationWidget']]]
 ];

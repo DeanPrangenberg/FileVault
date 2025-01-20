@@ -117,8 +117,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a846647ebbeba56cb9f6bb4c730b531b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_directory_scanner_8h_source.html#l00022">22</a> of file <a class="el" href="_directory_scanner_8h_source.html">DirectoryScanner.h</a>.</p>
+<div class="textblock"><p>Class for scanning directories and listing files. </p>
+
+<p class="definition">Definition at line <a class="el" href="_directory_scanner_8h_source.html#l00025">25</a> of file <a class="el" href="_directory_scanner_8h_source.html">DirectoryScanner.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a30c02803ace06fb0bb1a723a9642870d" name="a30c02803ace06fb0bb1a723a9642870d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a30c02803ace06fb0bb1a723a9642870d">&#9670;&#160;</a></span>FileFoundCallback</h2>
@@ -131,8 +132,9 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Type definition for the callback function to be called for each found file. </p>
 
-<p class="definition">Definition at line <a class="el" href="_directory_scanner_8h_source.html#l00024">24</a> of file <a class="el" href="_directory_scanner_8h_source.html">DirectoryScanner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_directory_scanner_8h_source.html#l00030">30</a> of file <a class="el" href="_directory_scanner_8h_source.html">DirectoryScanner.h</a>.</p>
 
 </div>
 </div>
@@ -159,8 +161,16 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Checks if a file has an encrypted file extension.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>The file path to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the file has an encrypted file extension, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_directory_scanner_8cpp_source.html#l00083">83</a> of file <a class="el" href="_directory_scanner_8cpp_source.html">DirectoryScanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_directory_scanner_8cpp_source.html#l00109">109</a> of file <a class="el" href="_directory_scanner_8cpp_source.html">DirectoryScanner.cpp</a>.</p>
 
 </div>
 </div>
@@ -192,8 +202,18 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Lists files in a directory, optionally searching only for decrypted files.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">directory</td><td>The directory to scan for files. </td></tr>
+    <tr><td class="paramname">searchOnlyForDecryptedFiles</td><td>If true, only decrypted files will be listed. </td></tr>
+    <tr><td class="paramname">fileList</td><td>A vector to store the paths of the found files. </td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function to be called for each found file. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_directory_scanner_8cpp_source.html#l00003">3</a> of file <a class="el" href="_directory_scanner_8cpp_source.html">DirectoryScanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_directory_scanner_8cpp_source.html#l00011">11</a> of file <a class="el" href="_directory_scanner_8cpp_source.html">DirectoryScanner.cpp</a>.</p>
 
 </div>
 </div>

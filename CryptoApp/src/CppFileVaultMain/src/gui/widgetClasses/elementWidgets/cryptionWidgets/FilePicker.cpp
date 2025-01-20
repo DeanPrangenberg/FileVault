@@ -1,5 +1,10 @@
 #include "FilePicker.h"
 
+/**
+ * @brief Constructs the FilePicker object.
+ * @param parent The parent widget.
+ * @param type The type of file picker (ENCRYPT or DECRYPT).
+ */
 FilePicker::FilePicker(QWidget *parent, FilePickerType type) : QWidget(parent) {
   filePickerType = type;
   BackgroundLabel = std::make_unique<QLabel>(this);
@@ -22,6 +27,9 @@ FilePicker::FilePicker(QWidget *parent, FilePickerType type) : QWidget(parent) {
   configureUI();
 }
 
+/**
+ * @brief Configures the user interface for the file picker.
+ */
 void FilePicker::configureUI() {
   FilePickerLayout->addLayout(FilePickerTopLayout.get());
   FilePickerTopLayout->addWidget(AddFileButton.get());
@@ -69,6 +77,10 @@ void FilePicker::configureUI() {
   }
 }
 
+/**
+ * @brief Adds an entry to the file picker.
+ * @param path The path of the file or directory to add.
+ */
 void FilePicker::addEntry(const QString &path) {
   auto entryLayout = new QHBoxLayout();
   auto checkbox = new QCheckBox(this);
@@ -106,6 +118,9 @@ void FilePicker::addEntry(const QString &path) {
   FilePickerScrollAreaWidget->update(); // Force widget to redraw
 }
 
+/**
+ * @brief Opens a file dialog to add files to the file picker.
+ */
 void FilePicker::addFile() {
   QStringList fileNames;
 
@@ -126,6 +141,9 @@ void FilePicker::addFile() {
   updateFileToProcessLabel();
 }
 
+/**
+ * @brief Opens a directory dialog to add a directory to the file picker.
+ */
 void FilePicker::addDirectory() {
   QString directory = QFileDialog::getExistingDirectory(this, tr("Select Directory"), "");
 
@@ -138,6 +156,9 @@ void FilePicker::addDirectory() {
   updateFileToProcessLabel();
 }
 
+/**
+ * @brief Resets the paths in the file picker.
+ */
 void FilePicker::resetPaths() {
   addedPaths.clear();
   FilePickerPaths.clear();
@@ -161,6 +182,9 @@ void FilePicker::resetPaths() {
   FilePickerScrollAreaWidget->update(); // Force widget to redraw
 }
 
+/**
+ * @brief Updates the label showing the number of files to process.
+ */
 void FilePicker::updateFileToProcessLabel() {
   int totalItems = FilePickerScrollAreaLayout->count();
   int checkedItems = 0;
@@ -176,6 +200,10 @@ void FilePicker::updateFileToProcessLabel() {
   FileToProcessLabel->setText(QString("%1/%2").arg(checkedItems).arg(totalItems));
 }
 
+/**
+ * @brief Handles the state change of the global checkbox.
+ * @param state The new state of the checkbox.
+ */
 void FilePicker::globalCheckStateChanged(int state) {
   bool isChecked = (state == Qt::Checked);
   int totalItems = FilePickerScrollAreaLayout->count();
@@ -191,6 +219,10 @@ void FilePicker::globalCheckStateChanged(int state) {
   updateFileToProcessLabel();
 }
 
+/**
+ * @brief Handles the change of the global algorithm combo box.
+ * @param algorithm The new algorithm selected.
+ */
 void FilePicker::globalAlgorithmChanged(const QString &algorithm) {
   int totalItems = FilePickerScrollAreaLayout->count();
   for (int i = 0; i < totalItems; ++i) {
@@ -204,6 +236,10 @@ void FilePicker::globalAlgorithmChanged(const QString &algorithm) {
   }
 }
 
+/**
+ * @brief Scans a directory in a separate thread.
+ * @param directory The directory to scan.
+ */
 void FilePicker::scanDirectoryInThread(const QString &directory) {
 
   // Start a new thread for scanning the directory
@@ -223,6 +259,10 @@ void FilePicker::scanDirectoryInThread(const QString &directory) {
   }).detach(); // Detach the thread to run independently
 }
 
+/**
+ * @brief Gets the decryption items from the file picker.
+ * @return A vector of decryption configurations.
+ */
 QVector<decryptionConfig> FilePicker::getDecItems() {
   QVector<decryptionConfig> decItems;
   int totalItems = FilePickerScrollAreaLayout->count();
@@ -242,6 +282,10 @@ QVector<decryptionConfig> FilePicker::getDecItems() {
   return decItems;
 }
 
+/**
+ * @brief Gets the encryption items from the file picker.
+ * @return A vector of encryption configurations.
+ */
 QVector<encryptionConfig> FilePicker::getEncItems() {
   QVector<encryptionConfig> encItems;
   int totalItems = FilePickerScrollAreaLayout->count();
@@ -263,14 +307,27 @@ QVector<encryptionConfig> FilePicker::getEncItems() {
   return encItems;
 }
 
+/**
+ * @brief Removes the encryption items from the file picker.
+ * @param results The results of the encryption process.
+ */
 void FilePicker::removeEncItems(const std::vector<int>& results) {
   removeItems(results, true);
 }
 
+/**
+ * @brief Removes the decryption items from the file picker.
+ * @param results The results of the decryption process.
+ */
 void FilePicker::removeDecItems(const std::vector<int>& results) {
   removeItems(results, false);
 }
 
+/**
+ * @brief Removes items from the file picker based on the results.
+ * @param results The results of the process.
+ * @param isEncryption Whether the process is encryption or decryption.
+ */
 void FilePicker::removeItems(const std::vector<int>& results, bool isEncryption) {
   for (auto & res : results) {
     qDebug() << "Result: " << res;

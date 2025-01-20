@@ -4,10 +4,20 @@
 
 #include "CryptoHelperUtils.h"
 
+/**
+ * Prints an error message to the standard error stream.
+ *
+ * @param msg The error message to print.
+ */
 void CryptoHelperUtils::printError(const std::wstring &msg) {
   std::wcerr << msg << L" Error: " << ERR_reason_error_string(ERR_get_error()) << std::endl;
 }
 
+/**
+ * Deletes a file based on its extension and global settings.
+ *
+ * @param filePath The path to the file to be deleted.
+ */
 void CryptoHelperUtils::deleteFile(const fs::path &filePath) {
   try {
     if (filePath.extension() == globalDefinitions::encFileSuffix && globalDefinitions::deleteFileAfterDecryption) {
@@ -27,23 +37,38 @@ void CryptoHelperUtils::deleteFile(const fs::path &filePath) {
   }
 }
 
-void CryptoHelperUtils::MarkFile(const class FileData *fileData) {
+/**
+ * Marks a file using an external DLL.
+ *
+ * @param fileData Pointer to the FileData object containing file information.
+ */
+bool CryptoHelperUtils::MarkFile(const class FileData *fileData) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
   if (!hFileMarkDll) {
-    return;
+    return false;
   }
 
   auto markFileFunc = (MarkFileFunc) GetProcAddress(hFileMarkDll, "markFile");
   if (!markFileFunc) {
     logError("Failed to get function address for markFile");
     unloadDll(hFileMarkDll);
-    return;
+    return false;
   }
 
-  markFileFunc(fileData);
+  if (!markFileFunc(fileData)) {
+    return false;
+  }
+
   unloadDll(hFileMarkDll);
+  return true;
 }
 
+/**
+ * Unmarks a file using an external DLL.
+ *
+ * @param fileData Pointer to the FileData object containing file information.
+ * @return True if the file was successfully unmarked, false otherwise.
+ */
 bool CryptoHelperUtils::UnmarkFile(const class FileData *fileData) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
   if (!hFileMarkDll) {
@@ -64,6 +89,11 @@ bool CryptoHelperUtils::UnmarkFile(const class FileData *fileData) {
   return result;
 }
 
+/**
+ * Gets the current time in milliseconds since epoch.
+ *
+ * @return A vector of unsigned char representing the current time in milliseconds.
+ */
 std::vector<unsigned char> CryptoHelperUtils::getCurrentTime() {
   auto now = std::chrono::system_clock::now();
   auto duration = now.time_since_epoch();
@@ -74,10 +104,21 @@ std::vector<unsigned char> CryptoHelperUtils::getCurrentTime() {
   return std::vector<unsigned char>(ms_string.begin(), ms_string.end());
 }
 
+/**
+ * Logs an error message to the standard error stream.
+ *
+ * @param message The error message to log.
+ */
 void CryptoHelperUtils::logError(const std::string &message) {
   std::cerr << message << std::endl;
 }
 
+/**
+ * Loads a DLL.
+ *
+ * @param dllName The name of the DLL to load.
+ * @return A handle to the loaded DLL.
+ */
 HMODULE CryptoHelperUtils::loadDll(const wchar_t *dllName) {
   HMODULE hDll = LoadLibraryW(dllName);
   if (!hDll) {
@@ -86,6 +127,11 @@ HMODULE CryptoHelperUtils::loadDll(const wchar_t *dllName) {
   return hDll;
 }
 
+/**
+ * Unloads a DLL.
+ *
+ * @param hDll The handle to the DLL to unload.
+ */
 void CryptoHelperUtils::unloadDll(HMODULE hDll) {
   if (hDll) {
     FreeLibrary(hDll);

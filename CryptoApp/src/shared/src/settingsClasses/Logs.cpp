@@ -2,12 +2,22 @@
 
 fs::path Logs::logsDirectory = fs::current_path() / "logs";
 
+/**
+ * @brief Ensures that the logs directory exists, creating it if necessary.
+ *
+ * @param logsDir The path to the logs directory.
+ */
 void Logs::ensureLogsDirectoryExists(const fs::path &logsDir) {
   if (!fs::exists(logsDir)) {
     fs::create_directories(logsDir);
   }
 }
 
+/**
+ * @brief Writes a message to the error log.
+ *
+ * @param message The error message to log.
+ */
 void Logs::writeToErrorLog(const std::string &message) {
   ensureLogsDirectoryExists(logsDirectory);
   if (!checkFileExists(logsDirectory / "errorLog.txt")) {
@@ -21,6 +31,11 @@ void Logs::writeToErrorLog(const std::string &message) {
   errorLog.close();
 }
 
+/**
+ * @brief Writes a message to the info log.
+ *
+ * @param message The info message to log.
+ */
 void Logs::writeToInfoLog(const std::string &message) {
   ensureLogsDirectoryExists(logsDirectory);
   if (!checkFileExists(logsDirectory / "infoLog.txt")) {
@@ -34,6 +49,12 @@ void Logs::writeToInfoLog(const std::string &message) {
   infoLog.close();
 }
 
+/**
+ * @brief Checks if a file exists at the given path.
+ *
+ * @param filePath The path to the file.
+ * @return True if the file exists, false otherwise.
+ */
 bool Logs::checkFileExists(const fs::path &filePath) {
   std::ifstream file(filePath);
   const bool exists = file.good();
@@ -41,6 +62,11 @@ bool Logs::checkFileExists(const fs::path &filePath) {
   return exists;
 }
 
+/**
+ * @brief Gets the current time formatted as a string.
+ *
+ * @return The current time formatted as a string.
+ */
 std::string Logs::getCurrentTimeFormatted() {
   const auto now = std::chrono::system_clock::now();
   const auto now_time = std::chrono::system_clock::to_time_t(now);
@@ -51,6 +77,11 @@ std::string Logs::getCurrentTimeFormatted() {
   return oss.str() + ": ";
 }
 
+/**
+ * @brief Moves the logs directory to a new location.
+ *
+ * @param newLogsDirectory The new path for the logs directory.
+ */
 void Logs::moveLogsDirectory(const fs::path &newLogsDirectory) {
   if (logsDirectory == newLogsDirectory) {
     return;
@@ -99,6 +130,11 @@ void Logs::moveLogsDirectory(const fs::path &newLogsDirectory) {
   std::cerr << "Failed to move logs directory after " << maxRetries << " attempts." << std::endl;
 }
 
+/**
+ * @brief Gets the current logs directory path.
+ *
+ * @return The path to the logs directory.
+ */
 fs::path Logs::getLogsDirectory() {
   return logsDirectory;
 }

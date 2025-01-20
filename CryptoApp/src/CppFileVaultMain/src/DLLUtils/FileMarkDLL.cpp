@@ -4,7 +4,16 @@
 
 #include "FileMarkDLL.h"
 
-bool FileMarkDLL::extractIDsFromFile(const wchar_t * filePath, unsigned char FileID[64], unsigned char EncryptionID[64]) {
+/**
+ * @brief Extracts FileID and EncryptionID from a file using the CppFileMarkLib DLL.
+ *
+ * @param filePath The path of the file to extract IDs from.
+ * @param FileID Buffer to store the extracted FileID.
+ * @param EncryptionID Buffer to store the extracted EncryptionID.
+ * @return True if the extraction was successful, false otherwise.
+ */
+bool FileMarkDLL::extractIDsFromFile(const fs::path *filePath, std::vector<unsigned char> *FileID,
+                                     std::vector<unsigned char> *EncryptionID) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");
   if (!hFileMarkDll) {
     return false;
@@ -12,7 +21,7 @@ bool FileMarkDLL::extractIDsFromFile(const wchar_t * filePath, unsigned char Fil
 
   auto extractIDsFromFileFunc = (ExtractIDsFromFileFunc) GetProcAddress(hFileMarkDll, "extractIDsFromFile");
   if (!extractIDsFromFileFunc) {
-    logError("Failed to get function address for extractIDsFromFile");
+    Logs::writeToErrorLog("Failed to get function address for extractIDsFromFile");
     unloadDll(hFileMarkDll);
     return false;
   }

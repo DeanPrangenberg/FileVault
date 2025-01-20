@@ -114,24 +114,26 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#undef min</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>fs = std::filesystem;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_a_e_s128.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="class_a_e_s128.html">AES128</a> {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_a_e_s128.html#a524cff3bd710b09b2eebf44094ca2367">encryptFile</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_file_data.html">FileData</a> *fileData);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_a_e_s128.html#afbf0042b3bb727f46f3b7a1310a822c2">decryptFile</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_file_data.html">FileData</a> *fileData);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keyword">static</span> std::mutex fileMutex;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_a_e_s128.html">   22</a></span><span class="keyword">class </span><a class="code hl_class" href="class_a_e_s128.html">AES128</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_a_e_s128.html#a524cff3bd710b09b2eebf44094ca2367">encryptFile</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_file_data.html">FileData</a> *fileData);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_a_e_s128.html#afbf0042b3bb727f46f3b7a1310a822c2">decryptFile</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_file_data.html">FileData</a> *fileData);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">static</span> std::mutex fileMutex;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
 </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif </span><span class="comment">//FILEVAULTROOT_AES128_H</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif </span><span class="comment">//FILEVAULTROOT_AES128_H</span></div>
 <div class="ttc" id="a_crypto_helper_utils_8h_html"><div class="ttname"><a href="_crypto_helper_utils_8h.html">CryptoHelperUtils.h</a></div></div>
 <div class="ttc" id="a_global_definitions_8h_html"><div class="ttname"><a href="_global_definitions_8h.html">GlobalDefinitions.h</a></div></div>
-<div class="ttc" id="aclass_a_e_s128_html"><div class="ttname"><a href="class_a_e_s128.html">AES128</a></div><div class="ttdef"><b>Definition</b> <a href="#l00019">AES128.h:19</a></div></div>
-<div class="ttc" id="aclass_a_e_s128_html_a524cff3bd710b09b2eebf44094ca2367"><div class="ttname"><a href="class_a_e_s128.html#a524cff3bd710b09b2eebf44094ca2367">AES128::encryptFile</a></div><div class="ttdeci">static bool encryptFile(const FileData *fileData)</div><div class="ttdef"><b>Definition</b> <a href="_a_e_s128_8cpp_source.html#l00006">AES128.cpp:6</a></div></div>
-<div class="ttc" id="aclass_a_e_s128_html_afbf0042b3bb727f46f3b7a1310a822c2"><div class="ttname"><a href="class_a_e_s128.html#afbf0042b3bb727f46f3b7a1310a822c2">AES128::decryptFile</a></div><div class="ttdeci">static bool decryptFile(const FileData *fileData)</div><div class="ttdef"><b>Definition</b> <a href="_a_e_s128_8cpp_source.html#l00076">AES128.cpp:76</a></div></div>
-<div class="ttc" id="aclass_file_data_html"><div class="ttname"><a href="class_file_data.html">FileData</a></div><div class="ttdef"><b>Definition</b> <a href="_file_data_8h_source.html#l00012">FileData.h:12</a></div></div>
+<div class="ttc" id="aclass_a_e_s128_html"><div class="ttname"><a href="class_a_e_s128.html">AES128</a></div><div class="ttdef"><b>Definition</b> <a href="#l00022">AES128.h:22</a></div></div>
+<div class="ttc" id="aclass_a_e_s128_html_a524cff3bd710b09b2eebf44094ca2367"><div class="ttname"><a href="class_a_e_s128.html#a524cff3bd710b09b2eebf44094ca2367">AES128::encryptFile</a></div><div class="ttdeci">static bool encryptFile(const FileData *fileData)</div><div class="ttdef"><b>Definition</b> <a href="_a_e_s128_8cpp_source.html#l00009">AES128.cpp:9</a></div></div>
+<div class="ttc" id="aclass_a_e_s128_html_afbf0042b3bb727f46f3b7a1310a822c2"><div class="ttname"><a href="class_a_e_s128.html#afbf0042b3bb727f46f3b7a1310a822c2">AES128::decryptFile</a></div><div class="ttdeci">static bool decryptFile(const FileData *fileData)</div><div class="ttdef"><b>Definition</b> <a href="_a_e_s128_8cpp_source.html#l00082">AES128.cpp:82</a></div></div>
+<div class="ttc" id="aclass_file_data_html"><div class="ttname"><a href="class_file_data.html">FileData</a></div><div class="ttdef"><b>Definition</b> <a href="_file_data_8h_source.html#l00010">FileData.h:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

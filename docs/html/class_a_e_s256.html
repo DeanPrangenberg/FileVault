@@ -107,8 +107,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a183a5717f75098bfc92686f3281f96fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_a_e_s256_8h_source.html#l00019">19</a> of file <a class="el" href="_a_e_s256_8h_source.html">AES256.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_a_e_s256.html">AES256</a> class provides static methods for encrypting and decrypting files using AES-256-CBC encryption. </p>
+
+<p class="definition">Definition at line <a class="el" href="_a_e_s256_8h_source.html#l00022">22</a> of file <a class="el" href="_a_e_s256_8h_source.html">AES256.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a183a5717f75098bfc92686f3281f96fc" name="a183a5717f75098bfc92686f3281f96fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a183a5717f75098bfc92686f3281f96fc">&#9670;&#160;</a></span>decryptFile()</h2>
@@ -132,8 +133,16 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Decrypts a file using AES-256-CBC decryption.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to the <a class="el" href="class_file_data.html">FileData</a> object containing file paths, key, and IV. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the decryption is successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_e_s256_8cpp_source.html#l00076">76</a> of file <a class="el" href="_a_e_s256_8cpp_source.html">AES256.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_e_s256_8cpp_source.html#l00081">81</a> of file <a class="el" href="_a_e_s256_8cpp_source.html">AES256.cpp</a>.</p>
 
 </div>
 </div>
@@ -159,8 +168,16 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Encrypts a file using AES-256-CBC encryption.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to the <a class="el" href="class_file_data.html">FileData</a> object containing file paths, key, and IV. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the encryption is successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_e_s256_8cpp_source.html#l00006">6</a> of file <a class="el" href="_a_e_s256_8cpp_source.html">AES256.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_e_s256_8cpp_source.html#l00009">9</a> of file <a class="el" href="_a_e_s256_8cpp_source.html">AES256.cpp</a>.</p>
 
 </div>
 </div>

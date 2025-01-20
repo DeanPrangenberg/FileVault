@@ -1,5 +1,10 @@
 #include "DecryptionScreenWidget.h"
 
+/**
+ * @brief Constructs the DecryptionScreenWidget object.
+ * @param parent The parent widget.
+ * @param statisticsPtr A shared pointer to the StatisticsScreenWidget.
+ */
 DecryptionScreenWidget::DecryptionScreenWidget(QWidget *parent, std::shared_ptr<StatisticsScreenWidget> statisticsPtr) : QWidget(parent) {
   statisticsScreenWidget = std::make_shared<StatisticsScreenWidget>();
   statisticsScreenWidget = statisticsPtr;
@@ -13,6 +18,9 @@ DecryptionScreenWidget::DecryptionScreenWidget(QWidget *parent, std::shared_ptr<
   configureUI();
 }
 
+/**
+ * @brief Configures the user interface for the decryption screen.
+ */
 void DecryptionScreenWidget::configureUI() {
   DecryptionScreenTitle->setAlignment(Qt::AlignCenter);
   DecryptionScreenWidgetLayout->addWidget(DecryptionScreenTitle.get());
@@ -23,6 +31,9 @@ void DecryptionScreenWidget::configureUI() {
   connect(StartProcessButton.get(), &QPushButton::clicked, this, &DecryptionScreenWidget::onStartProcessButtonClicked);
 }
 
+/**
+ * @brief Slot for handling the start process button click.
+ */
 void DecryptionScreenWidget::onStartProcessButtonClicked() {
   std::vector<fs::path> filePathVector;
   std::unordered_map<std::string, int> results;

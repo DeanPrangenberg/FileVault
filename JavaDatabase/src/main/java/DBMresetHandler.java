@@ -29,7 +29,7 @@ public class DBMresetHandler implements HttpHandler {
   public void handle(HttpExchange t) throws IOException {
     try {
       // Drop the database table
-      db.dropTable();
+      db.resetTable();
       String response = "true";
       t.sendResponseHeaders(200, response.length());
       OutputStream os = t.getResponseBody();

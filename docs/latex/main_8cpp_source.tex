@@ -34,7 +34,7 @@
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00030}00030\ \}}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00031}00031\ }
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}\mbox{\hyperlink{main_8cpp_aae895b6617445a3424159d3a87958661}{00032}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_aae895b6617445a3424159d3a87958661}{removeFailedEntries}}(std::vector<FileData>\ \&fileDataVec,\ std::vector<bool>\ \&results)\ \{}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ results.size();)\ \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size_t}\ i\ =\ 0;\ i\ <\ results.size();)\ \{}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{if}\ (!results[i])\ \{}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}00035\ \ \ \ \ \ \ fileDataVec.erase(fileDataVec.begin()\ +\ i);}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00036}00036\ \ \ \ \ \ \ results.erase(results.begin()\ +\ i);}
@@ -186,7 +186,7 @@
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00182}00182\ }
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00183}00183\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ testRuns;\ ++i)\ \{}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00184}00184\ \ \ \ \ system(\textcolor{stringliteral}{"{}.\(\backslash\)\(\backslash\)RustFileCopy.exe"{}});}
-\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00185}00185\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a401e669fb611f37850c98d6c31673eee}{scanAndBuildStructs}}(fileScannerDll,\ fileDataVec);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00185}00185\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a401e669fb611f37850c98d6c31673eee}{scanAndBuildMetaData}}(fileScannerDll,\ fileDataVec);}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00186}00186\ \ \ \ \ \mbox{\hyperlink{main_8cpp_ab958cdb8982061d5c6e37940f11bc85a}{encryptAndSaveFiles}}(cryptoDll,\ restApiDll,\ fileDataVec);}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00187}00187\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a9fc7089364f880caa47e5bce1a3e3822}{repairAndReloadFiles}}(fileScannerDll,\ fileMarkDll,\ restApiDll,\ fileDataVec);}
 \DoxyCodeLine{\Hypertarget{main_8cpp_source_l00188}00188\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a6463934e5d847640cc882d5d276c66c5}{decryptAndDeleteFiles}}(cryptoDll,\ restApiDll,\ fileDataVec);}

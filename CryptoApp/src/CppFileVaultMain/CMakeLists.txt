@@ -12,8 +12,10 @@ set(Qt6_DIR "C:/Qt/6.8.0/msvc2022_64/lib/cmake/Qt6")
 set(CMAKE_TOOLCHAIN_FILE "C:/Users/prang/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake")
 set(VCPKG_TARGET_TRIPLET "x64-windows-static")  # Ensure all libraries are static
 
+# Find the required Qt6 components
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
+# Include directories for the project
 include_directories(
     src/System
     src/logic
@@ -46,6 +48,7 @@ if (NOT TARGET SharedClasses)
   add_subdirectory(../shared ${CMAKE_BINARY_DIR}/shared_CppFileVaultMain)
 endif()
 
+# Define the main executable target
 add_executable(CppFileVaultMain
     src/main.cpp
     src/StructUtils/StructUtils.cpp
@@ -106,11 +109,15 @@ add_executable(CppFileVaultMain
     ../shared/src/GlobalDefinitions.cpp
     ../shared/src/FileData.cpp
     ../shared/src/FileData.h
+    src/BackendTester/BackendTester.cpp
+    src/BackendTester/BackendTester.h
+    src/BackendTester/BackendTester.cpp
 )
 
 # Ensure the custom target is built before the main executable
 add_dependencies(CppFileVaultMain compile_resources)
 
+# Set target properties
 set_target_properties(CppFileVaultMain PROPERTIES
     AUTOMOC ON
 )
@@ -118,6 +125,7 @@ set_target_properties(CppFileVaultMain PROPERTIES
 # Specify the path to the cpprest_2_10.lib file
 target_link_directories(CppFileVaultMain PRIVATE "C:/Users/prang/.vcpkg-clion/vcpkg/packages/cpprestsdk_x64-windows/lib")
 
+# Link the required libraries
 target_link_libraries(CppFileVaultMain PRIVATE
     Qt6::Core
     Qt6::Gui
@@ -125,6 +133,7 @@ target_link_libraries(CppFileVaultMain PRIVATE
     SharedClasses
 )
 
+# Compilation options for warnings
 if (MSVC)
   target_compile_options(CppFileVaultMain PRIVATE /W4 /GS)
 else ()

@@ -22,6 +22,7 @@ add_subdirectory(CppFileVaultMain)  # Main application logic
 add_subdirectory(CppFileMarkLib)  # File marking module
 add_subdirectory(CppDirectoryScanner)  # Directory Scanner module
 
+# Custom target to build the Rust FileCopy executable
 add_custom_target(RustFileCopy ALL
     COMMAND cargo build --release
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/../../RustFileCopy/target/release/RustFileCopy.exe ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/RustFileCopy.exe
@@ -29,12 +30,14 @@ add_custom_target(RustFileCopy ALL
     COMMENT "Building Rust FileCopy"
 )
 
+# Custom target to generate documentation using Doxygen
 add_custom_target(GenDoc ALL
     COMMAND doxygen Doxyfile
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/../../docs
     COMMENT "Generating documentation"
 )
 
+# Custom target to build the Go RestApiWrapper library
 add_custom_target(GoRestApiWrapperLib ALL
     COMMAND go build -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/GoRestApiWrapperLib.dll -buildmode=c-shared .
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/GoRestApiWrapperLib
@@ -42,7 +45,7 @@ add_custom_target(GoRestApiWrapperLib ALL
 )
 
 # Specify dependencies between projects
-add_dependencies(CppFileVaultMain GenDoc)
+# add_dependencies(CppFileVaultMain GenDoc)
 add_dependencies(CppFileVaultMain RustFileCopy)
 add_dependencies(CppFileVaultMain CppCryptoLib)
 add_dependencies(CppFileVaultMain GoRestApiWrapperLib)

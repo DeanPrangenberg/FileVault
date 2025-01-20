@@ -112,11 +112,13 @@ Inheritance diagram for FileScannerDLL:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a1a84bc9e13aaef0297b88351c831085d" id="r_a1a84bc9e13aaef0297b88351c831085d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a84bc9e13aaef0297b88351c831085d">FileFoundCallback</a> = std::function&lt;void(const std::filesystem::path&amp;)&gt;</td></tr>
+<tr class="memdesc:a1a84bc9e13aaef0297b88351c831085d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback type for when a file is found during the directory scan.  <br /></td></tr>
 <tr class="separator:a1a84bc9e13aaef0297b88351c831085d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae960e416e9b47fc2c2b411b2df46c19e" id="r_ae960e416e9b47fc2c2b411b2df46c19e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae960e416e9b47fc2c2b411b2df46c19e">ScanDirectory</a> (const std::filesystem::path &amp;directory, const bool searchOnlyForEncFiles, std::vector&lt; std::filesystem::path &gt; &amp;fileList, <a class="el" href="#a1a84bc9e13aaef0297b88351c831085d">FileFoundCallback</a> callback)</td></tr>
+<tr class="memdesc:ae960e416e9b47fc2c2b411b2df46c19e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scans a directory for files using the CppDirectoryScannerLib DLL.  <br /></td></tr>
 <tr class="separator:ae960e416e9b47fc2c2b411b2df46c19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -135,7 +137,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_file_scanner_d_l_l_8h_source.html#l00011">11</a> of file <a class="el" href="_file_scanner_d_l_l_8h_source.html">FileScannerDLL.h</a>.</p>
+<p>Callback type for when a file is found during the directory scan. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path of the found file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_scanner_d_l_l_8h_source.html#l00016">16</a> of file <a class="el" href="_file_scanner_d_l_l_8h_source.html">FileScannerDLL.h</a>.</p>
 
 </div>
 </div>
@@ -169,7 +179,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_file_scanner_d_l_l_8cpp_source.html#l00003">3</a> of file <a class="el" href="_file_scanner_d_l_l_8cpp_source.html">FileScannerDLL.cpp</a>.</p>
+<p>Scans a directory for files using the CppDirectoryScannerLib DLL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">directory</td><td>The path of the directory to scan. </td></tr>
+    <tr><td class="paramname">searchOnlyForEncFiles</td><td>Flag to indicate whether to search only for encrypted files. </td></tr>
+    <tr><td class="paramname">fileList</td><td>A vector to store the list of found files. </td></tr>
+    <tr><td class="paramname">callback</td><td>The callback function to call when a file is found. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_scanner_d_l_l_8cpp_source.html#l00011">11</a> of file <a class="el" href="_file_scanner_d_l_l_8cpp_source.html">FileScannerDLL.cpp</a>.</p>
 
 </div>
 </div>

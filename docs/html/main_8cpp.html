@@ -126,29 +126,38 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a3cc055c5aa026dd2f9de3215a4dceef9" id="r_a3cc055c5aa026dd2f9de3215a4dceef9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cc055c5aa026dd2f9de3215a4dceef9">startDBContainer</a> ()</td></tr>
+<tr class="memdesc:a3cc055c5aa026dd2f9de3215a4dceef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the Docker container for the database.  <br /></td></tr>
 <tr class="separator:a3cc055c5aa026dd2f9de3215a4dceef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74ddb070bc3270f6a08b14447b9ae7ec" id="r_a74ddb070bc3270f6a08b14447b9ae7ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74ddb070bc3270f6a08b14447b9ae7ec">stopDBContainer</a> ()</td></tr>
+<tr class="memdesc:a74ddb070bc3270f6a08b14447b9ae7ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the Docker container for the database.  <br /></td></tr>
 <tr class="separator:a74ddb070bc3270f6a08b14447b9ae7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae895b6617445a3424159d3a87958661" id="r_aae895b6617445a3424159d3a87958661"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae895b6617445a3424159d3a87958661">removeFailedEntries</a> (std::vector&lt; <a class="el" href="class_file_data.html">FileData</a> &gt; &amp;fileDataVec, std::vector&lt; bool &gt; &amp;results)</td></tr>
+<tr class="memdesc:aae895b6617445a3424159d3a87958661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes entries from fileDataVec and results where the operation failed.  <br /></td></tr>
 <tr class="separator:aae895b6617445a3424159d3a87958661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afebce0cd98b4583cf78461dd80f2195b" id="r_afebce0cd98b4583cf78461dd80f2195b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afebce0cd98b4583cf78461dd80f2195b">printDiv</a> ()</td></tr>
+<tr class="memdesc:afebce0cd98b4583cf78461dd80f2195b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a divider line to the console.  <br /></td></tr>
 <tr class="separator:afebce0cd98b4583cf78461dd80f2195b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a401e669fb611f37850c98d6c31673eee" id="r_a401e669fb611f37850c98d6c31673eee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a401e669fb611f37850c98d6c31673eee">scanAndBuildStructs</a> (<a class="el" href="class_file_scanner_d_l_l.html">FileScannerDLL</a> &amp;fileScannerDll, std::vector&lt; <a class="el" href="class_file_data.html">FileData</a> &gt; &amp;fileDataVec)</td></tr>
+<tr class="memitem:a401e669fb611f37850c98d6c31673eee" id="r_a401e669fb611f37850c98d6c31673eee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a401e669fb611f37850c98d6c31673eee">scanAndBuildMetaData</a> (<a class="el" href="class_file_scanner_d_l_l.html">FileScannerDLL</a> &amp;fileScannerDll, std::vector&lt; <a class="el" href="class_file_data.html">FileData</a> &gt; &amp;fileDataVec)</td></tr>
+<tr class="memdesc:a401e669fb611f37850c98d6c31673eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scans the directory and builds file data structures.  <br /></td></tr>
 <tr class="separator:a401e669fb611f37850c98d6c31673eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab958cdb8982061d5c6e37940f11bc85a" id="r_ab958cdb8982061d5c6e37940f11bc85a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab958cdb8982061d5c6e37940f11bc85a">encryptAndSaveFiles</a> (<a class="el" href="class_crypto_d_l_l.html">CryptoDLL</a> &amp;cryptoDll, <a class="el" href="class_rest_api_d_l_l.html">RestApiDLL</a> &amp;restApiDll, std::vector&lt; <a class="el" href="class_file_data.html">FileData</a> &gt; &amp;fileDataVec)</td></tr>
+<tr class="memdesc:ab958cdb8982061d5c6e37940f11bc85a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts files and saves their data.  <br /></td></tr>
 <tr class="separator:ab958cdb8982061d5c6e37940f11bc85a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fc7089364f880caa47e5bce1a3e3822" id="r_a9fc7089364f880caa47e5bce1a3e3822"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9fc7089364f880caa47e5bce1a3e3822">repairAndReloadFiles</a> (<a class="el" href="class_file_scanner_d_l_l.html">FileScannerDLL</a> &amp;fileScannerDll, <a class="el" href="class_file_mark_d_l_l.html">FileMarkDLL</a> &amp;fileMarkDll, <a class="el" href="class_rest_api_d_l_l.html">RestApiDLL</a> &amp;restApiDll, std::vector&lt; <a class="el" href="class_file_data.html">FileData</a> &gt; &amp;fileDataVec)</td></tr>
+<tr class="memdesc:a9fc7089364f880caa47e5bce1a3e3822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repairs lost encrypted file structures and reloads file data.  <br /></td></tr>
 <tr class="separator:a9fc7089364f880caa47e5bce1a3e3822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6463934e5d847640cc882d5d276c66c5" id="r_a6463934e5d847640cc882d5d276c66c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6463934e5d847640cc882d5d276c66c5">decryptAndDeleteFiles</a> (<a class="el" href="class_crypto_d_l_l.html">CryptoDLL</a> &amp;cryptoDll, <a class="el" href="class_rest_api_d_l_l.html">RestApiDLL</a> &amp;restApiDll, std::vector&lt; <a class="el" href="class_file_data.html">FileData</a> &gt; &amp;fileDataVec)</td></tr>
+<tr class="memdesc:a6463934e5d847640cc882d5d276c66c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts files and deletes their data.  <br /></td></tr>
 <tr class="separator:a6463934e5d847640cc882d5d276c66c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a299e785c00bb78751b9ff3c522c6bcdb" id="r_a299e785c00bb78751b9ff3c522c6bcdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a299e785c00bb78751b9ff3c522c6bcdb">testRun</a> (int testRuns)</td></tr>
+<tr class="memdesc:a299e785c00bb78751b9ff3c522c6bcdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a series of tests for file encryption and decryption.  <br /></td></tr>
 <tr class="separator:a299e785c00bb78751b9ff3c522c6bcdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a22e723d5cd6660c5725c5a33221093d8" id="r_a22e723d5cd6660c5725c5a33221093d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22e723d5cd6660c5725c5a33221093d8">printDebug</a> = true</td></tr>
+<tr class="memitem:a22e723d5cd6660c5725c5a33221093d8" id="r_a22e723d5cd6660c5725c5a33221093d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22e723d5cd6660c5725c5a33221093d8">printDebug</a> = false</td></tr>
 <tr class="separator:a22e723d5cd6660c5725c5a33221093d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a740e92005e3e79e44f6feadbedc7df20" id="r_a740e92005e3e79e44f6feadbedc7df20"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a740e92005e3e79e44f6feadbedc7df20">printConverterDebug</a> = true</td></tr>
 <tr class="separator:a740e92005e3e79e44f6feadbedc7df20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,7 +220,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00146">146</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Decrypts files and deletes their data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cryptoDll</td><td>Reference to the <a class="el" href="class_crypto_d_l_l.html">CryptoDLL</a> object. </td></tr>
+    <tr><td class="paramname">restApiDll</td><td>Reference to the <a class="el" href="class_rest_api_d_l_l.html">RestApiDLL</a> object. </td></tr>
+    <tr><td class="paramname">fileDataVec</td><td>Vector of <a class="el" href="class_file_data.html">FileData</a> structures to be decrypted and deleted. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00184">184</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -239,7 +258,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00073">73</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Encrypts files and saves their data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cryptoDll</td><td>Reference to the <a class="el" href="class_crypto_d_l_l.html">CryptoDLL</a> object. </td></tr>
+    <tr><td class="paramname">restApiDll</td><td>Reference to the <a class="el" href="class_rest_api_d_l_l.html">RestApiDLL</a> object. </td></tr>
+    <tr><td class="paramname">fileDataVec</td><td>Vector of <a class="el" href="class_file_data.html">FileData</a> structures to be encrypted and saved. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00098">98</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -262,7 +291,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00215">215</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00262">262</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +310,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00043">43</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Prints a divider line to the console. </p>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00057">57</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -304,7 +335,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00032">32</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Removes entries from fileDataVec and results where the operation failed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileDataVec</td><td>Vector of <a class="el" href="class_file_data.html">FileData</a> structures. </td></tr>
+    <tr><td class="paramname">results</td><td>Vector of boolean results indicating success or failure. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00043">43</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -337,18 +377,29 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00095">95</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Repairs lost encrypted file structures and reloads file data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileScannerDll</td><td>Reference to the <a class="el" href="class_file_scanner_d_l_l.html">FileScannerDLL</a> object. </td></tr>
+    <tr><td class="paramname">fileMarkDll</td><td>Reference to the <a class="el" href="class_file_mark_d_l_l.html">FileMarkDLL</a> object. </td></tr>
+    <tr><td class="paramname">restApiDll</td><td>Reference to the <a class="el" href="class_rest_api_d_l_l.html">RestApiDLL</a> object. </td></tr>
+    <tr><td class="paramname">fileDataVec</td><td>Vector to store the reloaded <a class="el" href="class_file_data.html">FileData</a> structures. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00127">127</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a401e669fb611f37850c98d6c31673eee" name="a401e669fb611f37850c98d6c31673eee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a401e669fb611f37850c98d6c31673eee">&#9670;&#160;</a></span>scanAndBuildStructs()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a401e669fb611f37850c98d6c31673eee">&#9670;&#160;</a></span>scanAndBuildMetaData()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void scanAndBuildStructs </td>
+          <td class="memname">void scanAndBuildMetaData </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_file_scanner_d_l_l.html">FileScannerDLL</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>fileScannerDll</em></span>, </td>
         </tr>
@@ -360,7 +411,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00052">52</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Scans the directory and builds file data structures. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileScannerDll</td><td>Reference to the <a class="el" href="class_file_scanner_d_l_l.html">FileScannerDLL</a> object. </td></tr>
+    <tr><td class="paramname">fileDataVec</td><td>Vector to store the generated <a class="el" href="class_file_data.html">FileData</a> structures. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00071">71</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +439,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00022">22</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Starts the Docker container for the database. </p>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00025">25</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +460,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00027">27</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Stops the Docker container for the database. </p>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00033">33</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -417,7 +481,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00172">172</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Runs a series of tests for file encryption and decryption. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">testRuns</td><td>Number of test runs to perform. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00214">214</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +517,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool printDebug = true</td>
+          <td class="memname">bool printDebug = false</td>
         </tr>
       </table>
 </div><div class="memdoc">

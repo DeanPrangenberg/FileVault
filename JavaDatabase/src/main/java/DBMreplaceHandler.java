@@ -56,7 +56,7 @@ public class DBMreplaceHandler implements HttpHandler {
       Database.GoFileData[] dataEntries = mapper.readValue(decryptedData, Database.GoFileData[].class);
 
       // Drop the existing table and reinitialize it
-      db.dropTable();
+      db.resetTable();
       db.connect();
 
       // Insert all entries into the database

@@ -111,14 +111,19 @@ Inheritance diagram for CryptoDLL:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad377410f792824ef4b7bbc5db4e71980" id="r_ad377410f792824ef4b7bbc5db4e71980"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad377410f792824ef4b7bbc5db4e71980">GenerateKeyIv</a> (size_t keySize, size_t ivSize, unsigned char *key, unsigned char *iv)</td></tr>
+<tr class="memdesc:ad377410f792824ef4b7bbc5db4e71980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a key and initialization vector (IV) using the CppCryptoLib DLL.  <br /></td></tr>
 <tr class="separator:ad377410f792824ef4b7bbc5db4e71980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a010be6b25f7046d5b95f56a73afbbd4e" id="r_a010be6b25f7046d5b95f56a73afbbd4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a010be6b25f7046d5b95f56a73afbbd4e">GenerateFileID</a> (const wchar_t *filePath, unsigned char *fileID)</td></tr>
+<tr class="memdesc:a010be6b25f7046d5b95f56a73afbbd4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a file ID for a given file path using the CppCryptoLib DLL.  <br /></td></tr>
 <tr class="separator:a010be6b25f7046d5b95f56a73afbbd4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2eabf7f6c2ca1aa2708591fb082e92ec" id="r_a2eabf7f6c2ca1aa2708591fb082e92ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2eabf7f6c2ca1aa2708591fb082e92ec">EncryptFiles</a> (class <a class="el" href="class_file_data.html">FileData</a> *fileData, int count, std::vector&lt; bool &gt; &amp;results)</td></tr>
+<tr class="memdesc:a2eabf7f6c2ca1aa2708591fb082e92ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts multiple files using the CppCryptoLib DLL.  <br /></td></tr>
 <tr class="separator:a2eabf7f6c2ca1aa2708591fb082e92ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67110ca087436c883f24b4206fe90b8a" id="r_a67110ca087436c883f24b4206fe90b8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67110ca087436c883f24b4206fe90b8a">DecryptFiles</a> (class <a class="el" href="class_file_data.html">FileData</a> *fileData, int count, std::vector&lt; bool &gt; &amp;results)</td></tr>
+<tr class="memdesc:a67110ca087436c883f24b4206fe90b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts multiple files using the CppCryptoLib DLL.  <br /></td></tr>
 <tr class="separator:a67110ca087436c883f24b4206fe90b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b9f7773ffd8121b128d7a9392c38614" id="r_a6b9f7773ffd8121b128d7a9392c38614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b9f7773ffd8121b128d7a9392c38614">getCurrentTimeHash</a> (unsigned char *timeHash)</td></tr>
+<tr class="memdesc:a6b9f7773ffd8121b128d7a9392c38614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a hash of the current time using the CppCryptoLib DLL.  <br /></td></tr>
 <tr class="separator:a6b9f7773ffd8121b128d7a9392c38614"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -149,7 +154,17 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00029">29</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
+<p>Decrypts multiple files using the CppCryptoLib DLL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to an array of <a class="el" href="class_file_data.html">FileData</a> objects representing the files to decrypt. </td></tr>
+    <tr><td class="paramname">count</td><td>The number of files to decrypt. </td></tr>
+    <tr><td class="paramname">results</td><td>A vector to store the results of the decryption for each file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00043">43</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -177,7 +192,17 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00007">7</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
+<p>Encrypts multiple files using the CppCryptoLib DLL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to an array of <a class="el" href="class_file_data.html">FileData</a> objects representing the files to encrypt. </td></tr>
+    <tr><td class="paramname">count</td><td>The number of files to encrypt. </td></tr>
+    <tr><td class="paramname">results</td><td>A vector to store the results of the encryption for each file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00014">14</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -200,7 +225,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00068">68</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
+<p>Generates a file ID for a given file path using the CppCryptoLib DLL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The path of the file to generate the ID for. </td></tr>
+    <tr><td class="paramname">fileID</td><td>Pointer to the buffer to store the generated file ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00096">96</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -233,7 +267,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00051">51</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
+<p>Generates a key and initialization vector (IV) using the CppCryptoLib DLL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keySize</td><td>The size of the key to generate. </td></tr>
+    <tr><td class="paramname">ivSize</td><td>The size of the IV to generate. </td></tr>
+    <tr><td class="paramname">key</td><td>Pointer to the buffer to store the generated key. </td></tr>
+    <tr><td class="paramname">iv</td><td>Pointer to the buffer to store the generated IV. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00073">73</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -252,7 +297,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00090">90</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
+<p>Generates a hash of the current time using the CppCryptoLib DLL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeHash</td><td>Pointer to the buffer to store the generated time hash. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00123">123</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
 
 </div>
 </div>

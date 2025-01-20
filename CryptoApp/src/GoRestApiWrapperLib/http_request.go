@@ -10,6 +10,13 @@ import (
   "net/http"
 )
 
+/**
+ * Makes an HTTP request to the specified URL with the given FileDataDB data.
+ *
+ * @param url The URL to send the request to.
+ * @param data Pointer to the C FileDataDB struct containing the data to send.
+ * @return Pointer to a C bool indicating the success of the request.
+ */
 func makeRequest(url string, data *C.FileDataDB) *C.bool {
   goData := convertToGoFileData(data)
   jsonData, err := json.Marshal(goData)

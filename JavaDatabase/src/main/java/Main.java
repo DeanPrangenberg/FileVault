@@ -13,7 +13,7 @@ public class Main {
   public static void main(String[] args) throws IOException {
     // Initialize the database
     Database db = new Database();
-    db.dropTable();
+    db.resetTable();
     db.connect();
 
     // Create and configure the HTTP server
@@ -24,7 +24,7 @@ public class Main {
     server.createContext("/api/delete", new DeleteHandler(db));
     server.createContext("/api/search", new SearchHandler(db));
     server.createContext("/api/replace", new ReplaceHandler(db));
-    server.createContext("/api/getAllFileIDsAndEncryptedPaths", new GetAllFileIDsAndEncryptedPathsHandler(db));
+    server.createContext("/api/getAllFileIDsAndEncryptedPaths", new GetAllImportantHandler(db));
     server.createContext("/api/getDBSize", new GetDBSizeHandler(db));
 
     // Set up the context handlers for DBM operations

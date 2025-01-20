@@ -29,5 +29,7 @@ public:
 
   // functions
   static std::string toHexString(const unsigned char *pUChar, size_t length);
+
+  static std::vector<unsigned char> fromHexString(const std::string &hexStr);
 };
 #endif // GLOBALDEFINITIONS_H
