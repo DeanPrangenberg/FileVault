@@ -129,3 +129,16 @@ std::array<unsigned char, EVP_MAX_MD_SIZE> BLAKE2::hashArray(const std::vector<u
   EVP_MD_CTX_free(mdctx);
   return hash;
 }
+
+std::array<unsigned char, EVP_MAX_MD_SIZE>
+BLAKE2::hashPassword(const std::vector<unsigned char> &password, const std::vector<unsigned char> &salt) {
+
+  std::vector<unsigned char> passwordWithSalt;
+  passwordWithSalt.reserve(password.size() + salt.size());
+  passwordWithSalt.insert(passwordWithSalt.end(), password.begin(), password.end());
+  passwordWithSalt.insert(passwordWithSalt.end(), salt.begin(), salt.end());
+
+  auto hash = hashArray(passwordWithSalt);
+
+  return hash;
+}

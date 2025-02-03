@@ -43,10 +43,16 @@ int main(int argc, char *argv[]) {
   QObject::connect(&app, &QApplication::aboutToQuit, []() {
     stopDBContainer();
   });
-
-  FileVaultGui fileVaultGui;
-  fileVaultGui.setWindowIcon(QIcon(":/icons/Icon.png"));
-  fileVaultGui.show();
-
+  try {
+    FileVaultGui fileVaultGui;
+    fileVaultGui.setWindowIcon(QIcon(":/icons/Icon.png"));
+    fileVaultGui.show();
+  } catch (const std::exception &e) {
+    std::cout << "Error in main: " + std::string(e.what()) << std::endl;
+    return 1;
+  } catch (...) {
+    std::cout << "Unknown error in main" << std::endl;
+    return 1;
+  }
   return app.exec();
 }

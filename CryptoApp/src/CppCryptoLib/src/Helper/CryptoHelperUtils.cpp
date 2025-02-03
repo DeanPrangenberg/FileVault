@@ -19,18 +19,20 @@ void CryptoHelperUtils::printError(const std::wstring &msg) {
  * @param filePath The path to the file to be deleted.
  */
 void CryptoHelperUtils::deleteFile(const fs::path &filePath) {
+  GetSettingsData settingsData;
+  auto settings = settingsData.ReadBoolsFromSettings();
   try {
-    if (filePath.extension() == globalDefinitions::encFileSuffix && globalDefinitions::deleteFileAfterDecryption) {
+    if (filePath.extension() == globalDefinitions::encFileSuffix && settings["DeleteAfterEncryption"]) {
       std::cout << "Deleting original file after encryption: " << filePath << std::endl;
       fs::remove(filePath);
-    } else if (globalDefinitions::deleteFileAfterDecryption) {
+    } else if (settings["DeleteAfterDecryption"]) {
       std::cout << "Deleting encrypted file after decryption: " << filePath << std::endl;
       fs::remove(filePath);
     } else {
       std::cout << "Skipped file deletion for: " << filePath << std::endl;
       std::cout << (filePath.extension() == globalDefinitions::encFileSuffix ? "Encrypted File" : "Decrypted File") << std::endl;
-      std::cout << "Delete after decryption: " << globalDefinitions::deleteFileAfterDecryption << std::endl;
-      std::cout << "Delete after encryption: " << globalDefinitions::deleteFileAfterEncryption << std::endl;
+      std::cout << "Delete after decryption: " << settings["DeleteAfterDecryption"] << std::endl;
+      std::cout << "Delete after encryption: " << settings["DeleteAfterEncryption"] << std::endl;
     }
   } catch (const fs::filesystem_error &e) {
     std::cerr << "Error: " << e.what() << std::endl;

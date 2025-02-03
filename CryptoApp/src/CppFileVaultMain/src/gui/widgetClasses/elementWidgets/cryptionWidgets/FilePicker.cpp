@@ -105,6 +105,11 @@ void FilePicker::addEntry(const QString &path) {
     comboBox->setFixedWidth(35);
     styleSetter.setComboBoxStyle(comboBox);
     comboBox->addItems({"AES-128", "AES-256"});
+    if (globalDefinitions::stdAlgorithm == "AES-128") {
+      comboBox->setCurrentText("AES-128");
+    } else {
+      comboBox->setCurrentText("AES-256");
+    }
     entryLayout->addWidget(comboBox);
   }
 

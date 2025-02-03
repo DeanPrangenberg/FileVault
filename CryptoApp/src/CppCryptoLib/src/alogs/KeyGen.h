@@ -26,6 +26,7 @@ public:
    */
   void generateKeyIv(const size_t &keySize, const size_t &ivSize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV);
 
+  void generateRandomBytes(const size_t &size, std::vector<unsigned char> &randomBytes);
   /**
    * Converts a vector of bytes to a hexadecimal string representation.
    *

@@ -3,10 +3,7 @@
 //
 
 #include "SystemUtils.h"
-#include <iostream>
-#include <filesystem>
-#include <windows.h>
-#include <fstream>
+#include "src/GlobalDefinitions.h"
 
 namespace fs = std::filesystem;
 

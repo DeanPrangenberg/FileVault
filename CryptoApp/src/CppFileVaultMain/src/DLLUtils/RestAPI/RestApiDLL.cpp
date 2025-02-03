@@ -352,6 +352,7 @@ std::vector<FileData> RestApiDLL::GetAllFileIDsAndEncryptedPaths() {
   Logs::writeToInfoLog("RestApiDLL-GetAll: Converting FileDataDB structs to FileData structs");
   for (int i = 0; i < listSize; i++) {
     FileData fileData = convertDBStructToFileData(pFileDataList[i]);
+    Logs::writeToInfoLog("RestApiDLL-GetAll: Converted entry for file: " + fileData.EncryptedFilePath->string());
     FileDataList.push_back(fileData);
   }
 

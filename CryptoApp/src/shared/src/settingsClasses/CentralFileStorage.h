@@ -3,6 +3,7 @@
 #define CENTRALSTORAGE_H
 
 #include <filesystem>
+#include <iostream>
 
 namespace fs = std::filesystem;
 
@@ -65,6 +66,8 @@ private:
    * @brief Counter for the number of decrypted files.
    */
   static unsigned long long decFileCounter;
+
+  void changeCentralFileStoragePath(const fs::path &newFilePath);
 };
 
 #endif //CENTRALSTORAGE_H

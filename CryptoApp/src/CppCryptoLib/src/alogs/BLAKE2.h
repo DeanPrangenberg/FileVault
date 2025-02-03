@@ -39,6 +39,9 @@ public:
    */
   static std::array<unsigned char, EVP_MAX_MD_SIZE> hashArray(const std::vector<unsigned char> &input);
 
+  static std::array<unsigned char, EVP_MAX_MD_SIZE> hashPassword(const std::vector<unsigned char> &password,
+                                                                 const std::vector<unsigned char> &salt);
+
 private:
   /// Flag to enable or disable debug printing.
   bool printDebug = false;

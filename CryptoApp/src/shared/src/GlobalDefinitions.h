@@ -18,6 +18,7 @@ public:
   // variables
   static const std::wstring encFileSuffix;
   static const std::string markIdentifier;
+  static std::string stdAlgorithm;
   static bool deleteFileAfterEncryption;
   static bool deleteFileAfterDecryption;
 

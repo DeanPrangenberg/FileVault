@@ -30,7 +30,7 @@ var searchData=
   ['counter_27',['counter',['../class_loading_window.html#a1356286aef3efa174d068936cadfefa1',1,'LoadingWindow']]],
   ['cppcryptolib_20c_20strong_28',['&lt;strong&gt;1. CppCryptoLib (C++)&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]],
   ['cppdirectoryscanner_20c_20strong_29',['&lt;strong&gt;2. CppDirectoryScanner (C++)&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md9',1,'']]],
-  ['createfiledatastruct_30',['createFileDataStruct',['../class_struct_utils.html#ac9f831bf931be282ed4a4d8224270094',1,'StructUtils']]],
+  ['createfiledatastruct_30',['createFileDataStruct',['../class_struct_utils.html#ac9f831bf931be282ed4a4d8224270094',1,'AttributeUtils']]],
   ['createfileifnotexists_31',['createFileIfNotExists',['../class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260',1,'SettingsScreenWidget']]],
   ['cryptoapi_2ecpp_32',['CryptoAPI.cpp',['../_crypto_a_p_i_8cpp.html',1,'']]],
   ['cryptoapi_2eh_33',['CryptoAPI.h',['../_crypto_a_p_i_8h.html',1,'']]],

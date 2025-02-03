@@ -142,3 +142,38 @@ void CryptoDLL::getCurrentTimeHash(unsigned char *timeHash) {
 
   unloadDll(hCryptographyDll);
 }
+
+void CryptoDLL::GeneratePasswordHash(unsigned char *password, unsigned char *salt, unsigned char *hash,
+                                     size_t passwordLength, size_t saltLength, size_t hashSize) {
+  HMODULE hCryptographyDll = loadDll(L"CppCryptoLib.dll");
+  if (!hCryptographyDll) {
+    return;
+  }
+
+  auto generatePasswordHashFunc = (GeneratePasswordHashFunc) GetProcAddress(hCryptographyDll, "GeneratePasswordHash");
+  if (!generatePasswordHashFunc) {
+    Logs::writeToErrorLog("Failed to get function address for GeneratePasswordHash");
+    unloadDll(hCryptographyDll);
+    return;
+  }
+
+  generatePasswordHashFunc(password, salt, hash, passwordLength, saltLength, hashSize);
+  unloadDll(hCryptographyDll);
+}
+
+void CryptoDLL::generateRandomBytes(size_t randomBytesSize, unsigned char *randomBytes) {
+  HMODULE hCryptographyDll = loadDll(L"CppCryptoLib.dll");
+  if (!hCryptographyDll) {
+    return;
+  }
+
+  auto generateRandomBytesFunc = (GenerateRandomBytesFunc) GetProcAddress(hCryptographyDll, "generateRandomBytes");
+  if (!generateRandomBytesFunc) {
+    Logs::writeToErrorLog("Failed to get function address for generateRandomBytes");
+    unloadDll(hCryptographyDll);
+    return;
+  }
+
+  generateRandomBytesFunc(randomBytesSize, randomBytes);
+  unloadDll(hCryptographyDll);
+}

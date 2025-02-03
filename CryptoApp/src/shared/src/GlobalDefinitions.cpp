@@ -6,6 +6,8 @@ const std::string globalDefinitions::markIdentifier = "<FileVault>";
 bool globalDefinitions::deleteFileAfterEncryption = true;
 bool globalDefinitions::deleteFileAfterDecryption = true;
 
+std::string globalDefinitions::stdAlgorithm = "AES-128";
+
 /**
  * @brief Converts an unsigned char array to a hex string.
  *

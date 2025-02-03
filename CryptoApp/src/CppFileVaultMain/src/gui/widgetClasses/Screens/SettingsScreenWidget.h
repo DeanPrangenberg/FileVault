@@ -13,6 +13,7 @@
 #include <QFileDialog>
 #include <qcoreapplication.h>
 #include "../../../shared/src/settingsClasses/Logs.h"
+#include "../../../shared/src/settingsClasses/CentralFileStorage.h"
 #include "../../../shared/src/GlobalDefinitions.h"
 #include "../elementWidgets/SettingsWidgets/MasterSettingsWidget.h"
 #include "../elementWidgets/SettingsWidgets/LanguageSelectionWidget.h"
@@ -22,6 +23,8 @@
 #include "../elementWidgets/SettingsWidgets/NewPasswordWidget.h"
 #include "../elementWidgets/SettingsWidgets/LogsLocationWidget.h"
 #include "../elementWidgets/SettingsWidgets/CentralFileStorageWidget.h"
+#include "../../PasswordDialog.h"
+#include "../DLLUtils/CryptoDLL.h"
 
 /**
  * @class SettingsScreenWidget
@@ -53,6 +56,9 @@ public:
    */
   void saveSettings();
 
+  static std::vector<unsigned char> password;
+  static std::vector<unsigned char> salt;
+
 private:
   std::unique_ptr<QScrollArea> scrollArea; ///< Scroll area for the settings.
   std::unique_ptr<QGridLayout> SettingsScreenWidgetLayout; ///< Layout for the settings screen widget.
@@ -71,6 +77,10 @@ private:
    * @brief Loads the settings from a file.
    */
   void loadSettings();
+
+  std::vector<unsigned char> hexStringToBytes(const std::string &hex);
+
+  std::string bytesToHexString(const std::vector<unsigned char> &bytes);
 };
 
 #endif // SETTINGSSCREENWIDGET_H

@@ -2,8 +2,6 @@
 #include <string>
 
 // Static member variables initialization
-bool CentralFileStorage::centralEncFileStorage = false;
-bool CentralFileStorage::centralDecFileStorage = false;
 unsigned long long CentralFileStorage::encFileCounter = 0;
 unsigned long long CentralFileStorage::decFileCounter = 0;
 fs::path CentralFileStorage::fileStoragePath = fs::current_path() / "centralStorage";
@@ -52,4 +50,43 @@ bool CentralFileStorage::moveFileToCentralStorage(const fs::path &filePath, bool
   }
 
   return true;
+}
+
+void CentralFileStorage::changeCentralFileStoragePath(const fs::path &newFilePath) {
+  if (fileStoragePath == newFilePath) {
+    return;
+  }
+
+  checkCentralFileStoragePath();
+
+  try {
+    // Create new directories if they do not exist
+    if (!fs::exists(newFilePath)) {
+      fs::create_directories(newFilePath);
+    }
+    if (!fs::exists(newFilePath / "Encrypted")) {
+      fs::create_directory(newFilePath / "Encrypted");
+    }
+    if (!fs::exists(newFilePath / "Decrypted")) {
+      fs::create_directory(newFilePath / "Decrypted");
+    }
+
+    // Move encrypted files
+    for (const auto &file : fs::directory_iterator(fileStoragePath / "Encrypted")) {
+      fs::path newFilePathEncrypted = newFilePath / "Encrypted" / file.path().filename();
+      fs::rename(file.path(), newFilePathEncrypted);
+    }
+
+    // Move decrypted files
+    for (const auto &file : fs::directory_iterator(fileStoragePath / "Decrypted")) {
+      fs::path newFilePathDecrypted = newFilePath / "Decrypted" / file.path().filename();
+      fs::rename(file.path(), newFilePathDecrypted);
+    }
+
+    // Update the storage path
+    fileStoragePath = newFilePath;
+    std::cout << "Central file storage path changed to: " << fileStoragePath << std::endl;
+  } catch (const std::exception &e) {
+    std::cerr << "Error changing central file storage path: " << e.what() << std::endl;
+  }
 }

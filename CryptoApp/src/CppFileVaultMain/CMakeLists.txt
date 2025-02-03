@@ -51,8 +51,8 @@ endif()
 # Define the main executable target
 add_executable(CppFileVaultMain
     src/main.cpp
-    src/StructUtils/StructUtils.cpp
-    src/StructUtils/StructUtils.h
+    src/AttributeUtils/AttributeUtils.cpp
+    src/AttributeUtils/AttributeUtils.h
     src/System/SystemUtils.h
     src/System/SystemUtils.cpp
     src/HelperUtils/HelperUtils.cpp
@@ -112,6 +112,8 @@ add_executable(CppFileVaultMain
     src/BackendTester/BackendTester.cpp
     src/BackendTester/BackendTester.h
     src/BackendTester/BackendTester.cpp
+    src/gui/PasswordDialog.cpp
+    src/gui/PasswordDialog.h
 )
 
 # Ensure the custom target is built before the main executable
@@ -140,19 +142,19 @@ else ()
   target_compile_options(CppFileVaultMain PRIVATE -Wall -Wextra)
 endif ()
 
-# Copy Qt DLLs to the output directory
 add_custom_command(TARGET CppFileVaultMain POST_BUILD
+    # Erstelle die benötigten Verzeichnisse
+    COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:CppFileVaultMain>/platforms
+
+    # Kopiere die Qt-DLLs in das Verzeichnis der ausführbaren Datei
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
     $<TARGET_FILE:Qt6::Core>
     $<TARGET_FILE:Qt6::Gui>
     $<TARGET_FILE:Qt6::Widgets>
     $<TARGET_FILE_DIR:CppFileVaultMain>
-)
 
-# Copy Qt platform plugin to the output directory
-add_custom_command(TARGET CppFileVaultMain POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:CppFileVaultMain>/platforms
+    # Kopiere qwindows.dll in das platforms-Verzeichnis
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${Qt6_DIR}/../../../plugins/platforms/qwindows.dll
-    $<TARGET_FILE_DIR:CppFileVaultMain>/platforms
+    "${QT6_INSTALL_PREFIX}/plugins/platforms/$<IF:$<CONFIG:Debug>,qwindowsd.dll,qwindows.dll>"
+    "$<TARGET_FILE_DIR:CppFileVaultMain>/platforms"
 )

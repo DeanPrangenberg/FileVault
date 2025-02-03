@@ -3,7 +3,7 @@
 #define BACKENDTESTER_H
 
 #include "../HelperUtils/HelperUtils.h"
-#include "../StructUtils/StructUtils.h"
+#include "../AttributeUtils/AttributeUtils.h"
 #include "../DLLUtils/FileScannerDLL.h"
 #include "../DLLUtils/CryptoDLL.h"
 #include "RestAPI/RestApiDLL.h"

@@ -156,93 +156,93 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &dat
  * @return The resulting FileData object.
  */
 FileData RestApiDLL::convertDBStructToFileData(FileDataDB &data) {
-  FileData fileData;
+  FileData fileData; // Annahme: Konstruktor initialisiert alle shared_ptr mit leeren Objekten
 
-  if (printDebug) std::cout << "convertDBStructToFileData: Converting FileDataDB to FileData" << std::endl;
+  auto validateHexConversion = [](const std::shared_ptr<std::vector<unsigned char>>& result, size_t expectedLength) {
+    if (!result) throw std::runtime_error("Hex-Konvertierung fehlgeschlagen");
+    if (expectedLength > 0 && result->size() != expectedLength) {
+      throw std::runtime_error("Längenmismatch: Erwartet " +
+                               std::to_string(expectedLength) +
+                               ", erhalten " +
+                               std::to_string(result->size()));
+    }
+  };
 
   try {
-    if (data.AlgorithmenType == nullptr) {
-      throw std::invalid_argument("convertDBStructToFileData: AlgorithmenType is null");
+    // AlgorithmenType
+    if (data.AlgorithmenType && data.AlgorithmenType[0] != L'\0') {
+      *fileData.AlgorithmenType = wcharToString(data.AlgorithmenType);
+
+      // Algorithmus-spezifische Validierungen
+      if (*fileData.AlgorithmenType == "AES128" || *fileData.AlgorithmenType == "AES256") {
+        size_t expectedKeyLen = (*fileData.AlgorithmenType == "AES128") ? 16 : 32;
+        if (fileData.Key->size() != expectedKeyLen) {
+          fileData.Key->resize(expectedKeyLen);
+        }
+        if (fileData.Iv->size() != 16) {
+          fileData.Iv->resize(16);
+        }
+      }
     }
 
-    if (printDebug) std::cout << "convertDBStructToFileData: Converting AlgorithmenType" << std::endl;
-    auto algotype = wcharToString(data.AlgorithmenType);
-
-    if (algotype == "AES128") {
-      if (printDebug) std::cout << "convertDBStructToFileData: AES128" << std::endl;
-      fileData.Key->resize(16);
-      fileData.Iv->resize(16);
-    } else if (algotype == "AES256") {
-      if (printDebug) std::cout << "convertDBStructToFileData: AES256" << std::endl;
-      fileData.Key->resize(32);
-      fileData.Iv->resize(16);
+    // FileID
+    if (data.FileID) {
+      fileData.FileID = convertFromHexWChar(data.FileID);
+      validateHexConversion(fileData.FileID, data.FileIDLength);
     } else {
-      throw std::invalid_argument("convertDBStructToFileData: Unsupported algorithm type: " + algotype);
+      Logs::writeToErrorLog("Conversion from DB to FileData: FileID is null");
     }
 
-    if (data.FileID == nullptr) {
-      throw std::invalid_argument("convertDBStructToFileData: FileID is null");
+    // EncryptedID
+    if (data.EncryptedID) {
+      fileData.EncryptionID = convertFromHexWChar(data.EncryptedID);
+      validateHexConversion(fileData.EncryptionID, data.EncryptedIDLength);
+    } else {
+      Logs::writeToErrorLog("Conversion from DB to FileData: EncryptedID is null");
     }
 
-    if (printDebug) std::cout << "convertDBStructToFileData: Converting FileID" << std::endl;
-    fileData.FileID = convertFromHexWChar(data.FileID);
-    if (fileData.FileID->size() != data.FileIDLength) {
-      throw std::runtime_error("convertDBStructToFileData: FileID length mismatch");
+    // LastUpdateID
+    if (data.LastUpdateID) {
+      fileData.LastUpdateID = convertFromHexWChar(data.LastUpdateID);
+      validateHexConversion(fileData.LastUpdateID, data.LastUpdateIDLength);
     }
 
-    if (data.EncryptedID == nullptr) {
-      throw std::invalid_argument("convertDBStructToFileData: EncryptedID is null");
+    // Key & IV mit doppelter Validierung
+    if (data.Key) {
+      fileData.Key = convertFromHexWChar(data.Key);
+      validateHexConversion(fileData.Key, data.KeyLength);
+
+      // Zusätzliche Algorithmus-Validierung
+      if (!fileData.AlgorithmenType->empty()) {
+        if (*fileData.AlgorithmenType == "AES128" && fileData.Key->size() != 16) {
+          throw std::runtime_error("AES128 benötigt 16-Byte-Key");
+        }
+        if (*fileData.AlgorithmenType == "AES256" && fileData.Key->size() != 32) {
+          throw std::runtime_error("AES256 benötigt 32-Byte-Key");
+        }
+      }
     }
 
-    if (printDebug) std::cout << "convertDBStructToFileData: Converting EncryptedID" << std::endl;
-    fileData.EncryptionID = convertFromHexWChar(data.EncryptedID);
-    if (fileData.EncryptionID->size() != data.EncryptedIDLength) {
-      throw std::runtime_error("convertDBStructToFileData: EncryptedID length mismatch");
+    if (data.Iv) {
+      fileData.Iv = convertFromHexWChar(data.Iv);
+      validateHexConversion(fileData.Iv, data.IvLength);
+      if (fileData.Iv->size() != 16) {
+        throw std::runtime_error("IV muss 16 Byte lang sein");
+      }
     }
 
-    if (data.LastUpdateID == nullptr) {
-      throw std::invalid_argument("convertDBStructToFileData: LastUpdateID is null");
-    }
+    // Pfad-Konvertierung mit Nullptr-Check
+    auto convertPath = [](const wchar_t* path) {
+      return path ? std::make_shared<fs::path>(path) : std::make_shared<fs::path>();
+    };
 
-    if (printDebug) std::cout << "convertDBStructToFileData: Converting LastUpdateID" << std::endl;
-    fileData.LastUpdateID = convertFromHexWChar(data.LastUpdateID);
-    if (fileData.LastUpdateID->size() != data.LastUpdateIDLength) {
-      throw std::runtime_error("convertDBStructToFileData: LastUpdateID length mismatch");
-    }
+    fileData.OriginalFilePath = convertPath(data.OriginalFilePath);
+    fileData.EncryptedFilePath = convertPath(data.EncryptedFilePath);
+    fileData.DecryptedFilePath = convertPath(data.DecryptedFilePath);
 
-    if (data.Key == nullptr) {
-      throw std::invalid_argument("convertDBStructToFileData: Key is null");
-    }
-
-    if (printDebug) std::cout << "convertDBStructToFileData: Converting Key" << std::endl;
-    fileData.Key = convertFromHexWChar(data.Key);
-    if (fileData.Key->size() != data.KeyLength) {
-      throw std::runtime_error("convertDBStructToFileData: Key length mismatch");
-    }
-
-    if (data.Iv == nullptr) {
-      throw std::invalid_argument("convertDBStructToFileData: Iv is null");
-    }
-
-    if (printDebug) std::cout << "convertDBStructToFileData: Converting Iv" << std::endl;
-    fileData.Iv = convertFromHexWChar(data.Iv);
-    if (fileData.Iv->size() != data.IvLength) {
-      throw std::runtime_error("convertDBStructToFileData: Iv length mismatch");
-    }
-
-    if (printDebug) std::cout << "convertDBStructToFileData: Converting other fields" << std::endl;
-    fileData.AlgorithmenType->assign(algotype);
-    fileData.EncryptedFilePath->assign(fs::path(data.EncryptedFilePath));
-    fileData.OriginalFilePath->assign(fs::path(data.OriginalFilePath));
-    fileData.DecryptedFilePath->assign(fs::path(data.DecryptedFilePath));
-
-  } catch (const std::exception &e) {
-    std::cerr << "convertDBStructToFileData: " << e.what() << std::endl;
-  } catch (...) {
-    std::cerr << "convertDBStructToFileData: Unknown error" << std::endl;
+  } catch (const std::exception& e) {
+    std::cerr << "Konvertierungsfehler: " << e.what() << std::endl;
   }
-
-  if (printDebug) std::cout << "convertDBStructToFileData: Converted FileDataDB to FileData" << std::endl;
 
   return fileData;
 }

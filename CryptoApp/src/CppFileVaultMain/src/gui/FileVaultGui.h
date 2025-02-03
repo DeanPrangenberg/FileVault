@@ -10,6 +10,7 @@
 #include <memory>
 #include <QHash>
 #include "styleClass/StyleSetter.h"
+#include "PasswordDialog.h"
 
 /**
  * @class FileVaultGui

@@ -23,7 +23,7 @@
 #include "../DLLUtils/RestAPI/RestApiDLL.h"
 #include "../DLLUtils/FileMarkDLL.h"
 #include "../DLLUtils/CryptoDLL.h"
-#include "../StructUtils/StructUtils.h"
+#include "../AttributeUtils/AttributeUtils.h"
 
 namespace fs = std::filesystem;
 

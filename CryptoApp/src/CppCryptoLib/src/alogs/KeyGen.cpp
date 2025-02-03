@@ -27,6 +27,14 @@ void KeyGen::generateKeyIv(const size_t &keySize, const size_t &ivSize, std::vec
   }
 }
 
+void KeyGen::generateRandomBytes(const size_t &size, std::vector<unsigned char> &randomBytes) {
+  randomBytes.resize(size);
+
+  if (!RAND_bytes(randomBytes.data(), static_cast<int>(size))) {
+    throw std::runtime_error("Failed to generate random bytes");
+  }
+}
+
 /**
  * Converts a vector of bytes to a hexadecimal string representation.
  *

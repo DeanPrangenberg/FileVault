@@ -1,4 +1,4 @@
-#include "StructUtils.h"
+#include "AttributeUtils.h"
 
 namespace fs = std::filesystem;
 
@@ -7,7 +7,7 @@ namespace fs = std::filesystem;
  * @param type The AlgorithmType enum value.
  * @return A string representing the algorithm type.
  */
-std::string StructUtils::AlgorithmTypeToString(globalDefinitions::AlgorithmType type) {
+std::string AttributeUtils::AlgorithmTypeToString(globalDefinitions::AlgorithmType type) {
   switch (type) {
     case globalDefinitions::AlgorithmType::AES128:
       return "AES128";
@@ -25,9 +25,8 @@ std::string StructUtils::AlgorithmTypeToString(globalDefinitions::AlgorithmType 
  * @return A FileData structure containing the file's metadata and encryption information.
  * @throws std::invalid_argument if the algorithm type is unsupported.
  */
-FileData StructUtils::createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath) {
+void AttributeUtils::createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath, FileData &fileData) {
   CryptoDLL cryptoDll;
-  FileData fileData;
 
   int keyLength = 0;
   int ivLength = 0;
@@ -62,6 +61,4 @@ FileData StructUtils::createFileDataStruct(const globalDefinitions::AlgorithmTyp
   cryptoDll.GenerateKeyIv(keyLength, ivLength, fileData.Key->data(), fileData.Iv->data());
 
   fileData.debugFileData();
-
-  return fileData;
 }

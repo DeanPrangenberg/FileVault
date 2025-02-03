@@ -66,10 +66,10 @@ bool FileMarker::extractIDsFromFile(const fs::path *encryptedFilePath, std::vect
     }
 
     FileID.resize(fileIDStart.size());
-    FileID = fileIDStart;
+    FileID.assign(fileIDStart.begin(), fileIDStart.end());
 
     EncryptionID.resize(encryptionIDStart.size());
-    EncryptionID = encryptionIDStart;
+    EncryptionID.assign(encryptionIDStart.begin(), encryptionIDStart.end());
 
     if (printDebug) {
       std::cout << "Extracted File ID: " << fileIDStartHex << std::endl;

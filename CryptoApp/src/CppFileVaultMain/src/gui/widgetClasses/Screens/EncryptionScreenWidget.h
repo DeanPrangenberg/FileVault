@@ -7,7 +7,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include "widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h"
-#include "../../../StructUtils/StructUtils.h"
+#include "../../../AttributeUtils/AttributeUtils.h"
 #include "../../../shared/src/GlobalDefinitions.h"
 #include "../../../DLLUtils/CryptoDLL.h"
 #include "../../../HelperUtils/HelperUtils.h"

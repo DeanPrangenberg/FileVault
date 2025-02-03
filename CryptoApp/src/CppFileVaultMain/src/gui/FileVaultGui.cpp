@@ -28,6 +28,8 @@ FileVaultGui::FileVaultGui(QMainWindow *parent) : QMainWindow(parent) {
   screenStack = std::make_unique<QStackedWidget>(this);
 
   setupUi();
+  auto passwordDialog = new PasswordDialog(this);
+  passwordDialog->exec();
 }
 
 /**

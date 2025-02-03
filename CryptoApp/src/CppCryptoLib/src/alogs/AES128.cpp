@@ -7,7 +7,7 @@
  * @return True if the encryption is successful, false otherwise.
  */
 bool AES128::encryptFile(const FileData *fileData) {
-  if (!fileData || fileData->Key->empty() <= 0 || fileData->Iv->empty() ) {
+  if (!fileData || fileData->Key->empty() || fileData->Iv->empty() ) {
     std::cerr << "AES128: Null pointer in FileData" << std::endl;
     return false;
   }
@@ -80,7 +80,7 @@ bool AES128::encryptFile(const FileData *fileData) {
  * @return True if the decryption is successful, false otherwise.
  */
 bool AES128::decryptFile(const FileData *fileData) {
-  if (!fileData || fileData->Key->empty() <= 0 || fileData->Iv->empty() ) {
+  if (!fileData || fileData->Key->empty() || fileData->Iv->empty() ) {
     std::cerr << "AES128: Null pointer in FileData" << std::endl;
     return false;
   }

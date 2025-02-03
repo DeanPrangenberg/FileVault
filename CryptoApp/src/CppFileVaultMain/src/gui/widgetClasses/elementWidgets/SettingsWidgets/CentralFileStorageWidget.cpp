@@ -1,3 +1,4 @@
+#include <QFileDialog>
 #include "CentralFileStorageWidget.h"
 
 CentralFileStorageWidget::CentralFileStorageWidget(QWidget *parent) : MasterSettingsWidget(parent) {

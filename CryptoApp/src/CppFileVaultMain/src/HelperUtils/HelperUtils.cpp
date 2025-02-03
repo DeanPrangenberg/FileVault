@@ -284,6 +284,7 @@ std::unordered_map<std::string, int> HelperUtils::decryptFiles(const std::vector
 std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePaths, const std::vector<std::string> &algorithm) {
   CryptoDLL cryptoDll;
   RestApiDLL restApiDll;
+  AttributeUtils structUtils;
   std::vector<int> results;
   std::vector<FileData> fileDataVec;
 
@@ -291,9 +292,9 @@ std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePath
     // Create the FileData structure
     FileData fileData;
     if (algorithm[i] == "AES-128") {
-      fileData = StructUtils::createFileDataStruct(globalDefinitions::AlgorithmType::AES128, filePaths[i]);
+      structUtils.createFileDataStruct(globalDefinitions::AlgorithmType::AES128, filePaths[i], fileData);
     } else {
-      fileData = StructUtils::createFileDataStruct(globalDefinitions::AlgorithmType::AES256, filePaths[i]);
+      structUtils.createFileDataStruct(globalDefinitions::AlgorithmType::AES256, filePaths[i], fileData);
     }
     fileDataVec.push_back(fileData);
   }
@@ -331,21 +332,45 @@ std::vector<int> HelperUtils::encryptFiles(const std::vector<fs::path> &filePath
  */
 std::vector<int> HelperUtils::checkDBFileState() {
   RestApiDLL restApiDll;
-  auto fileDataList = restApiDll.GetAllFileIDsAndEncryptedPaths();
-  std::vector<int> results = {0, 0};
+  const auto& fileDataList = restApiDll.GetAllFileIDsAndEncryptedPaths();
+  std::vector<int> results = {0, 0, 0};  // [OK, Mismatch, Extraction Errors]
 
   FileMarkDLL fileMarkDll;
+  for (const auto& fileData : fileDataList) {
+    std::vector<unsigned char> fileID;
+    fileID.reserve(128);
+    std::vector<unsigned char> encryptionID;
+    encryptionID.reserve(128);
 
-  for (const auto &fileData : fileDataList) {
-    auto fileID = std::make_unique<std::vector<unsigned char>>(64);
-    auto encryptionID = std::make_unique<std::vector<unsigned char>>(64);
-    if (fileMarkDll.extractIDsFromFile(fileData.EncryptedFilePath.get(), fileID.get(), encryptionID.get())) {
-      results[0] += 1;
+    fileData.EncryptedFilePath->assign(fileData.EncryptedFilePath->lexically_normal());
+
+    if (!fileMarkDll.extractIDsFromFile(fileData.EncryptedFilePath.get(), &fileID, &encryptionID)) {
+      results[2]++;
+      Logs::writeToErrorLog("Extraktion fehlgeschlagen für: " + fileData.EncryptedFilePath->string());
+      continue;
+    }
+
+    fileID.resize(64);
+    encryptionID.resize(64);
+
+    fileData.FileID->erase(std::remove(fileData.FileID->begin(),
+                                       fileData.FileID->end(), '\n'), fileData.FileID->end());
+    fileData.EncryptionID->erase(std::remove(fileData.EncryptionID->begin(),
+                                       fileData.EncryptionID->end(), '\n'), fileData.EncryptionID->end());
+
+    const bool isMatch = (fileID == *fileData.FileID) && (encryptionID == *fileData.EncryptionID);
+
+    if (isMatch) {
+      results[0]++;
     } else {
-      results[1] += 1;
+      results[1]++;
+      Logs::writeToErrorLog("ID-Mismatch in: " + fileData.EncryptedFilePath->string());
+      Logs::writeToErrorLog("DB FileID: " + FileData::toHexString(fileData.FileID));
+      Logs::writeToErrorLog("File FileID: " + FileData::toHexString(std::make_shared<std::vector<unsigned char>>(fileID)));
+      Logs::writeToErrorLog("DB EncryptionID: " + FileData::toHexString(fileData.EncryptionID));
+      Logs::writeToErrorLog("File EncryptionID: " + FileData::toHexString(std::make_shared<std::vector<unsigned char>>(encryptionID)));
     }
   }
-
   return results;
 }
 

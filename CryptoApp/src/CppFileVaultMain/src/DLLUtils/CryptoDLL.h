@@ -10,7 +10,7 @@
 #include <thread>
 #include <memory>
 
-class CryptoDLL : MasterDLLClass  {
+class CryptoDLL : MasterDLLClass {
 public:
   /**
    * @brief Generates a key and initialization vector (IV) using the CppCryptoLib DLL.
@@ -55,6 +55,11 @@ public:
    */
   void getCurrentTimeHash(unsigned char *timeHash);
 
+  void GeneratePasswordHash(unsigned char *password, unsigned char *salt,
+                            unsigned char *hash, size_t passwordLength, size_t saltLength, size_t hashSize);
+
+  void generateRandomBytes(size_t randomBytesSize, unsigned char *randomBytes);
+
 private:
   /**
    * @brief Function pointer type for generating a key and IV.
@@ -69,17 +74,21 @@ private:
   /**
    * @brief Function pointer type for encrypting files.
    */
-  typedef bool* (*EncryptFilesFunc)(class FileData *, int);
+  typedef bool *(*EncryptFilesFunc)(class FileData *, int);
 
   /**
    * @brief Function pointer type for decrypting files.
    */
-  typedef bool* (*DecryptFilesFunc)(class FileData *, int);
+  typedef bool *(*DecryptFilesFunc)(class FileData *, int);
+
+  typedef void (*GeneratePasswordHashFunc)(unsigned char *, unsigned char *, unsigned char *, size_t, size_t, size_t);
 
   /**
    * @brief Function pointer type for generating a hash of the current time.
    */
   typedef void (*getCurrentTimeHashFunc)(unsigned char *);
+
+  typedef void (*GenerateRandomBytesFunc)(size_t, unsigned char *);
 };
 
 #endif //FILEVAULTROOT_CRYPTODLL_H

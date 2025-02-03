@@ -8,6 +8,9 @@
 #include <string>
 #include <vector>
 #include <filesystem>
+#include <windows.h>
+#include <iostream>
+#include <fstream>
 
 namespace fs = std::filesystem;
 

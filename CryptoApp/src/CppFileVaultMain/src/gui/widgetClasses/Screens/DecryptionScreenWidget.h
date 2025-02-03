@@ -8,7 +8,7 @@
 #include <QPushButton>
 #include <unordered_map>
 #include "widgetClasses/elementWidgets/cryptionWidgets/FilePicker.h"
-#include "../../../StructUtils/StructUtils.h"
+#include "../../../AttributeUtils/AttributeUtils.h"
 #include "../../../HelperUtils/HelperUtils.h"
 #include "../../../shared/src/GlobalDefinitions.h"
 #include "../../../DLLUtils/CryptoDLL.h"

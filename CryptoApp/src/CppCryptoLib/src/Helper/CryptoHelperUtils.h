@@ -9,6 +9,7 @@
 #include <string>
 #include <windows.h>
 #include "../../../shared/src/GlobalDefinitions.h"
+#include "../../../shared/src/settingsClasses/GetSettingsData.h"
 #include <iostream>
 #include <openssl/err.h>
 #include "../api/CryptoAPI.h"

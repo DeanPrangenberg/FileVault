@@ -10,10 +10,10 @@
 namespace fs = std::filesystem;
 
 /**
- * @class StructUtils
+ * @class AttributeUtils
  * @brief Utility class for handling file data structures and conversions.
  */
-class StructUtils {
+class AttributeUtils {
 public:
     /**
      * @brief Creates a FileData structure for the given algorithm type and original file path.
@@ -22,7 +22,7 @@ public:
      * @return A FileData structure containing the file's metadata and encryption information.
      * @throws std::invalid_argument if the algorithm type is unsupported.
      */
-    static FileData createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath);
+    void createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath, FileData &fileData);
 
 private:
     /**
