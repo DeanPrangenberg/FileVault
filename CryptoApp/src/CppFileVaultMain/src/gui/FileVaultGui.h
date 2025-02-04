@@ -29,7 +29,7 @@ public:
   /**
    * @brief Destructor for the FileVaultGui class.
    */
-  ~FileVaultGui() override;
+  ~FileVaultGui() override = default;
 
 private:
   // UI Elements
@@ -44,6 +44,7 @@ private:
   std::unique_ptr<QPushButton> EncryptSwitch; ///< Button to switch to the Encrypt screen.
   std::unique_ptr<QPushButton> DecryptSwitch; ///< Button to switch to the Decrypt screen.
   std::unique_ptr<QPushButton> SettingsSwitch; ///< Button to switch to the Settings screen.
+  std::unique_ptr<PasswordDialog> passwordDialog; ///< Password dialog for user authentication.
 
   // Variables
   int screenWidth = 1000; ///< Width of the main window.

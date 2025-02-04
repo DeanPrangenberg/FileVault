@@ -69,8 +69,6 @@ private:
   std::unique_ptr<CentralFileStorageWidget> centralStorageWidget; ///< Widget for central file storage.
   std::unique_ptr<QWidget> containerWidget; ///< Container widget.
   std::unique_ptr<QVBoxLayout> mainLayout; ///< Main layout for the settings screen widget.
-  std::vector<unsigned char> passwordHash; ///< The password hash.
-  std::vector<unsigned char> salt; ///< The salt for the password hash.
 
   /**
    * @brief Loads the settings from a file.

@@ -23,6 +23,7 @@ Q_OBJECT
 
 public:
   PasswordDialog(QWidget *parent = nullptr);
+  ~PasswordDialog() override = default;
   QVBoxLayout* layout;
   PasswordWidget* passwordField;
   QLabel* passwordLabel;

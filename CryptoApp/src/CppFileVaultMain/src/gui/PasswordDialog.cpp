@@ -26,6 +26,13 @@ PasswordDialog::PasswordDialog(QWidget *parent) : QDialog(parent) {
 
   setLayout(layout);
 
+  auto savedPasswordHash = settingsData->GetPasswordHash();
+  auto savedSalt = settingsData->GetSalt();
+
+  if (savedPasswordHash.empty() || savedSalt.empty()) {
+    passwordLabel->setText("Create new Password");
+  }
+
   connect(okButton, &QPushButton::clicked, [this] {
     if (checkPassword() == -1) {
       accept();

@@ -9,9 +9,6 @@
 SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   qDebug() << "SettingsScreenWidget: Creating SettingsScreenWidget";
 
-  passwordHash = std::vector<unsigned char>();
-  salt = std::vector<unsigned char>();
-
   // Scroll Area setup
   scrollArea = std::make_unique<QScrollArea>(this);
   scrollArea->setWidgetResizable(true);
@@ -135,20 +132,6 @@ void SettingsScreenWidget::createFileIfNotExists(const QString &filePath) {
   QFile file(filePath);
   if (!file.exists()) {
     if (file.open(QIODevice::WriteOnly)) {
-      try {
-        CryptoDLL cryptoDLL;
-        salt.resize(16);
-        passwordHash.resize(64);
-        cryptoDLL.generateRandomBytes(salt.size(), salt.data());
-        std::vector<unsigned char> password = {'1', '2', '3', '4'};
-        cryptoDLL.GeneratePasswordHash(password.data(), salt.data(), passwordHash.data(),
-                                       password.size(), salt.size(), passwordHash.size());
-      } catch (const std::exception &e) {
-        std::cerr << e.what() << std::endl;
-      } catch (...) {
-        std::cerr << "Unknown error" << std::endl;
-      }
-
       QJsonObject defaultSettings;
       defaultSettings["DeleteAfterEncryption"] = false;
       defaultSettings["DeleteAfterDecryption"] = false;

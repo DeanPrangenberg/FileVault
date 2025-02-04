@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_TOOLCHAIN_FILE "C:/Users/prang/.vcpkg-clion/vcpkgNew/scripts/buildsystems/vcpkg.cmake")
-set(VCPKG_TARGET_TRIPLET "x64-windows-static" CACHE STRING "Vcpkg target triplet")
 
 # Add nlohmann::json package
 find_package(nlohmann_json 3.11.3 REQUIRED)

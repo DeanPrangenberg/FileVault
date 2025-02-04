@@ -23,9 +23,6 @@ include_directories(
     src/DLLUtils
 )
 
-# Enable debugging information
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
-
 # Add this section before the add_executable command
 qt_add_resources(CppFileVaultMain_resources res/resources.qrc)
 

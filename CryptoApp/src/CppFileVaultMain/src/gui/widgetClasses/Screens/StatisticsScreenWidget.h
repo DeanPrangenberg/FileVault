@@ -108,16 +108,6 @@ private slots:
   void SetupUI();
 
   /**
-   * @brief Slot for handling save statistics button click.
-   */
-  void onSaveStatisticsButtonClicked();
-
-  /**
-   * @brief Slot for handling load statistics button click.
-   */
-  void onLoadStatisticsButtonClicked();
-
-  /**
    * @brief Saves the statistics to a JSON file.
    * @param filePath The path to the JSON file.
    */

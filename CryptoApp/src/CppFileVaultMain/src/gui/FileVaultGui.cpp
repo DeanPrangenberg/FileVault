@@ -29,14 +29,28 @@ FileVaultGui::FileVaultGui(QMainWindow *parent) : QMainWindow(parent) {
 
   setupUi();
 
-  auto passwordDialog = new PasswordDialog(this);
-  passwordDialog->exec();
-}
+  // Initialize and display the password dialog
+  passwordDialog = std::make_unique<PasswordDialog>(this);
+  if (passwordDialog->exec() != QDialog::Accepted) {
+    // If the dialog is not accepted, close the application
+    std::cout << "Password dialog not accepted. Closing application." << std::endl;
+    QApplication::quit();
+    return;
+  }
+  std::cout << "Password dialog accepted. Starting application." << std::endl;
 
-/**
- * @brief Destructor for the FileVaultGui class.
- */
-FileVaultGui::~FileVaultGui() = default;
+  // Additional debug statements
+  qDebug() << "FileVaultGui: Password dialog accepted, continuing setup";
+
+  // Ensure all widgets are properly initialized
+  if (!centralWidget || !SplitterLayout || !sidebar || !sideBarLayout || !Logo ||
+      !StatisticsSwitch || !EncryptSwitch || !DecryptSwitch || !SettingsSwitch || !screenStack) {
+    qDebug() << "FileVaultGui: One or more widgets are not properly initialized";
+    return;
+  }
+
+  qDebug() << "FileVaultGui: All widgets initialized successfully";
+}
 
 /**
  * @brief Sets up the user interface for the FileVaultGui.

@@ -85,7 +85,8 @@ void StatisticsScreenWidget::SetupUI() {
 void StatisticsScreenWidget::updateStatistics() {
   RestApiDLL restApiDll;
 
-  databaseSize = restApiDll.getDatabaseFileSize();
+  //databaseSize = restApiDll.getDatabaseFileSize();
+  databaseSize = 0;
 
   algoCakeDiagram->reset();
   LostFilesCakeDiagram->reset();
@@ -104,21 +105,6 @@ void StatisticsScreenWidget::updateStatistics() {
   algoStatsWidget->update(algoFileCounts);
 
   saveStatisticsToJson("statistics.json");
-}
-
-/**
- * @brief Slot for handling save statistics button click.
- */
-void StatisticsScreenWidget::onSaveStatisticsButtonClicked() {
-  saveStatisticsToJson("statistics.json");
-}
-
-/**
- * @brief Slot for handling load statistics button click.
- */
-void StatisticsScreenWidget::onLoadStatisticsButtonClicked() {
-  loadStatisticsFromJson("statistics.json");
-  updateStatistics();
 }
 
 /**
