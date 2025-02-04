@@ -17,7 +17,7 @@ public:
   void debugFileData();
   bool operator==(const FileData& other) const;
 
-  bool printDebug = false;
+  bool printDebug = true;
 
   std::shared_ptr<std::vector<unsigned char>> FileID;
   std::shared_ptr<std::vector<unsigned char>> EncryptionID;

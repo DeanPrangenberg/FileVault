@@ -67,7 +67,7 @@ private:
   /**
    * Flag to enable or disable debug printing.
    */
-  const bool printDebug = false;
+  const bool printDebug = true;
 };
 
 extern "C" {

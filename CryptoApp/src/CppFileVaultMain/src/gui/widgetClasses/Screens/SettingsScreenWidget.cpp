@@ -1,7 +1,6 @@
 #include "SettingsScreenWidget.h"
 
-std::vector<unsigned char> SettingsScreenWidget::password = std::vector<unsigned char>(64);
-std::vector<unsigned char> SettingsScreenWidget::salt = std::vector<unsigned char>(16);
+
 
 /**
  * @brief Constructs the SettingsScreenWidget object.
@@ -9,6 +8,10 @@ std::vector<unsigned char> SettingsScreenWidget::salt = std::vector<unsigned cha
  */
 SettingsScreenWidget::SettingsScreenWidget(QWidget *parent) : QWidget(parent) {
   qDebug() << "SettingsScreenWidget: Creating SettingsScreenWidget";
+
+  passwordHash = std::vector<unsigned char>();
+  salt = std::vector<unsigned char>();
+
   // Scroll Area setup
   scrollArea = std::make_unique<QScrollArea>(this);
   scrollArea->setWidgetResizable(true);
@@ -135,10 +138,11 @@ void SettingsScreenWidget::createFileIfNotExists(const QString &filePath) {
       try {
         CryptoDLL cryptoDLL;
         salt.resize(16);
+        passwordHash.resize(64);
         cryptoDLL.generateRandomBytes(salt.size(), salt.data());
         std::vector<unsigned char> password = {'1', '2', '3', '4'};
-        cryptoDLL.GeneratePasswordHash(password.data(), salt.data(), SettingsScreenWidget::password.data(),
-                                       password.size(), salt.size(), SettingsScreenWidget::password.size());
+        cryptoDLL.GeneratePasswordHash(password.data(), salt.data(), passwordHash.data(),
+                                       password.size(), salt.size(), passwordHash.size());
       } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
       } catch (...) {
@@ -154,8 +158,6 @@ void SettingsScreenWidget::createFileIfNotExists(const QString &filePath) {
       defaultSettings["ForEncryptedFiles"] = false;
       defaultSettings["ForDecryptedFiles"] = false;
       defaultSettings["StoragePath"] = QCoreApplication::applicationDirPath() + "/centralStorage";
-      defaultSettings["Password"] = QString::fromStdString(bytesToHexString(SettingsScreenWidget::password));
-      defaultSettings["Salt"] = QString::fromStdString(bytesToHexString(salt));
 
       QJsonDocument doc(defaultSettings);
       file.write(doc.toJson());
@@ -177,8 +179,6 @@ void SettingsScreenWidget::saveSettings() {
   settings["ForEncryptedFiles"] = centralStorageWidget->forEncryptedFiles->isChecked();
   settings["ForDecryptedFiles"] = centralStorageWidget->forDecryptedFiles->isChecked();
   settings["StoragePath"] = centralStorageWidget->storagePathLabel->text().remove("Current Path: ");
-  settings["Password"] = QString::fromStdString(bytesToHexString(password));
-  settings["Salt"] = QString::fromStdString(bytesToHexString(salt));
 
   const QJsonDocument doc(settings);
   const QString filePath = "settings.json";
@@ -188,14 +188,6 @@ void SettingsScreenWidget::saveSettings() {
     file.write(doc.toJson());
     file.close();
   }
-}
-
-std::string SettingsScreenWidget::bytesToHexString(const std::vector<unsigned char>& bytes) {
-  std::stringstream ss;
-  for (unsigned char byte : bytes) {
-    ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
-  }
-  return ss.str();
 }
 
 /**
@@ -232,8 +224,6 @@ void SettingsScreenWidget::loadSettings() {
 
     globalDefinitions::stdAlgorithm = settings["Algorithm"].toString().toStdString();
 
-    password = hexStringToBytes(settings["Password"].toString().toStdString());
-    salt = hexStringToBytes(settings["Salt"].toString().toStdString());
 
     if (!settings["LogsLocation"].toString().isEmpty()) {
       Logs::moveLogsDirectory(settings["LogsLocation"].toString().toStdWString());
@@ -242,14 +232,4 @@ void SettingsScreenWidget::loadSettings() {
 
     file.close();
   }
-}
-
-std::vector<unsigned char> SettingsScreenWidget::hexStringToBytes(const std::string& hex) {
-  std::vector<unsigned char> bytes;
-  for (size_t i = 0; i < hex.length(); i += 2) {
-    std::string byteString = hex.substr(i, 2);
-    unsigned char byte = static_cast<unsigned char>(strtol(byteString.c_str(), nullptr, 16));
-    bytes.push_back(byte);
-  }
-  return bytes;
 }

@@ -17,7 +17,6 @@
 #include "styleClass/StyleSetter.h"
 #include "../shared/src/settingsClasses/GetSettingsData.h"
 #include "../DLLUtils/CryptoDLL.h"
-#include "widgetClasses/Screens/SettingsScreenWidget.h"
 
 class PasswordDialog : public QDialog {
 Q_OBJECT
@@ -32,11 +31,8 @@ public:
   std::unique_ptr<StyleSetter> styleSetter;
   std::unique_ptr<GetSettingsData> settingsData;
   std::unique_ptr<CryptoDLL> cryptoDLL;
-  std::vector<unsigned char> passwordHash;
-  std::vector<unsigned char> savedPasswordHash;
 
 private:
-  bool firstStart = false;
   int wrongInputCounter = 0;
   int checkPassword();
 };

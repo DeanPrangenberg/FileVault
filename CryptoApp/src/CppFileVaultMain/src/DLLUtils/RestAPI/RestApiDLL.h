@@ -92,7 +92,7 @@ private:
   /**
    * @brief Flag to enable or disable debug printing.
    */
-  bool printDebug = false;
+  bool printDebug = true;
 
   /**
    * @brief Flag to enable or disable converter debug printing.

@@ -46,7 +46,7 @@ public:
 
 private:
   /// Flag to enable or disable debug printing.
-  bool printDebug = false;
+  bool printDebug = true;
 };
 
 #endif //FILEVAULTROOT_SHA512_H

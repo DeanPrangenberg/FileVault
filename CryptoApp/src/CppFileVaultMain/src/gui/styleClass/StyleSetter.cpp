@@ -1,7 +1,7 @@
 #include "StyleSetter.h"
 
 /**
- * @brief Sets the style for a password toggle button.
+ * @brief Sets the style for a passwordHash toggle button.
  * @tparam T The type of the QPushButton (shared_ptr or unique_ptr).
  * @param button The QPushButton to style.
  */
@@ -25,7 +25,7 @@ template void StyleSetter::setComboBoxStyle(std::shared_ptr<QComboBox> comboBox)
 template void StyleSetter::setComboBoxStyle(std::unique_ptr<QComboBox> comboBox);
 
 /**
- * @brief Sets the style for a password field.
+ * @brief Sets the style for a passwordHash field.
  * @tparam T The type of the QLineEdit (shared_ptr or unique_ptr).
  * @param passwordField The QLineEdit to style.
  */

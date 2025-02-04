@@ -9,16 +9,16 @@
 #include "../../../styleClass/StyleSetter.h"
 
 /**
- * @brief The PasswordWidget class provides a widget for entering and toggling the visibility of a password.
+ * @brief The PasswordWidget class provides a widget for entering and toggling the visibility of a passwordHash.
  */
 class PasswordWidget : public QWidget {
 Q_OBJECT
 
 public:
-  std::unique_ptr<QHBoxLayout> mainLayout; ///< Layout for the password widget.
-  std::unique_ptr<QLineEdit> passwordField; ///< Field for entering the password.
-  std::unique_ptr<QPushButton> toggleButton; ///< Button to toggle password visibility.
-  std::unique_ptr<QLabel> backgroundLabel; ///< Background label for the password widget.
+  std::unique_ptr<QHBoxLayout> mainLayout; ///< Layout for the passwordHash widget.
+  std::unique_ptr<QLineEdit> passwordField; ///< Field for entering the passwordHash.
+  std::unique_ptr<QPushButton> toggleButton; ///< Button to toggle passwordHash visibility.
+  std::unique_ptr<QLabel> backgroundLabel; ///< Background label for the passwordHash widget.
 
   /**
    * @brief Constructs the PasswordWidget object.
@@ -60,7 +60,7 @@ public:
   ~PasswordWidget() override = default;
 
   /**
-   * @brief Toggles the visibility of the password in the password field.
+   * @brief Toggles the visibility of the passwordHash in the passwordHash field.
    */
   void togglePasswordVisibility() {
     if (passwordField->echoMode() == QLineEdit::Password) {

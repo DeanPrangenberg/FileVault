@@ -56,9 +56,6 @@ public:
    */
   void saveSettings();
 
-  static std::vector<unsigned char> password;
-  static std::vector<unsigned char> salt;
-
 private:
   std::unique_ptr<QScrollArea> scrollArea; ///< Scroll area for the settings.
   std::unique_ptr<QGridLayout> SettingsScreenWidgetLayout; ///< Layout for the settings screen widget.
@@ -67,20 +64,18 @@ private:
   std::unique_ptr<StandardAlgorithmWidget> algorithmWidget; ///< Widget for standard algorithm selection.
   std::unique_ptr<DatabaseManagementWidget> databaseExportWidget; ///< Widget for database management.
   std::unique_ptr<FileDeletionWidget> fileDeletionWidget; ///< Widget for file deletion.
-  std::unique_ptr<NewPasswordWidget> passwordWidget; ///< Widget for setting a new password.
+  std::unique_ptr<NewPasswordWidget> passwordWidget; ///< Widget for setting a new passwordHash.
   std::unique_ptr<LogsLocationWidget> logsLocationWidget; ///< Widget for selecting logs location.
   std::unique_ptr<CentralFileStorageWidget> centralStorageWidget; ///< Widget for central file storage.
   std::unique_ptr<QWidget> containerWidget; ///< Container widget.
   std::unique_ptr<QVBoxLayout> mainLayout; ///< Main layout for the settings screen widget.
+  std::vector<unsigned char> passwordHash; ///< The password hash.
+  std::vector<unsigned char> salt; ///< The salt for the password hash.
 
   /**
    * @brief Loads the settings from a file.
    */
   void loadSettings();
-
-  std::vector<unsigned char> hexStringToBytes(const std::string &hex);
-
-  std::string bytesToHexString(const std::vector<unsigned char> &bytes);
 };
 
 #endif // SETTINGSSCREENWIDGET_H

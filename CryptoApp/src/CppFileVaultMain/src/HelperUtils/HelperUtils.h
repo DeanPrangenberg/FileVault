@@ -90,7 +90,7 @@ public:
   std::vector<int> checkDBFileState();
 
 private:
-  bool printDebug = false; ///< Flag to enable or disable debug printing
+  bool printDebug = true; ///< Flag to enable or disable debug printing
 
   /**
    * @brief Converts a file path to a wide character string.

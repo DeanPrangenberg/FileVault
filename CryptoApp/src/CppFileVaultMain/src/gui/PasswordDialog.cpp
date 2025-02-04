@@ -6,7 +6,7 @@
 
 PasswordDialog::PasswordDialog(QWidget *parent) : QDialog(parent) {
   setWindowTitle("Enter Password");
-  setFixedSize(400, 200);
+  setFixedSize(400, 140);
   setModal(true);
   styleSetter = std::make_unique<StyleSetter>();
   settingsData = std::make_unique<GetSettingsData>();
@@ -28,9 +28,8 @@ PasswordDialog::PasswordDialog(QWidget *parent) : QDialog(parent) {
 
   connect(okButton, &QPushButton::clicked, [this] {
     if (checkPassword() == -1) {
-      wrongInputCounter = 0;
       accept();
-      close();
+      std::cout << "Password correct closing Dialog" << std::endl;
     } else {
       wrongInputCounter++;
       if (wrongInputCounter < 3) {
@@ -45,85 +44,81 @@ PasswordDialog::PasswordDialog(QWidget *parent) : QDialog(parent) {
 
 int PasswordDialog::checkPassword() {
   if (passwordField->passwordField->text().isEmpty()) {
-    return 1;
-  } else {
-    try {
-      savedPasswordHash = settingsData->GetPasswordHash();
+    return 1; // Empty password
+  }
 
-      if (savedPasswordHash.empty()) {
-        firstStart = true;
-        std::vector<unsigned char> password = {'1', '2', '3', '4'};
-        std::vector<unsigned char> salt(16);
-        std::vector<unsigned char> passwordHashGen(64);
-        cryptoDLL->generateRandomBytes(salt.size(), salt.data());
-        passwordHash.resize(64);
+  try {
+    auto savedPasswordHash = settingsData->GetPasswordHash();
+    auto savedSalt = settingsData->GetSalt();
 
-        cryptoDLL->GeneratePasswordHash(
-            password.data(),
-            salt.data(),
-            passwordHash.data(),
-            password.size(),
-            salt.size(),
-            passwordHash.size()
-        );
+    // Create new password if none exists
+    if (savedPasswordHash.empty() || savedSalt.empty()) {
+      const auto passwordStr = passwordField->passwordField->text().toStdString();
+      std::vector<unsigned char> password(passwordStr.begin(), passwordStr.end());
 
-        if (passwordHash.size() != passwordHashGen.size()) {
-          std::cerr << "Password hash size does not match" << std::endl;
-          return 2;
-        }
-      }
+      // Generate salt and hash
+      std::vector<unsigned char> salt(16);
+      std::vector<unsigned char> newPasswordHash(64);
 
-      auto passwordStr = passwordField->passwordField->text().toStdString();
-      auto passwordVec = std::vector<unsigned char>(passwordStr.begin(), passwordStr.end());
-
-      std::cout << "Password: " << passwordStr << std::endl;
-
-      passwordHash.resize(64);
+      cryptoDLL->generateRandomBytes(salt.size(), salt.data());
       cryptoDLL->GeneratePasswordHash(
-          passwordVec.data(),
-          SettingsScreenWidget::salt.data(),
-          passwordHash.data(),
-          passwordVec.size(),
-          SettingsScreenWidget::salt.size(),
-          passwordHash.size()
+          password.data(),          // non-const data
+          salt.data(),              // non-const data
+          newPasswordHash.data(),
+          password.size(),
+          salt.size(),
+          newPasswordHash.size()
       );
 
-      std::cout << "Password hash: ";
-      for (const auto &byte : passwordHash) {
-        std::cout << std::setw(2) << std::hex << static_cast<int>(byte);
-      }
-      std::cout << std::endl;
-    } catch (const std::exception &e) {
-      std::cerr << e.what() << std::endl;
-      return 1;
+      // Store new credentials
+      settingsData->SetPasswordHash(newPasswordHash);
+      settingsData->SetSalt(salt);
+
+      std::cout << "New password set successfully.\n";
+      return -1; // Success: password created
     }
+
+    // Verify existing password
+    auto passwordStr = passwordField->passwordField->text().toStdString();
+    std::vector<unsigned char> password(passwordStr.begin(), passwordStr.end());
+
+    std::vector<unsigned char> inputHash(64);
+    cryptoDLL->GeneratePasswordHash(
+        password.data(),    // Safe const cast
+        savedSalt.data(),   // Safe const cast
+        inputHash.data(),
+        password.size(),
+        savedSalt.size(),
+        inputHash.size()
+    );
+
+    // Debug output
+    std::cout << "Stored hash: ";
+    for (const auto& byte : savedPasswordHash) {
+      std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
+    }
+    std::cout << "\nComputed hash: ";
+    for (const auto& byte : inputHash) {
+      std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
+    }
+    std::cout << std::endl;
+
+    // Hash comparison
+    if (inputHash.size() != savedPasswordHash.size()) {
+      std::cerr << "Hash size mismatch!\n";
+      return 2;
+    }
+
+    if (inputHash != savedPasswordHash) {
+      std::cerr << "Incorrect password!\n";
+      return 3;
+    }
+
+    std::cout << "Password correct.\n";
+    return -1; // Success: valid password
+
+  } catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+    return 4; // System error
   }
-
-  std::cout << "Comparing password hashes" << std::endl;
-
-  if (passwordHash.size() != savedPasswordHash.size()) {
-    std::cerr << "Password hash size does not match" << std::endl;
-    return 2;
-  }
-
-  if (passwordHash != savedPasswordHash) {
-    std::cerr << "Password hash does not match" << std::endl;
-    return 3;
-  }
-
-  std::cout << "Password hashes match" << std::endl;
-
-  std::cout << "Password hash: " << std::endl;
-  for (const auto &byte : passwordHash) {
-    std::cout << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(byte);
-  }
-  std::cout << std::endl;
-
-  std::cout << "Saved password hash: " << std::endl;
-  for (const auto &byte : savedPasswordHash) {
-    std::cout << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(byte);
-  }
-  std::cout << std::endl;
-
-  return -1;
 }

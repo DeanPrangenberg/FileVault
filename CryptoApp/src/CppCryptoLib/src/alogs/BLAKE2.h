@@ -44,7 +44,7 @@ public:
 
 private:
   /// Flag to enable or disable debug printing.
-  bool printDebug = false;
+  bool printDebug = true;
 };
 
 #endif // BLAKE2_H

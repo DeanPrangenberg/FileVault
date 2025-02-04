@@ -4,7 +4,7 @@
 #include "StyleSetter.h"
 
 /**
- * @brief Sets the style for a password toggle button.
+ * @brief Sets the style for a passwordHash toggle button.
  * @tparam T The type of the QPushButton (shared_ptr or unique_ptr).
  * @param button The QPushButton to style.
  */
@@ -101,7 +101,7 @@ void StyleSetter::setCheckBoxStyle(T checkBox) {
 }
 
 /**
- * @brief Sets the style for a password field.
+ * @brief Sets the style for a passwordHash field.
  * @tparam T The type of the QLineEdit (shared_ptr or unique_ptr).
  * @param field The QLineEdit to style.
  */

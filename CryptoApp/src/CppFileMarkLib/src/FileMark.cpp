@@ -1,6 +1,6 @@
 #include "FileMark.h"
 
-bool FileMarker::printDebug = false;
+bool FileMarker::printDebug = true;
 
 extern "C" {
   FILEMARKLIB_API bool extractIDsFromFile(const fs::path* encryptedFilePath, std::vector<unsigned char> *FileID,

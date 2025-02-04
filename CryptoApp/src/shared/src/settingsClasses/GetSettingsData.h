@@ -20,8 +20,15 @@ public:
   fs::path GetStorageLocation();
   std::vector<unsigned char> GetPasswordHash();
 
+  std::vector<unsigned char> GetSalt();
+
+  bool SetSalt(const std::vector<unsigned char> &saltVector);
+
+  bool SetPasswordHash(const std::vector<unsigned char> &hashVector);
+
 private:
   const std::string SETTINGS_FILE = "settings.json";
+
 };
 
 

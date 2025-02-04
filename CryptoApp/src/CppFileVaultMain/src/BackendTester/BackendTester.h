@@ -34,7 +34,7 @@ private:
     HelperUtils helperUtils;
     std::vector<FileData> fileDataVec;
     const std::string pathToCrypt = "S:\\clips\\cut";
-    const bool printDebug = false;
+    const bool printDebug = true;
 };
 
 #endif // BACKENDTESTER_H
