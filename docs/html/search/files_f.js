@@ -9,10 +9,8 @@ var searchData=
   ['standardalgorithmwidget_2eh_6',['StandardAlgorithmWidget.h',['../_standard_algorithm_widget_8h.html',1,'']]],
   ['statisticsscreenwidget_2ecpp_7',['StatisticsScreenWidget.cpp',['../_statistics_screen_widget_8cpp.html',1,'']]],
   ['statisticsscreenwidget_2eh_8',['StatisticsScreenWidget.h',['../_statistics_screen_widget_8h.html',1,'']]],
-  ['structutils_2ecpp_9',['AttributeUtils.cpp',['../_struct_utils_8cpp.html',1,'']]],
-  ['structutils_2eh_10',['AttributeUtils.h',['../_struct_utils_8h.html',1,'']]],
-  ['stylesetter_2ecpp_11',['StyleSetter.cpp',['../_style_setter_8cpp.html',1,'']]],
-  ['stylesetter_2eh_12',['StyleSetter.h',['../_style_setter_8h.html',1,'']]],
-  ['systemutils_2ecpp_13',['SystemUtils.cpp',['../_system_utils_8cpp.html',1,'']]],
-  ['systemutils_2eh_14',['SystemUtils.h',['../_system_utils_8h.html',1,'']]]
+  ['stylesetter_2ecpp_9',['StyleSetter.cpp',['../_style_setter_8cpp.html',1,'']]],
+  ['stylesetter_2eh_10',['StyleSetter.h',['../_style_setter_8h.html',1,'']]],
+  ['systemutils_2ecpp_11',['SystemUtils.cpp',['../_system_utils_8cpp.html',1,'']]],
+  ['systemutils_2eh_12',['SystemUtils.h',['../_system_utils_8h.html',1,'']]]
 ];

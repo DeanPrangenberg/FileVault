@@ -125,6 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6b9f7773ffd8121b128d7a9392c38614" id="r_a6b9f7773ffd8121b128d7a9392c38614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b9f7773ffd8121b128d7a9392c38614">getCurrentTimeHash</a> (unsigned char *timeHash)</td></tr>
 <tr class="memdesc:a6b9f7773ffd8121b128d7a9392c38614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a hash of the current time using the CppCryptoLib DLL.  <br /></td></tr>
 <tr class="separator:a6b9f7773ffd8121b128d7a9392c38614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf7e6b22cf45ec32fd4bc32010b29833" id="r_aaf7e6b22cf45ec32fd4bc32010b29833"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf7e6b22cf45ec32fd4bc32010b29833">GeneratePasswordHash</a> (unsigned char *password, unsigned char *salt, unsigned char *hash, size_t passwordLength, size_t saltLength, size_t hashSize)</td></tr>
+<tr class="separator:aaf7e6b22cf45ec32fd4bc32010b29833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a9497f9578c7e9f2b7281299a9a456" id="r_ad3a9497f9578c7e9f2b7281299a9a456"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3a9497f9578c7e9f2b7281299a9a456">generateRandomBytes</a> (size_t randomBytesSize, unsigned char *randomBytes)</td></tr>
+<tr class="separator:ad3a9497f9578c7e9f2b7281299a9a456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -279,6 +283,72 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00073">73</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aaf7e6b22cf45ec32fd4bc32010b29833" name="aaf7e6b22cf45ec32fd4bc32010b29833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf7e6b22cf45ec32fd4bc32010b29833">&#9670;&#160;</a></span>GeneratePasswordHash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CryptoDLL::GeneratePasswordHash </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>password</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>salt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>hash</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>passwordLength</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>saltLength</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>hashSize</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00146">146</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad3a9497f9578c7e9f2b7281299a9a456" name="ad3a9497f9578c7e9f2b7281299a9a456"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a9497f9578c7e9f2b7281299a9a456">&#9670;&#160;</a></span>generateRandomBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CryptoDLL::generateRandomBytes </td>
+          <td>(</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>randomBytesSize</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>randomBytes</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_crypto_d_l_l_8cpp_source.html#l00164">164</a> of file <a class="el" href="_crypto_d_l_l_8cpp_source.html">CryptoDLL.cpp</a>.</p>
 
 </div>
 </div>

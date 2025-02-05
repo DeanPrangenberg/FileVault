@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['main_0',['main',['../class_main.html#a8a5d0f827edddff706cc0e6740d0579a',1,'Main.main()'],['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main():&#160;main.cpp']]],
-  ['markfile_1',['MarkFile',['../class_crypto_helper_utils.html#a98c2503c4952376f5ad3f3bc83e9afcf',1,'CryptoHelperUtils']]],
-  ['markfile_2',['markFile',['../_file_mark_8cpp.html#aaef49c92fbc6aebba4eafaa4b5d88b67',1,'markFile(const FileData *fileData):&#160;FileMark.cpp'],['../_file_mark_8h.html#aaef49c92fbc6aebba4eafaa4b5d88b67',1,'markFile(const FileData *fileData):&#160;FileMark.cpp']]],
-  ['mastersettingswidget_3',['MasterSettingsWidget',['../class_master_settings_widget.html#ab60b5b3608ee94b0f5f297777414bb37',1,'MasterSettingsWidget']]],
-  ['movefiletocentralstorage_4',['moveFileToCentralStorage',['../class_central_file_storage.html#a51f0023d5f251289c3a8802b16884dfb',1,'CentralFileStorage']]],
-  ['movelogsdirectory_5',['moveLogsDirectory',['../class_logs.html#a5570d06ec08c65d6c172ceb73262de42',1,'Logs']]]
+  ['languageselectionwidget_0',['LanguageSelectionWidget',['../class_language_selection_widget.html#a5973bbe5a1e18574635bed60f7544de4',1,'LanguageSelectionWidget']]],
+  ['listfiles_1',['listFiles',['../class_directory_scanner.html#a846687e4ea24e119163ede2d19bc6a08',1,'DirectoryScanner']]],
+  ['loaddatabasefromfile_2',['loadDatabaseFromFile',['../class_helper_utils.html#a87921a6998e3bb5ab809fa680989387d',1,'HelperUtils']]],
+  ['loaddll_3',['loadDll',['../class_master_d_l_l_class.html#acf9cc57ab4a959499a7b946da24c9a22',1,'MasterDLLClass']]],
+  ['loadingwindow_4',['LoadingWindow',['../class_loading_window.html#af5f12330abe41411f81df432d0aa1c00',1,'LoadingWindow']]],
+  ['logs_5',['Logs',['../class_logs.html#aeafc01d597306bc80bca06dbec033169',1,'Logs']]],
+  ['logslocationwidget_6',['LogsLocationWidget',['../class_logs_location_widget.html#ac45eebc88d0974c89e8bd121325a2bf3',1,'LogsLocationWidget']]]
 ];

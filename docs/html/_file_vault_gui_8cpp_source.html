@@ -124,127 +124,146 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  screenStack = std::make_unique&lt;QStackedWidget&gt;(<span class="keyword">this</span>);</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  setupUi();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
-</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><a class="code hl_function" href="class_file_vault_gui.html#a7d30f16c9169292252f9b35bd20f5acf">FileVaultGui::~FileVaultGui</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keywordtype">void</span> FileVaultGui::setupUi() {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  SplitterLayout-&gt;addWidget(sidebar.get());</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  SplitterLayout-&gt;addWidget(screenStack.get());</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// Initialize and display the password dialog</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  passwordDialog = std::make_unique&lt;PasswordDialog&gt;(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">if</span> (passwordDialog-&gt;exec() != QDialog::Accepted) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment">// If the dialog is not accepted, close the application</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Password dialog not accepted. Closing application.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    QApplication::quit();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  std::cout &lt;&lt; <span class="stringliteral">&quot;Password dialog accepted. Starting application.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">// Additional debug statements</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultGui: Password dialog accepted, continuing setup&quot;</span>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  sidebar-&gt;setFixedWidth(200);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="comment">// Set radial gradient background for the central widget</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  QString objectName = <span class="stringliteral">&quot;centralWidget&quot;</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  centralWidget-&gt;setObjectName(objectName);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  QString gradientStyle = QString(<span class="stringliteral">&quot;QWidget#%1 {&quot;</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                          <span class="stringliteral">&quot;background: qradialgradient(&quot;</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                          <span class="stringliteral">&quot;cx:0.1, cy:0.2, &quot;</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                          <span class="stringliteral">&quot;radius:1.0, &quot;</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                          <span class="stringliteral">&quot;fx:0.1, fy:0.2, &quot;</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                          <span class="stringliteral">&quot;stop:0 rgba(100, 43, 115, 1), &quot;</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                          <span class="stringliteral">&quot;stop:0.9 rgba(25, 0, 51, 1))}&quot;</span>).arg(centralWidget-&gt;objectName()); <span class="comment">// Dark mix of blue and purple</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  centralWidget-&gt;setStyleSheet(gradientStyle);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="comment">// Make other widgets transparent</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  sidebar-&gt;setStyleSheet(<span class="stringliteral">&quot;background: transparent;&quot;</span>);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  screenStack-&gt;setObjectName(<span class="stringliteral">&quot;screenStack&quot;</span>);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  screenStack-&gt;setStyleSheet(QString(<span class="stringliteral">&quot;QStackedWidget#%1 { background: transparent;}&quot;</span>).arg(screenStack-&gt;objectName()));</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <a class="code hl_class" href="class_style_setter.html">StyleSetter</a> styleSetter;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a3053e0a73089c1989b9b8ca537aac5aa">setWidgetStyle</a>(screenStack.get());</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="comment">// Call other setup functions</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  setupSideBar();</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  setupStackedWidget();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keywordtype">void</span> FileVaultGui::setupSideBar() {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="comment">// Adjust button sizes and spacing</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  StatisticsSwitch-&gt;setMinimumHeight(50);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  EncryptSwitch-&gt;setMinimumHeight(50);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  DecryptSwitch-&gt;setMinimumHeight(50);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  SettingsSwitch-&gt;setMinimumHeight(50);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  sideBarLayout-&gt;setSpacing(20);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="comment">// Set button styles using the helper function</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  StyleSetter styleSetter;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(StatisticsSwitch.get());</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(EncryptSwitch.get());</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(DecryptSwitch.get());</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(SettingsSwitch.get());</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="comment">// Add logo to the sidebar</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  Logo-&gt;setAlignment(Qt::AlignTop);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  Logo-&gt;setFixedHeight(100);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  QPixmap logoPixmap(<span class="stringliteral">&quot;:/logos/LogoWithName.png&quot;</span>);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordflow">if</span> (!logoPixmap.isNull()) {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    logoPixmap = logoPixmap.scaled(Logo-&gt;size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    Logo-&gt;setPixmap(logoPixmap);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Logo pixmap loaded and scaled successfully&quot;</span>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Failed to load logo pixmap&quot;</span>;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  sideBarLayout-&gt;addWidget(Logo.get());</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  sideBarLayout-&gt;addStretch(); <span class="comment">// spacer</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Set button text&quot;</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="comment">// Ensure all widgets are properly initialized</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">if</span> (!centralWidget || !SplitterLayout || !sidebar || !sideBarLayout || !Logo ||</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      !StatisticsSwitch || !EncryptSwitch || !DecryptSwitch || !SettingsSwitch || !screenStack) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultGui: One or more widgets are not properly initialized&quot;</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultGui: All widgets initialized successfully&quot;</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keywordtype">void</span> FileVaultGui::setupUi() {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  SplitterLayout-&gt;addWidget(sidebar.get());</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  SplitterLayout-&gt;addWidget(screenStack.get());</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  sidebar-&gt;setFixedWidth(200);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="comment">// Set radial gradient background for the central widget</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  QString objectName = <span class="stringliteral">&quot;centralWidget&quot;</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  centralWidget-&gt;setObjectName(objectName);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  QString gradientStyle = QString(<span class="stringliteral">&quot;QWidget#%1 {&quot;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                          <span class="stringliteral">&quot;background: qradialgradient(&quot;</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                          <span class="stringliteral">&quot;cx:0.1, cy:0.2, &quot;</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                          <span class="stringliteral">&quot;radius:1.0, &quot;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                          <span class="stringliteral">&quot;fx:0.1, fy:0.2, &quot;</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                          <span class="stringliteral">&quot;stop:0 rgba(100, 43, 115, 1), &quot;</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                          <span class="stringliteral">&quot;stop:0.9 rgba(25, 0, 51, 1))}&quot;</span>).arg(centralWidget-&gt;objectName()); <span class="comment">// Dark mix of blue and purple</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  centralWidget-&gt;setStyleSheet(gradientStyle);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="comment">// Make other widgets transparent</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  sidebar-&gt;setStyleSheet(<span class="stringliteral">&quot;background: transparent;&quot;</span>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  screenStack-&gt;setObjectName(<span class="stringliteral">&quot;screenStack&quot;</span>);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  screenStack-&gt;setStyleSheet(QString(<span class="stringliteral">&quot;QStackedWidget#%1 { background: transparent;}&quot;</span>).arg(screenStack-&gt;objectName()));</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <a class="code hl_class" href="class_style_setter.html">StyleSetter</a> styleSetter;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a3053e0a73089c1989b9b8ca537aac5aa">setWidgetStyle</a>(screenStack.get());</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="comment">// Call other setup functions</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  setupSideBar();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  setupStackedWidget();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keywordtype">void</span> FileVaultGui::setupSideBar() {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="comment">// Adjust button sizes and spacing</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  StatisticsSwitch-&gt;setMinimumHeight(50);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  EncryptSwitch-&gt;setMinimumHeight(50);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  DecryptSwitch-&gt;setMinimumHeight(50);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  SettingsSwitch-&gt;setMinimumHeight(50);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  sideBarLayout-&gt;setSpacing(20);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="comment">// Set button styles using the helper function</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  StyleSetter styleSetter;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(StatisticsSwitch.get());</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(EncryptSwitch.get());</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(DecryptSwitch.get());</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">setButtonStyle</a>(SettingsSwitch.get());</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="comment">// Adding buttons to the sidebar</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  StatisticsSwitch-&gt;setText(<span class="stringliteral">&quot;Statistics&quot;</span>);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  EncryptSwitch-&gt;setText(<span class="stringliteral">&quot;Encrypt&quot;</span>);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  DecryptSwitch-&gt;setText(<span class="stringliteral">&quot;Decrypt&quot;</span>);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Adding buttons to the sidebar&quot;</span>;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  sideBarLayout-&gt;addWidget(StatisticsSwitch.get());</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  sideBarLayout-&gt;addWidget(EncryptSwitch.get());</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  sideBarLayout-&gt;addWidget(DecryptSwitch.get());</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  sideBarLayout-&gt;addStretch();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  SettingsSwitch-&gt;setText(<span class="stringliteral">&quot;Settings&quot;</span>);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  sideBarLayout-&gt;addWidget(SettingsSwitch.get());</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  connect(StatisticsSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Statistics&quot;</span>); });</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  connect(EncryptSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Encrypt&quot;</span>); });</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  connect(DecryptSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Decrypt&quot;</span>); });</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  connect(SettingsSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Settings&quot;</span>); });</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keywordtype">void</span> FileVaultGui::setupStackedWidget() {</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Setting up screen hashmap&quot;</span>;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keyword">auto</span> statisticsScreen = std::make_shared&lt;StatisticsScreenWidget&gt;();</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="comment">// Add the screens to the screenHash</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  screenHash.insert(<span class="stringliteral">&quot;Statistics&quot;</span>, statisticsScreen);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added statistics screen&quot;</span>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  screenHash.insert(<span class="stringliteral">&quot;Encrypt&quot;</span>, std::make_shared&lt;EncryptionScreenWidget&gt;(<span class="keyword">this</span>, statisticsScreen));</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added encryption screen&quot;</span>;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  screenHash.insert(<span class="stringliteral">&quot;Decrypt&quot;</span>, std::make_shared&lt;DecryptionScreenWidget&gt;(<span class="keyword">this</span>, statisticsScreen));</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added decryption screen&quot;</span>;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  screenHash.insert(<span class="stringliteral">&quot;Settings&quot;</span>, std::make_shared&lt;SettingsScreenWidget&gt;());</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added settings screen&quot;</span>;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Setting up the stacked widget&quot;</span>;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <span class="comment">// Add the screens to the stacked widget</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Statistics&quot;</span>].get());</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Encrypt&quot;</span>].get());</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Decrypt&quot;</span>].get());</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Settings&quot;</span>].get());</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Setting start screen&quot;</span>;</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="comment">// Set the default screen</span></div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  screenStack-&gt;setCurrentWidget(screenHash[<span class="stringliteral">&quot;Statistics&quot;</span>].get());</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="keywordtype">void</span> FileVaultGui::switchScreens(<span class="keyword">const</span> QString &amp;screenName) {</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  screenStack-&gt;setCurrentWidget(screenHash[screenName].get());</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>}</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="comment">// Add logo to the sidebar</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  Logo-&gt;setAlignment(Qt::AlignTop);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  Logo-&gt;setFixedHeight(100);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  QPixmap logoPixmap(<span class="stringliteral">&quot;:/logos/LogoWithName.png&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keywordflow">if</span> (!logoPixmap.isNull()) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    logoPixmap = logoPixmap.scaled(Logo-&gt;size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    Logo-&gt;setPixmap(logoPixmap);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Logo pixmap loaded and scaled successfully&quot;</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Failed to load logo pixmap&quot;</span>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  sideBarLayout-&gt;addWidget(Logo.get());</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  sideBarLayout-&gt;addStretch(); <span class="comment">// spacer</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Set button text&quot;</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="comment">// Adding buttons to the sidebar</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  StatisticsSwitch-&gt;setText(<span class="stringliteral">&quot;Statistics&quot;</span>);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  EncryptSwitch-&gt;setText(<span class="stringliteral">&quot;Encrypt&quot;</span>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  DecryptSwitch-&gt;setText(<span class="stringliteral">&quot;Decrypt&quot;</span>);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Adding buttons to the sidebar&quot;</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  sideBarLayout-&gt;addWidget(StatisticsSwitch.get());</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  sideBarLayout-&gt;addWidget(EncryptSwitch.get());</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  sideBarLayout-&gt;addWidget(DecryptSwitch.get());</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  sideBarLayout-&gt;addStretch();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  SettingsSwitch-&gt;setText(<span class="stringliteral">&quot;Settings&quot;</span>);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  sideBarLayout-&gt;addWidget(SettingsSwitch.get());</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  connect(StatisticsSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Statistics&quot;</span>); });</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  connect(EncryptSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Encrypt&quot;</span>); });</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  connect(DecryptSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Decrypt&quot;</span>); });</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  connect(SettingsSwitch.get(), &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>] { switchScreens(<span class="stringliteral">&quot;Settings&quot;</span>); });</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="keywordtype">void</span> FileVaultGui::setupStackedWidget() {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Setting up screen hashmap&quot;</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keyword">auto</span> statisticsScreen = std::make_shared&lt;StatisticsScreenWidget&gt;();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="comment">// Add the screens to the screenHash</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  screenHash.insert(<span class="stringliteral">&quot;Statistics&quot;</span>, statisticsScreen);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added statistics screen&quot;</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  screenHash.insert(<span class="stringliteral">&quot;Encrypt&quot;</span>, std::make_shared&lt;EncryptionScreenWidget&gt;(<span class="keyword">this</span>, statisticsScreen));</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added encryption screen&quot;</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  screenHash.insert(<span class="stringliteral">&quot;Decrypt&quot;</span>, std::make_shared&lt;DecryptionScreenWidget&gt;(<span class="keyword">this</span>, statisticsScreen));</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added decryption screen&quot;</span>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  screenHash.insert(<span class="stringliteral">&quot;Settings&quot;</span>, std::make_shared&lt;SettingsScreenWidget&gt;());</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Added settings screen&quot;</span>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Setting up the stacked widget&quot;</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="comment">// Add the screens to the stacked widget</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Statistics&quot;</span>].get());</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Encrypt&quot;</span>].get());</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Decrypt&quot;</span>].get());</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  screenStack-&gt;addWidget(screenHash[<span class="stringliteral">&quot;Settings&quot;</span>].get());</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;FileVaultMainGui: Setting start screen&quot;</span>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="comment">// Set the default screen</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  screenStack-&gt;setCurrentWidget(screenHash[<span class="stringliteral">&quot;Statistics&quot;</span>].get());</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>}</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keywordtype">void</span> FileVaultGui::switchScreens(<span class="keyword">const</span> QString &amp;screenName) {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  screenStack-&gt;setCurrentWidget(screenHash[screenName].get());</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}</div>
 <div class="ttc" id="a_decryption_screen_widget_8h_html"><div class="ttname"><a href="_decryption_screen_widget_8h.html">DecryptionScreenWidget.h</a></div></div>
 <div class="ttc" id="a_encryption_screen_widget_8h_html"><div class="ttname"><a href="_encryption_screen_widget_8h.html">EncryptionScreenWidget.h</a></div></div>
 <div class="ttc" id="a_file_vault_gui_8h_html"><div class="ttname"><a href="_file_vault_gui_8h.html">FileVaultGui.h</a></div></div>
 <div class="ttc" id="a_settings_screen_widget_8h_html"><div class="ttname"><a href="_settings_screen_widget_8h.html">SettingsScreenWidget.h</a></div></div>
 <div class="ttc" id="a_statistics_screen_widget_8h_html"><div class="ttname"><a href="_statistics_screen_widget_8h.html">StatisticsScreenWidget.h</a></div></div>
-<div class="ttc" id="aclass_file_vault_gui_html_a7d30f16c9169292252f9b35bd20f5acf"><div class="ttname"><a href="class_file_vault_gui.html#a7d30f16c9169292252f9b35bd20f5acf">FileVaultGui::~FileVaultGui</a></div><div class="ttdeci">~FileVaultGui() override</div><div class="ttdoc">Destructor for the FileVaultGui class.</div></div>
 <div class="ttc" id="aclass_file_vault_gui_html_aaf9dac00ceca7e5bf79e980aa710f1fa"><div class="ttname"><a href="class_file_vault_gui.html#aaf9dac00ceca7e5bf79e980aa710f1fa">FileVaultGui::FileVaultGui</a></div><div class="ttdeci">FileVaultGui(QMainWindow *parent=nullptr)</div><div class="ttdoc">Constructs the FileVaultGui object.</div><div class="ttdef"><b>Definition</b> <a href="#l00011">FileVaultGui.cpp:11</a></div></div>
 <div class="ttc" id="aclass_style_setter_html"><div class="ttname"><a href="class_style_setter.html">StyleSetter</a></div><div class="ttdoc">A class to set styles for various Qt widgets.</div><div class="ttdef"><b>Definition</b> <a href="_style_setter_8h_source.html#l00017">StyleSetter.h:17</a></div></div>
 <div class="ttc" id="aclass_style_setter_html_a01a415ee9f7f97f8606b1873f595075e"><div class="ttname"><a href="class_style_setter.html#a01a415ee9f7f97f8606b1873f595075e">StyleSetter::setButtonStyle</a></div><div class="ttdeci">void setButtonStyle(T button)</div><div class="ttdoc">Sets the style for a button.</div></div>

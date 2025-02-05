@@ -118,7 +118,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_d_b_mreset_handler.html#afcd10dda7f841dd9d2d0887131ecd31c">   29</a></span>  <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_d_b_mreset_handler.html#afcd10dda7f841dd9d2d0887131ecd31c">handle</a>(HttpExchange t) <span class="keywordflow">throws</span> IOException {</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">try</span> {</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>      <span class="comment">// Drop the database table</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>      db.dropTable();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>      db.resetTable();</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      String response = <span class="stringliteral">&quot;true&quot;</span>;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      t.sendResponseHeaders(200, response.length());</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      OutputStream os = t.getResponseBody();</div>

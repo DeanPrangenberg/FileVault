@@ -196,246 +196,251 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    comboBox-&gt;setFixedWidth(35);</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    styleSetter.setComboBoxStyle(comboBox);</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    comboBox-&gt;addItems({<span class="stringliteral">&quot;AES-128&quot;</span>, <span class="stringliteral">&quot;AES-256&quot;</span>});</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    entryLayout-&gt;addWidget(comboBox);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  }</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;addLayout(entryLayout);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;Added entry for path:&quot;</span> &lt;&lt; path;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="comment">// Connect the checkbox state change to updateFileToProcessLabel</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  connect(checkbox, &amp;QCheckBox::checkStateChanged, <span class="keyword">this</span>, &amp;<a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">FilePicker::updateFileToProcessLabel</a>);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <a class="code hl_variable" href="class_file_picker.html#aa48e775c87b7c5a9aed26a98d7149d19">FilePickerScrollAreaWidget</a>-&gt;update(); <span class="comment">// Force widget to redraw</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
-<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="class_file_picker.html#abfdc32d43959b4c3deaafbc7b5713bbc">  124</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#abfdc32d43959b4c3deaafbc7b5713bbc">FilePicker::addFile</a>() {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  QStringList fileNames;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="keywordflow">if</span> (filePickerType == <a class="code hl_enumvalue" href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c">FilePickerType::DECRYPT</a>) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    fileNames = QFileDialog::getOpenFileNames(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Select Files&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, tr(</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        QString(<span class="stringliteral">&quot;Encrypted Files (*%1)&quot;</span>).arg(</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            QString::fromStdWString(<a class="code hl_variable" href="classglobal_definitions.html#a05b8690537c86aa0bcb0683ad8cafab3">globalDefinitions::encFileSuffix</a>)).toStdString().c_str()));</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (filePickerType == <a class="code hl_enumvalue" href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8">FilePickerType::ENCRYPT</a>) {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    fileNames = QFileDialog::getOpenFileNames(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Select Files&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, tr(<span class="stringliteral">&quot;All Files (*)&quot;</span>));</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  }</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> QString &amp;fileName : fileNames) {</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">if</span> (!addedPaths.contains(fileName)) {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>      addedPaths.insert(fileName);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>      addEntry(fileName);</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  }</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classglobal_definitions.html#a120ba10b6be244f9e9ffbf1e54b6a55c">globalDefinitions::stdAlgorithm</a> == <span class="stringliteral">&quot;AES-128&quot;</span>) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      comboBox-&gt;setCurrentText(<span class="stringliteral">&quot;AES-128&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      comboBox-&gt;setCurrentText(<span class="stringliteral">&quot;AES-256&quot;</span>);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    entryLayout-&gt;addWidget(comboBox);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;addLayout(entryLayout);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;Added entry for path:&quot;</span> &lt;&lt; path;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="comment">// Connect the checkbox state change to updateFileToProcessLabel</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  connect(checkbox, &amp;QCheckBox::checkStateChanged, <span class="keyword">this</span>, &amp;<a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">FilePicker::updateFileToProcessLabel</a>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <a class="code hl_variable" href="class_file_picker.html#aa48e775c87b7c5a9aed26a98d7149d19">FilePickerScrollAreaWidget</a>-&gt;update(); <span class="comment">// Force widget to redraw</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="class_file_picker.html#abfdc32d43959b4c3deaafbc7b5713bbc">  129</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#abfdc32d43959b4c3deaafbc7b5713bbc">FilePicker::addFile</a>() {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  QStringList fileNames;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keywordflow">if</span> (filePickerType == <a class="code hl_enumvalue" href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c">FilePickerType::DECRYPT</a>) {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    fileNames = QFileDialog::getOpenFileNames(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Select Files&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, tr(</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        QString(<span class="stringliteral">&quot;Encrypted Files (*%1)&quot;</span>).arg(</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            QString::fromStdWString(<a class="code hl_variable" href="classglobal_definitions.html#a05b8690537c86aa0bcb0683ad8cafab3">globalDefinitions::encFileSuffix</a>)).toStdString().c_str()));</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (filePickerType == <a class="code hl_enumvalue" href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8">FilePickerType::ENCRYPT</a>) {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    fileNames = QFileDialog::getOpenFileNames(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Select Files&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, tr(<span class="stringliteral">&quot;All Files (*)&quot;</span>));</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> QString &amp;fileName : fileNames) {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span> (!addedPaths.contains(fileName)) {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      addedPaths.insert(fileName);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      addEntry(fileName);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
 </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span></div>
-<div class="foldopen" id="foldopen00147" data-start="{" data-end="}">
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="class_file_picker.html#a9d9b6d1d47236bcf595c5fac7320abb8">  147</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#a9d9b6d1d47236bcf595c5fac7320abb8">FilePicker::addDirectory</a>() {</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  QString directory = QFileDialog::getExistingDirectory(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Select Directory&quot;</span>), <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keywordflow">if</span> (!directory.isEmpty()) {</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;Trying to add directory:&quot;</span> &lt;&lt; directory;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    scanDirectoryInThread(directory);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;No directory selected&quot;</span>;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  }</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span></div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="}">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="class_file_picker.html#a9d9b6d1d47236bcf595c5fac7320abb8">  152</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#a9d9b6d1d47236bcf595c5fac7320abb8">FilePicker::addDirectory</a>() {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  QString directory = QFileDialog::getExistingDirectory(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Select Directory&quot;</span>), <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keywordflow">if</span> (!directory.isEmpty()) {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;Trying to add directory:&quot;</span> &lt;&lt; directory;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    scanDirectoryInThread(directory);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;No directory selected&quot;</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>}</div>
 </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span></div>
-<div class="foldopen" id="foldopen00162" data-start="{" data-end="}">
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="class_file_picker.html#acbb919d981b97bf4935f816772eafdb8">  162</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#acbb919d981b97bf4935f816772eafdb8">FilePicker::resetPaths</a>() {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  addedPaths.clear();</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <a class="code hl_variable" href="class_file_picker.html#a4d387ffb98ab46d8fd6ad7c4e91ba78a">FilePickerPaths</a>.clear();</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <a class="code hl_variable" href="class_file_picker.html#af68aa5c30d799898982da90e61247cff">FileScannerPaths</a>.clear();</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  QLayoutItem* item;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordflow">while</span> ((item = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;takeAt(0)) != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordflow">while</span> (QLayoutItem* subItem = item-&gt;layout()-&gt;takeAt(0)) {</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>      <span class="keywordflow">if</span> (subItem-&gt;widget()) {</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        subItem-&gt;widget()-&gt;deleteLater();</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>      }</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>      <span class="keyword">delete</span> subItem;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordflow">if</span> (item-&gt;widget()) {</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      item-&gt;widget()-&gt;deleteLater();</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keyword">delete</span> item;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  }</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  <a class="code hl_variable" href="class_file_picker.html#aa48e775c87b7c5a9aed26a98d7149d19">FilePickerScrollAreaWidget</a>-&gt;update(); <span class="comment">// Force widget to redraw</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>}</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span></div>
+<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="class_file_picker.html#acbb919d981b97bf4935f816772eafdb8">  167</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#acbb919d981b97bf4935f816772eafdb8">FilePicker::resetPaths</a>() {</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  addedPaths.clear();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <a class="code hl_variable" href="class_file_picker.html#a4d387ffb98ab46d8fd6ad7c4e91ba78a">FilePickerPaths</a>.clear();</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  <a class="code hl_variable" href="class_file_picker.html#af68aa5c30d799898982da90e61247cff">FileScannerPaths</a>.clear();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  QLayoutItem* item;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordflow">while</span> ((item = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;takeAt(0)) != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">while</span> (QLayoutItem* subItem = item-&gt;layout()-&gt;takeAt(0)) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      <span class="keywordflow">if</span> (subItem-&gt;widget()) {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        subItem-&gt;widget()-&gt;deleteLater();</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>      <span class="keyword">delete</span> subItem;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordflow">if</span> (item-&gt;widget()) {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>      item-&gt;widget()-&gt;deleteLater();</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keyword">delete</span> item;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <a class="code hl_variable" href="class_file_picker.html#aa48e775c87b7c5a9aed26a98d7149d19">FilePickerScrollAreaWidget</a>-&gt;update(); <span class="comment">// Force widget to redraw</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>}</div>
 </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span></div>
-<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">  188</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">FilePicker::updateFileToProcessLabel</a>() {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  <span class="keywordtype">int</span> checkedItems = 0;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked()) {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        ++checkedItems;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      }</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  }</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  <a class="code hl_variable" href="class_file_picker.html#a6a0bb84e0fb39639f7c0786b25fcd3d6">FileToProcessLabel</a>-&gt;setText(QString(<span class="stringliteral">&quot;%1/%2&quot;</span>).arg(checkedItems).arg(totalItems));</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>}</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span></div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">  193</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">FilePicker::updateFileToProcessLabel</a>() {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="keywordtype">int</span> checkedItems = 0;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked()) {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        ++checkedItems;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  <a class="code hl_variable" href="class_file_picker.html#a6a0bb84e0fb39639f7c0786b25fcd3d6">FileToProcessLabel</a>-&gt;setText(QString(<span class="stringliteral">&quot;%1/%2&quot;</span>).arg(checkedItems).arg(totalItems));</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>}</div>
 </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span></div>
-<div class="foldopen" id="foldopen00207" data-start="{" data-end="}">
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="class_file_picker.html#ac46b7e48548af985329b3154981b80b3">  207</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#ac46b7e48548af985329b3154981b80b3">FilePicker::globalCheckStateChanged</a>(<span class="keywordtype">int</span> state) {</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <span class="keywordtype">bool</span> isChecked = (state == Qt::Checked);</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      <span class="keywordflow">if</span> (checkbox) {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        checkbox-&gt;setChecked(isChecked);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      }</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  }</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>}</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span></div>
+<div class="foldopen" id="foldopen00212" data-start="{" data-end="}">
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="class_file_picker.html#ac46b7e48548af985329b3154981b80b3">  212</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#ac46b7e48548af985329b3154981b80b3">FilePicker::globalCheckStateChanged</a>(<span class="keywordtype">int</span> state) {</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keywordtype">bool</span> isChecked = (state == Qt::Checked);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>      <span class="keywordflow">if</span> (checkbox) {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        checkbox-&gt;setChecked(isChecked);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>}</div>
 </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span></div>
-<div class="foldopen" id="foldopen00226" data-start="{" data-end="}">
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="class_file_picker.html#a0f6a6d6b25fdf2fd78242d3103bbec60">  226</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#a0f6a6d6b25fdf2fd78242d3103bbec60">FilePicker::globalAlgorithmChanged</a>(<span class="keyword">const</span> QString &amp;algorithm) {</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      QComboBox* comboBox = qobject_cast&lt;QComboBox*&gt;(entryLayout-&gt;itemAt(2)-&gt;widget());</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>      <span class="keywordflow">if</span> (comboBox) {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        comboBox-&gt;setCurrentText(algorithm);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>      }</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  }</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>}</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span></div>
+<div class="foldopen" id="foldopen00231" data-start="{" data-end="}">
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="class_file_picker.html#a0f6a6d6b25fdf2fd78242d3103bbec60">  231</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#a0f6a6d6b25fdf2fd78242d3103bbec60">FilePicker::globalAlgorithmChanged</a>(<span class="keyword">const</span> QString &amp;algorithm) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      QComboBox* comboBox = qobject_cast&lt;QComboBox*&gt;(entryLayout-&gt;itemAt(2)-&gt;widget());</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      <span class="keywordflow">if</span> (comboBox) {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        comboBox-&gt;setCurrentText(algorithm);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>      }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    }</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  }</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>}</div>
 </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keywordtype">void</span> FilePicker::scanDirectoryInThread(<span class="keyword">const</span> QString &amp;directory) {</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="comment">// Start a new thread for scanning the directory</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  std::thread([<span class="keyword">this</span>, directory]() {</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    fs::path dirPath = directory.toStdWString();</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    std::vector&lt;fs::path&gt; scannedPaths;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="keywordtype">void</span> FilePicker::scanDirectoryInThread(<span class="keyword">const</span> QString &amp;directory) {</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <a class="code hl_variable" href="class_file_picker.html#a4f15cbd25a7eb35bbf398f8f19f37418">fileScanner</a>.<a class="code hl_function" href="class_file_scanner_d_l_l.html#ae960e416e9b47fc2c2b411b2df46c19e">ScanDirectory</a>(dirPath, filePickerType == <a class="code hl_enumvalue" href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c">FilePickerType::DECRYPT</a>, scannedPaths, [<span class="keyword">this</span>](<span class="keyword">const</span> fs::path &amp;path) {</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      QString qPath = QString::fromStdWString(path.wstring());</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      <span class="keywordflow">if</span> (!addedPaths.contains(qPath)) {</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        addedPaths.insert(qPath);</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        QMetaObject::invokeMethod(<span class="keyword">this</span>, [<span class="keyword">this</span>, qPath]() {</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>          addEntry(qPath);</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        }, Qt::QueuedConnection);</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      }</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    });</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  }).detach(); <span class="comment">// Detach the thread to run independently</span></div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>}</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span></div>
-<div class="foldopen" id="foldopen00266" data-start="{" data-end="}">
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="class_file_picker.html#a8f60e56bc0852a2ae33edc2a3d64577c">  266</a></span>QVector&lt;decryptionConfig&gt; <a class="code hl_function" href="class_file_picker.html#a8f60e56bc0852a2ae33edc2a3d64577c">FilePicker::getDecItems</a>() {</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  QVector&lt;decryptionConfig&gt; decItems;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      QLabel* label = qobject_cast&lt;QLabel*&gt;(entryLayout-&gt;itemAt(0)-&gt;widget());</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked() &amp;&amp; label) {</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <a class="code hl_struct" href="structdecryption_config.html">decryptionConfig</a> config;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        config.<a class="code hl_variable" href="structdecryption_config.html#aaf7d467c448124a281793ed767d08683">checkForDec</a> = checkbox-&gt;isChecked();</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        config.<a class="code hl_variable" href="structdecryption_config.html#a5e306f94a28513b53d40b8b07cb10016">Path</a> = label-&gt;toolTip(); <span class="comment">// Use the full path stored in the tooltip</span></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        decItems.append(config);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      }</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    }</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  }</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  <span class="keywordflow">return</span> decItems;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>}</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>  <span class="comment">// Start a new thread for scanning the directory</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  std::thread([<span class="keyword">this</span>, directory]() {</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    fs::path dirPath = directory.toStdWString();</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    std::vector&lt;fs::path&gt; scannedPaths;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <a class="code hl_variable" href="class_file_picker.html#a4f15cbd25a7eb35bbf398f8f19f37418">fileScanner</a>.<a class="code hl_function" href="class_file_scanner_d_l_l.html#ae960e416e9b47fc2c2b411b2df46c19e">ScanDirectory</a>(dirPath, filePickerType == <a class="code hl_enumvalue" href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c">FilePickerType::DECRYPT</a>, scannedPaths, [<span class="keyword">this</span>](<span class="keyword">const</span> fs::path &amp;path) {</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      QString qPath = QString::fromStdWString(path.wstring());</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      <span class="keywordflow">if</span> (!addedPaths.contains(qPath)) {</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        addedPaths.insert(qPath);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        QMetaObject::invokeMethod(<span class="keyword">this</span>, [<span class="keyword">this</span>, qPath]() {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>          addEntry(qPath);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        }, Qt::QueuedConnection);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      }</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    });</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  }).detach(); <span class="comment">// Detach the thread to run independently</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>}</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span></div>
+<div class="foldopen" id="foldopen00271" data-start="{" data-end="}">
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="class_file_picker.html#a8f60e56bc0852a2ae33edc2a3d64577c">  271</a></span>QVector&lt;decryptionConfig&gt; <a class="code hl_function" href="class_file_picker.html#a8f60e56bc0852a2ae33edc2a3d64577c">FilePicker::getDecItems</a>() {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>  QVector&lt;decryptionConfig&gt; decItems;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>      QLabel* label = qobject_cast&lt;QLabel*&gt;(entryLayout-&gt;itemAt(0)-&gt;widget());</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked() &amp;&amp; label) {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <a class="code hl_struct" href="structdecryption_config.html">decryptionConfig</a> config;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        config.<a class="code hl_variable" href="structdecryption_config.html#aaf7d467c448124a281793ed767d08683">checkForDec</a> = checkbox-&gt;isChecked();</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        config.<a class="code hl_variable" href="structdecryption_config.html#a5e306f94a28513b53d40b8b07cb10016">Path</a> = label-&gt;toolTip(); <span class="comment">// Use the full path stored in the tooltip</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        decItems.append(config);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      }</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    }</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  }</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keywordflow">return</span> decItems;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>}</div>
 </div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span></div>
-<div class="foldopen" id="foldopen00289" data-start="{" data-end="}">
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno"><a class="line" href="class_file_picker.html#a13c07dabffc7698e34959310bb620d67">  289</a></span>QVector&lt;encryptionConfig&gt; <a class="code hl_function" href="class_file_picker.html#a13c07dabffc7698e34959310bb620d67">FilePicker::getEncItems</a>() {</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  QVector&lt;encryptionConfig&gt; encItems;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      QLabel* label = qobject_cast&lt;QLabel*&gt;(entryLayout-&gt;itemAt(0)-&gt;widget());</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      QComboBox* comboBox = qobject_cast&lt;QComboBox*&gt;(entryLayout-&gt;itemAt(2)-&gt;widget());</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked() &amp;&amp; label &amp;&amp; comboBox) {</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <a class="code hl_struct" href="structencryption_config.html">encryptionConfig</a> config;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        config.<a class="code hl_variable" href="structencryption_config.html#ab46dc07f6ce1ede7546b353c495af8f4">checkForEnc</a> = checkbox-&gt;isChecked();</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        config.<a class="code hl_variable" href="structencryption_config.html#ab9a2e64fd1fcedffc82b0b8e2092a612">Path</a> = label-&gt;toolTip(); <span class="comment">// Use the full path stored in the tooltip</span></div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        config.<a class="code hl_variable" href="structencryption_config.html#ad85dfd6a8f7c90e17c638990cddc6d69">Algorithm</a> = comboBox-&gt;currentText();</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        encItems.append(config);</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>      }</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    }</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  }</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  <span class="keywordflow">return</span> encItems;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>}</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span></div>
+<div class="foldopen" id="foldopen00294" data-start="{" data-end="}">
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="class_file_picker.html#a13c07dabffc7698e34959310bb620d67">  294</a></span>QVector&lt;encryptionConfig&gt; <a class="code hl_function" href="class_file_picker.html#a13c07dabffc7698e34959310bb620d67">FilePicker::getEncItems</a>() {</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  QVector&lt;encryptionConfig&gt; encItems;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; totalItems; ++i) {</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>      QLabel* label = qobject_cast&lt;QLabel*&gt;(entryLayout-&gt;itemAt(0)-&gt;widget());</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>      QComboBox* comboBox = qobject_cast&lt;QComboBox*&gt;(entryLayout-&gt;itemAt(2)-&gt;widget());</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked() &amp;&amp; label &amp;&amp; comboBox) {</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        <a class="code hl_struct" href="structencryption_config.html">encryptionConfig</a> config;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        config.<a class="code hl_variable" href="structencryption_config.html#ab46dc07f6ce1ede7546b353c495af8f4">checkForEnc</a> = checkbox-&gt;isChecked();</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        config.<a class="code hl_variable" href="structencryption_config.html#ab9a2e64fd1fcedffc82b0b8e2092a612">Path</a> = label-&gt;toolTip(); <span class="comment">// Use the full path stored in the tooltip</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        config.<a class="code hl_variable" href="structencryption_config.html#ad85dfd6a8f7c90e17c638990cddc6d69">Algorithm</a> = comboBox-&gt;currentText();</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        encItems.append(config);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      }</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="keywordflow">return</span> encItems;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>}</div>
 </div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span></div>
-<div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="class_file_picker.html#ae9af795f20bcb7962ce310dc86250a22">  314</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#ae9af795f20bcb7962ce310dc86250a22">FilePicker::removeEncItems</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; results) {</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  removeItems(results, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>}</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span></div>
+<div class="foldopen" id="foldopen00319" data-start="{" data-end="}">
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="class_file_picker.html#ae9af795f20bcb7962ce310dc86250a22">  319</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#ae9af795f20bcb7962ce310dc86250a22">FilePicker::removeEncItems</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; results) {</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  removeItems(results, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>}</div>
 </div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span></div>
-<div class="foldopen" id="foldopen00322" data-start="{" data-end="}">
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno"><a class="line" href="class_file_picker.html#a450dcb98adb65b44af3f1b2858b8a8ba">  322</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#a450dcb98adb65b44af3f1b2858b8a8ba">FilePicker::removeDecItems</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; results) {</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  removeItems(results, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>}</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span></div>
+<div class="foldopen" id="foldopen00327" data-start="{" data-end="}">
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno"><a class="line" href="class_file_picker.html#a450dcb98adb65b44af3f1b2858b8a8ba">  327</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_file_picker.html#a450dcb98adb65b44af3f1b2858b8a8ba">FilePicker::removeDecItems</a>(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; results) {</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  removeItems(results, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>}</div>
 </div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span></div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="keywordtype">void</span> FilePicker::removeItems(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; results, <span class="keywordtype">bool</span> isEncryption) {</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp; res : results) {</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;Result: &quot;</span> &lt;&lt; res;</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  }</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = totalItems - 1; i &gt;= 0; --i) {</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      QLabel* label = qobject_cast&lt;QLabel*&gt;(entryLayout-&gt;itemAt(0)-&gt;widget());</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      QComboBox* comboBox = isEncryption ? qobject_cast&lt;QComboBox*&gt;(entryLayout-&gt;itemAt(2)-&gt;widget()) : nullptr;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked() &amp;&amp; label) {</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keywordtype">int</span> result = results[i];</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keywordflow">if</span> (result == -1) {</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>          <span class="comment">// Remove the entry</span></div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>          <span class="keywordflow">while</span> (QLayoutItem* subItem = entryLayout-&gt;takeAt(0)) {</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>            <span class="keywordflow">if</span> (subItem-&gt;widget()) {</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>              subItem-&gt;widget()-&gt;deleteLater();</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            }</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            <span class="keyword">delete</span> subItem;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>          }</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>          <span class="keyword">delete</span> entryLayout;</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>          <span class="comment">// Show error message</span></div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>          QString errorMessage = QString(<span class="stringliteral">&quot;Error code: %1&quot;</span>).arg(QString::number(result));</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          label-&gt;setToolTip(errorMessage);</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        }</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>      }</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    }</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  }</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  <a class="code hl_variable" href="class_file_picker.html#aa48e775c87b7c5a9aed26a98d7149d19">FilePickerScrollAreaWidget</a>-&gt;update(); <span class="comment">// Force widget to redraw</span></div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>}</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="keywordtype">void</span> FilePicker::removeItems(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; results, <span class="keywordtype">bool</span> isEncryption) {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp; res : results) {</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;Result: &quot;</span> &lt;&lt; res;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  }</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>  <span class="keywordtype">int</span> totalItems = <a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;count();</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = totalItems - 1; i &gt;= 0; --i) {</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    QHBoxLayout* entryLayout = qobject_cast&lt;QHBoxLayout*&gt;(<a class="code hl_variable" href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePickerScrollAreaLayout</a>-&gt;itemAt(i)-&gt;layout());</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keywordflow">if</span> (entryLayout) {</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>      QCheckBox* checkbox = qobject_cast&lt;QCheckBox*&gt;(entryLayout-&gt;itemAt(1)-&gt;widget());</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>      QLabel* label = qobject_cast&lt;QLabel*&gt;(entryLayout-&gt;itemAt(0)-&gt;widget());</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>      QComboBox* comboBox = isEncryption ? qobject_cast&lt;QComboBox*&gt;(entryLayout-&gt;itemAt(2)-&gt;widget()) : nullptr;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>      <span class="keywordflow">if</span> (checkbox &amp;&amp; checkbox-&gt;isChecked() &amp;&amp; label) {</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keywordtype">int</span> result = results[i];</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keywordflow">if</span> (result == -1) {</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>          <span class="comment">// Remove the entry</span></div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>          <span class="keywordflow">while</span> (QLayoutItem* subItem = entryLayout-&gt;takeAt(0)) {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            <span class="keywordflow">if</span> (subItem-&gt;widget()) {</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>              subItem-&gt;widget()-&gt;deleteLater();</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            }</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>            <span class="keyword">delete</span> subItem;</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          }</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          <span class="keyword">delete</span> entryLayout;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>          <span class="comment">// Show error message</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>          QString errorMessage = QString(<span class="stringliteral">&quot;Error code: %1&quot;</span>).arg(QString::number(result));</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>          label-&gt;setToolTip(errorMessage);</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        }</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>      }</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    }</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  }</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <a class="code hl_function" href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">updateFileToProcessLabel</a>();</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <a class="code hl_variable" href="class_file_picker.html#aa48e775c87b7c5a9aed26a98d7149d19">FilePickerScrollAreaWidget</a>-&gt;update(); <span class="comment">// Force widget to redraw</span></div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>}</div>
 <div class="ttc" id="a_file_picker_8h_html"><div class="ttname"><a href="_file_picker_8h.html">FilePicker.h</a></div></div>
 <div class="ttc" id="a_file_picker_8h_html_a7fa646836905015e276adb6df68dbd11"><div class="ttname"><a href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11">FilePickerType</a></div><div class="ttdeci">FilePickerType</div><div class="ttdoc">Enum class for file picker type.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00029">FilePicker.h:29</a></div></div>
 <div class="ttc" id="a_file_picker_8h_html_a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8"><div class="ttname"><a href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11a6d0a4b1ea95557a81aa1d452367b47a8">FilePickerType::ENCRYPT</a></div><div class="ttdeci">@ ENCRYPT</div><div class="ttdoc">File picker for encryption.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00030">FilePicker.h:30</a></div></div>
 <div class="ttc" id="a_file_picker_8h_html_a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c"><div class="ttname"><a href="_file_picker_8h.html#a7fa646836905015e276adb6df68dbd11afb84708d32d00fca5d352e460776584c">FilePickerType::DECRYPT</a></div><div class="ttdeci">@ DECRYPT</div><div class="ttdoc">File picker for decryption.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00031">FilePicker.h:31</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_a0f6a6d6b25fdf2fd78242d3103bbec60"><div class="ttname"><a href="class_file_picker.html#a0f6a6d6b25fdf2fd78242d3103bbec60">FilePicker::globalAlgorithmChanged</a></div><div class="ttdeci">void globalAlgorithmChanged(const QString &amp;algorithm)</div><div class="ttdoc">Handles the change of the global algorithm combo box.</div><div class="ttdef"><b>Definition</b> <a href="#l00226">FilePicker.cpp:226</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_a0f6a6d6b25fdf2fd78242d3103bbec60"><div class="ttname"><a href="class_file_picker.html#a0f6a6d6b25fdf2fd78242d3103bbec60">FilePicker::globalAlgorithmChanged</a></div><div class="ttdeci">void globalAlgorithmChanged(const QString &amp;algorithm)</div><div class="ttdoc">Handles the change of the global algorithm combo box.</div><div class="ttdef"><b>Definition</b> <a href="#l00231">FilePicker.cpp:231</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a1119adf2971d198f809326dada4d59f4"><div class="ttname"><a href="class_file_picker.html#a1119adf2971d198f809326dada4d59f4">FilePicker::GlobalControlLayout</a></div><div class="ttdeci">std::unique_ptr&lt; QHBoxLayout &gt; GlobalControlLayout</div><div class="ttdoc">Global control layout for the file picker.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00072">FilePicker.h:72</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_a13c07dabffc7698e34959310bb620d67"><div class="ttname"><a href="class_file_picker.html#a13c07dabffc7698e34959310bb620d67">FilePicker::getEncItems</a></div><div class="ttdeci">QVector&lt; encryptionConfig &gt; getEncItems()</div><div class="ttdoc">Gets the encryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00289">FilePicker.cpp:289</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_a13c07dabffc7698e34959310bb620d67"><div class="ttname"><a href="class_file_picker.html#a13c07dabffc7698e34959310bb620d67">FilePicker::getEncItems</a></div><div class="ttdeci">QVector&lt; encryptionConfig &gt; getEncItems()</div><div class="ttdoc">Gets the encryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00294">FilePicker.cpp:294</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a3ceea6569f40d63cd10f8f960bca3efb"><div class="ttname"><a href="class_file_picker.html#a3ceea6569f40d63cd10f8f960bca3efb">FilePicker::ResetPathsButton</a></div><div class="ttdeci">std::shared_ptr&lt; QPushButton &gt; ResetPathsButton</div><div class="ttdoc">Button to reset paths.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00076">FilePicker.h:76</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_a450dcb98adb65b44af3f1b2858b8a8ba"><div class="ttname"><a href="class_file_picker.html#a450dcb98adb65b44af3f1b2858b8a8ba">FilePicker::removeDecItems</a></div><div class="ttdeci">void removeDecItems(const std::vector&lt; int &gt; &amp;results)</div><div class="ttdoc">Removes the decryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00322">FilePicker.cpp:322</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_a450dcb98adb65b44af3f1b2858b8a8ba"><div class="ttname"><a href="class_file_picker.html#a450dcb98adb65b44af3f1b2858b8a8ba">FilePicker::removeDecItems</a></div><div class="ttdeci">void removeDecItems(const std::vector&lt; int &gt; &amp;results)</div><div class="ttdoc">Removes the decryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00327">FilePicker.cpp:327</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a4948da647ec92fa5300efee1169087b7"><div class="ttname"><a href="class_file_picker.html#a4948da647ec92fa5300efee1169087b7">FilePicker::FilePickerTopLayout</a></div><div class="ttdeci">std::unique_ptr&lt; QHBoxLayout &gt; FilePickerTopLayout</div><div class="ttdoc">Top layout for the file picker.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00071">FilePicker.h:71</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a4d387ffb98ab46d8fd6ad7c4e91ba78a"><div class="ttname"><a href="class_file_picker.html#a4d387ffb98ab46d8fd6ad7c4e91ba78a">FilePicker::FilePickerPaths</a></div><div class="ttdeci">QVector&lt; QString &gt; FilePickerPaths</div><div class="ttdoc">Vector of file picker paths.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00086">FilePicker.h:86</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a4f15cbd25a7eb35bbf398f8f19f37418"><div class="ttname"><a href="class_file_picker.html#a4f15cbd25a7eb35bbf398f8f19f37418">FilePicker::fileScanner</a></div><div class="ttdeci">FileScannerDLL fileScanner</div><div class="ttdoc">File scanner for scanning directories.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00085">FilePicker.h:85</a></div></div>
@@ -443,25 +448,26 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclass_file_picker_html_a57a1eb6dbe60d8d285319250c031e443"><div class="ttname"><a href="class_file_picker.html#a57a1eb6dbe60d8d285319250c031e443">FilePicker::FilePickerScrollArea</a></div><div class="ttdeci">std::unique_ptr&lt; QScrollArea &gt; FilePickerScrollArea</div><div class="ttdoc">Scroll area for the file picker.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00081">FilePicker.h:81</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a6a0bb84e0fb39639f7c0786b25fcd3d6"><div class="ttname"><a href="class_file_picker.html#a6a0bb84e0fb39639f7c0786b25fcd3d6">FilePicker::FileToProcessLabel</a></div><div class="ttdeci">std::unique_ptr&lt; QLabel &gt; FileToProcessLabel</div><div class="ttdoc">Label to show the number of files to process.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00077">FilePicker.h:77</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a70cd78f71673ce2bb2fd0024aaa2ecc9"><div class="ttname"><a href="class_file_picker.html#a70cd78f71673ce2bb2fd0024aaa2ecc9">FilePicker::configureUI</a></div><div class="ttdeci">void configureUI()</div><div class="ttdoc">Configures the user interface for the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">FilePicker.cpp:33</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_a8f60e56bc0852a2ae33edc2a3d64577c"><div class="ttname"><a href="class_file_picker.html#a8f60e56bc0852a2ae33edc2a3d64577c">FilePicker::getDecItems</a></div><div class="ttdeci">QVector&lt; decryptionConfig &gt; getDecItems()</div><div class="ttdoc">Gets the decryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00266">FilePicker.cpp:266</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_a8f60e56bc0852a2ae33edc2a3d64577c"><div class="ttname"><a href="class_file_picker.html#a8f60e56bc0852a2ae33edc2a3d64577c">FilePicker::getDecItems</a></div><div class="ttdeci">QVector&lt; decryptionConfig &gt; getDecItems()</div><div class="ttdoc">Gets the decryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00271">FilePicker.cpp:271</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_a911515a9a7e6a879b11033224f14f4b9"><div class="ttname"><a href="class_file_picker.html#a911515a9a7e6a879b11033224f14f4b9">FilePicker::AddFileButton</a></div><div class="ttdeci">std::shared_ptr&lt; QPushButton &gt; AddFileButton</div><div class="ttdoc">Button to add a file.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00074">FilePicker.h:74</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_a9d9b6d1d47236bcf595c5fac7320abb8"><div class="ttname"><a href="class_file_picker.html#a9d9b6d1d47236bcf595c5fac7320abb8">FilePicker::addDirectory</a></div><div class="ttdeci">void addDirectory()</div><div class="ttdoc">Opens a directory dialog to add a directory to the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00147">FilePicker.cpp:147</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_a9d9b6d1d47236bcf595c5fac7320abb8"><div class="ttname"><a href="class_file_picker.html#a9d9b6d1d47236bcf595c5fac7320abb8">FilePicker::addDirectory</a></div><div class="ttdeci">void addDirectory()</div><div class="ttdoc">Opens a directory dialog to add a directory to the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00152">FilePicker.cpp:152</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_aa48e775c87b7c5a9aed26a98d7149d19"><div class="ttname"><a href="class_file_picker.html#aa48e775c87b7c5a9aed26a98d7149d19">FilePicker::FilePickerScrollAreaWidget</a></div><div class="ttdeci">std::unique_ptr&lt; QWidget &gt; FilePickerScrollAreaWidget</div><div class="ttdoc">Widget inside the scroll area.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00082">FilePicker.h:82</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_ab8afc86fbe2ee19b310e1ec57d8c93b2"><div class="ttname"><a href="class_file_picker.html#ab8afc86fbe2ee19b310e1ec57d8c93b2">FilePicker::GlobalCheckBox</a></div><div class="ttdeci">std::unique_ptr&lt; QCheckBox &gt; GlobalCheckBox</div><div class="ttdoc">Global checkbox to select all files.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00078">FilePicker.h:78</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_abfdc32d43959b4c3deaafbc7b5713bbc"><div class="ttname"><a href="class_file_picker.html#abfdc32d43959b4c3deaafbc7b5713bbc">FilePicker::addFile</a></div><div class="ttdeci">void addFile()</div><div class="ttdoc">Opens a file dialog to add files to the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00124">FilePicker.cpp:124</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_abfdc32d43959b4c3deaafbc7b5713bbc"><div class="ttname"><a href="class_file_picker.html#abfdc32d43959b4c3deaafbc7b5713bbc">FilePicker::addFile</a></div><div class="ttdeci">void addFile()</div><div class="ttdoc">Opens a file dialog to add files to the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00129">FilePicker.cpp:129</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_ac01cb15c13bdf412fc3b8a7785da2513"><div class="ttname"><a href="class_file_picker.html#ac01cb15c13bdf412fc3b8a7785da2513">FilePicker::GlobalAlgorithmComboBox</a></div><div class="ttdeci">std::unique_ptr&lt; QComboBox &gt; GlobalAlgorithmComboBox</div><div class="ttdoc">Global combo box to select the algorithm.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00079">FilePicker.h:79</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_ac46b7e48548af985329b3154981b80b3"><div class="ttname"><a href="class_file_picker.html#ac46b7e48548af985329b3154981b80b3">FilePicker::globalCheckStateChanged</a></div><div class="ttdeci">void globalCheckStateChanged(int state)</div><div class="ttdoc">Handles the state change of the global checkbox.</div><div class="ttdef"><b>Definition</b> <a href="#l00207">FilePicker.cpp:207</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_ac46b7e48548af985329b3154981b80b3"><div class="ttname"><a href="class_file_picker.html#ac46b7e48548af985329b3154981b80b3">FilePicker::globalCheckStateChanged</a></div><div class="ttdeci">void globalCheckStateChanged(int state)</div><div class="ttdoc">Handles the state change of the global checkbox.</div><div class="ttdef"><b>Definition</b> <a href="#l00212">FilePicker.cpp:212</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_ac50ebf2636fdac4e075f1707cf6a7fb7"><div class="ttname"><a href="class_file_picker.html#ac50ebf2636fdac4e075f1707cf6a7fb7">FilePicker::FilePickerScrollAreaLayout</a></div><div class="ttdeci">std::unique_ptr&lt; QVBoxLayout &gt; FilePickerScrollAreaLayout</div><div class="ttdoc">Layout inside the scroll area.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00083">FilePicker.h:83</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_acbb919d981b97bf4935f816772eafdb8"><div class="ttname"><a href="class_file_picker.html#acbb919d981b97bf4935f816772eafdb8">FilePicker::resetPaths</a></div><div class="ttdeci">void resetPaths()</div><div class="ttdoc">Resets the paths in the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00162">FilePicker.cpp:162</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_acbb919d981b97bf4935f816772eafdb8"><div class="ttname"><a href="class_file_picker.html#acbb919d981b97bf4935f816772eafdb8">FilePicker::resetPaths</a></div><div class="ttdeci">void resetPaths()</div><div class="ttdoc">Resets the paths in the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00167">FilePicker.cpp:167</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_acceb48ab6a49f7fd83d1fd0558570204"><div class="ttname"><a href="class_file_picker.html#acceb48ab6a49f7fd83d1fd0558570204">FilePicker::FilePicker</a></div><div class="ttdeci">FilePicker(QWidget *parent=nullptr, FilePickerType type=FilePickerType::ENCRYPT)</div><div class="ttdoc">Constructs the FilePicker object.</div><div class="ttdef"><b>Definition</b> <a href="#l00008">FilePicker.cpp:8</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_ad1aa5dcc94020b94da99d42d044da0f4"><div class="ttname"><a href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">FilePicker::updateFileToProcessLabel</a></div><div class="ttdeci">void updateFileToProcessLabel()</div><div class="ttdoc">Updates the label showing the number of files to process.</div><div class="ttdef"><b>Definition</b> <a href="#l00188">FilePicker.cpp:188</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_ad1aa5dcc94020b94da99d42d044da0f4"><div class="ttname"><a href="class_file_picker.html#ad1aa5dcc94020b94da99d42d044da0f4">FilePicker::updateFileToProcessLabel</a></div><div class="ttdeci">void updateFileToProcessLabel()</div><div class="ttdoc">Updates the label showing the number of files to process.</div><div class="ttdef"><b>Definition</b> <a href="#l00193">FilePicker.cpp:193</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_ad979c1f0fe3e98cae582bace0c236454"><div class="ttname"><a href="class_file_picker.html#ad979c1f0fe3e98cae582bace0c236454">FilePicker::FilePickerLayout</a></div><div class="ttdeci">std::unique_ptr&lt; QVBoxLayout &gt; FilePickerLayout</div><div class="ttdoc">Layout for the file picker.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00070">FilePicker.h:70</a></div></div>
-<div class="ttc" id="aclass_file_picker_html_ae9af795f20bcb7962ce310dc86250a22"><div class="ttname"><a href="class_file_picker.html#ae9af795f20bcb7962ce310dc86250a22">FilePicker::removeEncItems</a></div><div class="ttdeci">void removeEncItems(const std::vector&lt; int &gt; &amp;results)</div><div class="ttdoc">Removes the encryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00314">FilePicker.cpp:314</a></div></div>
+<div class="ttc" id="aclass_file_picker_html_ae9af795f20bcb7962ce310dc86250a22"><div class="ttname"><a href="class_file_picker.html#ae9af795f20bcb7962ce310dc86250a22">FilePicker::removeEncItems</a></div><div class="ttdeci">void removeEncItems(const std::vector&lt; int &gt; &amp;results)</div><div class="ttdoc">Removes the encryption items from the file picker.</div><div class="ttdef"><b>Definition</b> <a href="#l00319">FilePicker.cpp:319</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_af68aa5c30d799898982da90e61247cff"><div class="ttname"><a href="class_file_picker.html#af68aa5c30d799898982da90e61247cff">FilePicker::FileScannerPaths</a></div><div class="ttdeci">std::vector&lt; fs::path &gt; FileScannerPaths</div><div class="ttdoc">Vector of file scanner paths.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00087">FilePicker.h:87</a></div></div>
 <div class="ttc" id="aclass_file_picker_html_afb7d9510cf1d901154558784b6d017c4"><div class="ttname"><a href="class_file_picker.html#afb7d9510cf1d901154558784b6d017c4">FilePicker::AddDirectoryButton</a></div><div class="ttdeci">std::shared_ptr&lt; QPushButton &gt; AddDirectoryButton</div><div class="ttdoc">Button to add a directory.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00075">FilePicker.h:75</a></div></div>
 <div class="ttc" id="aclass_file_scanner_d_l_l_html_ae960e416e9b47fc2c2b411b2df46c19e"><div class="ttname"><a href="class_file_scanner_d_l_l.html#ae960e416e9b47fc2c2b411b2df46c19e">FileScannerDLL::ScanDirectory</a></div><div class="ttdeci">void ScanDirectory(const std::filesystem::path &amp;directory, const bool searchOnlyForEncFiles, std::vector&lt; std::filesystem::path &gt; &amp;fileList, FileFoundCallback callback)</div><div class="ttdoc">Scans a directory for files using the CppDirectoryScannerLib DLL.</div><div class="ttdef"><b>Definition</b> <a href="_file_scanner_d_l_l_8cpp_source.html#l00011">FileScannerDLL.cpp:11</a></div></div>
 <div class="ttc" id="aclass_style_setter_html_a164c973892b524dea9a766679f65fcd5"><div class="ttname"><a href="class_style_setter.html#a164c973892b524dea9a766679f65fcd5">StyleSetter::setCheckBoxStyle</a></div><div class="ttdeci">void setCheckBoxStyle(T checkBox)</div><div class="ttdoc">Sets the style for a checkbox.</div></div>
 <div class="ttc" id="aclassglobal_definitions_html_a05b8690537c86aa0bcb0683ad8cafab3"><div class="ttname"><a href="classglobal_definitions.html#a05b8690537c86aa0bcb0683ad8cafab3">globalDefinitions::encFileSuffix</a></div><div class="ttdeci">static const std::wstring encFileSuffix</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00019">GlobalDefinitions.h:19</a></div></div>
+<div class="ttc" id="aclassglobal_definitions_html_a120ba10b6be244f9e9ffbf1e54b6a55c"><div class="ttname"><a href="classglobal_definitions.html#a120ba10b6be244f9e9ffbf1e54b6a55c">globalDefinitions::stdAlgorithm</a></div><div class="ttdeci">static std::string stdAlgorithm</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00021">GlobalDefinitions.h:21</a></div></div>
 <div class="ttc" id="astructdecryption_config_html"><div class="ttname"><a href="structdecryption_config.html">decryptionConfig</a></div><div class="ttdoc">Struct for decryption configuration.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00046">FilePicker.h:46</a></div></div>
 <div class="ttc" id="astructdecryption_config_html_a5e306f94a28513b53d40b8b07cb10016"><div class="ttname"><a href="structdecryption_config.html#a5e306f94a28513b53d40b8b07cb10016">decryptionConfig::Path</a></div><div class="ttdeci">QString Path</div><div class="ttdoc">Path of the file to be decrypted.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00048">FilePicker.h:48</a></div></div>
 <div class="ttc" id="astructdecryption_config_html_aaf7d467c448124a281793ed767d08683"><div class="ttname"><a href="structdecryption_config.html#aaf7d467c448124a281793ed767d08683">decryptionConfig::checkForDec</a></div><div class="ttdeci">bool checkForDec</div><div class="ttdoc">Flag to check for decryption.</div><div class="ttdef"><b>Definition</b> <a href="_file_picker_8h_source.html#l00047">FilePicker.h:47</a></div></div>

@@ -2,7 +2,7 @@ var searchData=
 [
   ['unloaddll_0',['unloadDll',['../class_master_d_l_l_class.html#a3a157c4be88f65f13a7b781becdf907b',1,'MasterDLLClass']]],
   ['unmarkfile_1',['UnmarkFile',['../class_crypto_helper_utils.html#a33cd6ec51fc19593de1a5176f269a2f2',1,'CryptoHelperUtils']]],
-  ['unmarkfile_2',['unmarkFile',['../_file_mark_8cpp.html#a27d975033037e5342a1b20eec6f5ec96',1,'unmarkFile(const FileData *fileData):&#160;FileMark.cpp'],['../_file_mark_8h.html#a27d975033037e5342a1b20eec6f5ec96',1,'unmarkFile(const FileData *fileData):&#160;FileMark.cpp']]],
+  ['unmarkfile_2',['unmarkFile',['../class_file_marker.html#abaffc1ffa7d7b2087ad12e600f01c54f',1,'FileMarker::unmarkFile()'],['../_file_mark_8cpp.html#a27d975033037e5342a1b20eec6f5ec96',1,'unmarkFile(const FileData *fileData):&#160;FileMark.cpp'],['../_file_mark_8h.html#a27d975033037e5342a1b20eec6f5ec96',1,'unmarkFile(const FileData *fileData):&#160;FileMark.cpp']]],
   ['update_3',['update',['../class_algorithm_statistic_widget.html#a92b7fa6db0b25e5b798bac803158aff5',1,'AlgorithmStatisticWidget']]],
   ['updateaes128count_4',['updateAes128Count',['../class_statistics_screen_widget.html#a7d741e3ea3c0bcf1e9aca708738228ed',1,'StatisticsScreenWidget']]],
   ['updateaes256count_5',['updateAes256Count',['../class_statistics_screen_widget.html#a5ed8d7b4470153bbb17f5fd21d746f2e',1,'StatisticsScreenWidget']]],

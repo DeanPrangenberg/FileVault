@@ -115,16 +115,20 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">static</span> std::array&lt;unsigned char, EVP_MAX_MD_SIZE&gt; <a class="code hl_function" href="class_b_l_a_k_e2.html#aa1c8de27dcb14eb1f05d5d72d63e7cb5">hashArray</a>(<span class="keyword">const</span> std::vector&lt;unsigned char&gt; &amp;input);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">bool</span> printDebug = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">static</span> std::array&lt;unsigned char, EVP_MAX_MD_SIZE&gt; <a class="code hl_function" href="class_b_l_a_k_e2.html#af7f9f0e2af45df43bf709199c6cd671c">hashPassword</a>(<span class="keyword">const</span> std::vector&lt;unsigned char&gt; &amp;password,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                                                                 <span class="keyword">const</span> std::vector&lt;unsigned char&gt; &amp;salt);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordtype">bool</span> printDebug = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
 </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif </span><span class="comment">// BLAKE2_H</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif </span><span class="comment">// BLAKE2_H</span></div>
 <div class="ttc" id="aclass_b_l_a_k_e2_html"><div class="ttname"><a href="class_b_l_a_k_e2.html">BLAKE2</a></div><div class="ttdef"><b>Definition</b> <a href="#l00013">BLAKE2.h:13</a></div></div>
 <div class="ttc" id="aclass_b_l_a_k_e2_html_a0f6eb40ccd5760236ca1c843bf49f738"><div class="ttname"><a href="class_b_l_a_k_e2.html#a0f6eb40ccd5760236ca1c843bf49f738">BLAKE2::hashFile</a></div><div class="ttdeci">static std::array&lt; unsigned char, EVP_MAX_MD_SIZE &gt; hashFile(const wchar_t *filePath)</div><div class="ttdef"><b>Definition</b> <a href="_b_l_a_k_e2_8cpp_source.html#l00012">BLAKE2.cpp:12</a></div></div>
 <div class="ttc" id="aclass_b_l_a_k_e2_html_aa1c8de27dcb14eb1f05d5d72d63e7cb5"><div class="ttname"><a href="class_b_l_a_k_e2.html#aa1c8de27dcb14eb1f05d5d72d63e7cb5">BLAKE2::hashArray</a></div><div class="ttdeci">static std::array&lt; unsigned char, EVP_MAX_MD_SIZE &gt; hashArray(const std::vector&lt; unsigned char &gt; &amp;input)</div><div class="ttdef"><b>Definition</b> <a href="_b_l_a_k_e2_8cpp_source.html#l00103">BLAKE2.cpp:103</a></div></div>
 <div class="ttc" id="aclass_b_l_a_k_e2_html_ad6cc0550c558f57e98a0073a4a4ad05e"><div class="ttname"><a href="class_b_l_a_k_e2.html#ad6cc0550c558f57e98a0073a4a4ad05e">BLAKE2::hashString</a></div><div class="ttdeci">static std::array&lt; unsigned char, EVP_MAX_MD_SIZE &gt; hashString(const std::wstring &amp;input)</div><div class="ttdef"><b>Definition</b> <a href="_b_l_a_k_e2_8cpp_source.html#l00058">BLAKE2.cpp:58</a></div></div>
+<div class="ttc" id="aclass_b_l_a_k_e2_html_af7f9f0e2af45df43bf709199c6cd671c"><div class="ttname"><a href="class_b_l_a_k_e2.html#af7f9f0e2af45df43bf709199c6cd671c">BLAKE2::hashPassword</a></div><div class="ttdeci">static std::array&lt; unsigned char, EVP_MAX_MD_SIZE &gt; hashPassword(const std::vector&lt; unsigned char &gt; &amp;password, const std::vector&lt; unsigned char &gt; &amp;salt)</div><div class="ttdef"><b>Definition</b> <a href="_b_l_a_k_e2_8cpp_source.html#l00134">BLAKE2.cpp:134</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

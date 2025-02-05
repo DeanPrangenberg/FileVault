@@ -95,9 +95,9 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">FileMark.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -107,9 +107,17 @@ $(function(){ initResizable(false); });
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
 </div>
 <p><a href="_file_mark_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_marker.html">FileMarker</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a9e4d89749a1bb71962b6db2d529e9aaa" id="r_a9e4d89749a1bb71962b6db2d529e9aaa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a>&#160;&#160;&#160;__declspec(dllimport)</td></tr>
@@ -117,17 +125,12 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8062770102a7dd083213d8e952dba282" id="r_a8062770102a7dd083213d8e952dba282"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8062770102a7dd083213d8e952dba282">extractIDsFromFile</a> (const fs::path *encryptedFilePath, unsigned char FileID[64], unsigned char EncryptionID[64])</td></tr>
-<tr class="separator:a8062770102a7dd083213d8e952dba282"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaef49c92fbc6aebba4eafaa4b5d88b67" id="r_aaef49c92fbc6aebba4eafaa4b5d88b67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaef49c92fbc6aebba4eafaa4b5d88b67">markFile</a> (const <a class="el" href="class_file_data.html">FileData</a> *fileData)</td></tr>
-<tr class="separator:aaef49c92fbc6aebba4eafaa4b5d88b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03da3d1dbd6ee76f1fdebffee4e25b0f" id="r_a03da3d1dbd6ee76f1fdebffee4e25b0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03da3d1dbd6ee76f1fdebffee4e25b0f">extractIDsFromFile</a> (const fs::path *encryptedFilePath, std::vector&lt; unsigned char &gt; *FileID, std::vector&lt; unsigned char &gt; *EncryptionID)</td></tr>
+<tr class="separator:a03da3d1dbd6ee76f1fdebffee4e25b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b217b0c06e6f2fe39137e8e39a08133" id="r_a9b217b0c06e6f2fe39137e8e39a08133"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b217b0c06e6f2fe39137e8e39a08133">markFile</a> (const <a class="el" href="class_file_data.html">FileData</a> *fileData)</td></tr>
+<tr class="separator:a9b217b0c06e6f2fe39137e8e39a08133"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27d975033037e5342a1b20eec6f5ec96" id="r_a27d975033037e5342a1b20eec6f5ec96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27d975033037e5342a1b20eec6f5ec96">unmarkFile</a> (const <a class="el" href="class_file_data.html">FileData</a> *fileData)</td></tr>
 <tr class="separator:a27d975033037e5342a1b20eec6f5ec96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a804a2deda8bd4820b904932c70df0ce5" id="r_a804a2deda8bd4820b904932c70df0ce5"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a804a2deda8bd4820b904932c70df0ce5">debugPrint</a> = false</td></tr>
-<tr class="separator:a804a2deda8bd4820b904932c70df0ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a9e4d89749a1bb71962b6db2d529e9aaa" name="a9e4d89749a1bb71962b6db2d529e9aaa"></a>
@@ -142,13 +145,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_8h_source.html#l00014">14</a> of file <a class="el" href="_file_mark_8h_source.html">FileMark.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_file_mark_8h_source.html#l00017">17</a> of file <a class="el" href="_file_mark_8h_source.html">FileMark.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8062770102a7dd083213d8e952dba282" name="a8062770102a7dd083213d8e952dba282"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8062770102a7dd083213d8e952dba282">&#9670;&#160;</a></span>extractIDsFromFile()</h2>
+<a id="a03da3d1dbd6ee76f1fdebffee4e25b0f" name="a03da3d1dbd6ee76f1fdebffee4e25b0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03da3d1dbd6ee76f1fdebffee4e25b0f">&#9670;&#160;</a></span>extractIDsFromFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -161,53 +164,36 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>FileID</em></span>[64], </td>
+          <td class="paramtype">std::vector&lt; unsigned char &gt; *</td>          <td class="paramname"><span class="paramname"><em>FileID</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>EncryptionID</em></span>[64]&#160;)</td>
+          <td class="paramtype">std::vector&lt; unsigned char &gt; *</td>          <td class="paramname"><span class="paramname"><em>EncryptionID</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Extracts File ID and Encryption ID from an encrypted file.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filePath</td><td>The path to the encrypted file. </td></tr>
-    <tr><td class="paramname">FileID</td><td>A buffer to store the extracted File ID. </td></tr>
-    <tr><td class="paramname">EncryptionID</td><td>A buffer to store the extracted Encryption ID. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the IDs were successfully extracted, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00004">4</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00006">6</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aaef49c92fbc6aebba4eafaa4b5d88b67" name="aaef49c92fbc6aebba4eafaa4b5d88b67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaef49c92fbc6aebba4eafaa4b5d88b67">&#9670;&#160;</a></span>markFile()</h2>
+<a id="a9b217b0c06e6f2fe39137e8e39a08133" name="a9b217b0c06e6f2fe39137e8e39a08133"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b217b0c06e6f2fe39137e8e39a08133">&#9670;&#160;</a></span>markFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a> void markFile </td>
+          <td class="memname"><a class="el" href="#a9e4d89749a1bb71962b6db2d529e9aaa">FILEMARKLIB_API</a> bool markFile </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_file_data.html">FileData</a> *</td>          <td class="paramname"><span class="paramname"><em>fileData</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Marks a file with File ID and Encryption ID.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fileData</td><td>Pointer to the <a class="el" href="class_file_data.html">FileData</a> object containing file information. </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00071">71</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00011">11</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
 
 </div>
 </div>
@@ -225,34 +211,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Unmarks a file by removing File ID and Encryption ID.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fileData</td><td>Pointer to the <a class="el" href="class_file_data.html">FileData</a> object containing file information. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the file was successfully unmarked, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00098">98</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a804a2deda8bd4820b904932c70df0ce5" name="a804a2deda8bd4820b904932c70df0ce5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a804a2deda8bd4820b904932c70df0ce5">&#9670;&#160;</a></span>debugPrint</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const bool debugPrint = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Flag to enable or disable debug printing. </p>
-
-<p class="definition">Definition at line <a class="el" href="_file_mark_8h_source.html#l00020">20</a> of file <a class="el" href="_file_mark_8h_source.html">FileMark.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00015">15</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
 
 </div>
 </div>

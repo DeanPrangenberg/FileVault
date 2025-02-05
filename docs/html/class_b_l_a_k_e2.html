@@ -107,6 +107,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:ad6cc0550c558f57e98a0073a4a4ad05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1c8de27dcb14eb1f05d5d72d63e7cb5" id="r_aa1c8de27dcb14eb1f05d5d72d63e7cb5"><td class="memItemLeft" align="right" valign="top">static std::array&lt; unsigned char, EVP_MAX_MD_SIZE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1c8de27dcb14eb1f05d5d72d63e7cb5">hashArray</a> (const std::vector&lt; unsigned char &gt; &amp;input)</td></tr>
 <tr class="separator:aa1c8de27dcb14eb1f05d5d72d63e7cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f9f0e2af45df43bf709199c6cd671c" id="r_af7f9f0e2af45df43bf709199c6cd671c"><td class="memItemLeft" align="right" valign="top">static std::array&lt; unsigned char, EVP_MAX_MD_SIZE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7f9f0e2af45df43bf709199c6cd671c">hashPassword</a> (const std::vector&lt; unsigned char &gt; &amp;password, const std::vector&lt; unsigned char &gt; &amp;salt)</td></tr>
+<tr class="separator:af7f9f0e2af45df43bf709199c6cd671c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_b_l_a_k_e2.html">BLAKE2</a> class provides static methods for computing <a class="el" href="class_b_l_a_k_e2.html">BLAKE2</a> hashes of files, strings, and byte arrays. </p>
@@ -192,6 +194,37 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_b_l_a_k_e2_8cpp_source.html#l00012">12</a> of file <a class="el" href="_b_l_a_k_e2_8cpp_source.html">BLAKE2.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af7f9f0e2af45df43bf709199c6cd671c" name="af7f9f0e2af45df43bf709199c6cd671c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f9f0e2af45df43bf709199c6cd671c">&#9670;&#160;</a></span>hashPassword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt; unsigned char, EVP_MAX_MD_SIZE &gt; BLAKE2::hashPassword </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; unsigned char &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>password</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned char &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>salt</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_b_l_a_k_e2_8cpp_source.html#l00134">134</a> of file <a class="el" href="_b_l_a_k_e2_8cpp_source.html">BLAKE2.cpp</a>.</p>
 
 </div>
 </div>

@@ -47,6 +47,8 @@ add_dependencies(CppFileVaultMain CppCryptoLib)
 add_dependencies(CppFileVaultMain GoRestApiWrapperLib)
 add_dependencies(CppFileVaultMain CppDirectoryScannerLib)
 add_dependencies(CppFileVaultMain CppFileMarkLib)
+add_dependencies(CppFileVaultMain GenDoc)
+
 
 if (MSVC)
     add_compile_options(/W4 /GS)

@@ -6,8 +6,9 @@
 #include "BackendTester/BackendTester.h"
 
 constexpr bool backendtest = false;
+constexpr bool release = true;
 
-#define dockerHash "812eaa5336593d48d4ab79314441b7c5310935f850e5d79b32e299032ce29e94"
+std::string dockerHash;
 
 /**
  * @brief Starts the Docker container for the database.
@@ -26,7 +27,20 @@ void stopDBContainer() {
   system(command.c_str());
 }
 
+
+std::string readFileToString(const std::string &filePath) {
+  std::ifstream fileStream(filePath);
+  if (!fileStream.is_open()) {
+    throw std::runtime_error("Konnte die Datei nicht öffnen: " + filePath);
+  }
+
+  std::stringstream buffer;
+  buffer << fileStream.rdbuf();
+  return buffer.str();
+}
+
 int main(int argc, char *argv[]) {
+  dockerHash = readFileToString("dockerContainerHash.txt");
   if (backendtest) {
     startDBContainer();
 
@@ -38,14 +52,15 @@ int main(int argc, char *argv[]) {
 
   QApplication app(argc, argv);
   startDBContainer();
-  system(".\\RustFileCopy.exe");
+  if(!release) system(".\\RustFileCopy.exe");
 
   QObject::connect(&app, &QApplication::aboutToQuit, []() {
     stopDBContainer();
   });
 
-
   FileVaultGui fileVaultGui;
+  fileVaultGui.setWindowTitle("FileVault");
+  fileVaultGui.setStyleSheet("QWidget {color: #FFFFFF; }");
   fileVaultGui.setWindowIcon(QIcon(":/icons/Icon.png"));
   fileVaultGui.show();
 

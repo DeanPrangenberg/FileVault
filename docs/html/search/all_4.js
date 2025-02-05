@@ -28,5 +28,8 @@ var searchData=
   ['and_20qt_20strong_25',['and Qt strong',['../md__r_e_a_d_m_e.html',1,'&lt;strong&gt;FileVault: Frontend and Backend Solution with C++ and Qt&lt;/strong&gt;'],['../md__r_e_a_d_m_e.html#autotoc_md1',1,'&lt;strong&gt;Frontend in C++ and Qt&lt;/strong&gt;']]],
   ['api_20connector_20go_20strong_26',['&lt;strong&gt;4. REST API Connector (Go)&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md11',1,'']]],
   ['appendconsoleoutput_27',['appendConsoleOutput',['../class_loading_window.html#a83995b4476776bc2004c3fbad05d0647',1,'LoadingWindow']]],
-  ['applystyle_28',['applyStyle',['../class_master_settings_widget.html#afa5c74b29051ca9e2a97f3680a2339dc',1,'MasterSettingsWidget']]]
+  ['applystyle_28',['applyStyle',['../class_master_settings_widget.html#afa5c74b29051ca9e2a97f3680a2339dc',1,'MasterSettingsWidget']]],
+  ['attributeutils_29',['AttributeUtils',['../class_attribute_utils.html',1,'']]],
+  ['attributeutils_2ecpp_30',['AttributeUtils.cpp',['../_attribute_utils_8cpp.html',1,'']]],
+  ['attributeutils_2eh_31',['AttributeUtils.h',['../_attribute_utils_8h.html',1,'']]]
 ];

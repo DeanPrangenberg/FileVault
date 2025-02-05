@@ -85,8 +85,7 @@ void StatisticsScreenWidget::SetupUI() {
 void StatisticsScreenWidget::updateStatistics() {
   RestApiDLL restApiDll;
 
-  //databaseSize = restApiDll.getDatabaseFileSize();
-  databaseSize = 0;
+  databaseSize = restApiDll.getDatabaseFileSize();
 
   algoCakeDiagram->reset();
   LostFilesCakeDiagram->reset();

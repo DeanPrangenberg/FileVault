@@ -4,12 +4,13 @@ var searchData=
   ['hasencfileextension_1',['hasEncFileExtension',['../class_directory_scanner.html#a846647ebbeba56cb9f6bb4c730b531b4',1,'DirectoryScanner']]],
   ['hasharray_2',['hashArray',['../class_b_l_a_k_e2.html#aa1c8de27dcb14eb1f05d5d72d63e7cb5',1,'BLAKE2::hashArray()'],['../class_s_h_a512.html#a892866c109cbc620209c6381f9dcc064',1,'SHA512::hashArray()']]],
   ['hashfile_3',['hashFile',['../class_b_l_a_k_e2.html#a0f6eb40ccd5760236ca1c843bf49f738',1,'BLAKE2::hashFile()'],['../class_s_h_a512.html#aa7ae66f88694732f653e3ed114fc104f',1,'SHA512::hashFile()']]],
-  ['hashstring_4',['hashString',['../class_b_l_a_k_e2.html#ad6cc0550c558f57e98a0073a4a4ad05e',1,'BLAKE2::hashString()'],['../class_s_h_a512.html#a101f96457f096d48f121fbf75562ce68',1,'SHA512::hashString()']]],
-  ['helperutils_5',['HelperUtils',['../class_helper_utils.html',1,'']]],
-  ['helperutils_6',['helperUtils',['../class_database_management_widget.html#a360eede9cf5cd0b574394e6cd02979ab',1,'DatabaseManagementWidget']]],
-  ['helperutils_2ecpp_7',['HelperUtils.cpp',['../_helper_utils_8cpp.html',1,'']]],
-  ['helperutils_2eh_8',['HelperUtils.h',['../_helper_utils_8h.html',1,'']]],
-  ['hlayout1_9',['hLayout1',['../class_database_management_widget.html#aa687756d9c450dd0b5aedec23949ecda',1,'DatabaseManagementWidget']]],
-  ['hlayout2_10',['hLayout2',['../class_database_management_widget.html#a127b8bb2f91c2eccbee2faf19c53fc89',1,'DatabaseManagementWidget']]],
-  ['how_20to_20run_20strong_11',['&lt;strong&gt;How to Run&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md25',1,'']]]
+  ['hashpassword_4',['hashPassword',['../class_b_l_a_k_e2.html#af7f9f0e2af45df43bf709199c6cd671c',1,'BLAKE2']]],
+  ['hashstring_5',['hashString',['../class_b_l_a_k_e2.html#ad6cc0550c558f57e98a0073a4a4ad05e',1,'BLAKE2::hashString()'],['../class_s_h_a512.html#a101f96457f096d48f121fbf75562ce68',1,'SHA512::hashString()']]],
+  ['helperutils_6',['HelperUtils',['../class_helper_utils.html',1,'']]],
+  ['helperutils_7',['helperUtils',['../class_database_management_widget.html#a360eede9cf5cd0b574394e6cd02979ab',1,'DatabaseManagementWidget']]],
+  ['helperutils_2ecpp_8',['HelperUtils.cpp',['../_helper_utils_8cpp.html',1,'']]],
+  ['helperutils_2eh_9',['HelperUtils.h',['../_helper_utils_8h.html',1,'']]],
+  ['hlayout1_10',['hLayout1',['../class_database_management_widget.html#aa687756d9c450dd0b5aedec23949ecda',1,'DatabaseManagementWidget']]],
+  ['hlayout2_11',['hLayout2',['../class_database_management_widget.html#a127b8bb2f91c2eccbee2faf19c53fc89',1,'DatabaseManagementWidget']]],
+  ['how_20to_20run_20strong_12',['&lt;strong&gt;How to Run&lt;/strong&gt;',['../md__r_e_a_d_m_e.html#autotoc_md25',1,'']]]
 ];

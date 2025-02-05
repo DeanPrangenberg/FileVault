@@ -24,6 +24,17 @@ PasswordDialog::PasswordDialog(QWidget *parent) : QDialog(parent) {
   styleSetter->setLabelStyleNoBorder(passwordLabel);
   styleSetter->setButtonStyle(okButton);
 
+  QString objectName = "QDialog";
+  setObjectName(objectName);
+  QString gradientStyle = QString("QDialog#%1 {"
+                                  "background: qradialgradient("
+                                  "cx:0.1, cy:0.2, "
+                                  "radius:1.0, "
+                                  "fx:0.1, fy:0.2, "
+                                  "stop:0 rgba(100, 43, 115, 1), "
+                                  "stop:0.9 rgba(25, 0, 51, 1))}").arg(this->objectName()); // Dark mix of blue and purple
+  setStyleSheet(gradientStyle);
+
   setLayout(layout);
 
   auto savedPasswordHash = settingsData->GetPasswordHash();
