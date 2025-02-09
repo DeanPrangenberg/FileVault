@@ -19,7 +19,7 @@ public:
      * @brief Creates a FileData structure for the given algorithm type and original file path.
      * @param algorithmenType The algorithm type to be used for encryption.
      * @param originalFilePath The path to the original file.
-     * @return A FileData structure containing the file's metadata and encryption information.
+     * @param fileData The FileData structure to be populated with the file's metadata and encryption information.
      * @throws std::invalid_argument if the algorithm type is unsupported.
      */
     void createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath, FileData &fileData);

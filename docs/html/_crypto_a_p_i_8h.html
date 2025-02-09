@@ -345,8 +345,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Generates a hash of a password combined with a salt.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">password</td><td>Pointer to the password. </td></tr>
+    <tr><td class="paramname">salt</td><td>Pointer to the salt. </td></tr>
+    <tr><td class="paramname">hash</td><td>Pointer to a buffer where the generated hash will be stored. </td></tr>
+    <tr><td class="paramname">passwordSize</td><td>The size of the password. </td></tr>
+    <tr><td class="paramname">saltSize</td><td>The size of the salt. </td></tr>
+    <tr><td class="paramname">hashSize</td><td>The size of the hash. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00139">139</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00149">149</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
 
 </div>
 </div>
@@ -368,8 +380,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Generates a specified number of random bytes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">randomBytesSize</td><td>The number of random bytes to generate. </td></tr>
+    <tr><td class="paramname">randomBytes</td><td>Pointer to a buffer where the generated random bytes will be stored. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00152">152</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_crypto_a_p_i_8cpp_source.html#l00167">167</a> of file <a class="el" href="_crypto_a_p_i_8cpp_source.html">CryptoAPI.cpp</a>.</p>
 
 </div>
 </div>

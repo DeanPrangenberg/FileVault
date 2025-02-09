@@ -136,8 +136,18 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Extracts File ID and Encryption ID from an encrypted file.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">encryptedFilePath</td><td>Pointer to the path of the encrypted file. </td></tr>
+    <tr><td class="paramname">FileID</td><td>Vector to store the extracted File ID. </td></tr>
+    <tr><td class="paramname">EncryptionID</td><td>Vector to store the extracted Encryption ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the IDs were successfully extracted, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00006">6</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00014">14</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
 
 </div>
 </div>
@@ -155,8 +165,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Marks a file with File ID and Encryption ID.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to the <a class="el" href="class_file_data.html">FileData</a> object containing file information. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the file was successfully marked, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00011">11</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00025">25</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
 
 </div>
 </div>
@@ -174,8 +192,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Unmarks a file by removing the File ID and Encryption ID.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileData</td><td>Pointer to the <a class="el" href="class_file_data.html">FileData</a> object containing file information. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the file was successfully unmarked, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00015">15</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_file_mark_8cpp_source.html#l00035">35</a> of file <a class="el" href="_file_mark_8cpp_source.html">FileMark.cpp</a>.</p>
 
 </div>
 </div>

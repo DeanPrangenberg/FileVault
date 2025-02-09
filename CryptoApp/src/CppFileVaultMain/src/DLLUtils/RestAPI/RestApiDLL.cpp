@@ -5,6 +5,9 @@
 /**
  * @brief Exports the database using the GoRestApiWrapperLib DLL.
  *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the ExportDatabase function,
+ * and calls it to export the database. The exported data and key are returned in a map.
+ *
  * @return A map containing the exported database data and key.
  */
 std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
@@ -76,6 +79,9 @@ std::unordered_map<std::string, std::string> RestApiDLL::ExportDatabase() {
 /**
  * @brief Inserts data into the database using the GoRestApiWrapperLib DLL.
  *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the InsertDatabase function,
+ * and calls it to insert the provided data and key into the database.
+ *
  * @param key The key for the data.
  * @param data The data to insert.
  * @return True if the insertion was successful, false otherwise.
@@ -103,6 +109,9 @@ bool RestApiDLL::InsertDatabase(const std::string &key, const std::string &data)
 
 /**
  * @brief Replaces data in the database using the GoRestApiWrapperLib DLL.
+ *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the ReplaceDatabase function,
+ * and calls it to replace the provided data and key in the database.
  *
  * @param key The key for the data.
  * @param data The data to replace.
@@ -136,6 +145,9 @@ bool RestApiDLL::ReplaceDatabase(const std::string &key, const std::string &data
 /**
  * @brief Resets the database using the GoRestApiWrapperLib DLL.
  *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the ResetDatabase function,
+ * and calls it to reset the database.
+ *
  * @return True if the reset was successful, false otherwise.
  */
 bool RestApiDLL::ResetDatabase() {
@@ -161,6 +173,9 @@ bool RestApiDLL::ResetDatabase() {
 
 /**
  * @brief Inserts an entry into the database using the GoRestApiWrapperLib DLL.
+ *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the InsertEntry function,
+ * and calls it to insert the provided FileData object into the database.
  *
  * @param data The FileData object to insert.
  * @return True if the insertion was successful, false otherwise.
@@ -196,6 +211,9 @@ bool RestApiDLL::InsertEntry(const FileData &data) {
 
 /**
  * @brief Deletes an entry from the database using the GoRestApiWrapperLib DLL.
+ *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the DeleteEntry function,
+ * and calls it to delete the provided FileData object from the database.
  *
  * @param data The FileData object to delete.
  * @return True if the deletion was successful, false otherwise.
@@ -237,6 +255,9 @@ bool RestApiDLL::DeleteEntry(const FileData &data) {
 
 /**
  * @brief Searches for an entry in the database using the GoRestApiWrapperLib DLL.
+ *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the SearchEntry function,
+ * and calls it to search for the provided FileData object in the database.
  *
  * @param data The FileData object to search for.
  * @return True if the search was successful, false otherwise.
@@ -285,6 +306,9 @@ bool RestApiDLL::SearchEntry(FileData &data) {
 /**
  * @brief Replaces an entry in the database using the GoRestApiWrapperLib DLL.
  *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the ReplaceEntry function,
+ * and calls it to replace the provided FileData object in the database.
+ *
  * @param data The FileData object to replace.
  * @return True if the replacement was successful, false otherwise.
  */
@@ -320,6 +344,9 @@ bool RestApiDLL::ReplaceEntry(const FileData &data) {
 
 /**
  * @brief Retrieves all FileData objects from the database using the GoRestApiWrapperLib DLL.
+ *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the GetAllFileIDsAndEncryptedPaths function,
+ * and calls it to get all FileData objects from the database.
  *
  * @return A vector containing all FileData objects.
  */
@@ -362,6 +389,9 @@ std::vector<FileData> RestApiDLL::GetAllFileIDsAndEncryptedPaths() {
 
 /**
  * @brief Gets the size of the database file using the GoRestApiWrapperLib DLL.
+ *
+ * This function loads the GoRestApiWrapperLib DLL, retrieves the GetDatabaseFileSize function,
+ * and calls it to get the size of the database file.
  *
  * @return The size of the database file, or -1 if an error occurred.
  */

@@ -4,6 +4,10 @@
 
 #include "PasswordDialog.h"
 
+/**
+ * @brief Constructs the PasswordDialog object.
+ * @param parent The parent widget.
+ */
 PasswordDialog::PasswordDialog(QWidget *parent) : QDialog(parent) {
   setWindowTitle("Enter Password");
   setFixedSize(400, 140);
@@ -60,6 +64,10 @@ PasswordDialog::PasswordDialog(QWidget *parent) : QDialog(parent) {
   });
 }
 
+/**
+ * @brief Checks the entered password against the stored hash.
+ * @return -1 if the password is correct or created, otherwise an error code.
+ */
 int PasswordDialog::checkPassword() {
   if (passwordField->passwordField->text().isEmpty()) {
     return 1; // Empty password

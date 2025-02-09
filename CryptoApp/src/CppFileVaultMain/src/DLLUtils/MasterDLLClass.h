@@ -13,6 +13,10 @@
 
 namespace fs = std::filesystem;
 
+/**
+ * @class MasterDLLClass
+ * @brief A base class for handling DLL operations.
+ */
 class MasterDLLClass {
 protected:
   /**

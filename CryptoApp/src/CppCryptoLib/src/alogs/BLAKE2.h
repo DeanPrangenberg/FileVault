@@ -39,6 +39,14 @@ public:
    */
   static std::array<unsigned char, EVP_MAX_MD_SIZE> hashArray(const std::vector<unsigned char> &input);
 
+  /**
+   * Computes the BLAKE2 hash of a password combined with a salt.
+   *
+   * @param password The password to be hashed.
+   * @param salt The salt to be combined with the password.
+   * @return A std::array containing the hash value.
+   * @throws std::runtime_error if any OpenSSL function fails.
+   */
   static std::array<unsigned char, EVP_MAX_MD_SIZE> hashPassword(const std::vector<unsigned char> &password,
                                                                  const std::vector<unsigned char> &salt);
 

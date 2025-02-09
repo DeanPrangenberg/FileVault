@@ -26,7 +26,15 @@ public:
    */
   void generateKeyIv(const size_t &keySize, const size_t &ivSize, std::vector<unsigned char> &KEY, std::vector<unsigned char> &IV);
 
+  /**
+   * Generates a specified number of random bytes.
+   *
+   * @param size The number of random bytes to generate.
+   * @param randomBytes A reference to a vector where the generated random bytes will be stored.
+   * @throws std::runtime_error if random byte generation fails.
+   */
   void generateRandomBytes(const size_t &size, std::vector<unsigned char> &randomBytes);
+
   /**
    * Converts a vector of bytes to a hexadecimal string representation.
    *

@@ -140,9 +140,10 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieves all logical drives on the system. </p>
+<p>This function retrieves all logical drives available on the system. It uses the GetLogicalDriveStringsW function to get the drive strings and then processes them to create a vector of paths representing each drive.</p>
 <dl class="section return"><dt>Returns</dt><dd>A vector of paths representing all logical drives. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_system_utils_8cpp_source.html#l00036">36</a> of file <a class="el" href="_system_utils_8cpp_source.html">SystemUtils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_system_utils_8cpp_source.html#l00046">46</a> of file <a class="el" href="_system_utils_8cpp_source.html">SystemUtils.cpp</a>.</p>
 
 </div>
 </div>
@@ -170,9 +171,10 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieves the Windows folder path. </p>
+<p>This function retrieves the path to the Windows folder on the system. It uses the GetWindowsDirectoryW function to get the path and then processes it to extract the drive letter.</p>
 <dl class="section return"><dt>Returns</dt><dd>The path to the Windows folder. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_system_utils_8cpp_source.html#l00014">14</a> of file <a class="el" href="_system_utils_8cpp_source.html">SystemUtils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_system_utils_8cpp_source.html#l00019">19</a> of file <a class="el" href="_system_utils_8cpp_source.html">SystemUtils.cpp</a>.</p>
 
 </div>
 </div>

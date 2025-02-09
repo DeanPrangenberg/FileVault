@@ -43,6 +43,7 @@ void CryptoHelperUtils::deleteFile(const fs::path &filePath) {
  * Marks a file using an external DLL.
  *
  * @param fileData Pointer to the FileData object containing file information.
+ * @return True if the file was successfully marked, false otherwise.
  */
 bool CryptoHelperUtils::MarkFile(const class FileData *fileData) {
   HMODULE hFileMarkDll = loadDll(L"CppFileMarkLib.dll");

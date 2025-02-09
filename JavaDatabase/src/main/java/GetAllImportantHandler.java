@@ -13,7 +13,7 @@ public class GetAllImportantHandler implements HttpHandler {
     private final Database db;
 
     /**
-     * Constructs a new GetAllFileIDsAndEncryptedPathsHandler with the specified database.
+     * Constructs a new GetAllImportantHandler with the specified database.
      *
      * @param db the database to retrieve file IDs and encrypted paths from
      */

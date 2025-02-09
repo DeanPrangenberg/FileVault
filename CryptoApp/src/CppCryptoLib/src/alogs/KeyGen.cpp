@@ -27,6 +27,13 @@ void KeyGen::generateKeyIv(const size_t &keySize, const size_t &ivSize, std::vec
   }
 }
 
+/**
+ * Generates a specified number of random bytes.
+ *
+ * @param size The number of random bytes to generate.
+ * @param randomBytes A reference to a vector where the generated random bytes will be stored.
+ * @throws std::runtime_error if random byte generation fails.
+ */
 void KeyGen::generateRandomBytes(const size_t &size, std::vector<unsigned char> &randomBytes) {
   randomBytes.resize(size);
 

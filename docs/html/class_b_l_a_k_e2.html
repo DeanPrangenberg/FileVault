@@ -223,8 +223,23 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Computes the <a class="el" href="class_b_l_a_k_e2.html">BLAKE2</a> hash of a password combined with a salt.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">password</td><td>The password to be hashed. </td></tr>
+    <tr><td class="paramname">salt</td><td>The salt to be combined with the password. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A std::array containing the hash value. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if any OpenSSL function fails. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_b_l_a_k_e2_8cpp_source.html#l00134">134</a> of file <a class="el" href="_b_l_a_k_e2_8cpp_source.html">BLAKE2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_b_l_a_k_e2_8cpp_source.html#l00141">141</a> of file <a class="el" href="_b_l_a_k_e2_8cpp_source.html">BLAKE2.cpp</a>.</p>
 
 </div>
 </div>

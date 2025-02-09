@@ -13,5 +13,4 @@ LanguageSelectionWidget::LanguageSelectionWidget(QWidget *parent) : MasterSettin
   centralLayout->addWidget(languageComboBox.get());
 
   applyStyle();
-
 }

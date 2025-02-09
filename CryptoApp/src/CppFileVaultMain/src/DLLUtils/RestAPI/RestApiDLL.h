@@ -8,6 +8,10 @@
 #include <stdexcept>
 #include <unordered_map>
 
+/**
+ * @class RestApiDLL
+ * @brief A class that provides an interface to interact with the database using the GoRestApiWrapperLib DLL.
+ */
 class RestApiDLL : MasterDLLClass {
 public:
   /**
@@ -218,8 +222,20 @@ private:
    */
   void debugFileDataDB(const FileDataDB &data);
 
+  /**
+   * @brief Converts a std::string to a wchar_t string.
+   *
+   * @param str The std::string to convert.
+   * @return Pointer to the resulting wchar_t string.
+   */
   wchar_t *convertStringToWChar(const std::string &str);
 
+  /**
+   * @brief Converts a wchar_t string to a std::string.
+   *
+   * @param wstr The wchar_t string to convert.
+   * @return The resulting std::string.
+   */
   std::string wcharToString(const wchar_t *wstr);
 
 };

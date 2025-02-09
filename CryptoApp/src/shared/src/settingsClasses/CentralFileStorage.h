@@ -67,6 +67,11 @@ private:
    */
   static unsigned long long decFileCounter;
 
+  /**
+   * @brief Changes the central file storage path to a new location.
+   *
+   * @param newFilePath The new path for the central file storage.
+   */
   void changeCentralFileStoragePath(const fs::path &newFilePath);
 };
 

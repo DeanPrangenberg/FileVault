@@ -12,6 +12,14 @@ FileData::FileData() {
   Iv = std::make_shared<std::vector<unsigned char>>();
 }
 
+/**
+ * @brief Equality operator for FileData.
+ *
+ * Compares two FileData objects for equality based on their FileID and EncryptionID.
+ *
+ * @param other The other FileData object to compare with.
+ * @return True if the FileID and EncryptionID are equal, false otherwise.
+ */
 bool FileData::operator==(const FileData &other) const {
   if (*FileID != *other.FileID ||
       *EncryptionID != *other.EncryptionID) {
@@ -21,6 +29,13 @@ bool FileData::operator==(const FileData &other) const {
   return true;
 }
 
+/**
+ * @brief Converts a vector of unsigned char to a hexadecimal string.
+ *
+ * @param data A shared pointer to the vector of unsigned char.
+ * @return The hexadecimal string representation of the data.
+ * @throws std::invalid_argument if the data is null or empty.
+ */
 std::string FileData::toHexString(const std::shared_ptr<std::vector<unsigned char>> &data) {
   if (!data || data->empty()) {
     throw std::invalid_argument("Null or empty data passed to toHexString");
@@ -35,6 +50,11 @@ std::string FileData::toHexString(const std::shared_ptr<std::vector<unsigned cha
   return oss.str();
 }
 
+/**
+ * @brief Prints the FileData object in a debug format.
+ *
+ * Converts the FileData attributes to hexadecimal strings and prints them to the console.
+ */
 void FileData::debugFileData() {
   if (printDebug) {
     std::cout << "Global-debugFileData: Converting FileData to hex strings" << std::endl;

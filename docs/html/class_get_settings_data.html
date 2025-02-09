@@ -102,16 +102,22 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6fd91afe8bccb5957710c4a8d19989b9" id="r_a6fd91afe8bccb5957710c4a8d19989b9"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fd91afe8bccb5957710c4a8d19989b9">ReadBoolsFromSettings</a> ()</td></tr>
+<tr class="memdesc:a6fd91afe8bccb5957710c4a8d19989b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads boolean settings from a JSON file.  <br /></td></tr>
 <tr class="separator:a6fd91afe8bccb5957710c4a8d19989b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3ee5c2069598fad8f83409c395c6c43" id="r_ae3ee5c2069598fad8f83409c395c6c43"><td class="memItemLeft" align="right" valign="top">fs::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3ee5c2069598fad8f83409c395c6c43">GetStorageLocation</a> ()</td></tr>
+<tr class="memdesc:ae3ee5c2069598fad8f83409c395c6c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the storage location from the settings file.  <br /></td></tr>
 <tr class="separator:ae3ee5c2069598fad8f83409c395c6c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a578c466a2169e96b444fe20eabd70943" id="r_a578c466a2169e96b444fe20eabd70943"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a578c466a2169e96b444fe20eabd70943">GetPasswordHash</a> ()</td></tr>
+<tr class="memdesc:a578c466a2169e96b444fe20eabd70943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the password hash from the settings file.  <br /></td></tr>
 <tr class="separator:a578c466a2169e96b444fe20eabd70943"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4998638a495467e57bd6705d6ee2b7b" id="r_ac4998638a495467e57bd6705d6ee2b7b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4998638a495467e57bd6705d6ee2b7b">GetSalt</a> ()</td></tr>
+<tr class="memdesc:ac4998638a495467e57bd6705d6ee2b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the salt from the settings file.  <br /></td></tr>
 <tr class="separator:ac4998638a495467e57bd6705d6ee2b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b686146de94af6e6f4d2277afd7322f" id="r_a1b686146de94af6e6f4d2277afd7322f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b686146de94af6e6f4d2277afd7322f">SetSalt</a> (const std::vector&lt; unsigned char &gt; &amp;saltVector)</td></tr>
+<tr class="memdesc:a1b686146de94af6e6f4d2277afd7322f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the salt in the settings file.  <br /></td></tr>
 <tr class="separator:a1b686146de94af6e6f4d2277afd7322f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa781139dd19c5e668eaba7f9499e96ed" id="r_aa781139dd19c5e668eaba7f9499e96ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa781139dd19c5e668eaba7f9499e96ed">SetPasswordHash</a> (const std::vector&lt; unsigned char &gt; &amp;hashVector)</td></tr>
+<tr class="memdesc:aa781139dd19c5e668eaba7f9499e96ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the password hash in the settings file.  <br /></td></tr>
 <tr class="separator:aa781139dd19c5e668eaba7f9499e96ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -133,7 +139,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00060">60</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
+<p>Gets the password hash from the settings file. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector containing the password hash. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00075">75</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
 
 </div>
 </div>
@@ -152,7 +161,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00094">94</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
+<p>Gets the salt from the settings file. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector containing the salt. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00114">114</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
 
 </div>
 </div>
@@ -171,7 +183,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00036">36</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
+<p>Gets the storage location from the settings file. </p>
+<dl class="section return"><dt>Returns</dt><dd>The storage location path. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00046">46</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
 
 </div>
 </div>
@@ -190,7 +205,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00004">4</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
+<p>Reads boolean settings from a JSON file. </p>
+<dl class="section return"><dt>Returns</dt><dd>A map containing the boolean settings. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00009">9</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
 
 </div>
 </div>
@@ -209,7 +227,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00128">128</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
+<p>Sets the password hash in the settings file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hashVector</td><td>A vector containing the password hash. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the password hash was successfully set, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00154">154</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
 
 </div>
 </div>
@@ -228,7 +255,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00163">163</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
+<p>Sets the salt in the settings file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">saltVector</td><td>A vector containing the salt. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the salt was successfully set, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_get_settings_data_8cpp_source.html#l00195">195</a> of file <a class="el" href="_get_settings_data_8cpp_source.html">GetSettingsData.cpp</a>.</p>
 
 </div>
 </div>

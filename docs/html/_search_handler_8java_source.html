@@ -121,37 +121,42 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  @Override</div>
 <div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_search_handler.html#a09635f8f84e192552bd46fd25c5733da">   34</a></span>  <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_search_handler.html#a09635f8f84e192552bd46fd25c5733da">handle</a>(HttpExchange t) <span class="keywordflow">throws</span> IOException {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    InputStream is = t.getRequestBody();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">byte</span>[] inputBytes = is.readAllBytes();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    String input = <span class="keyword">new</span> String(inputBytes, StandardCharsets.UTF_8);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    System.out.println(<span class="stringliteral">&quot;Received input for search: &quot;</span> + input);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    JsonNode jsonNode = mapper.readTree(input);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    String fileID = jsonNode.get(<span class="stringliteral">&quot;FileID&quot;</span>).asText();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    String encryptionID = jsonNode.get(<span class="stringliteral">&quot;EncryptionID&quot;</span>).asText();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    Database.GoFileData data = db.searchEntry(fileID, encryptionID);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment">// Read the request body</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    InputStream is = t.getRequestBody();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">byte</span>[] inputBytes = is.readAllBytes();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    String input = <span class="keyword">new</span> String(inputBytes, StandardCharsets.UTF_8);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    System.out.println(<span class="stringliteral">&quot;Received input for search: &quot;</span> + input);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// Parse the input JSON to extract FileID and EncryptionID</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    JsonNode jsonNode = mapper.readTree(input);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    String fileID = jsonNode.get(<span class="stringliteral">&quot;FileID&quot;</span>).asText();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    String encryptionID = jsonNode.get(<span class="stringliteral">&quot;EncryptionID&quot;</span>).asText();</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    String response;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span> (data != <span class="keyword">null</span>) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      response = objectMapper.writeValueAsString(data);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      t.sendResponseHeaders(200, response.getBytes().length);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      System.out.println(<span class="stringliteral">&quot;Found entry with FileID: &quot;</span> + fileID + <span class="stringliteral">&quot; and EncryptionID: &quot;</span> + encryptionID);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      response = <span class="stringliteral">&quot;false&quot;</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      t.sendResponseHeaders(404, response.getBytes().length);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      System.out.println(<span class="stringliteral">&quot;Entry not found for FileID: &quot;</span> + fileID + <span class="stringliteral">&quot; and EncryptionID: &quot;</span> + encryptionID);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    OutputStream os = t.getResponseBody();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    os.write(response.getBytes());</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    os.close();</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// Search for the entry in the database</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    Database.GoFileData data = db.searchEntry(fileID, encryptionID);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="comment">// Prepare the response</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    String response;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (data != <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      response = objectMapper.writeValueAsString(data);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      t.sendResponseHeaders(200, response.getBytes().length);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      System.out.println(<span class="stringliteral">&quot;Found entry with FileID: &quot;</span> + fileID + <span class="stringliteral">&quot; and EncryptionID: &quot;</span> + encryptionID);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      response = <span class="stringliteral">&quot;false&quot;</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      t.sendResponseHeaders(404, response.getBytes().length);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      System.out.println(<span class="stringliteral">&quot;Entry not found for FileID: &quot;</span> + fileID + <span class="stringliteral">&quot; and EncryptionID: &quot;</span> + encryptionID);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="comment">// Send the response</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    OutputStream os = t.getResponseBody();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    os.write(response.getBytes());</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    os.close();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
 </div>
-<div class="ttc" id="aclass_database_html"><div class="ttname"><a href="class_database.html">Database</a></div><div class="ttdef"><b>Definition</b> <a href="_database_8java_source.html#l00005">Database.java:5</a></div></div>
+<div class="ttc" id="aclass_database_html"><div class="ttname"><a href="class_database.html">Database</a></div><div class="ttdef"><b>Definition</b> <a href="_database_8java_source.html#l00009">Database.java:9</a></div></div>
 <div class="ttc" id="aclass_search_handler_html_a09635f8f84e192552bd46fd25c5733da"><div class="ttname"><a href="class_search_handler.html#a09635f8f84e192552bd46fd25c5733da">SearchHandler.handle</a></div><div class="ttdeci">void handle(HttpExchange t)</div><div class="ttdef"><b>Definition</b> <a href="#l00034">SearchHandler.java:34</a></div></div>
 <div class="ttc" id="aclass_search_handler_html_a9dd4ee1996b1f34ac3cf2753827de0bc"><div class="ttname"><a href="class_search_handler.html#a9dd4ee1996b1f34ac3cf2753827de0bc">SearchHandler.SearchHandler</a></div><div class="ttdeci">SearchHandler(Database db)</div><div class="ttdef"><b>Definition</b> <a href="#l00023">SearchHandler.java:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

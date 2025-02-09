@@ -22,7 +22,7 @@ std::string AttributeUtils::AlgorithmTypeToString(globalDefinitions::AlgorithmTy
  * @brief Creates a FileData structure for the given algorithm type and original file path.
  * @param algorithmenType The algorithm type to be used for encryption.
  * @param originalFilePath The path to the original file.
- * @return A FileData structure containing the file's metadata and encryption information.
+ * @param fileData The FileData structure to be populated with the file's metadata and encryption information.
  * @throws std::invalid_argument if the algorithm type is unsupported.
  */
 void AttributeUtils::createFileDataStruct(const globalDefinitions::AlgorithmType &algorithmenType, const fs::path &originalFilePath, FileData &fileData) {
@@ -56,7 +56,7 @@ void AttributeUtils::createFileDataStruct(const globalDefinitions::AlgorithmType
   cryptoDll.getCurrentTimeHash(fileData.LastUpdateID->data());
   fileData.AlgorithmenType->assign(algorithmenTypeStr);
   fileData.OriginalFilePath->assign(originalFilePath);
-  fileData.EncryptedFilePath->assign(fs::path (encryptedFilePath));
+  fileData.EncryptedFilePath->assign(fs::path(encryptedFilePath));
   fileData.DecryptedFilePath->assign(originalFilePath);
   cryptoDll.GenerateKeyIv(keyLength, ivLength, fileData.Key->data(), fileData.Iv->data());
 

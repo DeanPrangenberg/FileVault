@@ -3,6 +3,11 @@
 #include "src/settingsClasses/GetSettingsData.h"
 #include "../DLLUtils/CryptoDLL.h"
 
+/**
+ * @brief Constructs a NewPasswordWidget.
+ *
+ * @param parent The parent widget.
+ */
 NewPasswordWidget::NewPasswordWidget(QWidget *parent) : MasterSettingsWidget(parent) {
   titleLabel->setText("Set New Password");
   setMinimumHeight(150);
@@ -14,7 +19,6 @@ NewPasswordWidget::NewPasswordWidget(QWidget *parent) : MasterSettingsWidget(par
 
   buttons.push_back(setPasswordButton);
 
-
   centralLayout->addWidget(oldPasswordInput.get());
   centralLayout->addWidget(newPasswordInput.get());
   centralLayout->addWidget(setPasswordButton.get());
@@ -24,6 +28,14 @@ NewPasswordWidget::NewPasswordWidget(QWidget *parent) : MasterSettingsWidget(par
   applyStyle();
 }
 
+/**
+ * @brief Sets a new password.
+ *
+ * This function checks if the old and new password fields are filled.
+ * It verifies the old password against the saved hash and salt.
+ * If the old password is correct, it hashes the new password and updates the settings.
+ * Displays appropriate messages for success or failure.
+ */
 void NewPasswordWidget::setNewPassword() {
   if (oldPasswordInput->passwordField->text().isEmpty() || newPasswordInput->passwordField->text().isEmpty()) {
     QMessageBox::warning(this, "Error", "Please fill out all fields.");

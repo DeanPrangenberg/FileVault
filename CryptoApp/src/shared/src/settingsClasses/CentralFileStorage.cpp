@@ -52,6 +52,11 @@ bool CentralFileStorage::moveFileToCentralStorage(const fs::path &filePath, bool
   return true;
 }
 
+/**
+ * @brief Changes the central file storage path to a new location.
+ *
+ * @param newFilePath The new path for the central file storage.
+ */
 void CentralFileStorage::changeCentralFileStoragePath(const fs::path &newFilePath) {
   if (fileStoragePath == newFilePath) {
     return;

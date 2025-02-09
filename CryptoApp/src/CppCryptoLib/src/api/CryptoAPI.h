@@ -73,8 +73,25 @@ extern "C" {
  */
 [[maybe_unused]] CRYPTOLIB_API void getCurrentTimeHash(unsigned char *timeHash);
 
+/**
+ * Generates a hash of a password combined with a salt.
+ *
+ * @param password Pointer to the password.
+ * @param salt Pointer to the salt.
+ * @param hash Pointer to a buffer where the generated hash will be stored.
+ * @param passwordSize The size of the password.
+ * @param saltSize The size of the salt.
+ * @param hashSize The size of the hash.
+ */
 [[maybe_unused]] CRYPTOLIB_API void GeneratePasswordHash(unsigned char *password, unsigned char *salt, unsigned char *hash,
                                                          size_t passwordSize, size_t saltSize, size_t hashSize);
+
+/**
+ * Generates a specified number of random bytes.
+ *
+ * @param randomBytesSize The number of random bytes to generate.
+ * @param randomBytes Pointer to a buffer where the generated random bytes will be stored.
+ */
 [[maybe_unused]] CRYPTOLIB_API void generateRandomBytes(size_t randomBytesSize, unsigned char *randomBytes);
 }
 

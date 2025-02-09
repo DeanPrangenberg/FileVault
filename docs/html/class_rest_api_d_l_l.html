@@ -97,6 +97,9 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
+<p>A class that provides an interface to interact with the database using the GoRestApiWrapperLib DLL.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_rest_api_d_l_l_8h_source.html">RestApiDLL.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RestApiDLL:</div>
@@ -104,7 +107,7 @@ Inheritance diagram for RestApiDLL:</div>
  <div class="center">
   <img src="class_rest_api_d_l_l.png" usemap="#RestApiDLL_map" alt=""/>
   <map id="RestApiDLL_map" name="RestApiDLL_map">
-<area href="class_master_d_l_l_class.html" alt="MasterDLLClass" shape="rect" coords="0,0,105,24"/>
+<area href="class_master_d_l_l_class.html" title="A base class for handling DLL operations." alt="MasterDLLClass" shape="rect" coords="0,0,105,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -142,8 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a988227e41a51c25faa9a861b9d2b11de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8h_source.html#l00011">11</a> of file <a class="el" href="_rest_api_d_l_l_8h_source.html">RestApiDLL.h</a>.</p>
+<div class="textblock"><p>A class that provides an interface to interact with the database using the GoRestApiWrapperLib DLL. </p>
+
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8h_source.html#l00015">15</a> of file <a class="el" href="_rest_api_d_l_l_8h_source.html">RestApiDLL.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae9eb8b43e8abddcd559978422cb0f9b5" name="ae9eb8b43e8abddcd559978422cb0f9b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae9eb8b43e8abddcd559978422cb0f9b5">&#9670;&#160;</a></span>DeleteEntry()</h2>
@@ -167,9 +171,17 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the deletion was successful, false otherwise.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the DeleteEntry function, and calls it to delete the provided <a class="el" href="class_file_data.html">FileData</a> object from the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The <a class="el" href="class_file_data.html">FileData</a> object to delete. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the deletion was successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00203">203</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00221">221</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -189,9 +201,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Exports the database using the GoRestApiWrapperLib DLL. </p>
+<dl class="section return"><dt>Returns</dt><dd>A map containing the exported database data and key.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the ExportDatabase function, and calls it to export the database. The exported data and key are returned in a map.</p>
 <dl class="section return"><dt>Returns</dt><dd>A map containing the exported database data and key. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00010">10</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00013">13</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -211,9 +225,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieves all <a class="el" href="class_file_data.html">FileData</a> objects from the database using the GoRestApiWrapperLib DLL. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector containing all <a class="el" href="class_file_data.html">FileData</a> objects.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the GetAllFileIDsAndEncryptedPaths function, and calls it to get all <a class="el" href="class_file_data.html">FileData</a> objects from the database.</p>
 <dl class="section return"><dt>Returns</dt><dd>A vector containing all <a class="el" href="class_file_data.html">FileData</a> objects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00326">326</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00353">353</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -233,9 +249,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Gets the size of the database file using the GoRestApiWrapperLib DLL. </p>
+<dl class="section return"><dt>Returns</dt><dd>The size of the database file, or -1 if an error occurred.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the GetDatabaseFileSize function, and calls it to get the size of the database file.</p>
 <dl class="section return"><dt>Returns</dt><dd>The size of the database file, or -1 if an error occurred. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00368">368</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00398">398</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -266,9 +284,18 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the insertion was successful, false otherwise.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the InsertDatabase function, and calls it to insert the provided data and key into the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>The key for the data. </td></tr>
+    <tr><td class="paramname">data</td><td>The data to insert. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the insertion was successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00083">83</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00089">89</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -294,9 +321,17 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the insertion was successful, false otherwise.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the InsertEntry function, and calls it to insert the provided <a class="el" href="class_file_data.html">FileData</a> object into the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The <a class="el" href="class_file_data.html">FileData</a> object to insert. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the insertion was successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00168">168</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00183">183</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -327,9 +362,18 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the replacement was successful, false otherwise.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the ReplaceDatabase function, and calls it to replace the provided data and key in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>The key for the data. </td></tr>
+    <tr><td class="paramname">data</td><td>The data to replace. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the replacement was successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00111">111</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00120">120</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -355,9 +399,17 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the replacement was successful, false otherwise.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the ReplaceEntry function, and calls it to replace the provided <a class="el" href="class_file_data.html">FileData</a> object in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The <a class="el" href="class_file_data.html">FileData</a> object to replace. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the replacement was successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00291">291</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00315">315</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -377,9 +429,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Resets the database using the GoRestApiWrapperLib DLL. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the reset was successful, false otherwise.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the ResetDatabase function, and calls it to reset the database.</p>
 <dl class="section return"><dt>Returns</dt><dd>True if the reset was successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00141">141</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00153">153</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>
@@ -405,9 +459,17 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the search was successful, false otherwise.</dd></dl>
+<p>This function loads the GoRestApiWrapperLib DLL, retrieves the SearchEntry function, and calls it to search for the provided <a class="el" href="class_file_data.html">FileData</a> object in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The <a class="el" href="class_file_data.html">FileData</a> object to search for. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the search was successful, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00244">244</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rest_api_d_l_l_8cpp_source.html#l00265">265</a> of file <a class="el" href="_rest_api_d_l_l_8cpp_source.html">RestApiDLL.cpp</a>.</p>
 
 </div>
 </div>

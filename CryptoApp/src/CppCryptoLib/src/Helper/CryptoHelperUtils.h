@@ -39,6 +39,7 @@ public:
    * Marks a file using an external DLL.
    *
    * @param fileData Pointer to the FileData object containing file information.
+   * @return True if the file was successfully marked, false otherwise.
    */
   static bool MarkFile(const class FileData *fileData);
 

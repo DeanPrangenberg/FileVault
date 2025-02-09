@@ -6,6 +6,10 @@
 #include <vector>
 #include <filesystem>
 
+/**
+ * @class FileScannerDLL
+ * @brief A class for scanning directories for files using the CppDirectoryScannerLib DLL.
+ */
 class FileScannerDLL : MasterDLLClass {
 public:
   /**

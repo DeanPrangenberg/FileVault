@@ -1,6 +1,7 @@
-//
-// Created by prang on 20.11.2024.
-//
+/**
+ * @file CryptoDLL.cpp
+ * @brief Implementation of the CryptoDLL class for cryptographic operations using the CppCryptoLib DLL.
+ */
 
 #include "CryptoDLL.h"
 
@@ -143,6 +144,16 @@ void CryptoDLL::getCurrentTimeHash(unsigned char *timeHash) {
   unloadDll(hCryptographyDll);
 }
 
+/**
+ * @brief Generates a password hash using the CppCryptoLib DLL.
+ *
+ * @param password Pointer to the password buffer.
+ * @param salt Pointer to the salt buffer.
+ * @param hash Pointer to the buffer to store the generated hash.
+ * @param passwordLength The length of the password.
+ * @param saltLength The length of the salt.
+ * @param hashSize The size of the hash to generate.
+ */
 void CryptoDLL::GeneratePasswordHash(unsigned char *password, unsigned char *salt, unsigned char *hash,
                                      size_t passwordLength, size_t saltLength, size_t hashSize) {
   HMODULE hCryptographyDll = loadDll(L"CppCryptoLib.dll");
@@ -161,6 +172,12 @@ void CryptoDLL::GeneratePasswordHash(unsigned char *password, unsigned char *sal
   unloadDll(hCryptographyDll);
 }
 
+/**
+ * @brief Generates random bytes using the CppCryptoLib DLL.
+ *
+ * @param randomBytesSize The size of the random bytes to generate.
+ * @param randomBytes Pointer to the buffer to store the generated random bytes.
+ */
 void CryptoDLL::generateRandomBytes(size_t randomBytesSize, unsigned char *randomBytes) {
   HMODULE hCryptographyDll = loadDll(L"CppCryptoLib.dll");
   if (!hCryptographyDll) {

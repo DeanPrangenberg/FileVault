@@ -3,20 +3,48 @@
 bool FileMarker::printDebug = true;
 
 extern "C" {
+  /**
+   * Extracts File ID and Encryption ID from an encrypted file.
+   *
+   * @param encryptedFilePath Pointer to the path of the encrypted file.
+   * @param FileID Vector to store the extracted File ID.
+   * @param EncryptionID Vector to store the extracted Encryption ID.
+   * @return True if the IDs were successfully extracted, false otherwise.
+   */
   FILEMARKLIB_API bool extractIDsFromFile(const fs::path* encryptedFilePath, std::vector<unsigned char> *FileID,
                                           std::vector<unsigned char> *EncryptionID) {
     return FileMarker::extractIDsFromFile(encryptedFilePath, *FileID, *EncryptionID);
   }
 
+  /**
+   * Marks a file with File ID and Encryption ID.
+   *
+   * @param fileData Pointer to the FileData object containing file information.
+   * @return True if the file was successfully marked, false otherwise.
+   */
   FILEMARKLIB_API bool markFile(const FileData *fileData) {
     return FileMarker::markFile(fileData);
   }
 
+  /**
+   * Unmarks a file by removing the File ID and Encryption ID.
+   *
+   * @param fileData Pointer to the FileData object containing file information.
+   * @return True if the file was successfully unmarked, false otherwise.
+   */
   FILEMARKLIB_API bool unmarkFile(const FileData *fileData) {
     return FileMarker::unmarkFile(fileData);
   }
 }
 
+/**
+ * Extracts File ID and Encryption ID from an encrypted file.
+ *
+   * @param encryptedFilePath Pointer to the path of the encrypted file.
+   * @param FileID Vector to store the extracted File ID.
+   * @param EncryptionID Vector to store the extracted Encryption ID.
+   * @return True if the IDs were successfully extracted, false otherwise.
+ */
 bool FileMarker::extractIDsFromFile(const fs::path *encryptedFilePath, std::vector<unsigned char> &FileID, std::vector<unsigned char> &EncryptionID) {
   std::ifstream inputFile(encryptedFilePath->wstring(), std::ios::binary);
   if (!inputFile) {
@@ -82,6 +110,12 @@ bool FileMarker::extractIDsFromFile(const fs::path *encryptedFilePath, std::vect
   }
 }
 
+/**
+ * Marks a file with File ID and Encryption ID.
+ *
+ * @param fileData Pointer to the FileData object containing file information.
+ * @return True if the file was successfully marked, false otherwise.
+ */
 bool FileMarker::markFile(const FileData *fileData) {
   std::string fileMark = globalDefinitions::markIdentifier
       + toHexString(fileData->FileID->data(), fileData->FileID->size())
@@ -112,6 +146,12 @@ bool FileMarker::markFile(const FileData *fileData) {
   return true;
 }
 
+/**
+ * Unmarks a file by removing the File ID and Encryption ID.
+ *
+ * @param fileData Pointer to the FileData object containing file information.
+ * @return True if the file was successfully unmarked, false otherwise.
+ */
 bool FileMarker::unmarkFile(const FileData *fileData) {
 
   std::string encryptionIdunmark = toHexString(fileData->EncryptionID->data(), fileData->EncryptionID->size());
@@ -183,6 +223,14 @@ bool FileMarker::unmarkFile(const FileData *fileData) {
   return true;
 }
 
+/**
+ * Converts a byte array to a hexadecimal string.
+ *
+ * @param pUChar Pointer to the byte array.
+ * @param length Length of the byte array.
+ * @return Hexadecimal string representation of the byte array.
+ * @throws std::invalid_argument if the pointer is null.
+ */
 std::string FileMarker::toHexString(const unsigned char *pUChar, size_t length) {
   if (pUChar == nullptr) {
     throw std::invalid_argument("Null pointer passed to toHexString");
@@ -197,6 +245,13 @@ std::string FileMarker::toHexString(const unsigned char *pUChar, size_t length) 
   return oss.str();
 }
 
+/**
+ * Converts a hexadecimal string to a byte array.
+ *
+ * @param hexStr Hexadecimal string.
+ * @return Byte array representation of the hexadecimal string.
+ * @throws std::invalid_argument if the hex string length is invalid or contains invalid characters.
+ */
 std::vector<unsigned char> FileMarker::fromHexString(const std::string &hexStr) {
   if (hexStr.length() % 2 != 0) {
     throw std::invalid_argument("Invalid hex string length");

@@ -1,7 +1,5 @@
 #include "SettingsScreenWidget.h"
 
-
-
 /**
  * @brief Constructs the SettingsScreenWidget object.
  * @param parent The parent widget.
@@ -206,7 +204,6 @@ void SettingsScreenWidget::loadSettings() {
     }
 
     globalDefinitions::stdAlgorithm = settings["Algorithm"].toString().toStdString();
-
 
     if (!settings["LogsLocation"].toString().isEmpty()) {
       Logs::moveLogsDirectory(settings["LogsLocation"].toString().toStdWString());

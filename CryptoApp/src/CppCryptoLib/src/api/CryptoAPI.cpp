@@ -136,6 +136,16 @@ GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *
   std::copy(hashedTime.begin(), hashedTime.begin() + 64, timeHash);
 }
 
+/**
+ * Generates a hash of a password combined with a salt.
+ *
+ * @param password Pointer to the password.
+ * @param salt Pointer to the salt.
+ * @param hash Pointer to a buffer where the generated hash will be stored.
+ * @param passwordSize The size of the password.
+ * @param saltSize The size of the salt.
+ * @param hashSize The size of the hash.
+ */
 [[maybe_unused]] CRYPTOLIB_API void GeneratePasswordHash(unsigned char *password, unsigned char *salt,
                                                          unsigned char *hash,
                                                          size_t passwordSize, size_t saltSize, size_t hashSize) {
@@ -143,12 +153,17 @@ GenerateKeyIv(size_t keySize, size_t ivSize, unsigned char *key, unsigned char *
   std::vector<unsigned char> passwordVec(password, password + passwordSize);
   std::vector<unsigned char> saltVec(salt, salt + saltSize);
 
-
   auto PasswordHash = BLAKE2::hashPassword(passwordVec, saltVec);
 
   std::copy(PasswordHash.begin(), PasswordHash.begin() + hashSize, hash);
 }
 
+/**
+ * Generates a specified number of random bytes.
+ *
+ * @param randomBytesSize The number of random bytes to generate.
+ * @param randomBytes Pointer to a buffer where the generated random bytes will be stored.
+ */
 [[maybe_unused]] CRYPTOLIB_API void generateRandomBytes(size_t randomBytesSize, unsigned char *randomBytes) {
   std::vector<unsigned char> randomBytesVec(randomBytes, randomBytes + randomBytesSize);
   KeyGen keyGen;

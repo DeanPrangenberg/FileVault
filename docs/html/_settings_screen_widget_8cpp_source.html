@@ -98,225 +98,222 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <a href="_settings_screen_widget_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_settings_screen_widget_8h.html">SettingsScreenWidget.h</a>&quot;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
-<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_settings_screen_widget.html#a68090bd823c4298b0a428be90de168e0">    9</a></span><a class="code hl_function" href="class_settings_screen_widget.html#a68090bd823c4298b0a428be90de168e0">SettingsScreenWidget::SettingsScreenWidget</a>(QWidget *parent) : QWidget(parent) {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;SettingsScreenWidget: Creating SettingsScreenWidget&quot;</span>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="comment">// Scroll Area setup</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  scrollArea = std::make_unique&lt;QScrollArea&gt;(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  scrollArea-&gt;setWidgetResizable(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  scrollArea-&gt;setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  scrollArea-&gt;setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  scrollArea-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  scrollArea-&gt;setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  scrollArea-&gt;setContentsMargins(0, 0, 0, 0);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="comment">// Apply styling to scroll area</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_class" href="class_style_setter.html">StyleSetter</a> styleSetter;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a04543f909f11bf4247fd05b8f78907e3">setScrollAreaStyle</a>(scrollArea.get());</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="comment">// Container widget inside the scroll area</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  containerWidget = std::make_unique&lt;QWidget&gt;(scrollArea.get());</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  containerWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  containerWidget-&gt;setObjectName(<span class="stringliteral">&quot;SettingsScreenWidget&quot;</span>);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  containerWidget-&gt;setStyleSheet(QString(<span class="stringliteral">&quot;QWidget#%1 { background: Transparent; }&quot;</span>)</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                                     .arg(containerWidget-&gt;objectName()));</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// Layout for the container widget</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  SettingsScreenWidgetLayout = std::make_unique&lt;QGridLayout&gt;(containerWidget.get());</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  SettingsScreenWidgetLayout-&gt;setContentsMargins(10, 10, 10, 10);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  SettingsScreenWidgetLayout-&gt;setSpacing(10);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="comment">// Add widgets to the layout</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  title = std::make_unique&lt;QLabel&gt;(<span class="stringliteral">&quot;Settings&quot;</span>, containerWidget.get());</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  title-&gt;setAlignment(Qt::AlignCenter);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  title-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  SettingsScreenWidgetLayout-&gt;addWidget(title.get(), 0, 0, 1, 2);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  languageWidget = std::make_unique&lt;LanguageSelectionWidget&gt;(containerWidget.get());</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  languageWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  SettingsScreenWidgetLayout-&gt;addWidget(languageWidget.get(), 1, 0, 1, 2);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;SettingsScreenWidget: LanguageSelectionWidget added&quot;</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  algorithmWidget = std::make_unique&lt;StandardAlgorithmWidget&gt;(containerWidget.get());</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  algorithmWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  SettingsScreenWidgetLayout-&gt;addWidget(algorithmWidget.get(), 2, 1);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  databaseExportWidget = std::make_unique&lt;DatabaseManagementWidget&gt;(containerWidget.get());</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  databaseExportWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  SettingsScreenWidgetLayout-&gt;addWidget(databaseExportWidget.get(), 2, 0);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  fileDeletionWidget = std::make_unique&lt;FileDeletionWidget&gt;(containerWidget.get());</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  fileDeletionWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  SettingsScreenWidgetLayout-&gt;addWidget(fileDeletionWidget.get(), 3, 0);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  passwordWidget = std::make_unique&lt;NewPasswordWidget&gt;(containerWidget.get());</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  passwordWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  SettingsScreenWidgetLayout-&gt;addWidget(passwordWidget.get(), 3, 1);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  logsLocationWidget = std::make_unique&lt;LogsLocationWidget&gt;(containerWidget.get(),</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                                                            [<span class="keyword">this</span>] { saveSettings(); });</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  logsLocationWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  SettingsScreenWidgetLayout-&gt;addWidget(logsLocationWidget.get(), 4, 0, 1, 2);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  centralStorageWidget = std::make_unique&lt;CentralFileStorageWidget&gt;(containerWidget.get());</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  centralStorageWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  SettingsScreenWidgetLayout-&gt;addWidget(centralStorageWidget.get(), 5, 0, 1, 2);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="comment">// Set the layout for the container widget</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  containerWidget-&gt;setLayout(SettingsScreenWidgetLayout.get());</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  containerWidget-&gt;setMinimumSize(SettingsScreenWidgetLayout-&gt;sizeHint().width(),</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                                  SettingsScreenWidgetLayout-&gt;sizeHint().height());</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="comment">// Add the container widget to the scroll area</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  scrollArea-&gt;setWidget(containerWidget.get());</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="comment">// Main layout</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  mainLayout = std::make_unique&lt;QVBoxLayout&gt;(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  mainLayout-&gt;addWidget(scrollArea.get());</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  mainLayout-&gt;setContentsMargins(0, 0, 0, 0);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  setLayout(mainLayout.get());</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  connect(fileDeletionWidget-&gt;deleteAfterEncryption.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    globalDefinitions::deleteFileAfterEncryption = (state == Qt::Checked);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Delete after encryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterEncryption &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    saveSettings();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  });</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  connect(fileDeletionWidget-&gt;deleteAfterDecryption.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Delete after decryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterDecryption &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    saveSettings();</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  });</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  connect(centralStorageWidget-&gt;forEncryptedFiles.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Central Storage for encryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterDecryption &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    saveSettings();</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  });</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  connect(centralStorageWidget-&gt;forDecryptedFiles.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Central Storage for decryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterDecryption &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    saveSettings();</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  });</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  connect(centralStorageWidget-&gt;selectStoragePathButton.get(), &amp;QPushButton::clicked, [<span class="keyword">this</span>] {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    QString path = QFileDialog::getExistingDirectory(this, <span class="stringliteral">&quot;Select Storage Path&quot;</span>, QDir::homePath());</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    centralStorageWidget-&gt;storagePathLabel-&gt;setText(<span class="stringliteral">&quot;Current Path: &quot;</span> + path);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    saveSettings();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  });</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  connect(algorithmWidget-&gt;algorithmComboBox.get(), &amp;QComboBox::currentTextChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> QString &amp;text) {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    globalDefinitions::stdAlgorithm = text.toStdString();</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Algorithm: &quot;</span> &lt;&lt; globalDefinitions::stdAlgorithm &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    saveSettings();</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  });</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="comment">// Load settings</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  loadSettings();</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span></div>
+<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="class_settings_screen_widget.html#a68090bd823c4298b0a428be90de168e0">    7</a></span><a class="code hl_function" href="class_settings_screen_widget.html#a68090bd823c4298b0a428be90de168e0">SettingsScreenWidget::SettingsScreenWidget</a>(QWidget *parent) : QWidget(parent) {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;SettingsScreenWidget: Creating SettingsScreenWidget&quot;</span>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <span class="comment">// Scroll Area setup</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  scrollArea = std::make_unique&lt;QScrollArea&gt;(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  scrollArea-&gt;setWidgetResizable(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  scrollArea-&gt;setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  scrollArea-&gt;setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  scrollArea-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  scrollArea-&gt;setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  scrollArea-&gt;setContentsMargins(0, 0, 0, 0);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="comment">// Apply styling to scroll area</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <a class="code hl_class" href="class_style_setter.html">StyleSetter</a> styleSetter;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  styleSetter.<a class="code hl_function" href="class_style_setter.html#a04543f909f11bf4247fd05b8f78907e3">setScrollAreaStyle</a>(scrollArea.get());</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="comment">// Container widget inside the scroll area</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  containerWidget = std::make_unique&lt;QWidget&gt;(scrollArea.get());</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  containerWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  containerWidget-&gt;setObjectName(<span class="stringliteral">&quot;SettingsScreenWidget&quot;</span>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  containerWidget-&gt;setStyleSheet(QString(<span class="stringliteral">&quot;QWidget#%1 { background: Transparent; }&quot;</span>)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                                     .arg(containerWidget-&gt;objectName()));</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">// Layout for the container widget</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  SettingsScreenWidgetLayout = std::make_unique&lt;QGridLayout&gt;(containerWidget.get());</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  SettingsScreenWidgetLayout-&gt;setContentsMargins(10, 10, 10, 10);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  SettingsScreenWidgetLayout-&gt;setSpacing(10);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="comment">// Add widgets to the layout</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  title = std::make_unique&lt;QLabel&gt;(<span class="stringliteral">&quot;Settings&quot;</span>, containerWidget.get());</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  title-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  title-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  SettingsScreenWidgetLayout-&gt;addWidget(title.get(), 0, 0, 1, 2);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  languageWidget = std::make_unique&lt;LanguageSelectionWidget&gt;(containerWidget.get());</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  languageWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  SettingsScreenWidgetLayout-&gt;addWidget(languageWidget.get(), 1, 0, 1, 2);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  qDebug() &lt;&lt; <span class="stringliteral">&quot;SettingsScreenWidget: LanguageSelectionWidget added&quot;</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  algorithmWidget = std::make_unique&lt;StandardAlgorithmWidget&gt;(containerWidget.get());</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  algorithmWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  SettingsScreenWidgetLayout-&gt;addWidget(algorithmWidget.get(), 2, 1);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  databaseExportWidget = std::make_unique&lt;DatabaseManagementWidget&gt;(containerWidget.get());</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  databaseExportWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  SettingsScreenWidgetLayout-&gt;addWidget(databaseExportWidget.get(), 2, 0);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  fileDeletionWidget = std::make_unique&lt;FileDeletionWidget&gt;(containerWidget.get());</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  fileDeletionWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  SettingsScreenWidgetLayout-&gt;addWidget(fileDeletionWidget.get(), 3, 0);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  passwordWidget = std::make_unique&lt;NewPasswordWidget&gt;(containerWidget.get());</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  passwordWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  SettingsScreenWidgetLayout-&gt;addWidget(passwordWidget.get(), 3, 1);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  logsLocationWidget = std::make_unique&lt;LogsLocationWidget&gt;(containerWidget.get(),</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                                                            [<span class="keyword">this</span>] { saveSettings(); });</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  logsLocationWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  SettingsScreenWidgetLayout-&gt;addWidget(logsLocationWidget.get(), 4, 0, 1, 2);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  centralStorageWidget = std::make_unique&lt;CentralFileStorageWidget&gt;(containerWidget.get());</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  centralStorageWidget-&gt;setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  SettingsScreenWidgetLayout-&gt;addWidget(centralStorageWidget.get(), 5, 0, 1, 2);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="comment">// Set the layout for the container widget</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  containerWidget-&gt;setLayout(SettingsScreenWidgetLayout.get());</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  containerWidget-&gt;setMinimumSize(SettingsScreenWidgetLayout-&gt;sizeHint().width(),</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                                  SettingsScreenWidgetLayout-&gt;sizeHint().height());</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="comment">// Add the container widget to the scroll area</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  scrollArea-&gt;setWidget(containerWidget.get());</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="comment">// Main layout</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  mainLayout = std::make_unique&lt;QVBoxLayout&gt;(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  mainLayout-&gt;addWidget(scrollArea.get());</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  mainLayout-&gt;setContentsMargins(0, 0, 0, 0);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  setLayout(mainLayout.get());</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  connect(fileDeletionWidget-&gt;deleteAfterEncryption.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    globalDefinitions::deleteFileAfterEncryption = (state == Qt::Checked);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Delete after encryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterEncryption &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    saveSettings();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  });</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  connect(fileDeletionWidget-&gt;deleteAfterDecryption.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Delete after decryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterDecryption &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    saveSettings();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  });</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  connect(centralStorageWidget-&gt;forEncryptedFiles.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Central Storage for encryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterDecryption &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    saveSettings();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  });</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  connect(centralStorageWidget-&gt;forDecryptedFiles.get(), &amp;QCheckBox::checkStateChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">int</span> state) {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    globalDefinitions::deleteFileAfterDecryption = (state == Qt::Checked);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Central Storage for decryption: &quot;</span> &lt;&lt; globalDefinitions::deleteFileAfterDecryption &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    saveSettings();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  });</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  connect(centralStorageWidget-&gt;selectStoragePathButton.get(), &amp;QPushButton::clicked, [<span class="keyword">this</span>] {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    QString path = QFileDialog::getExistingDirectory(this, <span class="stringliteral">&quot;Select Storage Path&quot;</span>, QDir::homePath());</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    centralStorageWidget-&gt;storagePathLabel-&gt;setText(<span class="stringliteral">&quot;Current Path: &quot;</span> + path);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    saveSettings();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  });</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  connect(algorithmWidget-&gt;algorithmComboBox.get(), &amp;QComboBox::currentTextChanged, [<span class="keyword">this</span>](<span class="keyword">const</span> QString &amp;text) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    globalDefinitions::stdAlgorithm = text.toStdString();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Algorithm: &quot;</span> &lt;&lt; globalDefinitions::stdAlgorithm &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    saveSettings();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  });</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  <span class="comment">// Load settings</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  loadSettings();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>}</div>
 </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span></div>
-<div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">  131</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">SettingsScreenWidget::createFileIfNotExists</a>(<span class="keyword">const</span> QString &amp;filePath) {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  QFile file(filePath);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">if</span> (!file.exists()) {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">if</span> (file.open(QIODevice::WriteOnly)) {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>      QJsonObject defaultSettings;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>      defaultSettings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>] = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>      defaultSettings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>] = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>      defaultSettings[<span class="stringliteral">&quot;Algorithm&quot;</span>] = <span class="stringliteral">&quot;AES-128&quot;</span>;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>      defaultSettings[<span class="stringliteral">&quot;LogsLocation&quot;</span>] = QCoreApplication::applicationDirPath() + <span class="stringliteral">&quot;/logs&quot;</span>;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      defaultSettings[<span class="stringliteral">&quot;Language&quot;</span>] = <span class="stringliteral">&quot;English&quot;</span>;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      defaultSettings[<span class="stringliteral">&quot;ForEncryptedFiles&quot;</span>] = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      defaultSettings[<span class="stringliteral">&quot;ForDecryptedFiles&quot;</span>] = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      defaultSettings[<span class="stringliteral">&quot;StoragePath&quot;</span>] = QCoreApplication::applicationDirPath() + <span class="stringliteral">&quot;/centralStorage&quot;</span>;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      QJsonDocument doc(defaultSettings);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>      file.write(doc.toJson());</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>      file.close();</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>}</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span></div>
+<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">  129</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">SettingsScreenWidget::createFileIfNotExists</a>(<span class="keyword">const</span> QString &amp;filePath) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  QFile file(filePath);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordflow">if</span> (!file.exists()) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">if</span> (file.open(QIODevice::WriteOnly)) {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>      QJsonObject defaultSettings;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>      defaultSettings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>] = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>      defaultSettings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>] = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>      defaultSettings[<span class="stringliteral">&quot;Algorithm&quot;</span>] = <span class="stringliteral">&quot;AES-128&quot;</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>      defaultSettings[<span class="stringliteral">&quot;LogsLocation&quot;</span>] = QCoreApplication::applicationDirPath() + <span class="stringliteral">&quot;/logs&quot;</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>      defaultSettings[<span class="stringliteral">&quot;Language&quot;</span>] = <span class="stringliteral">&quot;English&quot;</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>      defaultSettings[<span class="stringliteral">&quot;ForEncryptedFiles&quot;</span>] = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      defaultSettings[<span class="stringliteral">&quot;ForDecryptedFiles&quot;</span>] = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      defaultSettings[<span class="stringliteral">&quot;StoragePath&quot;</span>] = QCoreApplication::applicationDirPath() + <span class="stringliteral">&quot;/centralStorage&quot;</span>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      QJsonDocument doc(defaultSettings);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      file.write(doc.toJson());</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      file.close();</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
 </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span></div>
-<div class="foldopen" id="foldopen00155" data-start="{" data-end="}">
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="class_settings_screen_widget.html#a6953fc2ebadae85520b16432ba6ab782">  155</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_settings_screen_widget.html#a6953fc2ebadae85520b16432ba6ab782">SettingsScreenWidget::saveSettings</a>() {</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  QJsonObject settings;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  settings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>] = fileDeletionWidget-&gt;deleteAfterEncryption-&gt;isChecked();</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  settings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>] = fileDeletionWidget-&gt;deleteAfterDecryption-&gt;isChecked();</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  settings[<span class="stringliteral">&quot;Algorithm&quot;</span>] = algorithmWidget-&gt;algorithmComboBox-&gt;currentText();</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>] = logsLocationWidget-&gt;logsLocationLabel-&gt;text().remove(<span class="stringliteral">&quot;Current Path: &quot;</span>);</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  settings[<span class="stringliteral">&quot;Language&quot;</span>] = languageWidget-&gt;languageComboBox-&gt;currentText();</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  settings[<span class="stringliteral">&quot;ForEncryptedFiles&quot;</span>] = centralStorageWidget-&gt;forEncryptedFiles-&gt;isChecked();</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  settings[<span class="stringliteral">&quot;ForDecryptedFiles&quot;</span>] = centralStorageWidget-&gt;forDecryptedFiles-&gt;isChecked();</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  settings[<span class="stringliteral">&quot;StoragePath&quot;</span>] = centralStorageWidget-&gt;storagePathLabel-&gt;text().remove(<span class="stringliteral">&quot;Current Path: &quot;</span>);</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  <span class="keyword">const</span> QJsonDocument doc(settings);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="keyword">const</span> QString filePath = <span class="stringliteral">&quot;settings.json&quot;</span>;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <a class="code hl_function" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">createFileIfNotExists</a>(filePath);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  QFile file(filePath);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  <span class="keywordflow">if</span> (file.open(QIODevice::WriteOnly)) {</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    file.write(doc.toJson());</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    file.close();</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  }</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>}</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span></div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="class_settings_screen_widget.html#a6953fc2ebadae85520b16432ba6ab782">  153</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_settings_screen_widget.html#a6953fc2ebadae85520b16432ba6ab782">SettingsScreenWidget::saveSettings</a>() {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  QJsonObject settings;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  settings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>] = fileDeletionWidget-&gt;deleteAfterEncryption-&gt;isChecked();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  settings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>] = fileDeletionWidget-&gt;deleteAfterDecryption-&gt;isChecked();</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  settings[<span class="stringliteral">&quot;Algorithm&quot;</span>] = algorithmWidget-&gt;algorithmComboBox-&gt;currentText();</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>] = logsLocationWidget-&gt;logsLocationLabel-&gt;text().remove(<span class="stringliteral">&quot;Current Path: &quot;</span>);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  settings[<span class="stringliteral">&quot;Language&quot;</span>] = languageWidget-&gt;languageComboBox-&gt;currentText();</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  settings[<span class="stringliteral">&quot;ForEncryptedFiles&quot;</span>] = centralStorageWidget-&gt;forEncryptedFiles-&gt;isChecked();</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  settings[<span class="stringliteral">&quot;ForDecryptedFiles&quot;</span>] = centralStorageWidget-&gt;forDecryptedFiles-&gt;isChecked();</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  settings[<span class="stringliteral">&quot;StoragePath&quot;</span>] = centralStorageWidget-&gt;storagePathLabel-&gt;text().remove(<span class="stringliteral">&quot;Current Path: &quot;</span>);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keyword">const</span> QJsonDocument doc(settings);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keyword">const</span> QString filePath = <span class="stringliteral">&quot;settings.json&quot;</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  <a class="code hl_function" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">createFileIfNotExists</a>(filePath);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  QFile file(filePath);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordflow">if</span> (file.open(QIODevice::WriteOnly)) {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    file.write(doc.toJson());</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    file.close();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>}</div>
 </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="keywordtype">void</span> SettingsScreenWidget::loadSettings() {</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  QString filePath = <span class="stringliteral">&quot;settings.json&quot;</span>;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <a class="code hl_function" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">createFileIfNotExists</a>(filePath);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  QFile file(filePath);</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  <span class="keywordflow">if</span> (file.open(QIODevice::ReadOnly)) {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    QByteArray data = file.readAll();</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    QJsonDocument doc(QJsonDocument::fromJson(data));</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    QJsonObject settings = doc.object();</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    fileDeletionWidget-&gt;deleteAfterEncryption-&gt;setChecked(settings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>].toBool());</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    fileDeletionWidget-&gt;deleteAfterDecryption-&gt;setChecked(settings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>].toBool());</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    algorithmWidget-&gt;algorithmComboBox-&gt;setCurrentText(settings[<span class="stringliteral">&quot;Algorithm&quot;</span>].toString());</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    languageWidget-&gt;languageComboBox-&gt;setCurrentText(settings[<span class="stringliteral">&quot;Language&quot;</span>].toString());</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    centralStorageWidget-&gt;forEncryptedFiles-&gt;setChecked(settings[<span class="stringliteral">&quot;ForEncryptedFiles&quot;</span>].toBool());</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    centralStorageWidget-&gt;forDecryptedFiles-&gt;setChecked(settings[<span class="stringliteral">&quot;ForDecryptedFiles&quot;</span>].toBool());</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    centralStorageWidget-&gt;storagePathLabel-&gt;setText(<span class="stringliteral">&quot;Current Path: &quot;</span> + settings[<span class="stringliteral">&quot;StoragePath&quot;</span>].toString());</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">if</span> (settings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>].toBool()) {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <a class="code hl_variable" href="classglobal_definitions.html#a03b8ff29d795cfc828357c0b4d96028b">globalDefinitions::deleteFileAfterEncryption</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      <a class="code hl_variable" href="classglobal_definitions.html#a03b8ff29d795cfc828357c0b4d96028b">globalDefinitions::deleteFileAfterEncryption</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">if</span> (settings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>].toBool()) {</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      <a class="code hl_variable" href="classglobal_definitions.html#ad157075e507b1b04cf0ee40a6120d8cb">globalDefinitions::deleteFileAfterDecryption</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      <a class="code hl_variable" href="classglobal_definitions.html#ad157075e507b1b04cf0ee40a6120d8cb">globalDefinitions::deleteFileAfterDecryption</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keywordtype">void</span> SettingsScreenWidget::loadSettings() {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  QString filePath = <span class="stringliteral">&quot;settings.json&quot;</span>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <a class="code hl_function" href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">createFileIfNotExists</a>(filePath);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  QFile file(filePath);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <span class="keywordflow">if</span> (file.open(QIODevice::ReadOnly)) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    QByteArray data = file.readAll();</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    QJsonDocument doc(QJsonDocument::fromJson(data));</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    QJsonObject settings = doc.object();</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    fileDeletionWidget-&gt;deleteAfterEncryption-&gt;setChecked(settings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>].toBool());</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    fileDeletionWidget-&gt;deleteAfterDecryption-&gt;setChecked(settings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>].toBool());</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    algorithmWidget-&gt;algorithmComboBox-&gt;setCurrentText(settings[<span class="stringliteral">&quot;Algorithm&quot;</span>].toString());</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    languageWidget-&gt;languageComboBox-&gt;setCurrentText(settings[<span class="stringliteral">&quot;Language&quot;</span>].toString());</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    centralStorageWidget-&gt;forEncryptedFiles-&gt;setChecked(settings[<span class="stringliteral">&quot;ForEncryptedFiles&quot;</span>].toBool());</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    centralStorageWidget-&gt;forDecryptedFiles-&gt;setChecked(settings[<span class="stringliteral">&quot;ForDecryptedFiles&quot;</span>].toBool());</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    centralStorageWidget-&gt;storagePathLabel-&gt;setText(<span class="stringliteral">&quot;Current Path: &quot;</span> + settings[<span class="stringliteral">&quot;StoragePath&quot;</span>].toString());</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">if</span> (settings[<span class="stringliteral">&quot;DeleteAfterEncryption&quot;</span>].toBool()) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>      <a class="code hl_variable" href="classglobal_definitions.html#a03b8ff29d795cfc828357c0b4d96028b">globalDefinitions::deleteFileAfterEncryption</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <a class="code hl_variable" href="classglobal_definitions.html#a03b8ff29d795cfc828357c0b4d96028b">globalDefinitions::deleteFileAfterEncryption</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">if</span> (settings[<span class="stringliteral">&quot;DeleteAfterDecryption&quot;</span>].toBool()) {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      <a class="code hl_variable" href="classglobal_definitions.html#ad157075e507b1b04cf0ee40a6120d8cb">globalDefinitions::deleteFileAfterDecryption</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      <a class="code hl_variable" href="classglobal_definitions.html#ad157075e507b1b04cf0ee40a6120d8cb">globalDefinitions::deleteFileAfterDecryption</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <a class="code hl_variable" href="classglobal_definitions.html#a120ba10b6be244f9e9ffbf1e54b6a55c">globalDefinitions::stdAlgorithm</a> = settings[<span class="stringliteral">&quot;Algorithm&quot;</span>].toString().toStdString();</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <a class="code hl_variable" href="classglobal_definitions.html#a120ba10b6be244f9e9ffbf1e54b6a55c">globalDefinitions::stdAlgorithm</a> = settings[<span class="stringliteral">&quot;Algorithm&quot;</span>].toString().toStdString();</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">if</span> (!settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>].toString().isEmpty()) {</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>      <a class="code hl_function" href="class_logs.html#a5570d06ec08c65d6c172ceb73262de42">Logs::moveLogsDirectory</a>(settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>].toString().toStdWString());</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      logsLocationWidget-&gt;logsLocationLabel-&gt;setText(<span class="stringliteral">&quot;Current Path: &quot;</span> + settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>].toString());</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    }</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    file.close();</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  }</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>}</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">if</span> (!settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>].toString().isEmpty()) {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      <a class="code hl_function" href="class_logs.html#a5570d06ec08c65d6c172ceb73262de42">Logs::moveLogsDirectory</a>(settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>].toString().toStdWString());</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>      logsLocationWidget-&gt;logsLocationLabel-&gt;setText(<span class="stringliteral">&quot;Current Path: &quot;</span> + settings[<span class="stringliteral">&quot;LogsLocation&quot;</span>].toString());</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    file.close();</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  }</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>}</div>
 <div class="ttc" id="a_settings_screen_widget_8h_html"><div class="ttname"><a href="_settings_screen_widget_8h.html">SettingsScreenWidget.h</a></div></div>
 <div class="ttc" id="aclass_logs_html_a5570d06ec08c65d6c172ceb73262de42"><div class="ttname"><a href="class_logs.html#a5570d06ec08c65d6c172ceb73262de42">Logs::moveLogsDirectory</a></div><div class="ttdeci">static void moveLogsDirectory(const fs::path &amp;newLogsDirectory)</div><div class="ttdoc">Moves the logs directory to a new location.</div><div class="ttdef"><b>Definition</b> <a href="_logs_8cpp_source.html#l00085">Logs.cpp:85</a></div></div>
-<div class="ttc" id="aclass_settings_screen_widget_html_a68090bd823c4298b0a428be90de168e0"><div class="ttname"><a href="class_settings_screen_widget.html#a68090bd823c4298b0a428be90de168e0">SettingsScreenWidget::SettingsScreenWidget</a></div><div class="ttdeci">SettingsScreenWidget(QWidget *parent=nullptr)</div><div class="ttdoc">Constructs the SettingsScreenWidget object.</div><div class="ttdef"><b>Definition</b> <a href="#l00009">SettingsScreenWidget.cpp:9</a></div></div>
-<div class="ttc" id="aclass_settings_screen_widget_html_a6953fc2ebadae85520b16432ba6ab782"><div class="ttname"><a href="class_settings_screen_widget.html#a6953fc2ebadae85520b16432ba6ab782">SettingsScreenWidget::saveSettings</a></div><div class="ttdeci">void saveSettings()</div><div class="ttdoc">Saves the settings to a file.</div><div class="ttdef"><b>Definition</b> <a href="#l00155">SettingsScreenWidget.cpp:155</a></div></div>
-<div class="ttc" id="aclass_settings_screen_widget_html_a92b82b12339fc201cf0c977a1456c260"><div class="ttname"><a href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">SettingsScreenWidget::createFileIfNotExists</a></div><div class="ttdeci">void createFileIfNotExists(const QString &amp;filePath)</div><div class="ttdoc">Creates a file if it does not exist.</div><div class="ttdef"><b>Definition</b> <a href="#l00131">SettingsScreenWidget.cpp:131</a></div></div>
+<div class="ttc" id="aclass_settings_screen_widget_html_a68090bd823c4298b0a428be90de168e0"><div class="ttname"><a href="class_settings_screen_widget.html#a68090bd823c4298b0a428be90de168e0">SettingsScreenWidget::SettingsScreenWidget</a></div><div class="ttdeci">SettingsScreenWidget(QWidget *parent=nullptr)</div><div class="ttdoc">Constructs the SettingsScreenWidget object.</div><div class="ttdef"><b>Definition</b> <a href="#l00007">SettingsScreenWidget.cpp:7</a></div></div>
+<div class="ttc" id="aclass_settings_screen_widget_html_a6953fc2ebadae85520b16432ba6ab782"><div class="ttname"><a href="class_settings_screen_widget.html#a6953fc2ebadae85520b16432ba6ab782">SettingsScreenWidget::saveSettings</a></div><div class="ttdeci">void saveSettings()</div><div class="ttdoc">Saves the settings to a file.</div><div class="ttdef"><b>Definition</b> <a href="#l00153">SettingsScreenWidget.cpp:153</a></div></div>
+<div class="ttc" id="aclass_settings_screen_widget_html_a92b82b12339fc201cf0c977a1456c260"><div class="ttname"><a href="class_settings_screen_widget.html#a92b82b12339fc201cf0c977a1456c260">SettingsScreenWidget::createFileIfNotExists</a></div><div class="ttdeci">void createFileIfNotExists(const QString &amp;filePath)</div><div class="ttdoc">Creates a file if it does not exist.</div><div class="ttdef"><b>Definition</b> <a href="#l00129">SettingsScreenWidget.cpp:129</a></div></div>
 <div class="ttc" id="aclass_style_setter_html"><div class="ttname"><a href="class_style_setter.html">StyleSetter</a></div><div class="ttdoc">A class to set styles for various Qt widgets.</div><div class="ttdef"><b>Definition</b> <a href="_style_setter_8h_source.html#l00017">StyleSetter.h:17</a></div></div>
 <div class="ttc" id="aclass_style_setter_html_a04543f909f11bf4247fd05b8f78907e3"><div class="ttname"><a href="class_style_setter.html#a04543f909f11bf4247fd05b8f78907e3">StyleSetter::setScrollAreaStyle</a></div><div class="ttdeci">void setScrollAreaStyle(T scrollArea)</div><div class="ttdoc">Sets the style for a scroll area.</div></div>
-<div class="ttc" id="aclassglobal_definitions_html_a03b8ff29d795cfc828357c0b4d96028b"><div class="ttname"><a href="classglobal_definitions.html#a03b8ff29d795cfc828357c0b4d96028b">globalDefinitions::deleteFileAfterEncryption</a></div><div class="ttdeci">static bool deleteFileAfterEncryption</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00022">GlobalDefinitions.h:22</a></div></div>
-<div class="ttc" id="aclassglobal_definitions_html_a120ba10b6be244f9e9ffbf1e54b6a55c"><div class="ttname"><a href="classglobal_definitions.html#a120ba10b6be244f9e9ffbf1e54b6a55c">globalDefinitions::stdAlgorithm</a></div><div class="ttdeci">static std::string stdAlgorithm</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00021">GlobalDefinitions.h:21</a></div></div>
-<div class="ttc" id="aclassglobal_definitions_html_ad157075e507b1b04cf0ee40a6120d8cb"><div class="ttname"><a href="classglobal_definitions.html#ad157075e507b1b04cf0ee40a6120d8cb">globalDefinitions::deleteFileAfterDecryption</a></div><div class="ttdeci">static bool deleteFileAfterDecryption</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00023">GlobalDefinitions.h:23</a></div></div>
+<div class="ttc" id="aclassglobal_definitions_html_a03b8ff29d795cfc828357c0b4d96028b"><div class="ttname"><a href="classglobal_definitions.html#a03b8ff29d795cfc828357c0b4d96028b">globalDefinitions::deleteFileAfterEncryption</a></div><div class="ttdeci">static bool deleteFileAfterEncryption</div><div class="ttdoc">Flag to indicate whether to delete the file after encryption.</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00041">GlobalDefinitions.h:41</a></div></div>
+<div class="ttc" id="aclassglobal_definitions_html_a120ba10b6be244f9e9ffbf1e54b6a55c"><div class="ttname"><a href="classglobal_definitions.html#a120ba10b6be244f9e9ffbf1e54b6a55c">globalDefinitions::stdAlgorithm</a></div><div class="ttdeci">static std::string stdAlgorithm</div><div class="ttdoc">Standard algorithm used for encryption.</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00036">GlobalDefinitions.h:36</a></div></div>
+<div class="ttc" id="aclassglobal_definitions_html_ad157075e507b1b04cf0ee40a6120d8cb"><div class="ttname"><a href="classglobal_definitions.html#ad157075e507b1b04cf0ee40a6120d8cb">globalDefinitions::deleteFileAfterDecryption</a></div><div class="ttdeci">static bool deleteFileAfterDecryption</div><div class="ttdoc">Flag to indicate whether to delete the file after decryption.</div><div class="ttdef"><b>Definition</b> <a href="_global_definitions_8h_source.html#l00046">GlobalDefinitions.h:46</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

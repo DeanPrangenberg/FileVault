@@ -1,5 +1,10 @@
 #include "MasterSettingsWidget.h"
 
+/**
+ * @brief Constructs a MasterSettingsWidget.
+ *
+ * @param parent The parent widget.
+ */
 MasterSettingsWidget::MasterSettingsWidget(QWidget *parent) : QWidget(parent) {
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -21,13 +26,19 @@ MasterSettingsWidget::MasterSettingsWidget(QWidget *parent) : QWidget(parent) {
   centralLayout->setSpacing(5);
   centralLayout->addWidget(titleLabel.get());
 
-  // Initialisieren Sie die Container
+  // Initialize the containers
   buttons = QVector<std::shared_ptr<QPushButton>>();
   comboBoxes = QVector<std::shared_ptr<QComboBox>>();
   checkBoxes = QVector<std::shared_ptr<QCheckBox>>();
   lineEdits = QVector<std::shared_ptr<QLineEdit>>();
 }
 
+/**
+ * @brief Applies the style settings to the widget.
+ *
+ * This function is responsible for applying the predefined style settings
+ * to the widget, ensuring a consistent appearance.
+ */
 void MasterSettingsWidget::applyStyle() {
   StyleSetter styleSetter;
   styleSetter.setWidgetBackgroundStyle(backgroundLabel);
@@ -49,4 +60,7 @@ void MasterSettingsWidget::applyStyle() {
   }
 }
 
+/**
+ * @brief Destructor for MasterSettingsWidget.
+ */
 MasterSettingsWidget::~MasterSettingsWidget() = default;

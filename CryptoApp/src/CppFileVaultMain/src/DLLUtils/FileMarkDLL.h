@@ -7,6 +7,10 @@
 
 #include "MasterDLLClass.h"
 
+/**
+ * @class FileMarkDLL
+ * @brief A class for extracting FileID and EncryptionID from files using the CppFileMarkLib DLL.
+ */
 class FileMarkDLL : MasterDLLClass {
 public:
   /**

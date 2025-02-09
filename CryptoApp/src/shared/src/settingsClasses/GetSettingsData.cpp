@@ -1,6 +1,11 @@
 #include <sstream>
 #include "GetSettingsData.h"
 
+/**
+ * @brief Reads boolean settings from a JSON file.
+ *
+ * @return A map containing the boolean settings.
+ */
 std::unordered_map<std::string, bool> GetSettingsData::ReadBoolsFromSettings() {
   std::ifstream file(SETTINGS_FILE);
   json jsonData;
@@ -33,6 +38,11 @@ std::unordered_map<std::string, bool> GetSettingsData::ReadBoolsFromSettings() {
   return boolValues;
 }
 
+/**
+ * @brief Gets the storage location from the settings file.
+ *
+ * @return The storage location path.
+ */
 fs::path GetSettingsData::GetStorageLocation() {
   std::ifstream file(SETTINGS_FILE);
   json jsonData;
@@ -57,6 +67,11 @@ fs::path GetSettingsData::GetStorageLocation() {
   return fs::path(jsonData["StoragePath"].get<std::string>());
 }
 
+/**
+ * @brief Gets the password hash from the settings file.
+ *
+ * @return A vector containing the password hash.
+ */
 std::vector<unsigned char> GetSettingsData::GetPasswordHash() {
   std::ifstream file(SETTINGS_FILE);
   json jsonData;
@@ -91,6 +106,11 @@ std::vector<unsigned char> GetSettingsData::GetPasswordHash() {
   return hashVector;
 }
 
+/**
+ * @brief Gets the salt from the settings file.
+ *
+ * @return A vector containing the salt.
+ */
 std::vector<unsigned char> GetSettingsData::GetSalt() {
   std::ifstream file(SETTINGS_FILE);
   json jsonData;
@@ -125,6 +145,12 @@ std::vector<unsigned char> GetSettingsData::GetSalt() {
   return hashVector;
 }
 
+/**
+ * @brief Sets the password hash in the settings file.
+ *
+ * @param hashVector A vector containing the password hash.
+ * @return True if the password hash was successfully set, false otherwise.
+ */
 bool GetSettingsData::SetPasswordHash(const std::vector<unsigned char>& hashVector) {
   if (hashVector.size() != 64) {
     std::cerr << "Error: Password hash must be 64 bytes (128 hex chars)!\n";
@@ -160,6 +186,12 @@ bool GetSettingsData::SetPasswordHash(const std::vector<unsigned char>& hashVect
   return true;
 }
 
+/**
+ * @brief Sets the salt in the settings file.
+ *
+ * @param saltVector A vector containing the salt.
+ * @return True if the salt was successfully set, false otherwise.
+ */
 bool GetSettingsData::SetSalt(const std::vector<unsigned char>& saltVector) {
   if (saltVector.size() != 16) {
     std::cerr << "Error: Salt must be 16 bytes!\n";

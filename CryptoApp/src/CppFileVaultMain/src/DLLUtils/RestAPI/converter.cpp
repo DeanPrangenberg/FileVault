@@ -80,6 +80,12 @@ RestApiDLL::FileDataDB RestApiDLL::convertFileDataForSearch(const FileData &data
   return dbStruct;
 }
 
+/**
+ * @brief Converts a std::string to a wchar_t string.
+ *
+ * @param str The std::string to convert.
+ * @return Pointer to the resulting wchar_t string.
+ */
 wchar_t *RestApiDLL::convertStringToWChar(const std::string &str) {
   // Determine the required buffer size
   size_t size = mbstowcs(nullptr, str.c_str(), 0) + 1;
@@ -95,11 +101,23 @@ wchar_t *RestApiDLL::convertStringToWChar(const std::string &str) {
   return result;
 }
 
+/**
+ * @brief Converts a wchar_t string to a std::string.
+ *
+ * @param wstr The wchar_t string to convert.
+ * @return The resulting std::string.
+ */
 std::string RestApiDLL::wcharToString(const wchar_t *wstr) {
   std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
   return converter.to_bytes(wstr);
 }
 
+/**
+ * @brief Converts FileData to a FileDataDB structure.
+ *
+ * @param data The FileData object to convert.
+ * @return The resulting FileDataDB structure.
+ */
 RestApiDLL::FileDataDB RestApiDLL::convertFileDataToDBStruct(const FileData &data) {
   // Convert and allocate memory for file paths
   auto originalFilePath = new wchar_t[data.OriginalFilePath->wstring().size() + 1];

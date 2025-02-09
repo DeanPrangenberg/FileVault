@@ -10,6 +10,10 @@
 #include <thread>
 #include <memory>
 
+/**
+ * @class CryptoDLL
+ * @brief A class for cryptographic operations using the CppCryptoLib DLL.
+ */
 class CryptoDLL : MasterDLLClass {
 public:
   /**
@@ -55,9 +59,25 @@ public:
    */
   void getCurrentTimeHash(unsigned char *timeHash);
 
+  /**
+   * @brief Generates a password hash using the CppCryptoLib DLL.
+   *
+   * @param password Pointer to the password buffer.
+   * @param salt Pointer to the salt buffer.
+   * @param hash Pointer to the buffer to store the generated hash.
+   * @param passwordLength The length of the password.
+   * @param saltLength The length of the salt.
+   * @param hashSize The size of the hash to generate.
+   */
   void GeneratePasswordHash(unsigned char *password, unsigned char *salt,
                             unsigned char *hash, size_t passwordLength, size_t saltLength, size_t hashSize);
 
+  /**
+   * @brief Generates random bytes using the CppCryptoLib DLL.
+   *
+   * @param randomBytesSize The size of the random bytes to generate.
+   * @param randomBytes Pointer to the buffer to store the generated random bytes.
+   */
   void generateRandomBytes(size_t randomBytesSize, unsigned char *randomBytes);
 
 private:
@@ -81,6 +101,9 @@ private:
    */
   typedef bool *(*DecryptFilesFunc)(class FileData *, int);
 
+  /**
+   * @brief Function pointer type for generating a password hash.
+   */
   typedef void (*GeneratePasswordHashFunc)(unsigned char *, unsigned char *, unsigned char *, size_t, size_t, size_t);
 
   /**
@@ -88,6 +111,9 @@ private:
    */
   typedef void (*getCurrentTimeHashFunc)(unsigned char *);
 
+  /**
+   * @brief Function pointer type for generating random bytes.
+   */
   typedef void (*GenerateRandomBytesFunc)(size_t, unsigned char *);
 };
 

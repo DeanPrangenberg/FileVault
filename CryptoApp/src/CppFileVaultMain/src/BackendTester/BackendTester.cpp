@@ -1,6 +1,14 @@
 // BackendTester.cpp
 #include "BackendTester.h"
 
+/**
+ * @brief Constructs a BackendTester object and runs the specified number of test runs.
+ *
+ * This constructor initializes the BackendTester object, runs the specified number of test runs,
+ * and prints the results of the tests, including the total number of files scanned, encrypted, and decrypted.
+ *
+ * @param testRuns The number of test runs to perform.
+ */
 BackendTester::BackendTester(int testRuns) {
   int totalFilesScanned = 0;
   int totalFilesEncrypted = 0;
@@ -40,6 +48,12 @@ BackendTester::BackendTester(int testRuns) {
   printDiv();
 }
 
+/**
+ * @brief Scans the directory for files and builds metadata for each file.
+ *
+ * This function scans the specified directory for files, builds metadata for each file found,
+ * and stores the metadata in the fileDataVec vector.
+ */
 void BackendTester::scanAndBuildMetaData() {
   printDiv();
   if (printDebug) std::cout << "--Starting file scan--" << std::endl;
@@ -63,6 +77,11 @@ void BackendTester::scanAndBuildMetaData() {
   printDiv();
 }
 
+/**
+ * @brief Encrypts and saves the files.
+ *
+ * This function encrypts the files listed in the fileDataVec vector and saves the encrypted files.
+ */
 void BackendTester::encryptAndSaveFiles() {
   if (fileDataVec.empty()) return;
 
@@ -77,6 +96,12 @@ void BackendTester::encryptAndSaveFiles() {
   if (printDebug) std::cout << "++" << fileDataVec.size() << " Files Encrypted++" << std::endl;
 }
 
+/**
+ * @brief Repairs lost encrypted file structures and reloads the files.
+ *
+ * This function repairs lost encrypted file structures, rescans the directory for encrypted files,
+ * and reloads the file data into the fileDataVec vector.
+ */
 void BackendTester::repairAndReloadFiles() {
   printDiv();
   if (printDebug) std::cout << "--Repairing Lost Encrypted File Structs--" << std::endl;
@@ -121,6 +146,11 @@ void BackendTester::repairAndReloadFiles() {
   }
 }
 
+/**
+ * @brief Decrypts and deletes the files.
+ *
+ * This function decrypts the files listed in the fileDataVec vector and deletes the entries from the database.
+ */
 void BackendTester::decryptAndDeleteFiles() {
   printDiv();
   if (fileDataVec.empty()) return;
@@ -146,6 +176,11 @@ void BackendTester::decryptAndDeleteFiles() {
               << std::endl;
 }
 
+/**
+ * @brief Prints a divider line for console output.
+ *
+ * This function prints a divider line consisting of hash (\#) characters to the console output.
+ */
 void BackendTester::printDiv() {
   for (int k = 0; k < 3; ++k) {
     for (int i = 0; i < 90; ++i) {

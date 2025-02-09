@@ -31,6 +31,13 @@ std::string globalDefinitions::toHexString(const unsigned char *pUChar, size_t l
   return oss.str();
 }
 
+/**
+ * @brief Converts a hex string to a vector of unsigned char.
+ *
+ * @param hexStr The hex string to convert.
+ * @return A vector of unsigned char representing the hex string.
+ * @throws std::invalid_argument if the hex string length is invalid.
+ */
 std::vector<unsigned char> globalDefinitions::fromHexString(const std::string &hexStr) {
   if (hexStr.length() % 2 != 0) {
     throw std::invalid_argument("Invalid hex string length");
